@@ -8,6 +8,7 @@ target 'Moon' do
   # Pods for Moon
   pod "RxSwift"
   pod "RxCocoa"
+  pod "SwiftLint"
 
   target 'MoonTests' do
     inherit! :search_paths
