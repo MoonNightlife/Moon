@@ -9,6 +9,7 @@ target 'Moon' do
   pod "RxSwift"
   pod "RxCocoa"
   pod "SwiftLint"
+  pod "Material", :git => "https://github.com/CosmicMind/Material"
 
   target 'MoonTests' do
     inherit! :search_paths
