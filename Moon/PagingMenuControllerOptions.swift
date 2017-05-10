@@ -13,7 +13,7 @@ struct MenuItemBeerSpecials: MenuItemViewCustomizable {}
 struct MenuItemWineSpecials: MenuItemViewCustomizable {}
 struct MenuItemLiquorSpecials: MenuItemViewCustomizable {}
 
-struct PagingMenuOptions1: PagingMenuControllerCustomizable {
+struct PagingMenuOptions: PagingMenuControllerCustomizable {
     let beerSpecialTableViewController = SpecialsViewController.instantiateFromStoryboard()
     let wineSpecialTableViewController = SpecialsViewController.instantiateFromStoryboard()
     let liquorSpecialTableViewController = SpecialsViewController.instantiateFromStoryboard()

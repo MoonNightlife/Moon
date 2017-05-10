@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		02B692203D881BDBDF5C4CD4 /* Pods_Moon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F1CC74CAD6A77CCA922B2C6 /* Pods_Moon.framework */; };
 		2F7739078AD1F7D7D17B7854 /* Pods_MoonTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C35285EFFE654F5498B6457 /* Pods_MoonTests.framework */; };
+		F03776A21EC3A44100B92E6B /* FakeSpecialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03776A11EC3A44100B92E6B /* FakeSpecialData.swift */; };
+		F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */; };
+		F03776A71EC3B9AD00B92E6B /* miller.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F03776A61EC3B9AD00B92E6B /* miller.jpeg */; };
+		F03776AB1EC3B9B400B92E6B /* redwine.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F03776A81EC3B9B400B92E6B /* redwine.jpeg */; };
+		F03776AC1EC3B9B400B92E6B /* budlight.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F03776A91EC3B9B400B92E6B /* budlight.jpeg */; };
+		F03776AD1EC3B9B400B92E6B /* whitewine.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F03776AA1EC3B9B400B92E6B /* whitewine.jpeg */; };
 		F048F11B1EA3B7A5000F0161 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F048F11A1EA3B7A5000F0161 /* AppDelegate.swift */; };
 		F048F11D1EA3B7A5000F0161 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F048F11C1EA3B7A5000F0161 /* LoginViewController.swift */; };
 		F048F1201EA3B7A5000F0161 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F048F11E1EA3B7A5000F0161 /* Login.storyboard */; };
@@ -20,6 +26,16 @@
 		F09B9D061EC356BA00B2385A /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F09B9D051EC356BA00B2385A /* Search.storyboard */; };
 		F09B9D081EC3571800B2385A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09B9D071EC3571800B2385A /* SearchViewController.swift */; };
 		F09B9D0A1EC35D5D00B2385A /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09B9D091EC35D5D00B2385A /* SegmentedControl.swift */; };
+		F0A8E2D81EC3C6B2001D9993 /* ImageCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A8E2D71EC3C6B2001D9993 /* ImageCardCollectionViewCell.swift */; };
+		F0A8E2E31EC3C858001D9993 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2DA1EC3C858001D9993 /* button.png */; };
+		F0A8E2E41EC3C858001D9993 /* eventButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2DB1EC3C858001D9993 /* eventButton.png */; };
+		F0A8E2E51EC3C858001D9993 /* pic1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2DC1EC3C858001D9993 /* pic1.jpg */; };
+		F0A8E2E61EC3C858001D9993 /* pic2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2DD1EC3C858001D9993 /* pic2.jpg */; };
+		F0A8E2E71EC3C858001D9993 /* pic3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2DE1EC3C858001D9993 /* pic3.jpg */; };
+		F0A8E2E81EC3C858001D9993 /* pic4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2DF1EC3C858001D9993 /* pic4.jpg */; };
+		F0A8E2E91EC3C858001D9993 /* pic5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2E01EC3C858001D9993 /* pic5.jpg */; };
+		F0A8E2EA1EC3C858001D9993 /* pic6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2E11EC3C858001D9993 /* pic6.jpg */; };
+		F0A8E2EB1EC3C858001D9993 /* Pic7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2E21EC3C858001D9993 /* Pic7.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +55,12 @@
 		5F1CC74CAD6A77CCA922B2C6 /* Pods_Moon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Moon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80DC1C4A5C45AFA862F99FB2 /* Pods-MoonTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoonTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoonTests/Pods-MoonTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C4C4DBD54FFB0BEB382262E5 /* Pods-MoonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoonTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoonTests/Pods-MoonTests.release.xcconfig"; sourceTree = "<group>"; };
+		F03776A11EC3A44100B92E6B /* FakeSpecialData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeSpecialData.swift; sourceTree = "<group>"; };
+		F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialTableViewCell.swift; sourceTree = "<group>"; };
+		F03776A61EC3B9AD00B92E6B /* miller.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = miller.jpeg; sourceTree = "<group>"; };
+		F03776A81EC3B9B400B92E6B /* redwine.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = redwine.jpeg; sourceTree = "<group>"; };
+		F03776A91EC3B9B400B92E6B /* budlight.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = budlight.jpeg; sourceTree = "<group>"; };
+		F03776AA1EC3B9B400B92E6B /* whitewine.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = whitewine.jpeg; sourceTree = "<group>"; };
 		F048F1171EA3B7A5000F0161 /* Moon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F048F11A1EA3B7A5000F0161 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F048F11C1EA3B7A5000F0161 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +76,16 @@
 		F09B9D051EC356BA00B2385A /* Search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		F09B9D071EC3571800B2385A /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		F09B9D091EC35D5D00B2385A /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
+		F0A8E2D71EC3C6B2001D9993 /* ImageCardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCardCollectionViewCell.swift; sourceTree = "<group>"; };
+		F0A8E2DA1EC3C858001D9993 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
+		F0A8E2DB1EC3C858001D9993 /* eventButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eventButton.png; sourceTree = "<group>"; };
+		F0A8E2DC1EC3C858001D9993 /* pic1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic1.jpg; sourceTree = "<group>"; };
+		F0A8E2DD1EC3C858001D9993 /* pic2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic2.jpg; sourceTree = "<group>"; };
+		F0A8E2DE1EC3C858001D9993 /* pic3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic3.jpg; sourceTree = "<group>"; };
+		F0A8E2DF1EC3C858001D9993 /* pic4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic4.jpg; sourceTree = "<group>"; };
+		F0A8E2E01EC3C858001D9993 /* pic5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic5.jpg; sourceTree = "<group>"; };
+		F0A8E2E11EC3C858001D9993 /* pic6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic6.jpg; sourceTree = "<group>"; };
+		F0A8E2E21EC3C858001D9993 /* Pic7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Pic7.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +126,17 @@
 				C4C4DBD54FFB0BEB382262E5 /* Pods-MoonTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		F03776A51EC3B97700B92E6B /* SpecialPhotos */ = {
+			isa = PBXGroup;
+			children = (
+				F03776A61EC3B9AD00B92E6B /* miller.jpeg */,
+				F03776A81EC3B9B400B92E6B /* redwine.jpeg */,
+				F03776A91EC3B9B400B92E6B /* budlight.jpeg */,
+				F03776AA1EC3B9B400B92E6B /* whitewine.jpeg */,
+			);
+			name = SpecialPhotos;
 			sourceTree = "<group>";
 		};
 		F048F10E1EA3B7A5000F0161 = {
@@ -169,7 +212,10 @@
 			children = (
 				F0644C281EC3754000D92BF7 /* PagingMenuControllerOptions.swift */,
 				F048F11A1EA3B7A5000F0161 /* AppDelegate.swift */,
+				F03776A51EC3B97700B92E6B /* SpecialPhotos */,
+				F03776A11EC3A44100B92E6B /* FakeSpecialData.swift */,
 				F048F1211EA3B7A5000F0161 /* Assets.xcassets */,
+				F0A8E2D91EC3C858001D9993 /* Images */,
 				F048F1261EA3B7A5000F0161 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -179,8 +225,26 @@
 			isa = PBXGroup;
 			children = (
 				F09B9D091EC35D5D00B2385A /* SegmentedControl.swift */,
+				F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */,
+				F0A8E2D71EC3C6B2001D9993 /* ImageCardCollectionViewCell.swift */,
 			);
 			name = Subclasses;
+			sourceTree = "<group>";
+		};
+		F0A8E2D91EC3C858001D9993 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				F0A8E2DA1EC3C858001D9993 /* button.png */,
+				F0A8E2DB1EC3C858001D9993 /* eventButton.png */,
+				F0A8E2DC1EC3C858001D9993 /* pic1.jpg */,
+				F0A8E2DD1EC3C858001D9993 /* pic2.jpg */,
+				F0A8E2DE1EC3C858001D9993 /* pic3.jpg */,
+				F0A8E2DF1EC3C858001D9993 /* pic4.jpg */,
+				F0A8E2E01EC3C858001D9993 /* pic5.jpg */,
+				F0A8E2E11EC3C858001D9993 /* pic6.jpg */,
+				F0A8E2E21EC3C858001D9993 /* Pic7.jpg */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,8 +340,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				F048F1251EA3B7A5000F0161 /* LaunchScreen.storyboard in Resources */,
+				F0A8E2E91EC3C858001D9993 /* pic5.jpg in Resources */,
+				F0A8E2E71EC3C858001D9993 /* pic3.jpg in Resources */,
+				F0A8E2E61EC3C858001D9993 /* pic2.jpg in Resources */,
+				F0A8E2E81EC3C858001D9993 /* pic4.jpg in Resources */,
 				F048F1221EA3B7A5000F0161 /* Assets.xcassets in Resources */,
+				F03776AB1EC3B9B400B92E6B /* redwine.jpeg in Resources */,
+				F0A8E2EB1EC3C858001D9993 /* Pic7.jpg in Resources */,
+				F03776AC1EC3B9B400B92E6B /* budlight.jpeg in Resources */,
+				F0A8E2E51EC3C858001D9993 /* pic1.jpg in Resources */,
+				F0A8E2EA1EC3C858001D9993 /* pic6.jpg in Resources */,
 				F09B9D061EC356BA00B2385A /* Search.storyboard in Resources */,
+				F03776A71EC3B9AD00B92E6B /* miller.jpeg in Resources */,
+				F03776AD1EC3B9B400B92E6B /* whitewine.jpeg in Resources */,
+				F0A8E2E31EC3C858001D9993 /* button.png in Resources */,
+				F0A8E2E41EC3C858001D9993 /* eventButton.png in Resources */,
 				F048F1201EA3B7A5000F0161 /* Login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,10 +481,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F09B9D081EC3571800B2385A /* SearchViewController.swift in Sources */,
+				F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */,
 				F048F11D1EA3B7A5000F0161 /* LoginViewController.swift in Sources */,
 				F0644C2B1EC37D0E00D92BF7 /* SpecialsViewController.swift in Sources */,
 				F09B9D0A1EC35D5D00B2385A /* SegmentedControl.swift in Sources */,
+				F03776A21EC3A44100B92E6B /* FakeSpecialData.swift in Sources */,
 				F0644C291EC3754000D92BF7 /* PagingMenuControllerOptions.swift in Sources */,
+				F0A8E2D81EC3C6B2001D9993 /* ImageCardCollectionViewCell.swift in Sources */,
 				F048F11B1EA3B7A5000F0161 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

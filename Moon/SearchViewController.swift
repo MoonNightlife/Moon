@@ -8,14 +8,26 @@
 
 import UIKit
 import PagingMenuController
+import Material
 
 class SearchViewController: UIViewController {
-    var options: PagingMenuControllerCustomizable = PagingMenuOptions1()
+    
+    fileprivate let reuseIdentifier = "TopBarCell"
+    fileprivate var topBarData = [TopBarData]()
+    var options: PagingMenuControllerCustomizable = PagingMenuOptions()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
+        createTempTopBarData()
         setupPagingMenuController()
+    }
+    
+    private func createTempTopBarData() {
+        for i in 1..<7 {
+            let data = TopBarData(imageName: "pic\(i).jpg", barName: "BarName\(i)", location: "Location\(i)")
+            topBarData.append(data)
+        }
     }
     
     private func setupPagingMenuController() {
@@ -55,6 +67,31 @@ class SearchViewController: UIViewController {
 
 }
 
-extension SearchViewController {
+extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return topBarData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? ImageCardCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        
+        cell.initializeCollectionViewWith(data: topBarData[indexPath.row])
+        // Configure the cell
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemWidth = collectionView.bounds.width
+        let itemHeight = collectionView.bounds.height
+        return CGSize(width: itemWidth, height: itemHeight)
+    }
     
 }
