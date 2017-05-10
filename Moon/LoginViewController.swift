@@ -8,15 +8,19 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
 
-    func testingFor(Value value: String) {
-        print(value)
-    }
+    let searchControllerSegueIdenifier = "loginToSearch"
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        performSegue(withIdentifier: searchControllerSegueIdenifier, sender: self)
     }
 
     override func didReceiveMemoryWarning() {
