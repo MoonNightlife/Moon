@@ -7,13 +7,44 @@
 //
 
 import UIKit
+import PagingMenuController
 
 class SearchViewController: UIViewController {
+    var options: PagingMenuControllerCustomizable = PagingMenuOptions1()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        setupPagingMenuController()
+    }
+    
+    private func setupPagingMenuController() {
+        guard let pagingMenuController = self.childViewControllers.first as? PagingMenuController else {
+            return
+        }
+        
+        pagingMenuController.setup(options)
+        pagingMenuController.onMove = { state in
+            switch state {
+            case let .willMoveController(menuController, previousMenuController):
+                print(previousMenuController)
+                print(menuController)
+            case let .didMoveController(menuController, previousMenuController):
+                print(previousMenuController)
+                print(menuController)
+            case let .willMoveItem(menuItemView, previousMenuItemView):
+                print(previousMenuItemView)
+                print(menuItemView)
+            case let .didMoveItem(menuItemView, previousMenuItemView):
+                print(previousMenuItemView)
+                print(menuItemView)
+            case .didScrollStart:
+                print("Scroll start")
+            case .didScrollEnd:
+                print("Scroll end")
+            }
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,14 +52,9 @@ class SearchViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     
     }
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+}
 
+extension SearchViewController {
+    
 }
