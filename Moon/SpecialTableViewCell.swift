@@ -20,7 +20,14 @@ class SpecialTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+     
+    func initilizeSpecialCellWith(data: Special) {
+        mainImage.image = data.image
+        mainTitle.text = data.description
+        subTitle.text = data.barName
+        secondarySubtitle.text = "\(data.likes)"
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import PagingMenuController
 import Material
+import PageMenu
 import iCarousel
 
 class SearchViewController: UIViewController {
@@ -22,7 +22,10 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var topBarCarousel: iCarousel!
     fileprivate let reuseIdentifier = "TopBarCell"
     fileprivate var topBarData = [TopBarData]()
-    var options: PagingMenuControllerCustomizable = PagingMenuOptions()
+    
+    @IBOutlet weak var viewForPageMenu: UIView!
+    var pageMenu: CAPSPageMenu?
+    var controllerArray = [UIViewController]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,30 +49,37 @@ class SearchViewController: UIViewController {
     }
     
     private func setupPagingMenuController() {
-        guard let pagingMenuController = self.childViewControllers.first as? PagingMenuController else {
-            return
-        }
+        let beerSpecialsController = SpecialsViewController.instantiateFromStoryboard()
+        beerSpecialsController.title = "Beer"
+        beerSpecialsController.specialData = fakeSpecials.filter({$0.type == .beer})
+        controllerArray.append(beerSpecialsController)
         
-        pagingMenuController.setup(options)
-        pagingMenuController.onMove = { state in
-            switch state {
-            case let .willMoveController(menuController, previousMenuController):
-                print(previousMenuController)
-                print(menuController)
-            case let .didMoveController(menuController, previousMenuController):
-                print(previousMenuController)
-                print(menuController)
-            case let .willMoveItem(menuItemView, previousMenuItemView):
-                print(previousMenuItemView)
-                print(menuItemView)
-            case let .didMoveItem(menuItemView, previousMenuItemView):
-                print(previousMenuItemView)
-                print(menuItemView)
-            case .didScrollStart:
-                print("Scroll start")
-            case .didScrollEnd:
-                print("Scroll end")
-            }
+        let liquorSpecialsController = SpecialsViewController.instantiateFromStoryboard()
+        liquorSpecialsController.title = "Liqiour"
+        liquorSpecialsController.specialData = fakeSpecials.filter({$0.type == .liquor})
+        controllerArray.append(liquorSpecialsController)
+        
+        let wineSpecialsController = SpecialsViewController.instantiateFromStoryboard()
+        wineSpecialsController.title = "Wine"
+        wineSpecialsController.specialData = fakeSpecials.filter({$0.type == .wine})
+        controllerArray.append(wineSpecialsController)
+        
+        let parameters: [CAPSPageMenuOption] = [
+            .menuItemSeparatorWidth(4.3),
+            .menuItemSeparatorPercentageHeight(0.1),
+            .scrollMenuBackgroundColor(.clear),
+            .selectionIndicatorColor(.clear),
+            .addBottomMenuHairline(false),
+            .selectionIndicatorColor(.white),
+            .unselectedMenuItemLabelColor(.lightText)
+            
+        ]
+        
+        let sizeOfFrame = CGRect(x: 0, y: 0, width: viewForPageMenu.frame.width, height: viewForPageMenu.frame.height)
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: sizeOfFrame, pageMenuOptions: parameters)
+        pageMenu?.view.backgroundColor = .lightGray
+        if let view = pageMenu?.view {
+            viewForPageMenu.addSubview(view)
         }
         
     }
@@ -88,13 +98,12 @@ extension SearchViewController: iCarouselDataSource, iCarouselDelegate {
     }
     
     func numberOfItems(in carousel: iCarousel) -> Int {
-        print(topBarData.count)
         return topBarData.count
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         let topBarView = ImageCardView(frame: carousel.frame)
-        topBarView.initializeCollectionViewWith(data: topBarData[index])
+        topBarView.initializeImageCardViewWith(data: topBarData[index])
         return topBarView
     }
 }

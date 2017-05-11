@@ -25,7 +25,7 @@ class ImageCardView: UIView {
     fileprivate var toolbar: Toolbar!
     fileprivate var moreButton: IconButton!
     
-    func initializeCollectionViewWith(data: TopBarData) {
+    func initializeImageCardViewWith(data: TopBarData) {
         
         prepareImageViewWith(imageName: data.imageName)
         prepareMoreButton()

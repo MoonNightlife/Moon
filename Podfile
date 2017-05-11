@@ -10,7 +10,7 @@ target 'Moon' do
   pod "RxCocoa"
   pod "SwiftLint"
   pod "Material", :git => "https://github.com/CosmicMind/Material"
-  pod "PagingMenuController"
+  pod "PageMenu"
   pod "iCarousel"
 
   target 'MoonTests' do
