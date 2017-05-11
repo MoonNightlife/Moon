@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PageMenu
 
 class MoonsViewViewController: UIViewController {
 
@@ -16,10 +17,13 @@ class MoonsViewViewController: UIViewController {
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! MoonsViewViewController
     }
     
+    var pageMenu: CAPSPageMenu?
+    var controllerArray = [UIViewController]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setupPagingMenuController()
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,4 +41,30 @@ class MoonsViewViewController: UIViewController {
     }
     */
 
+}
+
+extension MoonsViewViewController {
+    fileprivate func setupPagingMenuController() {
+        let beerSpecialsController = BarActivityFeedViewController.instantiateFromStoryboard()
+        beerSpecialsController.title = "Friend Feed"
+        controllerArray.append(beerSpecialsController)
+        
+        let parameters: [CAPSPageMenuOption] = [
+            .menuItemSeparatorWidth(4.3),
+            .menuItemSeparatorPercentageHeight(0.1),
+            .scrollMenuBackgroundColor(.clear),
+            .selectionIndicatorColor(.clear),
+            .addBottomMenuHairline(false),
+            .selectionIndicatorColor(.white),
+            .unselectedMenuItemLabelColor(.lightText)
+            
+        ]
+        
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: self.view.frame, pageMenuOptions: parameters)
+        pageMenu?.view.backgroundColor = .lightGray
+        if let view = pageMenu?.view {
+            self.view.addSubview(view)
+        }
+        
+    }
 }

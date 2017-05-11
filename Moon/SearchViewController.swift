@@ -40,6 +40,7 @@ class SearchViewController: UIViewController {
         topBarCarousel.type = .linear
     }
     
+    // Function can be deleted once we are aren't using fake top bar data
     private func createTempTopBarData() {
         for i in 1..<7 {
             let data = TopBarData(imageName: "pic\(i).jpg", barName: "BarName\(i)", location: "Location\(i)")
@@ -48,7 +49,16 @@ class SearchViewController: UIViewController {
         topBarCarousel.reloadData()
     }
     
-    private func setupPagingMenuController() {
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    
+    }
+
+}
+
+extension SearchViewController {
+    fileprivate func setupPagingMenuController() {
         let beerSpecialsController = SpecialsViewController.instantiateFromStoryboard()
         beerSpecialsController.title = "Beer"
         beerSpecialsController.specialData = fakeSpecials.filter({$0.type == .beer})
@@ -83,13 +93,6 @@ class SearchViewController: UIViewController {
         }
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    
-    }
-
 }
 
 extension SearchViewController: iCarouselDataSource, iCarouselDelegate {
