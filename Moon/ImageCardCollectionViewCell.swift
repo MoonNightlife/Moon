@@ -38,9 +38,9 @@ class ImageCardCollectionViewCell: UICollectionViewCell {
 extension ImageCardCollectionViewCell {
     fileprivate func prepareImageViewWith(imageName: String) {
         imageView = UIImageView()
-        imageView.contentMode = UIViewContentMode.scaleAspectFit
+        //imageView.contentMode = UIViewContentMode.scaleAspectFit
         imageView.image = UIImage(named: imageName)?.resize(toWidth: self.width)
-    
+        
     }
     
     fileprivate func prepareMoreButton() {
