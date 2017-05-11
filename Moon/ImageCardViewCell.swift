@@ -15,7 +15,7 @@ struct TopBarData {
     let location: String
 }
 
-class ImageCardCollectionViewCell: UICollectionViewCell {
+class ImageCardView: UIView {
     fileprivate var card: ImageCard!
     
     /// Content area.
@@ -35,11 +35,12 @@ class ImageCardCollectionViewCell: UICollectionViewCell {
 
 }
 
-extension ImageCardCollectionViewCell {
+extension ImageCardView {
     fileprivate func prepareImageViewWith(imageName: String) {
-        imageView = UIImageView()
-        //imageView.contentMode = UIViewContentMode.scaleAspectFit
-        imageView.image = UIImage(named: imageName)?.resize(toWidth: self.width)
+        imageView = UIImageView(frame: self.frame)
+        imageView.contentMode = UIViewContentMode.scaleAspectFill
+        imageView.image = UIImage(named: imageName)
+            //?.resize(toWidth: self.width)
         
     }
     

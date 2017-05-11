@@ -10,7 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    let searchControllerSegueIdenifier = "loginToSearch"
+    let masterControllerSegueIdenifier = "loginToMaster"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +20,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        performSegue(withIdentifier: searchControllerSegueIdenifier, sender: self)
+        performSegue(withIdentifier: masterControllerSegueIdenifier, sender: self)
     }
 
     override func didReceiveMemoryWarning() {

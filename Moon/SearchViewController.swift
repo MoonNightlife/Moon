@@ -9,9 +9,17 @@
 import UIKit
 import PagingMenuController
 import Material
+import iCarousel
 
 class SearchViewController: UIViewController {
     
+    class func instantiateFromStoryboard() -> SearchViewController {
+        let storyboard = UIStoryboard(name: "Search", bundle: nil)
+        // swiftlint:disable:next force_cast
+        return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! SearchViewController
+    }
+    
+    @IBOutlet weak var topBarCarousel: iCarousel!
     fileprivate let reuseIdentifier = "TopBarCell"
     fileprivate var topBarData = [TopBarData]()
     var options: PagingMenuControllerCustomizable = PagingMenuOptions()
@@ -21,6 +29,12 @@ class SearchViewController: UIViewController {
     
         createTempTopBarData()
         setupPagingMenuController()
+        setupCarousel()
+    }
+    
+    private func setupCarousel() {
+        topBarCarousel.isPagingEnabled = true
+        topBarCarousel.type = .linear
     }
     
     private func createTempTopBarData() {
@@ -28,6 +42,7 @@ class SearchViewController: UIViewController {
             let data = TopBarData(imageName: "pic\(i).jpg", barName: "BarName\(i)", location: "Location\(i)")
             topBarData.append(data)
         }
+        topBarCarousel.reloadData()
     }
     
     private func setupPagingMenuController() {
@@ -67,26 +82,19 @@ class SearchViewController: UIViewController {
 
 }
 
-extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension SearchViewController: iCarouselDataSource, iCarouselDelegate {
+    func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
+        return value
+    }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func numberOfItems(in carousel: iCarousel) -> Int {
+        print(topBarData.count)
         return topBarData.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? ImageCardCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        
-        cell.initializeCollectionViewWith(data: topBarData[indexPath.row])
-        // Configure the cell
-        return cell
+    func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
+        let topBarView = ImageCardView(frame: carousel.frame)
+        topBarView.initializeCollectionViewWith(data: topBarData[index])
+        return topBarView
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemWidth = collectionView.bounds.width
-        let itemHeight = collectionView.bounds.height
-        return CGSize(width: itemWidth, height: itemHeight)
-    }
-    
 }
