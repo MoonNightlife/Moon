@@ -12,6 +12,7 @@ target 'Moon' do
   pod "Material", :git => "https://github.com/CosmicMind/Material"
   pod "PageMenu"
   pod "iCarousel"
+  pod "MaterialComponents"
 
   target 'MoonTests' do
     inherit! :search_paths

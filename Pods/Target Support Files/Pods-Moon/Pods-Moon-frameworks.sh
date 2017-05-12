@@ -84,14 +84,18 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/MDFTextAccessibility/MDFTextAccessibility.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Material/Material.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MaterialComponents/MaterialComponents.framework"
   install_framework "$BUILT_PRODUCTS_DIR/PageMenu/PageMenu.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RxCocoa/RxCocoa.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RxSwift/RxSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/iCarousel/iCarousel.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/MDFTextAccessibility/MDFTextAccessibility.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Material/Material.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MaterialComponents/MaterialComponents.framework"
   install_framework "$BUILT_PRODUCTS_DIR/PageMenu/PageMenu.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RxCocoa/RxCocoa.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RxSwift/RxSwift.framework"
