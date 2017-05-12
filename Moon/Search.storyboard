@@ -27,38 +27,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="0va-Wt-TMc">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJK-E8-a3q">
+                                <rect key="frame" x="0.0" y="250" width="375" height="417"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W9C-sT-ytT" customClass="iCarousel">
-                                <rect key="frame" x="0.0" y="64" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="Tfe-LV-kKT"/>
+                                    <constraint firstAttribute="height" constant="250" id="waE-h2-vc3"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="uuI-yN-RFv" id="44l-Fo-9MY"/>
                                     <outlet property="delegate" destination="uuI-yN-RFv" id="0FK-Wm-Wbs"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJK-E8-a3q">
-                                <rect key="frame" x="0.0" y="264" width="375" height="403"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="jJK-E8-a3q" firstAttribute="bottom" secondItem="XI4-ae-QLp" secondAttribute="top" id="4pO-TD-ZAA"/>
-                            <constraint firstItem="W9C-sT-ytT" firstAttribute="trailing" secondItem="0va-Wt-TMc" secondAttribute="trailing" id="60F-lp-mSd"/>
-                            <constraint firstItem="jJK-E8-a3q" firstAttribute="top" secondItem="W9C-sT-ytT" secondAttribute="bottom" id="986-1t-0qW"/>
-                            <constraint firstItem="W9C-sT-ytT" firstAttribute="leading" secondItem="0va-Wt-TMc" secondAttribute="leading" id="9Y1-gC-0C3"/>
-                            <constraint firstItem="0va-Wt-TMc" firstAttribute="leading" secondItem="DjY-uY-Phg" secondAttribute="leading" id="FwU-Bm-oC8"/>
-                            <constraint firstAttribute="trailing" secondItem="0va-Wt-TMc" secondAttribute="trailing" id="GLx-fT-va1"/>
-                            <constraint firstItem="jJK-E8-a3q" firstAttribute="trailing" secondItem="W9C-sT-ytT" secondAttribute="trailing" id="kw0-fM-J7g"/>
-                            <constraint firstItem="W9C-sT-ytT" firstAttribute="top" secondItem="0va-Wt-TMc" secondAttribute="bottom" id="n7Z-hs-9nk"/>
-                            <constraint firstItem="0va-Wt-TMc" firstAttribute="top" secondItem="y48-nH-QWP" secondAttribute="bottom" id="naj-gv-Pqc"/>
-                            <constraint firstItem="jJK-E8-a3q" firstAttribute="leading" secondItem="W9C-sT-ytT" secondAttribute="leading" id="qbl-TR-eIF"/>
+                            <constraint firstItem="W9C-sT-ytT" firstAttribute="trailing" secondItem="jJK-E8-a3q" secondAttribute="trailing" id="AKD-lk-UZd"/>
+                            <constraint firstItem="jJK-E8-a3q" firstAttribute="top" secondItem="W9C-sT-ytT" secondAttribute="bottom" id="Mhp-cw-hFq"/>
+                            <constraint firstAttribute="trailing" secondItem="W9C-sT-ytT" secondAttribute="trailing" id="Wou-i0-yDB"/>
+                            <constraint firstItem="jJK-E8-a3q" firstAttribute="bottom" secondItem="XI4-ae-QLp" secondAttribute="top" id="dxG-I9-MCd"/>
+                            <constraint firstItem="W9C-sT-ytT" firstAttribute="leading" secondItem="jJK-E8-a3q" secondAttribute="leading" id="ee0-4l-ean"/>
+                            <constraint firstItem="W9C-sT-ytT" firstAttribute="leading" secondItem="DjY-uY-Phg" secondAttribute="leading" id="gTc-18-Y7O"/>
+                            <constraint firstItem="W9C-sT-ytT" firstAttribute="top" secondItem="DjY-uY-Phg" secondAttribute="top" id="uwM-Cd-OiV"/>
                         </constraints>
                     </view>
                     <connections>

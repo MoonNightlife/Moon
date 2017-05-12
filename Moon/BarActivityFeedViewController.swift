@@ -63,6 +63,9 @@ extension BarActivityFeedViewController {
         tableView.rowHeight = 75
         self.tableView.separatorStyle = .none
         
+        // We dont want the background to be an image.
+        // We would rather change the background color, because when the user pulls
+        // down on the table view to reload the table view, then the image moves with it.
         // Background set up
         let goingToImage = "Moons_View_Background.png"
         let image = UIImage(named: goingToImage)

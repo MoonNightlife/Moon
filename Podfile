@@ -12,6 +12,8 @@ target 'Moon' do
   pod "Material", :git => "https://github.com/CosmicMind/Material"
   pod "PageMenu"
   pod "iCarousel"
+  pod "MaterialComponents"
+  pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
 
   target 'MoonTests' do
     inherit! :search_paths

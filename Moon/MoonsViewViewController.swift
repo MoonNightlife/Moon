@@ -45,19 +45,29 @@ class MoonsViewViewController: UIViewController {
 
 extension MoonsViewViewController {
     fileprivate func setupPagingMenuController() {
-        let beerSpecialsController = BarActivityFeedViewController.instantiateFromStoryboard()
-        beerSpecialsController.title = "Friend Feed"
-        controllerArray.append(beerSpecialsController)
+        let barActivityFeedViewController = BarActivityFeedViewController.instantiateFromStoryboard()
+        barActivityFeedViewController.title = "Friend Feed"
+        controllerArray.append(barActivityFeedViewController)
+        
+        let cityOverviewViewController = CityOverviewViewController.instantiateFromStoryboard()
+        cityOverviewViewController.title = "City Overview"
+        controllerArray.append(cityOverviewViewController)
         
         let parameters: [CAPSPageMenuOption] = [
             .menuItemSeparatorWidth(4.3),
             .menuItemSeparatorPercentageHeight(0.1),
-            .scrollMenuBackgroundColor(.clear),
-            .selectionIndicatorColor(.clear),
-            .addBottomMenuHairline(false),
-            .selectionIndicatorColor(.white),
-            .unselectedMenuItemLabelColor(.lightText)
             
+            .scrollMenuBackgroundColor(UIColor(red: 1, green: 1, blue: 1, alpha: 0.5)),
+            .selectionIndicatorColor(UIColor(red: 31/255, green: 92/255, blue: 167/255, alpha: 1)),
+            .unselectedMenuItemLabelColor(.lightText),
+            .selectionIndicatorColor(UIColor(red: 31/255, green: 92/255, blue: 167/255, alpha: 1)),
+            
+            .menuItemFont(UIFont(name: "Roboto", size: 15)!),
+            
+            .addBottomMenuHairline(true),
+            
+            .useMenuLikeSegmentedControl(true),
+            .enableHorizontalBounce(false)
         ]
         
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: self.view.frame, pageMenuOptions: parameters)

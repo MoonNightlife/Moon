@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="UqM-gC-rae">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Data Source-->
+        <scene sceneID="s2X-LD-PIR">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iPa-mt-ZcO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="UqM-gC-rae" customClass="MasterViewController" customModule="Moon" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1Aw-hd-GwU"/>
+                        <viewControllerLayoutGuide type="bottom" id="UHK-hl-0Cb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="62j-IE-10U">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qd2-pc-YMl" customClass="iCarousel">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="UqM-gC-rae" id="kGv-vh-nCd"/>
+                                    <outlet property="delegate" destination="UqM-gC-rae" id="lkF-ng-Sjv"/>
+                                </connections>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7vs-64-Xle" customClass="MDCFloatingButton">
+                                <rect key="frame" x="329" y="629" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="4Em-g0-YBB"/>
+                                    <constraint firstAttribute="width" constant="30" id="6no-hm-zr4"/>
+                                </constraints>
+                                <state key="normal" title="M"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autohide" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="animation" value="fadeInUp"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="curve" value="easeInSine"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="showRightView:" destination="UqM-gC-rae" eventType="touchUpInside" id="t5v-Wm-9E5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjU-LC-vA1" customClass="MDCFloatingButton">
+                                <rect key="frame" x="167" y="619" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="0ds-xn-j0i"/>
+                                    <constraint firstAttribute="width" constant="40" id="duK-1S-GF4"/>
+                                </constraints>
+                                <state key="normal" title="S"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1GM-jh-SOl" customClass="MDCFloatingButton">
+                                <rect key="frame" x="16" y="629" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="CqV-Jx-ky7"/>
+                                    <constraint firstAttribute="width" constant="30" id="Iah-tQ-WqD"/>
+                                </constraints>
+                                <state key="normal" title="F"/>
+                                <connections>
+                                    <action selector="showLeftView:" destination="UqM-gC-rae" eventType="touchUpInside" id="xxR-De-tck"/>
+                                </connections>
+                            </button>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="RTO-fW-D9W">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1GM-jh-SOl" firstAttribute="leading" secondItem="62j-IE-10U" secondAttribute="leadingMargin" id="05g-sC-gL8"/>
+                            <constraint firstItem="7vs-64-Xle" firstAttribute="trailing" secondItem="62j-IE-10U" secondAttribute="trailingMargin" id="3PT-Fe-4kQ"/>
+                            <constraint firstItem="RTO-fW-D9W" firstAttribute="leading" secondItem="62j-IE-10U" secondAttribute="leading" id="5Ca-Kf-AMg"/>
+                            <constraint firstItem="RTO-fW-D9W" firstAttribute="top" secondItem="1Aw-hd-GwU" secondAttribute="bottom" id="7Fd-sx-RbI"/>
+                            <constraint firstItem="qd2-pc-YMl" firstAttribute="bottom" secondItem="UHK-hl-0Cb" secondAttribute="top" id="9Br-Km-ggT"/>
+                            <constraint firstItem="RTO-fW-D9W" firstAttribute="trailing" secondItem="qd2-pc-YMl" secondAttribute="trailing" id="CI5-ld-NSK"/>
+                            <constraint firstItem="UHK-hl-0Cb" firstAttribute="top" secondItem="fjU-LC-vA1" secondAttribute="bottom" constant="8" symbolic="YES" id="Few-Ed-thm"/>
+                            <constraint firstAttribute="trailing" secondItem="RTO-fW-D9W" secondAttribute="trailing" id="HHA-wi-OGS"/>
+                            <constraint firstItem="qd2-pc-YMl" firstAttribute="top" secondItem="RTO-fW-D9W" secondAttribute="bottom" id="PMg-Qh-NLw"/>
+                            <constraint firstItem="UHK-hl-0Cb" firstAttribute="top" secondItem="1GM-jh-SOl" secondAttribute="bottom" constant="8" symbolic="YES" id="Zkr-iu-a0d"/>
+                            <constraint firstItem="RTO-fW-D9W" firstAttribute="leading" secondItem="qd2-pc-YMl" secondAttribute="leading" id="cHV-5x-JLJ"/>
+                            <constraint firstItem="1GM-jh-SOl" firstAttribute="baseline" secondItem="7vs-64-Xle" secondAttribute="baseline" id="f9M-PL-3uH"/>
+                            <constraint firstItem="fjU-LC-vA1" firstAttribute="centerX" secondItem="62j-IE-10U" secondAttribute="centerX" id="qGM-EV-fVv"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="currentViewButton" destination="fjU-LC-vA1" id="hLt-4d-TvD"/>
+                        <outlet property="leftViewButton" destination="1GM-jh-SOl" id="YfW-jH-5cw"/>
+                        <outlet property="masterCarousel" destination="qd2-pc-YMl" id="IMY-1d-h35"/>
+                        <outlet property="rightViewButton" destination="7vs-64-Xle" id="Tvf-qx-RBX"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1005.6" y="116.49175412293854"/>
+        </scene>
+    </scenes>
+</document>
