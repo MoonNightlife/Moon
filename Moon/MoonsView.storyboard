@@ -109,7 +109,7 @@
                                                         <color key="titleColor" red="0.0" green="0.0" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="nameButtonTappedWithSender:" destination="EcU-As-Jcs" eventType="touchUpInside" id="LQO-Fd-aXy"/>
+                                                        <action selector="nameButtonTappedWithSender:" destination="EcU-As-Jcs" eventType="touchUpInside" id="Fx7-lv-bGL"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="is going to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xPB-9s-FLx">
@@ -151,8 +151,7 @@
                                                         <color key="titleColor" red="0.0" green="0.0" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="barButtonTapped:" destination="EcU-As-Jcs" eventType="touchUpInside" id="ntG-r2-361"/>
-                                                        <action selector="barButtonTappedWithSender:" destination="EcU-As-Jcs" eventType="touchUpInside" id="vYx-gZ-fMG"/>
+                                                        <action selector="barButtonTappedWithSender:" destination="EcU-As-Jcs" eventType="touchUpInside" id="GYx-zg-jEe"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -206,8 +205,7 @@
                                                     </constraints>
                                                     <state key="normal" backgroundImage="Heart_Icon2"/>
                                                     <connections>
-                                                        <action selector="heartButtonTapped:" destination="EcU-As-Jcs" eventType="touchUpInside" id="czE-RA-JSV"/>
-                                                        <action selector="heartButtonTappedWithSender:" destination="EcU-As-Jcs" eventType="touchUpInside" id="8WC-pM-Ulj"/>
+                                                        <action selector="heartButtonTappedWithSender:" destination="EcU-As-Jcs" eventType="touchUpInside" id="pup-lz-cEU"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FKk-Pq-ab3">
@@ -217,8 +215,7 @@
                                                         <color key="titleColor" red="0.1215686275" green="0.36078431370000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="numLikeButtonTapped:" destination="EcU-As-Jcs" eventType="touchUpInside" id="0Bn-1i-fdz"/>
-                                                        <action selector="numLikeButtonTappedWithSender:" destination="EcU-As-Jcs" eventType="touchUpInside" id="RER-Ja-Bcp"/>
+                                                        <action selector="numLikeButtonTappedWithSender:" destination="EcU-As-Jcs" eventType="touchUpInside" id="ISo-XN-0cD"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

@@ -13,6 +13,10 @@ import MaterialComponents
 class MasterViewController: UIViewController {
 
     @IBOutlet weak var masterCarousel: iCarousel!
+    @IBOutlet weak var currentViewButton: MDCFloatingButton!
+    @IBOutlet weak var rightViewButton: MDCFloatingButton!
+    @IBOutlet weak var leftViewButton: MDCFloatingButton!
+    
     var items: [Int] = [1, 2, 3]
     
     @IBAction func showRightView(_ sender: Any) {
@@ -108,8 +112,12 @@ extension MasterViewController: iCarouselDelegate, iCarouselDataSource {
             itemViewController = UIViewController()
         }
         
+        // These couple method calls are needed so there is a parent child relationship between the
+        // new VC and the Master VC. We also have to resize the view of the created VC, so it will fit
+        // in the carousel frame.
         self.addChildViewController(itemViewController)
         itemViewController.didMove(toParentViewController: self)
+        itemViewController.view.frame = CGRect(x: 0, y: 0, width: carousel.frame.width, height: carousel.frame.height)
         
         return itemViewController.view
     }

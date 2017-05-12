@@ -52,7 +52,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kuj-Th-VWp" customClass="iCarousel">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="s3u-bJ-7NO" id="ruR-rT-SWL"/>
@@ -66,6 +66,12 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gtx-1a-mAA" customClass="MDCFloatingButton">
                                 <rect key="frame" x="313" y="629" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autohide" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="animation" value="fadeInUp"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="curve" value="easeInSine"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="showRightView:" destination="s3u-bJ-7NO" eventType="touchUpInside" id="rHa-J2-P1H"/>
                                 </connections>
@@ -77,28 +83,38 @@
                                     <action selector="showLeftView:" destination="s3u-bJ-7NO" eventType="touchUpInside" id="fAM-xP-Juf"/>
                                 </connections>
                             </button>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="WVs-PC-3iz">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="U2C-Zd-Z8B" firstAttribute="top" secondItem="jfH-z8-K5o" secondAttribute="bottom" constant="40" id="LVm-pU-Uzh"/>
-                            <constraint firstItem="U2C-Zd-Z8B" firstAttribute="top" secondItem="CUD-HL-88t" secondAttribute="bottom" constant="8" symbolic="YES" id="TVS-IE-wHl"/>
-                            <constraint firstItem="kuj-Th-VWp" firstAttribute="bottom" secondItem="U2C-Zd-Z8B" secondAttribute="top" id="aOV-Ly-ELD"/>
-                            <constraint firstItem="Gtx-1a-mAA" firstAttribute="trailing" secondItem="Mdu-3N-kaa" secondAttribute="trailingMargin" id="d57-RJ-G55"/>
-                            <constraint firstItem="CUD-HL-88t" firstAttribute="baseline" secondItem="Gtx-1a-mAA" secondAttribute="baseline" id="e90-h0-cn0"/>
-                            <constraint firstItem="kuj-Th-VWp" firstAttribute="top" secondItem="eRa-QN-0PJ" secondAttribute="bottom" id="eUb-SF-84d"/>
-                            <constraint firstItem="jfH-z8-K5o" firstAttribute="centerX" secondItem="Mdu-3N-kaa" secondAttribute="centerX" id="epR-R8-9nB"/>
-                            <constraint firstItem="kuj-Th-VWp" firstAttribute="leading" secondItem="Mdu-3N-kaa" secondAttribute="leading" id="f0L-PT-3RW"/>
-                            <constraint firstAttribute="trailing" secondItem="kuj-Th-VWp" secondAttribute="trailing" id="l4f-cS-1jx"/>
-                            <constraint firstItem="CUD-HL-88t" firstAttribute="leading" secondItem="Mdu-3N-kaa" secondAttribute="leadingMargin" id="nSK-OK-2uq"/>
+                            <constraint firstItem="WVs-PC-3iz" firstAttribute="top" secondItem="eRa-QN-0PJ" secondAttribute="bottom" id="8Z5-1l-mMx"/>
+                            <constraint firstItem="kuj-Th-VWp" firstAttribute="centerX" secondItem="jfH-z8-K5o" secondAttribute="centerX" id="FYr-yy-kIT"/>
+                            <constraint firstItem="WVs-PC-3iz" firstAttribute="leading" secondItem="Mdu-3N-kaa" secondAttribute="leading" id="Fz5-tE-ele"/>
+                            <constraint firstItem="U2C-Zd-Z8B" firstAttribute="top" secondItem="jfH-z8-K5o" secondAttribute="bottom" constant="40" id="Q8J-TI-XXS"/>
+                            <constraint firstItem="kuj-Th-VWp" firstAttribute="top" secondItem="WVs-PC-3iz" secondAttribute="bottom" id="VUC-yg-aQy"/>
+                            <constraint firstItem="U2C-Zd-Z8B" firstAttribute="top" secondItem="CUD-HL-88t" secondAttribute="bottom" constant="8" symbolic="YES" id="WTQ-lh-hKJ"/>
+                            <constraint firstItem="CUD-HL-88t" firstAttribute="baseline" secondItem="Gtx-1a-mAA" secondAttribute="baseline" id="YYd-rp-Nuk"/>
+                            <constraint firstItem="WVs-PC-3iz" firstAttribute="trailing" secondItem="kuj-Th-VWp" secondAttribute="trailing" id="Ype-kL-dDS"/>
+                            <constraint firstItem="kuj-Th-VWp" firstAttribute="bottom" secondItem="U2C-Zd-Z8B" secondAttribute="top" id="bjy-cd-7WM"/>
+                            <constraint firstItem="Gtx-1a-mAA" firstAttribute="trailing" secondItem="Mdu-3N-kaa" secondAttribute="trailingMargin" id="dF7-hr-Aaf"/>
+                            <constraint firstItem="CUD-HL-88t" firstAttribute="leading" secondItem="Mdu-3N-kaa" secondAttribute="leadingMargin" id="fHQ-Mp-tdZ"/>
+                            <constraint firstItem="WVs-PC-3iz" firstAttribute="leading" secondItem="kuj-Th-VWp" secondAttribute="leading" id="w7l-1J-LaO"/>
+                            <constraint firstAttribute="trailing" secondItem="WVs-PC-3iz" secondAttribute="trailing" id="zyW-0E-CkH"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="currentViewButton" destination="jfH-z8-K5o" id="RZj-TD-O9z"/>
+                        <outlet property="leftViewButton" destination="CUD-HL-88t" id="iYb-Zl-mag"/>
                         <outlet property="masterCarousel" destination="kuj-Th-VWp" id="cjJ-ng-7md"/>
+                        <outlet property="rightViewButton" destination="Gtx-1a-mAA" id="Cxr-sc-6jp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iLO-SP-YWw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1005.6" y="115.59220389805098"/>
+            <point key="canvasLocation" x="1005.6" y="116.49175412293854"/>
         </scene>
     </scenes>
 </document>

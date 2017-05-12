@@ -168,6 +168,7 @@ PODS:
   - RxCocoa (3.4.0):
     - RxSwift (~> 3.4)
   - RxSwift (3.4.0)
+  - Spring (1.0.3)
   - SwiftLint (0.18.1)
 
 DEPENDENCIES:
@@ -177,16 +178,23 @@ DEPENDENCIES:
   - PageMenu
   - RxCocoa
   - RxSwift
+  - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
   - SwiftLint
 
 EXTERNAL SOURCES:
   Material:
     :git: https://github.com/CosmicMind/Material
+  Spring:
+    :branch: swift3
+    :git: https://github.com/MengTo/Spring.git
 
 CHECKOUT OPTIONS:
   Material:
     :commit: 6bfd58cfc65a930a0bde660a588f2e75c2a533e8
     :git: https://github.com/CosmicMind/Material
+  Spring:
+    :commit: 8201b5c93bd7ebdf4cd18160bcde1e6e88c2be64
+    :git: https://github.com/MengTo/Spring.git
 
 SPEC CHECKSUMS:
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
@@ -196,8 +204,9 @@ SPEC CHECKSUMS:
   PageMenu: 9c38fd7e0d9ef4b1408320f55bb907bbc0e538dc
   RxCocoa: d14ef6b6029e1ddc6e966508c09289090de68ff9
   RxSwift: 3789a1af753002a14edecdb698a2424624296a9c
+  Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
 
-PODFILE CHECKSUM: 18cc457f22ac46ee9489902eb875a839aa620f79
+PODFILE CHECKSUM: 3c0a934b4c2422718a46488c0111871d1ddd8386
 
 COCOAPODS: 1.1.1
