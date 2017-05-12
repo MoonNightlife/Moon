@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -58,13 +59,37 @@
                                     <outlet property="delegate" destination="s3u-bJ-7NO" id="cNc-jt-2zf"/>
                                 </connections>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jfH-z8-K5o" customClass="MDCFloatingButton">
+                                <rect key="frame" x="164" y="597" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gtx-1a-mAA" customClass="MDCFloatingButton">
+                                <rect key="frame" x="313" y="629" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="showRightView:" destination="s3u-bJ-7NO" eventType="touchUpInside" id="rHa-J2-P1H"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUD-HL-88t" customClass="MDCFloatingButton">
+                                <rect key="frame" x="16" y="629" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="showLeftView:" destination="s3u-bJ-7NO" eventType="touchUpInside" id="fAM-xP-Juf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="U2C-Zd-Z8B" firstAttribute="top" secondItem="jfH-z8-K5o" secondAttribute="bottom" constant="40" id="LVm-pU-Uzh"/>
+                            <constraint firstItem="U2C-Zd-Z8B" firstAttribute="top" secondItem="CUD-HL-88t" secondAttribute="bottom" constant="8" symbolic="YES" id="TVS-IE-wHl"/>
                             <constraint firstItem="kuj-Th-VWp" firstAttribute="bottom" secondItem="U2C-Zd-Z8B" secondAttribute="top" id="aOV-Ly-ELD"/>
+                            <constraint firstItem="Gtx-1a-mAA" firstAttribute="trailing" secondItem="Mdu-3N-kaa" secondAttribute="trailingMargin" id="d57-RJ-G55"/>
+                            <constraint firstItem="CUD-HL-88t" firstAttribute="baseline" secondItem="Gtx-1a-mAA" secondAttribute="baseline" id="e90-h0-cn0"/>
                             <constraint firstItem="kuj-Th-VWp" firstAttribute="top" secondItem="eRa-QN-0PJ" secondAttribute="bottom" id="eUb-SF-84d"/>
+                            <constraint firstItem="jfH-z8-K5o" firstAttribute="centerX" secondItem="Mdu-3N-kaa" secondAttribute="centerX" id="epR-R8-9nB"/>
                             <constraint firstItem="kuj-Th-VWp" firstAttribute="leading" secondItem="Mdu-3N-kaa" secondAttribute="leading" id="f0L-PT-3RW"/>
                             <constraint firstAttribute="trailing" secondItem="kuj-Th-VWp" secondAttribute="trailing" id="l4f-cS-1jx"/>
+                            <constraint firstItem="CUD-HL-88t" firstAttribute="leading" secondItem="Mdu-3N-kaa" secondAttribute="leadingMargin" id="nSK-OK-2uq"/>
                         </constraints>
                     </view>
                     <connections>
@@ -73,7 +98,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iLO-SP-YWw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1007" y="116"/>
+            <point key="canvasLocation" x="1005.6" y="115.59220389805098"/>
         </scene>
     </scenes>
 </document>

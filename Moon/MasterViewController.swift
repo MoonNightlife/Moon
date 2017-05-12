@@ -8,11 +8,55 @@
 
 import UIKit
 import iCarousel
+import MaterialComponents
 
 class MasterViewController: UIViewController {
 
     @IBOutlet weak var masterCarousel: iCarousel!
     var items: [Int] = [1, 2, 3]
+    
+    @IBAction func showRightView(_ sender: Any) {
+        scrollToNextRightView()
+    }
+    @IBAction func showLeftView(_ sender: Any) {
+        scrollToNextLeftView()
+    }
+    
+    private func scrollToNextRightView() {
+        let currentIndex = masterCarousel.currentItemIndex
+        var scrollToIndex: Int!
+        
+        switch currentIndex {
+        case 0:
+            scrollToIndex = 1
+        case 1:
+            scrollToIndex = 2
+        case 2:
+            scrollToIndex = 0
+        default:
+            scrollToIndex = 1
+        }
+        
+        masterCarousel.scrollToItem(at: scrollToIndex, animated: true)
+    }
+    
+    private func scrollToNextLeftView() {
+        let currentIndex = masterCarousel.currentItemIndex
+        var scrollToIndex: Int!
+        
+        switch currentIndex {
+        case 0:
+            scrollToIndex = 2
+        case 1:
+            scrollToIndex = 0
+        case 2:
+            scrollToIndex = 1
+        default:
+            scrollToIndex = 1
+        }
+        
+        masterCarousel.scrollToItem(at: scrollToIndex, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
