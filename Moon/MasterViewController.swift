@@ -36,7 +36,11 @@ extension MasterViewController: iCarouselDelegate, iCarouselDataSource {
     
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
         if option == .spacing {
-            return value * 2.46
+            return value * 1
+        }
+        
+        if option == .showBackfaces {
+            return 0
         }
         return value
     }

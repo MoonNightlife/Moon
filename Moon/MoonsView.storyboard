@@ -42,6 +42,38 @@
             </objects>
             <point key="canvasLocation" x="102" y="146"/>
         </scene>
+        <!--City Overview View Controller-->
+        <scene sceneID="r75-hC-0xS">
+            <objects>
+                <viewController storyboardIdentifier="CityOverviewViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fRQ-IH-wvJ" customClass="CityOverviewViewController" customModule="Moon" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="huY-hJ-v5U"/>
+                        <viewControllerLayoutGuide type="bottom" id="8EG-cs-fVW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xaT-Yi-cff">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="i9M-5i-LRs">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="i9M-5i-LRs" firstAttribute="leading" secondItem="xaT-Yi-cff" secondAttribute="leading" id="0RJ-fQ-ht9"/>
+                            <constraint firstAttribute="trailing" secondItem="i9M-5i-LRs" secondAttribute="trailing" id="8CM-pG-HLC"/>
+                            <constraint firstItem="i9M-5i-LRs" firstAttribute="top" secondItem="huY-hJ-v5U" secondAttribute="bottom" id="reS-Uh-Ij4"/>
+                            <constraint firstItem="i9M-5i-LRs" firstAttribute="bottom" secondItem="8EG-cs-fVW" secondAttribute="top" id="zVx-iO-QVA"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cityMapView" destination="i9M-5i-LRs" id="s42-uG-pxV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8TM-iN-hsY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1045.5999999999999" y="496.10194902548727"/>
+        </scene>
         <!--Bar Activity Feed View Controller-->
         <scene sceneID="Zlf-R4-Bk5">
             <objects>

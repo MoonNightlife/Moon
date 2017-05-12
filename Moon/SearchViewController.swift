@@ -38,6 +38,7 @@ class SearchViewController: UIViewController {
     private func setupCarousel() {
         topBarCarousel.isPagingEnabled = true
         topBarCarousel.type = .linear
+        topBarCarousel.bounces = false
     }
     
     // Function can be deleted once we are aren't using fake top bar data
@@ -97,6 +98,7 @@ extension SearchViewController {
 
 extension SearchViewController: iCarouselDataSource, iCarouselDelegate {
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
+        
         return value
     }
     

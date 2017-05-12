@@ -18,6 +18,7 @@
 		F001BAC11EC50E9700CDF9BC /* BarActivityFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F001BAC01EC50E9700CDF9BC /* BarActivityFeedViewController.swift */; };
 		F001BAC31EC50F7500CDF9BC /* BarActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F001BAC21EC50F7500CDF9BC /* BarActivityTableViewCell.swift */; };
 		F001BAC51EC51BD400CDF9BC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F001BAC41EC51BD400CDF9BC /* Utilities.swift */; };
+		F0055D691EC5E64B005544B4 /* CityOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0055D681EC5E64B005544B4 /* CityOverviewViewController.swift */; };
 		F03776A21EC3A44100B92E6B /* FakeSpecialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03776A11EC3A44100B92E6B /* FakeSpecialData.swift */; };
 		F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */; };
 		F03776A71EC3B9AD00B92E6B /* miller.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F03776A61EC3B9AD00B92E6B /* miller.jpeg */; };
@@ -86,6 +87,7 @@
 		F001BAC01EC50E9700CDF9BC /* BarActivityFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarActivityFeedViewController.swift; sourceTree = "<group>"; };
 		F001BAC21EC50F7500CDF9BC /* BarActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarActivityTableViewCell.swift; sourceTree = "<group>"; };
 		F001BAC41EC51BD400CDF9BC /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		F0055D681EC5E64B005544B4 /* CityOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityOverviewViewController.swift; sourceTree = "<group>"; };
 		F03776A11EC3A44100B92E6B /* FakeSpecialData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeSpecialData.swift; sourceTree = "<group>"; };
 		F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialTableViewCell.swift; sourceTree = "<group>"; };
 		F03776A61EC3B9AD00B92E6B /* miller.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = miller.jpeg; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 				F04283AE1EC4A92700CCB5F3 /* FeaturedViewController.swift */,
 				F04283B01EC4A96200CCB5F3 /* MoonsViewViewController.swift */,
 				F001BAC01EC50E9700CDF9BC /* BarActivityFeedViewController.swift */,
+				F0055D681EC5E64B005544B4 /* CityOverviewViewController.swift */,
 				F09B9D071EC3571800B2385A /* SearchViewController.swift */,
 				F0644C2A1EC37D0E00D92BF7 /* SpecialsViewController.swift */,
 			);
@@ -596,6 +599,7 @@
 				F09B9D0A1EC35D5D00B2385A /* SegmentedControl.swift in Sources */,
 				F03776A21EC3A44100B92E6B /* FakeSpecialData.swift in Sources */,
 				F0A8E2D81EC3C6B2001D9993 /* ImageCardViewCell.swift in Sources */,
+				F0055D691EC5E64B005544B4 /* CityOverviewViewController.swift in Sources */,
 				F048F11B1EA3B7A5000F0161 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

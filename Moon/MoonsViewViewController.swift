@@ -45,9 +45,13 @@ class MoonsViewViewController: UIViewController {
 
 extension MoonsViewViewController {
     fileprivate func setupPagingMenuController() {
-        let beerSpecialsController = BarActivityFeedViewController.instantiateFromStoryboard()
-        beerSpecialsController.title = "Friend Feed"
-        controllerArray.append(beerSpecialsController)
+        let barActivityFeedViewController = BarActivityFeedViewController.instantiateFromStoryboard()
+        barActivityFeedViewController.title = "Friend Feed"
+        controllerArray.append(barActivityFeedViewController)
+        
+        let cityOverviewViewController = CityOverviewViewController.instantiateFromStoryboard()
+        cityOverviewViewController.title = "City Overview"
+        controllerArray.append(cityOverviewViewController)
         
         let parameters: [CAPSPageMenuOption] = [
             .menuItemSeparatorWidth(4.3),
@@ -56,8 +60,9 @@ extension MoonsViewViewController {
             .selectionIndicatorColor(.clear),
             .addBottomMenuHairline(false),
             .selectionIndicatorColor(.white),
-            .unselectedMenuItemLabelColor(.lightText)
-            
+            .unselectedMenuItemLabelColor(.lightText),
+            .useMenuLikeSegmentedControl(true),
+            .enableHorizontalBounce(false)
         ]
         
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: self.view.frame, pageMenuOptions: parameters)
