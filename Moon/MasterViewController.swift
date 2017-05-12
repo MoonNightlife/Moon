@@ -10,6 +10,17 @@ import UIKit
 import iCarousel
 import MaterialComponents
 
+enum ScrollDirection {
+    case right
+    case left
+}
+
+enum MainView: Int {
+    case specials
+    case moons
+    case features
+}
+
 class MasterViewController: UIViewController {
 
     @IBOutlet weak var masterCarousel: iCarousel!
@@ -17,49 +28,53 @@ class MasterViewController: UIViewController {
     @IBOutlet weak var rightViewButton: MDCFloatingButton!
     @IBOutlet weak var leftViewButton: MDCFloatingButton!
     
-    var items: [Int] = [1, 2, 3]
+    let numberOfMainViews = 3
     
     @IBAction func showRightView(_ sender: Any) {
-        scrollToNextRightView()
+        let nextView = getNextViewForScroll(direction: .right)
+        changeBottomButtonsLayoutFor(nextView: nextView)
+        masterCarousel.scrollToItem(at: nextView.rawValue, animated: true)
     }
+    
     @IBAction func showLeftView(_ sender: Any) {
-        scrollToNextLeftView()
+        let nextView = getNextViewForScroll(direction: .left)
+        changeBottomButtonsLayoutFor(nextView: nextView)
+        masterCarousel.scrollToItem(at: nextView.rawValue, animated: true)
     }
     
-    private func scrollToNextRightView() {
-        let currentIndex = masterCarousel.currentItemIndex
-        var scrollToIndex: Int!
+    private func getNextViewForScroll(direction: ScrollDirection) -> MainView {
+        var scrollToView: MainView!
         
-        switch currentIndex {
-        case 0:
-            scrollToIndex = 1
-        case 1:
-            scrollToIndex = 2
-        case 2:
-            scrollToIndex = 0
-        default:
-            scrollToIndex = 1
+        guard let currentView = MainView(rawValue: masterCarousel.currentItemIndex) else {
+            return .specials
         }
         
-        masterCarousel.scrollToItem(at: scrollToIndex, animated: true)
+        switch direction {
+        case .right:
+            switch currentView {
+            case .specials:
+                scrollToView = .moons
+            case .moons:
+                scrollToView = .features
+            case .features:
+                scrollToView = .specials
+            }
+        case .left:
+            switch currentView {
+            case .specials:
+                scrollToView = .features
+            case .moons:
+                scrollToView = .specials
+            case .features:
+                scrollToView = .moons
+            }
+        }
+        
+        return scrollToView
     }
     
-    private func scrollToNextLeftView() {
-        let currentIndex = masterCarousel.currentItemIndex
-        var scrollToIndex: Int!
-        
-        switch currentIndex {
-        case 0:
-            scrollToIndex = 2
-        case 1:
-            scrollToIndex = 0
-        case 2:
-            scrollToIndex = 1
-        default:
-            scrollToIndex = 1
-        }
-        
-        masterCarousel.scrollToItem(at: scrollToIndex, animated: true)
+    private func changeBottomButtonsLayoutFor(nextView: MainView) {
+        print("animate buttons moving")
     }
     
     override func viewDidLoad() {
@@ -83,33 +98,33 @@ class MasterViewController: UIViewController {
 extension MasterViewController: iCarouselDelegate, iCarouselDataSource {
     
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
-        if option == .spacing {
-            return value * 1
-        }
-        
         if option == .showBackfaces {
+            // False
             return 0
         }
+        
         return value
     }
     
     func numberOfItems(in carousel: iCarousel) -> Int {
-        return items.count
+        return numberOfMainViews
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
 
         var itemViewController: UIViewController
         
-        switch index {
-        case 0:
-            itemViewController = FeaturedViewController.instantiateFromStoryboard()
-        case 1:
+        guard let view = MainView(rawValue: index) else {
+            return UIView()
+        }
+        
+        switch view {
+        case .specials:
             itemViewController = SearchViewController.instantiateFromStoryboard()
-        case 2:
+        case .moons:
             itemViewController = MoonsViewViewController.instantiateFromStoryboard()
-        default:
-            itemViewController = UIViewController()
+        case .features:
+            itemViewController = FeaturedViewController.instantiateFromStoryboard()
         }
         
         // These couple method calls are needed so there is a parent child relationship between the

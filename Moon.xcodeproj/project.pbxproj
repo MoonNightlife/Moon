@@ -25,6 +25,7 @@
 		F03776AB1EC3B9B400B92E6B /* redwine.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F03776A81EC3B9B400B92E6B /* redwine.jpeg */; };
 		F03776AC1EC3B9B400B92E6B /* budlight.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F03776A91EC3B9B400B92E6B /* budlight.jpeg */; };
 		F03776AD1EC3B9B400B92E6B /* whitewine.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F03776AA1EC3B9B400B92E6B /* whitewine.jpeg */; };
+		F03830601EC63C7300A0FF5D /* Master.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F038305F1EC63C7300A0FF5D /* Master.storyboard */; };
 		F04283AD1EC49DB600CCB5F3 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04283AC1EC49DB600CCB5F3 /* MasterViewController.swift */; };
 		F04283AF1EC4A92700CCB5F3 /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04283AE1EC4A92700CCB5F3 /* FeaturedViewController.swift */; };
 		F04283B11EC4A96200CCB5F3 /* MoonsViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04283B01EC4A96200CCB5F3 /* MoonsViewViewController.swift */; };
@@ -94,6 +95,7 @@
 		F03776A81EC3B9B400B92E6B /* redwine.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = redwine.jpeg; sourceTree = "<group>"; };
 		F03776A91EC3B9B400B92E6B /* budlight.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = budlight.jpeg; sourceTree = "<group>"; };
 		F03776AA1EC3B9B400B92E6B /* whitewine.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = whitewine.jpeg; sourceTree = "<group>"; };
+		F038305F1EC63C7300A0FF5D /* Master.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Master.storyboard; sourceTree = "<group>"; };
 		F04283AB1EC49D4E00CCB5F3 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		F04283AC1EC49DB600CCB5F3 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		F04283AE1EC4A92700CCB5F3 /* FeaturedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedViewController.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				F048F1231EA3B7A5000F0161 /* LaunchScreen.storyboard */,
 				F048F11E1EA3B7A5000F0161 /* Login.storyboard */,
 				F04283B21EC4A9E100CCB5F3 /* Featured.storyboard */,
+				F038305F1EC63C7300A0FF5D /* Master.storyboard */,
 				F04283B41EC4A9F600CCB5F3 /* MoonsView.storyboard */,
 				F09B9D051EC356BA00B2385A /* Search.storyboard */,
 			);
@@ -461,6 +464,7 @@
 				F001BABB1EC50D2600CDF9BC /* moons_view_base.png in Resources */,
 				F0A8E2E41EC3C858001D9993 /* eventButton.png in Resources */,
 				F0EAE4591EC4CBC10003EF23 /* bacardi.jpeg in Resources */,
+				F03830601EC63C7300A0FF5D /* Master.storyboard in Resources */,
 				F048F1201EA3B7A5000F0161 /* Login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
