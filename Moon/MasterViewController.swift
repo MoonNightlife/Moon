@@ -9,6 +9,7 @@
 import UIKit
 import iCarousel
 import MaterialComponents
+import Material
 
 enum ScrollDirection {
     case right
@@ -22,8 +23,14 @@ enum MainView: Int {
 }
 
 class MasterViewController: UIViewController {
+    
+    class func instantiateFromStoryboard() -> MasterViewController {
+        let storyboard = UIStoryboard(name: "Master", bundle: nil)
+        // swiftlint:disable:next force_cast
+        return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! MasterViewController
+    }
 
-    @IBOutlet weak var masterCarousel: iCarousel!
+    var masterCarousel: iCarousel!
     @IBOutlet weak var currentViewButton: MDCFloatingButton!
     @IBOutlet weak var rightViewButton: MDCFloatingButton!
     @IBOutlet weak var leftViewButton: MDCFloatingButton!
@@ -81,11 +88,33 @@ class MasterViewController: UIViewController {
         super.viewDidLoad()
 
         setupCarousel()
+        prepareSearchBar()
+        setupNavigationButtons()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+    }
+    
+    private func setupNavigationButtons() {
+        // Bring the buttons in front of carousel
+        leftViewButton.superview?.bringSubview(toFront: leftViewButton)
+        currentViewButton.superview?.bringSubview(toFront: currentViewButton)
+        rightViewButton.superview?.bringSubview(toFront: rightViewButton)
+        
+        // Change button colors
+        leftViewButton.backgroundColor = MoonColor.Red
+        currentViewButton.backgroundColor = MoonColor.Blue
+        rightViewButton.backgroundColor = MoonColor.Purple
     }
     
     private func setupCarousel() {
+        masterCarousel = iCarousel()
         masterCarousel.type = .rotary
         masterCarousel.isPagingEnabled = true
+        view.layout(masterCarousel).edges()
+        masterCarousel.dataSource = self
+        masterCarousel.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -93,6 +122,24 @@ class MasterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+}
+
+extension MasterViewController: SearchBarDelegate {
+    fileprivate func prepareSearchBar() {
+        guard let searchBar = searchBarController?.searchBar else {
+            return
+        }
+        
+        searchBar.delegate = self
+    }
+    
+    func searchBar(searchBar: SearchBar, didChange textField: UITextField, with text: String?) {
+        print("search database for \(text ?? "error")")
+    }
+    
+    func searchBar(searchBar: SearchBar, willClear textField: UITextField, with text: String?) {
+        print("clear")
+    }
 }
 
 extension MasterViewController: iCarouselDelegate, iCarouselDataSource {

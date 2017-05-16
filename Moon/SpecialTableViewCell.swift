@@ -22,10 +22,18 @@ class SpecialTableViewCell: UITableViewCell {
     }
      
     func initilizeSpecialCellWith(data: Special) {
+        setupImageView()
+        
         mainImage.image = data.image
         mainTitle.text = data.description
         subTitle.text = data.barName
         secondarySubtitle.text = "\(data.likes)"
+    }
+    
+    func setupImageView() {
+        mainImage.layer.masksToBounds = false
+        mainImage.layer.cornerRadius = mainImage.height / 2
+        mainImage.clipsToBounds = true
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
