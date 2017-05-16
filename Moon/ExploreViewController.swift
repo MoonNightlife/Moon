@@ -1,5 +1,5 @@
 //
-//  SearchViewController.swift
+//  ExploreViewController.swift
 //  Moon
 //
 //  Created by Evan Noble on 5/10/17.
@@ -11,12 +11,12 @@ import Material
 import PageMenu
 import iCarousel
 
-class SearchViewController: UIViewController {
+class ExploreViewController: UIViewController {
     
-    class func instantiateFromStoryboard() -> SearchViewController {
-        let storyboard = UIStoryboard(name: "Search", bundle: nil)
+    class func instantiateFromStoryboard() -> ExploreViewController {
+        let storyboard = UIStoryboard(name: "Explore", bundle: nil)
         // swiftlint:disable:next force_cast
-        return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! SearchViewController
+        return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! ExploreViewController
     }
     
     @IBOutlet weak var topBarCarousel: iCarousel!
@@ -58,7 +58,7 @@ class SearchViewController: UIViewController {
 
 }
 
-extension SearchViewController {
+extension ExploreViewController {
     fileprivate func setupPagingMenuController() {
         let beerSpecialsController = SpecialsViewController.instantiateFromStoryboard()
         beerSpecialsController.title = "Beer"
@@ -66,7 +66,7 @@ extension SearchViewController {
         controllerArray.append(beerSpecialsController)
         
         let liquorSpecialsController = SpecialsViewController.instantiateFromStoryboard()
-        liquorSpecialsController.title = "Liqiour"
+        liquorSpecialsController.title = "Liquor"
         liquorSpecialsController.specialData = fakeSpecials.filter({$0.type == .liquor})
         controllerArray.append(liquorSpecialsController)
         
@@ -99,7 +99,7 @@ extension SearchViewController {
     }
 }
 
-extension SearchViewController: iCarouselDataSource, iCarouselDelegate {
+extension ExploreViewController: iCarouselDataSource, iCarouselDelegate {
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
         
         return value

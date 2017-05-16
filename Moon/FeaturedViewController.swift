@@ -67,8 +67,6 @@ extension FeaturedViewController {
 //        let imageView = UIImageView(frame: view.frame)
 //        imageView.contentMode = UIViewContentMode.scaleAspectFill
 //        imageView.image = UIImage(named: name)
-        
-        return imageView
     }
     
     fileprivate func prepareDateFormatter() -> DateFormatter {

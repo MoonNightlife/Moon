@@ -100,7 +100,7 @@
                                             </constraints>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mz7-bR-KQg" userLabel="User_Going_View">
-                                            <rect key="frame" x="72" y="14" width="215" height="26"/>
+                                            <rect key="frame" x="72" y="14" width="223" height="26"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YaS-fh-QVT">
                                                     <rect key="frame" x="8" y="3" width="38" height="20"/>
@@ -113,12 +113,12 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="is going to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xPB-9s-FLx">
-                                                    <rect key="frame" x="54" y="1" width="72" height="24"/>
+                                                    <rect key="frame" x="54" y="1" width="80" height="24"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="72" id="rsf-CB-ysG"/>
+                                                        <constraint firstAttribute="width" constant="80" id="rsf-CB-ysG"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -135,7 +135,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ewd-0b-Dwz" userLabel="Bar_GoingTo_View">
                                             <rect key="frame" x="80" y="44" width="217" height="20"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LocationIcon" translatesAutoresizingMaskIntoConstraints="NO" id="8KU-lS-xoF">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8KU-lS-xoF">
                                                     <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="t9g-3v-q0Q"/>
@@ -212,7 +212,7 @@
                                                     <rect key="frame" x="29" y="4" width="33" height="20"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="13"/>
                                                     <state key="normal" title="100">
-                                                        <color key="titleColor" red="0.1215686275" green="0.36078431370000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="numLikeButtonTappedWithSender:" destination="EcU-As-Jcs" eventType="touchUpInside" id="ISo-XN-0cD"/>
@@ -254,7 +254,9 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="bar" destination="7Et-s5-vNB" id="112-67-qA7"/>
+                                    <outlet property="isGoingToLabel" destination="xPB-9s-FLx" id="JQg-Ho-rDE"/>
                                     <outlet property="likeButton" destination="Xyn-Kc-tEI" id="d3D-hy-wHK"/>
+                                    <outlet property="locationIcon" destination="8KU-lS-xoF" id="24i-fC-PZD"/>
                                     <outlet property="numLikeButton" destination="FKk-Pq-ab3" id="twe-AW-GpF"/>
                                     <outlet property="profilePicture" destination="GpD-jg-zck" id="GM4-49-Cco"/>
                                     <outlet property="timeLabel" destination="1hO-L0-rNY" id="gFc-1L-9r7"/>
@@ -280,7 +282,6 @@
         <image name="Add_Friend_Icon" width="16" height="16"/>
         <image name="ClockIcon" width="22" height="22"/>
         <image name="Heart_Icon2" width="16" height="16"/>
-        <image name="LocationIcon" width="30" height="30"/>
         <image name="moons_view_base.png" width="730" height="130"/>
     </resources>
 </document>
