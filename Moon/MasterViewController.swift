@@ -131,6 +131,8 @@ class MasterViewController: UIViewController {
         leftViewButton.backgroundColor = .white
         currentViewButton.backgroundColor = .white
         rightViewButton.backgroundColor = .white
+        
+        currentViewButton.tintColor = .moonBlue
     }
     
     private func setupCarousel() {
