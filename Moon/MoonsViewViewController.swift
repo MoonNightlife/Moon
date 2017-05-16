@@ -56,18 +56,15 @@ extension MoonsViewViewController {
         let parameters: [CAPSPageMenuOption] = [
             .menuItemSeparatorWidth(4.3),
             .menuItemSeparatorPercentageHeight(0.1),
-            
-            .scrollMenuBackgroundColor(UIColor(red: 1, green: 1, blue: 1, alpha: 0.5)),
-            .selectionIndicatorColor(UIColor(red: 31/255, green: 92/255, blue: 167/255, alpha: 1)),
-            .unselectedMenuItemLabelColor(.lightText),
-            .selectionIndicatorColor(UIColor(red: 31/255, green: 92/255, blue: 167/255, alpha: 1)),
-            
-            .menuItemFont(UIFont(name: "Roboto", size: 15)!),
-            
+            .scrollMenuBackgroundColor(.white),
+            .selectionIndicatorColor(.clear),
             .addBottomMenuHairline(true),
-            
             .useMenuLikeSegmentedControl(true),
-            .enableHorizontalBounce(false)
+            .selectionIndicatorColor(MoonColor.Blue),
+            .unselectedMenuItemLabelColor(.lightGray),
+            .selectedMenuItemLabelColor(.lightGray),
+            .enableHorizontalBounce(false),
+            .menuItemSeparatorColor(.clear)
         ]
         
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: self.view.frame, pageMenuOptions: parameters)

@@ -78,12 +78,15 @@ extension SearchViewController {
         let parameters: [CAPSPageMenuOption] = [
             .menuItemSeparatorWidth(4.3),
             .menuItemSeparatorPercentageHeight(0.1),
-            .scrollMenuBackgroundColor(.clear),
+            .scrollMenuBackgroundColor(.white),
             .selectionIndicatorColor(.clear),
-            .addBottomMenuHairline(false),
-            .selectionIndicatorColor(.white),
-            .unselectedMenuItemLabelColor(.lightText)
-            
+            .addBottomMenuHairline(true),
+            .useMenuLikeSegmentedControl(true),
+            .selectionIndicatorColor(MoonColor.Blue),
+            .unselectedMenuItemLabelColor(.lightGray),
+            .selectedMenuItemLabelColor(.lightGray),
+            .enableHorizontalBounce(false),
+            .menuItemSeparatorColor(.clear)
         ]
         
         let sizeOfFrame = CGRect(x: 0, y: 0, width: viewForPageMenu.frame.width, height: viewForPageMenu.frame.height)

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Material
 
 class LoginViewController: UIViewController {
 
@@ -20,7 +21,8 @@ class LoginViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        performSegue(withIdentifier: masterControllerSegueIdenifier, sender: self)
+        let searchController = SearchBarViewController(rootViewController: MasterViewController.instantiateFromStoryboard())
+        self.present(searchController, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
