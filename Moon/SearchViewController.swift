@@ -82,7 +82,7 @@ extension SearchViewController {
             .selectionIndicatorColor(.clear),
             .addBottomMenuHairline(true),
             .useMenuLikeSegmentedControl(true),
-            .selectionIndicatorColor(MoonColor.Blue),
+            .selectionIndicatorColor(.moonBlue),
             .unselectedMenuItemLabelColor(.lightGray),
             .selectedMenuItemLabelColor(.lightGray),
             .enableHorizontalBounce(false),

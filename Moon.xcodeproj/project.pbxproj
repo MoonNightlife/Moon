@@ -53,6 +53,7 @@
 		F0A8E2EA1EC3C858001D9993 /* pic6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2E11EC3C858001D9993 /* pic6.jpg */; };
 		F0A8E2EB1EC3C858001D9993 /* Pic7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2E21EC3C858001D9993 /* Pic7.jpg */; };
 		F0D168531ECA62940064F642 /* MoonColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D168521ECA62940064F642 /* MoonColor.swift */; };
+		F0E6ED121ECB3C54009508FC /* Bar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E6ED111ECB3C54009508FC /* Bar.swift */; };
 		F0EAE4551EC4CBC10003EF23 /* captain.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F0EAE44E1EC4CBC10003EF23 /* captain.jpeg */; };
 		F0EAE4561EC4CBC10003EF23 /* patron.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F0EAE44F1EC4CBC10003EF23 /* patron.jpeg */; };
 		F0EAE4571EC4CBC10003EF23 /* absolute.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F0EAE4501EC4CBC10003EF23 /* absolute.jpeg */; };
@@ -130,6 +131,7 @@
 		F0A8E2E11EC3C858001D9993 /* pic6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic6.jpg; sourceTree = "<group>"; };
 		F0A8E2E21EC3C858001D9993 /* Pic7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Pic7.jpg; sourceTree = "<group>"; };
 		F0D168521ECA62940064F642 /* MoonColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonColor.swift; sourceTree = "<group>"; };
+		F0E6ED111ECB3C54009508FC /* Bar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bar.swift; sourceTree = "<group>"; };
 		F0EAE44E1EC4CBC10003EF23 /* captain.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = captain.jpeg; sourceTree = "<group>"; };
 		F0EAE44F1EC4CBC10003EF23 /* patron.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = patron.jpeg; sourceTree = "<group>"; };
 		F0EAE4501EC4CBC10003EF23 /* absolute.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = absolute.jpeg; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 			isa = PBXGroup;
 			children = (
 				F0D168521ECA62940064F642 /* MoonColor.swift */,
+				F0E6ED111ECB3C54009508FC /* Bar.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				F09B9D081EC3571800B2385A /* SearchViewController.swift in Sources */,
 				F001BAC51EC51BD400CDF9BC /* Utilities.swift in Sources */,
 				F04283B11EC4A96200CCB5F3 /* MoonsViewViewController.swift in Sources */,
+				F0E6ED121ECB3C54009508FC /* Bar.swift in Sources */,
 				F001BAC11EC50E9700CDF9BC /* BarActivityFeedViewController.swift in Sources */,
 				F001BAC31EC50F7500CDF9BC /* BarActivityTableViewCell.swift in Sources */,
 				F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */,

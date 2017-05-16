@@ -40,13 +40,30 @@ class MasterViewController: UIViewController {
     @IBAction func showRightView(_ sender: Any) {
         let nextView = getNextViewForScroll(direction: .right)
         changeBottomButtonsLayoutFor(nextView: nextView)
+        changeSearchBarLineColorFor(nextView: nextView)
         masterCarousel.scrollToItem(at: nextView.rawValue, animated: true)
     }
     
     @IBAction func showLeftView(_ sender: Any) {
         let nextView = getNextViewForScroll(direction: .left)
         changeBottomButtonsLayoutFor(nextView: nextView)
+        changeSearchBarLineColorFor(nextView: nextView)
         masterCarousel.scrollToItem(at: nextView.rawValue, animated: true)
+    }
+    
+    private func changeSearchBarLineColorFor(nextView: MainView) {
+        guard let searchBar = searchBarController?.searchBar else {
+            return
+        }
+        
+        switch nextView {
+        case .features:
+            searchBar.drawLineUnderSearchTextAndIcon(color: .moonRed)
+        case .moons:
+            searchBar.drawLineUnderSearchTextAndIcon(color: .moonPurple)
+        case .specials:
+            searchBar.drawLineUnderSearchTextAndIcon(color: .moonBlue)
+        }
     }
     
     private func getNextViewForScroll(direction: ScrollDirection) -> MainView {
@@ -88,8 +105,13 @@ class MasterViewController: UIViewController {
         super.viewDidLoad()
 
         setupCarousel()
-        prepareSearchBar()
         setupNavigationButtons()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        prepareSearchBar()
     }
     
     override func viewWillLayoutSubviews() {
@@ -103,9 +125,9 @@ class MasterViewController: UIViewController {
         rightViewButton.superview?.bringSubview(toFront: rightViewButton)
         
         // Change button colors
-        leftViewButton.backgroundColor = MoonColor.Red
-        currentViewButton.backgroundColor = MoonColor.Blue
-        rightViewButton.backgroundColor = MoonColor.Purple
+        leftViewButton.backgroundColor = .moonRed
+        currentViewButton.backgroundColor = .moonBlue
+        rightViewButton.backgroundColor = .moonPurple
     }
     
     private func setupCarousel() {
@@ -131,6 +153,8 @@ extension MasterViewController: SearchBarDelegate {
         }
         
         searchBar.delegate = self
+        // Has to be called after the searchBar is loaded in view controller
+        searchBar.drawLineUnderSearchTextAndIcon(color: .moonBlue)
     }
     
     func searchBar(searchBar: SearchBar, didChange textField: UITextField, with text: String?) {
