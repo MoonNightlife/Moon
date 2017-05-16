@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mcz-7J-aEl" customClass="iCarousel">
-                                <rect key="frame" x="0.0" y="28" width="375" height="639"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Ef2-gS-UXE" id="biJ-cu-M53"/>
@@ -32,10 +32,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="TFe-HZ-6rf" firstAttribute="top" secondItem="Mcz-7J-aEl" secondAttribute="bottom" id="47R-Tv-YsU"/>
-                            <constraint firstItem="Mcz-7J-aEl" firstAttribute="top" secondItem="T2o-iJ-7lt" secondAttribute="bottom" constant="8" id="Ast-WH-1Vc"/>
-                            <constraint firstItem="Mcz-7J-aEl" firstAttribute="leading" secondItem="dl6-HS-aDJ" secondAttribute="leading" id="VJd-RM-LZO"/>
-                            <constraint firstAttribute="trailing" secondItem="Mcz-7J-aEl" secondAttribute="trailing" id="cZw-WF-OjK"/>
+                            <constraint firstAttribute="trailing" secondItem="Mcz-7J-aEl" secondAttribute="trailing" id="GMm-Gu-b7t"/>
+                            <constraint firstItem="Mcz-7J-aEl" firstAttribute="top" secondItem="dl6-HS-aDJ" secondAttribute="top" id="Mqe-eS-wEk"/>
+                            <constraint firstItem="TFe-HZ-6rf" firstAttribute="top" secondItem="Mcz-7J-aEl" secondAttribute="bottom" id="XTs-Vv-ZxY"/>
+                            <constraint firstItem="Mcz-7J-aEl" firstAttribute="leading" secondItem="dl6-HS-aDJ" secondAttribute="leading" id="gvN-C3-n55"/>
                         </constraints>
                     </view>
                     <connections>

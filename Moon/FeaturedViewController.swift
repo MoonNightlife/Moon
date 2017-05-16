@@ -64,6 +64,11 @@ extension FeaturedViewController {
         imageView.image = UIImage(named: name)?.resize(toWidth: view.width)
         return imageView
         
+//        let imageView = UIImageView(frame: view.frame)
+//        imageView.contentMode = UIViewContentMode.scaleAspectFill
+//        imageView.image = UIImage(named: name)
+        
+        return imageView
     }
     
     fileprivate func prepareDateFormatter() -> DateFormatter {
@@ -97,26 +102,26 @@ extension FeaturedViewController {
         return moreButton
     }
     
-    fileprivate func prepareToolbar() -> Toolbar {
+    fileprivate func prepareToolbar(barName: String, date: String) -> Toolbar {
         
         let moreButton = prepareMoreButton()
         let toolbar = Toolbar(rightViews: [moreButton])
         toolbar.backgroundColor = nil
         
-        toolbar.title = "Material"
+        toolbar.title = barName
         toolbar.titleLabel.textColor = .white
         toolbar.titleLabel.textAlignment = .center
         
-        toolbar.detail = "Build Beautiful Software"
+        toolbar.detail = date
         toolbar.detailLabel.textColor = .white
         toolbar.detailLabel.textAlignment = .center
         return toolbar
     }
     
-    fileprivate func prepareContentView() -> UILabel {
+    fileprivate func prepareContentView(description: String) -> UILabel {
         let contentView = UILabel()
         contentView.numberOfLines = 0
-        contentView.text = "Material is an animation and graphics framework that is used to create beautiful applications."
+        contentView.text = description
         contentView.font = RobotoFont.regular(with: 14)
         
         return contentView
@@ -130,15 +135,15 @@ extension FeaturedViewController {
         return bottomBar
     }
     
-    fileprivate func preparePresenterCard() -> ImageCard {
+    fileprivate func preparePresenterCard(image: String, barName: String, date: String, description: String) -> ImageCard {
         let card = ImageCard()
         
-        card.toolbar = prepareToolbar()
+        card.toolbar = prepareToolbar(barName: barName, date: date)
         card.toolbarEdgeInsetsPreset = .square3
         
-        card.imageView = prepareImageView(name: "pic1.jpg")
+        card.imageView = prepareImageView(name: image)
         
-        card.contentView = prepareContentView()
+        card.contentView = prepareContentView(description: description)
         card.contentViewEdgeInsetsPreset = .square3
         
         card.bottomBar = prepareBottomBar()
@@ -162,9 +167,8 @@ extension FeaturedViewController: iCarouselDataSource, iCarouselDelegate {
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         
         let cardView = UIView(frame: carousel.frame)
-        let card = preparePresenterCard()
+        let card = preparePresenterCard(image: images[index], barName: barNames[index], date: dates[index], description: descriptions[index])
         cardView.layout(card).horizontally(left: 20, right: 20)
-       
         return cardView
     }
 }
