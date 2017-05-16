@@ -28,7 +28,7 @@ extension SearchBarViewController {
     fileprivate func prepareProfileButton() {
         // Resize the icon to match the icons in material design
         let sizeReference = Icon.cm.moreVertical
-    
+        
         let profileIconImage = #imageLiteral(resourceName: "ProfileIcon").resize(toWidth: (sizeReference?.width)!)?.resize(toHeight: (sizeReference?.height)!)?.withRenderingMode(.alwaysTemplate)
         
         profileButton = IconButton(image: profileIconImage, tintColor: .moonBlue)
