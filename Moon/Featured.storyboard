@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Featured View Controller-->
+        <!--Data Source-->
         <scene sceneID="qFt-zG-IsG">
             <objects>
                 <viewController storyboardIdentifier="FeaturedViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ef2-gS-UXE" customClass="FeaturedViewController" customModule="Moon" customModuleProvider="target" sceneMemberID="viewController">
@@ -21,20 +21,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Featured" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JQs-h4-T2g">
-                                <rect key="frame" x="153" y="323" width="69" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mcz-7J-aEl" customClass="iCarousel">
+                                <rect key="frame" x="0.0" y="28" width="375" height="639"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Ef2-gS-UXE" id="biJ-cu-M53"/>
+                                    <outlet property="delegate" destination="Ef2-gS-UXE" id="H7E-73-73a"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="TFe-HZ-6rf" firstAttribute="top" secondItem="Mcz-7J-aEl" secondAttribute="bottom" id="47R-Tv-YsU"/>
+                            <constraint firstItem="Mcz-7J-aEl" firstAttribute="top" secondItem="T2o-iJ-7lt" secondAttribute="bottom" constant="8" id="Ast-WH-1Vc"/>
+                            <constraint firstItem="Mcz-7J-aEl" firstAttribute="leading" secondItem="dl6-HS-aDJ" secondAttribute="leading" id="VJd-RM-LZO"/>
+                            <constraint firstAttribute="trailing" secondItem="Mcz-7J-aEl" secondAttribute="trailing" id="cZw-WF-OjK"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="carousel" destination="Mcz-7J-aEl" id="EIK-k6-qDz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bAX-BA-8Kv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-199" y="-113"/>
+            <point key="canvasLocation" x="-199.19999999999999" y="-113.79310344827587"/>
         </scene>
     </scenes>
 </document>
