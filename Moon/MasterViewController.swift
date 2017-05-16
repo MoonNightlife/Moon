@@ -196,7 +196,7 @@ extension MasterViewController: iCarouselDelegate, iCarouselDataSource {
         
         switch view {
         case .specials:
-            itemViewController = SearchViewController.instantiateFromStoryboard()
+            itemViewController = ExploreViewController.instantiateFromStoryboard()
         case .moons:
             itemViewController = MoonsViewViewController.instantiateFromStoryboard()
         case .features:

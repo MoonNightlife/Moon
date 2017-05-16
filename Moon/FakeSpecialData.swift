@@ -34,18 +34,18 @@ struct Special {
     var barName: String
 }
 
-let miller = UIImage(named: "miller.jpeg")
-let budlight = UIImage(named: "budlight.jpeg")
-let pbr = UIImage(named: "pbr.jpeg")
-let whiteWine = UIImage(named: "whitewine.jpeg")
-let redWine = UIImage(named: "redwine.jpeg")
-let captain = UIImage(named: "captain.jpeg")
-let patron = UIImage(named: "patron.jpeg")
-let absolute = UIImage(named: "absolute.jpeg")
-let sky = UIImage(named: "sky.jpeg")
-let bacardi = UIImage(named: "bacardi.jpeg")
-let jack = UIImage(named: "jack.jpeg")
-let jose = UIImage(named: "jose.jpeg")
+let miller = #imageLiteral(resourceName: "miller.jpeg")
+let budlight = #imageLiteral(resourceName: "budlight.jpeg")
+let pbr = #imageLiteral(resourceName: "pbr.jpeg")
+let whiteWine = #imageLiteral(resourceName: "whitewine.jpeg")
+let redWine = #imageLiteral(resourceName: "redwine.jpeg")
+let captain = #imageLiteral(resourceName: "captain.jpeg")
+let patron = #imageLiteral(resourceName: "patron.jpeg")
+let absolute = #imageLiteral(resourceName: "absolute.jpeg")
+let sky = #imageLiteral(resourceName: "sky.jpeg")
+let bacardi = #imageLiteral(resourceName: "bacardi.jpeg")
+let jack = #imageLiteral(resourceName: "jack.jpeg")
+let jose = #imageLiteral(resourceName: "jose.jpeg")
 
 let barley = "Barley House"
 let grapevine = "The Grapevine House"

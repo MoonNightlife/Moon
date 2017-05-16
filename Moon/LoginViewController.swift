@@ -11,8 +11,6 @@ import Material
 
 class LoginViewController: UIViewController {
 
-    let masterControllerSegueIdenifier = "loginToMaster"
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
