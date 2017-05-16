@@ -58,11 +58,14 @@ class MasterViewController: UIViewController {
         
         switch nextView {
         case .features:
-            searchBar.drawLineUnderSearchTextAndIcon(color: .moonRed)
+            searchBar.changeIconButtonsTint(color: .moonRed)
+            searchBar.changeLineUnderSearchTextAndIcon(color: .moonRed)
         case .moons:
-            searchBar.drawLineUnderSearchTextAndIcon(color: .moonPurple)
+            searchBar.changeIconButtonsTint(color: .moonPurple)
+            searchBar.changeLineUnderSearchTextAndIcon(color: .moonPurple)
         case .specials:
-            searchBar.drawLineUnderSearchTextAndIcon(color: .moonBlue)
+            searchBar.changeIconButtonsTint(color: .moonBlue)
+            searchBar.changeLineUnderSearchTextAndIcon(color: .moonBlue)
         }
     }
     
@@ -125,9 +128,9 @@ class MasterViewController: UIViewController {
         rightViewButton.superview?.bringSubview(toFront: rightViewButton)
         
         // Change button colors
-        leftViewButton.backgroundColor = .moonRed
-        currentViewButton.backgroundColor = .moonBlue
-        rightViewButton.backgroundColor = .moonPurple
+        leftViewButton.backgroundColor = .white
+        currentViewButton.backgroundColor = .white
+        rightViewButton.backgroundColor = .white
     }
     
     private func setupCarousel() {

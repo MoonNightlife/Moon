@@ -13,7 +13,7 @@ import MaterialComponents.MaterialTypography
 import Material
 import iCarousel
 
-class FeaturedViewController: UIViewController{
+class FeaturedViewController: UIViewController {
     
     var images = ["pic2.jpg", "pic3.jpg", "pic4.jpg", "pic5.jpg", "pic6.jpg", "pic7.jpg"]
     var titles = ["Blink 182", "DJ Tiesto Live", "Below The Line ", "Nikko & Swae ", "Jellow Shot Party", "Halloween Special Event"]
@@ -165,7 +165,6 @@ extension FeaturedViewController: iCarouselDataSource, iCarouselDelegate {
         let card = preparePresenterCard()
         cardView.layout(card).horizontally(left: 20, right: 20)
        
-        
         return cardView
     }
 }
