@@ -169,7 +169,6 @@ extension FeaturedViewController: iCarouselDataSource, iCarouselDelegate {
         let cardView = UIView(frame: carousel.frame)
         let card = preparePresenterCard(image: images[index], barName: barNames[index], date: dates[index], description: descriptions[index])
         cardView.layout(card).horizontally(left: 20, right: 20)
-        
         return cardView
     }
 }

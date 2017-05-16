@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum HeartColor {
+    case red
+    case gray
+}
+
 class SpecialTableViewCell: UITableViewCell {
 
     @IBOutlet weak var mainImage: UIImageView!
@@ -34,6 +39,15 @@ class SpecialTableViewCell: UITableViewCell {
         mainImage.layer.masksToBounds = false
         mainImage.layer.cornerRadius = mainImage.height / 2
         mainImage.clipsToBounds = true
+    }
+    
+    func changeHeart(color: HeartColor) {
+        switch color {
+        case .red:
+            subTitle.tintColor = .moonRed
+        case .gray:
+            subTitle.tintColor = .darkGray
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

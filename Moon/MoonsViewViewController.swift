@@ -60,9 +60,9 @@ extension MoonsViewViewController {
             .selectionIndicatorColor(.clear),
             .addBottomMenuHairline(true),
             .useMenuLikeSegmentedControl(true),
-            .selectionIndicatorColor(MoonColor.Blue),
+            .selectionIndicatorColor(.moonPurple),
             .unselectedMenuItemLabelColor(.lightGray),
-            .selectedMenuItemLabelColor(.lightGray),
+            .selectedMenuItemLabelColor(.darkGray),
             .enableHorizontalBounce(false),
             .menuItemSeparatorColor(.clear)
         ]

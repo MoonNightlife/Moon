@@ -28,7 +28,6 @@
                                     <constraint firstAttribute="height" constant="30" id="4Em-g0-YBB"/>
                                     <constraint firstAttribute="width" constant="30" id="6no-hm-zr4"/>
                                 </constraints>
-                                <state key="normal" title="M"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="NO"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="autohide" value="NO"/>
@@ -39,13 +38,13 @@
                                     <action selector="showRightView:" destination="UqM-gC-rae" eventType="touchUpInside" id="t5v-Wm-9E5"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjU-LC-vA1" customClass="MDCFloatingButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjU-LC-vA1" customClass="MDCFloatingButton">
                                 <rect key="frame" x="167" y="619" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="0ds-xn-j0i"/>
                                     <constraint firstAttribute="width" constant="40" id="duK-1S-GF4"/>
                                 </constraints>
-                                <state key="normal" title="S"/>
+                                <state key="normal" backgroundImage="test"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1GM-jh-SOl" customClass="MDCFloatingButton">
                                 <rect key="frame" x="16" y="624" width="30" height="30"/>
@@ -53,7 +52,6 @@
                                     <constraint firstAttribute="height" constant="30" id="7H6-at-E5x"/>
                                     <constraint firstAttribute="width" constant="30" id="vrT-er-iH2"/>
                                 </constraints>
-                                <state key="normal" title="F"/>
                                 <connections>
                                     <action selector="showLeftView:" destination="UqM-gC-rae" eventType="touchUpInside" id="xxR-De-tck"/>
                                 </connections>
@@ -80,4 +78,7 @@
             <point key="canvasLocation" x="1005.6" y="116.49175412293854"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="test" width="40" height="40"/>
+    </resources>
 </document>

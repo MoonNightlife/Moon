@@ -1,5 +1,5 @@
 //
-//  ImageCardCollectionViewCell.swift
+//  ImageViewCell.swift
 //  MainMoonViewSamples
 //
 //  Created by Evan Noble on 5/1/17.
@@ -15,7 +15,7 @@ struct TopBarData {
     let location: String
 }
 
-class ImageCardView: UIView {
+class ImageViewCell: UIView {
     fileprivate var card: ImageCard!
     
     /// Content area.
@@ -35,17 +35,15 @@ class ImageCardView: UIView {
 
 }
 
-extension ImageCardView {
+extension ImageViewCell {
     fileprivate func prepareImageViewWith(imageName: String) {
         imageView = UIImageView(frame: self.frame)
         imageView.contentMode = UIViewContentMode.scaleAspectFill
         imageView.image = UIImage(named: imageName)
-            //?.resize(toWidth: self.width)
-        
     }
     
     fileprivate func prepareMoreButton() {
-        moreButton = IconButton(image: Icon.cm.moreHorizontal, tintColor: Color.blueGrey.base)
+        moreButton = IconButton(image: Icon.cm.moreHorizontal, tintColor: .white)
     }
     
     fileprivate func prepareToolbarWith(title: String, subtitle: String) {

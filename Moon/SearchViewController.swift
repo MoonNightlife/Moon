@@ -82,9 +82,9 @@ extension SearchViewController {
             .selectionIndicatorColor(.clear),
             .addBottomMenuHairline(true),
             .useMenuLikeSegmentedControl(true),
-            .selectionIndicatorColor(MoonColor.Blue),
+            .selectionIndicatorColor(.moonBlue),
             .unselectedMenuItemLabelColor(.lightGray),
-            .selectedMenuItemLabelColor(.lightGray),
+            .selectedMenuItemLabelColor(.darkGray),
             .enableHorizontalBounce(false),
             .menuItemSeparatorColor(.clear)
         ]
@@ -110,7 +110,7 @@ extension SearchViewController: iCarouselDataSource, iCarouselDelegate {
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
-        let topBarView = ImageCardView(frame: carousel.frame)
+        let topBarView = ImageViewCell(frame: carousel.frame)
         topBarView.initializeImageCardViewWith(data: topBarData[index])
         return topBarView
     }

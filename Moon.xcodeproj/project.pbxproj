@@ -42,7 +42,7 @@
 		F09B9D061EC356BA00B2385A /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F09B9D051EC356BA00B2385A /* Search.storyboard */; };
 		F09B9D081EC3571800B2385A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09B9D071EC3571800B2385A /* SearchViewController.swift */; };
 		F09B9D0A1EC35D5D00B2385A /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09B9D091EC35D5D00B2385A /* SegmentedControl.swift */; };
-		F0A8E2D81EC3C6B2001D9993 /* ImageCardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A8E2D71EC3C6B2001D9993 /* ImageCardViewCell.swift */; };
+		F0A8E2D81EC3C6B2001D9993 /* ImageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A8E2D71EC3C6B2001D9993 /* ImageViewCell.swift */; };
 		F0A8E2E31EC3C858001D9993 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2DA1EC3C858001D9993 /* button.png */; };
 		F0A8E2E41EC3C858001D9993 /* eventButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2DB1EC3C858001D9993 /* eventButton.png */; };
 		F0A8E2E51EC3C858001D9993 /* pic1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2DC1EC3C858001D9993 /* pic1.jpg */; };
@@ -53,6 +53,7 @@
 		F0A8E2EA1EC3C858001D9993 /* pic6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2E11EC3C858001D9993 /* pic6.jpg */; };
 		F0A8E2EB1EC3C858001D9993 /* Pic7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2E21EC3C858001D9993 /* Pic7.jpg */; };
 		F0D168531ECA62940064F642 /* MoonColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D168521ECA62940064F642 /* MoonColor.swift */; };
+		F0E6ED121ECB3C54009508FC /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E6ED111ECB3C54009508FC /* SearchBar.swift */; };
 		F0EAE4551EC4CBC10003EF23 /* captain.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F0EAE44E1EC4CBC10003EF23 /* captain.jpeg */; };
 		F0EAE4561EC4CBC10003EF23 /* patron.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F0EAE44F1EC4CBC10003EF23 /* patron.jpeg */; };
 		F0EAE4571EC4CBC10003EF23 /* absolute.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F0EAE4501EC4CBC10003EF23 /* absolute.jpeg */; };
@@ -119,7 +120,7 @@
 		F09B9D051EC356BA00B2385A /* Search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		F09B9D071EC3571800B2385A /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		F09B9D091EC35D5D00B2385A /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
-		F0A8E2D71EC3C6B2001D9993 /* ImageCardViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCardViewCell.swift; sourceTree = "<group>"; };
+		F0A8E2D71EC3C6B2001D9993 /* ImageViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewCell.swift; sourceTree = "<group>"; };
 		F0A8E2DA1EC3C858001D9993 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		F0A8E2DB1EC3C858001D9993 /* eventButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eventButton.png; sourceTree = "<group>"; };
 		F0A8E2DC1EC3C858001D9993 /* pic1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic1.jpg; sourceTree = "<group>"; };
@@ -130,6 +131,7 @@
 		F0A8E2E11EC3C858001D9993 /* pic6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic6.jpg; sourceTree = "<group>"; };
 		F0A8E2E21EC3C858001D9993 /* Pic7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Pic7.jpg; sourceTree = "<group>"; };
 		F0D168521ECA62940064F642 /* MoonColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonColor.swift; sourceTree = "<group>"; };
+		F0E6ED111ECB3C54009508FC /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		F0EAE44E1EC4CBC10003EF23 /* captain.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = captain.jpeg; sourceTree = "<group>"; };
 		F0EAE44F1EC4CBC10003EF23 /* patron.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = patron.jpeg; sourceTree = "<group>"; };
 		F0EAE4501EC4CBC10003EF23 /* absolute.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = absolute.jpeg; sourceTree = "<group>"; };
@@ -322,7 +324,7 @@
 			children = (
 				F09B9D091EC35D5D00B2385A /* SegmentedControl.swift */,
 				F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */,
-				F0A8E2D71EC3C6B2001D9993 /* ImageCardViewCell.swift */,
+				F0A8E2D71EC3C6B2001D9993 /* ImageViewCell.swift */,
 				F001BAC21EC50F7500CDF9BC /* BarActivityTableViewCell.swift */,
 			);
 			name = Subclasses;
@@ -349,6 +351,7 @@
 			isa = PBXGroup;
 			children = (
 				F0D168521ECA62940064F642 /* MoonColor.swift */,
+				F0E6ED111ECB3C54009508FC /* SearchBar.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				F09B9D081EC3571800B2385A /* SearchViewController.swift in Sources */,
 				F001BAC51EC51BD400CDF9BC /* Utilities.swift in Sources */,
 				F04283B11EC4A96200CCB5F3 /* MoonsViewViewController.swift in Sources */,
+				F0E6ED121ECB3C54009508FC /* SearchBar.swift in Sources */,
 				F001BAC11EC50E9700CDF9BC /* BarActivityFeedViewController.swift in Sources */,
 				F001BAC31EC50F7500CDF9BC /* BarActivityTableViewCell.swift in Sources */,
 				F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */,
@@ -618,7 +622,7 @@
 				F0644C2B1EC37D0E00D92BF7 /* SpecialsViewController.swift in Sources */,
 				F09B9D0A1EC35D5D00B2385A /* SegmentedControl.swift in Sources */,
 				F03776A21EC3A44100B92E6B /* FakeSpecialData.swift in Sources */,
-				F0A8E2D81EC3C6B2001D9993 /* ImageCardViewCell.swift in Sources */,
+				F0A8E2D81EC3C6B2001D9993 /* ImageViewCell.swift in Sources */,
 				F0055D691EC5E64B005544B4 /* CityOverviewViewController.swift in Sources */,
 				F048F11B1EA3B7A5000F0161 /* AppDelegate.swift in Sources */,
 			);
