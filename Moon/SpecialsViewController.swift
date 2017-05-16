@@ -15,7 +15,7 @@ class SpecialsViewController: UIViewController {
     
     @IBOutlet weak var specialsTableView: UITableView!
     class func instantiateFromStoryboard() -> SpecialsViewController {
-        let storyboard = UIStoryboard(name: "Search", bundle: nil)
+        let storyboard = UIStoryboard(name: "Explore", bundle: nil)
         // swiftlint:disable:next force_cast
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! SpecialsViewController
     }
