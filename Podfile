@@ -14,6 +14,7 @@ target 'Moon' do
   pod "iCarousel"
   pod "MaterialComponents"
   pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
+  pod 'ActionButton'
 
   target 'MoonTests' do
     inherit! :search_paths
