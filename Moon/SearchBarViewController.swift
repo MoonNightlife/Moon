@@ -31,11 +31,11 @@ extension SearchBarViewController {
         
         let profileIconImage = #imageLiteral(resourceName: "ProfileIcon").resize(toWidth: (sizeReference?.width)!)?.resize(toHeight: (sizeReference?.height)!)?.withRenderingMode(.alwaysTemplate)
         
-        profileButton = IconButton(image: profileIconImage, tintColor: .moonBlue)
+        profileButton = IconButton(image: profileIconImage, tintColor: .white)
     }
     
     fileprivate func prepareSettingsButton() {
-        settingsButton = IconButton(image: Icon.cm.settings, tintColor: .moonBlue)
+        settingsButton = IconButton(image: Icon.cm.settings, tintColor: .white)
     }
     
     fileprivate func prepareStatusBar() {
@@ -44,7 +44,7 @@ extension SearchBarViewController {
     
     fileprivate func prepapreSearchIcon() {
         searchIcon =  IconButton(image: Icon.cm.search, tintColor:
-            .moonBlue)
+            .white)
         searchIcon.isUserInteractionEnabled = false
     }
     
