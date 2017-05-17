@@ -22,24 +22,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mcz-7J-aEl" customClass="iCarousel">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="408"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="408" id="cPU-zX-W2Q"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="Ef2-gS-UXE" id="biJ-cu-M53"/>
                                     <outlet property="delegate" destination="Ef2-gS-UXE" id="H7E-73-73a"/>
                                 </connections>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="usr-gF-l9I" customClass="iCarousel">
+                                <rect key="frame" x="0.0" y="416" width="375" height="178"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="178" id="8E7-4U-5st"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="Ef2-gS-UXE" id="Zyg-zV-fGa"/>
+                                    <outlet property="delegate" destination="Ef2-gS-UXE" id="xfK-PN-lBP"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="usr-gF-l9I" secondAttribute="trailing" id="81B-Ek-3hZ"/>
                             <constraint firstAttribute="trailing" secondItem="Mcz-7J-aEl" secondAttribute="trailing" id="GMm-Gu-b7t"/>
                             <constraint firstItem="Mcz-7J-aEl" firstAttribute="top" secondItem="dl6-HS-aDJ" secondAttribute="top" id="Mqe-eS-wEk"/>
-                            <constraint firstItem="TFe-HZ-6rf" firstAttribute="top" secondItem="Mcz-7J-aEl" secondAttribute="bottom" id="XTs-Vv-ZxY"/>
+                            <constraint firstItem="usr-gF-l9I" firstAttribute="top" secondItem="Mcz-7J-aEl" secondAttribute="bottom" constant="8" id="fen-zn-FNT"/>
                             <constraint firstItem="Mcz-7J-aEl" firstAttribute="leading" secondItem="dl6-HS-aDJ" secondAttribute="leading" id="gvN-C3-n55"/>
+                            <constraint firstItem="usr-gF-l9I" firstAttribute="leading" secondItem="dl6-HS-aDJ" secondAttribute="leading" id="sHv-Dy-N8d"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="carousel" destination="Mcz-7J-aEl" id="EIK-k6-qDz"/>
+                        <outlet property="friendCarousel" destination="usr-gF-l9I" id="pjl-IB-gw1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bAX-BA-8Kv" userLabel="First Responder" sceneMemberID="firstResponder"/>

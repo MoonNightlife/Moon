@@ -58,14 +58,17 @@ class MasterViewController: UIViewController {
         
         switch nextView {
         case .features:
-            searchBar.changeIconButtonsTint(color: .moonRed)
-            searchBar.changeLineUnderSearchTextAndIcon(color: .moonRed)
+            searchBar.changeIconButtonsTint(color: .white)
+            searchBar.changeLineUnderSearchTextAndIcon(color: .white)
+            searchBar.backgroundColor = .moonRed
         case .moons:
-            searchBar.changeIconButtonsTint(color: .moonPurple)
-            searchBar.changeLineUnderSearchTextAndIcon(color: .moonPurple)
+            searchBar.changeIconButtonsTint(color: .white)
+            searchBar.changeLineUnderSearchTextAndIcon(color: .white)
+            searchBar.backgroundColor = .moonPurple
         case .specials:
-            searchBar.changeIconButtonsTint(color: .moonBlue)
-            searchBar.changeLineUnderSearchTextAndIcon(color: .moonBlue)
+            searchBar.changeIconButtonsTint(color: .white)
+            searchBar.changeLineUnderSearchTextAndIcon(color: .white)
+            searchBar.backgroundColor = .moonBlue
         }
     }
     
@@ -131,8 +134,7 @@ class MasterViewController: UIViewController {
         leftViewButton.backgroundColor = .white
         currentViewButton.backgroundColor = .white
         rightViewButton.backgroundColor = .white
-        
-        currentViewButton.tintColor = .moonBlue
+    
     }
     
     private func setupCarousel() {
@@ -159,7 +161,8 @@ extension MasterViewController: SearchBarDelegate {
         
         searchBar.delegate = self
         // Has to be called after the searchBar is loaded in view controller
-        searchBar.drawLineUnderSearchTextAndIcon(color: .moonBlue)
+        searchBar.drawLineUnderSearchTextAndIcon(color: .white)
+        searchBar.backgroundColor = .moonBlue
     }
     
     func searchBar(searchBar: SearchBar, didChange textField: UITextField, with text: String?) {
