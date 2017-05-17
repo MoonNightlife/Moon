@@ -54,7 +54,7 @@ class BarActivityTableViewCell: UITableViewCell {
 extension BarActivityTableViewCell {
     fileprivate func setupProfilePicture() {
         // Sets a circular profile pic
-        self.profilePicture.image = UIImage(named: "DefaultProfilePic.png")
+        self.profilePicture.image = UIImage(named: activity.profileImage!)
         
         self.profilePicture.layer.masksToBounds = false
         self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.height/2
@@ -67,7 +67,7 @@ extension BarActivityTableViewCell {
     }
     
     fileprivate func setupUsername() {
-        if let username = activity.username {
+        if let username = activity.name {
             self.user.setTitle(username, for: .normal)
             self.user.setTitleColor(.darkGray, for: .normal)
             self.user.titleLabel?.font = UIFont.moonFont(size: 16)

@@ -21,7 +21,6 @@ class FeaturedViewController: UIViewController {
     var dates = ["10/05/2017", "19/04/2017", "06/11/2017", "03/12/2017", "01/25/2017", "06/10/2017"]
     var descriptions = ["Come watch blink 182 Live! Event starts at 9:00 pm", "We are featuring the famouse DJ Tiesto at 11:00 pm. Buy a table and bring your friends", "Come listen to some good live country music at 7:00 pm with family and friends", "Two young DJs showing off their skills at 10:00pm", "We are having a $1 Jellow Shot party starting at 9:00pm! Bring your friends!", "Our annual Halloween custom will start at 8:00pm with $2 beers and $3 shots!"]
     
-
     @IBOutlet weak var carousel: iCarousel!
     class func instantiateFromStoryboard() -> FeaturedViewController {
         let storyboard = UIStoryboard(name: "Featured", bundle: nil)
