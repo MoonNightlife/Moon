@@ -25,9 +25,11 @@ class BarActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var numLikeButton: UIButton!
-
+    @IBOutlet weak var timeImageView: UIImageView!
+    
     // Cell delegate
     weak var delegate: BarActivityCellDelegate?
+    
     fileprivate var activity: BarActivity!
     fileprivate var index: Int?
     
@@ -45,6 +47,7 @@ class BarActivityTableViewCell: UITableViewCell {
         setupLikeNumber()
         setupLocationImage()
         setupIsGoingToLabel()
+        setupTimeImageView()
     }
 }
 
@@ -98,6 +101,7 @@ extension BarActivityTableViewCell {
     }
     
     fileprivate func setupLikeNumber() {
+        self.numLikeButton.titleLabel?.textColor = .lightGray
         if let likes = activity.likes {
             self.numLikeButton.setTitle(String(likes), for: .normal)
         } else {
@@ -107,6 +111,12 @@ extension BarActivityTableViewCell {
     
     fileprivate func setupIsGoingToLabel() {
         isGoingToLabel.font = UIFont.moonFont(size: 16)
+        isGoingToLabel.text = "is going to"
+        isGoingToLabel.textColor = .lightGray
+    }
+    
+    fileprivate func setupTimeImageView() {
+        timeImageView.image = #imageLiteral(resourceName: "ClockIcon").withRenderingMode(.alwaysTemplate).tint(with: .lightGray)
     }
 }
 

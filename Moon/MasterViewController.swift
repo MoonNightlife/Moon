@@ -42,12 +42,14 @@ class MasterViewController: UIViewController {
         setupTabBar()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     
         prepareSearchBar()
-        // Starting index for carousel should be the explore view
-        masterCarousel.scrollToItem(at: MainView.explore.rawValue, animated: false)
     }
     
     private func setupTabBar() {
