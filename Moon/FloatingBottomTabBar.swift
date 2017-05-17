@@ -36,16 +36,17 @@ class FloatingBottomTabBar: Bar {
 
 extension FloatingBottomTabBar {
     fileprivate func setupFeaturedButton() {
-        let featuredImage = #imageLiteral(resourceName: "eventsSM").withRenderingMode(.alwaysTemplate)
-        
-        featuredButton = IconButton(image: featuredImage, tintColor: .moonRed)
+       // let featuredImage = #imageLiteral(resourceName: "eventsSM").withRenderingMode(.alwaysTemplate)
+ 
+        featuredButton = IconButton(image: #imageLiteral(resourceName: "eventsSM"))
         featuredButton.addTarget(self, action: #selector(featuredButtonClicked), for: .touchUpInside)
+        
     }
     
     fileprivate func setupExploreButton() {
-        let exploreImage = #imageLiteral(resourceName: "searchLG").withRenderingMode(.alwaysTemplate)
+        //let exploreImage = #imageLiteral(resourceName: "searchLG").withRenderingMode(.alwaysTemplate)
         
-        exploreButton = IconButton(image: exploreImage, tintColor: .moonBlue)
+        exploreButton = IconButton(image: #imageLiteral(resourceName: "searchSM"))
         exploreButton.addTarget(self, action: #selector(exploreButtonClicked), for: .touchUpInside)
     }
     

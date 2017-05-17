@@ -57,6 +57,7 @@ class MasterViewController: UIViewController {
         tabBar.superview?.bringSubview(toFront: tabBar)
         tabBar.initializeTabBar()
         tabBar.delegate = self
+        tabBar.backgroundColor = .moonRed
     }
     
     private func setupCarousel() {
@@ -106,6 +107,8 @@ extension MasterViewController: FloatingBottomTabBarDelegate {
         
         controller .statusBar.backgroundColor = color
         controller.searchBar.backgroundColor = color
+        
+        tabBar.backgroundColor = color
     }
 
 }

@@ -21,7 +21,7 @@ class FeaturedViewController: UIViewController {
     var dates = ["10/05/2017", "19/04/2017", "06/11/2017", "03/12/2017", "01/25/2017", "06/10/2017"]
     var descriptions = ["Come watch blink 182 Live! Event starts at 9:00 pm", "We are featuring the famouse DJ Tiesto at 11:00 pm. Buy a table and bring your friends", "Come listen to some good live country music at 7:00 pm with family and friends", "Two young DJs showing off their skills at 10:00pm", "We are having a $1 Jellow Shot party starting at 9:00pm! Bring your friends!", "Our annual Halloween custom will start at 8:00pm with $2 beers and $3 shots!"]
     
-    @IBOutlet weak var friendCarousel: iCarousel!
+
     @IBOutlet weak var carousel: iCarousel!
     class func instantiateFromStoryboard() -> FeaturedViewController {
         let storyboard = UIStoryboard(name: "Featured", bundle: nil)
@@ -160,56 +160,18 @@ extension FeaturedViewController: iCarouselDataSource, iCarouselDelegate {
     
     func numberOfItems(in carousel: iCarousel) -> Int {
         
-        if carousel == carousel {
-            return images.count
-        } else if carousel == friendCarousel {
-            return 100
-        }
-        
-        return 0
+        return images.count
         
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         
-        if carousel == friendCarousel {
-            
-            let itemView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: friendCarousel.frame.size.height - 10))
-            
-            let innerView = UIView(frame: CGRect(x: 10, y: 10, width: itemView.frame.size.width - 10, height: itemView.frame.size.height - 10))
-            innerView.backgroundColor = .moonRed
-            
-            let imageView = UIImageView()
-            imageView.image = UIImage(named: "pic2.jpg")
-            imageView.layer.masksToBounds = false
-            imageView.clipsToBounds = true
-            imageView.frame = CGRect(x: innerView.frame.size.width / 3.2, y: innerView.frame.size.height / 7, width: innerView.frame.size.width / 1.7, height: innerView.frame.size.width / 1.7)
-            imageView.layer.cornerRadius = imageView.frame.size.width / 2
-    
-            let label = UILabel(frame:itemView.bounds)
-            label.textAlignment = .center
-            label.frame = CGRect(x: 0, y: 0, width: innerView.frame.size.width - 20, height: 30)
-            label.center = CGPoint(x: innerView.frame.midX, y: innerView.frame.size.height / 1.3)
-            label.font = label.font.withSize(12)
-            label.lineBreakMode = .byWordWrapping
-            label.numberOfLines = 0
-            label.text = "Ryan Smith"
-            label.textColor = UIColor.lightGray
-            
-            itemView.addSubview(innerView)
-            itemView.addSubview(imageView)
-            itemView.addSubview(label)
-            
-            return itemView
-            
-        } else {
-
         let cardView = UIView(frame: carousel.frame)
         let card = preparePresenterCard(image: images[index], barName: barNames[index], date: dates[index], description: descriptions[index])
         cardView.layout(card).horizontally(left: 20, right: 20)
         cardView.layout(card).top(20)
+        
         return cardView
-            
-        }
+        
     }
 }
