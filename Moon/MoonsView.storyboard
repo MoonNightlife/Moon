@@ -22,20 +22,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Moon's View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gcz-QG-15e">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moon's View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gcz-QG-15e">
                                 <rect key="frame" x="138" y="323" width="98" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q4i-HI-WAN" userLabel="Friend Feed">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <segue destination="0Jz-bI-4xT" kind="embed" id="uGZ-C6-92e"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRW-9V-aeh" userLabel="Map View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <segue destination="fRQ-IH-wvJ" kind="embed" id="4wE-I2-8sg"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="q4i-HI-WAN" firstAttribute="top" secondItem="ypm-Sp-ffg" secondAttribute="top" id="1xY-gU-p1I"/>
+                            <constraint firstItem="q4i-HI-WAN" firstAttribute="leading" secondItem="ypm-Sp-ffg" secondAttribute="leading" id="BfO-3n-TSB"/>
+                            <constraint firstItem="q4i-HI-WAN" firstAttribute="centerY" secondItem="Gcz-QG-15e" secondAttribute="centerY" id="Nwr-44-e0S"/>
+                            <constraint firstItem="WRW-9V-aeh" firstAttribute="bottom" secondItem="3MV-0G-p0b" secondAttribute="top" id="cea-NS-SOI"/>
+                            <constraint firstItem="q4i-HI-WAN" firstAttribute="bottom" secondItem="3MV-0G-p0b" secondAttribute="top" id="iym-FF-ocv"/>
+                            <constraint firstItem="WRW-9V-aeh" firstAttribute="trailing" secondItem="q4i-HI-WAN" secondAttribute="trailing" id="jhs-8d-49b"/>
+                            <constraint firstItem="WRW-9V-aeh" firstAttribute="leading" secondItem="q4i-HI-WAN" secondAttribute="leading" id="sOR-Lz-SJ9"/>
+                            <constraint firstItem="WRW-9V-aeh" firstAttribute="top" secondItem="q4i-HI-WAN" secondAttribute="top" id="thQ-bg-6aR"/>
+                            <constraint firstItem="q4i-HI-WAN" firstAttribute="centerX" secondItem="Gcz-QG-15e" secondAttribute="centerX" id="wg1-Bd-eWt"/>
+                            <constraint firstAttribute="trailing" secondItem="q4i-HI-WAN" secondAttribute="trailing" id="z81-o0-MH6"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="friendFeedContainer" destination="q4i-HI-WAN" id="zeC-6s-Jzh"/>
+                        <outlet property="mapViewContainerView" destination="WRW-9V-aeh" id="9bJ-MM-5eg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9pC-73-xYn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="102" y="146"/>
+            <point key="canvasLocation" x="101.59999999999999" y="145.27736131934034"/>
         </scene>
         <!--Bar Activity Feed View Controller-->
         <scene sceneID="N5y-dU-qit">
@@ -158,7 +185,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="i9M-5i-LRs">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -175,7 +202,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8TM-iN-hsY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1045.5999999999999" y="496.10194902548727"/>
+            <point key="canvasLocation" x="1161" y="492"/>
         </scene>
     </scenes>
 </document>
