@@ -12,15 +12,10 @@ import MaterialComponents
 import Material
 import Spring
 
-enum ScrollDirection {
-    case right
-    case left
-}
-
 enum MainView: Int {
+    case featured
     case explore
     case moons
-    case featured
 }
 
 class MasterViewController: UIViewController {
@@ -51,6 +46,8 @@ class MasterViewController: UIViewController {
         super.viewDidAppear(animated)
     
         prepareSearchBar()
+        // Starting index for carousel should be the explore view
+        masterCarousel.scrollToItem(at: MainView.explore.rawValue, animated: false)
     }
     
     private func setupTabBar() {
@@ -108,37 +105,6 @@ extension MasterViewController: FloatingBottomTabBarDelegate {
         controller .statusBar.backgroundColor = color
         controller.searchBar.backgroundColor = color
     }
-    
-    private func getNextViewForScroll(direction: ScrollDirection) -> MainView {
-        var scrollToView: MainView!
-        
-        guard let currentView = MainView(rawValue: masterCarousel.currentItemIndex) else {
-            return .explore
-        }
-        
-        switch direction {
-        case .right:
-            switch currentView {
-            case .explore:
-                scrollToView = .moons
-            case .moons:
-                scrollToView = .featured
-            case .featured:
-                scrollToView = .explore
-            }
-        case .left:
-            switch currentView {
-            case .explore:
-                scrollToView = .featured
-            case .moons:
-                scrollToView = .explore
-            case .featured:
-                scrollToView = .moons
-            }
-        }
-        
-        return scrollToView
-    }
 
 }
 
@@ -170,6 +136,11 @@ extension MasterViewController: iCarouselDelegate, iCarouselDataSource {
             return 0
         }
         
+        if option == .wrap {
+            // False
+            return 0
+        }
+        
         return value
     }
     
@@ -186,12 +157,12 @@ extension MasterViewController: iCarouselDelegate, iCarouselDataSource {
         }
         
         switch view {
+        case .featured:
+            itemViewController = FeaturedViewController.instantiateFromStoryboard()
         case .explore:
             itemViewController = ExploreViewController.instantiateFromStoryboard()
         case .moons:
             itemViewController = MoonsViewViewController.instantiateFromStoryboard()
-        case .featured:
-            itemViewController = FeaturedViewController.instantiateFromStoryboard()
         }
         
         // These couple method calls are needed so there is a parent child relationship between the

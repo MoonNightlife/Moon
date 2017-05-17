@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import PageMenu
+import ActionButton
+import Material
 
 class MoonsViewViewController: UIViewController {
 
@@ -17,61 +18,58 @@ class MoonsViewViewController: UIViewController {
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! MoonsViewViewController
     }
     
-    var pageMenu: CAPSPageMenu?
-    var controllerArray = [UIViewController]()
+    @IBOutlet weak var mapViewContainerView: UIView!
+    @IBOutlet weak var friendFeedContainer: UIView!
+    
+    var changeViewActionButton: ActionButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupPagingMenuController()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        mapViewContainerView.isHidden = true
+        friendFeedContainer.isHidden = false 
+        
+        let items = setupActionButtonItems()
+        setupActionButton(items: items)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        changeViewActionButton.fadeIn()
     }
-    */
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        changeViewActionButton.fadeOut()
+    }
+    
 }
 
 extension MoonsViewViewController {
-    fileprivate func setupPagingMenuController() {
-        let barActivityFeedViewController = BarActivityFeedViewController.instantiateFromStoryboard()
-        barActivityFeedViewController.title = "Friend Feed"
-        controllerArray.append(barActivityFeedViewController)
-        
-        let cityOverviewViewController = CityOverviewViewController.instantiateFromStoryboard()
-        cityOverviewViewController.title = "City Overview"
-        controllerArray.append(cityOverviewViewController)
-        
-        let parameters: [CAPSPageMenuOption] = [
-            .menuItemSeparatorWidth(4.3),
-            .menuItemSeparatorPercentageHeight(0.1),
-            .scrollMenuBackgroundColor(.white),
-            .selectionIndicatorColor(.clear),
-            .addBottomMenuHairline(true),
-            .useMenuLikeSegmentedControl(true),
-            .selectionIndicatorColor(.moonPurple),
-            .unselectedMenuItemLabelColor(.lightGray),
-            .selectedMenuItemLabelColor(.darkGray),
-            .enableHorizontalBounce(false),
-            .menuItemSeparatorColor(.clear)
-        ]
-        
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: self.view.frame, pageMenuOptions: parameters)
-        pageMenu?.view.backgroundColor = .lightGray
-        if let view = pageMenu?.view {
-            self.view.addSubview(view)
+    
+    fileprivate func setupActionButtonItems() -> [ActionButtonItem] {
+        let friendFeedAction = ActionButtonItem(title: "Feed", image: Icon.cm.moreVertical)
+        friendFeedAction.action = { item in
+            self.friendFeedContainer.isHidden = false
+            self.mapViewContainerView.isHidden = true
+            self.changeViewActionButton.toggleMenu()
         }
         
+        let mapViewAction = ActionButtonItem(title: "Map", image: Icon.cm.photoCamera)
+        mapViewAction.action = { item in
+            self.mapViewContainerView.isHidden = false
+            self.friendFeedContainer.isHidden = true
+            self.changeViewActionButton.toggleMenu()
+        }
+        
+        return [friendFeedAction, mapViewAction]
+
     }
+    
+    fileprivate func setupActionButton(items: [ActionButtonItem]) {
+        changeViewActionButton = ActionButton(attachedToView: view, items: items)
+        changeViewActionButton.backgroundColor = .moonPurple
+        changeViewActionButton.action = { button in button.toggleMenu() }
+    }
+    
 }
