@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Material
 
 struct BarActivity {
     var barId: String?
@@ -61,18 +62,8 @@ extension BarActivityFeedViewController {
     fileprivate func viewSetUp() {
         // TableView set up
         tableView.rowHeight = 75
-        self.tableView.separatorStyle = .none
-        
-        // We dont want the background to be an image.
-        // We would rather change the background color, because when the user pulls
-        // down on the table view to reload the table view, then the image moves with it.
-        // Background set up
-        let goingToImage = "Moons_View_Background.png"
-        let image = UIImage(named: goingToImage)
-        let imageView = UIImageView(image: image!)
-        imageView.frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: tableView.frame.size.height)
-        tableView.addSubview(imageView)
-        tableView.sendSubview(toBack: imageView)
+        self.tableView.separatorStyle = .singleLine
+        tableView.backgroundColor = Color.grey.lighten5
         
         // Add the refresh control
         refreshControl = UIRefreshControl()
