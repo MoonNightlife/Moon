@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,57 +21,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7vs-64-Xle" customClass="MDCFloatingButton">
-                                <rect key="frame" x="329" y="624" width="30" height="30"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fw2-l8-sXr" customClass="FloatingBottomTabBar" customModule="Moon" customModuleProvider="target">
+                                <rect key="frame" x="87.5" y="599" width="200" height="60"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="4Em-g0-YBB"/>
-                                    <constraint firstAttribute="width" constant="30" id="6no-hm-zr4"/>
+                                    <constraint firstAttribute="height" constant="60" id="CUC-S3-JXb"/>
+                                    <constraint firstAttribute="width" constant="200" id="hU7-Fc-Gxq"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="moonSM"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autohide" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="animation" value="fadeInUp"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="curve" value="easeInSine"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="showRightView:" destination="UqM-gC-rae" eventType="touchUpInside" id="t5v-Wm-9E5"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1GM-jh-SOl" customClass="MDCFloatingButton">
-                                <rect key="frame" x="16" y="624" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="7H6-at-E5x"/>
-                                    <constraint firstAttribute="width" constant="30" id="vrT-er-iH2"/>
-                                </constraints>
-                                <state key="normal" backgroundImage="eventsSM"/>
-                                <connections>
-                                    <action selector="showLeftView:" destination="UqM-gC-rae" eventType="touchUpInside" id="xxR-De-tck"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjU-LC-vA1" customClass="MDCFloatingButton">
-                                <rect key="frame" x="167" y="607" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="0ds-xn-j0i"/>
-                                    <constraint firstAttribute="width" constant="40" id="duK-1S-GF4"/>
-                                </constraints>
-                                <state key="normal" backgroundImage="searchLG"/>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="7vs-64-Xle" firstAttribute="trailing" secondItem="62j-IE-10U" secondAttribute="trailingMargin" id="3PT-Fe-4kQ"/>
-                            <constraint firstItem="1GM-jh-SOl" firstAttribute="centerY" secondItem="fjU-LC-vA1" secondAttribute="centerY" constant="12" id="4lW-fi-8G8"/>
-                            <constraint firstItem="1GM-jh-SOl" firstAttribute="leading" secondItem="62j-IE-10U" secondAttribute="leadingMargin" id="DJ3-HX-ofk"/>
-                            <constraint firstItem="7vs-64-Xle" firstAttribute="centerY" secondItem="fjU-LC-vA1" secondAttribute="centerY" constant="12" id="DuW-MY-otY"/>
-                            <constraint firstItem="UHK-hl-0Cb" firstAttribute="top" secondItem="fjU-LC-vA1" secondAttribute="bottom" constant="20" id="Few-Ed-thm"/>
-                            <constraint firstItem="fjU-LC-vA1" firstAttribute="centerX" secondItem="62j-IE-10U" secondAttribute="centerX" id="qGM-EV-fVv"/>
+                            <constraint firstItem="fw2-l8-sXr" firstAttribute="centerX" secondItem="62j-IE-10U" secondAttribute="centerX" id="IA5-OU-BSG"/>
+                            <constraint firstItem="UHK-hl-0Cb" firstAttribute="top" secondItem="fw2-l8-sXr" secondAttribute="bottom" constant="8" symbolic="YES" id="tcR-sF-n9G"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="currentViewButton" destination="fjU-LC-vA1" id="hLt-4d-TvD"/>
-                        <outlet property="leftViewButton" destination="1GM-jh-SOl" id="YfW-jH-5cw"/>
-                        <outlet property="rightViewButton" destination="7vs-64-Xle" id="Tvf-qx-RBX"/>
+                        <outlet property="tabBar" destination="fw2-l8-sXr" id="iYB-Jx-MKZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iPa-mt-ZcO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -80,9 +50,4 @@
             <point key="canvasLocation" x="1005.6" y="116.49175412293854"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="eventsSM" width="30" height="30"/>
-        <image name="moonSM" width="30" height="30"/>
-        <image name="searchLG" width="40" height="40"/>
-    </resources>
 </document>

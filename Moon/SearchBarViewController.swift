@@ -40,6 +40,7 @@ extension SearchBarViewController {
     
     fileprivate func prepareStatusBar() {
         statusBarStyle = .lightContent
+        statusBar.backgroundColor = .moonBlue
     }
     
     fileprivate func prepapreSearchIcon() {
@@ -51,6 +52,8 @@ extension SearchBarViewController {
     fileprivate func prepareSearchBar() {
         searchBar.leftViews = [profileButton, searchIcon]
         searchBar.rightViews = [settingsButton]
+        searchBar.placeholderColor = .white
+        searchBar.backgroundColor = .moonBlue
     }
 
 }

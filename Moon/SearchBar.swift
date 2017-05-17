@@ -49,5 +49,5 @@ extension SearchBar {
         for icon in rightViews {
             icon.tintColor = color
         }
-    }
+    }    
 }

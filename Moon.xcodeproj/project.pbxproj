@@ -37,7 +37,7 @@
 		F07060061EC525A10020B3BE /* default_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = F07060051EC525A10020B3BE /* default_pic.png */; };
 		F09B9D061EC356BA00B2385A /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F09B9D051EC356BA00B2385A /* Explore.storyboard */; };
 		F09B9D081EC3571800B2385A /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09B9D071EC3571800B2385A /* ExploreViewController.swift */; };
-		F09B9D0A1EC35D5D00B2385A /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09B9D091EC35D5D00B2385A /* SegmentedControl.swift */; };
+		F09C09221ECC7D3B003076CC /* FloatingBottomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C09211ECC7D3B003076CC /* FloatingBottomTabBar.swift */; };
 		F0A2251F1ECB9F2600170927 /* MoonFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A2251E1ECB9F2600170927 /* MoonFont.swift */; };
 		F0A2252D1ECBAA3E00170927 /* absolute.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F0A225211ECBAA3E00170927 /* absolute.jpeg */; };
 		F0A2252E1ECBAA3E00170927 /* bacardi.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F0A225221ECBAA3E00170927 /* bacardi.jpeg */; };
@@ -116,7 +116,7 @@
 		F07060051EC525A10020B3BE /* default_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_pic.png; sourceTree = "<group>"; };
 		F09B9D051EC356BA00B2385A /* Explore.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Explore.storyboard; sourceTree = "<group>"; };
 		F09B9D071EC3571800B2385A /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
-		F09B9D091EC35D5D00B2385A /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
+		F09C09211ECC7D3B003076CC /* FloatingBottomTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingBottomTabBar.swift; sourceTree = "<group>"; };
 		F0A2251E1ECB9F2600170927 /* MoonFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonFont.swift; sourceTree = "<group>"; };
 		F0A225211ECBAA3E00170927 /* absolute.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = absolute.jpeg; sourceTree = "<group>"; };
 		F0A225221ECBAA3E00170927 /* bacardi.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bacardi.jpeg; sourceTree = "<group>"; };
@@ -305,9 +305,9 @@
 		F09B9D0B1EC363D200B2385A /* Subclasses */ = {
 			isa = PBXGroup;
 			children = (
-				F09B9D091EC35D5D00B2385A /* SegmentedControl.swift */,
 				F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */,
 				F0A8E2D71EC3C6B2001D9993 /* ImageViewCell.swift */,
+				F09C09211ECC7D3B003076CC /* FloatingBottomTabBar.swift */,
 				F001BAC21EC50F7500CDF9BC /* BarActivityTableViewCell.swift */,
 			);
 			name = Subclasses;
@@ -616,6 +616,7 @@
 				F001BAC51EC51BD400CDF9BC /* Utilities.swift in Sources */,
 				F04283B11EC4A96200CCB5F3 /* MoonsViewViewController.swift in Sources */,
 				F0E6ED121ECB3C54009508FC /* SearchBar.swift in Sources */,
+				F09C09221ECC7D3B003076CC /* FloatingBottomTabBar.swift in Sources */,
 				F001BAC11EC50E9700CDF9BC /* BarActivityFeedViewController.swift in Sources */,
 				F001BAC31EC50F7500CDF9BC /* BarActivityTableViewCell.swift in Sources */,
 				F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */,
@@ -624,7 +625,6 @@
 				F0A2251F1ECB9F2600170927 /* MoonFont.swift in Sources */,
 				F04283AF1EC4A92700CCB5F3 /* FeaturedViewController.swift in Sources */,
 				F0644C2B1EC37D0E00D92BF7 /* SpecialsViewController.swift in Sources */,
-				F09B9D0A1EC35D5D00B2385A /* SegmentedControl.swift in Sources */,
 				F03776A21EC3A44100B92E6B /* FakeSpecialData.swift in Sources */,
 				F0A8E2D81EC3C6B2001D9993 /* ImageViewCell.swift in Sources */,
 				F0055D691EC5E64B005544B4 /* CityOverviewViewController.swift in Sources */,
