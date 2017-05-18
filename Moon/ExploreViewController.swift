@@ -19,6 +19,7 @@ class ExploreViewController: UIViewController {
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! ExploreViewController
     }
     
+    @IBOutlet weak var topBarPageController: UIPageControl!
     @IBOutlet weak var topBarCarousel: iCarousel!
     fileprivate let reuseIdentifier = "TopBarCell"
     
@@ -31,6 +32,8 @@ class ExploreViewController: UIViewController {
     
         setupPagingMenuController()
         setupCarousel()
+        
+        topBarPageController.superview?.bringSubview(toFront: topBarPageController)
     }
     
     private func setupCarousel() {
@@ -69,13 +72,13 @@ extension ExploreViewController {
             .menuItemSeparatorPercentageHeight(0.1),
             .scrollMenuBackgroundColor(.white),
             .selectionIndicatorColor(.clear),
-            .addBottomMenuHairline(true),
+            .addBottomMenuHairline(false),
             .useMenuLikeSegmentedControl(true),
             .selectionIndicatorColor(.moonBlue),
             .unselectedMenuItemLabelColor(.lightGray),
             .selectedMenuItemLabelColor(.darkGray),
             .enableHorizontalBounce(false),
-            .menuItemSeparatorColor(.clear)
+            .menuItemSeparatorColor(.clear),
         ]
         
         let sizeOfFrame = CGRect(x: 0, y: 0, width: viewForPageMenu.frame.width, height: viewForPageMenu.frame.height)

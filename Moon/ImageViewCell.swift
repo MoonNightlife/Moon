@@ -49,20 +49,27 @@ extension ImageViewCell {
     fileprivate func prepareToolbarWith(title: String, subtitle: String) {
         toolbar = Toolbar(rightViews: [moreButton])
         toolbar.leftViews = [goButton]
-        let view = IconButton(image: #imageLiteral(resourceName: "goingIcon"), tintColor: .white)
-       // toolbar.centerViews = [view]
         toolbar.backgroundColor = nil
         
         toolbar.title = title
         toolbar.titleLabel.textColor = .white
         toolbar.titleLabel.textAlignment = .center
         
-        toolbar.detail = subtitle
         toolbar.detailLabel.textColor = .white
         toolbar.detailLabel.textAlignment = .center
+     
+        let fullString = NSMutableAttributedString(string: " ")
         
-        toolbar.detailLabel.layout(view).bottomLeft(bottom: -10, left: 80)
+        let attachment = NSTextAttachment()
+        attachment.image = #imageLiteral(resourceName: "goingIcon")
+        attachment.bounds = CGRect(x: 0, y: -5, width: 16, height: 16)
         
+        let attachmentString = NSAttributedString(attachment: attachment)
+        
+        fullString.append(attachmentString)
+        fullString.append(NSAttributedString(string: " " + subtitle))
+        
+        toolbar.detailLabel.attributedText = fullString
     }
     
     fileprivate func preparePresenterCard() {
