@@ -52,6 +52,7 @@ class FeaturedEventCollectionViewCell: UICollectionViewCell {
         prepareContentView()
         prepareBottomBar()
         preparePresenterCard()
+
     }
 
 }
