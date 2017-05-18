@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Data Source-->
+        <!--Featured View Controller-->
         <scene sceneID="qFt-zG-IsG">
             <objects>
                 <viewController storyboardIdentifier="FeaturedViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ef2-gS-UXE" customClass="FeaturedViewController" customModule="Moon" customModuleProvider="target" sceneMemberID="viewController">
@@ -21,27 +21,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mcz-7J-aEl" customClass="iCarousel">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="408"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tHK-3l-YbL">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="408" id="cPU-zX-W2Q"/>
-                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="30" id="9iK-Ph-jjh">
+                                    <size key="itemSize" width="317" height="266"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="30" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="featuredEventCell" id="42f-qj-df2" customClass="FeaturedEventCollectionViewCell" customModule="Moon" customModuleProvider="target">
+                                        <rect key="frame" x="29" y="30" width="317" height="266"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="317" height="266"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="Ef2-gS-UXE" id="biJ-cu-M53"/>
-                                    <outlet property="delegate" destination="Ef2-gS-UXE" id="H7E-73-73a"/>
+                                    <outlet property="dataSource" destination="Ef2-gS-UXE" id="lJi-pw-byx"/>
+                                    <outlet property="delegate" destination="Ef2-gS-UXE" id="xRa-i3-hxe"/>
                                 </connections>
-                            </view>
+                            </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Mcz-7J-aEl" secondAttribute="trailing" id="GMm-Gu-b7t"/>
-                            <constraint firstItem="Mcz-7J-aEl" firstAttribute="top" secondItem="dl6-HS-aDJ" secondAttribute="top" id="Mqe-eS-wEk"/>
-                            <constraint firstItem="Mcz-7J-aEl" firstAttribute="leading" secondItem="dl6-HS-aDJ" secondAttribute="leading" id="gvN-C3-n55"/>
+                            <constraint firstItem="tHK-3l-YbL" firstAttribute="leading" secondItem="dl6-HS-aDJ" secondAttribute="leading" id="9nM-Sl-e57"/>
+                            <constraint firstAttribute="trailing" secondItem="tHK-3l-YbL" secondAttribute="trailing" id="J8G-o7-BJI"/>
+                            <constraint firstItem="tHK-3l-YbL" firstAttribute="bottom" secondItem="TFe-HZ-6rf" secondAttribute="top" id="thm-mg-DaE"/>
+                            <constraint firstItem="tHK-3l-YbL" firstAttribute="top" secondItem="dl6-HS-aDJ" secondAttribute="top" id="zYQ-8H-ouc"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="carousel" destination="Mcz-7J-aEl" id="EIK-k6-qDz"/>
+                        <outlet property="eventCollectionView" destination="tHK-3l-YbL" id="AQY-72-nFs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bAX-BA-8Kv" userLabel="First Responder" sceneMemberID="firstResponder"/>
