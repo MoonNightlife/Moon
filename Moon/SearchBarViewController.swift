@@ -43,6 +43,10 @@ extension SearchBarViewController {
         statusBar.backgroundColor = .moonBlue
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     fileprivate func prepapreSearchIcon() {
         searchIcon =  IconButton(image: Icon.cm.search, tintColor:
             .white)

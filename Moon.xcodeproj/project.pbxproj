@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		02B692203D881BDBDF5C4CD4 /* Pods_Moon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F1CC74CAD6A77CCA922B2C6 /* Pods_Moon.framework */; };
 		2F7739078AD1F7D7D17B7854 /* Pods_MoonTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C35285EFFE654F5498B6457 /* Pods_MoonTests.framework */; };
+		C034E2C71ECCF09D008EA4BA /* FakeUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034E2C61ECCF09D008EA4BA /* FakeUserData.swift */; };
+		C034E2CB1ECCF2F5008EA4BA /* p3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C034E2CA1ECCF2F5008EA4BA /* p3.jpg */; };
+		C034E2CD1ECCF2FB008EA4BA /* p1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C034E2CC1ECCF2FB008EA4BA /* p1.jpg */; };
+		C034E2CF1ECCF301008EA4BA /* p2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C034E2CE1ECCF301008EA4BA /* p2.jpg */; };
+		C034E2D11ECCF30A008EA4BA /* p4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C034E2D01ECCF30A008EA4BA /* p4.jpg */; };
+		C034E2D31ECCF365008EA4BA /* p5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C034E2D21ECCF365008EA4BA /* p5.jpg */; };
+		C034E2D51ECCF37C008EA4BA /* p6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C034E2D41ECCF37C008EA4BA /* p6.jpg */; };
+		C034E2D71ECCF38C008EA4BA /* p7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C034E2D61ECCF38C008EA4BA /* p7.jpg */; };
 		F001BABA1EC50D2600CDF9BC /* feed_base.png in Resources */ = {isa = PBXBuildFile; fileRef = F001BAB41EC50D2600CDF9BC /* feed_base.png */; };
 		F001BABB1EC50D2600CDF9BC /* moons_view_base.png in Resources */ = {isa = PBXBuildFile; fileRef = F001BAB51EC50D2600CDF9BC /* moons_view_base.png */; };
 		F001BABC1EC50D2600CDF9BC /* Moons_View_Background.png in Resources */ = {isa = PBXBuildFile; fileRef = F001BAB61EC50D2600CDF9BC /* Moons_View_Background.png */; };
@@ -83,6 +91,14 @@
 		448C01FBA79545B4FB94346A /* Pods-Moon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Moon/Pods-Moon.debug.xcconfig"; sourceTree = "<group>"; };
 		5F1CC74CAD6A77CCA922B2C6 /* Pods_Moon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Moon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80DC1C4A5C45AFA862F99FB2 /* Pods-MoonTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoonTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoonTests/Pods-MoonTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C034E2C61ECCF09D008EA4BA /* FakeUserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeUserData.swift; sourceTree = "<group>"; };
+		C034E2CA1ECCF2F5008EA4BA /* p3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = p3.jpg; sourceTree = "<group>"; };
+		C034E2CC1ECCF2FB008EA4BA /* p1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = p1.jpg; sourceTree = "<group>"; };
+		C034E2CE1ECCF301008EA4BA /* p2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = p2.jpg; sourceTree = "<group>"; };
+		C034E2D01ECCF30A008EA4BA /* p4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = p4.jpg; sourceTree = "<group>"; };
+		C034E2D21ECCF365008EA4BA /* p5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = p5.jpg; sourceTree = "<group>"; };
+		C034E2D41ECCF37C008EA4BA /* p6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = p6.jpg; sourceTree = "<group>"; };
+		C034E2D61ECCF38C008EA4BA /* p7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = p7.jpg; sourceTree = "<group>"; };
 		C4C4DBD54FFB0BEB382262E5 /* Pods-MoonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoonTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoonTests/Pods-MoonTests.release.xcconfig"; sourceTree = "<group>"; };
 		F001BAB41EC50D2600CDF9BC /* feed_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feed_base.png; sourceTree = "<group>"; };
 		F001BAB51EC50D2600CDF9BC /* moons_view_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moons_view_base.png; sourceTree = "<group>"; };
@@ -174,6 +190,30 @@
 				1C35285EFFE654F5498B6457 /* Pods_MoonTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C034E2C81ECCF0B3008EA4BA /* FakeData */ = {
+			isa = PBXGroup;
+			children = (
+				C034E2C91ECCF2E9008EA4BA /* Profile Pics */,
+				C034E2C61ECCF09D008EA4BA /* FakeUserData.swift */,
+				F03776A11EC3A44100B92E6B /* FakeSpecialData.swift */,
+			);
+			name = FakeData;
+			sourceTree = "<group>";
+		};
+		C034E2C91ECCF2E9008EA4BA /* Profile Pics */ = {
+			isa = PBXGroup;
+			children = (
+				C034E2CC1ECCF2FB008EA4BA /* p1.jpg */,
+				C034E2CE1ECCF301008EA4BA /* p2.jpg */,
+				C034E2CA1ECCF2F5008EA4BA /* p3.jpg */,
+				C034E2D01ECCF30A008EA4BA /* p4.jpg */,
+				C034E2D21ECCF365008EA4BA /* p5.jpg */,
+				C034E2D41ECCF37C008EA4BA /* p6.jpg */,
+				C034E2D61ECCF38C008EA4BA /* p7.jpg */,
+			);
+			name = "Profile Pics";
 			sourceTree = "<group>";
 		};
 		EB53EE56F63191AB85F5969C /* Pods */ = {
@@ -292,11 +332,11 @@
 		F09B9D041EC3555300B2385A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C034E2C81ECCF0B3008EA4BA /* FakeData */,
 				F04283AB1EC49D4E00CCB5F3 /* Bridging-Header.h */,
 				F001BAC41EC51BD400CDF9BC /* Utilities.swift */,
 				F048F11A1EA3B7A5000F0161 /* AppDelegate.swift */,
 				F001BAB21EC50CDB00CDF9BC /* Designs */,
-				F03776A11EC3A44100B92E6B /* FakeSpecialData.swift */,
 				F048F1211EA3B7A5000F0161 /* Assets.xcassets */,
 				F0A8E2D91EC3C858001D9993 /* FakeBarImages */,
 				F048F1261EA3B7A5000F0161 /* Info.plist */,
@@ -454,14 +494,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C034E2CD1ECCF2FB008EA4BA /* p1.jpg in Resources */,
 				F0A2252D1ECBAA3E00170927 /* absolute.jpeg in Resources */,
 				F04283B51EC4A9F600CCB5F3 /* MoonsView.storyboard in Resources */,
 				F04283B31EC4A9E100CCB5F3 /* Featured.storyboard in Resources */,
 				F0A225351ECBAA3E00170927 /* miller.jpeg in Resources */,
 				F001BABC1EC50D2600CDF9BC /* Moons_View_Background.png in Resources */,
+				C034E2D71ECCF38C008EA4BA /* p7.jpg in Resources */,
 				F0A2253C1ECBAB2400170927 /* sky.jpeg in Resources */,
 				F07060061EC525A10020B3BE /* default_pic.png in Resources */,
 				F0A225371ECBAA3E00170927 /* pbr.jpeg in Resources */,
+				C034E2D11ECCF30A008EA4BA /* p4.jpg in Resources */,
 				F048F1251EA3B7A5000F0161 /* LaunchScreen.storyboard in Resources */,
 				F0A225381ECBAA3E00170927 /* redwine.jpeg in Resources */,
 				F0A8E2E91EC3C858001D9993 /* pic5.jpg in Resources */,
@@ -471,11 +514,13 @@
 				F0A8E2E61EC3C858001D9993 /* pic2.jpg in Resources */,
 				F0A225331ECBAA3E00170927 /* jack.jpeg in Resources */,
 				F0A8E2E81EC3C858001D9993 /* pic4.jpg in Resources */,
+				C034E2CB1ECCF2F5008EA4BA /* p3.jpg in Resources */,
 				F048F1221EA3B7A5000F0161 /* Assets.xcassets in Resources */,
 				F001BABE1EC50D2600CDF9BC /* Profile_base.png in Resources */,
 				F0A2252E1ECBAA3E00170927 /* bacardi.jpeg in Resources */,
 				F0A8E2EB1EC3C858001D9993 /* Pic7.jpg in Resources */,
 				F001BABF1EC50D2600CDF9BC /* BottomBar_base.png in Resources */,
+				C034E2D51ECCF37C008EA4BA /* p6.jpg in Resources */,
 				F001BABA1EC50D2600CDF9BC /* feed_base.png in Resources */,
 				F0A8E2E51EC3C858001D9993 /* pic1.jpg in Resources */,
 				F0A8E2EA1EC3C858001D9993 /* pic6.jpg in Resources */,
@@ -486,9 +531,11 @@
 				F0A8E2E31EC3C858001D9993 /* button.png in Resources */,
 				F001BABB1EC50D2600CDF9BC /* moons_view_base.png in Resources */,
 				F0A8E2E41EC3C858001D9993 /* eventButton.png in Resources */,
+				C034E2CF1ECCF301008EA4BA /* p2.jpg in Resources */,
 				F03830601EC63C7300A0FF5D /* Master.storyboard in Resources */,
 				F0A2253A1ECBAAE300170927 /* whitewine.jpeg in Resources */,
 				F048F1201EA3B7A5000F0161 /* Login.storyboard in Resources */,
+				C034E2D31ECCF365008EA4BA /* p5.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,6 +669,7 @@
 				F09C09221ECC7D3B003076CC /* FloatingBottomTabBar.swift in Sources */,
 				F001BAC11EC50E9700CDF9BC /* BarActivityFeedViewController.swift in Sources */,
 				F001BAC31EC50F7500CDF9BC /* BarActivityTableViewCell.swift in Sources */,
+				C034E2C71ECCF09D008EA4BA /* FakeUserData.swift in Sources */,
 				F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */,
 				F0D168531ECA62940064F642 /* MoonColor.swift in Sources */,
 				F048F11D1EA3B7A5000F0161 /* LoginViewController.swift in Sources */,
