@@ -21,7 +21,6 @@ class ExploreViewController: UIViewController {
     
     @IBOutlet weak var topBarCarousel: iCarousel!
     fileprivate let reuseIdentifier = "TopBarCell"
-    fileprivate var topBarData = [TopBarData]()
     
     @IBOutlet weak var viewForPageMenu: UIView!
     var pageMenu: CAPSPageMenu?
@@ -30,7 +29,6 @@ class ExploreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        createTempTopBarData()
         setupPagingMenuController()
         setupCarousel()
     }
@@ -39,15 +37,6 @@ class ExploreViewController: UIViewController {
         topBarCarousel.isPagingEnabled = true
         topBarCarousel.type = .linear
         topBarCarousel.bounces = false
-    }
-    
-    // Function can be deleted once we are aren't using fake top bar data
-    private func createTempTopBarData() {
-        for i in 1..<7 {
-            let data = TopBarData(imageName: "pic\(i).jpg", barName: "BarName\(i)", location: "Location\(i)")
-            topBarData.append(data)
-        }
-        topBarCarousel.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -106,12 +95,12 @@ extension ExploreViewController: iCarouselDataSource, iCarouselDelegate {
     }
     
     func numberOfItems(in carousel: iCarousel) -> Int {
-        return topBarData.count
+        return fakeTopBars.count
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         let topBarView = ImageViewCell(frame: carousel.frame)
-        topBarView.initializeImageCardViewWith(data: topBarData[index])
+        topBarView.initializeImageCardViewWith(data: fakeTopBars[index])
         return topBarView
     }
 }

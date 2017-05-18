@@ -9,17 +9,11 @@
 import UIKit
 import Material
 
-struct TopBarData {
-    let imageName: String
-    let barName: String
-    let location: String
-}
-
 class ImageViewCell: UIView {
     fileprivate var card: ImageCard!
     
     /// Content area.
-    fileprivate var imageView: UIImageView!
+    fileprivate var imageView: BottomGradientImageView!
     
     /// Toolbar views.
     fileprivate var toolbar: Toolbar!
@@ -29,7 +23,7 @@ class ImageViewCell: UIView {
         
         prepareImageViewWith(imageName: data.imageName)
         prepareMoreButton()
-        prepareToolbarWith(title: data.barName, subtitle: data.location)
+        prepareToolbarWith(title: data.barName, subtitle: data.usersGoing)
         preparePresenterCard()
     }
 
@@ -37,9 +31,9 @@ class ImageViewCell: UIView {
 
 extension ImageViewCell {
     fileprivate func prepareImageViewWith(imageName: String) {
-        imageView = UIImageView(frame: self.frame)
-        imageView.contentMode = UIViewContentMode.scaleAspectFill
+        imageView = BottomGradientImageView(frame: self.frame)
         imageView.image = UIImage(named: imageName)
+        imageView.contentMode = UIViewContentMode.scaleAspectFill
     }
     
     fileprivate func prepareMoreButton() {

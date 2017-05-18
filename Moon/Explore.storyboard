@@ -75,19 +75,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="96" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IHM-eJ-pFQ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="75" translatesAutoresizingMaskIntoConstraints="NO" id="IHM-eJ-pFQ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SpecialCell" rowHeight="96" id="l8d-pq-DRQ" customClass="SpecialTableViewCell" customModule="Moon" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="96"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SpecialCell" rowHeight="65" id="l8d-pq-DRQ" customClass="SpecialTableViewCell" customModule="Moon" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l8d-pq-DRQ" id="pY9-Zb-Hpf">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="95.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Buy One Get One Free Millers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7p2-jw-KfB">
-                                                    <rect key="frame" x="66" y="8" width="207" height="22"/>
+                                                    <rect key="frame" x="66" y="8" width="206.5" height="21.5"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -99,36 +99,36 @@
                                                     </constraints>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HeartIconGray" translatesAutoresizingMaskIntoConstraints="NO" id="Pji-ME-K53">
-                                                    <rect key="frame" x="66" y="57" width="24" height="24"/>
+                                                    <rect key="frame" x="66" y="34" width="24" height="24"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="24" id="3MG-sB-wjN"/>
-                                                        <constraint firstAttribute="width" constant="24" id="RUM-Oh-4KD"/>
+                                                        <constraint firstAttribute="width" constant="24" id="OUd-C5-AiV"/>
+                                                        <constraint firstAttribute="height" constant="24" id="wtG-Zp-qgv"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Hy-Ht-iKh">
-                                                    <rect key="frame" x="98" y="61" width="21" height="16"/>
+                                                    <rect key="frame" x="98" y="38" width="21" height="16"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Barley House" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0i-xV-mJZ">
-                                                    <rect key="frame" x="66" y="30" width="110" height="19"/>
+                                                    <rect key="frame" x="257" y="37" width="109.5" height="18.5"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="4Hy-Ht-iKh" firstAttribute="leading" secondItem="Pji-ME-K53" secondAttribute="trailing" constant="8" symbolic="YES" id="0jD-jJ-n33"/>
-                                                <constraint firstItem="i0i-xV-mJZ" firstAttribute="leading" secondItem="7p2-jw-KfB" secondAttribute="leading" id="8YU-5c-uZX"/>
-                                                <constraint firstItem="4Hy-Ht-iKh" firstAttribute="centerY" secondItem="Pji-ME-K53" secondAttribute="centerY" id="CHb-MF-hbt"/>
                                                 <constraint firstItem="7p2-jw-KfB" firstAttribute="leading" secondItem="7zv-7h-MfY" secondAttribute="trailing" constant="8" symbolic="YES" id="EXR-CG-M1W"/>
+                                                <constraint firstItem="4Hy-Ht-iKh" firstAttribute="centerY" secondItem="Pji-ME-K53" secondAttribute="centerY" id="GlJ-Cu-yTb"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="i0i-xV-mJZ" secondAttribute="trailing" id="VxS-fR-I4r"/>
+                                                <constraint firstItem="Pji-ME-K53" firstAttribute="top" secondItem="7p2-jw-KfB" secondAttribute="bottom" constant="4.5" id="XE9-ea-yed"/>
                                                 <constraint firstItem="7zv-7h-MfY" firstAttribute="top" secondItem="7p2-jw-KfB" secondAttribute="top" id="ald-Ar-7pW"/>
-                                                <constraint firstItem="Pji-ME-K53" firstAttribute="top" secondItem="i0i-xV-mJZ" secondAttribute="bottom" constant="8" symbolic="YES" id="dOl-YO-Nj1"/>
+                                                <constraint firstItem="4Hy-Ht-iKh" firstAttribute="leading" secondItem="Pji-ME-K53" secondAttribute="trailing" constant="8" id="cBN-qu-1Ht"/>
+                                                <constraint firstItem="Pji-ME-K53" firstAttribute="leading" secondItem="7p2-jw-KfB" secondAttribute="leading" id="eGD-bM-8DA"/>
                                                 <constraint firstItem="7zv-7h-MfY" firstAttribute="leading" secondItem="pY9-Zb-Hpf" secondAttribute="leadingMargin" id="iMs-cU-EHU"/>
+                                                <constraint firstItem="i0i-xV-mJZ" firstAttribute="centerY" secondItem="4Hy-Ht-iKh" secondAttribute="centerY" id="nMi-eb-Ms4"/>
                                                 <constraint firstItem="7zv-7h-MfY" firstAttribute="top" secondItem="pY9-Zb-Hpf" secondAttribute="topMargin" id="oVD-up-RwI"/>
-                                                <constraint firstItem="Pji-ME-K53" firstAttribute="leading" secondItem="i0i-xV-mJZ" secondAttribute="leading" id="rHc-iC-8R5"/>
-                                                <constraint firstItem="i0i-xV-mJZ" firstAttribute="top" secondItem="7p2-jw-KfB" secondAttribute="bottom" id="vAI-Ek-c64"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
