@@ -18,11 +18,13 @@ class ImageViewCell: UIView {
     /// Toolbar views.
     fileprivate var toolbar: Toolbar!
     fileprivate var moreButton: IconButton!
+    fileprivate var goButton: IconButton!
     
     func initializeImageCardViewWith(data: TopBarData) {
         
         prepareImageViewWith(imageName: data.imageName)
         prepareMoreButton()
+        prepareGoButton()
         prepareToolbarWith(title: data.barName, subtitle: data.usersGoing)
         preparePresenterCard()
     }
@@ -40,8 +42,13 @@ extension ImageViewCell {
         moreButton = IconButton(image: Icon.cm.moreHorizontal, tintColor: .white)
     }
     
+    fileprivate func prepareGoButton() {
+        goButton = IconButton(image: #imageLiteral(resourceName: "goButton"))
+    }
+    
     fileprivate func prepareToolbarWith(title: String, subtitle: String) {
         toolbar = Toolbar(rightViews: [moreButton])
+        toolbar.leftViews = [goButton]
         toolbar.backgroundColor = nil
         
         toolbar.title = title
@@ -50,11 +57,11 @@ extension ImageViewCell {
         
         toolbar.detailLabel.textColor = .white
         toolbar.detailLabel.textAlignment = .center
-        
+     
         let fullString = NSMutableAttributedString(string: " ")
         
         let attachment = NSTextAttachment()
-        attachment.image = Icon.cm.pen
+        attachment.image = #imageLiteral(resourceName: "goingIcon")
         attachment.bounds = CGRect(x: 0, y: -5, width: 16, height: 16)
         
         let attachmentString = NSAttributedString(attachment: attachment)
