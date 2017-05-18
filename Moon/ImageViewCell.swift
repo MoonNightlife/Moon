@@ -48,9 +48,21 @@ extension ImageViewCell {
         toolbar.titleLabel.textColor = .white
         toolbar.titleLabel.textAlignment = .center
         
-        toolbar.detail = subtitle
         toolbar.detailLabel.textColor = .white
         toolbar.detailLabel.textAlignment = .center
+        
+        let fullString = NSMutableAttributedString(string: " ")
+        
+        let attachment = NSTextAttachment()
+        attachment.image = Icon.cm.pen
+        attachment.bounds = CGRect(x: 0, y: -5, width: 16, height: 16)
+        
+        let attachmentString = NSAttributedString(attachment: attachment)
+        
+        fullString.append(attachmentString)
+        fullString.append(NSAttributedString(string: " " + subtitle))
+        
+        toolbar.detailLabel.attributedText = fullString
     }
     
     fileprivate func preparePresenterCard() {
