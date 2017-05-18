@@ -199,9 +199,11 @@
 		C034E2C81ECCF0B3008EA4BA /* FakeData */ = {
 			isa = PBXGroup;
 			children = (
+				F0A8E2D91EC3C858001D9993 /* FakeBarImages */,
 				C034E2C91ECCF2E9008EA4BA /* Profile Pics */,
 				C034E2C61ECCF09D008EA4BA /* FakeUserData.swift */,
 				F03776A11EC3A44100B92E6B /* FakeSpecialData.swift */,
+				F0942F0A1ECCEBA40038E389 /* FakeEventData.swift */,
 			);
 			name = FakeData;
 			sourceTree = "<group>";
@@ -341,10 +343,7 @@
 				F001BAC41EC51BD400CDF9BC /* Utilities.swift */,
 				F048F11A1EA3B7A5000F0161 /* AppDelegate.swift */,
 				F001BAB21EC50CDB00CDF9BC /* Designs */,
-				F03776A11EC3A44100B92E6B /* FakeSpecialData.swift */,
-				F0942F0A1ECCEBA40038E389 /* FakeEventData.swift */,
 				F048F1211EA3B7A5000F0161 /* Assets.xcassets */,
-				F0A8E2D91EC3C858001D9993 /* FakeBarImages */,
 				F048F1261EA3B7A5000F0161 /* Info.plist */,
 			);
 			name = "Supporting Files";
