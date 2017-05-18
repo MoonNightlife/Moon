@@ -33,9 +33,16 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W9C-sT-ytT" customClass="iCarousel">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <subviews>
+                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="BFk-rG-9Mk">
+                                        <rect key="frame" x="168" y="223" width="39" height="37"/>
+                                    </pageControl>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="BFk-rG-9Mk" secondAttribute="bottom" constant="-10" id="cpd-Fu-lNY"/>
                                     <constraint firstAttribute="height" constant="250" id="waE-h2-vc3"/>
+                                    <constraint firstItem="BFk-rG-9Mk" firstAttribute="centerX" secondItem="W9C-sT-ytT" secondAttribute="centerX" id="xNx-pT-7yR"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="uuI-yN-RFv" id="44l-Fo-9MY"/>
@@ -56,6 +63,7 @@
                     </view>
                     <connections>
                         <outlet property="topBarCarousel" destination="W9C-sT-ytT" id="0X7-Aj-cnO"/>
+                        <outlet property="topBarPageController" destination="BFk-rG-9Mk" id="GeV-hE-CP9"/>
                         <outlet property="viewForPageMenu" destination="jJK-E8-a3q" id="CMp-JB-Zgu"/>
                     </connections>
                 </viewController>
