@@ -68,7 +68,7 @@ class MasterViewController: UIViewController {
         masterCarousel.dataSource = self
         masterCarousel.delegate = self
     }
-
+    
 }
 
 extension MasterViewController: FloatingBottomTabBarDelegate {

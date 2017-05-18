@@ -12,11 +12,13 @@ import Material
 struct BarActivity {
     var barId: String?
     var barName: String?
+    var name: String?
     var time: NSDate?
     var username: String?
     var userId: String?
     var activityId: String?
     var likes: Int?
+    var profileImage: String?
 }
 
 class BarActivityFeedViewController: UITableViewController {
@@ -39,12 +41,6 @@ class BarActivityFeedViewController: UITableViewController {
         viewSetUp()
     }
     
-    private func createFakeBarActivities() -> [BarActivity] {
-        var activities = [BarActivity]()
-        activities.append(BarActivity(barId: "123", barName: "Barley House", time: NSDate(), username: "enoble89", userId: "666", activityId: "456", likes: 3))
-        return activities
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
