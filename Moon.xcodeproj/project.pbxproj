@@ -35,6 +35,8 @@
 		F04283B11EC4A96200CCB5F3 /* MoonsViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04283B01EC4A96200CCB5F3 /* MoonsViewViewController.swift */; };
 		F04283B31EC4A9E100CCB5F3 /* Featured.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F04283B21EC4A9E100CCB5F3 /* Featured.storyboard */; };
 		F04283B51EC4A9F600CCB5F3 /* MoonsView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F04283B41EC4A9F600CCB5F3 /* MoonsView.storyboard */; };
+		F044CD531ECDE28A00E47138 /* BottomGradientImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F044CD521ECDE28A00E47138 /* BottomGradientImageView.swift */; };
+		F044CD551ECE030C00E47138 /* FakeTopBarData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F044CD541ECE030C00E47138 /* FakeTopBarData.swift */; };
 		F048F11B1EA3B7A5000F0161 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F048F11A1EA3B7A5000F0161 /* AppDelegate.swift */; };
 		F048F11D1EA3B7A5000F0161 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F048F11C1EA3B7A5000F0161 /* LoginViewController.swift */; };
 		F048F1201EA3B7A5000F0161 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F048F11E1EA3B7A5000F0161 /* Login.storyboard */; };
@@ -121,6 +123,8 @@
 		F04283B01EC4A96200CCB5F3 /* MoonsViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonsViewViewController.swift; sourceTree = "<group>"; };
 		F04283B21EC4A9E100CCB5F3 /* Featured.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Featured.storyboard; sourceTree = "<group>"; };
 		F04283B41EC4A9F600CCB5F3 /* MoonsView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MoonsView.storyboard; sourceTree = "<group>"; };
+		F044CD521ECDE28A00E47138 /* BottomGradientImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomGradientImageView.swift; sourceTree = "<group>"; };
+		F044CD541ECE030C00E47138 /* FakeTopBarData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeTopBarData.swift; sourceTree = "<group>"; };
 		F048F1171EA3B7A5000F0161 /* Moon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F048F11A1EA3B7A5000F0161 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F048F11C1EA3B7A5000F0161 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +206,7 @@
 				F0A8E2D91EC3C858001D9993 /* FakeBarImages */,
 				C034E2C91ECCF2E9008EA4BA /* Profile Pics */,
 				C034E2C61ECCF09D008EA4BA /* FakeUserData.swift */,
+				F044CD541ECE030C00E47138 /* FakeTopBarData.swift */,
 				F03776A11EC3A44100B92E6B /* FakeSpecialData.swift */,
 				F0942F0A1ECCEBA40038E389 /* FakeEventData.swift */,
 			);
@@ -355,6 +360,7 @@
 				F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */,
 				F0A8E2D71EC3C6B2001D9993 /* ImageViewCell.swift */,
 				F09C09211ECC7D3B003076CC /* FloatingBottomTabBar.swift */,
+				F044CD521ECDE28A00E47138 /* BottomGradientImageView.swift */,
 				F001BAC21EC50F7500CDF9BC /* BarActivityTableViewCell.swift */,
 				F0942F0C1ECCEC550038E389 /* FeaturedEventCollectionViewCell.swift */,
 			);
@@ -672,6 +678,7 @@
 				F0942F0D1ECCEC550038E389 /* FeaturedEventCollectionViewCell.swift in Sources */,
 				F001BAC51EC51BD400CDF9BC /* Utilities.swift in Sources */,
 				F04283B11EC4A96200CCB5F3 /* MoonsViewViewController.swift in Sources */,
+				F044CD551ECE030C00E47138 /* FakeTopBarData.swift in Sources */,
 				F0E6ED121ECB3C54009508FC /* SearchBar.swift in Sources */,
 				F09C09221ECC7D3B003076CC /* FloatingBottomTabBar.swift in Sources */,
 				F001BAC11EC50E9700CDF9BC /* BarActivityFeedViewController.swift in Sources */,
@@ -682,6 +689,7 @@
 				F048F11D1EA3B7A5000F0161 /* LoginViewController.swift in Sources */,
 				F0A2251F1ECB9F2600170927 /* MoonFont.swift in Sources */,
 				F04283AF1EC4A92700CCB5F3 /* FeaturedViewController.swift in Sources */,
+				F044CD531ECDE28A00E47138 /* BottomGradientImageView.swift in Sources */,
 				F0644C2B1EC37D0E00D92BF7 /* SpecialsViewController.swift in Sources */,
 				F03776A21EC3A44100B92E6B /* FakeSpecialData.swift in Sources */,
 				F0A8E2D81EC3C6B2001D9993 /* ImageViewCell.swift in Sources */,

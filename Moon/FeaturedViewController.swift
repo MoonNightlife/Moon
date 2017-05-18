@@ -28,7 +28,7 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        eventCollectionView.backgroundColor = Color.grey.lighten3
+        eventCollectionView.backgroundColor = Color.grey.lighten2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

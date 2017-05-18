@@ -24,7 +24,7 @@ class FeaturedEventCollectionViewCell: UICollectionViewCell {
     fileprivate var card: ImageCard!
     
     /// Conent area.
-    fileprivate var imageView: UIImageView!
+    fileprivate var imageView: BottomGradientImageView!
     fileprivate var eventContent: UILabel!
     
     /// Bottom Bar views.
@@ -59,9 +59,10 @@ class FeaturedEventCollectionViewCell: UICollectionViewCell {
 extension FeaturedEventCollectionViewCell {
     
     fileprivate func prepareImageView() {
-        imageView = UIImageView()
-        //imageView.contentMode = .scaleAspectFill
+        imageView = BottomGradientImageView(frame: CGRect(x: 0, y: 0, width: self.width, height: 200))
         imageView.image = UIImage(named: event.imageName)?.resize(toWidth: self.width)
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
     }
     
     fileprivate func prepareDateFormatter() {
@@ -78,7 +79,7 @@ extension FeaturedEventCollectionViewCell {
     }
     
     fileprivate func prepareFavoriteButton() {
-        favoriteButton = IconButton(image: Icon.favorite, tintColor: Color.red.base)
+        favoriteButton = IconButton(image: Icon.favorite, tintColor: .lightGray)
     }
     
     fileprivate func prepareShareButton() {
@@ -86,7 +87,7 @@ extension FeaturedEventCollectionViewCell {
     }
     
     fileprivate func prepareMoreButton() {
-        moreButton = IconButton(image: Icon.cm.moreHorizontal, tintColor: Color.blueGrey.base)
+        moreButton = IconButton(image: Icon.cm.moreHorizontal, tintColor: .white)
     }
     
     fileprivate func prepareToolbar() {
@@ -124,8 +125,8 @@ extension FeaturedEventCollectionViewCell {
         card.contentView = eventContent
         card.contentViewEdgeInsetsPreset = .square3
         
-        //card.bottomBar = bottomBar
-        //card.bottomBarEdgeInsetsPreset = .wideRectangle2
+        card.bottomBar = bottomBar
+        card.bottomBarEdgeInsetsPreset = .wideRectangle2
         
         self.layout(card).edges().center()
     }
