@@ -69,6 +69,9 @@ extension MoonsViewViewController {
     fileprivate func setupActionButton(items: [ActionButtonItem]) {
         changeViewActionButton = ActionButton(attachedToView: view, items: items)
         changeViewActionButton.backgroundColor = .moonPurple
+        changeViewActionButton.removeTitle()
+        changeViewActionButton.addImage(image: Icon.cm.moreHorizontal?.tint(with: .white))
+        changeViewActionButton.setImage(Icon.cm.moreHorizontal?.tint(with: .white), forState: .normal)
         changeViewActionButton.action = { button in button.toggleMenu() }
     }
     
