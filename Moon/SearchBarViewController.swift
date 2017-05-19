@@ -40,7 +40,6 @@ extension SearchBarViewController {
     
     fileprivate func prepareStatusBar() {
         statusBarStyle = .lightContent
-        statusBar.backgroundColor = .moonBlue
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -57,7 +56,6 @@ extension SearchBarViewController {
         searchBar.leftViews = [searchIcon]
         searchBar.rightViews = [profileButton, settingsButton]
         searchBar.placeholderColor = .white
-        searchBar.backgroundColor = .moonBlue
     }
 
 }

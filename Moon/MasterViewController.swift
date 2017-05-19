@@ -14,8 +14,8 @@ import Spring
 
 enum MainView: Int {
     case featured
-    case explore
     case moons
+    case explore
 }
 
 class MasterViewController: UIViewController {
@@ -40,16 +40,20 @@ class MasterViewController: UIViewController {
 
         setupCarousel()
         setupTabBar()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     
         prepareSearchBar()
+        changeColorForTabBarAndSearchBar(nextView: .moons)
+        masterCarousel.scrollToItem(at: 1, animated: false)
     }
     
     private func setupTabBar() {
@@ -57,7 +61,6 @@ class MasterViewController: UIViewController {
         tabBar.superview?.bringSubview(toFront: tabBar)
         tabBar.initializeTabBar()
         tabBar.delegate = self
-        tabBar.backgroundColor = .moonRed
     }
     
     private func setupCarousel() {
@@ -85,11 +88,11 @@ extension MasterViewController: FloatingBottomTabBarDelegate {
     }
     
     private func show(view: MainView) {
-        changeSearchBarLineColorFor(nextView: view)
+        changeColorForTabBarAndSearchBar(nextView: view)
         masterCarousel.scrollToItem(at: view.rawValue, animated: true)
     }
     
-    private func changeSearchBarLineColorFor(nextView: MainView) {
+    fileprivate func changeColorForTabBarAndSearchBar(nextView: MainView) {
         guard let controller = searchBarController else {
             return
         }
@@ -107,7 +110,6 @@ extension MasterViewController: FloatingBottomTabBarDelegate {
         
         controller .statusBar.backgroundColor = color
         controller.searchBar.backgroundColor = color
-        
         tabBar.backgroundColor = color
     }
 

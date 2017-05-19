@@ -60,8 +60,8 @@ extension FloatingBottomTabBar {
     
     fileprivate func setupTabBar() {
         leftViews = [featuredButton]
-        centerViews = [exploreButton]
-        rightViews = [moonsViewButton]
+        centerViews = [moonsViewButton]
+        rightViews = [exploreButton]
         
         backgroundColor = Color.grey.lighten4
         cornerRadius = height / 2
