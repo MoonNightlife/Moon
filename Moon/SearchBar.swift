@@ -13,13 +13,14 @@ extension SearchBar {
     open func drawLineUnderSearchTextAndIcon(color: UIColor) {
         // The search icon is not part of the content view (text field),
         // so we need to start the line at the beginning of the search icon
-        let widthOfLeftSearchIcon = leftViews[1].width
+        let widthOfLeftSearchIcon = leftViews[0].width
         
         // Larger the number the closer the line is to the searchBar
         let heightOffset: CGFloat = 5.0
+        let sideMarginForLine: CGFloat = 10
         
-        let startPoint = CGPoint(x: -widthOfLeftSearchIcon, y: contentView.height - heightOffset)
-        let endPoint = CGPoint(x: contentView.width, y: contentView.height - heightOffset)
+        let startPoint = CGPoint(x: -widthOfLeftSearchIcon + sideMarginForLine, y: contentView.height - heightOffset)
+        let endPoint = CGPoint(x: contentView.width - sideMarginForLine, y: contentView.height - heightOffset)
 
         let path = UIBezierPath()
         path.move(to: startPoint)

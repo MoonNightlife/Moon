@@ -54,8 +54,8 @@ extension SearchBarViewController {
     }
     
     fileprivate func prepareSearchBar() {
-        searchBar.leftViews = [profileButton, searchIcon]
-        searchBar.rightViews = [settingsButton]
+        searchBar.leftViews = [searchIcon]
+        searchBar.rightViews = [profileButton, settingsButton]
         searchBar.placeholderColor = .white
         searchBar.backgroundColor = .moonBlue
     }
