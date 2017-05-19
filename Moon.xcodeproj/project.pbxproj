@@ -43,6 +43,7 @@
 		F048F1221EA3B7A5000F0161 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F048F1211EA3B7A5000F0161 /* Assets.xcassets */; };
 		F048F1251EA3B7A5000F0161 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F048F1231EA3B7A5000F0161 /* LaunchScreen.storyboard */; };
 		F048F1301EA3B7A5000F0161 /* MoonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F048F12F1EA3B7A5000F0161 /* MoonTests.swift */; };
+		F04F445C1ECF840700D5FC62 /* BarAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */; };
 		F0644C2B1EC37D0E00D92BF7 /* SpecialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0644C2A1EC37D0E00D92BF7 /* SpecialsViewController.swift */; };
 		F07060061EC525A10020B3BE /* default_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = F07060051EC525A10020B3BE /* default_pic.png */; };
 		F0942F0B1ECCEBA40038E389 /* FakeEventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0942F0A1ECCEBA40038E389 /* FakeEventData.swift */; };
@@ -74,6 +75,7 @@
 		F0A8E2EA1EC3C858001D9993 /* pic6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2E11EC3C858001D9993 /* pic6.jpg */; };
 		F0A8E2EB1EC3C858001D9993 /* Pic7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2E21EC3C858001D9993 /* Pic7.jpg */; };
 		F0D168531ECA62940064F642 /* MoonColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D168521ECA62940064F642 /* MoonColor.swift */; };
+		F0D797B71ECF837A007BDB9C /* Dallas.gpx in Resources */ = {isa = PBXBuildFile; fileRef = F0D797B61ECF837A007BDB9C /* Dallas.gpx */; };
 		F0E6ED121ECB3C54009508FC /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E6ED111ECB3C54009508FC /* SearchBar.swift */; };
 		F0EBA0BF1ECCAE9F00056EF9 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EBA0BE1ECCAE9F00056EF9 /* ActionButton.swift */; };
 		F0F210591ECA1C160027B50B /* SearchBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F210581ECA1C160027B50B /* SearchBarViewController.swift */; };
@@ -135,6 +137,7 @@
 		F048F12B1EA3B7A5000F0161 /* MoonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F048F12F1EA3B7A5000F0161 /* MoonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonTests.swift; sourceTree = "<group>"; };
 		F048F1311EA3B7A5000F0161 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAnnotation.swift; sourceTree = "<group>"; };
 		F0644C2A1EC37D0E00D92BF7 /* SpecialsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialsViewController.swift; sourceTree = "<group>"; };
 		F07060051EC525A10020B3BE /* default_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_pic.png; sourceTree = "<group>"; };
 		F0942F0A1ECCEBA40038E389 /* FakeEventData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeEventData.swift; sourceTree = "<group>"; };
@@ -166,6 +169,7 @@
 		F0A8E2E11EC3C858001D9993 /* pic6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic6.jpg; sourceTree = "<group>"; };
 		F0A8E2E21EC3C858001D9993 /* Pic7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Pic7.jpg; sourceTree = "<group>"; };
 		F0D168521ECA62940064F642 /* MoonColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonColor.swift; sourceTree = "<group>"; };
+		F0D797B61ECF837A007BDB9C /* Dallas.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Dallas.gpx; sourceTree = "<group>"; };
 		F0E6ED111ECB3C54009508FC /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		F0EBA0BE1ECCAE9F00056EF9 /* ActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		F0F210581ECA1C160027B50B /* SearchBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarViewController.swift; sourceTree = "<group>"; };
@@ -343,6 +347,7 @@
 		F09B9D041EC3555300B2385A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F0D797B61ECF837A007BDB9C /* Dallas.gpx */,
 				C034E2C81ECCF0B3008EA4BA /* FakeData */,
 				F04283AB1EC49D4E00CCB5F3 /* Bridging-Header.h */,
 				F001BAC41EC51BD400CDF9BC /* Utilities.swift */,
@@ -362,6 +367,7 @@
 				F09C09211ECC7D3B003076CC /* FloatingBottomTabBar.swift */,
 				F044CD521ECDE28A00E47138 /* BottomGradientImageView.swift */,
 				F001BAC21EC50F7500CDF9BC /* BarActivityTableViewCell.swift */,
+				F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */,
 				F0942F0C1ECCEC550038E389 /* FeaturedEventCollectionViewCell.swift */,
 			);
 			name = Subclasses;
@@ -537,6 +543,7 @@
 				F0A8E2E51EC3C858001D9993 /* pic1.jpg in Resources */,
 				F0A8E2EA1EC3C858001D9993 /* pic6.jpg in Resources */,
 				F0A225341ECBAA3E00170927 /* jose.jpeg in Resources */,
+				F0D797B71ECF837A007BDB9C /* Dallas.gpx in Resources */,
 				F0A2252F1ECBAA3E00170927 /* budlight.jpeg in Resources */,
 				F001BABD1EC50D2600CDF9BC /* Header_base.png in Resources */,
 				F09B9D061EC356BA00B2385A /* Explore.storyboard in Resources */,
@@ -682,6 +689,7 @@
 				F0E6ED121ECB3C54009508FC /* SearchBar.swift in Sources */,
 				F09C09221ECC7D3B003076CC /* FloatingBottomTabBar.swift in Sources */,
 				F001BAC11EC50E9700CDF9BC /* BarActivityFeedViewController.swift in Sources */,
+				F04F445C1ECF840700D5FC62 /* BarAnnotation.swift in Sources */,
 				F001BAC31EC50F7500CDF9BC /* BarActivityTableViewCell.swift in Sources */,
 				C034E2C71ECCF09D008EA4BA /* FakeUserData.swift in Sources */,
 				F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */,
