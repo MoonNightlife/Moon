@@ -88,10 +88,10 @@
                                             </constraints>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="kay-jA-FBz">
-                                            <rect key="frame" x="309" y="13.5" width="20" height="20"/>
+                                            <rect key="frame" x="314" y="16" width="15" height="15"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="20" id="5Xw-DH-06V"/>
-                                                <constraint firstAttribute="width" constant="20" id="iGv-VH-30F"/>
+                                                <constraint firstAttribute="height" constant="15" id="5Xw-DH-06V"/>
+                                                <constraint firstAttribute="width" constant="15" id="iGv-VH-30F"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAJ-AL-So4">
@@ -147,10 +147,10 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aex-sH-4lX">
-                                            <rect key="frame" x="309" y="42" width="20" height="20"/>
+                                            <rect key="frame" x="305" y="40" width="24" height="24"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="20" id="0Q5-EI-yN1"/>
-                                                <constraint firstAttribute="height" constant="20" id="8Fd-UD-c68"/>
+                                                <constraint firstAttribute="width" constant="24" id="0Q5-EI-yN1"/>
+                                                <constraint firstAttribute="height" constant="24" id="8Fd-UD-c68"/>
                                             </constraints>
                                             <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <state key="normal" title="Button">
