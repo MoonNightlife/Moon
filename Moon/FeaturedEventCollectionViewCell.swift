@@ -14,6 +14,7 @@ struct FeaturedEvent {
     var barName: String
     var date: String
     var description: String
+    var title: String
 }
 
 class FeaturedEventCollectionViewCell: UICollectionViewCell {
@@ -95,11 +96,11 @@ extension FeaturedEventCollectionViewCell {
         toolbar = Toolbar(rightViews: [moreButton])
         toolbar.backgroundColor = nil
         
-        toolbar.title = event.barName
+        toolbar.title = event.title
         toolbar.titleLabel.textColor = .white
         toolbar.titleLabel.textAlignment = .center
         
-        toolbar.detail = event.date
+        toolbar.detail = event.barName
         toolbar.detailLabel.textColor = .white
         toolbar.detailLabel.textAlignment = .center
     }
