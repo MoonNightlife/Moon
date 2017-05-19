@@ -78,7 +78,7 @@ extension ExploreViewController {
             .unselectedMenuItemLabelColor(.lightGray),
             .selectedMenuItemLabelColor(.darkGray),
             .enableHorizontalBounce(false),
-            .menuItemSeparatorColor(.clear),
+            .menuItemSeparatorColor(.clear)
         ]
         
         let sizeOfFrame = CGRect(x: 0, y: 0, width: viewForPageMenu.frame.width, height: viewForPageMenu.frame.height)
