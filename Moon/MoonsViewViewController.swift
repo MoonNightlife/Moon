@@ -27,20 +27,21 @@ class MoonsViewViewController: UIViewController {
         super.viewDidLoad()
         
         mapViewContainerView.isHidden = true
-        friendFeedContainer.isHidden = false 
+        friendFeedContainer.isHidden = false
         
         let items = setupActionButtonItems()
         setupActionButton(items: items)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        changeViewActionButton.fadeIn()
+        //changeViewActionButton.fadeIn()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        changeViewActionButton.fadeOut()
+        //changeViewActionButton.fadeOut()
     }
     
 }
@@ -67,10 +68,10 @@ extension MoonsViewViewController {
     }
     
     fileprivate func setupActionButton(items: [ActionButtonItem]) {
-        changeViewActionButton = ActionButton(attachedToView: view, items: items)
+        changeViewActionButton = ActionButton(attachedToView: self.view, items: items)
         changeViewActionButton.backgroundColor = .moonPurple
-        changeViewActionButton.removeTitle()
-        changeViewActionButton.addImage(image: Icon.cm.moreHorizontal?.tint(with: .white))
+        
+        changeViewActionButton.setTitle(nil, forState: .normal)
         changeViewActionButton.setImage(Icon.cm.moreHorizontal?.tint(with: .white), forState: .normal)
         changeViewActionButton.action = { button in button.toggleMenu() }
     }

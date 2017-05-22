@@ -8,6 +8,8 @@
 
 import UIKit
 import MapKit
+import MaterialComponents
+import Material
 
 class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
@@ -17,9 +19,14 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! CityOverviewViewController
     }
     
+
+    @IBOutlet weak var zoomToLocationButton: MDCFloatingButton!
     @IBOutlet weak var cityMapView: MKMapView!
     var locationManager: CLLocationManager?
     
+    @IBAction func zoomToLocation(_ sender: Any) {
+        locationManager?.startUpdatingLocation()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,11 +42,19 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
             locationManager?.requestLocation()
         }
         
-        addAnnotations()
+        zoomToLocationButton.backgroundColor = .white
+        let locationImage = #imageLiteral(resourceName: "Location").withRenderingMode(.alwaysTemplate).tint(with: .moonPurple)
+        zoomToLocationButton.setImage(locationImage, for: .normal)
 
     }
     
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        for a in cityMapView.annotations {
+            cityMapView.removeAnnotation(a)
+        }
+        addAnnotations()
+    }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
@@ -62,7 +77,7 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
         let location = locations.first!
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 2000, 2000)
         cityMapView.setRegion(coordinateRegion, animated: true)
-    
+        locationManager?.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

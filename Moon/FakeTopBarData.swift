@@ -26,12 +26,12 @@ func createTempTopBarData() -> [TopBarData] {
 }
 
 let coordinates = [
-    CLLocationCoordinate2D(latitude: 32.8418, longitude: 96.7720),
-    CLLocationCoordinate2D(latitude: 32.8001, longitude: 96.8006),
-    CLLocationCoordinate2D(latitude: 32.7997, longitude: 96.8007),
-    CLLocationCoordinate2D(latitude: 32.8000, longitude: 96.8006),
-    CLLocationCoordinate2D(latitude: 32.7843, longitude: 96.7863),
-    CLLocationCoordinate2D(latitude: 32.7980, longitude: 96.8010),
+    CLLocationCoordinate2D(latitude: 32.8418, longitude: -96.7720),
+    CLLocationCoordinate2D(latitude: 32.8001, longitude: -96.8006),
+    CLLocationCoordinate2D(latitude: 32.7997, longitude: -96.8007),
+    CLLocationCoordinate2D(latitude: 32.8000, longitude: -96.8006),
+    CLLocationCoordinate2D(latitude: 32.7843, longitude: -96.7863),
+    CLLocationCoordinate2D(latitude: 32.7980, longitude: -96.8010)
 ]
 
 //func addFakeLocations(topBars: [TopBarData]) -> [TopBarData] {
