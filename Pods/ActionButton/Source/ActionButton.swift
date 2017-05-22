@@ -78,7 +78,7 @@ open class ActionButton: NSObject {
     
     public init(attachedToView view: UIView, items: [ActionButtonItem]?) {
         super.init()
-        
+    
         self.parentView = view
         self.items = items
         let bounds = self.parentView.bounds

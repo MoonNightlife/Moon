@@ -11,6 +11,7 @@ import iCarousel
 import MaterialComponents
 import Material
 import Spring
+import EZSwipeController
 
 enum MainView: Int {
     case featured
@@ -18,7 +19,7 @@ enum MainView: Int {
     case explore
 }
 
-class MasterViewController: UIViewController {
+class MasterViewController: EZSwipeController {
     
     class func instantiateFromStoryboard() -> MasterViewController {
         let storyboard = UIStoryboard(name: "Master", bundle: nil)
@@ -26,34 +27,31 @@ class MasterViewController: UIViewController {
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! MasterViewController
     }
 
-    var masterCarousel: iCarousel!
-
-    @IBOutlet weak var exploreButton: UIButton!
-    @IBOutlet weak var featuedButton: SpringButton!
-    @IBOutlet weak var moonsViewButton: SpringButton!
     @IBOutlet weak var tabBar: FloatingBottomTabBar!
     
     let numberOfMainViews = 3
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupCarousel()
+        
         setupTabBar()
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     
+        
+        // Has to be called after view is showen
         prepareSearchBar()
+        // Has to be called after view is showen
+        setFrameForCurrentOrientation()
+        
         changeColorForTabBarAndSearchBar(nextView: .moons)
-        masterCarousel.scrollToItem(at: 1, animated: false)
+    }
+    
+    override func setupView() {
+        datasource = self
+        navigationBarShouldNotExist = true
     }
     
     private func setupTabBar() {
@@ -61,15 +59,6 @@ class MasterViewController: UIViewController {
         tabBar.superview?.bringSubview(toFront: tabBar)
         tabBar.initializeTabBar()
         tabBar.delegate = self
-    }
-    
-    private func setupCarousel() {
-        masterCarousel = iCarousel()
-        masterCarousel.type = .rotary
-        masterCarousel.isPagingEnabled = true
-        view.layout(masterCarousel).edges()
-        masterCarousel.dataSource = self
-        masterCarousel.delegate = self
     }
     
 }
@@ -89,7 +78,6 @@ extension MasterViewController: FloatingBottomTabBarDelegate {
     
     private func show(view: MainView) {
         changeColorForTabBarAndSearchBar(nextView: view)
-        masterCarousel.scrollToItem(at: view.rawValue, animated: true)
     }
     
     fileprivate func changeColorForTabBarAndSearchBar(nextView: MainView) {
@@ -115,6 +103,19 @@ extension MasterViewController: FloatingBottomTabBarDelegate {
 
 }
 
+extension MasterViewController: EZSwipeControllerDataSource {
+    func viewControllerData() -> [UIViewController] {
+        let featuredVC = FeaturedViewController.instantiateFromStoryboard()
+        let exploreVC = ExploreViewController.instantiateFromStoryboard()
+        let moonsViewVC = MoonsViewViewController.instantiateFromStoryboard()
+        return [featuredVC, moonsViewVC, exploreVC]
+    }
+    
+    func indexOfStartingPage() -> Int {
+        return MainView.moons.rawValue
+    }
+}
+
 extension MasterViewController: SearchBarDelegate {
     fileprivate func prepareSearchBar() {
         guard let searchBar = searchBarController?.searchBar else {
@@ -132,53 +133,5 @@ extension MasterViewController: SearchBarDelegate {
     
     func searchBar(searchBar: SearchBar, willClear textField: UITextField, with text: String?) {
         print("clear")
-    }
-}
-
-extension MasterViewController: iCarouselDelegate, iCarouselDataSource {
-    
-    func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
-        if option == .showBackfaces {
-            // False
-            return 0
-        }
-        
-        if option == .wrap {
-            // False
-            return 0
-        }
-        
-        return value
-    }
-    
-    func numberOfItems(in carousel: iCarousel) -> Int {
-        return numberOfMainViews
-    }
-    
-    func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
-
-        var itemViewController: UIViewController
-        
-        guard let view = MainView(rawValue: index) else {
-            return UIView()
-        }
-        
-        switch view {
-        case .featured:
-            itemViewController = FeaturedViewController.instantiateFromStoryboard()
-        case .explore:
-            itemViewController = ExploreViewController.instantiateFromStoryboard()
-        case .moons:
-            itemViewController = MoonsViewViewController.instantiateFromStoryboard()
-        }
-        
-        // These couple method calls are needed so there is a parent child relationship between the
-        // new VC and the Master VC. We also have to resize the view of the created VC, so it will fit
-        // in the carousel frame.
-        self.addChildViewController(itemViewController)
-        itemViewController.didMove(toParentViewController: self)
-        itemViewController.view.frame = CGRect(x: 0, y: 0, width: carousel.frame.width, height: carousel.frame.height)
-        
-        return itemViewController.view
     }
 }

@@ -39,8 +39,6 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
 
     }
     
-    
-    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined:

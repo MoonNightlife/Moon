@@ -23,12 +23,5 @@ extension ActionButton {
             self.floatButton.alpha = 0.0
         }, completion: completion)
     }
-    
-    func removeTitle() {
-        self.floatButton.setTitle(nil, for: .normal)
-    }
-    
-    func addImage(image: UIImage?) {
-        self.floatButton.setImage(image, for: .normal)
-    }
+
 }
