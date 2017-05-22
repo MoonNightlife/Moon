@@ -220,17 +220,31 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="i9M-5i-LRs">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vps-kE-bir" customClass="MDCFloatingButton">
+                                <rect key="frame" x="309" y="8" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="BXo-27-9AT"/>
+                                    <constraint firstAttribute="height" constant="50" id="Rg8-QB-hN2"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="zoomToLocation:" destination="fRQ-IH-wvJ" eventType="touchUpInside" id="Xhk-7l-LEh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="i9M-5i-LRs" firstAttribute="leading" secondItem="xaT-Yi-cff" secondAttribute="leading" id="0RJ-fQ-ht9"/>
+                            <constraint firstItem="vps-kE-bir" firstAttribute="top" secondItem="huY-hJ-v5U" secondAttribute="bottom" constant="8" symbolic="YES" id="1Pg-YO-lkC"/>
                             <constraint firstAttribute="trailing" secondItem="i9M-5i-LRs" secondAttribute="trailing" id="8CM-pG-HLC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vps-kE-bir" secondAttribute="trailing" id="CJf-gL-bGv"/>
                             <constraint firstItem="i9M-5i-LRs" firstAttribute="top" secondItem="huY-hJ-v5U" secondAttribute="bottom" id="reS-Uh-Ij4"/>
                             <constraint firstItem="i9M-5i-LRs" firstAttribute="bottom" secondItem="8EG-cs-fVW" secondAttribute="top" id="zVx-iO-QVA"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cityMapView" destination="i9M-5i-LRs" id="s42-uG-pxV"/>
+                        <outlet property="zoomToLocationButton" destination="vps-kE-bir" id="2Za-Sk-GgJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8TM-iN-hsY" userLabel="First Responder" sceneMemberID="firstResponder"/>
