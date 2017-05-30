@@ -8,9 +8,9 @@
 
 import Foundation
 
-let profilePics = ["p1.jpg", "p2.jpg", "p3.jpg", "p4.jpg", "p5.jpg", "p6.jpg", "p7.jpg"]
-let names = ["Collin Duzyk", "Camden Moore", "Mony Gonzalez", "Molly Smith", "Marisol Leiva", "Sloan Stearman", "Henry Berhle"]
-let barNames = ["The Barley House", "Avenu Lounge", "The Standard Pour", "Next Door", "Avenu Lounge", "Paino Bar", "Trophy Room"]
+let profilePics = ["p1.jpg", "p2.jpg", "p3.jpg", "p4.jpg", "p5.jpg", "p6.jpg", "p8.jpg", "p7.jpg"]
+let names = ["Collin Duzyk", "Camden Moore", "Mony Gonzalez", "Molly Smith", "Marisol Leiva", "Sloan Stearman", "Andrea Adler", "Henry Berhle"]
+let barNames = ["The Barley House", "Avenu Lounge", "The Standard Pour", "Next Door", "Avenu Lounge", "Paino Bar", "The Fat Rabbit", "Trophy Room"]
 
 func createFakeBarActivities() -> [BarActivity] {
     var activities = [BarActivity]()

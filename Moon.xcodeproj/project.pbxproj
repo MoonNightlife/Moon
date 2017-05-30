@@ -36,6 +36,7 @@
 		C0FC628C1ECF69730087FA3B /* e4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0FC62861ECF69730087FA3B /* e4.jpg */; };
 		C0FC628D1ECF69730087FA3B /* e5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0FC62871ECF69730087FA3B /* e5.jpg */; };
 		C0FC628E1ECF69730087FA3B /* e6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0FC62881ECF69730087FA3B /* e6.jpg */; };
+		C0FC62901ED260D40087FA3B /* p8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0FC628F1ED260D40087FA3B /* p8.jpg */; };
 		F001BABA1EC50D2600CDF9BC /* feed_base.png in Resources */ = {isa = PBXBuildFile; fileRef = F001BAB41EC50D2600CDF9BC /* feed_base.png */; };
 		F001BABB1EC50D2600CDF9BC /* moons_view_base.png in Resources */ = {isa = PBXBuildFile; fileRef = F001BAB51EC50D2600CDF9BC /* moons_view_base.png */; };
 		F001BABC1EC50D2600CDF9BC /* Moons_View_Background.png in Resources */ = {isa = PBXBuildFile; fileRef = F001BAB61EC50D2600CDF9BC /* Moons_View_Background.png */; };
@@ -143,6 +144,7 @@
 		C0FC62861ECF69730087FA3B /* e4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = e4.jpg; sourceTree = "<group>"; };
 		C0FC62871ECF69730087FA3B /* e5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = e5.jpg; sourceTree = "<group>"; };
 		C0FC62881ECF69730087FA3B /* e6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = e6.jpg; sourceTree = "<group>"; };
+		C0FC628F1ED260D40087FA3B /* p8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = p8.jpg; sourceTree = "<group>"; };
 		C4C4DBD54FFB0BEB382262E5 /* Pods-MoonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoonTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoonTests/Pods-MoonTests.release.xcconfig"; sourceTree = "<group>"; };
 		F001BAB41EC50D2600CDF9BC /* feed_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feed_base.png; sourceTree = "<group>"; };
 		F001BAB51EC50D2600CDF9BC /* moons_view_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moons_view_base.png; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 			children = (
 				C034E2CC1ECCF2FB008EA4BA /* p1.jpg */,
 				C034E2CE1ECCF301008EA4BA /* p2.jpg */,
+				C0FC628F1ED260D40087FA3B /* p8.jpg */,
 				C034E2CA1ECCF2F5008EA4BA /* p3.jpg */,
 				C034E2D01ECCF30A008EA4BA /* p4.jpg */,
 				C034E2D21ECCF365008EA4BA /* p5.jpg */,
@@ -590,6 +593,7 @@
 				F04283B51EC4A9F600CCB5F3 /* MoonsView.storyboard in Resources */,
 				F04283B31EC4A9E100CCB5F3 /* Featured.storyboard in Resources */,
 				F0A225351ECBAA3E00170927 /* miller.jpeg in Resources */,
+				C0FC62901ED260D40087FA3B /* p8.jpg in Resources */,
 				F001BABC1EC50D2600CDF9BC /* Moons_View_Background.png in Resources */,
 				C034E2D71ECCF38C008EA4BA /* p7.jpg in Resources */,
 				F0A2253C1ECBAB2400170927 /* sky.jpeg in Resources */,
