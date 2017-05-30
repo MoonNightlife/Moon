@@ -40,7 +40,6 @@ class MasterViewController: EZSwipeController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     
-        
         // Has to be called after view is showen
         prepareSearchBar()
         // Has to be called after view is showen

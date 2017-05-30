@@ -19,7 +19,6 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! CityOverviewViewController
     }
     
-
     @IBOutlet weak var zoomToLocationButton: MDCFloatingButton!
     @IBOutlet weak var cityMapView: MKMapView!
     var locationManager: CLLocationManager?
