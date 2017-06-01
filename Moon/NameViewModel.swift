@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import Action
+import RxCocoa
 
 struct NameViewModel {
     
@@ -19,8 +20,8 @@ struct NameViewModel {
     private let disposeBag = DisposeBag()
     
     // Inputs
-    var firstName = BehaviorSubject<String>(value: "")
-    var lastName = BehaviorSubject<String>(value: "")
+    var firstName = BehaviorSubject<String?>(value: nil)
+    var lastName = BehaviorSubject<String?>(value: nil)
     
     // Ouputs
     var dataValid: Observable<Bool> {

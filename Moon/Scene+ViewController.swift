@@ -14,11 +14,13 @@ extension SignUpScene {
         let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
         switch self {
         case .birthdaySex(let viewModel):
-            var vc = storyboard.instantiateViewController(withIdentifier: "BirthdaySex") as! BirthdaySexViewController
+            let nc = storyboard.instantiateViewController(withIdentifier: "BirthdaySex") as! UINavigationController
+            var vc = nc.viewControllers.first as! BirthdaySexViewController
             vc.bindViewModel(to: viewModel)
             return vc    
         case .emailUsername(let viewModel):
-            var vc = storyboard.instantiateViewController(withIdentifier: "EmailUsername") as! EmailUsernameViewController
+            let nc = storyboard.instantiateViewController(withIdentifier: "EmailUsername") as! UINavigationController
+            var vc = nc.viewControllers.first as! EmailUsernameViewController
             vc.bindViewModel(to: viewModel)
             return vc
         case .name(let viewModel):
@@ -27,7 +29,8 @@ extension SignUpScene {
             vc.bindViewModel(to: viewModel)
             return nc
         case .passwords(let viewModel):
-            var vc = storyboard.instantiateViewController(withIdentifier: "Passwords") as! PasswordsViewController
+            let nc = storyboard.instantiateViewController(withIdentifier: "Passwords") as! UINavigationController
+            var vc = nc.viewControllers.first as! PasswordsViewController
             vc.bindViewModel(to: viewModel)
             return vc
         }

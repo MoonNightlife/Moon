@@ -27,17 +27,38 @@ class EmailUsernameViewController: UIViewController, BindableType {
     }
 
     func bindViewModel() {
-        usernameTextField.rx.textInput.text.orEmpty.bind(to: viewModel.email).addDisposableTo(disposeBag)
-        emailTextField.rx.textInput.text.orEmpty.bind(to: viewModel.username).addDisposableTo(disposeBag)
+        usernameTextField.rx.textInput.text.bind(to: viewModel.username).addDisposableTo(disposeBag)
+        emailTextField.rx.textInput.text.bind(to: viewModel.email).addDisposableTo(disposeBag)
         
-        viewModel.allFieldsValid.bind(to: nextButton.rx.isEnabled).addDisposableTo(disposeBag)
-        nextButton.rx.action = viewModel.nextSignUpScreen()
-        
-        viewModel.usernameValid
-            .subscribe(onNext: { (isValid) in
-                self.usernameTextField.isErrorRevealed = !isValid
+        viewModel.allFieldsValid
+            .subscribe(onNext: { [unowned self] (allValid) in
+                self.changeNextButton(valid: allValid)
             })
             .addDisposableTo(disposeBag)
+        
+        nextButton.rx.action = viewModel.nextSignUpScreen()
+        
+        viewModel.showUsernameError
+            .subscribe(onNext: { [unowned self] (show) in
+                self.usernameTextField.isErrorRevealed = show
+            })
+            .addDisposableTo(disposeBag)
+        
+        viewModel.showEmailError
+            .subscribe(onNext: { [unowned self] (show) in
+                self.emailTextField.isErrorRevealed = show
+            })
+            .addDisposableTo(disposeBag)
+    }
+    
+    fileprivate func changeNextButton(valid: Bool) {
+        nextButton.isUserInteractionEnabled = valid
+        switch valid {
+        case true:
+            nextButton.setTitleColor(.moonGreen, for: .normal)
+        case false:
+            nextButton.setTitleColor(.moonRed, for: .normal)
+        }
     }
 }
 
@@ -49,6 +70,7 @@ extension EmailUsernameViewController {
     }
     fileprivate func prepareEmailTextField() {
         emailTextField.placeholder = "Email"
+        emailTextField.detail = "Invalid Email"
         emailTextField.isClearIconButtonEnabled = true
     }
 }

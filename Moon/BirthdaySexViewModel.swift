@@ -12,11 +12,10 @@ import Action
 
 struct BirthdaySexViewModel {
     
-    let sexPickerViewOptions = ["Male", "Female", "Rather Not Say"]
+    let sexPickerViewOptions = ["", "Male", "Female", "Rather Not Say"]
     
     // Dependencies
     let sceneCoordinator: SceneCoordinatorType
-    
     var newUser: NewUser!
     var dateFormatter: DateFormatter {
         let df = DateFormatter()
@@ -30,12 +29,18 @@ struct BirthdaySexViewModel {
     
     // Outputs
     var birthdayString: Observable<String> {
-        return birthday.map(dateFormatter.string)
+        return birthday.map(dateFormatter.string).skip(1)
     }
     var sexString: Observable<String> {
         return sex.map({ self.sexPickerViewOptions[$0.0] })
     }
-    var validInfo: Observable<Void>!
+    var validInfo: Observable<Bool> {
+        return Observable.combineLatest(birthday.map(ValidationUtility.validBirthday), sex)
+            .map({
+                // valid birthday and the empty sex option is not selected
+                return $0 && ($1.0 != 0)
+            })
+    }
     
     init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator

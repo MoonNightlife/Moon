@@ -20,7 +20,7 @@ class BirthdaySexViewController: UIViewController, BindableType {
 
     @IBOutlet weak var birthdayTextField: TextField!
     @IBOutlet weak var sexTextField: TextField!
-    @IBOutlet weak var nextScreenTextField: UIButton!
+    @IBOutlet weak var nextScreenButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,17 +29,17 @@ class BirthdaySexViewController: UIViewController, BindableType {
         prepareSexTextField()
         prepareDatePickerView()
         prepareSexPickerView()
+        prepareNextButton()
     }
     
     func bindViewModel() {
+        
         birthdayTextField.rx
             .controlEvent(.editingDidBegin)
             .subscribe(onNext: {
                 self.birthdayTextField.inputView = self.datePickerView
             })
             .addDisposableTo(disposeBag)
-        
-        viewModel.birthdayString.bind(to: birthdayTextField.rx.text).addDisposableTo(disposeBag)
         
         sexTextField.rx
             .controlEvent(.editingDidBegin)
@@ -48,11 +48,28 @@ class BirthdaySexViewController: UIViewController, BindableType {
             })
             .addDisposableTo(disposeBag)
         
-        viewModel.sexString.bind(to: sexTextField.rx.text).addDisposableTo(disposeBag)
-        
         sexPickerView.rx.itemSelected.bind(to: viewModel.sex).addDisposableTo(disposeBag)
-        
         datePickerView.rx.date.bind(to: viewModel.birthday).addDisposableTo(disposeBag)
+        
+        viewModel.birthdayString.bind(to: birthdayTextField.rx.text).addDisposableTo(disposeBag)
+        viewModel.sexString.bind(to: sexTextField.rx.text).addDisposableTo(disposeBag)
+        viewModel.validInfo
+            .subscribe(onNext: { [unowned self] (allValid) in
+                self.changeNextButton(valid: allValid)
+            })
+            .addDisposableTo(disposeBag)
+        nextScreenButton.rx.action = viewModel.nextSignUpScreen()
+        
+    }
+    
+    fileprivate func changeNextButton(valid: Bool) {
+        nextScreenButton.isUserInteractionEnabled = valid
+        switch valid {
+        case true:
+            nextScreenButton.setTitleColor(.moonGreen, for: .normal)
+        case false:
+            nextScreenButton.setTitleColor(.moonRed, for: .normal)
+        }
     }
 
 }
@@ -65,7 +82,7 @@ extension BirthdaySexViewController {
     fileprivate func prepareSexTextField() {
         sexTextField.placeholder = "Sex"
         
-            }
+    }
     
     fileprivate func prepareSexPickerView() {
         sexPickerView = UIPickerView()
@@ -76,6 +93,11 @@ extension BirthdaySexViewController {
     fileprivate func prepareDatePickerView() {
         datePickerView = UIDatePicker()
         datePickerView.datePickerMode = .date
+        datePickerView.maximumDate = Date()
+    }
+    
+    fileprivate func prepareNextButton() {
+        nextScreenButton.isEnabled = false
     }
 }
 

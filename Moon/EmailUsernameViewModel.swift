@@ -17,22 +17,38 @@ struct EmailUsernameViewModel {
     let sceneCoordinator: SceneCoordinatorType
     
     // Inputs
-    var username = BehaviorSubject<String>(value: "")
-    var email = BehaviorSubject<String>(value: "")
+    var username = BehaviorSubject<String?>(value: nil)
+    var email = BehaviorSubject<String?>(value: nil)
     
     // Outputs
-    var emailValid: Observable<Bool> {
-        return email
-            .map(ValidationUtility.validEmail)
+    var showEmailError: Observable<Bool> {
+        let validEmail = email.map(ValidationUtility.validEmail)
+        return Observable.combineLatest(email, validEmail)
+            .map({ (email, validEmail) in
+                guard let e = email else {
+                    return false
+                }
+                
+                // return true if string is not blank and email is not valid
+                return (e != "") && !validEmail
+            })
     }
     
-    var usernameValid: Observable<Bool> {
-        return username
-            .map(ValidationUtility.validUsername)
+    var showUsernameError: Observable<Bool> {
+        let validUsername = username.map(ValidationUtility.validUsername)
+        return Observable.combineLatest(username, validUsername)
+            .map({ (username, validUsername) in
+                guard let un = username else {
+                    return false
+                }
+                
+                // return true if string is not blank and email is not valid
+                return (un != "") && !validUsername
+            })
     }
+    
     var allFieldsValid: Observable<Bool> {
-        return Observable.combineLatest(usernameValid, emailValid)
-            .map { $0 && $1 }
+        return Observable.combineLatest(username.map(ValidationUtility.validUsername), email.map(ValidationUtility.validEmail)).map({$0 && $1})
     }
     
     init(coordinator: SceneCoordinatorType) {
