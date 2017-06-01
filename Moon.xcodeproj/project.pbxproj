@@ -22,6 +22,9 @@
 		C0465DB41EDF20DC0065FD7C /* Moon_Title.png in Resources */ = {isa = PBXBuildFile; fileRef = C0465DB31EDF20DC0065FD7C /* Moon_Title.png */; };
 		C0465DB61EDF35560065FD7C /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = C0465DB51EDF35560065FD7C /* background.png */; };
 		C0465DB81EDF43B70065FD7C /* OR_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C0465DB71EDF43B70065FD7C /* OR_icon.png */; };
+		C0552C5C1EE0922A007B84F6 /* Moon_Title2.png in Resources */ = {isa = PBXBuildFile; fileRef = C0552C5B1EE0922A007B84F6 /* Moon_Title2.png */; };
+		C0552C621EE09F8D007B84F6 /* facebookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C0552C611EE09F8D007B84F6 /* facebookButton.png */; };
+		C0552C641EE09F91007B84F6 /* googleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C0552C631EE09F91007B84F6 /* googleButton.png */; };
 		C0FC62721ECF50C30087FA3B /* s1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0FC62681ECF50C30087FA3B /* s1.jpg */; };
 		C0FC62731ECF50C30087FA3B /* s10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0FC62691ECF50C30087FA3B /* s10.jpg */; };
 		C0FC62741ECF50C30087FA3B /* s11.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0FC626A1ECF50C30087FA3B /* s11.jpg */; };
@@ -135,6 +138,9 @@
 		C0465DB31EDF20DC0065FD7C /* Moon_Title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Moon_Title.png; sourceTree = "<group>"; };
 		C0465DB51EDF35560065FD7C /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		C0465DB71EDF43B70065FD7C /* OR_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OR_icon.png; sourceTree = "<group>"; };
+		C0552C5B1EE0922A007B84F6 /* Moon_Title2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Moon_Title2.png; sourceTree = "<group>"; };
+		C0552C611EE09F8D007B84F6 /* facebookButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebookButton.png; sourceTree = "<group>"; };
+		C0552C631EE09F91007B84F6 /* googleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = googleButton.png; sourceTree = "<group>"; };
 		C0FC62681ECF50C30087FA3B /* s1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = s1.jpg; sourceTree = "<group>"; };
 		C0FC62691ECF50C30087FA3B /* s10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = s10.jpg; sourceTree = "<group>"; };
 		C0FC626A1ECF50C30087FA3B /* s11.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = s11.jpg; sourceTree = "<group>"; };
@@ -287,7 +293,10 @@
 		C0465DB01EDF20820065FD7C /* Login Images */ = {
 			isa = PBXGroup;
 			children = (
+				C0552C611EE09F8D007B84F6 /* facebookButton.png */,
+				C0552C631EE09F91007B84F6 /* googleButton.png */,
 				C0465DB31EDF20DC0065FD7C /* Moon_Title.png */,
+				C0552C5B1EE0922A007B84F6 /* Moon_Title2.png */,
 				C0465DB71EDF43B70065FD7C /* OR_icon.png */,
 				C0465DB51EDF35560065FD7C /* background.png */,
 				C0465DB11EDF20AD0065FD7C /* lg_background.png */,
@@ -658,11 +667,14 @@
 				F0A8E2E51EC3C858001D9993 /* pic1.jpg in Resources */,
 				F0A8E2EA1EC3C858001D9993 /* pic6.jpg in Resources */,
 				C0FC62781ECF50C30087FA3B /* s2.jpg in Resources */,
+				C0552C621EE09F8D007B84F6 /* facebookButton.png in Resources */,
 				C0FC627D1ECF53520087FA3B /* s7.jpg in Resources */,
+				C0552C641EE09F91007B84F6 /* googleButton.png in Resources */,
 				C0FC62811ECF53600087FA3B /* s6.jpg in Resources */,
 				C0FC62761ECF50C30087FA3B /* s13.jpg in Resources */,
 				F0A225341ECBAA3E00170927 /* jose.jpeg in Resources */,
 				F0D797B71ECF837A007BDB9C /* Dallas.gpx in Resources */,
+				C0552C5C1EE0922A007B84F6 /* Moon_Title2.png in Resources */,
 				F0A2252F1ECBAA3E00170927 /* budlight.jpeg in Resources */,
 				F001BABD1EC50D2600CDF9BC /* Header_base.png in Resources */,
 				F09B9D061EC356BA00B2385A /* Explore.storyboard in Resources */,

@@ -15,6 +15,10 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: TextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var emailIcon: UIImageView!
+    @IBOutlet weak var keyIcon: UIImageView!
+    @IBOutlet weak var orIcon: UIImageView!
+    @IBOutlet weak var recoverButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,29 +42,41 @@ class LoginViewController: UIViewController {
     func setUpLoginView() {
         
         //Email Text Field Set Up
-        emailTextField.dividerNormalColor = .white
-        emailTextField.dividerActiveColor = .white
+        emailTextField.dividerNormalColor = .moonBlue
+        emailTextField.dividerActiveColor = .moonBlue
         emailTextField.placeholder = "email"
-        emailTextField.placeholderActiveColor = .white
+        emailTextField.placeholderActiveColor = .moonBlue
         emailTextField.placeholderNormalColor = .lightGray
-        emailTextField.textColor = .white
+        emailTextField.textColor = .black
         
         //Password Text Field Set Up
-        passwordTextField.dividerNormalColor = .white
-        passwordTextField.dividerActiveColor = .white
+        passwordTextField.dividerNormalColor = .moonBlue
+        passwordTextField.dividerActiveColor = .moonBlue
         passwordTextField.placeholder = "password"
-        passwordTextField.placeholderActiveColor = .white
+        passwordTextField.placeholderActiveColor = .moonBlue
         passwordTextField.placeholderNormalColor = .lightGray
-        passwordTextField.textColor = .white
+        passwordTextField.textColor = .black
         
         //Login Button Set Up
-        loginButton.backgroundColor = .white
-        loginButton.setTitleColor(.moonBlue, for: .normal)
+        loginButton.backgroundColor = .moonBlue
+        loginButton.setTitleColor(.white, for: .normal)
         loginButton.layer.cornerRadius = 5
         
         //Sign Up Button Set Up
-        signUpButton.backgroundColor = .white
-        signUpButton.setTitleColor(.moonGreen, for: .normal)
+        signUpButton.backgroundColor = .moonGreen
+        signUpButton.setTitleColor(.white, for: .normal)
         signUpButton.layer.cornerRadius = 5
+        
+        //Recover Button Set Up
+        recoverButton.setTitleColor(.moonPurple, for: .normal)
+        
+        emailIcon.image = emailIcon.image?.withRenderingMode(.alwaysTemplate)
+        emailIcon.tintColor = .moonBlue
+        
+        keyIcon.image = keyIcon.image?.withRenderingMode(.alwaysTemplate)
+        keyIcon.tintColor = .moonBlue
+        
+        orIcon.image = orIcon.image?.withRenderingMode(.alwaysTemplate)
+        orIcon.tintColor = .lightGray
     }
 }
