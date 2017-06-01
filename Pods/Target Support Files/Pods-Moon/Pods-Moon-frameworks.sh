@@ -84,6 +84,7 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/Action/Action.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ActionButton/ActionButton.framework"
   install_framework "$BUILT_PRODUCTS_DIR/EZSwipeController/EZSwipeController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MDFTextAccessibility/MDFTextAccessibility.framework"
@@ -96,6 +97,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/iCarousel/iCarousel.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/Action/Action.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ActionButton/ActionButton.framework"
   install_framework "$BUILT_PRODUCTS_DIR/EZSwipeController/EZSwipeController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MDFTextAccessibility/MDFTextAccessibility.framework"

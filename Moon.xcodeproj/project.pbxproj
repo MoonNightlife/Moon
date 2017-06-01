@@ -63,6 +63,13 @@
 		F048F1221EA3B7A5000F0161 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F048F1211EA3B7A5000F0161 /* Assets.xcassets */; };
 		F048F1251EA3B7A5000F0161 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F048F1231EA3B7A5000F0161 /* LaunchScreen.storyboard */; };
 		F048F1301EA3B7A5000F0161 /* MoonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F048F12F1EA3B7A5000F0161 /* MoonTests.swift */; };
+		F04989641EE0641300064F58 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04989631EE0641300064F58 /* Scene.swift */; };
+		F04989661EE0651800064F58 /* SceneCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04989651EE0651800064F58 /* SceneCoordinatorType.swift */; };
+		F04989681EE0653D00064F58 /* Scene+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04989671EE0653D00064F58 /* Scene+ViewController.swift */; };
+		F049896A1EE0661E00064F58 /* BindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04989691EE0661E00064F58 /* BindableType.swift */; };
+		F049896C1EE068BE00064F58 /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F049896B1EE068BE00064F58 /* SceneTransitionType.swift */; };
+		F049896E1EE068E000064F58 /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F049896D1EE068E000064F58 /* SceneCoordinator.swift */; };
+		F04989701EE0746400064F58 /* UINavigationController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F049896F1EE0746400064F58 /* UINavigationController+Rx.swift */; };
 		F04F445C1ECF840700D5FC62 /* BarAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */; };
 		F0644C2B1EC37D0E00D92BF7 /* SpecialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0644C2A1EC37D0E00D92BF7 /* SpecialsViewController.swift */; };
 		F07060061EC525A10020B3BE /* default_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = F07060051EC525A10020B3BE /* default_pic.png */; };
@@ -188,6 +195,13 @@
 		F048F12B1EA3B7A5000F0161 /* MoonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F048F12F1EA3B7A5000F0161 /* MoonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonTests.swift; sourceTree = "<group>"; };
 		F048F1311EA3B7A5000F0161 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F04989631EE0641300064F58 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		F04989651EE0651800064F58 /* SceneCoordinatorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCoordinatorType.swift; sourceTree = "<group>"; };
+		F04989671EE0653D00064F58 /* Scene+ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Scene+ViewController.swift"; sourceTree = "<group>"; };
+		F04989691EE0661E00064F58 /* BindableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindableType.swift; sourceTree = "<group>"; };
+		F049896B1EE068BE00064F58 /* SceneTransitionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
+		F049896D1EE068E000064F58 /* SceneCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
+		F049896F1EE0746400064F58 /* UINavigationController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Rx.swift"; sourceTree = "<group>"; };
 		F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAnnotation.swift; sourceTree = "<group>"; };
 		F0644C2A1EC37D0E00D92BF7 /* SpecialsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialsViewController.swift; sourceTree = "<group>"; };
 		F07060051EC525A10020B3BE /* default_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_pic.png; sourceTree = "<group>"; };
@@ -387,6 +401,7 @@
 		F048F1191EA3B7A5000F0161 /* Moon */ = {
 			isa = PBXGroup;
 			children = (
+				F04989621EE063F400064F58 /* Scenes */,
 				F098FF9C1EDF46EF00A59594 /* Utilities */,
 				F098FF991EDF1DDA00A59594 /* Models */,
 				F09B9D031EC3552F00B2385A /* View Models */,
@@ -408,10 +423,23 @@
 			path = MoonTests;
 			sourceTree = "<group>";
 		};
+		F04989621EE063F400064F58 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				F04989631EE0641300064F58 /* Scene.swift */,
+				F04989671EE0653D00064F58 /* Scene+ViewController.swift */,
+				F04989651EE0651800064F58 /* SceneCoordinatorType.swift */,
+				F049896D1EE068E000064F58 /* SceneCoordinator.swift */,
+				F049896B1EE068BE00064F58 /* SceneTransitionType.swift */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
 		F098FF991EDF1DDA00A59594 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				F098FF9A1EDF1DEA00A59594 /* NewUser.swift */,
+				F04989691EE0661E00064F58 /* BindableType.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -553,6 +581,7 @@
 		F0D168541ECA62EF0064F642 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F049896F1EE0746400064F58 /* UINavigationController+Rx.swift */,
 				F0D168521ECA62940064F642 /* MoonColor.swift */,
 				F0E6ED111ECB3C54009508FC /* SearchBar.swift */,
 				F0EBA0BE1ECCAE9F00056EF9 /* ActionButton.swift */,
@@ -841,6 +870,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F049896A1EE0661E00064F58 /* BindableType.swift in Sources */,
 				F0CF15981EDEEE8900531DCF /* BrithdaySexViewController.swift in Sources */,
 				F0CF15901EDEED9600531DCF /* BirthdaySexViewModel.swift in Sources */,
 				F0F210591ECA1C160027B50B /* SearchBarViewController.swift in Sources */,
@@ -857,12 +887,16 @@
 				F098FF9B1EDF1DEA00A59594 /* NewUser.swift in Sources */,
 				F001BAC11EC50E9700CDF9BC /* BarActivityFeedViewController.swift in Sources */,
 				F04F445C1ECF840700D5FC62 /* BarAnnotation.swift in Sources */,
+				F04989701EE0746400064F58 /* UINavigationController+Rx.swift in Sources */,
 				F001BAC31EC50F7500CDF9BC /* BarActivityTableViewCell.swift in Sources */,
 				C034E2C71ECCF09D008EA4BA /* FakeUserData.swift in Sources */,
+				F04989681EE0653D00064F58 /* Scene+ViewController.swift in Sources */,
 				F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */,
+				F04989661EE0651800064F58 /* SceneCoordinatorType.swift in Sources */,
 				F0D168531ECA62940064F642 /* MoonColor.swift in Sources */,
 				F048F11D1EA3B7A5000F0161 /* LoginViewController.swift in Sources */,
 				F0A2251F1ECB9F2600170927 /* MoonFont.swift in Sources */,
+				F049896C1EE068BE00064F58 /* SceneTransitionType.swift in Sources */,
 				F04283AF1EC4A92700CCB5F3 /* FeaturedViewController.swift in Sources */,
 				F044CD531ECDE28A00E47138 /* BottomGradientImageView.swift in Sources */,
 				F0644C2B1EC37D0E00D92BF7 /* SpecialsViewController.swift in Sources */,
@@ -870,7 +904,9 @@
 				F0A8E2D81EC3C6B2001D9993 /* ImageViewCell.swift in Sources */,
 				F0942F0B1ECCEBA40038E389 /* FakeEventData.swift in Sources */,
 				F0CF158E1EDEED8600531DCF /* NameViewModel.swift in Sources */,
+				F049896E1EE068E000064F58 /* SceneCoordinator.swift in Sources */,
 				F0055D691EC5E64B005544B4 /* CityOverviewViewController.swift in Sources */,
+				F04989641EE0641300064F58 /* Scene.swift in Sources */,
 				F0CF159C1EDEEEA100531DCF /* PasswordsViewController.swift in Sources */,
 				F048F11B1EA3B7A5000F0161 /* AppDelegate.swift in Sources */,
 				F0EBA0BF1ECCAE9F00056EF9 /* ActionButton.swift in Sources */,

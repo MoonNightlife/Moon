@@ -8,47 +8,41 @@
 
 import Foundation
 import RxSwift
+import Action
 
-class EmailUsernameViewModel {
+struct EmailUsernameViewModel {
+    
     // Dependencies
-    var validationUtility: SignUpValidation!
     var newUser: NewUser!
+    let sceneCoordinator: SceneCoordinatorType
     
     // Inputs
-    var username = BehaviorSubject<String?>(value: "")
-    var email = BehaviorSubject<String?>(value: "")
+    var username = BehaviorSubject<String>(value: "")
+    var email = BehaviorSubject<String>(value: "")
     
     // Outputs
-    var emailValid: Observable<Bool>!
-    var usernameValid: Observable<Bool>!
-    var allFieldsValid: Observable<Bool>!
-    
-    init() {
-        prepareOutputs()
+    var emailValid: Observable<Bool> {
+        return email
+            .map(ValidationUtility.validEmail)
     }
     
-    func prepareOutputs() {
-        emailValid = email
-            .map({ (email) -> Bool in
-                guard let e = email else {
-                    return false
-                }
-                
-                return self.validationUtility.valid(email: e)
-            })
-        
-        usernameValid = username
-            .map({ (username) -> Bool in
-                guard let un = username else {
-                    return false
-                }
-                
-                return self.validationUtility.valid(username: un)
-            })
-        
-        allFieldsValid = Observable.combineLatest(usernameValid, emailValid)
-            .map({
-                return $0 && $1
-            })
+    var usernameValid: Observable<Bool> {
+        return username
+            .map(ValidationUtility.validUsername)
+    }
+    var allFieldsValid: Observable<Bool> {
+        return Observable.combineLatest(usernameValid, emailValid)
+            .map { $0 && $1 }
+    }
+    
+    init(coordinator: SceneCoordinatorType) {
+        self.sceneCoordinator = coordinator
+    }
+    
+    func nextSignUpScreen() -> CocoaAction {
+        return CocoaAction {
+            let viewModel = PasswordsViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: SignUpScene.passwords(viewModel), type: .push)
+        }
     }
 }

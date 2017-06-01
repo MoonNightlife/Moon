@@ -11,7 +11,7 @@ import Material
 import RxCocoa
 import RxSwift
 
-class BirthdaySexViewController: UIViewController {
+class BirthdaySexViewController: UIViewController, BindableType {
     
     var sexPickerView: UIPickerView!
     var datePickerView: UIDatePicker!
@@ -31,18 +31,7 @@ class BirthdaySexViewController: UIViewController {
         prepareSexPickerView()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? EmailUsernameViewController {
-            vc.viewModel = viewModel.createEmailUsernameViewModel()
-        }
-    }
-
-}
-
-extension BirthdaySexViewController {
-    fileprivate func prepareBirthdayTextField() {
-        birthdayTextField.placeholder = "Birthday"
-        
+    func bindViewModel() {
         birthdayTextField.rx
             .controlEvent(.editingDidBegin)
             .subscribe(onNext: {
@@ -51,10 +40,6 @@ extension BirthdaySexViewController {
             .addDisposableTo(disposeBag)
         
         viewModel.birthdayString.bind(to: birthdayTextField.rx.text).addDisposableTo(disposeBag)
-    }
-    
-    fileprivate func prepareSexTextField() {
-        sexTextField.placeholder = "Sex"
         
         sexTextField.rx
             .controlEvent(.editingDidBegin)
@@ -64,21 +49,33 @@ extension BirthdaySexViewController {
             .addDisposableTo(disposeBag)
         
         viewModel.sexString.bind(to: sexTextField.rx.text).addDisposableTo(disposeBag)
+        
+        sexPickerView.rx.itemSelected.bind(to: viewModel.sex).addDisposableTo(disposeBag)
+        
+        datePickerView.rx.date.bind(to: viewModel.birthday).addDisposableTo(disposeBag)
     }
+
+}
+
+extension BirthdaySexViewController {
+    fileprivate func prepareBirthdayTextField() {
+        birthdayTextField.placeholder = "Birthday"
+    }
+    
+    fileprivate func prepareSexTextField() {
+        sexTextField.placeholder = "Sex"
+        
+            }
     
     fileprivate func prepareSexPickerView() {
         sexPickerView = UIPickerView()
         sexPickerView.dataSource = self
         sexPickerView.delegate = self
-        
-        sexPickerView.rx.itemSelected.bind(to: viewModel.sex).addDisposableTo(disposeBag)
     }
     
     fileprivate func prepareDatePickerView() {
         datePickerView = UIDatePicker()
         datePickerView.datePickerMode = .date
-        
-        datePickerView.rx.date.bind(to: viewModel.birthday).addDisposableTo(disposeBag)
     }
 }
 

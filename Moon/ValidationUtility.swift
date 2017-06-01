@@ -9,40 +9,31 @@
 import Foundation
 
 protocol SignUpValidation {
-    func valid(firstName: String) -> Bool
-    func valid(lastName: String) -> Bool
-    func valid(username: String) -> Bool
-    func valid(email: String) -> Bool
-    func valid(birthday: String) -> Bool
-    func valid(sex: String) -> Bool
-    func valid(password: String, retypedPassword: String) -> Bool
+    static func validName(firstName: String, lastName: String) -> Bool
+    static func validUsername(username: String) -> Bool
+    static func validEmail(email: String) -> Bool
+    static func validBirthday(birthday: String) -> Bool
+    static func validSex(sex: String) -> Bool
+    static func validPassword(password: String) -> Bool
 }
 
 class ValidationUtility: SignUpValidation {
-    func valid(email: String) -> Bool {
+    static func validSex(sex: String) -> Bool {
         return true
     }
-    func valid(firstName: String) -> Bool {
-        return firstName.characters.count > 0 ? true : false
-    }
-    
-    func valid(lastName: String) -> Bool {
-        return lastName.characters.count > 0 ? true : false
-    }
-    
-    func valid(username: String) -> Bool {
+    static func validEmail(email: String) -> Bool {
         return true
     }
-    
-    func valid(birthday: String) -> Bool {
+    static func validBirthday(birthday: String) -> Bool {
         return true
     }
-    
-    func valid(sex: String) -> Bool {
+    static func validPassword(password: String) -> Bool {
         return true
     }
-    
-    func valid(password: String, retypedPassword: String) -> Bool {
+    static func validUsername(username: String) -> Bool {
+        return true
+    }
+    static func validName(firstName: String, lastName: String) -> Bool {
         return true
     }
 }

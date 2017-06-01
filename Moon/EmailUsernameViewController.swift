@@ -11,7 +11,7 @@ import Material
 import RxSwift
 import RxCocoa
 
-class EmailUsernameViewController: UIViewController {
+class EmailUsernameViewController: UIViewController, BindableType {
     
     var viewModel: EmailUsernameViewModel!
     let disposeBag = DisposeBag()
@@ -24,9 +24,21 @@ class EmailUsernameViewController: UIViewController {
 
         prepareEmailTextField()
         prepareUsernameTextField()
-        prepareNextButton()
     }
 
+    func bindViewModel() {
+        usernameTextField.rx.textInput.text.orEmpty.bind(to: viewModel.email).addDisposableTo(disposeBag)
+        emailTextField.rx.textInput.text.orEmpty.bind(to: viewModel.username).addDisposableTo(disposeBag)
+        
+        viewModel.allFieldsValid.bind(to: nextButton.rx.isEnabled).addDisposableTo(disposeBag)
+        nextButton.rx.action = viewModel.nextSignUpScreen()
+        
+        viewModel.usernameValid
+            .subscribe(onNext: { (isValid) in
+                self.usernameTextField.isErrorRevealed = !isValid
+            })
+            .addDisposableTo(disposeBag)
+    }
 }
 
 extension EmailUsernameViewController {
@@ -34,20 +46,9 @@ extension EmailUsernameViewController {
         usernameTextField.placeholder = "Username"
         usernameTextField.detail = "Invailid Username"
         usernameTextField.isClearIconButtonEnabled = true
-        
-        usernameTextField.rx.textInput.text.bind(to: viewModel.email).addDisposableTo(disposeBag)
-        viewModel.usernameValid
-            .subscribe(onNext: { (isValid) in
-                self.usernameTextField.isErrorRevealed = !isValid
-            })
-            .addDisposableTo(disposeBag)
     }
     fileprivate func prepareEmailTextField() {
         emailTextField.placeholder = "Email"
         emailTextField.isClearIconButtonEnabled = true
-        emailTextField.rx.textInput.text.bind(to: viewModel.username).addDisposableTo(disposeBag)
-    }
-    fileprivate func prepareNextButton() {
-        viewModel.allFieldsValid.bind(to: nextButton.rx.isEnabled).addDisposableTo(disposeBag)
     }
 }

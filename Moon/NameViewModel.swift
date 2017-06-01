@@ -8,47 +8,38 @@
 
 import Foundation
 import RxSwift
+import Action
 
-class NameViewModel {
+struct NameViewModel {
+    
+    // Dependencies
+    let sceneCoordinator: SceneCoordinatorType
     
     // Private
     private let disposeBag = DisposeBag()
     
     // Inputs
-    var firstName = BehaviorSubject<String?>(value: "")
-    var lastNmae = BehaviorSubject<String?>(value: "")
+    var firstName = BehaviorSubject<String>(value: "")
+    var lastName = BehaviorSubject<String>(value: "")
     
     // Ouputs
-    var dataValid: Observable<Bool>!
+    var dataValid: Observable<Bool> {
+        return Observable.combineLatest(firstName, lastName)
+            .map(ValidationUtility.validName)
+    }
     
     // Dependencies
-    var validationUtility: SignUpValidation!
+    
     var newUser: NewUser!
     
-    init() {
-        creatOutputs()
+    init(coordinator: SceneCoordinatorType) {
+        self.sceneCoordinator = coordinator
     }
-    
-    private func creatOutputs() {
-        dataValid = Observable.combineLatest(firstName, lastNmae)
-            .do(onNext: {
-                self.newUser.firstName = $0
-                self.newUser.lastName = $1
-            })
-            .map({
-                guard let fn = $0, let ln = $1 else {
-                    return false
-                }
-                
-                return self.validationUtility.valid(firstName: fn) && self.validationUtility.valid(lastName: ln)
-            })
-    }
-    
-    func createBirthdaySexViewModel() -> BirthdaySexViewModel {
-        let vm = BirthdaySexViewModel()
-        vm.newUser = self.newUser
-        vm.validationUtility = validationUtility
-        
-        return vm
+
+    func nextSignUpScreen() -> CocoaAction {
+        return CocoaAction {
+            let viewModel = BirthdaySexViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: .birthdaySex(viewModel), type: .push)
+        }
     }
 }

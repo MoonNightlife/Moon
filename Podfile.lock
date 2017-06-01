@@ -1,4 +1,7 @@
 PODS:
+  - Action (3.1.1):
+    - RxCocoa (~> 3.4)
+    - RxSwift (~> 3.4)
   - ActionButton (0.1.5)
   - EZSwipeController (0.6.1)
   - iCarousel (1.8.3)
@@ -174,6 +177,7 @@ PODS:
   - SwiftLint (0.18.1)
 
 DEPENDENCIES:
+  - Action (~> 3.0)
   - ActionButton
   - EZSwipeController
   - iCarousel
@@ -201,6 +205,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/MengTo/Spring.git
 
 SPEC CHECKSUMS:
+  Action: e224bd151fe2e057f4189b4a9df0dc5d21264a9e
   ActionButton: a71147de5a83b6d8d8e18464b216904ba7821677
   EZSwipeController: 255b0f8aed31963b0236802c926e27dd006a2532
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
@@ -213,6 +218,6 @@ SPEC CHECKSUMS:
   Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
 
-PODFILE CHECKSUM: f743bdcf1ccbb0dd2e6f152e6af5af4ad9323565
+PODFILE CHECKSUM: 2e7c19d7a4eb8d2d629d0ff5da31e4060358682e
 
 COCOAPODS: 1.1.1

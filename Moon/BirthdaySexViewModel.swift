@@ -8,57 +8,44 @@
 
 import Foundation
 import RxSwift
+import Action
 
-class BirthdaySexViewModel {
+struct BirthdaySexViewModel {
     
     let sexPickerViewOptions = ["Male", "Female", "Rather Not Say"]
     
     // Dependencies
-    var validationUtility: SignUpValidation!
+    let sceneCoordinator: SceneCoordinatorType
+    
     var newUser: NewUser!
-    var dateFormatter: DateFormatter!
+    var dateFormatter: DateFormatter {
+        let df = DateFormatter()
+        df.dateStyle = .short
+        return df
+    }
     
     // Inputs
     var birthday = BehaviorSubject<Date>(value: Date())
     var sex = BehaviorSubject<(Int, Int)>(value: (0, 0))
     
     // Outputs
-    var birthdayString: Observable<String>!
-    var sexString: Observable<String>!
+    var birthdayString: Observable<String> {
+        return birthday.map(dateFormatter.string)
+    }
+    var sexString: Observable<String> {
+        return sex.map({ self.sexPickerViewOptions[$0.0] })
+    }
     var validInfo: Observable<Void>!
     
-    init() {
-        createDateFormatter()
-        createOutput()
+    init(coordinator: SceneCoordinatorType) {
+        self.sceneCoordinator = coordinator
     }
     
-    fileprivate func createDateFormatter() {
-        dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-    }
-    
-    fileprivate func createOutput() {
-        birthdayString = birthday
-            .map({ (date) -> String in
-                return self.dateFormatter.string(from: date)
-            })
-            .do(onNext: { (birthdayString) in
-                self.newUser.birthday = birthdayString
-            })
-        
-        sexString = sex
-            .map({ (row, section) -> String in
-                print(section)
-                print(row)
-                return self.sexPickerViewOptions[row]
-            })
-    }
-    
-    func createEmailUsernameViewModel() -> EmailUsernameViewModel {
-        let vm = EmailUsernameViewModel()
-        vm.newUser = newUser
-        vm.validationUtility = validationUtility
-        return vm
+    func nextSignUpScreen() -> CocoaAction {
+        return CocoaAction {
+            let viewModel = EmailUsernameViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: SignUpScene.emailUsername(viewModel), type: .push)
+        }
     }
     
 }

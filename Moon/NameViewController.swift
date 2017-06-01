@@ -10,8 +10,9 @@ import UIKit
 import Material
 import RxCocoa
 import RxSwift
+import Action
 
-class NameViewController: UIViewController {
+class NameViewController: UIViewController, BindableType {
     
     var viewModel: NameViewModel!
     let disposeBag = DisposeBag()
@@ -22,34 +23,24 @@ class NameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // this needs to be created by the login screen view model
-        viewModel = NameViewModel()
-        viewModel.validationUtility = ValidationUtility()
-        viewModel.newUser = NewUser()
         
         prepareFirstNameTextField()
         prepareLastNameTextField()
-        prepareNextScreenButton()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? BirthdaySexViewController {
-            vc.viewModel = viewModel.createBirthdaySexViewModel()
-        }
+    func bindViewModel() {
+        firstNameTextField.rx.textInput.text.orEmpty.bind(to: viewModel.firstName).addDisposableTo(disposeBag)
+        lastNameTextField.rx.textInput.text.orEmpty.bind(to: viewModel.lastName).addDisposableTo(disposeBag)
+        nextScreenButton.rx.action = viewModel.nextSignUpScreen()
     }
 
 }
 
 extension NameViewController {
-    fileprivate func prepareNextScreenButton() {
-        viewModel.dataValid.bind(to: nextScreenButton.rx.isEnabled).addDisposableTo(disposeBag)
-    }
     
     fileprivate func prepareFirstNameTextField() {
         firstNameTextField.placeholder = "First Name"
         firstNameTextField.isClearIconButtonEnabled = true
-        firstNameTextField.rx.textInput.text.bind(to: viewModel.firstName).addDisposableTo(disposeBag)
         
         let leftView = UIImageView()
         leftView.image = Icon.cm.audio
@@ -59,7 +50,6 @@ extension NameViewController {
     fileprivate func prepareLastNameTextField() {
         lastNameTextField.placeholder = "Last Name"
         lastNameTextField.isClearIconButtonEnabled = true
-        lastNameTextField.rx.textInput.text.bind(to: viewModel.lastNmae).addDisposableTo(disposeBag)
         
         let leftView = UIImageView()
         leftView.image = Icon.cm.audio

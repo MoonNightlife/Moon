@@ -8,16 +8,17 @@
 
 import UIKit
 import Material
+import RxSwift
+import RxCocoa
 
-class PasswordsViewController: UIViewController {
+class PasswordsViewController: UIViewController, BindableType {
 
+    let disposeBag = DisposeBag()
+    var viewModel: PasswordsViewModel!
+    
     @IBOutlet weak var doneButton: UIButton!
-
     @IBOutlet weak var retypePasswordTextField: ErrorTextField!
     @IBOutlet weak var passwordTextField: ErrorTextField!
-    @IBAction func doneButtonTapped(_ sender: Any) {
-        print("Present Master View")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,9 @@ class PasswordsViewController: UIViewController {
         prepareRetypePasswordTextField()
     }
 
+    func bindViewModel() {
+        doneButton.rx.action = viewModel.onCreateUser()
+    }
 }
 
 extension PasswordsViewController {
