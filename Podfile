@@ -16,6 +16,7 @@ target 'Moon' do
   pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
   pod 'ActionButton'
   pod 'EZSwipeController'
+  pod 'Action', '~> 3.0'
 
   target 'MoonTests' do
     inherit! :search_paths
