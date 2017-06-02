@@ -8,8 +8,9 @@
 
 import Foundation
 
-enum MasterScene {
+enum Scene {
     case signUp(SignUpScene)
+    case login(LoginScene)
 }
 
 enum SignUpScene {
@@ -17,4 +18,8 @@ enum SignUpScene {
     case birthdaySex(BirthdaySexViewModel)
     case emailUsername(EmailUsernameViewModel)
     case passwords(PasswordsViewModel)
+}
+
+enum LoginScene {
+    case login(LoginViewModel)
 }

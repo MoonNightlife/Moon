@@ -29,7 +29,7 @@ class SceneCoordinator: SceneCoordinatorType {
     }
     
     @discardableResult
-    func transition(to scene: SignUpScene, type: SceneTransitionType) -> Observable<Void> {
+    func transition(to scene: Scene, type: SceneTransitionType) -> Observable<Void> {
         let subject = PublishSubject<Void>()
         let viewController = scene.viewController()
         switch type {

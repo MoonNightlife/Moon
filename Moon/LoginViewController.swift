@@ -8,8 +8,13 @@
 
 import UIKit
 import Material
+import RxCocoa
+import RxSwift
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, BindableType {
+    
+    var viewModel: LoginViewModel!
+    private let disposeBag = DisposeBag()
 
     @IBOutlet weak var emailTextField: TextField!
     @IBOutlet weak var passwordTextField: TextField!
@@ -78,5 +83,9 @@ class LoginViewController: UIViewController {
         
         orIcon.image = orIcon.image?.withRenderingMode(.alwaysTemplate)
         orIcon.tintColor = .lightGray
+    }
+    
+    func bindViewModel() {
+        
     }
 }

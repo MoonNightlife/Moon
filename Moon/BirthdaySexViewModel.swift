@@ -49,7 +49,7 @@ struct BirthdaySexViewModel {
     func nextSignUpScreen() -> CocoaAction {
         return CocoaAction {
             let viewModel = EmailUsernameViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: SignUpScene.emailUsername(viewModel), type: .push)
+            return self.sceneCoordinator.transition(to: MainScene.SignUpScene.emailUsername(viewModel), type: .push)
         }
     }
     

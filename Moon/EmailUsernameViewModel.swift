@@ -58,7 +58,7 @@ struct EmailUsernameViewModel {
     func nextSignUpScreen() -> CocoaAction {
         return CocoaAction {
             let viewModel = PasswordsViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: SignUpScene.passwords(viewModel), type: .push)
+            return self.sceneCoordinator.transition(to: Scene.signUp(.passwords(viewModel)), type: .push)
         }
     }
     

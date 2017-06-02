@@ -8,9 +8,20 @@
 
 import UIKit
 
+extension Scene {
+    func viewController() -> UIViewController {
+        switch self {
+        case .signUp(let scene):
+            return scene.viewController()
+        case .login(let scene):
+            return scene.viewController()
+        }
+    }
+}
+
 //swiftlint:disable force_cast
 extension SignUpScene {
-    func viewController() -> UIViewController {
+    fileprivate func viewController() -> UIViewController {
         let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
         switch self {
         case .birthdaySex(let viewModel):
@@ -34,6 +45,18 @@ extension SignUpScene {
             //let nc = storyboard.instantiateViewController(withIdentifier: "Passwords") as! UINavigationController
             //var vc = nc.viewControllers.first as! PasswordsViewController
             var vc = storyboard.instantiateViewController(withIdentifier: "Passwords") as! PasswordsViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        }
+    }
+}
+
+extension LoginScene {
+    fileprivate func viewController() -> UIViewController {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        switch self {
+        case .login(let viewModel):
+            var vc = storyboard.instantiateViewController(withIdentifier: "Login") as! LoginViewController
             vc.bindViewModel(to: viewModel)
             return vc
         }
