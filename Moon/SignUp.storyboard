@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CCY-BD-Xcj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,7 @@
         <!--Name View Controller-->
         <scene sceneID="nod-Du-MKH">
             <objects>
-                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="5tY-Ce-QKJ" customClass="NameViewController" customModule="Moon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Name" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5tY-Ce-QKJ" customClass="NameViewController" customModule="Moon" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nZx-FS-cns"/>
                         <viewControllerLayoutGuide type="bottom" id="jvs-pZ-G7V"/>
@@ -173,7 +173,6 @@
         <!--Email Username View Controller-->
         <scene sceneID="gwR-m3-ZTT">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4wG-ZD-nXn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="EmailUsername" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ykz-b0-g8k" customClass="EmailUsernameViewController" customModule="Moon" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WUe-LE-tLT"/>
@@ -221,26 +220,9 @@
                         <outlet property="usernameTextField" destination="SbJ-XF-fHT" id="VvF-DI-NVu"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4wG-ZD-nXn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2193" y="114"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="5j4-G5-G8V">
-            <objects>
-                <navigationController storyboardIdentifier="Name" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CCY-BD-Xcj" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="C82-d2-JHI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="5tY-Ce-QKJ" kind="relationship" relationship="rootViewController" id="cS7-gI-MBX"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pQn-5D-vHn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-132" y="114"/>
         </scene>
     </scenes>
 </document>

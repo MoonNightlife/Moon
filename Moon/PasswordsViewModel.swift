@@ -13,8 +13,9 @@ import Action
 struct PasswordsViewModel {
     
     // Dependencies
-    var newUser: NewUser!
-    let sceneCoordinator: SceneCoordinatorType
+    private let newUser: NewUser
+    private let sceneCoordinator: SceneCoordinatorType
+    private let disposeBag = DisposeBag()
     
     // Inputs
     var passwordText = BehaviorSubject<String>(value: "")
@@ -40,20 +41,32 @@ struct PasswordsViewModel {
             })
     }
     
-    init(coordinator: SceneCoordinatorType) {
+    init(coordinator: SceneCoordinatorType, user: NewUser) {
         self.sceneCoordinator = coordinator
+        self.newUser = user
+        subscribeToInputs()
+    }
+    
+    private func subscribeToInputs() {
+        passwordText
+            .subscribe(onNext: {
+                self.newUser.password = $0
+            })
+            .addDisposableTo(disposeBag)
     }
     
     func onCreateUser() -> CocoaAction {
-        return CocoaAction {_ in
+        return CocoaAction(enabledIf: allValid, workFactory: {
             print("Create User")
+            self.newUser.listPropertiesWithValues()
             return .just()
-        }
+
+        })
     }
     
     func onBack() -> CocoaAction {
         return CocoaAction {
-            self.sceneCoordinator.pop(animated: true)
+            self.sceneCoordinator.pop()
         }
     }
 

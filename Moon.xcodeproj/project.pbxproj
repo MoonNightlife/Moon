@@ -125,6 +125,10 @@
 		F0E6ED121ECB3C54009508FC /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E6ED111ECB3C54009508FC /* SearchBar.swift */; };
 		F0EBA0BF1ECCAE9F00056EF9 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EBA0BE1ECCAE9F00056EF9 /* ActionButton.swift */; };
 		F0F210591ECA1C160027B50B /* SearchBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F210581ECA1C160027B50B /* SearchBarViewController.swift */; };
+		F0FD8F301EE178650020D131 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */; };
+		F0FD8F321EE19D4E0020D131 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F311EE19D4E0020D131 /* ForgotPasswordViewController.swift */; };
+		F0FD8F341EE19D9F0020D131 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F331EE19D9F0020D131 /* ForgotPasswordViewModel.swift */; };
+		F0FD8F371EE1DC950020D131 /* TextField+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F361EE1DC950020D131 /* TextField+Rx.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -265,6 +269,10 @@
 		F0E6ED111ECB3C54009508FC /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		F0EBA0BE1ECCAE9F00056EF9 /* ActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		F0F210581ECA1C160027B50B /* SearchBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarViewController.swift; sourceTree = "<group>"; };
+		F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		F0FD8F311EE19D4E0020D131 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		F0FD8F331EE19D9F0020D131 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
+		F0FD8F361EE1DC950020D131 /* TextField+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TextField+Rx.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -432,7 +440,6 @@
 		F048F1191EA3B7A5000F0161 /* Moon */ = {
 			isa = PBXGroup;
 			children = (
-
 				F04989621EE063F400064F58 /* Scenes */,
 				F098FF9C1EDF46EF00A59594 /* Utilities */,
 				F098FF991EDF1DDA00A59594 /* Models */,
@@ -442,6 +449,7 @@
 				F09B9D0B1EC363D200B2385A /* Subclasses */,
 				F09B9D011EC3551F00B2385A /* Storyboards */,
 				F0D168541ECA62EF0064F642 /* Extensions */,
+				F0FD8F351EE1DC600020D131 /* RxExtensions */,
 				F09B9D041EC3555300B2385A /* Supporting Files */,
 			);
 			path = Moon;
@@ -504,6 +512,7 @@
 			children = (
 				F0CF158B1EDEED0F00531DCF /* SignUp */,
 				F048F11C1EA3B7A5000F0161 /* LoginViewController.swift */,
+				F0FD8F311EE19D4E0020D131 /* ForgotPasswordViewController.swift */,
 				F04283AC1EC49DB600CCB5F3 /* MasterViewController.swift */,
 				F0F210581ECA1C160027B50B /* SearchBarViewController.swift */,
 				F04283AE1EC4A92700CCB5F3 /* FeaturedViewController.swift */,
@@ -520,6 +529,8 @@
 			isa = PBXGroup;
 			children = (
 				F0CF158C1EDEED1E00531DCF /* SignUp */,
+				F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */,
+				F0FD8F331EE19D9F0020D131 /* ForgotPasswordViewModel.swift */,
 			);
 			name = "View Models";
 			sourceTree = "<group>";
@@ -621,6 +632,14 @@
 				F0A2251E1ECB9F2600170927 /* MoonFont.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		F0FD8F351EE1DC600020D131 /* RxExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				F0FD8F361EE1DC950020D131 /* TextField+Rx.swift */,
+			);
+			name = RxExtensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -935,6 +954,7 @@
 				F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */,
 				F04989661EE0651800064F58 /* SceneCoordinatorType.swift in Sources */,
 				F0D168531ECA62940064F642 /* MoonColor.swift in Sources */,
+				F0FD8F301EE178650020D131 /* LoginViewModel.swift in Sources */,
 				F048F11D1EA3B7A5000F0161 /* LoginViewController.swift in Sources */,
 				F0A2251F1ECB9F2600170927 /* MoonFont.swift in Sources */,
 				F049896C1EE068BE00064F58 /* SceneTransitionType.swift in Sources */,
@@ -944,6 +964,7 @@
 				F03776A21EC3A44100B92E6B /* FakeSpecialData.swift in Sources */,
 				F0A8E2D81EC3C6B2001D9993 /* ImageViewCell.swift in Sources */,
 				F0942F0B1ECCEBA40038E389 /* FakeEventData.swift in Sources */,
+				F0FD8F371EE1DC950020D131 /* TextField+Rx.swift in Sources */,
 				F0CF158E1EDEED8600531DCF /* NameViewModel.swift in Sources */,
 				F049896E1EE068E000064F58 /* SceneCoordinator.swift in Sources */,
 				F0055D691EC5E64B005544B4 /* CityOverviewViewController.swift in Sources */,
@@ -951,6 +972,8 @@
 				F0CF159C1EDEEEA100531DCF /* PasswordsViewController.swift in Sources */,
 				F048F11B1EA3B7A5000F0161 /* AppDelegate.swift in Sources */,
 				F0EBA0BF1ECCAE9F00056EF9 /* ActionButton.swift in Sources */,
+				F0FD8F321EE19D4E0020D131 /* ForgotPasswordViewController.swift in Sources */,
+				F0FD8F341EE19D9F0020D131 /* ForgotPasswordViewModel.swift in Sources */,
 				F098FF9E1EDF47D400A59594 /* ValidationUtility.swift in Sources */,
 				F0CF159A1EDEEE9000531DCF /* EmailUsernameViewController.swift in Sources */,
 				F0CF15941EDEEE2300531DCF /* PasswordsViewModel.swift in Sources */,
