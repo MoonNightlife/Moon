@@ -50,5 +50,11 @@ struct PasswordsViewModel {
             return .just()
         }
     }
+    
+    func onBack() -> CocoaAction {
+        return CocoaAction {
+            self.sceneCoordinator.pop(animated: true)
+        }
+    }
 
 }

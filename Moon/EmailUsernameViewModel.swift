@@ -61,4 +61,10 @@ struct EmailUsernameViewModel {
             return self.sceneCoordinator.transition(to: SignUpScene.passwords(viewModel), type: .push)
         }
     }
+    
+    func onBack() -> CocoaAction {
+        return CocoaAction {
+            self.sceneCoordinator.pop()
+        }
+    }
 }

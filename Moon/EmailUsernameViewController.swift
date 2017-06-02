@@ -19,11 +19,14 @@ class EmailUsernameViewController: UIViewController, BindableType {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var usernameTextField: ErrorTextField!
     @IBOutlet weak var emailTextField: ErrorTextField!
+    var navBackButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         prepareEmailTextField()
         prepareUsernameTextField()
+        prepareNavigationBackButton()
     }
 
     func bindViewModel() {
@@ -49,6 +52,8 @@ class EmailUsernameViewController: UIViewController, BindableType {
                 self.emailTextField.isErrorRevealed = show
             })
             .addDisposableTo(disposeBag)
+        
+        navBackButton.rx.action = viewModel.onBack()
     }
     
     fileprivate func changeNextButton(valid: Bool) {
@@ -59,6 +64,12 @@ class EmailUsernameViewController: UIViewController, BindableType {
         case false:
             nextButton.setTitleColor(.moonRed, for: .normal)
         }
+    }
+    
+    fileprivate func prepareNavigationBackButton() {
+        navBackButton = UIBarButtonItem()
+        navBackButton.title = "Back"
+        self.navigationItem.leftBarButtonItem = navBackButton
     }
 }
 

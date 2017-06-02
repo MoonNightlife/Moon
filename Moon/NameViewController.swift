@@ -20,19 +20,21 @@ class NameViewController: UIViewController, BindableType {
     @IBOutlet weak var lastNameTextField: TextField!
     @IBOutlet weak var firstNameTextField: TextField!
     @IBOutlet weak var nextScreenButton: UIButton!
+    var navBackButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         prepareFirstNameTextField()
         prepareLastNameTextField()
-        prepareNextButton()
+        prepareNavigationBackButton()
     }
     
     func bindViewModel() {
         firstNameTextField.rx.textInput.text.orEmpty.bind(to: viewModel.firstName).addDisposableTo(disposeBag)
         lastNameTextField.rx.textInput.text.orEmpty.bind(to: viewModel.lastName).addDisposableTo(disposeBag)
         nextScreenButton.rx.action = viewModel.nextSignUpScreen()
+        navBackButton.rx.action = viewModel.onBack()
         
         viewModel.dataValid
             .subscribe(onNext: { [unowned self] (allValid) in
@@ -73,7 +75,10 @@ extension NameViewController {
         lastNameTextField.leftView = leftView
     }
     
-    fileprivate func prepareNextButton() {
-        nextScreenButton.isEnabled = false
+    fileprivate func prepareNavigationBackButton() {
+        navBackButton = UIBarButtonItem()
+        navBackButton.title = "Back"
+        self.navigationItem.leftBarButtonItem = navBackButton
     }
+
 }

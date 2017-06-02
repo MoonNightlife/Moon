@@ -19,12 +19,14 @@ class PasswordsViewController: UIViewController, BindableType {
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var retypePasswordTextField: ErrorTextField!
     @IBOutlet weak var passwordTextField: ErrorTextField!
+    var navBackButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         preparePasswordTextField()
         prepareRetypePasswordTextField()
+        prepareNavigationBackButton()
     }
 
     func bindViewModel() {
@@ -49,6 +51,8 @@ class PasswordsViewController: UIViewController, BindableType {
                 self.changeNextButton(valid: allValid)
             })
             .addDisposableTo(disposeBag)
+        
+        navBackButton.rx.action = viewModel.onBack()
     }
     
     fileprivate func changeNextButton(valid: Bool) {
@@ -60,6 +64,12 @@ class PasswordsViewController: UIViewController, BindableType {
             doneButton.setTitleColor(.moonRed, for: .normal)
         }
     }
+    
+    fileprivate func prepareNavigationBackButton() {
+        navBackButton = UIBarButtonItem()
+        navBackButton.title = "Back"
+        self.navigationItem.leftBarButtonItem = navBackButton
+    }
 }
 
 extension PasswordsViewController {
@@ -67,10 +77,12 @@ extension PasswordsViewController {
         passwordTextField.placeholder = "Password"
         passwordTextField.detail = "Invalid Password"
         passwordTextField.isClearIconButtonEnabled = true
+        passwordTextField.isSecureTextEntry = true
     }
     fileprivate func prepareRetypePasswordTextField() {
         retypePasswordTextField.placeholder = "Retype Password"
         retypePasswordTextField.detail = "Passwords Do Not Match"
         retypePasswordTextField.isClearIconButtonEnabled = true
+        retypePasswordTextField.isSecureTextEntry = true
     }
 }

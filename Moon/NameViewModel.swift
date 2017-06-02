@@ -43,4 +43,10 @@ struct NameViewModel {
             return self.sceneCoordinator.transition(to: .birthdaySex(viewModel), type: .push)
         }
     }
+    
+    func onBack() -> CocoaAction {
+        return CocoaAction {
+            self.sceneCoordinator.pop(animated: true)
+        }
+    }
 }

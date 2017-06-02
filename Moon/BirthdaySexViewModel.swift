@@ -53,4 +53,10 @@ struct BirthdaySexViewModel {
         }
     }
     
+    func onBack() -> CocoaAction {
+        return CocoaAction {
+            self.sceneCoordinator.pop(animated: true)
+        }
+    }
+    
 }

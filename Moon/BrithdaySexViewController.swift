@@ -21,6 +21,7 @@ class BirthdaySexViewController: UIViewController, BindableType {
     @IBOutlet weak var birthdayTextField: TextField!
     @IBOutlet weak var sexTextField: TextField!
     @IBOutlet weak var nextScreenButton: UIButton!
+    var navBackButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,7 @@ class BirthdaySexViewController: UIViewController, BindableType {
         prepareSexTextField()
         prepareDatePickerView()
         prepareSexPickerView()
-        prepareNextButton()
+        prepareNavigationBackButton()
     }
     
     func bindViewModel() {
@@ -60,6 +61,8 @@ class BirthdaySexViewController: UIViewController, BindableType {
             .addDisposableTo(disposeBag)
         nextScreenButton.rx.action = viewModel.nextSignUpScreen()
         
+        navBackButton.rx.action = viewModel.onBack()
+        
     }
     
     fileprivate func changeNextButton(valid: Bool) {
@@ -77,11 +80,11 @@ class BirthdaySexViewController: UIViewController, BindableType {
 extension BirthdaySexViewController {
     fileprivate func prepareBirthdayTextField() {
         birthdayTextField.placeholder = "Birthday"
+        birthdayTextField.detail = "Must be at least 18 years old"
     }
     
     fileprivate func prepareSexTextField() {
         sexTextField.placeholder = "Sex"
-        
     }
     
     fileprivate func prepareSexPickerView() {
@@ -93,12 +96,20 @@ extension BirthdaySexViewController {
     fileprivate func prepareDatePickerView() {
         datePickerView = UIDatePicker()
         datePickerView.datePickerMode = .date
-        datePickerView.maximumDate = Date()
+        
+        // The max birthday that can be choosen is one that ensures the user is 18 years old
+        var components = DateComponents()
+        components.year = -18
+        let maxDate = Calendar.current.date(byAdding: components, to: Date())
+        datePickerView.maximumDate = maxDate
     }
     
-    fileprivate func prepareNextButton() {
-        nextScreenButton.isEnabled = false
+    fileprivate func prepareNavigationBackButton() {
+        navBackButton = UIBarButtonItem()
+        navBackButton.title = "Back"
+        self.navigationItem.leftBarButtonItem = navBackButton
     }
+
 }
 
 extension BirthdaySexViewController: UIPickerViewDataSource, UIPickerViewDelegate {

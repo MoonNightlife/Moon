@@ -36,8 +36,17 @@ class ValidationUtility: ValidationUtilityType {
         guard let birthday = birthday else {
             return false
         }
-        return true
+        
+        // The max birthday that can be choosen is one that ensures the user is 18 years old
+        var components = DateComponents()
+        components.year = -18
+        if let maxDate = Calendar.current.date(byAdding: components, to: Date()) {
+            return birthday.compare(maxDate) == .orderedAscending || birthday.compare(maxDate) == .orderedSame
+        }
+        
+        return false
     }
+    
     static func validPassword(password: String?) -> Bool {
         guard let password = password else {
             return false
@@ -66,8 +75,10 @@ class ValidationUtility: ValidationUtilityType {
         
         let lnIsValidLength = (lastName.characters.count < ValidationConstants.maxNameCount) && (lastName.characters.count >= ValidationConstants.minNameCount)
         let lnContainsSpecialCharsAndNums = specialCharactersAndNumbersIn(string: lastName)
+        
+        let hasNonWhiteChars = stringHasNonWhiteChars(string: firstName) && stringHasNonWhiteChars(string: lastName)
 
-        return fnIsValidLength && lnIsValidLength && !fnContainsSpecialCharsAndNums && !lnContainsSpecialCharsAndNums
+        return fnIsValidLength && lnIsValidLength && !fnContainsSpecialCharsAndNums && !lnContainsSpecialCharsAndNums && hasNonWhiteChars
     }
 }
 
@@ -115,5 +126,13 @@ extension ValidationUtility {
         
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: email)
+    }
+    
+    static func stringHasNonWhiteChars(string: String) -> Bool {
+        if !string.trimmingCharacters(in: .whitespaces).isEmpty {
+            return true
+        } else {
+            return false
+        }
     }
 }
