@@ -15,9 +15,14 @@ struct BirthdaySexViewModel {
     let sexPickerViewOptions = ["", "Male", "Female", "Rather Not Say"]
     
     // Dependencies
-    let sceneCoordinator: SceneCoordinatorType
-    var newUser: NewUser!
-    var dateFormatter: DateFormatter {
+    private let sceneCoordinator: SceneCoordinatorType
+    private let newUser: NewUser
+    
+    
+    // Private
+    private let validInfo: Observable<Bool>
+    private let disposeBag = DisposeBag()
+    private var dateFormatter: DateFormatter {
         let df = DateFormatter()
         df.dateStyle = .short
         return df
@@ -28,34 +33,55 @@ struct BirthdaySexViewModel {
     var sex = BehaviorSubject<(Int, Int)>(value: (0, 0))
     
     // Outputs
-    var birthdayString: Observable<String> {
-        return birthday.map(dateFormatter.string).skip(1)
-    }
-    var sexString: Observable<String> {
-        return sex.map({ self.sexPickerViewOptions[$0.0] })
-    }
-    var validInfo: Observable<Bool> {
-        return Observable.combineLatest(birthday.map(ValidationUtility.validBirthday), sex)
-            .map({
-                // valid birthday and the empty sex option is not selected
-                return $0 && ($1.0 != 0)
-            })
+    var birthdayString: Observable<String>!
+    var sexString: Observable<String>!
+    
+    init(coordinator: SceneCoordinatorType, user: NewUser) {
+        self.sceneCoordinator = coordinator
+        self.newUser = user
+        
+        let validBirthday = birthday.map(ValidationUtility.validBirthday)
+        let validSex = sex.map({ $0.0 != 0 })
+        validInfo = Observable.combineLatest(validBirthday, validSex).map({ $0 && $1 })
+        
+        birthdayString = birthday.skip(1).map(dateFormatter.string)
+        sexString = sex.map({
+            switch $0.0 {
+            case 0: return ""
+            case 1: return "Male"
+            case 2: return "Female"
+            case 3: return "Rather Not Say"
+            default: return ""
+            }
+        })
+        
+        subscribeToInputs()
     }
     
-    init(coordinator: SceneCoordinatorType) {
-        self.sceneCoordinator = coordinator
+    fileprivate func subscribeToInputs() {
+        birthdayString
+            .subscribe(onNext: {
+                self.newUser.birthday = $0
+            })
+            .addDisposableTo(disposeBag)
+        
+        sexString
+            .subscribe(onNext: {
+                self.newUser.sex = $0
+            })
+            .addDisposableTo(disposeBag)
     }
     
     func nextSignUpScreen() -> CocoaAction {
-        return CocoaAction {
-            let viewModel = EmailUsernameViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: SignUpScene.emailUsername(viewModel), type: .push)
-        }
+        return CocoaAction(enabledIf: validInfo, workFactory: {
+            let viewModel = EmailUsernameViewModel(coordinator: self.sceneCoordinator, user: self.newUser)
+            return self.sceneCoordinator.transition(to: Scene.SignUpScene.emailUsername(viewModel), type: .push)
+        })
     }
     
     func onBack() -> CocoaAction {
         return CocoaAction {
-            self.sceneCoordinator.pop(animated: true)
+            self.sceneCoordinator.pop()
         }
     }
     

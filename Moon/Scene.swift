@@ -8,13 +8,16 @@
 
 import Foundation
 
-enum MasterScene {
-    case signUp(SignUpScene)
-}
-
-enum SignUpScene {
-    case name(NameViewModel)
-    case birthdaySex(BirthdaySexViewModel)
-    case emailUsername(EmailUsernameViewModel)
-    case passwords(PasswordsViewModel)
+enum Scene {
+    enum SignUpScene: SceneType {
+        case name(NameViewModel)
+        case birthdaySex(BirthdaySexViewModel)
+        case emailUsername(EmailUsernameViewModel)
+        case passwords(PasswordsViewModel)
+    }
+    
+    enum LoginScene: SceneType {
+        case login(LoginViewModel)
+        case forgotPassword(ForgotPasswordViewModel)
+    }
 }

@@ -33,44 +33,13 @@ class EmailUsernameViewController: UIViewController, BindableType {
         usernameTextField.rx.textInput.text.bind(to: viewModel.username).addDisposableTo(disposeBag)
         emailTextField.rx.textInput.text.bind(to: viewModel.email).addDisposableTo(disposeBag)
         
-        viewModel.allFieldsValid
-            .subscribe(onNext: { [unowned self] (allValid) in
-                self.changeNextButton(valid: allValid)
-            })
-            .addDisposableTo(disposeBag)
-        
-        nextButton.rx.action = viewModel.nextSignUpScreen()
-        
-        viewModel.showUsernameError
-            .subscribe(onNext: { [unowned self] (show) in
-                self.usernameTextField.isErrorRevealed = show
-            })
-            .addDisposableTo(disposeBag)
-        
-        viewModel.showEmailError
-            .subscribe(onNext: { [unowned self] (show) in
-                self.emailTextField.isErrorRevealed = show
-            })
-            .addDisposableTo(disposeBag)
-        
+        viewModel.showUsernameError.bind(to: usernameTextField.rx.isErrorRevealed).addDisposableTo(disposeBag)
+        viewModel.showEmailError.drive(emailTextField.rx.isErrorRevealed).addDisposableTo(disposeBag)
+
         navBackButton.rx.action = viewModel.onBack()
+        nextButton.rx.action = viewModel.nextSignUpScreen()
     }
     
-    fileprivate func changeNextButton(valid: Bool) {
-        nextButton.isUserInteractionEnabled = valid
-        switch valid {
-        case true:
-            nextButton.setTitleColor(.moonGreen, for: .normal)
-        case false:
-            nextButton.setTitleColor(.moonRed, for: .normal)
-        }
-    }
-    
-    fileprivate func prepareNavigationBackButton() {
-        navBackButton = UIBarButtonItem()
-        navBackButton.title = "Back"
-        self.navigationItem.leftBarButtonItem = navBackButton
-    }
 }
 
 extension EmailUsernameViewController {
@@ -83,5 +52,11 @@ extension EmailUsernameViewController {
         emailTextField.placeholder = "Email"
         emailTextField.detail = "Invalid Email"
         emailTextField.isClearIconButtonEnabled = true
+    }
+    
+    fileprivate func prepareNavigationBackButton() {
+        navBackButton = UIBarButtonItem()
+        navBackButton.title = "Back"
+        self.navigationItem.leftBarButtonItem = navBackButton
     }
 }

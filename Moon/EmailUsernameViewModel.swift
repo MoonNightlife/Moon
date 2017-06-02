@@ -9,19 +9,21 @@
 import Foundation
 import RxSwift
 import Action
+import RxCocoa
 
 struct EmailUsernameViewModel {
     
     // Dependencies
-    var newUser: NewUser!
-    let sceneCoordinator: SceneCoordinatorType
+    private let newUser: NewUser
+    private let sceneCoordinator: SceneCoordinatorType
+    private let disposeBag = DisposeBag()
     
     // Inputs
     var username = BehaviorSubject<String?>(value: nil)
     var email = BehaviorSubject<String?>(value: nil)
     
     // Outputs
-    var showEmailError: Observable<Bool> {
+    var showEmailError: Driver<Bool> {
         let validEmail = email.map(ValidationUtility.validEmail)
         return Observable.combineLatest(email, validEmail)
             .map({ (email, validEmail) in
@@ -31,7 +33,7 @@ struct EmailUsernameViewModel {
                 
                 // return true if string is not blank and email is not valid
                 return (e != "") && !validEmail
-            })
+            }).asDriver(onErrorJustReturn: false)
     }
     
     var showUsernameError: Observable<Bool> {
@@ -51,15 +53,31 @@ struct EmailUsernameViewModel {
         return Observable.combineLatest(username.map(ValidationUtility.validUsername), email.map(ValidationUtility.validEmail)).map({$0 && $1})
     }
     
-    init(coordinator: SceneCoordinatorType) {
+    init(coordinator: SceneCoordinatorType, user: NewUser) {
         self.sceneCoordinator = coordinator
+        self.newUser = user
+        subscribeToInputs()
+    }
+    
+    private func subscribeToInputs() {
+        username
+            .subscribe(onNext: {
+                self.newUser.username = $0
+            })
+            .addDisposableTo(disposeBag)
+        
+        email
+            .subscribe(onNext: {
+                self.newUser.email = $0
+            })
+            .addDisposableTo(disposeBag)
     }
     
     func nextSignUpScreen() -> CocoaAction {
-        return CocoaAction {
-            let viewModel = PasswordsViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: SignUpScene.passwords(viewModel), type: .push)
-        }
+        return CocoaAction(enabledIf: allFieldsValid, workFactory: {
+            let viewModel = PasswordsViewModel(coordinator: self.sceneCoordinator, user: self.newUser)
+            return self.sceneCoordinator.transition(to: Scene.SignUpScene.passwords(viewModel), type: .push)
+        })
     }
     
     func onBack() -> CocoaAction {

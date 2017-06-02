@@ -30,39 +30,14 @@ class PasswordsViewController: UIViewController, BindableType {
     }
 
     func bindViewModel() {
-        doneButton.rx.action = viewModel.onCreateUser()
         passwordTextField.rx.textInput.text.orEmpty.bind(to: viewModel.passwordText).addDisposableTo(disposeBag)
         retypePasswordTextField.rx.textInput.text.orEmpty.bind(to: viewModel.retypePasswordText).addDisposableTo(disposeBag)
         
-        viewModel.showAcceptablePasswordError
-            .subscribe(onNext: { [unowned self] show in
-                self.passwordTextField.isErrorRevealed = show
-            })
-            .addDisposableTo(disposeBag)
+        viewModel.showAcceptablePasswordError.bind(to: passwordTextField.rx.isErrorRevealed).addDisposableTo(disposeBag)
+        viewModel.showPasswordsMatchError.bind(to: retypePasswordTextField.rx.isErrorRevealed).addDisposableTo(disposeBag)
         
-        viewModel.showPasswordsMatchError
-            .subscribe(onNext: { [unowned self] show in
-                self.retypePasswordTextField.isErrorRevealed = show
-            })
-            .addDisposableTo(disposeBag)
-        
-        viewModel.allValid
-            .subscribe(onNext: { [unowned self] (allValid) in
-                self.changeNextButton(valid: allValid)
-            })
-            .addDisposableTo(disposeBag)
-        
+        doneButton.rx.action = viewModel.onCreateUser()
         navBackButton.rx.action = viewModel.onBack()
-    }
-    
-    fileprivate func changeNextButton(valid: Bool) {
-        doneButton.isUserInteractionEnabled = valid
-        switch valid {
-        case true:
-            doneButton.setTitleColor(.moonGreen, for: .normal)
-        case false:
-            doneButton.setTitleColor(.moonRed, for: .normal)
-        }
     }
     
     fileprivate func prepareNavigationBackButton() {
