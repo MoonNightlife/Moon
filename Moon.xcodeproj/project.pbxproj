@@ -126,6 +126,8 @@
 		F0EBA0BF1ECCAE9F00056EF9 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EBA0BE1ECCAE9F00056EF9 /* ActionButton.swift */; };
 		F0F210591ECA1C160027B50B /* SearchBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F210581ECA1C160027B50B /* SearchBarViewController.swift */; };
 		F0FD8F301EE178650020D131 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */; };
+		F0FD8F321EE19D4E0020D131 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F311EE19D4E0020D131 /* ForgotPasswordViewController.swift */; };
+		F0FD8F341EE19D9F0020D131 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F331EE19D9F0020D131 /* ForgotPasswordViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -267,6 +269,8 @@
 		F0EBA0BE1ECCAE9F00056EF9 /* ActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		F0F210581ECA1C160027B50B /* SearchBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarViewController.swift; sourceTree = "<group>"; };
 		F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		F0FD8F311EE19D4E0020D131 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		F0FD8F331EE19D9F0020D131 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -505,6 +509,7 @@
 			children = (
 				F0CF158B1EDEED0F00531DCF /* SignUp */,
 				F048F11C1EA3B7A5000F0161 /* LoginViewController.swift */,
+				F0FD8F311EE19D4E0020D131 /* ForgotPasswordViewController.swift */,
 				F04283AC1EC49DB600CCB5F3 /* MasterViewController.swift */,
 				F0F210581ECA1C160027B50B /* SearchBarViewController.swift */,
 				F04283AE1EC4A92700CCB5F3 /* FeaturedViewController.swift */,
@@ -521,6 +526,8 @@
 			isa = PBXGroup;
 			children = (
 				F0CF158C1EDEED1E00531DCF /* SignUp */,
+				F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */,
+				F0FD8F331EE19D9F0020D131 /* ForgotPasswordViewModel.swift */,
 			);
 			name = "View Models";
 			sourceTree = "<group>";
@@ -608,7 +615,6 @@
 				F0CF158F1EDEED9600531DCF /* BirthdaySexViewModel.swift */,
 				F0CF15911EDEEDA500531DCF /* EmailUsernameViewModel.swift */,
 				F0CF15931EDEEE2300531DCF /* PasswordsViewModel.swift */,
-				F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */,
 			);
 			name = SignUp;
 			sourceTree = "<group>";
@@ -954,6 +960,8 @@
 				F0CF159C1EDEEEA100531DCF /* PasswordsViewController.swift in Sources */,
 				F048F11B1EA3B7A5000F0161 /* AppDelegate.swift in Sources */,
 				F0EBA0BF1ECCAE9F00056EF9 /* ActionButton.swift in Sources */,
+				F0FD8F321EE19D4E0020D131 /* ForgotPasswordViewController.swift in Sources */,
+				F0FD8F341EE19D9F0020D131 /* ForgotPasswordViewModel.swift in Sources */,
 				F098FF9E1EDF47D400A59594 /* ValidationUtility.swift in Sources */,
 				F0CF159A1EDEEE9000531DCF /* EmailUsernameViewController.swift in Sources */,
 				F0CF15941EDEEE2300531DCF /* PasswordsViewModel.swift in Sources */,

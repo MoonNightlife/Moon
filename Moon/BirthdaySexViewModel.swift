@@ -15,8 +15,9 @@ struct BirthdaySexViewModel {
     let sexPickerViewOptions = ["", "Male", "Female", "Rather Not Say"]
     
     // Dependencies
-    let sceneCoordinator: SceneCoordinatorType
-    var newUser: NewUser!
+    private let sceneCoordinator: SceneCoordinatorType
+    private let newUser: NewUser
+    private let disposeBag = DisposeBag()
     var dateFormatter: DateFormatter {
         let df = DateFormatter()
         df.dateStyle = .short
@@ -42,20 +43,36 @@ struct BirthdaySexViewModel {
             })
     }
     
-    init(coordinator: SceneCoordinatorType) {
+    init(coordinator: SceneCoordinatorType, user: NewUser) {
         self.sceneCoordinator = coordinator
+        self.newUser = user
+        subscribeToInputs()
+    }
+    
+    fileprivate func subscribeToInputs() {
+        birthdayString
+            .subscribe(onNext: {
+                self.newUser.birthday = $0
+            })
+            .addDisposableTo(disposeBag)
+        
+        sexString
+            .subscribe(onNext: {
+                self.newUser.sex = $0
+            })
+            .addDisposableTo(disposeBag)
     }
     
     func nextSignUpScreen() -> CocoaAction {
         return CocoaAction {
-            let viewModel = EmailUsernameViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: MainScene.SignUpScene.emailUsername(viewModel), type: .push)
+            let viewModel = EmailUsernameViewModel(coordinator: self.sceneCoordinator, user: self.newUser)
+            return self.sceneCoordinator.transition(to: Scene.SignUpScene.emailUsername(viewModel), type: .push)
         }
     }
     
     func onBack() -> CocoaAction {
         return CocoaAction {
-            self.sceneCoordinator.pop(animated: true)
+            self.sceneCoordinator.pop()
         }
     }
     

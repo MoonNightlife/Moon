@@ -9,17 +9,15 @@
 import Foundation
 
 enum Scene {
-    case signUp(SignUpScene)
-    case login(LoginScene)
-}
-
-enum SignUpScene {
-    case name(NameViewModel)
-    case birthdaySex(BirthdaySexViewModel)
-    case emailUsername(EmailUsernameViewModel)
-    case passwords(PasswordsViewModel)
-}
-
-enum LoginScene {
-    case login(LoginViewModel)
+    enum SignUpScene: SceneType {
+        case name(NameViewModel)
+        case birthdaySex(BirthdaySexViewModel)
+        case emailUsername(EmailUsernameViewModel)
+        case passwords(PasswordsViewModel)
+    }
+    
+    enum LoginScene: SceneType {
+        case login(LoginViewModel)
+        case forgotPassword(ForgotPasswordViewModel)
+    }
 }

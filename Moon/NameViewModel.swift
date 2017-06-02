@@ -14,9 +14,8 @@ import RxCocoa
 struct NameViewModel {
     
     // Dependencies
-    let sceneCoordinator: SceneCoordinatorType
-    
-    // Private
+    private let sceneCoordinator: SceneCoordinatorType
+    private let newUser: NewUser
     private let disposeBag = DisposeBag()
     
     // Inputs
@@ -29,24 +28,36 @@ struct NameViewModel {
             .map(ValidationUtility.validName)
     }
     
-    // Dependencies
-    
-    var newUser: NewUser!
-    
-    init(coordinator: SceneCoordinatorType) {
+    init(coordinator: SceneCoordinatorType, user: NewUser) {
         self.sceneCoordinator = coordinator
+        self.newUser = user
+        subscribeToInputs()
+    }
+    
+    private func subscribeToInputs() {
+        firstName
+            .subscribe(onNext: {
+                self.newUser.firstName = $0?.trimmed
+            })
+            .addDisposableTo(disposeBag)
+        
+        lastName
+            .subscribe(onNext: {
+                self.newUser.lastName = $0?.trimmed
+            })
+            .addDisposableTo(disposeBag)
     }
 
     func nextSignUpScreen() -> CocoaAction {
         return CocoaAction {
-            let viewModel = BirthdaySexViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: .birthdaySex(viewModel), type: .push)
+            let viewModel = BirthdaySexViewModel(coordinator: self.sceneCoordinator, user: self.newUser)
+            return self.sceneCoordinator.transition(to: Scene.SignUpScene.birthdaySex(viewModel), type: .push)
         }
     }
     
     func onBack() -> CocoaAction {
         return CocoaAction {
-            self.sceneCoordinator.pop(animated: true)
+            self.sceneCoordinator.pop()
         }
     }
 }

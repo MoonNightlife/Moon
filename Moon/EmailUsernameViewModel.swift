@@ -13,8 +13,9 @@ import Action
 struct EmailUsernameViewModel {
     
     // Dependencies
-    var newUser: NewUser!
-    let sceneCoordinator: SceneCoordinatorType
+    private let newUser: NewUser
+    private let sceneCoordinator: SceneCoordinatorType
+    private let disposeBag = DisposeBag()
     
     // Inputs
     var username = BehaviorSubject<String?>(value: nil)
@@ -51,14 +52,30 @@ struct EmailUsernameViewModel {
         return Observable.combineLatest(username.map(ValidationUtility.validUsername), email.map(ValidationUtility.validEmail)).map({$0 && $1})
     }
     
-    init(coordinator: SceneCoordinatorType) {
+    init(coordinator: SceneCoordinatorType, user: NewUser) {
         self.sceneCoordinator = coordinator
+        self.newUser = user
+        subscribeToInputs()
+    }
+    
+    private func subscribeToInputs() {
+        username
+            .subscribe(onNext: {
+                self.newUser.username = $0
+            })
+            .addDisposableTo(disposeBag)
+        
+        email
+            .subscribe(onNext: {
+                self.newUser.email = $0
+            })
+            .addDisposableTo(disposeBag)
     }
     
     func nextSignUpScreen() -> CocoaAction {
         return CocoaAction {
-            let viewModel = PasswordsViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: Scene.signUp(.passwords(viewModel)), type: .push)
+            let viewModel = PasswordsViewModel(coordinator: self.sceneCoordinator, user: self.newUser)
+            return self.sceneCoordinator.transition(to: Scene.SignUpScene.passwords(viewModel), type: .push)
         }
     }
     

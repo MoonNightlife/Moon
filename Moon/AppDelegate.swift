@@ -20,8 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let sceneCoordinator = SceneCoordinator(window: window!)
         
-        let nameViewModel = NameViewModel(coordinator: sceneCoordinator)
-        let firstScene = Scene.signUp(.name(nameViewModel))
+        let viewModel = LoginViewModel(coordinator: sceneCoordinator)
+        let firstScene = Scene.LoginScene.login(viewModel)
         sceneCoordinator.transition(to: firstScene, type: .root)
         
         return true

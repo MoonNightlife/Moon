@@ -7,15 +7,39 @@
 //
 
 import Foundation
+import RxSwift
+import Action
 
 struct LoginViewModel {
+    
     // Dependencies
+    let sceneCoordinator: SceneCoordinatorType
     
     // Inputs
+    var email = BehaviorSubject<String?>(value: nil)
+    var password = BehaviorSubject<String?>(value: nil)
     
     // Ouputs
+    var showLoadingIndicator = Variable(false)
     
-    init() {
+    init(coordinator: SceneCoordinator) {
+        self.sceneCoordinator = coordinator
         
     }
+    
+    func onSignUp() -> CocoaAction {
+        return CocoaAction {
+            let newUser = NewUser()
+            let viewModel = NameViewModel(coordinator: self.sceneCoordinator, user: newUser)
+            return self.sceneCoordinator.transition(to: Scene.SignUpScene.name(viewModel), type: .push)
+        }
+    }
+    
+    func onForgotPassword() -> CocoaAction {
+        return CocoaAction {
+            let viewModel = ForgotPasswordViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.LoginScene.forgotPassword(viewModel), type: .push)
+        }
+    }
+
 }
