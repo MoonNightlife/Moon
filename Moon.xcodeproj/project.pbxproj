@@ -128,6 +128,7 @@
 		F0FD8F301EE178650020D131 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */; };
 		F0FD8F321EE19D4E0020D131 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F311EE19D4E0020D131 /* ForgotPasswordViewController.swift */; };
 		F0FD8F341EE19D9F0020D131 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F331EE19D9F0020D131 /* ForgotPasswordViewModel.swift */; };
+		F0FD8F371EE1DC950020D131 /* TextField+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F361EE1DC950020D131 /* TextField+Rx.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -271,6 +272,7 @@
 		F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		F0FD8F311EE19D4E0020D131 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		F0FD8F331EE19D9F0020D131 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
+		F0FD8F361EE1DC950020D131 /* TextField+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TextField+Rx.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -447,6 +449,7 @@
 				F09B9D0B1EC363D200B2385A /* Subclasses */,
 				F09B9D011EC3551F00B2385A /* Storyboards */,
 				F0D168541ECA62EF0064F642 /* Extensions */,
+				F0FD8F351EE1DC600020D131 /* RxExtensions */,
 				F09B9D041EC3555300B2385A /* Supporting Files */,
 			);
 			path = Moon;
@@ -629,6 +632,14 @@
 				F0A2251E1ECB9F2600170927 /* MoonFont.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		F0FD8F351EE1DC600020D131 /* RxExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				F0FD8F361EE1DC950020D131 /* TextField+Rx.swift */,
+			);
+			name = RxExtensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -953,6 +964,7 @@
 				F03776A21EC3A44100B92E6B /* FakeSpecialData.swift in Sources */,
 				F0A8E2D81EC3C6B2001D9993 /* ImageViewCell.swift in Sources */,
 				F0942F0B1ECCEBA40038E389 /* FakeEventData.swift in Sources */,
+				F0FD8F371EE1DC950020D131 /* TextField+Rx.swift in Sources */,
 				F0CF158E1EDEED8600531DCF /* NameViewModel.swift in Sources */,
 				F049896E1EE068E000064F58 /* SceneCoordinator.swift in Sources */,
 				F0055D691EC5E64B005544B4 /* CityOverviewViewController.swift in Sources */,

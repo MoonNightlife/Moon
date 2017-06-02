@@ -16,21 +16,21 @@ struct NameViewModel {
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
     private let newUser: NewUser
+    
+    // Private
     private let disposeBag = DisposeBag()
+    private let dataValid: Driver<Bool>
     
     // Inputs
     var firstName = BehaviorSubject<String?>(value: nil)
     var lastName = BehaviorSubject<String?>(value: nil)
     
-    // Ouputs
-    var dataValid: Observable<Bool> {
-        return Observable.combineLatest(firstName, lastName)
-            .map(ValidationUtility.validName)
-    }
-    
     init(coordinator: SceneCoordinatorType, user: NewUser) {
         self.sceneCoordinator = coordinator
         self.newUser = user
+        
+        dataValid = Observable.combineLatest(firstName, lastName).map(ValidationUtility.validName).asDriver(onErrorJustReturn: false)
+        
         subscribeToInputs()
     }
     
@@ -49,10 +49,10 @@ struct NameViewModel {
     }
 
     func nextSignUpScreen() -> CocoaAction {
-        return CocoaAction {
+        return CocoaAction(enabledIf: dataValid.asObservable(), workFactory: {
             let viewModel = BirthdaySexViewModel(coordinator: self.sceneCoordinator, user: self.newUser)
             return self.sceneCoordinator.transition(to: Scene.SignUpScene.birthdaySex(viewModel), type: .push)
-        }
+        })
     }
     
     func onBack() -> CocoaAction {

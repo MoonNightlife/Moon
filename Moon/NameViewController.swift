@@ -33,24 +33,9 @@ class NameViewController: UIViewController, BindableType {
     func bindViewModel() {
         firstNameTextField.rx.textInput.text.orEmpty.bind(to: viewModel.firstName).addDisposableTo(disposeBag)
         lastNameTextField.rx.textInput.text.orEmpty.bind(to: viewModel.lastName).addDisposableTo(disposeBag)
+        
         nextScreenButton.rx.action = viewModel.nextSignUpScreen()
         navBackButton.rx.action = viewModel.onBack()
-        
-        viewModel.dataValid
-            .subscribe(onNext: { [unowned self] (allValid) in
-                self.changeNextButton(valid: allValid)
-            })
-            .addDisposableTo(disposeBag)
-    }
-    
-    fileprivate func changeNextButton(valid: Bool) {
-        nextScreenButton.isUserInteractionEnabled = valid
-        switch valid {
-        case true:
-            nextScreenButton.setTitleColor(.moonGreen, for: .normal)
-        case false:
-            nextScreenButton.setTitleColor(.moonRed, for: .normal)
-        }
     }
 
 }

@@ -56,11 +56,12 @@ struct PasswordsViewModel {
     }
     
     func onCreateUser() -> CocoaAction {
-        return CocoaAction {_ in
+        return CocoaAction(enabledIf: allValid, workFactory: {
             print("Create User")
             self.newUser.listPropertiesWithValues()
             return .just()
-        }
+
+        })
     }
     
     func onBack() -> CocoaAction {

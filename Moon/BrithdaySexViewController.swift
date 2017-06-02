@@ -35,44 +35,15 @@ class BirthdaySexViewController: UIViewController, BindableType {
     
     func bindViewModel() {
         
-        birthdayTextField.rx
-            .controlEvent(.editingDidBegin)
-            .subscribe(onNext: {
-                self.birthdayTextField.inputView = self.datePickerView
-            })
-            .addDisposableTo(disposeBag)
-        
-        sexTextField.rx
-            .controlEvent(.editingDidBegin)
-            .subscribe(onNext: {
-                self.sexTextField.inputView = self.sexPickerView
-            })
-            .addDisposableTo(disposeBag)
-        
         sexPickerView.rx.itemSelected.bind(to: viewModel.sex).addDisposableTo(disposeBag)
         datePickerView.rx.date.bind(to: viewModel.birthday).addDisposableTo(disposeBag)
         
         viewModel.birthdayString.bind(to: birthdayTextField.rx.text).addDisposableTo(disposeBag)
         viewModel.sexString.bind(to: sexTextField.rx.text).addDisposableTo(disposeBag)
-        viewModel.validInfo
-            .subscribe(onNext: { [unowned self] (allValid) in
-                self.changeNextButton(valid: allValid)
-            })
-            .addDisposableTo(disposeBag)
-        nextScreenButton.rx.action = viewModel.nextSignUpScreen()
         
+        nextScreenButton.rx.action = viewModel.nextSignUpScreen()
         navBackButton.rx.action = viewModel.onBack()
         
-    }
-    
-    fileprivate func changeNextButton(valid: Bool) {
-        nextScreenButton.isUserInteractionEnabled = valid
-        switch valid {
-        case true:
-            nextScreenButton.setTitleColor(.moonGreen, for: .normal)
-        case false:
-            nextScreenButton.setTitleColor(.moonRed, for: .normal)
-        }
     }
 
 }
@@ -91,17 +62,25 @@ extension BirthdaySexViewController {
         sexPickerView = UIPickerView()
         sexPickerView.dataSource = self
         sexPickerView.delegate = self
+        
+        sexTextField.rx
+            .controlEvent(.editingDidBegin)
+            .subscribe(onNext: {
+                self.sexTextField.inputView = self.sexPickerView
+            })
+            .addDisposableTo(disposeBag)
     }
     
     fileprivate func prepareDatePickerView() {
         datePickerView = UIDatePicker()
         datePickerView.datePickerMode = .date
         
-        // The max birthday that can be choosen is one that ensures the user is 18 years old
-        var components = DateComponents()
-        components.year = -18
-        let maxDate = Calendar.current.date(byAdding: components, to: Date())
-        datePickerView.maximumDate = maxDate
+        birthdayTextField.rx
+            .controlEvent(.editingDidBegin)
+            .subscribe(onNext: {
+                self.birthdayTextField.inputView = self.datePickerView
+            })
+            .addDisposableTo(disposeBag)
     }
     
     fileprivate func prepareNavigationBackButton() {

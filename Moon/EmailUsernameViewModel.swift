@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import Action
+import RxCocoa
 
 struct EmailUsernameViewModel {
     
@@ -22,7 +23,7 @@ struct EmailUsernameViewModel {
     var email = BehaviorSubject<String?>(value: nil)
     
     // Outputs
-    var showEmailError: Observable<Bool> {
+    var showEmailError: Driver<Bool> {
         let validEmail = email.map(ValidationUtility.validEmail)
         return Observable.combineLatest(email, validEmail)
             .map({ (email, validEmail) in
@@ -32,7 +33,7 @@ struct EmailUsernameViewModel {
                 
                 // return true if string is not blank and email is not valid
                 return (e != "") && !validEmail
-            })
+            }).asDriver(onErrorJustReturn: false)
     }
     
     var showUsernameError: Observable<Bool> {
@@ -73,10 +74,10 @@ struct EmailUsernameViewModel {
     }
     
     func nextSignUpScreen() -> CocoaAction {
-        return CocoaAction {
+        return CocoaAction(enabledIf: allFieldsValid, workFactory: {
             let viewModel = PasswordsViewModel(coordinator: self.sceneCoordinator, user: self.newUser)
             return self.sceneCoordinator.transition(to: Scene.SignUpScene.passwords(viewModel), type: .push)
-        }
+        })
     }
     
     func onBack() -> CocoaAction {
