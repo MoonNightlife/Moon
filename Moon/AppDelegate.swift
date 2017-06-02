@@ -17,6 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        let sceneCoordinator = SceneCoordinator(window: window!)
+        
+        let viewModel = LoginViewModel(coordinator: sceneCoordinator)
+        let firstScene = Scene.LoginScene.login(viewModel)
+        sceneCoordinator.transition(to: firstScene, type: .root)
+        
         return true
     }
 
