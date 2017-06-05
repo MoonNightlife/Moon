@@ -18,7 +18,6 @@ struct BirthdaySexViewModel {
     private let sceneCoordinator: SceneCoordinatorType
     private let newUser: NewUser
     
-    
     // Private
     private let validInfo: Observable<Bool>
     private let disposeBag = DisposeBag()
@@ -50,7 +49,7 @@ struct BirthdaySexViewModel {
             case 0: return ""
             case 1: return "Male"
             case 2: return "Female"
-            case 3: return "Rather Not Say"
+            case 3: return "Other"
             default: return ""
             }
         })
