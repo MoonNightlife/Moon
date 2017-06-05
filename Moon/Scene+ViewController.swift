@@ -13,7 +13,7 @@ protocol SceneType {
 }
 
 //swiftlint:disable force_cast
-extension Scene.SignUpScene {
+extension Scene.SignUp {
     internal func viewController() -> UIViewController {
         let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
         switch self {
@@ -37,7 +37,7 @@ extension Scene.SignUpScene {
     }
 }
 
-extension Scene.LoginScene {
+extension Scene.Login {
     internal func viewController() -> UIViewController {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         switch self {
@@ -50,6 +50,32 @@ extension Scene.LoginScene {
             var vc = storyboard.instantiateViewController(withIdentifier: "ForgotPassword") as! ForgotPasswordViewController
             vc.bindViewModel(to: viewModel)
             return vc
+        }
+    }
+}
+
+extension Scene.User {
+    internal func viewController() -> UIViewController {
+        let storyboard = UIStoryboard(name: "User", bundle: nil)
+        switch self {
+        case .profile(let viewModel):
+            var vc = storyboard .instantiateViewController(withIdentifier: "Profile") as! ProfileViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        }
+    }
+}
+
+extension Scene.Master {
+    internal func viewController() -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Master", bundle: nil)
+        switch self {
+        case .main((let searchBarVM, let mainVM)):
+            var vc = storyBoard.instantiateViewController(withIdentifier: "Main") as! MainViewController
+            vc.bindViewModel(to: mainVM)
+            var searchController = SearchBarViewController(rootViewController: vc)
+            searchController.bindViewModel(to: searchBarVM)
+            return searchController
         }
     }
 }

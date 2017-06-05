@@ -9,15 +9,23 @@
 import Foundation
 
 enum Scene {
-    enum SignUpScene: SceneType {
+    enum SignUp: SceneType {
         case name(NameViewModel)
         case birthdaySex(BirthdaySexViewModel)
         case emailUsername(EmailUsernameViewModel)
         case passwords(PasswordsViewModel)
     }
     
-    enum LoginScene: SceneType {
+    enum Login: SceneType {
         case login(LoginViewModel)
         case forgotPassword(ForgotPasswordViewModel)
+    }
+    
+    enum User: SceneType {
+        case profile(ProfileViewModel)
+    }
+    
+    enum Master: SceneType {
+        case main((searchBar: SearchBarViewModel, mainView: MainViewModel))
     }
 }

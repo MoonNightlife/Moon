@@ -34,8 +34,6 @@ class LoginViewController: UIViewController, BindableType {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        let searchController = SearchBarViewController(rootViewController: MasterViewController.instantiateFromStoryboard())
-//        self.present(searchController, animated: true, completion: nil)
           navigationController?.navigationBar.isHidden = true
     }
     
@@ -94,6 +92,7 @@ class LoginViewController: UIViewController, BindableType {
     func bindViewModel() {
         signUpButton.rx.action = viewModel.onSignUp()
         recoverButton.rx.action = viewModel.onForgotPassword()
+        loginButton.rx.action = viewModel.onSignIn()
         emailTextField.rx.textInput.text.bind(to: viewModel.email).addDisposableTo(disposeBag)
         passwordTextField.rx.textInput.text.bind(to: viewModel.password).addDisposableTo(disposeBag)
     }
