@@ -11,6 +11,7 @@ import Material
 import RxCocoa
 import RxSwift
 import Action
+import MaterialComponents.MaterialProgressView
 
 class NameViewController: UIViewController, BindableType {
     
@@ -21,21 +22,33 @@ class NameViewController: UIViewController, BindableType {
     @IBOutlet weak var firstNameTextField: TextField!
     @IBOutlet weak var nextScreenButton: UIButton!
     var navBackButton: UIBarButtonItem!
+    var progressView: MDCProgressView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         prepareFirstNameTextField()
         prepareLastNameTextField()
         prepareNavigationBackButton()
+        prepareProgressView()
+        prepareNextScreenButton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.barTintColor = .moonPurple
+        self.navigationController?.navigationBar.backgroundColor = .moonPurple
     }
     
     func bindViewModel() {
         firstNameTextField.rx.textInput.text.orEmpty.bind(to: viewModel.firstName).addDisposableTo(disposeBag)
         lastNameTextField.rx.textInput.text.orEmpty.bind(to: viewModel.lastName).addDisposableTo(disposeBag)
         
+        //progressView.progress = 0.25
+        
         nextScreenButton.rx.action = viewModel.nextSignUpScreen()
         navBackButton.rx.action = viewModel.onBack()
+        
     }
 
 }
@@ -45,25 +58,61 @@ extension NameViewController {
     fileprivate func prepareFirstNameTextField() {
         firstNameTextField.placeholder = "First Name"
         firstNameTextField.isClearIconButtonEnabled = true
+        firstNameTextField.dividerActiveColor = .moonPurple
+        firstNameTextField.dividerNormalColor = .moonPurple
+        firstNameTextField.placeholderActiveColor = .moonPurple
         
         let leftView = UIImageView()
-        leftView.image = Icon.cm.audio
+        leftView.image = Icon.cm.pen
         firstNameTextField.leftView = leftView
+        firstNameTextField.leftViewActiveColor = .moonPurple
     }
     
     fileprivate func prepareLastNameTextField() {
         lastNameTextField.placeholder = "Last Name"
         lastNameTextField.isClearIconButtonEnabled = true
+        lastNameTextField.dividerActiveColor = .moonPurple
+        lastNameTextField.dividerNormalColor = .moonPurple
+        lastNameTextField.placeholderActiveColor = .moonPurple
         
         let leftView = UIImageView()
-        leftView.image = Icon.cm.audio
+        leftView.image = Icon.cm.pen
         lastNameTextField.leftView = leftView
+        lastNameTextField.leftViewActiveColor = .moonPurple
     }
     
     fileprivate func prepareNavigationBackButton() {
         navBackButton = UIBarButtonItem()
-        navBackButton.title = "Back"
+        navBackButton.image = Icon.cm.arrowBack
+        navBackButton.tintColor = .white
         self.navigationItem.leftBarButtonItem = navBackButton
+        
+    }
+    
+    fileprivate func prepareNextScreenButton() {
+        
+        let nextArrow = UIImage(cgImage: (Icon.cm.arrowBack?.cgImage)!, scale: 1.5, orientation: UIImageOrientation.down)
+        
+        nextScreenButton.backgroundColor = .moonPurple
+        nextScreenButton.setTitle("", for: .normal)
+        nextScreenButton.tintColor = .white
+        nextScreenButton.layer.cornerRadius = 5
+        nextScreenButton.setBackgroundImage(nextArrow, for: .normal)
+  
+    }
+    
+    fileprivate func prepareProgressView() {
+        
+        progressView = MDCProgressView()
+        progressView.progress = 0
+        progressView.trackTintColor = .moonGreenLight
+        progressView.progressTintColor = .moonGreen
+        
+        let progressViewHeight = CGFloat(3)
+        progressView.setHidden(false, animated: true)
+        progressView.frame = CGRect(x: 0, y: 65, width: view.bounds.width, height: progressViewHeight)
+        view.addSubview(progressView)
+        
     }
 
 }
