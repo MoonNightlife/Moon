@@ -74,7 +74,7 @@ struct BirthdaySexViewModel {
     func nextSignUpScreen() -> CocoaAction {
         return CocoaAction(enabledIf: validInfo, workFactory: {
             let viewModel = EmailUsernameViewModel(coordinator: self.sceneCoordinator, user: self.newUser)
-            return self.sceneCoordinator.transition(to: Scene.SignUpScene.emailUsername(viewModel), type: .push)
+            return self.sceneCoordinator.transition(to: Scene.SignUp.emailUsername(viewModel), type: .push)
         })
     }
     

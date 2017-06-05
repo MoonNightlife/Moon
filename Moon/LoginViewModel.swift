@@ -31,14 +31,22 @@ struct LoginViewModel {
         return CocoaAction {
             let newUser = NewUser()
             let viewModel = NameViewModel(coordinator: self.sceneCoordinator, user: newUser)
-            return self.sceneCoordinator.transition(to: Scene.SignUpScene.name(viewModel), type: .push)
+            return self.sceneCoordinator.transition(to: Scene.SignUp.name(viewModel), type: .push)
         }
     }
     
     func onForgotPassword() -> CocoaAction {
         return CocoaAction {
             let viewModel = ForgotPasswordViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: Scene.LoginScene.forgotPassword(viewModel), type: .push)
+            return self.sceneCoordinator.transition(to: Scene.Login.forgotPassword(viewModel), type: .push)
+        }
+    }
+    
+    func onSignIn() -> CocoaAction {
+        return CocoaAction {
+            let mainVM = MainViewModel(coordinator: self.sceneCoordinator)
+            let searchVM = SearchBarViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.Master.main(searchBar: searchVM, mainView: mainVM), type: .modal)
         }
     }
 

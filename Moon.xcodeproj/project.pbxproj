@@ -58,7 +58,7 @@
 		F03776A21EC3A44100B92E6B /* FakeSpecialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03776A11EC3A44100B92E6B /* FakeSpecialData.swift */; };
 		F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */; };
 		F03830601EC63C7300A0FF5D /* Master.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F038305F1EC63C7300A0FF5D /* Master.storyboard */; };
-		F04283AD1EC49DB600CCB5F3 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04283AC1EC49DB600CCB5F3 /* MasterViewController.swift */; };
+		F04283AD1EC49DB600CCB5F3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04283AC1EC49DB600CCB5F3 /* MainViewController.swift */; };
 		F04283AF1EC4A92700CCB5F3 /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04283AE1EC4A92700CCB5F3 /* FeaturedViewController.swift */; };
 		F04283B11EC4A96200CCB5F3 /* MoonsViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04283B01EC4A96200CCB5F3 /* MoonsViewViewController.swift */; };
 		F04283B31EC4A9E100CCB5F3 /* Featured.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F04283B21EC4A9E100CCB5F3 /* Featured.storyboard */; };
@@ -111,6 +111,11 @@
 		F0A8E2E91EC3C858001D9993 /* pic5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2E01EC3C858001D9993 /* pic5.jpg */; };
 		F0A8E2EA1EC3C858001D9993 /* pic6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2E11EC3C858001D9993 /* pic6.jpg */; };
 		F0A8E2EB1EC3C858001D9993 /* Pic7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2E21EC3C858001D9993 /* Pic7.jpg */; };
+		F0CA18911EE584AF00428318 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18901EE584AF00428318 /* ProfileViewModel.swift */; };
+		F0CA18931EE585D700428318 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18921EE585D700428318 /* ProfileViewController.swift */; };
+		F0CA18951EE5867700428318 /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0CA18941EE5867700428318 /* User.storyboard */; };
+		F0CA18971EE58BBD00428318 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18961EE58BBD00428318 /* MainViewModel.swift */; };
+		F0CA18A51EE58FD400428318 /* SearchBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18A41EE58FD400428318 /* SearchBarViewModel.swift */; };
 		F0CF158A1EDEECEE00531DCF /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0CF15891EDEECEE00531DCF /* SignUp.storyboard */; };
 		F0CF158E1EDEED8600531DCF /* NameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF158D1EDEED8600531DCF /* NameViewModel.swift */; };
 		F0CF15901EDEED9600531DCF /* BirthdaySexViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF158F1EDEED9600531DCF /* BirthdaySexViewModel.swift */; };
@@ -198,7 +203,7 @@
 		F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialTableViewCell.swift; sourceTree = "<group>"; };
 		F038305F1EC63C7300A0FF5D /* Master.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Master.storyboard; sourceTree = "<group>"; };
 		F04283AB1EC49D4E00CCB5F3 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
-		F04283AC1EC49DB600CCB5F3 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		F04283AC1EC49DB600CCB5F3 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F04283AE1EC4A92700CCB5F3 /* FeaturedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedViewController.swift; sourceTree = "<group>"; };
 		F04283B01EC4A96200CCB5F3 /* MoonsViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonsViewViewController.swift; sourceTree = "<group>"; };
 		F04283B21EC4A9E100CCB5F3 /* Featured.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Featured.storyboard; sourceTree = "<group>"; };
@@ -255,6 +260,11 @@
 		F0A8E2E01EC3C858001D9993 /* pic5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic5.jpg; sourceTree = "<group>"; };
 		F0A8E2E11EC3C858001D9993 /* pic6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic6.jpg; sourceTree = "<group>"; };
 		F0A8E2E21EC3C858001D9993 /* Pic7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Pic7.jpg; sourceTree = "<group>"; };
+		F0CA18901EE584AF00428318 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		F0CA18921EE585D700428318 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		F0CA18941EE5867700428318 /* User.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = User.storyboard; sourceTree = "<group>"; };
+		F0CA18961EE58BBD00428318 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		F0CA18A41EE58FD400428318 /* SearchBarViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarViewModel.swift; sourceTree = "<group>"; };
 		F0CF15891EDEECEE00531DCF /* SignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
 		F0CF158D1EDEED8600531DCF /* NameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameViewModel.swift; sourceTree = "<group>"; };
 		F0CF158F1EDEED9600531DCF /* BirthdaySexViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthdaySexViewModel.swift; sourceTree = "<group>"; };
@@ -500,6 +510,7 @@
 				F048F11E1EA3B7A5000F0161 /* Login.storyboard */,
 				F0CF15891EDEECEE00531DCF /* SignUp.storyboard */,
 				F038305F1EC63C7300A0FF5D /* Master.storyboard */,
+				F0CA18941EE5867700428318 /* User.storyboard */,
 				F04283B21EC4A9E100CCB5F3 /* Featured.storyboard */,
 				F09B9D051EC356BA00B2385A /* Explore.storyboard */,
 				F04283B41EC4A9F600CCB5F3 /* MoonsView.storyboard */,
@@ -511,16 +522,12 @@
 			isa = PBXGroup;
 			children = (
 				F0CF158B1EDEED0F00531DCF /* SignUp */,
-				F048F11C1EA3B7A5000F0161 /* LoginViewController.swift */,
-				F0FD8F311EE19D4E0020D131 /* ForgotPasswordViewController.swift */,
-				F04283AC1EC49DB600CCB5F3 /* MasterViewController.swift */,
-				F0F210581ECA1C160027B50B /* SearchBarViewController.swift */,
-				F04283AE1EC4A92700CCB5F3 /* FeaturedViewController.swift */,
-				F04283B01EC4A96200CCB5F3 /* MoonsViewViewController.swift */,
-				F001BAC01EC50E9700CDF9BC /* BarActivityFeedViewController.swift */,
-				F0055D681EC5E64B005544B4 /* CityOverviewViewController.swift */,
-				F09B9D071EC3571800B2385A /* ExploreViewController.swift */,
-				F0644C2A1EC37D0E00D92BF7 /* SpecialsViewController.swift */,
+				F0CA18981EE58BEC00428318 /* Login */,
+				F0CA189D1EE58C3600428318 /* User */,
+				F0CA18991EE58BF200428318 /* Master */,
+				F0CA189A1EE58BFD00428318 /* Explore */,
+				F0CA189B1EE58C0700428318 /* Featured */,
+				F0CA189C1EE58C0D00428318 /* MoonsView */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -529,8 +536,12 @@
 			isa = PBXGroup;
 			children = (
 				F0CF158C1EDEED1E00531DCF /* SignUp */,
-				F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */,
-				F0FD8F331EE19D9F0020D131 /* ForgotPasswordViewModel.swift */,
+				F0CA189E1EE58CC400428318 /* Login */,
+				F0CA189F1EE58CCB00428318 /* User */,
+				F0CA18A01EE58CD000428318 /* Master */,
+				F0CA18A21EE58CDD00428318 /* Featured */,
+				F0CA18A31EE58CE300428318 /* MoonsView */,
+				F0CA18A11EE58CD500428318 /* Explore */,
 			);
 			name = "View Models";
 			sourceTree = "<group>";
@@ -598,6 +609,106 @@
 			);
 			name = FakeBarImages;
 			path = Images;
+			sourceTree = "<group>";
+		};
+		F0CA18981EE58BEC00428318 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				F048F11C1EA3B7A5000F0161 /* LoginViewController.swift */,
+				F0FD8F311EE19D4E0020D131 /* ForgotPasswordViewController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		F0CA18991EE58BF200428318 /* Master */ = {
+			isa = PBXGroup;
+			children = (
+				F04283AC1EC49DB600CCB5F3 /* MainViewController.swift */,
+				F0F210581ECA1C160027B50B /* SearchBarViewController.swift */,
+			);
+			name = Master;
+			sourceTree = "<group>";
+		};
+		F0CA189A1EE58BFD00428318 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				F09B9D071EC3571800B2385A /* ExploreViewController.swift */,
+				F0644C2A1EC37D0E00D92BF7 /* SpecialsViewController.swift */,
+			);
+			name = Explore;
+			sourceTree = "<group>";
+		};
+		F0CA189B1EE58C0700428318 /* Featured */ = {
+			isa = PBXGroup;
+			children = (
+				F04283AE1EC4A92700CCB5F3 /* FeaturedViewController.swift */,
+			);
+			name = Featured;
+			sourceTree = "<group>";
+		};
+		F0CA189C1EE58C0D00428318 /* MoonsView */ = {
+			isa = PBXGroup;
+			children = (
+				F04283B01EC4A96200CCB5F3 /* MoonsViewViewController.swift */,
+				F001BAC01EC50E9700CDF9BC /* BarActivityFeedViewController.swift */,
+				F0055D681EC5E64B005544B4 /* CityOverviewViewController.swift */,
+			);
+			name = MoonsView;
+			sourceTree = "<group>";
+		};
+		F0CA189D1EE58C3600428318 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				F0CA18921EE585D700428318 /* ProfileViewController.swift */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
+		F0CA189E1EE58CC400428318 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */,
+				F0FD8F331EE19D9F0020D131 /* ForgotPasswordViewModel.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		F0CA189F1EE58CCB00428318 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				F0CA18901EE584AF00428318 /* ProfileViewModel.swift */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
+		F0CA18A01EE58CD000428318 /* Master */ = {
+			isa = PBXGroup;
+			children = (
+				F0CA18961EE58BBD00428318 /* MainViewModel.swift */,
+				F0CA18A41EE58FD400428318 /* SearchBarViewModel.swift */,
+			);
+			name = Master;
+			sourceTree = "<group>";
+		};
+		F0CA18A11EE58CD500428318 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Explore;
+			sourceTree = "<group>";
+		};
+		F0CA18A21EE58CDD00428318 /* Featured */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Featured;
+			sourceTree = "<group>";
+		};
+		F0CA18A31EE58CE300428318 /* MoonsView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = MoonsView;
 			sourceTree = "<group>";
 		};
 		F0CF158B1EDEED0F00531DCF /* SignUp */ = {
@@ -770,6 +881,7 @@
 				F0CF158A1EDEECEE00531DCF /* SignUp.storyboard in Resources */,
 				C0FC62791ECF50C30087FA3B /* s3.jpg in Resources */,
 				F0A2252E1ECBAA3E00170927 /* bacardi.jpeg in Resources */,
+				F0CA18951EE5867700428318 /* User.storyboard in Resources */,
 				F0A8E2EB1EC3C858001D9993 /* Pic7.jpg in Resources */,
 				C0FC62731ECF50C30087FA3B /* s10.jpg in Resources */,
 				F001BABF1EC50D2600CDF9BC /* BottomBar_base.png in Resources */,
@@ -934,7 +1046,8 @@
 				F0CF15981EDEEE8900531DCF /* BrithdaySexViewController.swift in Sources */,
 				F0CF15901EDEED9600531DCF /* BirthdaySexViewModel.swift in Sources */,
 				F0F210591ECA1C160027B50B /* SearchBarViewController.swift in Sources */,
-				F04283AD1EC49DB600CCB5F3 /* MasterViewController.swift in Sources */,
+				F04283AD1EC49DB600CCB5F3 /* MainViewController.swift in Sources */,
+				F0CA18971EE58BBD00428318 /* MainViewModel.swift in Sources */,
 				F09B9D081EC3571800B2385A /* ExploreViewController.swift in Sources */,
 				F0942F0D1ECCEC550038E389 /* FeaturedEventCollectionViewCell.swift in Sources */,
 				F001BAC51EC51BD400CDF9BC /* Utilities.swift in Sources */,
@@ -954,13 +1067,16 @@
 				F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */,
 				F04989661EE0651800064F58 /* SceneCoordinatorType.swift in Sources */,
 				F0D168531ECA62940064F642 /* MoonColor.swift in Sources */,
+				F0CA18A51EE58FD400428318 /* SearchBarViewModel.swift in Sources */,
 				F0FD8F301EE178650020D131 /* LoginViewModel.swift in Sources */,
 				F048F11D1EA3B7A5000F0161 /* LoginViewController.swift in Sources */,
 				F0A2251F1ECB9F2600170927 /* MoonFont.swift in Sources */,
 				F049896C1EE068BE00064F58 /* SceneTransitionType.swift in Sources */,
 				F04283AF1EC4A92700CCB5F3 /* FeaturedViewController.swift in Sources */,
 				F044CD531ECDE28A00E47138 /* BottomGradientImageView.swift in Sources */,
+				F0CA18911EE584AF00428318 /* ProfileViewModel.swift in Sources */,
 				F0644C2B1EC37D0E00D92BF7 /* SpecialsViewController.swift in Sources */,
+				F0CA18931EE585D700428318 /* ProfileViewController.swift in Sources */,
 				F03776A21EC3A44100B92E6B /* FakeSpecialData.swift in Sources */,
 				F0A8E2D81EC3C6B2001D9993 /* ImageViewCell.swift in Sources */,
 				F0942F0B1ECCEBA40038E389 /* FakeEventData.swift in Sources */,

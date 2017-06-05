@@ -55,6 +55,20 @@ class SceneCoordinator: SceneCoordinatorType {
                 subject.onCompleted()
             }
             currentViewController = SceneCoordinator.actualViewController(for: viewController)
+        case .popover:
+            viewController.modalPresentationStyle = .popover
+            guard let delegateViewController = currentViewController as? UIPopoverPresentationControllerDelegate else {
+                fatalError("Presenting contorller does not adapt to popover delegate")
+            }
+            viewController.popoverPresentationController?.delegate = delegateViewController
+            viewController.popoverPresentationController?.sourceView = currentViewController.view
+            // Remove the arrow from the popover
+            viewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+            viewController.popoverPresentationController?.sourceRect = CGRect(x: currentViewController.view.bounds.midX, y: currentViewController.view.bounds.midY, width: 0, height: 0)
+            currentViewController.present(viewController, animated: true) {
+                subject.onCompleted()
+            }
+            currentViewController = SceneCoordinator.actualViewController(for: viewController)
         }
         return subject.asObservable()
             .take(1)
