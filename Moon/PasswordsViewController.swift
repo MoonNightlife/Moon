@@ -10,7 +10,7 @@ import UIKit
 import Material
 import RxSwift
 import RxCocoa
-
+import MaterialComponents.MDCProgressView
 class PasswordsViewController: UIViewController, BindableType {
 
     let disposeBag = DisposeBag()
@@ -20,6 +20,7 @@ class PasswordsViewController: UIViewController, BindableType {
     @IBOutlet weak var retypePasswordTextField: ErrorTextField!
     @IBOutlet weak var passwordTextField: ErrorTextField!
     var navBackButton: UIBarButtonItem!
+    var progressView: MDCProgressView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,15 @@ class PasswordsViewController: UIViewController, BindableType {
         preparePasswordTextField()
         prepareRetypePasswordTextField()
         prepareNavigationBackButton()
+        prepareProgressView()
+        prepareDoneButton()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.barTintColor = .moonGreen
+        self.navigationController?.navigationBar.backgroundColor = .moonGreen
     }
 
     func bindViewModel() {
@@ -40,11 +50,6 @@ class PasswordsViewController: UIViewController, BindableType {
         navBackButton.rx.action = viewModel.onBack()
     }
     
-    fileprivate func prepareNavigationBackButton() {
-        navBackButton = UIBarButtonItem()
-        navBackButton.title = "Back"
-        self.navigationItem.leftBarButtonItem = navBackButton
-    }
 }
 
 extension PasswordsViewController {
@@ -53,11 +58,64 @@ extension PasswordsViewController {
         passwordTextField.detail = "Invalid Password"
         passwordTextField.isClearIconButtonEnabled = true
         passwordTextField.isSecureTextEntry = true
+        passwordTextField.placeholderActiveColor = .moonGreen
+        passwordTextField.dividerActiveColor = .moonGreen
+        passwordTextField.dividerNormalColor = .moonGreen
+        
+        let leftView = UIImageView()
+        leftView.image = #imageLiteral(resourceName: "passwordIcon")
+        leftView.image = leftView.image?.withRenderingMode(.alwaysTemplate)
+        leftView.tintColor = .lightGray
+        
+        passwordTextField.leftView = leftView
+        passwordTextField.leftViewActiveColor = .moonGreen
     }
+    
     fileprivate func prepareRetypePasswordTextField() {
         retypePasswordTextField.placeholder = "Retype Password"
         retypePasswordTextField.detail = "Passwords Do Not Match"
         retypePasswordTextField.isClearIconButtonEnabled = true
         retypePasswordTextField.isSecureTextEntry = true
+        retypePasswordTextField.placeholderActiveColor = .moonGreen
+        retypePasswordTextField.dividerActiveColor = .moonGreen
+        retypePasswordTextField.dividerNormalColor = .moonGreen
+        
+        let leftView = UIImageView()
+        leftView.image = #imageLiteral(resourceName: "passwordIcon")
+        leftView.image = leftView.image?.withRenderingMode(.alwaysTemplate)
+        leftView.tintColor = .lightGray
+        
+        retypePasswordTextField.leftView = leftView
+        retypePasswordTextField.leftViewActiveColor = .moonGreen
+    }
+    
+    fileprivate func prepareNavigationBackButton() {
+        navBackButton = UIBarButtonItem()
+        navBackButton.image = Icon.cm.arrowBack
+        navBackButton.tintColor = .white
+        self.navigationItem.leftBarButtonItem = navBackButton
+        
+    }
+    
+    fileprivate func prepareDoneButton() {
+        doneButton.backgroundColor = .moonGreen
+        doneButton.setTitle("Finish", for: .normal)
+        doneButton.tintColor = .white
+        doneButton.layer.cornerRadius = 5
+        
+    }
+    
+    fileprivate func prepareProgressView() {
+        
+        progressView = MDCProgressView()
+        progressView.progress = 0.75
+        progressView.trackTintColor = .moonGreenLight
+        progressView.progressTintColor = .moonGreen
+        
+        let progressViewHeight = CGFloat(3)
+        progressView.setHidden(false, animated: true)
+        progressView.frame = CGRect(x: 0, y: 65, width: view.bounds.width, height: progressViewHeight)
+        view.addSubview(progressView)
+        
     }
 }
