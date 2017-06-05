@@ -53,7 +53,6 @@
 		F001BABF1EC50D2600CDF9BC /* BottomBar_base.png in Resources */ = {isa = PBXBuildFile; fileRef = F001BAB91EC50D2600CDF9BC /* BottomBar_base.png */; };
 		F001BAC11EC50E9700CDF9BC /* BarActivityFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F001BAC01EC50E9700CDF9BC /* BarActivityFeedViewController.swift */; };
 		F001BAC31EC50F7500CDF9BC /* BarActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F001BAC21EC50F7500CDF9BC /* BarActivityTableViewCell.swift */; };
-		F001BAC51EC51BD400CDF9BC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F001BAC41EC51BD400CDF9BC /* Utilities.swift */; };
 		F0055D691EC5E64B005544B4 /* CityOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0055D681EC5E64B005544B4 /* CityOverviewViewController.swift */; };
 		F03776A21EC3A44100B92E6B /* FakeSpecialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03776A11EC3A44100B92E6B /* FakeSpecialData.swift */; };
 		F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */; };
@@ -124,6 +123,10 @@
 		F0CA18B11EE5AA7900428318 /* CityOverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18B01EE5AA7900428318 /* CityOverviewViewModel.swift */; };
 		F0CA18B31EE5AE7500428318 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18B21EE5AE7500428318 /* Enums.swift */; };
 		F0CA18B51EE5AEEC00428318 /* FloatingBottomTabBar+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18B41EE5AEEC00428318 /* FloatingBottomTabBar+Rx.swift */; };
+		F0CA18B71EE6101200428318 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18B61EE6101200428318 /* TopBar.swift */; };
+		F0CA18BB1EE6108200428318 /* Special.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18BA1EE6108200428318 /* Special.swift */; };
+		F0CA18BD1EE610CB00428318 /* FeaturedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18BC1EE610CB00428318 /* FeaturedEvent.swift */; };
+		F0CA18BF1EE611C100428318 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18BE1EE611C100428318 /* Date.swift */; };
 		F0CF158A1EDEECEE00531DCF /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0CF15891EDEECEE00531DCF /* SignUp.storyboard */; };
 		F0CF158E1EDEED8600531DCF /* NameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF158D1EDEED8600531DCF /* NameViewModel.swift */; };
 		F0CF15901EDEED9600531DCF /* BirthdaySexViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF158F1EDEED9600531DCF /* BirthdaySexViewModel.swift */; };
@@ -205,7 +208,6 @@
 		F001BAB91EC50D2600CDF9BC /* BottomBar_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BottomBar_base.png; sourceTree = "<group>"; };
 		F001BAC01EC50E9700CDF9BC /* BarActivityFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarActivityFeedViewController.swift; sourceTree = "<group>"; };
 		F001BAC21EC50F7500CDF9BC /* BarActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarActivityTableViewCell.swift; sourceTree = "<group>"; };
-		F001BAC41EC51BD400CDF9BC /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		F0055D681EC5E64B005544B4 /* CityOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityOverviewViewController.swift; sourceTree = "<group>"; };
 		F03776A11EC3A44100B92E6B /* FakeSpecialData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeSpecialData.swift; sourceTree = "<group>"; };
 		F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialTableViewCell.swift; sourceTree = "<group>"; };
@@ -281,6 +283,10 @@
 		F0CA18B01EE5AA7900428318 /* CityOverviewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityOverviewViewModel.swift; sourceTree = "<group>"; };
 		F0CA18B21EE5AE7500428318 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		F0CA18B41EE5AEEC00428318 /* FloatingBottomTabBar+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FloatingBottomTabBar+Rx.swift"; sourceTree = "<group>"; };
+		F0CA18B61EE6101200428318 /* TopBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
+		F0CA18BA1EE6108200428318 /* Special.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Special.swift; sourceTree = "<group>"; };
+		F0CA18BC1EE610CB00428318 /* FeaturedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedEvent.swift; sourceTree = "<group>"; };
+		F0CA18BE1EE611C100428318 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		F0CF15891EDEECEE00531DCF /* SignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
 		F0CF158D1EDEED8600531DCF /* NameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameViewModel.swift; sourceTree = "<group>"; };
 		F0CF158F1EDEED9600531DCF /* BirthdaySexViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthdaySexViewModel.swift; sourceTree = "<group>"; };
@@ -507,6 +513,9 @@
 			children = (
 				F098FF9A1EDF1DEA00A59594 /* NewUser.swift */,
 				F04989691EE0661E00064F58 /* BindableType.swift */,
+				F0CA18BA1EE6108200428318 /* Special.swift */,
+				F0CA18B61EE6101200428318 /* TopBar.swift */,
+				F0CA18BC1EE610CB00428318 /* FeaturedEvent.swift */,
 				F0CA18B21EE5AE7500428318 /* Enums.swift */,
 			);
 			name = Models;
@@ -569,7 +578,6 @@
 				F0D797B61ECF837A007BDB9C /* Dallas.gpx */,
 				C034E2C81ECCF0B3008EA4BA /* FakeData */,
 				F04283AB1EC49D4E00CCB5F3 /* Bridging-Header.h */,
-				F001BAC41EC51BD400CDF9BC /* Utilities.swift */,
 				F048F11A1EA3B7A5000F0161 /* AppDelegate.swift */,
 				F001BAB21EC50CDB00CDF9BC /* Designs */,
 				F048F1211EA3B7A5000F0161 /* Assets.xcassets */,
@@ -759,9 +767,9 @@
 		F0D168541ECA62EF0064F642 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				F049896F1EE0746400064F58 /* UINavigationController+Rx.swift */,
 				F0D168521ECA62940064F642 /* MoonColor.swift */,
 				F0E6ED111ECB3C54009508FC /* SearchBar.swift */,
+				F0CA18BE1EE611C100428318 /* Date.swift */,
 				F0EBA0BE1ECCAE9F00056EF9 /* ActionButton.swift */,
 				F0A2251E1ECB9F2600170927 /* MoonFont.swift */,
 			);
@@ -771,6 +779,7 @@
 		F0FD8F351EE1DC600020D131 /* RxExtensions */ = {
 			isa = PBXGroup;
 			children = (
+				F049896F1EE0746400064F58 /* UINavigationController+Rx.swift */,
 				F0FD8F361EE1DC950020D131 /* ErrorTextField+Rx.swift */,
 				F0CA18B41EE5AEEC00428318 /* FloatingBottomTabBar+Rx.swift */,
 			);
@@ -1066,6 +1075,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0CA18BD1EE610CB00428318 /* FeaturedEvent.swift in Sources */,
 				F049896A1EE0661E00064F58 /* BindableType.swift in Sources */,
 				F0CF15981EDEEE8900531DCF /* BrithdaySexViewController.swift in Sources */,
 				F0CF15901EDEED9600531DCF /* BirthdaySexViewModel.swift in Sources */,
@@ -1073,12 +1083,14 @@
 				F0CA18AB1EE5AA4C00428318 /* FeaturedViewModel.swift in Sources */,
 				F04283AD1EC49DB600CCB5F3 /* MainViewController.swift in Sources */,
 				F0CA18971EE58BBD00428318 /* MainViewModel.swift in Sources */,
+				F0CA18B71EE6101200428318 /* TopBar.swift in Sources */,
 				F09B9D081EC3571800B2385A /* ExploreViewController.swift in Sources */,
 				F0942F0D1ECCEC550038E389 /* FeaturedEventCollectionViewCell.swift in Sources */,
 				F0CA18A71EE5AA2A00428318 /* ExploreViewModel.swift in Sources */,
-				F001BAC51EC51BD400CDF9BC /* Utilities.swift in Sources */,
 				F0CA18AD1EE5AA5D00428318 /* MoonsViewViewModel.swift in Sources */,
 				F0CA18B11EE5AA7900428318 /* CityOverviewViewModel.swift in Sources */,
+				F0CA18BB1EE6108200428318 /* Special.swift in Sources */,
+				F0CA18BF1EE611C100428318 /* Date.swift in Sources */,
 				F0CA18A91EE5AA3A00428318 /* SpecialsViewModel.swift in Sources */,
 				F04283B11EC4A96200CCB5F3 /* MoonsViewViewController.swift in Sources */,
 				F044CD551ECE030C00E47138 /* FakeTopBarData.swift in Sources */,

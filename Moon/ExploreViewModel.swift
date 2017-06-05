@@ -26,5 +26,3 @@ struct ExploreViewModel {
         self.sceneCoordinator = coordinator
     }
 }
-
-

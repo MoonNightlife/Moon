@@ -84,7 +84,7 @@ extension BarActivityTableViewCell {
     
     fileprivate func setupTime() {
         if let time = activity.time {
-            self.timeLabel.text = getElaspedTimefromDate(fromDate: time)
+            self.timeLabel.text = time.getElaspedTimefromDate()
             self.timeLabel.textColor = .gray
 
         }

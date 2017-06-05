@@ -13,7 +13,7 @@ struct BarActivity {
     var barId: String?
     var barName: String?
     var name: String?
-    var time: NSDate?
+    var time: Date?
     var username: String?
     var userId: String?
     var activityId: String?

@@ -8,11 +8,6 @@
 
 import UIKit
 
-enum HeartColor {
-    case red
-    case gray
-}
-
 class SpecialTableViewCell: UITableViewCell {
 
     @IBOutlet weak var mainImage: UIImageView!

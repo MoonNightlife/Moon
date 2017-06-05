@@ -17,6 +17,7 @@ target 'Moon' do
   pod 'ActionButton'
   pod 'EZSwipeController'
   pod 'Action', '~> 3.0'
+  pod 'RxDataSources', '~> 1.0'
 
   target 'MoonTests' do
     inherit! :search_paths

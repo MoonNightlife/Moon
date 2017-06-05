@@ -9,31 +9,6 @@
 import Foundation
 import UIKit
 
-enum AlcoholType {
-    case beer
-    case liquor
-    case wine
-}
-
-enum DayOfWeek {
-    case monday
-    case tuesday
-    case wednesday
-    case thursday
-    case friday
-    case saturday
-    case sunday
-}
-
-struct Special {
-    var type: AlcoholType
-    var day: DayOfWeek
-    var description: String
-    var likes: Int
-    var image: UIImage? = UIImage(contentsOfFile: "miller.jpeg")
-    var barName: String
-}
-
 let miller = #imageLiteral(resourceName: "miller.jpeg")
 let budlight = #imageLiteral(resourceName: "budlight.jpeg")
 let pbr = #imageLiteral(resourceName: "pbr.jpeg")
