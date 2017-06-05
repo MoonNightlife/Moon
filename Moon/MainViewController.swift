@@ -1,5 +1,5 @@
 //
-//  MasterViewController.swift
+//  MainViewController.swift
 //  Moon
 //
 //  Created by Evan Noble on 5/11/17.
@@ -19,13 +19,9 @@ enum MainView: Int {
     case explore
 }
 
-class MasterViewController: EZSwipeController {
+class MainViewController: EZSwipeController, BindableType {
     
-    class func instantiateFromStoryboard() -> MasterViewController {
-        let storyboard = UIStoryboard(name: "Master", bundle: nil)
-        // swiftlint:disable:next force_cast
-        return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! MasterViewController
-    }
+    var viewModel: MainViewModel!
 
     @IBOutlet weak var tabBar: FloatingBottomTabBar!
     
@@ -60,9 +56,13 @@ class MasterViewController: EZSwipeController {
         tabBar.delegate = self
     }
     
+    func bindViewModel() {
+        
+    }
+    
 }
 
-extension MasterViewController: FloatingBottomTabBarDelegate {
+extension MainViewController: FloatingBottomTabBarDelegate {
     func showMoonsView() {
         show(view: .moons)
     }
@@ -102,7 +102,7 @@ extension MasterViewController: FloatingBottomTabBarDelegate {
 
 }
 
-extension MasterViewController: EZSwipeControllerDataSource {
+extension MainViewController: EZSwipeControllerDataSource {
     func viewControllerData() -> [UIViewController] {
         let featuredVC = FeaturedViewController.instantiateFromStoryboard()
         let exploreVC = ExploreViewController.instantiateFromStoryboard()
@@ -115,7 +115,7 @@ extension MasterViewController: EZSwipeControllerDataSource {
     }
 }
 
-extension MasterViewController: SearchBarDelegate {
+extension MainViewController: SearchBarDelegate {
     fileprivate func prepareSearchBar() {
         guard let searchBar = searchBarController?.searchBar else {
             return

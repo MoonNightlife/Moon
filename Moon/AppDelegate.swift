@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let sceneCoordinator = SceneCoordinator(window: window!)
         
         let viewModel = LoginViewModel(coordinator: sceneCoordinator)
-        let firstScene = Scene.LoginScene.login(viewModel)
+        let firstScene = Scene.Login.login(viewModel)
         sceneCoordinator.transition(to: firstScene, type: .root)
         
         return true

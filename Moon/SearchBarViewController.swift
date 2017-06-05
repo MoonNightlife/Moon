@@ -8,8 +8,14 @@
 
 import UIKit
 import Material
+import Action
+import RxSwift
+import RxCocoa
 
-class SearchBarViewController: SearchBarController {
+class SearchBarViewController: SearchBarController, BindableType, UIPopoverPresentationControllerDelegate {
+    
+    var viewModel: SearchBarViewModel!
+    
     fileprivate var profileButton: IconButton!
     fileprivate var settingsButton: IconButton!
     fileprivate var searchIcon: IconButton!
@@ -21,6 +27,19 @@ class SearchBarViewController: SearchBarController {
         prepareStatusBar()
         prepapreSearchIcon()
         prepareSearchBar()
+    }
+    
+    func bindViewModel() {
+        profileButton.rx.action = viewModel.onShowProfile()
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+
+        return UIModalPresentationStyle.none
+    }
+    
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        return false
     }
 }
 

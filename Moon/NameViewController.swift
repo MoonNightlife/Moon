@@ -43,9 +43,7 @@ class NameViewController: UIViewController, BindableType {
     func bindViewModel() {
         firstNameTextField.rx.textInput.text.orEmpty.bind(to: viewModel.firstName).addDisposableTo(disposeBag)
         lastNameTextField.rx.textInput.text.orEmpty.bind(to: viewModel.lastName).addDisposableTo(disposeBag)
-        
-        //progressView.progress = 0.25
-        
+
         nextScreenButton.rx.action = viewModel.nextSignUpScreen()
         navBackButton.rx.action = viewModel.onBack()
         
