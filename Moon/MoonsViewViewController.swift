@@ -10,7 +10,9 @@ import UIKit
 import ActionButton
 import Material
 
-class MoonsViewViewController: UIViewController {
+class MoonsViewViewController: UIViewController, BindableType {
+    
+    var viewModel: MoonsViewViewModel!
 
     class func instantiateFromStoryboard() -> MoonsViewViewController {
         let storyboard = UIStoryboard(name: "MoonsView", bundle: nil)
@@ -44,6 +46,9 @@ class MoonsViewViewController: UIViewController {
         //changeViewActionButton.fadeOut()
     }
     
+    func bindViewModel() {
+        
+    }
 }
 
 extension MoonsViewViewController {

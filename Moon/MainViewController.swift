@@ -12,16 +12,13 @@ import MaterialComponents
 import Material
 import Spring
 import EZSwipeController
-
-enum MainView: Int {
-    case featured
-    case moons
-    case explore
-}
+import RxSwift
+import RxCocoa
 
 class MainViewController: EZSwipeController, BindableType {
     
     var viewModel: MainViewModel!
+    private let bag = DisposeBag()
 
     @IBOutlet weak var tabBar: FloatingBottomTabBar!
     
@@ -53,30 +50,30 @@ class MainViewController: EZSwipeController, BindableType {
         // Bring tab bar to front of all other views
         tabBar.superview?.bringSubview(toFront: tabBar)
         tabBar.initializeTabBar()
-        tabBar.delegate = self
     }
     
     func bindViewModel() {
-        
-    }
-    
-}
 
-extension MainViewController: FloatingBottomTabBarDelegate {
-    func showMoonsView() {
-        show(view: .moons)
-    }
-    
-    func showExploreView() {
-        show(view: .explore)
-    }
-    
-    func showFeaturedView() {
-        show(view: .featured)
-    }
-    
-    private func show(view: MainView) {
-        changeColorForTabBarAndSearchBar(nextView: view)
+        tabBar.rx.showExploreView
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.onChangeView().execute(.explore)
+                self.changeColorForTabBarAndSearchBar(nextView: .explore)
+            })
+            .addDisposableTo(bag)
+        
+        tabBar.rx.showFeatured
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.onChangeView().execute(.featured)
+                self.changeColorForTabBarAndSearchBar(nextView: .featured)
+            })
+            .addDisposableTo(bag)
+        
+        tabBar.rx.showMoonsView
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.onChangeView().execute(.moons)
+                self.changeColorForTabBarAndSearchBar(nextView: .moons)
+            })
+            .addDisposableTo(bag)
     }
     
     fileprivate func changeColorForTabBarAndSearchBar(nextView: MainView) {
@@ -99,7 +96,7 @@ extension MainViewController: FloatingBottomTabBarDelegate {
         controller.searchBar.backgroundColor = color
         tabBar.backgroundColor = color
     }
-
+    
 }
 
 extension MainViewController: EZSwipeControllerDataSource {

@@ -28,4 +28,16 @@ enum Scene {
     enum Master: SceneType {
         case main((searchBar: SearchBarViewModel, mainView: MainViewModel))
     }
+    
+    enum Explore: SceneType {
+        case explore(ExploreViewModel)
+    }
+    
+    enum MoonsView: SceneType {
+        case moonsView(MoonsViewViewModel)
+    }
+    
+    enum Featured: SceneType {
+        case featured(FeaturedViewModel)
+    }
 }

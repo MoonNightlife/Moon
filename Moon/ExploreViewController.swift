@@ -11,7 +11,9 @@ import Material
 import PageMenu
 import iCarousel
 
-class ExploreViewController: UIViewController {
+class ExploreViewController: UIViewController, BindableType {
+    
+    var viewModel: ExploreViewModel!
     
     class func instantiateFromStoryboard() -> ExploreViewController {
         let storyboard = UIStoryboard(name: "Explore", bundle: nil)
@@ -42,10 +44,8 @@ class ExploreViewController: UIViewController {
         topBarCarousel.bounces = false
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    
+    func bindViewModel() {
+        
     }
 
 }

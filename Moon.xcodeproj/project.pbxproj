@@ -116,6 +116,14 @@
 		F0CA18951EE5867700428318 /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0CA18941EE5867700428318 /* User.storyboard */; };
 		F0CA18971EE58BBD00428318 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18961EE58BBD00428318 /* MainViewModel.swift */; };
 		F0CA18A51EE58FD400428318 /* SearchBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18A41EE58FD400428318 /* SearchBarViewModel.swift */; };
+		F0CA18A71EE5AA2A00428318 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18A61EE5AA2A00428318 /* ExploreViewModel.swift */; };
+		F0CA18A91EE5AA3A00428318 /* SpecialsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18A81EE5AA3A00428318 /* SpecialsViewModel.swift */; };
+		F0CA18AB1EE5AA4C00428318 /* FeaturedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18AA1EE5AA4C00428318 /* FeaturedViewModel.swift */; };
+		F0CA18AD1EE5AA5D00428318 /* MoonsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18AC1EE5AA5D00428318 /* MoonsViewViewModel.swift */; };
+		F0CA18AF1EE5AA6C00428318 /* BarActivityFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18AE1EE5AA6C00428318 /* BarActivityFeedViewModel.swift */; };
+		F0CA18B11EE5AA7900428318 /* CityOverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18B01EE5AA7900428318 /* CityOverviewViewModel.swift */; };
+		F0CA18B31EE5AE7500428318 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18B21EE5AE7500428318 /* Enums.swift */; };
+		F0CA18B51EE5AEEC00428318 /* FloatingBottomTabBar+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18B41EE5AEEC00428318 /* FloatingBottomTabBar+Rx.swift */; };
 		F0CF158A1EDEECEE00531DCF /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0CF15891EDEECEE00531DCF /* SignUp.storyboard */; };
 		F0CF158E1EDEED8600531DCF /* NameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF158D1EDEED8600531DCF /* NameViewModel.swift */; };
 		F0CF15901EDEED9600531DCF /* BirthdaySexViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF158F1EDEED9600531DCF /* BirthdaySexViewModel.swift */; };
@@ -133,7 +141,7 @@
 		F0FD8F301EE178650020D131 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */; };
 		F0FD8F321EE19D4E0020D131 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F311EE19D4E0020D131 /* ForgotPasswordViewController.swift */; };
 		F0FD8F341EE19D9F0020D131 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F331EE19D9F0020D131 /* ForgotPasswordViewModel.swift */; };
-		F0FD8F371EE1DC950020D131 /* TextField+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F361EE1DC950020D131 /* TextField+Rx.swift */; };
+		F0FD8F371EE1DC950020D131 /* ErrorTextField+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F361EE1DC950020D131 /* ErrorTextField+Rx.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -265,6 +273,14 @@
 		F0CA18941EE5867700428318 /* User.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = User.storyboard; sourceTree = "<group>"; };
 		F0CA18961EE58BBD00428318 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		F0CA18A41EE58FD400428318 /* SearchBarViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarViewModel.swift; sourceTree = "<group>"; };
+		F0CA18A61EE5AA2A00428318 /* ExploreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
+		F0CA18A81EE5AA3A00428318 /* SpecialsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialsViewModel.swift; sourceTree = "<group>"; };
+		F0CA18AA1EE5AA4C00428318 /* FeaturedViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedViewModel.swift; sourceTree = "<group>"; };
+		F0CA18AC1EE5AA5D00428318 /* MoonsViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonsViewViewModel.swift; sourceTree = "<group>"; };
+		F0CA18AE1EE5AA6C00428318 /* BarActivityFeedViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarActivityFeedViewModel.swift; sourceTree = "<group>"; };
+		F0CA18B01EE5AA7900428318 /* CityOverviewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityOverviewViewModel.swift; sourceTree = "<group>"; };
+		F0CA18B21EE5AE7500428318 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		F0CA18B41EE5AEEC00428318 /* FloatingBottomTabBar+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FloatingBottomTabBar+Rx.swift"; sourceTree = "<group>"; };
 		F0CF15891EDEECEE00531DCF /* SignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
 		F0CF158D1EDEED8600531DCF /* NameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameViewModel.swift; sourceTree = "<group>"; };
 		F0CF158F1EDEED9600531DCF /* BirthdaySexViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthdaySexViewModel.swift; sourceTree = "<group>"; };
@@ -282,7 +298,7 @@
 		F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		F0FD8F311EE19D4E0020D131 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		F0FD8F331EE19D9F0020D131 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
-		F0FD8F361EE1DC950020D131 /* TextField+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TextField+Rx.swift"; sourceTree = "<group>"; };
+		F0FD8F361EE1DC950020D131 /* ErrorTextField+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ErrorTextField+Rx.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -491,6 +507,7 @@
 			children = (
 				F098FF9A1EDF1DEA00A59594 /* NewUser.swift */,
 				F04989691EE0661E00064F58 /* BindableType.swift */,
+				F0CA18B21EE5AE7500428318 /* Enums.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -539,9 +556,9 @@
 				F0CA189E1EE58CC400428318 /* Login */,
 				F0CA189F1EE58CCB00428318 /* User */,
 				F0CA18A01EE58CD000428318 /* Master */,
+				F0CA18A11EE58CD500428318 /* Explore */,
 				F0CA18A21EE58CDD00428318 /* Featured */,
 				F0CA18A31EE58CE300428318 /* MoonsView */,
-				F0CA18A11EE58CD500428318 /* Explore */,
 			);
 			name = "View Models";
 			sourceTree = "<group>";
@@ -693,6 +710,8 @@
 		F0CA18A11EE58CD500428318 /* Explore */ = {
 			isa = PBXGroup;
 			children = (
+				F0CA18A61EE5AA2A00428318 /* ExploreViewModel.swift */,
+				F0CA18A81EE5AA3A00428318 /* SpecialsViewModel.swift */,
 			);
 			name = Explore;
 			sourceTree = "<group>";
@@ -700,6 +719,7 @@
 		F0CA18A21EE58CDD00428318 /* Featured */ = {
 			isa = PBXGroup;
 			children = (
+				F0CA18AA1EE5AA4C00428318 /* FeaturedViewModel.swift */,
 			);
 			name = Featured;
 			sourceTree = "<group>";
@@ -707,6 +727,9 @@
 		F0CA18A31EE58CE300428318 /* MoonsView */ = {
 			isa = PBXGroup;
 			children = (
+				F0CA18AC1EE5AA5D00428318 /* MoonsViewViewModel.swift */,
+				F0CA18AE1EE5AA6C00428318 /* BarActivityFeedViewModel.swift */,
+				F0CA18B01EE5AA7900428318 /* CityOverviewViewModel.swift */,
 			);
 			name = MoonsView;
 			sourceTree = "<group>";
@@ -748,7 +771,8 @@
 		F0FD8F351EE1DC600020D131 /* RxExtensions */ = {
 			isa = PBXGroup;
 			children = (
-				F0FD8F361EE1DC950020D131 /* TextField+Rx.swift */,
+				F0FD8F361EE1DC950020D131 /* ErrorTextField+Rx.swift */,
+				F0CA18B41EE5AEEC00428318 /* FloatingBottomTabBar+Rx.swift */,
 			);
 			name = RxExtensions;
 			sourceTree = "<group>";
@@ -1046,11 +1070,16 @@
 				F0CF15981EDEEE8900531DCF /* BrithdaySexViewController.swift in Sources */,
 				F0CF15901EDEED9600531DCF /* BirthdaySexViewModel.swift in Sources */,
 				F0F210591ECA1C160027B50B /* SearchBarViewController.swift in Sources */,
+				F0CA18AB1EE5AA4C00428318 /* FeaturedViewModel.swift in Sources */,
 				F04283AD1EC49DB600CCB5F3 /* MainViewController.swift in Sources */,
 				F0CA18971EE58BBD00428318 /* MainViewModel.swift in Sources */,
 				F09B9D081EC3571800B2385A /* ExploreViewController.swift in Sources */,
 				F0942F0D1ECCEC550038E389 /* FeaturedEventCollectionViewCell.swift in Sources */,
+				F0CA18A71EE5AA2A00428318 /* ExploreViewModel.swift in Sources */,
 				F001BAC51EC51BD400CDF9BC /* Utilities.swift in Sources */,
+				F0CA18AD1EE5AA5D00428318 /* MoonsViewViewModel.swift in Sources */,
+				F0CA18B11EE5AA7900428318 /* CityOverviewViewModel.swift in Sources */,
+				F0CA18A91EE5AA3A00428318 /* SpecialsViewModel.swift in Sources */,
 				F04283B11EC4A96200CCB5F3 /* MoonsViewViewController.swift in Sources */,
 				F044CD551ECE030C00E47138 /* FakeTopBarData.swift in Sources */,
 				F0CF15961EDEEE7B00531DCF /* NameViewController.swift in Sources */,
@@ -1065,6 +1094,7 @@
 				C034E2C71ECCF09D008EA4BA /* FakeUserData.swift in Sources */,
 				F04989681EE0653D00064F58 /* Scene+ViewController.swift in Sources */,
 				F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */,
+				F0CA18B51EE5AEEC00428318 /* FloatingBottomTabBar+Rx.swift in Sources */,
 				F04989661EE0651800064F58 /* SceneCoordinatorType.swift in Sources */,
 				F0D168531ECA62940064F642 /* MoonColor.swift in Sources */,
 				F0CA18A51EE58FD400428318 /* SearchBarViewModel.swift in Sources */,
@@ -1080,8 +1110,10 @@
 				F03776A21EC3A44100B92E6B /* FakeSpecialData.swift in Sources */,
 				F0A8E2D81EC3C6B2001D9993 /* ImageViewCell.swift in Sources */,
 				F0942F0B1ECCEBA40038E389 /* FakeEventData.swift in Sources */,
-				F0FD8F371EE1DC950020D131 /* TextField+Rx.swift in Sources */,
+				F0FD8F371EE1DC950020D131 /* ErrorTextField+Rx.swift in Sources */,
+				F0CA18AF1EE5AA6C00428318 /* BarActivityFeedViewModel.swift in Sources */,
 				F0CF158E1EDEED8600531DCF /* NameViewModel.swift in Sources */,
+				F0CA18B31EE5AE7500428318 /* Enums.swift in Sources */,
 				F049896E1EE068E000064F58 /* SceneCoordinator.swift in Sources */,
 				F0055D691EC5E64B005544B4 /* CityOverviewViewController.swift in Sources */,
 				F04989641EE0641300064F58 /* Scene.swift in Sources */,

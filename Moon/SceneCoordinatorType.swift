@@ -19,6 +19,9 @@ protocol SceneCoordinatorType {
     /// pop scene from navigation stack or dismiss current modal
     @discardableResult
     func pop(animated: Bool) -> Observable<Void>
+    
+    @discardableResult
+    func tab(to scene: MainView) -> Observable<Void>
 }
 
 extension SceneCoordinatorType {

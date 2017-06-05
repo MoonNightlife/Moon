@@ -21,14 +21,15 @@ struct BarActivity {
     var profileImage: String?
 }
 
-class BarActivityFeedViewController: UITableViewController {
+class BarActivityFeedViewController: UITableViewController, BindableType {
     
     class func instantiateFromStoryboard() -> BarActivityFeedViewController {
         let storyboard = UIStoryboard(name: "MoonsView", bundle: nil)
         // swiftlint:disable:next force_cast
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! BarActivityFeedViewController
     }
-
+    
+    var viewModel: BarActivityFeedViewModel!
     var activities = [BarActivity]()
     let barActivityCellIdenifier = "barActivityCell"
     
@@ -50,6 +51,10 @@ class BarActivityFeedViewController: UITableViewController {
     @objc fileprivate func reloadUsersBarFeed() {
         refreshControl?.endRefreshing()
         print("Should reload here")
+    }
+    
+    func bindViewModel() {
+        
     }
 
 }

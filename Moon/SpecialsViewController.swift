@@ -8,10 +8,11 @@
 
 import UIKit
 
-class SpecialsViewController: UIViewController {
+class SpecialsViewController: UIViewController, BindableType {
     
     let specialCellIdenifier = "SpecialCell"
     var specialData = [Special]()
+    var viewModel: SpecialsViewModel!
     
     @IBOutlet weak var specialsTableView: UITableView!
     class func instantiateFromStoryboard() -> SpecialsViewController {
@@ -27,20 +28,9 @@ class SpecialsViewController: UIViewController {
         specialsTableView.reloadData()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func bindViewModel() {
+        
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

@@ -25,4 +25,22 @@ struct MainViewModel {
     init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator
     }
+    
+    func onChangeView() -> Action<MainView, Void> {
+        return Action(workFactory: {
+//            var scene: SceneType
+//            switch $0 {
+//            case .explore:
+//                let vm = ExploreViewModel(coordinator: self.sceneCoordinator)
+//                scene = Scene.Explore.explore(vm)
+//            case .featured:
+//                let vm = FeaturedViewModel(coordinator: self.sceneCoordinator)
+//                scene = Scene.Featured.featured(vm)
+//            case .moons:
+//                let vm = MoonsViewViewModel(coordinator: self.sceneCoordinator)
+//                scene = Scene.MoonsView.moonsView(vm)
+//            }
+            return self.sceneCoordinator.tab(to: $0)
+        })
+    }
 }

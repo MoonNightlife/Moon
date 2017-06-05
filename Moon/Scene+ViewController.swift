@@ -79,3 +79,39 @@ extension Scene.Master {
         }
     }
 }
+
+extension Scene.Featured {
+    func viewController() -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Featured", bundle: nil)
+        switch self {
+        case .featured(let viewModel):
+            var vc = storyBoard.instantiateViewController(withIdentifier: "Featured") as! FeaturedViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        }
+    }
+}
+
+extension Scene.Explore {
+    func viewController() -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Featured", bundle: nil)
+        switch self {
+        case .explore(let viewModel):
+            var vc = storyBoard.instantiateViewController(withIdentifier: "Explore") as! ExploreViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        }
+    }
+}
+
+extension Scene.MoonsView {
+    func viewController() -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Featured", bundle: nil)
+        switch self {
+        case .moonsView(let viewModel):
+            var vc = storyBoard.instantiateViewController(withIdentifier: "MoonsView") as! MoonsViewViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        }
+    }
+}
