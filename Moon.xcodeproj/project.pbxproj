@@ -25,6 +25,13 @@
 		C0552C5C1EE0922A007B84F6 /* Moon_Title2.png in Resources */ = {isa = PBXBuildFile; fileRef = C0552C5B1EE0922A007B84F6 /* Moon_Title2.png */; };
 		C0552C661EE0A1FB007B84F6 /* facebookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C0552C651EE0A1FB007B84F6 /* facebookButton.png */; };
 		C0552C681EE0A200007B84F6 /* googleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C0552C671EE0A200007B84F6 /* googleButton.png */; };
+		C0DAD30B1EE5EBC4008BAF05 /* ProfileFakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DAD30A1EE5EBC4008BAF05 /* ProfileFakeData.swift */; };
+		C0DAD3101EE5EDD5008BAF05 /* pp1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0DAD30F1EE5EDD5008BAF05 /* pp1.jpg */; };
+		C0DAD3121EE5EDDB008BAF05 /* pp2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0DAD3111EE5EDDB008BAF05 /* pp2.jpg */; };
+		C0DAD3141EE5EDE1008BAF05 /* pp3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0DAD3131EE5EDE1008BAF05 /* pp3.jpg */; };
+		C0DAD3161EE5EDE9008BAF05 /* pp4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0DAD3151EE5EDE9008BAF05 /* pp4.jpg */; };
+		C0DAD3181EE5EDEF008BAF05 /* pp5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0DAD3171EE5EDEF008BAF05 /* pp5.jpg */; };
+		C0DAD3211EE62DE2008BAF05 /* bioBase.png in Resources */ = {isa = PBXBuildFile; fileRef = C0DAD3201EE62DE2008BAF05 /* bioBase.png */; };
 		C0FC62721ECF50C30087FA3B /* s1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0FC62681ECF50C30087FA3B /* s1.jpg */; };
 		C0FC62731ECF50C30087FA3B /* s10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0FC62691ECF50C30087FA3B /* s10.jpg */; };
 		C0FC62741ECF50C30087FA3B /* s11.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0FC626A1ECF50C30087FA3B /* s11.jpg */; };
@@ -168,6 +175,13 @@
 		C0552C5B1EE0922A007B84F6 /* Moon_Title2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Moon_Title2.png; sourceTree = "<group>"; };
 		C0552C651EE0A1FB007B84F6 /* facebookButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebookButton.png; sourceTree = "<group>"; };
 		C0552C671EE0A200007B84F6 /* googleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = googleButton.png; sourceTree = "<group>"; };
+		C0DAD30A1EE5EBC4008BAF05 /* ProfileFakeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFakeData.swift; sourceTree = "<group>"; };
+		C0DAD30F1EE5EDD5008BAF05 /* pp1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pp1.jpg; sourceTree = "<group>"; };
+		C0DAD3111EE5EDDB008BAF05 /* pp2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pp2.jpg; sourceTree = "<group>"; };
+		C0DAD3131EE5EDE1008BAF05 /* pp3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pp3.jpg; sourceTree = "<group>"; };
+		C0DAD3151EE5EDE9008BAF05 /* pp4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pp4.jpg; sourceTree = "<group>"; };
+		C0DAD3171EE5EDEF008BAF05 /* pp5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pp5.jpg; sourceTree = "<group>"; };
+		C0DAD3201EE62DE2008BAF05 /* bioBase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bioBase.png; sourceTree = "<group>"; };
 		C0FC62681ECF50C30087FA3B /* s1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = s1.jpg; sourceTree = "<group>"; };
 		C0FC62691ECF50C30087FA3B /* s10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = s10.jpg; sourceTree = "<group>"; };
 		C0FC626A1ECF50C30087FA3B /* s11.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = s11.jpg; sourceTree = "<group>"; };
@@ -317,6 +331,7 @@
 		C034E2C81ECCF0B3008EA4BA /* FakeData */ = {
 			isa = PBXGroup;
 			children = (
+				C0DAD30E1EE5EDBA008BAF05 /* Fake Profile Pics */,
 				C0FC62821ECF69730087FA3B /* EventPics */,
 				C0FC62671ECF50C30087FA3B /* SpecialPictures */,
 				F0A8E2D91EC3C858001D9993 /* FakeBarImages */,
@@ -325,6 +340,7 @@
 				F044CD541ECE030C00E47138 /* FakeTopBarData.swift */,
 				F03776A11EC3A44100B92E6B /* FakeSpecialData.swift */,
 				F0942F0A1ECCEBA40038E389 /* FakeEventData.swift */,
+				C0DAD30A1EE5EBC4008BAF05 /* ProfileFakeData.swift */,
 			);
 			name = FakeData;
 			sourceTree = "<group>";
@@ -357,6 +373,26 @@
 				C0296B0A1EDF16A60074F0FA /* Web_Background.png */,
 			);
 			name = "Login Images";
+			sourceTree = "<group>";
+		};
+		C0DAD30E1EE5EDBA008BAF05 /* Fake Profile Pics */ = {
+			isa = PBXGroup;
+			children = (
+				C0DAD3111EE5EDDB008BAF05 /* pp2.jpg */,
+				C0DAD30F1EE5EDD5008BAF05 /* pp1.jpg */,
+				C0DAD3131EE5EDE1008BAF05 /* pp3.jpg */,
+				C0DAD3171EE5EDEF008BAF05 /* pp5.jpg */,
+				C0DAD3151EE5EDE9008BAF05 /* pp4.jpg */,
+			);
+			name = "Fake Profile Pics";
+			sourceTree = "<group>";
+		};
+		C0DAD3191EE62B4B008BAF05 /* Profile Images */ = {
+			isa = PBXGroup;
+			children = (
+				C0DAD3201EE62DE2008BAF05 /* bioBase.png */,
+			);
+			name = "Profile Images";
 			sourceTree = "<group>";
 		};
 		C0FC62671ECF50C30087FA3B /* SpecialPictures */ = {
@@ -450,6 +486,7 @@
 		F048F1191EA3B7A5000F0161 /* Moon */ = {
 			isa = PBXGroup;
 			children = (
+				C0DAD3191EE62B4B008BAF05 /* Profile Images */,
 				F04989621EE063F400064F58 /* Scenes */,
 				F098FF9C1EDF46EF00A59594 /* Utilities */,
 				F098FF991EDF1DDA00A59594 /* Models */,
@@ -878,16 +915,19 @@
 				F001BABE1EC50D2600CDF9BC /* Profile_base.png in Resources */,
 				C0FC627F1ECF53560087FA3B /* s8.jpg in Resources */,
 				C0FC628A1ECF69730087FA3B /* e2.jpg in Resources */,
+				C0DAD3181EE5EDEF008BAF05 /* pp5.jpg in Resources */,
 				F0CF158A1EDEECEE00531DCF /* SignUp.storyboard in Resources */,
 				C0FC62791ECF50C30087FA3B /* s3.jpg in Resources */,
 				F0A2252E1ECBAA3E00170927 /* bacardi.jpeg in Resources */,
 				F0CA18951EE5867700428318 /* User.storyboard in Resources */,
 				F0A8E2EB1EC3C858001D9993 /* Pic7.jpg in Resources */,
 				C0FC62731ECF50C30087FA3B /* s10.jpg in Resources */,
+				C0DAD3211EE62DE2008BAF05 /* bioBase.png in Resources */,
 				F001BABF1EC50D2600CDF9BC /* BottomBar_base.png in Resources */,
 				C0465DB41EDF20DC0065FD7C /* Moon_Title.png in Resources */,
 				C0FC627A1ECF50C30087FA3B /* s4.jpg in Resources */,
 				C034E2D51ECCF37C008EA4BA /* p6.jpg in Resources */,
+				C0DAD3101EE5EDD5008BAF05 /* pp1.jpg in Resources */,
 				C0FC62771ECF50C30087FA3B /* s14.jpg in Resources */,
 				C0FC628E1ECF69730087FA3B /* e6.jpg in Resources */,
 				F001BABA1EC50D2600CDF9BC /* feed_base.png in Resources */,
@@ -905,14 +945,17 @@
 				F0A2252F1ECBAA3E00170927 /* budlight.jpeg in Resources */,
 				F001BABD1EC50D2600CDF9BC /* Header_base.png in Resources */,
 				F09B9D061EC356BA00B2385A /* Explore.storyboard in Resources */,
+				C0DAD3141EE5EDE1008BAF05 /* pp3.jpg in Resources */,
 				F0A8E2E31EC3C858001D9993 /* button.png in Resources */,
 				F001BABB1EC50D2600CDF9BC /* moons_view_base.png in Resources */,
 				F0A8E2E41EC3C858001D9993 /* eventButton.png in Resources */,
 				C0FC62741ECF50C30087FA3B /* s11.jpg in Resources */,
 				C034E2CF1ECCF301008EA4BA /* p2.jpg in Resources */,
 				C0FC62891ECF69730087FA3B /* e1.jpg in Resources */,
+				C0DAD3161EE5EDE9008BAF05 /* pp4.jpg in Resources */,
 				F03830601EC63C7300A0FF5D /* Master.storyboard in Resources */,
 				F0A2253A1ECBAAE300170927 /* whitewine.jpeg in Resources */,
+				C0DAD3121EE5EDDB008BAF05 /* pp2.jpg in Resources */,
 				C0465DB81EDF43B70065FD7C /* OR_icon.png in Resources */,
 				C0FC628B1ECF69730087FA3B /* e3.jpg in Resources */,
 				F048F1201EA3B7A5000F0161 /* Login.storyboard in Resources */,
@@ -1088,6 +1131,7 @@
 				F0CF159C1EDEEEA100531DCF /* PasswordsViewController.swift in Sources */,
 				F048F11B1EA3B7A5000F0161 /* AppDelegate.swift in Sources */,
 				F0EBA0BF1ECCAE9F00056EF9 /* ActionButton.swift in Sources */,
+				C0DAD30B1EE5EBC4008BAF05 /* ProfileFakeData.swift in Sources */,
 				F0FD8F321EE19D4E0020D131 /* ForgotPasswordViewController.swift in Sources */,
 				F0FD8F341EE19D9F0020D131 /* ForgotPasswordViewModel.swift in Sources */,
 				F098FF9E1EDF47D400A59594 /* ValidationUtility.swift in Sources */,
