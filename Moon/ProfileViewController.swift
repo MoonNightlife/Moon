@@ -23,6 +23,7 @@ class ProfileViewController: UIViewController, BindableType {
     @IBOutlet weak var toolBar: Toolbar!
     @IBOutlet weak var planLabel: TextField!
     @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var pageController: UIPageControl!
     
     var friendsButton: IconButton!
     
@@ -34,6 +35,7 @@ class ProfileViewController: UIViewController, BindableType {
         fakeUser = FakeUser(firstName: "Marisol", lastName: "Leiva", city: "Dallas", username: "marisolleiva", pics: pics, bio:"Mexico -> SMU 2018 | KKG | Tequila Lover", plan: "The Standard Pour")
         
         setupCarousel()
+        setUpPageController()
         setUpEditProfileButton()
         setUpExitButton()
         setUpFriendsButton()
@@ -44,13 +46,17 @@ class ProfileViewController: UIViewController, BindableType {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
     @IBOutlet weak var exitButton: UIButton!
 
     func bindViewModel() {
         dismissButton.rx.action = viewModel.onDismiss()
+    }
+    
+    private func setUpPageController() {
+        pageController.numberOfPages = pics.count
+        pageController.currentPageIndicatorTintColor = .white
+        pageController.pageIndicatorTintColor = .lightGray
+        pageController.currentPage = 0
     }
     
     private func setupCarousel() {
@@ -120,11 +126,16 @@ extension ProfileViewController: iCarouselDataSource, iCarouselDelegate {
         return pics.count
     }
     
+    func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
+        pageController.currentPage = carousel.currentItemIndex
+    }
+    
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         let profilePic = BottomGradientImageView(frame: carousel.frame)
         profilePic.image = UIImage(named: pics[index])
         //profilePic.contentMode = UIViewContentMode.scaleAspectFill
-        
+        print(index)
+   
         return profilePic
     }
 }
