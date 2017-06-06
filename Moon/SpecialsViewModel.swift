@@ -9,6 +9,9 @@
 import Foundation
 import RxSwift
 import Action
+import RxDataSources
+
+typealias SpecialSection = AnimatableSectionModel<String, Special>
 
 struct SpecialsViewModel {
     
@@ -21,8 +24,18 @@ struct SpecialsViewModel {
     // Inputs
     
     // Outputs
+    var specials: Observable<[SpecialSection]>
     
     init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator
+        
+        specials = Observable.just([SpecialSection(model: "", items: fakeSpecials)])
+    }
+    
+    func onLike() -> CocoaAction {
+        return CocoaAction {
+            print("Liked Special")
+            return Observable.empty()
+        }
     }
 }

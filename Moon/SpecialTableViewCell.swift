@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Action
 
 class SpecialTableViewCell: UITableViewCell {
 
@@ -21,7 +22,7 @@ class SpecialTableViewCell: UITableViewCell {
         // Initialization code
     }
      
-    func initilizeSpecialCellWith(data: Special) {
+    func initilizeSpecialCellWith(data: Special, likeAction: CocoaAction) {
         setupImageView()
         
         mainImage.image = data.image

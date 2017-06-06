@@ -16,7 +16,7 @@ struct MainViewModel {
     private let disposeBag = DisposeBag()
     
     // Dependencies
-    private let sceneCoordinator: SceneCoordinatorType
+    let sceneCoordinator: SceneCoordinatorType
     
     // Inputs
     
@@ -28,19 +28,19 @@ struct MainViewModel {
     
     func onChangeView() -> Action<MainView, Void> {
         return Action(workFactory: {
-//            var scene: SceneType
-//            switch $0 {
-//            case .explore:
-//                let vm = ExploreViewModel(coordinator: self.sceneCoordinator)
-//                scene = Scene.Explore.explore(vm)
-//            case .featured:
-//                let vm = FeaturedViewModel(coordinator: self.sceneCoordinator)
-//                scene = Scene.Featured.featured(vm)
-//            case .moons:
-//                let vm = MoonsViewViewModel(coordinator: self.sceneCoordinator)
-//                scene = Scene.MoonsView.moonsView(vm)
-//            }
             return self.sceneCoordinator.tab(to: $0)
         })
+    }
+    
+    func viewModelForExplore() -> ExploreViewModel {
+        return ExploreViewModel(coordinator: sceneCoordinator)
+    }
+    
+    func viewModelForFeatured() -> FeaturedViewModel {
+        return FeaturedViewModel(coordinator: sceneCoordinator)
+    }
+    
+    func viewModelForMoonsView() -> MoonsViewViewModel {
+        return MoonsViewViewModel(coordinator: sceneCoordinator)
     }
 }

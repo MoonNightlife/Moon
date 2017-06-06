@@ -25,4 +25,8 @@ struct ExploreViewModel {
     init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator
     }
+    
+    func createSpecialViewModel() -> SpecialsViewModel {
+        return SpecialsViewModel(coordinator: sceneCoordinator)
+    }
 }

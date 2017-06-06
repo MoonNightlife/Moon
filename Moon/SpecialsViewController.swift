@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import RxDataSources
+import RxSwift
 
 class SpecialsViewController: UIViewController, BindableType {
     
     let specialCellIdenifier = "SpecialCell"
     var specialData = [Special]()
     var viewModel: SpecialsViewModel!
+    let disposeBag = DisposeBag()
+    let dataSource = RxTableViewSectionedAnimatedDataSource<SpecialSection>()
     
     @IBOutlet weak var specialsTableView: UITableView!
     class func instantiateFromStoryboard() -> SpecialsViewController {
@@ -26,27 +30,22 @@ class SpecialsViewController: UIViewController, BindableType {
 
         // Do any additional setup after loading the view.
         specialsTableView.reloadData()
+        configureDataSource()
     }
 
     func bindViewModel() {
-        
-    }
-
-}
-
-extension SpecialsViewController: UITableViewDelegate {
-    
-}
-
-extension SpecialsViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return specialData.count
+        viewModel.specials.bind(to: specialsTableView.rx.items(dataSource: dataSource)).addDisposableTo(disposeBag)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //swiftlint:disable:next force_cast
-        let cell = tableView.dequeueReusableCell(withIdentifier: specialCellIdenifier, for: indexPath) as! SpecialTableViewCell
-        cell.initilizeSpecialCellWith(data: specialData[indexPath.row])
-        return cell
+    func configureDataSource() {
+        dataSource.configureCell = { [weak self] dataSource, tableView, indexPath, item in
+            //swiftlint:disable force_cast
+            let cell = tableView.dequeueReusableCell(withIdentifier: self!.specialCellIdenifier, for: indexPath) as! SpecialTableViewCell
+            if let strongSelf = self {
+                cell.initilizeSpecialCellWith(data: item, likeAction: strongSelf.viewModel.onLike())
+            }
+            return cell
+        }
     }
+
 }

@@ -52,17 +52,20 @@ class ExploreViewController: UIViewController, BindableType {
 
 extension ExploreViewController {
     fileprivate func setupPagingMenuController() {
-        let beerSpecialsController = SpecialsViewController.instantiateFromStoryboard()
+        var beerSpecialsController = SpecialsViewController.instantiateFromStoryboard()
+        beerSpecialsController.bindViewModel(to: viewModel.createSpecialViewModel())
         beerSpecialsController.title = "Beer"
         beerSpecialsController.specialData = fakeSpecials.filter({$0.type == .beer})
         controllerArray.append(beerSpecialsController)
         
-        let liquorSpecialsController = SpecialsViewController.instantiateFromStoryboard()
+        var liquorSpecialsController = SpecialsViewController.instantiateFromStoryboard()
+        liquorSpecialsController.bindViewModel(to: viewModel.createSpecialViewModel())
         liquorSpecialsController.title = "Liquor"
         liquorSpecialsController.specialData = fakeSpecials.filter({$0.type == .liquor})
         controllerArray.append(liquorSpecialsController)
         
-        let wineSpecialsController = SpecialsViewController.instantiateFromStoryboard()
+        var wineSpecialsController = SpecialsViewController.instantiateFromStoryboard()
+        wineSpecialsController.bindViewModel(to: viewModel.createSpecialViewModel())
         wineSpecialsController.title = "Wine"
         wineSpecialsController.specialData = fakeSpecials.filter({$0.type == .wine})
         controllerArray.append(wineSpecialsController)

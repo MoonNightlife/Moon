@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import RxDataSources
 
 struct Special {
     let type: AlcoholType
@@ -16,4 +17,17 @@ struct Special {
     let likes: Int
     let image: UIImage
     let barName: String
+    var id: String?
+}
+
+extension Special: Equatable {
+    static func ==(lhs: Special, rhs: Special) -> Bool {
+        return lhs.id == rhs.id && lhs.likes == rhs.likes
+    }
+}
+
+extension Special: IdentifiableType {
+    var identity: String {
+        return id ?? "0"
+    }
 }

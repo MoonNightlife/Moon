@@ -172,6 +172,9 @@ PODS:
   - PageMenu (2.0.0)
   - RxCocoa (3.4.0):
     - RxSwift (~> 3.4)
+  - RxDataSources (1.0.3):
+    - RxCocoa (~> 3.0)
+    - RxSwift (~> 3.0)
   - RxSwift (3.4.0)
   - Spring (1.0.3)
   - SwiftLint (0.18.1)
@@ -185,6 +188,7 @@ DEPENDENCIES:
   - MaterialComponents
   - PageMenu
   - RxCocoa
+  - RxDataSources (~> 1.0)
   - RxSwift
   - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
   - SwiftLint
@@ -214,10 +218,11 @@ SPEC CHECKSUMS:
   MDFTextAccessibility: 94098925e0853551c5a311ce7c1ecefbe297cdb6
   PageMenu: 9c38fd7e0d9ef4b1408320f55bb907bbc0e538dc
   RxCocoa: d14ef6b6029e1ddc6e966508c09289090de68ff9
+  RxDataSources: a021a0e944ba5f7991259829d973afdbfa719c0b
   RxSwift: 3789a1af753002a14edecdb698a2424624296a9c
   Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
 
-PODFILE CHECKSUM: 2e7c19d7a4eb8d2d629d0ff5da31e4060358682e
+PODFILE CHECKSUM: 73cb659a5d2724fbe57dd8bb72ec3984f9517032
 
 COCOAPODS: 1.1.1

@@ -8,7 +8,10 @@
 
 import Foundation
 import RxSwift
+import RxDataSources
 import Action
+
+typealias ActivitySection = AnimatableSectionModel<String, BarActivity>
 
 struct BarActivityFeedViewModel {
     
@@ -21,8 +24,43 @@ struct BarActivityFeedViewModel {
     // Inputs
     
     // Outputs
+    lazy var refreshAction: Action<Void, [ActivitySection]> = {
+        return Action { _ in
+            let section = [ActivitySection(model: "", items: createFakeBarActivities().slice(start: Int(arc4random_uniform(UInt32(createFakeBarActivities().count-1))), end: createFakeBarActivities().count-1))]
+            return Observable.just(section)
+        }
+    }()
     
     init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator
+
+    }
+    
+    func onLike(activity: BarActivity) -> CocoaAction {
+        return CocoaAction {
+            print("Show \(activity)")
+            return Observable.empty()
+        }
+    }
+    
+    func onViewUser(activity: BarActivity) -> CocoaAction {
+        return CocoaAction {
+            print("Show \(activity)")
+            return Observable.empty()
+        }
+    }
+    
+    func onViewBar(activity: BarActivity) -> CocoaAction {
+        return CocoaAction {
+            print("Show \(activity)")
+            return Observable.empty()
+        }
+    }
+    
+    func onViewLikers(activity: BarActivity) -> CocoaAction {
+        return CocoaAction {
+            print("Show \(activity)")
+            return Observable.empty()
+        }
     }
 }

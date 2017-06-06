@@ -101,9 +101,14 @@ class MainViewController: EZSwipeController, BindableType {
 
 extension MainViewController: EZSwipeControllerDataSource {
     func viewControllerData() -> [UIViewController] {
-        let featuredVC = FeaturedViewController.instantiateFromStoryboard()
-        let exploreVC = ExploreViewController.instantiateFromStoryboard()
-        let moonsViewVC = MoonsViewViewController.instantiateFromStoryboard()
+        // This should be done in the view model/scene coordinator
+        var featuredVC = FeaturedViewController.instantiateFromStoryboard()
+        let featuredVM = viewModel.viewModelForFeatured()
+        featuredVC.bindViewModel(to: featuredVM)
+        var exploreVC = ExploreViewController.instantiateFromStoryboard()
+        exploreVC.bindViewModel(to: viewModel.viewModelForExplore())
+        var moonsViewVC = MoonsViewViewController.instantiateFromStoryboard()
+        moonsViewVC.bindViewModel(to: viewModel.viewModelForMoonsView())
         return [featuredVC, moonsViewVC, exploreVC]
     }
     

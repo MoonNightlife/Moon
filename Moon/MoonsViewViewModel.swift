@@ -25,4 +25,12 @@ struct MoonsViewViewModel {
     init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator
     }
+    
+    func createBarActivityFeedViewMode() -> BarActivityFeedViewModel {
+        return BarActivityFeedViewModel(coordinator: sceneCoordinator)
+    }
+    
+    func createCityOverviewViewMode() -> CityOverviewViewModel {
+        return CityOverviewViewModel(coordinator: sceneCoordinator)
+    }
 }
