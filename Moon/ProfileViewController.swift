@@ -20,8 +20,9 @@ class ProfileViewController: UIViewController, BindableType {
     @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var editProfileButton: UIButton!
     @IBOutlet weak var bioLabel: UILabel!
-    @IBOutlet weak var planLabel: UILabel!
     @IBOutlet weak var toolBar: Toolbar!
+    @IBOutlet weak var planLabel: TextField!
+    @IBOutlet weak var usernameLabel: UILabel!
     
     var friendsButton: IconButton!
     
@@ -30,13 +31,16 @@ class ProfileViewController: UIViewController, BindableType {
 
         // Do any additional setup after loading the view.
         pics = ["pp1.jpg", "pp2.jpg", "pp3.jpg", "pp4.jpg", "pp5.jpg"]
-        fakeUser = FakeUser(firstName: "Marisol", lastName: "Leiva", city: "Dallas", username: "marisolleiva95", pics: pics, bio:"SMU 2018 | Kappa | Mexico", plan: "The Standard Pour")
+        fakeUser = FakeUser(firstName: "Marisol", lastName: "Leiva", city: "Dallas", username: "marisolleiva", pics: pics, bio:"Mexico -> SMU 2018 | KKG | Tequila Lover", plan: "The Standard Pour")
         
         setupCarousel()
         setUpEditProfileButton()
         setUpExitButton()
         setUpFriendsButton()
+        setUpBioLabel()
+        setUpPlanLabel()
         setUpToolBar()
+        setUpUsernameLabel()
         
     }
     
@@ -63,11 +67,36 @@ class ProfileViewController: UIViewController, BindableType {
     }
     
     private func setUpExitButton() {
+        exitButton.setBackgroundImage(Icon.cm.close, for: .normal)
         exitButton.tintColor = .moonRed
     }
     
     private func setUpFriendsButton() {
         friendsButton = IconButton(image: #imageLiteral(resourceName: "friendsIcon"))
+    }
+    
+    private func setUpBioLabel() {
+        bioLabel.textColor = .lightGray
+        bioLabel.text = fakeUser.bio
+    }
+    
+    private func setUpUsernameLabel() {
+        usernameLabel.text = fakeUser.username
+        usernameLabel.textColor = .lightGray
+    }
+    
+    private func setUpPlanLabel() {
+        planLabel.placeholder = fakeUser.plan
+        planLabel.isUserInteractionEnabled = false
+        planLabel.placeholderNormalColor = .lightGray
+        planLabel.dividerNormalColor = .clear
+
+        let leftView = UIImageView()
+        leftView.image = #imageLiteral(resourceName: "LocationIcon")
+        leftView.image = leftView.image?.withRenderingMode(.alwaysTemplate)
+        planLabel.leftView = leftView
+        planLabel.leftViewNormalColor = .moonPurple
+       
     }
     
     private func setUpToolBar() {
