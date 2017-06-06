@@ -13,8 +13,9 @@ import MaterialComponents.MaterialTypography
 import Material
 import iCarousel
 
-class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, BindableType {
     
+    var viewModel: FeaturedViewModel!
     let featuredCellIdenifier = "featuredEventCell"
     
     @IBOutlet weak var eventCollectionView: UICollectionView!
@@ -29,6 +30,10 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
         super.viewDidLoad()
         
         eventCollectionView.backgroundColor = Color.grey.lighten4
+    }
+    
+    func bindViewModel() {
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -10,7 +10,9 @@ import UIKit
 import ActionButton
 import Material
 
-class MoonsViewViewController: UIViewController {
+class MoonsViewViewController: UIViewController, BindableType {
+    
+    var viewModel: MoonsViewViewModel!
 
     class func instantiateFromStoryboard() -> MoonsViewViewController {
         let storyboard = UIStoryboard(name: "MoonsView", bundle: nil)
@@ -26,8 +28,7 @@ class MoonsViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mapViewContainerView.isHidden = true
-        friendFeedContainer.isHidden = false
+        createViewsForContainers()
         
         let items = setupActionButtonItems()
         setupActionButton(items: items)
@@ -44,6 +45,33 @@ class MoonsViewViewController: UIViewController {
         //changeViewActionButton.fadeOut()
     }
     
+    func bindViewModel() {
+        
+    }
+    
+    func createViewsForContainers() {
+        
+        // Moon's Table View
+        var moonsVC = BarActivityFeedViewController.instantiateFromStoryboard()
+        moonsVC.bindViewModel(to: viewModel.createBarActivityFeedViewMode())
+        
+        addChildViewController(moonsVC)
+        moonsVC.view.frame = CGRect(x: 0, y: 0, width: friendFeedContainer.frame.width, height: friendFeedContainer.frame.height)
+        friendFeedContainer.addSubview(moonsVC.view)
+        moonsVC.didMove(toParentViewController: self)
+    
+        // Map Overview
+        var mapVC = CityOverviewViewController.instantiateFromStoryboard()
+        mapVC.bindViewModel(to: viewModel.createCityOverviewViewMode())
+        
+        addChildViewController(mapVC)
+        mapVC.view.frame = CGRect(x: 0, y: 0, width: mapViewContainerView.frame.width, height: mapViewContainerView.frame.height)
+        mapViewContainerView.addSubview(mapVC.view)
+        mapVC.didMove(toParentViewController: self)
+        
+        mapViewContainerView.isHidden = true
+        friendFeedContainer.isHidden = false
+    }
 }
 
 extension MoonsViewViewController {

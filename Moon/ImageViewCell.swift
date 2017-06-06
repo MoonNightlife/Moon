@@ -20,7 +20,7 @@ class ImageViewCell: UIView {
     fileprivate var moreButton: IconButton!
     fileprivate var goButton: IconButton!
     
-    func initializeImageCardViewWith(data: TopBarData) {
+    func initializeImageCardViewWith(data: TopBar) {
         
         prepareImageViewWith(imageName: data.imageName)
         prepareMoreButton()

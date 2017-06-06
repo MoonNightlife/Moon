@@ -10,10 +10,10 @@ import UIKit
 import Material
 import MaterialComponents
 
-protocol FloatingBottomTabBarDelegate: class {
-    func showFeaturedView()
-    func showExploreView()
-    func showMoonsView()
+@objc protocol FloatingBottomTabBarDelegate {
+    @objc optional func showFeaturedView()
+    @objc optional func showExploreView()
+    @objc optional func showMoonsView()
 }
 
 class FloatingBottomTabBar: Bar {
@@ -74,14 +74,14 @@ extension FloatingBottomTabBar {
 
 extension FloatingBottomTabBar {
     func featuredButtonClicked() {
-        delegate.showFeaturedView()
+        delegate.showFeaturedView!()
     }
     
     func exploreButtonClicked() {
-        delegate.showExploreView()
+        delegate.showExploreView!()
     }
     
     func moonsViewButtonClicked() {
-        delegate.showMoonsView()
+        delegate.showMoonsView!()
     }
 }

@@ -9,14 +9,6 @@
 import UIKit
 import Material
 
-struct FeaturedEvent {
-    var imageName: String
-    var barName: String
-    var date: String
-    var description: String
-    var title: String
-}
-
 class FeaturedEventCollectionViewCell: UICollectionViewCell {
     
     fileprivate var event: FeaturedEvent!

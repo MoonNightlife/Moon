@@ -11,13 +11,15 @@ import MapKit
 import MaterialComponents
 import Material
 
-class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, BindableType {
 
     class func instantiateFromStoryboard() -> CityOverviewViewController {
         let storyboard = UIStoryboard(name: "MoonsView", bundle: nil)
         // swiftlint:disable:next force_cast
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! CityOverviewViewController
     }
+    
+    var viewModel: CityOverviewViewModel!
     
     @IBOutlet weak var zoomToLocationButton: MDCFloatingButton!
     @IBOutlet weak var cityMapView: MKMapView!
@@ -53,6 +55,10 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
             cityMapView.removeAnnotation(a)
         }
         addAnnotations()
+    }
+    
+    func bindViewModel() {
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -125,7 +131,7 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
                 pointAnnotation.tintColor = UIColor.green
             }
             
-            pointAnnotation.coordinate = data.coordinates!
+            pointAnnotation.coordinate = data.coordinates
             pointAnnotation.title = data.barName
             pointAnnotation.placeID = "123123"
             pointAnnotation.subtitle = "Users Going: \(data.usersGoing)"
