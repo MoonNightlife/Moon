@@ -17,7 +17,7 @@ func createFakeBarActivities() -> [BarActivity] {
     
     for i in 0..<names.count {
     
-        let activity = BarActivity(barId: "123", barName: barNames[i], name: names[i], time: NSDate(), username: names[i], userId: "666", activityId: "456", likes: i * 3, profileImage: profilePics[i])
+        let activity = BarActivity(barId: "123", barName: barNames[i], name: names[i], time: Date(), username: names[i], userId: "666", activityId: "456", likes: i * 3, profileImage: profilePics[i])
        activities.append(activity)
     }
     return activities

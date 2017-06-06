@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EZSwipeController
 import RxSwift
 import RxCocoa
 
@@ -100,4 +101,17 @@ class SceneCoordinator: SceneCoordinatorType {
         }
         return subject.asObservable().take(1).ignoreElements()
     }
+    
+    @discardableResult
+    func tab(to view: MainView) -> Observable<Void> {
+        let subject = PublishSubject<Void>()
+        guard let presenter = (currentViewController as? SearchBarViewController)?.rootViewController as? EZSwipeController else {
+            fatalError("Presenting controller must be EZSwipeController")
+        }
+
+        presenter.moveToPage(view.rawValue, animated: true)
+        
+        return subject.asObserver().take(1).ignoreElements()
+    }
+
 }

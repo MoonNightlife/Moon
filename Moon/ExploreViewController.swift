@@ -11,7 +11,9 @@ import Material
 import PageMenu
 import iCarousel
 
-class ExploreViewController: UIViewController {
+class ExploreViewController: UIViewController, BindableType {
+    
+    var viewModel: ExploreViewModel!
     
     class func instantiateFromStoryboard() -> ExploreViewController {
         let storyboard = UIStoryboard(name: "Explore", bundle: nil)
@@ -42,27 +44,28 @@ class ExploreViewController: UIViewController {
         topBarCarousel.bounces = false
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    
+    func bindViewModel() {
+        
     }
 
 }
 
 extension ExploreViewController {
     fileprivate func setupPagingMenuController() {
-        let beerSpecialsController = SpecialsViewController.instantiateFromStoryboard()
+        var beerSpecialsController = SpecialsViewController.instantiateFromStoryboard()
+        beerSpecialsController.bindViewModel(to: viewModel.createSpecialViewModel())
         beerSpecialsController.title = "Beer"
         beerSpecialsController.specialData = fakeSpecials.filter({$0.type == .beer})
         controllerArray.append(beerSpecialsController)
         
-        let liquorSpecialsController = SpecialsViewController.instantiateFromStoryboard()
+        var liquorSpecialsController = SpecialsViewController.instantiateFromStoryboard()
+        liquorSpecialsController.bindViewModel(to: viewModel.createSpecialViewModel())
         liquorSpecialsController.title = "Liquor"
         liquorSpecialsController.specialData = fakeSpecials.filter({$0.type == .liquor})
         controllerArray.append(liquorSpecialsController)
         
-        let wineSpecialsController = SpecialsViewController.instantiateFromStoryboard()
+        var wineSpecialsController = SpecialsViewController.instantiateFromStoryboard()
+        wineSpecialsController.bindViewModel(to: viewModel.createSpecialViewModel())
         wineSpecialsController.title = "Wine"
         wineSpecialsController.specialData = fakeSpecials.filter({$0.type == .wine})
         controllerArray.append(wineSpecialsController)

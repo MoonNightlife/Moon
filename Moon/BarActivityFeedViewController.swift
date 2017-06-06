@@ -8,36 +8,31 @@
 
 import UIKit
 import Material
+import RxDataSources
+import Action
+import RxSwift
+import RxCocoa
 
-struct BarActivity {
-    var barId: String?
-    var barName: String?
-    var name: String?
-    var time: NSDate?
-    var username: String?
-    var userId: String?
-    var activityId: String?
-    var likes: Int?
-    var profileImage: String?
-}
-
-class BarActivityFeedViewController: UITableViewController {
+class BarActivityFeedViewController: UIViewController, BindableType {
     
     class func instantiateFromStoryboard() -> BarActivityFeedViewController {
         let storyboard = UIStoryboard(name: "MoonsView", bundle: nil)
         // swiftlint:disable:next force_cast
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! BarActivityFeedViewController
     }
-
-    var activities = [BarActivity]()
+    
+    var viewModel: BarActivityFeedViewModel!
     let barActivityCellIdenifier = "barActivityCell"
+    let dataSource = RxTableViewSectionedAnimatedDataSource<ActivitySection>()
+    private let disposeBag = DisposeBag()
+    var refreshControl: UIRefreshControl = UIRefreshControl()
+    
+    @IBOutlet var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        activities = createFakeBarActivities()
-        self.tableView.reloadData()
-        
+            
+        configureDataSource()
         viewSetUp()
     }
     
@@ -45,11 +40,28 @@ class BarActivityFeedViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+     
+    func bindViewModel() {
     
-    // Read more about this @objc keyword used in front of the function
-    @objc fileprivate func reloadUsersBarFeed() {
-        refreshControl?.endRefreshing()
-        print("Should reload here")
+        viewModel.refreshAction.elements.bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
+        viewModel.refreshAction.executionObservables.subscribe(onNext: { [unowned self] _ in self.refreshControl.endRefreshing() }).disposed(by: disposeBag)
+        refreshControl.rx.controlEvent(.valueChanged).subscribe(viewModel.refreshAction.inputs).addDisposableTo(disposeBag)
+    }
+    
+    fileprivate func configureDataSource() {
+        dataSource.configureCell = {
+            [weak self] dataSource, tableView, indexPath, item in
+            //swiftlint:disable force_cast
+            let cell = tableView.dequeueReusableCell(withIdentifier: self!.barActivityCellIdenifier, for: indexPath) as! BarActivityTableViewCell
+            if let strongSelf = self {
+                cell.initializeCellWith(activity: item,
+                                        userAction: strongSelf.viewModel.onViewUser(activity: item),
+                                        barAction: strongSelf.viewModel.onViewBar(activity: item),
+                                        likeAction: strongSelf.viewModel.onLike(activity: item),
+                                        userLikedAction: strongSelf.viewModel.onViewLikers(activity: item))
+            }
+            return cell
+        }
     }
 
 }
@@ -62,42 +74,6 @@ extension BarActivityFeedViewController {
         tableView.backgroundColor = Color.grey.lighten5
         
         // Add the refresh control
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(self.reloadUsersBarFeed), for: .valueChanged)
-        self.tableView.addSubview(refreshControl!)
-    }
-}
-
-extension BarActivityFeedViewController {
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return activities.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //swiftlint:disable:next force_cast
-        let  cell = tableView.dequeueReusableCell(withIdentifier: barActivityCellIdenifier) as! BarActivityTableViewCell
-        
-        cell.delegate = self
-        cell.initializeCellWith(activity: activities[indexPath.row], index: indexPath.row)
-        
-        return cell
-    }
-}
-
-extension BarActivityFeedViewController: BarActivityCellDelegate {
-    func likeButtonTapped(activityId: String, index: Int) {
-        print("user liked activity")
-    }
-    
-    func numButtonTapped(activityId: String) {
-        print("num button tapped")
-    }
-    
-    func nameButtonTapped(index: Int) {
-        print("user profile should display")
-    }
-    
-    func barButtonTapped(index: Int) {
-        print("bar profile should display")
+        tableView.addSubview(refreshControl)
     }
 }

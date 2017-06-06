@@ -7,13 +7,8 @@
 //
 
 import UIKit
-
-protocol BarActivityCellDelegate: class {
-    func likeButtonTapped(activityId: String, index: Int)
-    func numButtonTapped(activityId: String)
-    func nameButtonTapped(index: Int)
-    func barButtonTapped(index: Int)
-}
+import Action
+import RxSwift
 
 class BarActivityTableViewCell: UITableViewCell {
     
@@ -27,17 +22,18 @@ class BarActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var numLikeButton: UIButton!
     @IBOutlet weak var timeImageView: UIImageView!
     
-    // Cell delegate
-    weak var delegate: BarActivityCellDelegate?
-    
     fileprivate var activity: BarActivity!
-    fileprivate var index: Int?
     
-    func initializeCellWith(activity: BarActivity, index: Int) {
-        self.activity = activity
-        self.index = index
+    func initializeCellWith(activity: BarActivity, userAction: CocoaAction, barAction: CocoaAction, likeAction: CocoaAction, userLikedAction: CocoaAction) {
         
-        self.backgroundColor = .clear
+        self.activity = activity
+        
+        user.rx.action = userAction
+        bar.rx.action = barAction
+        likeButton.rx.action = likeAction
+        numLikeButton.rx.action = userLikedAction
+        
+        backgroundColor = .clear
         
         setupProfilePicture()
         setupUsername()
@@ -84,7 +80,7 @@ extension BarActivityTableViewCell {
     
     fileprivate func setupTime() {
         if let time = activity.time {
-            self.timeLabel.text = getElaspedTimefromDate(fromDate: time)
+            self.timeLabel.text = time.getElaspedTimefromDate()
             self.timeLabel.textColor = .gray
 
         }
@@ -117,31 +113,5 @@ extension BarActivityTableViewCell {
     
     fileprivate func setupTimeImageView() {
         timeImageView.image = #imageLiteral(resourceName: "ClockIcon").withRenderingMode(.alwaysTemplate).tint(with: .lightGray)
-    }
-}
-
-extension BarActivityTableViewCell {
-    @IBAction func nameButtonTapped(sender: UIButton) {
-        if let index = index {
-            delegate?.nameButtonTapped(index: index)
-        }
-    }
-    
-    @IBAction func barButtonTapped(sender: UIButton) {
-        if let index = index {
-            delegate?.barButtonTapped(index: index)
-        }
-    }
-    
-    @IBAction func numLikeButtonTapped(sender: UIButton) {
-        if let activityId = activity.activityId {
-            delegate?.numButtonTapped(activityId: activityId)
-        }
-    }
-    
-    @IBAction func heartButtonTapped(sender: UIButton) {
-        if let activityId = activity.activityId, let index = index {
-            delegate?.likeButtonTapped(activityId: activityId, index: index)
-        }
     }
 }
