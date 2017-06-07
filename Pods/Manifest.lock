@@ -3,6 +3,7 @@ PODS:
     - RxCocoa (~> 3.4)
     - RxSwift (~> 3.4)
   - ActionButton (0.1.5)
+  - Alamofire (4.4.0)
   - EZSwipeController (0.6.1)
   - iCarousel (1.8.3)
   - Material (2.6.3):
@@ -177,6 +178,8 @@ PODS:
     - RxSwift (~> 3.0)
   - RxSwift (3.4.0)
   - Spring (1.0.3)
+  - SwaggerClient (0.0.1):
+    - Alamofire (~> 4.0)
   - SwiftLint (0.18.1)
 
 DEPENDENCIES:
@@ -191,6 +194,7 @@ DEPENDENCIES:
   - RxDataSources (~> 1.0)
   - RxSwift
   - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
+  - SwaggerClient (from `../swift3-client-generated`)
   - SwiftLint
 
 EXTERNAL SOURCES:
@@ -199,6 +203,8 @@ EXTERNAL SOURCES:
   Spring:
     :branch: swift3
     :git: https://github.com/MengTo/Spring.git
+  SwaggerClient:
+    :path: ../swift3-client-generated
 
 CHECKOUT OPTIONS:
   Material:
@@ -211,6 +217,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Action: e224bd151fe2e057f4189b4a9df0dc5d21264a9e
   ActionButton: a71147de5a83b6d8d8e18464b216904ba7821677
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   EZSwipeController: 255b0f8aed31963b0236802c926e27dd006a2532
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   Material: 68440da8f2564c19344d5da2ee5dde5618be5f95
@@ -221,8 +228,9 @@ SPEC CHECKSUMS:
   RxDataSources: a021a0e944ba5f7991259829d973afdbfa719c0b
   RxSwift: 3789a1af753002a14edecdb698a2424624296a9c
   Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
+  SwaggerClient: c0415b80d67a8ab942e40170bd2200f96c2efeca
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
 
-PODFILE CHECKSUM: 73cb659a5d2724fbe57dd8bb72ec3984f9517032
+PODFILE CHECKSUM: e3a8fd5fe33d24e1fcfe31fb8738c0b672ff336d
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.1

@@ -1,0 +1,22 @@
+{
+  "name": "SwaggerClient",
+  "platforms": {
+    "ios": "9.0",
+    "osx": "10.11"
+  },
+  "version": "0.0.1",
+  "source": {
+    "git": "git@github.com:swagger-api/swagger-mustache.git",
+    "tag": "v1.0.0"
+  },
+  "authors": "Swagger Codegen",
+  "license": "Apache License, Version 2.0",
+  "source_files": "SwaggerClient/Classes/Swaggers/**/*.swift",
+  "dependencies": {
+    "Alamofire": [
+      "~> 4.0"
+    ]
+  },
+  "summary": "Swagger Swift SDK",
+  "homepage": "http://swagger.io/"
+}

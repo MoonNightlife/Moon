@@ -1,0 +1,6 @@
+framework module SwaggerClient {
+  umbrella header "SwaggerClient-umbrella.h"
+
+  export *
+  module * { export * }
+}
