@@ -38,6 +38,12 @@ class PasswordsViewController: UIViewController, BindableType {
         self.navigationController?.navigationBar.barTintColor = .moonGreen
         self.navigationController?.navigationBar.backgroundColor = .moonGreen
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        progressView.setProgress(0.75, animated: true, completion: nil)
+    }
 
     func bindViewModel() {
         passwordTextField.rx.textInput.text.orEmpty.bind(to: viewModel.passwordText).addDisposableTo(disposeBag)
@@ -108,7 +114,7 @@ extension PasswordsViewController {
     fileprivate func prepareProgressView() {
         
         progressView = MDCProgressView()
-        progressView.progress = 0.75
+        progressView.progress = 0.5
         progressView.trackTintColor = .moonGreenLight
         progressView.progressTintColor = .moonGreen
         

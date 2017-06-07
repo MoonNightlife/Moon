@@ -32,7 +32,7 @@ extension BarActivity: IdentifiableType {
 }
 
 extension BarActivity: Equatable {
-    static func ==(lhs: BarActivity, rhs: BarActivity) -> Bool {
+    static func == (lhs: BarActivity, rhs: BarActivity) -> Bool {
         return lhs.activityId == rhs.activityId && lhs.likes == rhs.likes
     }
 }

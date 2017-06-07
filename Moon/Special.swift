@@ -17,17 +17,17 @@ struct Special {
     let likes: Int
     let image: UIImage
     let barName: String
-    var id: String?
+    var specialID: String?
 }
 
 extension Special: Equatable {
-    static func ==(lhs: Special, rhs: Special) -> Bool {
-        return lhs.id == rhs.id && lhs.likes == rhs.likes
+    static func == (lhs: Special, rhs: Special) -> Bool {
+        return lhs.specialID == rhs.specialID && lhs.likes == rhs.likes
     }
 }
 
 extension Special: IdentifiableType {
     var identity: String {
-        return id ?? "0"
+        return specialID ?? "0"
     }
 }

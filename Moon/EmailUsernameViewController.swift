@@ -38,6 +38,12 @@ class EmailUsernameViewController: UIViewController, BindableType {
         self.navigationController?.navigationBar.barTintColor = .moonRed
         self.navigationController?.navigationBar.backgroundColor = .moonRed
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        progressView.setProgress(0.5, animated: true, completion: nil)
+    }
 
     func bindViewModel() {
         usernameTextField.rx.textInput.text.bind(to: viewModel.username).addDisposableTo(disposeBag)
@@ -107,7 +113,7 @@ extension EmailUsernameViewController {
     fileprivate func prepareProgressView() {
         
         progressView = MDCProgressView()
-        progressView.progress = 0.5
+        progressView.progress = 0.25
         progressView.trackTintColor = .moonGreenLight
         progressView.progressTintColor = .moonGreen
         

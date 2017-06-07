@@ -63,6 +63,7 @@ class LoginViewController: UIViewController, BindableType {
         passwordTextField.placeholder = "password"
         passwordTextField.placeholderActiveColor = .moonBlue
         passwordTextField.placeholderNormalColor = .lightGray
+        passwordTextField.isSecureTextEntry = true
         passwordTextField.textColor = .black
         
         //Login Button Set Up

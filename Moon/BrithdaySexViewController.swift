@@ -43,6 +43,11 @@ class BirthdaySexViewController: UIViewController, BindableType {
         self.navigationController?.navigationBar.backgroundColor = .moonBlue
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        progressView.setProgress(0.25, animated: true, completion: nil)
+    }
+    
     func bindViewModel() {
         
         sexPickerView.rx.itemSelected.bind(to: viewModel.sex).addDisposableTo(disposeBag)
@@ -137,7 +142,7 @@ extension BirthdaySexViewController {
     fileprivate func prepareProgressView() {
         
         progressView = MDCProgressView()
-        progressView.progress = 0.25
+        progressView.progress = 0.0
         progressView.trackTintColor = .moonGreenLight
         progressView.progressTintColor = .moonGreen
         
