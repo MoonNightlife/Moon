@@ -17,7 +17,7 @@ class FeaturedEventCollectionViewCell: UICollectionViewCell {
     fileprivate var card: ImageCard!
     
     /// Conent area.
-    fileprivate var imageView: BottomGradientImageView!
+     var imageView: BottomGradientImageView!
     fileprivate var eventContent: UILabel!
     
     /// Bottom Bar views.
@@ -53,8 +53,8 @@ class FeaturedEventCollectionViewCell: UICollectionViewCell {
 extension FeaturedEventCollectionViewCell {
     
     fileprivate func prepareImageView() {
-        imageView = BottomGradientImageView(frame: CGRect(x: 0, y: 0, width: self.width, height: 200))
-        imageView.image = UIImage(named: event.imageName)?.resize(toWidth: self.width)
+        imageView = BottomGradientImageView(frame: CGRect(x: 0, y: 0, width: self.width, height: (self.height + 200) * 0.372))
+        imageView.image = UIImage(named: event.imageName)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
     }

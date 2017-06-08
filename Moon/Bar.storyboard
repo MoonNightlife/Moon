@@ -8,8 +8,13 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--Bar Profile View Controller-->
+        <!--Data Source-->
         <scene sceneID="ClF-cY-CtO">
             <objects>
                 <viewController id="H0c-iM-lFa" customClass="BarProfileViewController" customModule="Moon" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,34 +23,140 @@
                         <viewControllerLayoutGuide type="bottom" id="FWU-ph-iBL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ktm-fQ-fff">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1150"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rBw-er-Wex">
-                                <rect key="frame" x="0.0" y="64" width="375" height="193"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nwR-VY-bxp">
+                                <rect key="frame" x="0.0" y="64" width="375" height="1086"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rBw-er-Wex" customClass="iCarousel">
+                                        <rect key="frame" x="0.0" y="-64" width="375" height="224"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bhx-KQ-7Tr" customClass="Toolbar" customModule="Material">
+                                                <rect key="frame" x="0.0" y="187" width="375" height="37"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="KyB-Ya-c9J">
+                                                <rect key="frame" x="168" y="187" width="39" height="37"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </pageControl>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="H0c-iM-lFa" id="o2y-eo-ev0"/>
+                                            <outlet property="delegate" destination="H0c-iM-lFa" id="3gt-Gm-krw"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sDD-fw-aHu" userLabel="GoingView">
+                                        <rect key="frame" x="0.0" y="168" width="375" height="283"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ohd-3u-6eB" customClass="iCarousel">
+                                                <rect key="frame" x="0.0" y="36" width="375" height="247"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.1215686275" green="0.36078431370000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="H0c-iM-lFa" id="fhI-3M-WFe"/>
+                                                    <outlet property="delegate" destination="H0c-iM-lFa" id="ggc-N3-A7Y"/>
+                                                </connections>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ele-ap-Q3G" customClass="ADVSegmentedControl" customModule="Moon" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8nl-DG-5DF" userLabel="EventsView">
+                                        <rect key="frame" x="0.0" y="684" width="375" height="330"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4NK-I2-H5g" customClass="iCarousel">
+                                                <rect key="frame" x="0.0" y="38" width="375" height="292"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.1215686275" green="0.36078431370000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="H0c-iM-lFa" id="uJ2-9S-tuq"/>
+                                                    <outlet property="delegate" destination="H0c-iM-lFa" id="xuP-IT-ozJ"/>
+                                                </connections>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Upcoming Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUn-zm-0dS">
+                                                <rect key="frame" x="8" y="0.0" width="171" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="22"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NXI-rs-fQU" userLabel="SpecialsView">
+                                        <rect key="frame" x="0.0" y="459" width="375" height="217"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UjQ-kw-8fD" customClass="iCarousel">
+                                                <rect key="frame" x="0.0" y="37" width="375" height="180"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.1215686275" green="0.36078431370000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="H0c-iM-lFa" id="Bb2-uL-488"/>
+                                                    <outlet property="delegate" destination="H0c-iM-lFa" id="XOz-g0-5RT"/>
+                                                </connections>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Specials" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w1f-8h-YSY">
+                                                <rect key="frame" x="8" y="8" width="89" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="22"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <connections>
+                                    <outlet property="delegate" destination="H0c-iM-lFa" id="fWv-AL-Fzs"/>
+                                </connections>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="FWU-ph-iBL" firstAttribute="top" secondItem="nwR-VY-bxp" secondAttribute="bottom" id="S27-eA-fmf"/>
+                            <constraint firstItem="nwR-VY-bxp" firstAttribute="leading" secondItem="Ktm-fQ-fff" secondAttribute="leading" id="XxY-cY-BMH"/>
+                            <constraint firstAttribute="trailing" secondItem="nwR-VY-bxp" secondAttribute="trailing" id="cid-oz-Qjo"/>
+                            <constraint firstItem="nwR-VY-bxp" firstAttribute="top" secondItem="q1v-Sy-alW" secondAttribute="bottom" id="z49-DP-a2V"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="tpt-7Z-YeB">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="sI1-fY-SKI"/>
                     </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="1150"/>
                     <connections>
                         <outlet property="backButton" destination="sI1-fY-SKI" id="O8v-3M-NRJ"/>
+                        <outlet property="eventsCarousel" destination="4NK-I2-H5g" id="1fR-Yo-2lS"/>
+                        <outlet property="goingCarousel" destination="Ohd-3u-6eB" id="eRX-Ck-5PC"/>
+                        <outlet property="pageController" destination="KyB-Ya-c9J" id="J3X-Xh-Fcc"/>
+                        <outlet property="pictureCarousel" destination="rBw-er-Wex" id="lwe-6n-4jY"/>
+                        <outlet property="scrollView" destination="nwR-VY-bxp" id="D8t-Sa-6B7"/>
+                        <outlet property="segmentControl" destination="ele-ap-Q3G" id="uV4-Ns-p0Y"/>
+                        <outlet property="specialsCarousel" destination="UjQ-kw-8fD" id="HpD-dI-VGq"/>
+                        <outlet property="toolBar" destination="Bhx-KQ-7Tr" id="r1s-9c-XKl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgx-35-uax" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="760.79999999999995" y="166.8665667166417"/>
+            <point key="canvasLocation" x="760.79999999999995" y="166.41679160419793"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gnH-RH-xFd">
             <objects>
                 <navigationController storyboardIdentifier="BarProfile" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="i7n-Cc-4af" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Pzu-vm-nHf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Pzu-vm-nHf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
