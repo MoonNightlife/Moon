@@ -65,6 +65,9 @@
 		F03776A21EC3A44100B92E6B /* FakeSpecialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03776A11EC3A44100B92E6B /* FakeSpecialData.swift */; };
 		F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */; };
 		F03830601EC63C7300A0FF5D /* Master.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F038305F1EC63C7300A0FF5D /* Master.storyboard */; };
+		F0388CF51EE9D2EA00E8ED48 /* Bar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0388CF41EE9D2EA00E8ED48 /* Bar.storyboard */; };
+		F0388CF91EE9D35C00E8ED48 /* BarProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0388CF81EE9D35C00E8ED48 /* BarProfileViewModel.swift */; };
+		F0388CFB1EE9D40B00E8ED48 /* BarProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0388CFA1EE9D40B00E8ED48 /* BarProfileViewController.swift */; };
 		F04283AD1EC49DB600CCB5F3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04283AC1EC49DB600CCB5F3 /* MainViewController.swift */; };
 		F04283AF1EC4A92700CCB5F3 /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04283AE1EC4A92700CCB5F3 /* FeaturedViewController.swift */; };
 		F04283B11EC4A96200CCB5F3 /* MoonsViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04283B01EC4A96200CCB5F3 /* MoonsViewViewController.swift */; };
@@ -228,6 +231,9 @@
 		F03776A11EC3A44100B92E6B /* FakeSpecialData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeSpecialData.swift; sourceTree = "<group>"; };
 		F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialTableViewCell.swift; sourceTree = "<group>"; };
 		F038305F1EC63C7300A0FF5D /* Master.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Master.storyboard; sourceTree = "<group>"; };
+		F0388CF41EE9D2EA00E8ED48 /* Bar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Bar.storyboard; sourceTree = "<group>"; };
+		F0388CF81EE9D35C00E8ED48 /* BarProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarProfileViewModel.swift; sourceTree = "<group>"; };
+		F0388CFA1EE9D40B00E8ED48 /* BarProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarProfileViewController.swift; sourceTree = "<group>"; };
 		F04283AB1EC49D4E00CCB5F3 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		F04283AC1EC49DB600CCB5F3 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F04283AE1EC4A92700CCB5F3 /* FeaturedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedViewController.swift; sourceTree = "<group>"; };
@@ -487,6 +493,22 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		F0388CF61EE9D32600E8ED48 /* Bar */ = {
+			isa = PBXGroup;
+			children = (
+				F0388CF81EE9D35C00E8ED48 /* BarProfileViewModel.swift */,
+			);
+			name = Bar;
+			sourceTree = "<group>";
+		};
+		F0388CF71EE9D33500E8ED48 /* Bar */ = {
+			isa = PBXGroup;
+			children = (
+				F0388CFA1EE9D40B00E8ED48 /* BarProfileViewController.swift */,
+			);
+			name = Bar;
+			sourceTree = "<group>";
+		};
 		F048F10E1EA3B7A5000F0161 = {
 			isa = PBXGroup;
 			children = (
@@ -576,6 +598,7 @@
 				F048F11E1EA3B7A5000F0161 /* Login.storyboard */,
 				F0CF15891EDEECEE00531DCF /* SignUp.storyboard */,
 				F038305F1EC63C7300A0FF5D /* Master.storyboard */,
+				F0388CF41EE9D2EA00E8ED48 /* Bar.storyboard */,
 				F0CA18941EE5867700428318 /* User.storyboard */,
 				F04283B21EC4A9E100CCB5F3 /* Featured.storyboard */,
 				F09B9D051EC356BA00B2385A /* Explore.storyboard */,
@@ -589,6 +612,7 @@
 			children = (
 				F0CF158B1EDEED0F00531DCF /* SignUp */,
 				F0CA18981EE58BEC00428318 /* Login */,
+				F0388CF71EE9D33500E8ED48 /* Bar */,
 				F0CA189D1EE58C3600428318 /* User */,
 				F0CA18991EE58BF200428318 /* Master */,
 				F0CA189A1EE58BFD00428318 /* Explore */,
@@ -606,6 +630,7 @@
 				F0CA189F1EE58CCB00428318 /* User */,
 				F0CA18A01EE58CD000428318 /* Master */,
 				F0CA18A11EE58CD500428318 /* Explore */,
+				F0388CF61EE9D32600E8ED48 /* Bar */,
 				F0CA18A21EE58CDD00428318 /* Featured */,
 				F0CA18A31EE58CE300428318 /* MoonsView */,
 			);
@@ -960,6 +985,7 @@
 				C0FC62731ECF50C30087FA3B /* s10.jpg in Resources */,
 				C0DAD3211EE62DE2008BAF05 /* bioBase.png in Resources */,
 				F001BABF1EC50D2600CDF9BC /* BottomBar_base.png in Resources */,
+				F0388CF51EE9D2EA00E8ED48 /* Bar.storyboard in Resources */,
 				C0465DB41EDF20DC0065FD7C /* Moon_Title.png in Resources */,
 				C0FC627A1ECF50C30087FA3B /* s4.jpg in Resources */,
 				C034E2D51ECCF37C008EA4BA /* p6.jpg in Resources */,
@@ -1142,6 +1168,7 @@
 				F044CD551ECE030C00E47138 /* FakeTopBarData.swift in Sources */,
 				F0CF15961EDEEE7B00531DCF /* NameViewController.swift in Sources */,
 				F0CF15921EDEEDA500531DCF /* EmailUsernameViewModel.swift in Sources */,
+				F0388CF91EE9D35C00E8ED48 /* BarProfileViewModel.swift in Sources */,
 				F0E6ED121ECB3C54009508FC /* SearchBar.swift in Sources */,
 				F09C09221ECC7D3B003076CC /* FloatingBottomTabBar.swift in Sources */,
 				F098FF9B1EDF1DEA00A59594 /* NewUser.swift in Sources */,
@@ -1176,6 +1203,7 @@
 				F049896E1EE068E000064F58 /* SceneCoordinator.swift in Sources */,
 				F0055D691EC5E64B005544B4 /* CityOverviewViewController.swift in Sources */,
 				F04989641EE0641300064F58 /* Scene.swift in Sources */,
+				F0388CFB1EE9D40B00E8ED48 /* BarProfileViewController.swift in Sources */,
 				F0CF159C1EDEEEA100531DCF /* PasswordsViewController.swift in Sources */,
 				F048F11B1EA3B7A5000F0161 /* AppDelegate.swift in Sources */,
 				F0EBA0BF1ECCAE9F00056EF9 /* ActionButton.swift in Sources */,

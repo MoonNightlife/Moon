@@ -52,8 +52,8 @@ struct BarActivityFeedViewModel {
     
     func onViewBar(activity: BarActivity) -> CocoaAction {
         return CocoaAction {
-            print("Show \(activity)")
-            return Observable.empty()
+            let vm = BarProfileViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
         }
     }
     

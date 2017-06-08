@@ -40,4 +40,8 @@ enum Scene {
     enum Featured: SceneType {
         case featured(FeaturedViewModel)
     }
+    
+    enum  Bar: SceneType {
+        case profile(BarProfileViewModel)
+    }
 }

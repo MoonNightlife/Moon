@@ -115,3 +115,16 @@ extension Scene.MoonsView {
         }
     }
 }
+
+extension Scene.Bar {
+    func viewController() -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Bar", bundle: nil)
+        switch self {
+        case .profile(let viewModel):
+            let nc = storyBoard.instantiateViewController(withIdentifier: "BarProfile") as! UINavigationController
+            var vc = nc.viewControllers.first as! BarProfileViewController
+            vc.bindViewModel(to: viewModel)
+            return nc
+        }
+    }
+}
