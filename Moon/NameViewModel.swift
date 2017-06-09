@@ -10,12 +10,13 @@ import Foundation
 import RxSwift
 import Action
 import RxCocoa
+import SwaggerClient
 
 struct NameViewModel {
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
-    private let newUser: NewUser
+    private let newUser: RegistrationProfile
     
     // Private
     private let disposeBag = DisposeBag()
@@ -25,7 +26,7 @@ struct NameViewModel {
     var firstName = BehaviorSubject<String?>(value: nil)
     var lastName = BehaviorSubject<String?>(value: nil)
     
-    init(coordinator: SceneCoordinatorType, user: NewUser) {
+    init(coordinator: SceneCoordinatorType, user: RegistrationProfile) {
         self.sceneCoordinator = coordinator
         self.newUser = user
         

@@ -16,6 +16,7 @@ class NotificationSettingsViewController: UIViewController, BindableType {
     var viewModel: NotificationSettingsViewModel!
     var navBackButton: UIBarButtonItem!
 
+    @IBOutlet weak var notificationSettingsTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
 

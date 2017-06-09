@@ -82,6 +82,10 @@ extension Scene.User {
             var vc = storyboard.instantiateViewController(withIdentifier: "NotificationSettings") as! NotificationSettingsViewController
             vc.bindViewModel(to: viewModel)
             return vc
+        case .webView(let viewModel):
+            var vc = storyboard.instantiateViewController(withIdentifier: "WebView") as! WebViewUIViViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
         }
     }
 }

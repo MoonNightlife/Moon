@@ -8,18 +8,30 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 import Action
 
 struct NameSettingsViewModel {
+    
+    typealias Name = (first: String, last: String)
+    private let dataValid: Driver<Bool>
+    
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
     
     // Inputs
+    var firstNameText = BehaviorSubject<String?>(value: nil)
+    var lastNameText = BehaviorSubject<String?>(value: nil)
     
     // Outputs
+    var firstName: Observable<String>!
+    var lastName: Observable<String>!
     
     init(coordinator: SceneCoordinatorType) {
         sceneCoordinator = coordinator
+        
+        dataValid = Observable.combineLatest(firstNameText, lastNameText).map(ValidationUtility.validName).asDriver(onErrorJustReturn: false)
+        
     }
     
     func onBack() -> CocoaAction {
@@ -29,9 +41,8 @@ struct NameSettingsViewModel {
     }
     
     func onSave() -> CocoaAction {
-        return CocoaAction {
-            
+        return CocoaAction(enabledIf: dataValid.asObservable(), workFactory: {
             return Observable.empty()
-        }
+        })
     }
 }

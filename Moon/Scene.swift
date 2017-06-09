@@ -28,6 +28,7 @@ enum Scene {
         case email(EmailSettingsViewModel)
         case notification(NotificationSettingsViewModel)
         case deleteAccount(DeleteAccountViewModel)
+        case webView(WebViewViewModel)
     }
     
     enum Master: SceneType {

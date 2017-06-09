@@ -52,7 +52,25 @@ class PasswordsViewController: UIViewController, BindableType {
         viewModel.showAcceptablePasswordError.bind(to: passwordTextField.rx.isErrorRevealed).addDisposableTo(disposeBag)
         viewModel.showPasswordsMatchError.bind(to: retypePasswordTextField.rx.isErrorRevealed).addDisposableTo(disposeBag)
         
-        doneButton.rx.action = viewModel.onCreateUser()
+        viewModel.allValid.bind(to: doneButton.rx.isEnabled).addDisposableTo(disposeBag)
+        doneButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(viewModel.createUser.inputs).addDisposableTo(disposeBag)
+        
+        viewModel.createUser.elements
+            .subscribe(onError: { (error) in
+                print(error)
+            }, onCompleted: {
+                print("Completed")
+            })
+            .addDisposableTo(disposeBag)
+        
+        viewModel.createUser.executionObservables
+            .subscribe(onError: { (error) in
+                print(error)
+            }, onCompleted: {
+                print("Completed")
+            })
+            .addDisposableTo(disposeBag)
+        
         navBackButton.rx.action = viewModel.onBack()
     }
     

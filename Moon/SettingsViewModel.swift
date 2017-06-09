@@ -73,11 +73,14 @@ struct SettingsViewModel {
     fileprivate func getSceneFor(moreInformation: SettingSections.MoreInformation) -> SceneType? {
         switch moreInformation {
         case .privacyPolicy:
-            return nil
+            let vm = WebViewViewModel(coordinator: self.sceneCoordinator, url: URL(string: "http://apple.com")!)
+            return Scene.User.webView(vm)
         case .support:
-            return nil
+            let vm = WebViewViewModel(coordinator: self.sceneCoordinator, url: URL(string: "https://www.google.com")!)
+            return Scene.User.webView(vm)
         case .termsAndConditions:
-            return nil
+            let vm = WebViewViewModel(coordinator: self.sceneCoordinator, url: URL(string: "http://www.yahoo.com")!)
+            return Scene.User.webView(vm)
         }
     }
 }

@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import Action
+import SwaggerClient
 
 struct BirthdaySexViewModel {
     
@@ -16,7 +17,7 @@ struct BirthdaySexViewModel {
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
-    private let newUser: NewUser
+    private let newUser: RegistrationProfile
     
     // Private
     private let validInfo: Observable<Bool>
@@ -35,7 +36,7 @@ struct BirthdaySexViewModel {
     var birthdayString: Observable<String>!
     var sexString: Observable<String>!
     
-    init(coordinator: SceneCoordinatorType, user: NewUser) {
+    init(coordinator: SceneCoordinatorType, user: RegistrationProfile) {
         self.sceneCoordinator = coordinator
         self.newUser = user
         

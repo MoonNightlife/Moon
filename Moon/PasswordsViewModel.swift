@@ -9,11 +9,12 @@
 import Foundation
 import RxSwift
 import Action
+import SwaggerClient
 
 struct PasswordsViewModel {
     
     // Dependencies
-    private let newUser: NewUser
+    private let newUser: RegistrationProfile
     private let sceneCoordinator: SceneCoordinatorType
     private let disposeBag = DisposeBag()
     
@@ -41,7 +42,21 @@ struct PasswordsViewModel {
             })
     }
     
-    init(coordinator: SceneCoordinatorType, user: NewUser) {
+    lazy var createUser: CocoaAction = { this in
+        return CocoaAction(enabledIf: this.allValid, workFactory: {_ in
+            return UserAPI.createNewUser(user: this.newUser)
+        })
+    }(self)
+    
+    lazy var loginAction: CocoaAction = { this in
+        return CocoaAction(workFactory: { _ in
+            let mainVM = MainViewModel(coordinator: this.sceneCoordinator)
+            let searchVM = SearchBarViewModel(coordinator: this.sceneCoordinator)
+            return this.sceneCoordinator.transition(to: Scene.Master.main(searchBar: searchVM, mainView: mainVM), type: .root)
+        })
+    }(self)
+    
+    init(coordinator: SceneCoordinatorType, user: RegistrationProfile) {
         self.sceneCoordinator = coordinator
         self.newUser = user
         subscribeToInputs()
@@ -55,19 +70,9 @@ struct PasswordsViewModel {
             .addDisposableTo(disposeBag)
     }
     
-    func onCreateUser() -> CocoaAction {
-        return CocoaAction(enabledIf: allValid, workFactory: {
-            print("Create User")
-            self.newUser.listPropertiesWithValues()
-            return .just()
-
-        })
-    }
-    
     func onBack() -> CocoaAction {
         return CocoaAction {
             self.sceneCoordinator.pop()
         }
     }
-
 }

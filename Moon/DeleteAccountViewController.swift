@@ -13,6 +13,10 @@ import Material
 
 class DeleteAccountViewController: UIViewController, BindableType {
     
+    @IBOutlet weak var passwordField: TextField!
+    @IBOutlet weak var emailField: TextField!
+    @IBOutlet weak var saveButton: UIButton!
+    
     var viewModel: DeleteAccountViewModel!
     var navBackButton: UIBarButtonItem!
 
@@ -20,6 +24,8 @@ class DeleteAccountViewController: UIViewController, BindableType {
         super.viewDidLoad()
 
         prepareNavigationBackButton()
+        prepareEmailTextField()
+        preparePasswordTextField()
     }
 
     func bindViewModel() {
@@ -31,5 +37,39 @@ class DeleteAccountViewController: UIViewController, BindableType {
         navBackButton.image = Icon.cm.arrowBack
         navBackButton.tintColor = .white
         self.navigationItem.leftBarButtonItem = navBackButton
+    }
+    
+    fileprivate func prepareEmailTextField() {
+        emailField.placeholder = "Email"
+        emailField.isClearIconButtonEnabled = true
+        emailField.placeholderActiveColor = .moonRed
+        emailField.dividerActiveColor = .moonRed
+        emailField.dividerNormalColor = .moonRed
+        
+        let leftView = UIImageView()
+        leftView.image = #imageLiteral(resourceName: "emailIcon")
+        leftView.image = leftView.image?.withRenderingMode(.alwaysTemplate)
+        leftView.tintColor = .lightGray
+        
+        emailField.leftView = leftView
+        emailField.leftViewActiveColor = .moonRed
+        
+    }
+    
+    fileprivate func preparePasswordTextField() {
+        passwordField.placeholder = "Password"
+        passwordField.isClearIconButtonEnabled = true
+        passwordField.isSecureTextEntry = true
+        passwordField.placeholderActiveColor = .moonGreen
+        passwordField.dividerActiveColor = .moonGreen
+        passwordField.dividerNormalColor = .moonGreen
+        
+        let leftView = UIImageView()
+        leftView.image = #imageLiteral(resourceName: "passwordIcon")
+        leftView.image = leftView.image?.withRenderingMode(.alwaysTemplate)
+        leftView.tintColor = .lightGray
+        
+        passwordField.leftView = leftView
+        passwordField.leftViewActiveColor = .moonGreen
     }
 }

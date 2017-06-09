@@ -82,11 +82,9 @@ class SceneCoordinator: SceneCoordinatorType {
     @discardableResult
     func pop(animated: Bool) -> Observable<Void> {
         let subject = PublishSubject<Void>()
-        print(currentViewController)
         if let presenter = currentViewController.presentingViewController {
             // dismiss a modal controller
             currentViewController.dismiss(animated: animated) {
-                print(presenter)
                 self.currentViewController = SceneCoordinator.actualViewController(for: presenter)
                 subject.onCompleted()
             }

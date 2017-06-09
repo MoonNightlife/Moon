@@ -109,6 +109,11 @@
 		F09B9D061EC356BA00B2385A /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F09B9D051EC356BA00B2385A /* Explore.storyboard */; };
 		F09B9D081EC3571800B2385A /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09B9D071EC3571800B2385A /* ExploreViewController.swift */; };
 		F09C09221ECC7D3B003076CC /* FloatingBottomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C09211ECC7D3B003076CC /* FloatingBottomTabBar.swift */; };
+		F09DF08C1EEAF0610092BFA5 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF08B1EEAF0610092BFA5 /* NotificationTableViewCell.swift */; };
+		F09DF08E1EEAF1240092BFA5 /* NotificationSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF08D1EEAF1240092BFA5 /* NotificationSetting.swift */; };
+		F09DF0901EEAFAF90092BFA5 /* WebViewUIViViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF08F1EEAFAF90092BFA5 /* WebViewUIViViewController.swift */; };
+		F09DF0921EEAFB670092BFA5 /* WebViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF0911EEAFB670092BFA5 /* WebViewViewModel.swift */; };
+		F09DF0941EEB224C0092BFA5 /* UserAPI+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF0931EEB224C0092BFA5 /* UserAPI+Rx.swift */; };
 		F0A2251F1ECB9F2600170927 /* MoonFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A2251E1ECB9F2600170927 /* MoonFont.swift */; };
 		F0A2252D1ECBAA3E00170927 /* absolute.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F0A225211ECBAA3E00170927 /* absolute.jpeg */; };
 		F0A2252E1ECBAA3E00170927 /* bacardi.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F0A225221ECBAA3E00170927 /* bacardi.jpeg */; };
@@ -291,6 +296,11 @@
 		F09B9D051EC356BA00B2385A /* Explore.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Explore.storyboard; sourceTree = "<group>"; };
 		F09B9D071EC3571800B2385A /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		F09C09211ECC7D3B003076CC /* FloatingBottomTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingBottomTabBar.swift; sourceTree = "<group>"; };
+		F09DF08B1EEAF0610092BFA5 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		F09DF08D1EEAF1240092BFA5 /* NotificationSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSetting.swift; sourceTree = "<group>"; };
+		F09DF08F1EEAFAF90092BFA5 /* WebViewUIViViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewUIViViewController.swift; sourceTree = "<group>"; };
+		F09DF0911EEAFB670092BFA5 /* WebViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewViewModel.swift; sourceTree = "<group>"; };
+		F09DF0931EEB224C0092BFA5 /* UserAPI+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserAPI+Rx.swift"; sourceTree = "<group>"; };
 		F0A2251E1ECB9F2600170927 /* MoonFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonFont.swift; sourceTree = "<group>"; };
 		F0A225211ECBAA3E00170927 /* absolute.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = absolute.jpeg; sourceTree = "<group>"; };
 		F0A225221ECBAA3E00170927 /* bacardi.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bacardi.jpeg; sourceTree = "<group>"; };
@@ -538,6 +548,7 @@
 				F03C78B91EE9E973002AEDAD /* NameSettingsViewController.swift */,
 				F03C78BB1EE9E97E002AEDAD /* EmailSettingsViewController.swift */,
 				F03C78BD1EE9E98E002AEDAD /* NotificationSettingsViewController.swift */,
+				F09DF08F1EEAFAF90092BFA5 /* WebViewUIViViewController.swift */,
 				F03C78BF1EE9E99D002AEDAD /* DeleteAccountViewController.swift */,
 			);
 			name = Settings;
@@ -550,6 +561,7 @@
 				F03C78C21EE9EA2D002AEDAD /* NameSettingsViewModel.swift */,
 				F03C78C41EE9EA3C002AEDAD /* EmailSettingsViewModel.swift */,
 				F03C78C61EE9EA4B002AEDAD /* NotificationSettingsViewModel.swift */,
+				F09DF0911EEAFB670092BFA5 /* WebViewViewModel.swift */,
 				F03C78C81EE9EA5C002AEDAD /* DeleteAccountViewModel.swift */,
 			);
 			name = Settings;
@@ -626,6 +638,7 @@
 				F02D9AA51EE61B3D00D6C969 /* BarActivity.swift */,
 				F0CA18BC1EE610CB00428318 /* FeaturedEvent.swift */,
 				F0CA18B21EE5AE7500428318 /* Enums.swift */,
+				F09DF08D1EEAF1240092BFA5 /* NotificationSetting.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -706,6 +719,7 @@
 				F09C09211ECC7D3B003076CC /* FloatingBottomTabBar.swift */,
 				F044CD521ECDE28A00E47138 /* BottomGradientImageView.swift */,
 				F001BAC21EC50F7500CDF9BC /* BarActivityTableViewCell.swift */,
+				F09DF08B1EEAF0610092BFA5 /* NotificationTableViewCell.swift */,
 				F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */,
 				F0942F0C1ECCEC550038E389 /* FeaturedEventCollectionViewCell.swift */,
 			);
@@ -896,6 +910,7 @@
 				F049896F1EE0746400064F58 /* UINavigationController+Rx.swift */,
 				F0FD8F361EE1DC950020D131 /* ErrorTextField+Rx.swift */,
 				F0CA18B41EE5AEEC00428318 /* FloatingBottomTabBar+Rx.swift */,
+				F09DF0931EEB224C0092BFA5 /* UserAPI+Rx.swift */,
 			);
 			name = RxExtensions;
 			sourceTree = "<group>";
@@ -1203,6 +1218,7 @@
 				F0CF15901EDEED9600531DCF /* BirthdaySexViewModel.swift in Sources */,
 				F03C78C31EE9EA2D002AEDAD /* NameSettingsViewModel.swift in Sources */,
 				F03C78C91EE9EA5C002AEDAD /* DeleteAccountViewModel.swift in Sources */,
+				F09DF08E1EEAF1240092BFA5 /* NotificationSetting.swift in Sources */,
 				F0F210591ECA1C160027B50B /* SearchBarViewController.swift in Sources */,
 				F0CA18AB1EE5AA4C00428318 /* FeaturedViewModel.swift in Sources */,
 				F04283AD1EC49DB600CCB5F3 /* MainViewController.swift in Sources */,
@@ -1223,9 +1239,11 @@
 				F0CF15961EDEEE7B00531DCF /* NameViewController.swift in Sources */,
 				F0CF15921EDEEDA500531DCF /* EmailUsernameViewModel.swift in Sources */,
 				F0388CF91EE9D35C00E8ED48 /* BarProfileViewModel.swift in Sources */,
+				F09DF0921EEAFB670092BFA5 /* WebViewViewModel.swift in Sources */,
 				F0E6ED121ECB3C54009508FC /* SearchBar.swift in Sources */,
 				F09C09221ECC7D3B003076CC /* FloatingBottomTabBar.swift in Sources */,
 				F03C78BE1EE9E98F002AEDAD /* NotificationSettingsViewController.swift in Sources */,
+				F09DF0901EEAFAF90092BFA5 /* WebViewUIViViewController.swift in Sources */,
 				F098FF9B1EDF1DEA00A59594 /* NewUser.swift in Sources */,
 				F001BAC11EC50E9700CDF9BC /* BarActivityFeedViewController.swift in Sources */,
 				F04F445C1ECF840700D5FC62 /* BarAnnotation.swift in Sources */,
@@ -1236,6 +1254,7 @@
 				F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */,
 				F0CA18B51EE5AEEC00428318 /* FloatingBottomTabBar+Rx.swift in Sources */,
 				F04989661EE0651800064F58 /* SceneCoordinatorType.swift in Sources */,
+				F09DF0941EEB224C0092BFA5 /* UserAPI+Rx.swift in Sources */,
 				F02D9AA61EE61B3D00D6C969 /* BarActivity.swift in Sources */,
 				F0D168531ECA62940064F642 /* MoonColor.swift in Sources */,
 				F0CA18A51EE58FD400428318 /* SearchBarViewModel.swift in Sources */,
@@ -1250,6 +1269,7 @@
 				F0CA18911EE584AF00428318 /* ProfileViewModel.swift in Sources */,
 				F0644C2B1EC37D0E00D92BF7 /* SpecialsViewController.swift in Sources */,
 				F0CA18931EE585D700428318 /* ProfileViewController.swift in Sources */,
+				F09DF08C1EEAF0610092BFA5 /* NotificationTableViewCell.swift in Sources */,
 				F03776A21EC3A44100B92E6B /* FakeSpecialData.swift in Sources */,
 				F03C78C71EE9EA4B002AEDAD /* NotificationSettingsViewModel.swift in Sources */,
 				F0A8E2D81EC3C6B2001D9993 /* ImageViewCell.swift in Sources */,
