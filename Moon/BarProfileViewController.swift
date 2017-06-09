@@ -54,15 +54,15 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     
     func prepareSegmentControl() {
         //segment set up
-        segmentControl.items = ["People Going", "Friends Going", "Specials"]
+        segmentControl.items = ["People Going", "Friends Going"]
         //segmentControler.font = UIFont(name: "Roboto-Bold", size: 10)
         segmentControl.selectedLabelColor = .moonBlue
         segmentControl.borderColor = .clear
         segmentControl.backgroundColor = .clear
         segmentControl.selectedIndex = 0
         segmentControl.unselectedLabelColor = .lightGray
-        segmentControl.thumbColor = .clear
-        
+        segmentControl.thumbColor = .moonBlue
+  
     }
     
     func prepareCarousels() {

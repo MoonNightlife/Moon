@@ -110,14 +110,14 @@ import UIKit
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        var selectFrame = self.bounds
+        var selectFrame = CGRect(x: 0, y: self.bounds.size.height - 5, width: self.bounds.size.width, height: 5)//self.bounds
         let newWidth = selectFrame.width / CGFloat(items.count)
         selectFrame.size.width = newWidth
         thumbView.frame = selectFrame
         thumbView.backgroundColor = thumbColor
-        ///thumbView.layer.cornerRadius = thumbView.frame.height
-        backgroundImage.frame = CGRect(x: 0, y: selectFrame.size.height, width: selectFrame.size.width, height: selectFrame.size.height / 12)
-        backgroundImage.image = UIImage(named: "Menu_hover.png")
+        thumbView.layer.cornerRadius = thumbView.frame.height / 2
+//        backgroundImage.frame = CGRect(x: 0, y: selectFrame.size.height, width: selectFrame.size.width, height: selectFrame.size.height / 12)
+//        backgroundImage.image = UIImage(named: "Menu_hover.png")
         thumbView.addSubview(backgroundImage)
         
         displayNewSelectedIndex()
@@ -152,8 +152,9 @@ import UIKit
         label.textColor = selectedLabelColor
         
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: [], animations: {
-            
             self.thumbView.frame = label.frame
+            self.thumbView.frame.size.height = 5
+            self.thumbView.position.y = label.frame.size.height - 5
             
             }, completion: nil)
     }
