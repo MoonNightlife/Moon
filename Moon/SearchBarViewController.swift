@@ -31,6 +31,7 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
     
     func bindViewModel() {
         profileButton.rx.action = viewModel.onShowProfile()
+        settingsButton.rx.action = viewModel.onShowSettings()
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {

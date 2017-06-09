@@ -12,7 +12,7 @@
         <!--Bar Profile View Controller-->
         <scene sceneID="ClF-cY-CtO">
             <objects>
-                <viewController id="H0c-iM-lFa" customClass="BarProfileViewController" customModule="Moon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BarProfile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="H0c-iM-lFa" customClass="BarProfileViewController" customModule="Moon" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="q1v-Sy-alW"/>
                         <viewControllerLayoutGuide type="bottom" id="FWU-ph-iBL"/>
@@ -43,25 +43,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgx-35-uax" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="760.79999999999995" y="166.8665667166417"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="gnH-RH-xFd">
-            <objects>
-                <navigationController storyboardIdentifier="BarProfile" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="i7n-Cc-4af" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Pzu-vm-nHf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="H0c-iM-lFa" kind="relationship" relationship="rootViewController" id="fk9-yI-QgR"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ywb-ei-kOi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-178.40000000000001" y="166.8665667166417"/>
+            <point key="canvasLocation" x="63" y="161"/>
         </scene>
     </scenes>
 </document>

@@ -59,7 +59,27 @@ extension Scene.User {
         let storyboard = UIStoryboard(name: "User", bundle: nil)
         switch self {
         case .profile(let viewModel):
-            var vc = storyboard .instantiateViewController(withIdentifier: "Profile") as! ProfileViewController
+            var vc = storyboard.instantiateViewController(withIdentifier: "Profile") as! ProfileViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        case .settings(let viewModel):
+            var vc = storyboard.instantiateViewController(withIdentifier: "Settings") as! SettingsViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        case .deleteAccount(let viewModel):
+            var vc = storyboard.instantiateViewController(withIdentifier: "DeleteAccount") as! DeleteAccountViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        case .email(let viewModel):
+            var vc = storyboard.instantiateViewController(withIdentifier: "EmailSettings") as! EmailSettingsViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        case .name(let viewModel):
+            var vc = storyboard.instantiateViewController(withIdentifier: "NameSettings") as! NameSettingsViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        case .notification(let viewModel):
+            var vc = storyboard.instantiateViewController(withIdentifier: "NotificationSettings") as! NotificationSettingsViewController
             vc.bindViewModel(to: viewModel)
             return vc
         }
@@ -75,7 +95,8 @@ extension Scene.Master {
             vc.bindViewModel(to: mainVM)
             var searchController = SearchBarViewController(rootViewController: vc)
             searchController.bindViewModel(to: searchBarVM)
-            return searchController
+            let nc = UINavigationController(rootViewController: searchController)
+            return nc
         }
     }
 }
@@ -121,10 +142,9 @@ extension Scene.Bar {
         let storyBoard = UIStoryboard(name: "Bar", bundle: nil)
         switch self {
         case .profile(let viewModel):
-            let nc = storyBoard.instantiateViewController(withIdentifier: "BarProfile") as! UINavigationController
-            var vc = nc.viewControllers.first as! BarProfileViewController
+            var vc = storyBoard.instantiateViewController(withIdentifier: "BarProfile") as! BarProfileViewController
             vc.bindViewModel(to: viewModel)
-            return nc
+            return vc
         }
     }
 }

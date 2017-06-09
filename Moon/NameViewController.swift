@@ -84,7 +84,6 @@ extension NameViewController {
         navBackButton.image = Icon.cm.arrowBack
         navBackButton.tintColor = .white
         self.navigationItem.leftBarButtonItem = navBackButton
-        
     }
     
     fileprivate func prepareNextScreenButton() {

@@ -32,4 +32,11 @@ struct SearchBarViewModel {
             return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
         }
     }
+    
+    func onShowSettings() -> CocoaAction {
+        return CocoaAction {
+            let vm = SettingsViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.User.settings(vm), type: .push)
+        }
+    }
 }

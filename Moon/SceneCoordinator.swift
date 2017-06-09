@@ -58,6 +58,7 @@ class SceneCoordinator: SceneCoordinatorType {
             currentViewController = SceneCoordinator.actualViewController(for: viewController)
         case .popover:
             viewController.modalPresentationStyle = .popover
+            print(currentViewController)
             guard let delegateViewController = currentViewController as? UIPopoverPresentationControllerDelegate else {
                 fatalError("Presenting contorller does not adapt to popover delegate")
             }
@@ -66,10 +67,12 @@ class SceneCoordinator: SceneCoordinatorType {
             // Remove the arrow from the popover
             viewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
             viewController.popoverPresentationController?.sourceRect = CGRect(x: currentViewController.view.bounds.midX, y: currentViewController.view.bounds.midY, width: 0, height: 0)
+            print(currentViewController)
             currentViewController.present(viewController, animated: true) {
+                self.currentViewController = SceneCoordinator.actualViewController(for: viewController)
                 subject.onCompleted()
             }
-            currentViewController = SceneCoordinator.actualViewController(for: viewController)
+            
         }
         return subject.asObservable()
             .take(1)
@@ -79,9 +82,11 @@ class SceneCoordinator: SceneCoordinatorType {
     @discardableResult
     func pop(animated: Bool) -> Observable<Void> {
         let subject = PublishSubject<Void>()
+        print(currentViewController)
         if let presenter = currentViewController.presentingViewController {
             // dismiss a modal controller
             currentViewController.dismiss(animated: animated) {
+                print(presenter)
                 self.currentViewController = SceneCoordinator.actualViewController(for: presenter)
                 subject.onCompleted()
             }
