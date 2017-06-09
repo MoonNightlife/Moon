@@ -47,8 +47,8 @@ extension ImageViewCell {
     }
     
     fileprivate func prepareToolbarWith(title: String, subtitle: String) {
-        toolbar = Toolbar(rightViews: [moreButton])
-        toolbar.leftViews = [goButton]
+        toolbar = Toolbar(leftViews: [moreButton])
+        toolbar.rightViews = [goButton]
         toolbar.backgroundColor = nil
         
         toolbar.title = title

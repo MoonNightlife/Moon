@@ -25,16 +25,37 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     @IBOutlet weak var scrollView: UIScrollView!
     var viewModel: BarProfileViewModel!
     
+    //fake variabls
     var barPics = [String]()
+    var barName = String()
+    var peoplePics = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        //Fake Data loading
         barPics = ["b1.jpg", "b2.jpg", "b3.jpg", "b4.jpg", "b5.jpg"]
+        peoplePics = ["pp2.jpg", "p1.jpg", "p2.jpg", "p3.jpg", "p4.jpg", "p5.jpg", "p6.jpg", "p7.jpg"]
+        barName = "Avenu Lounge"
+        
+        //prepare the UI
         prepareScrollView()
         prepareCarousels()
         prepareSegmentControl()
+        prepareToolBar()
+        preparePageControl()
+        prepareNavigationBackButton()
+      
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        self.navigationController?.navigationBar.barTintColor = .moonGrey
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.default
+        self.title = "Avenu Lounge"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.lightGray]
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,10 +73,18 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: 1100.0)
     }
     
+    func prepareNavigationBackButton() {
+        let navBackButton = UIBarButtonItem()
+        navBackButton.image = Icon.cm.arrowBack
+        navBackButton.tintColor = .lightGray
+        self.navigationItem.leftBarButtonItem = navBackButton
+        self.navigationItem.title = "Avenu Lounge"
+    
+    }
+    
     func prepareSegmentControl() {
         //segment set up
         segmentControl.items = ["People Going", "Friends Going"]
-        //segmentControler.font = UIFont(name: "Roboto-Bold", size: 10)
         segmentControl.selectedLabelColor = .moonBlue
         segmentControl.borderColor = .clear
         segmentControl.backgroundColor = .clear
@@ -66,7 +95,6 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     }
     
     func prepareCarousels() {
-        
         goingCarousel.isPagingEnabled = true
         goingCarousel.type = .linear
         goingCarousel.bounces = false
@@ -84,6 +112,8 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         pictureCarousel.bounces = false
         pictureCarousel.tag = 2
         pictureCarousel.reloadData()
+        pictureCarousel.bringSubview(toFront: toolBar)
+        pictureCarousel.bringSubview(toFront: pageController)
         
         specialsCarousel.isPagingEnabled = true
         specialsCarousel.type = .linear
@@ -91,6 +121,35 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         specialsCarousel.tag = 3
         specialsCarousel.reloadData()
         
+    }
+    
+    func preparePageControl() {
+        pageController.numberOfPages = barPics.count
+        pageController.currentPageIndicatorTintColor = .white
+        pageController.pageIndicatorTintColor = .lightGray
+        pageController.currentPage = 0
+    }
+    
+    func prepareToolBar() {
+        
+        //Adding going icon to the right of the title label
+        let fullString = NSMutableAttributedString(string: " ")
+        
+        let attachment = NSTextAttachment()
+        attachment.image = #imageLiteral(resourceName: "goingIcon")
+        attachment.bounds = CGRect(x: 0, y: -5, width: 16, height: 16)
+        
+        let attachmentString = NSAttributedString(attachment: attachment)
+        
+        fullString.append(attachmentString)
+        fullString.append(NSAttributedString(string: " " + "20")) //people going
+        
+        toolBar.titleLabel.attributedText = fullString
+        
+        toolBar.backgroundColor = .clear
+        toolBar.titleLabel.textColor = .white
+        toolBar.detailLabel.text = ""
+        toolBar.rightViews = [IconButton(image: #imageLiteral(resourceName: "goButton"))]
     }
 
 }
@@ -113,7 +172,7 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
     func numberOfItems(in carousel: iCarousel) -> Int {
         
         if carousel.tag == 0 {
-            return 20 //returns number of people going
+            return peoplePics.count //returns number of people going
         } else if carousel.tag == 1 {
             return fakeEvents.count //returns number of fake events
         } else if carousel.tag == 2 {
@@ -125,11 +184,13 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         return 0
     }
 
-//    func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
-//        
-//      pageController.currentPage = pictureCarousel.currentItemIndex
-//      
-//    }
+    func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
+        
+        if carousel == pictureCarousel {
+            pageController.currentPage = pictureCarousel.currentItemIndex
+        }
+      
+    }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         
@@ -138,7 +199,7 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         } else if carousel == specialsCarousel {
             return setUpSpecialView()
         } else if carousel == goingCarousel {
-            return setUpGoingView()
+            return setUpGoingView(index: index)
         } else if carousel == eventsCarousel {
             return setUpEventView(event: fakeEvents[index], index: index)
         }
@@ -146,12 +207,11 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         return UIView(frame: carousel.frame)
     }
     
-    func setUpGoingView() -> UIView {
-        
-        let view = UIView()
+    func setUpGoingView(index: Int) -> UIView {
         let size = goingCarousel.frame.size.height - 25
-        view.frame = CGRect(x: goingCarousel.frame.size.width / 2, y: goingCarousel.frame.size.height / 2, width: size, height: size)
-        view.backgroundColor = .white
+        let frame = CGRect(x: goingCarousel.frame.size.width / 2, y: goingCarousel.frame.size.height / 2, width: size, height: size)
+        let view = PeopleGoingCarouselView()
+        view.initializeViewWith(imageName: peoplePics[index], name: "Name", frame: frame)
         
         return view
     }
@@ -168,7 +228,7 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         view.frame = CGRect(x: eventsCarousel.frame.size.width / 2, y: eventsCarousel.frame.size.height / 2, width: size + 60, height: size)
         view.backgroundColor = .clear
         view.initializeCellWith(event: event, index: index)
-        print(view.imageView.frame.size)
+        
         return view
     }
     
