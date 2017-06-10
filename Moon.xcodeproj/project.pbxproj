@@ -114,6 +114,8 @@
 		F09DF0901EEAFAF90092BFA5 /* WebViewUIViViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF08F1EEAFAF90092BFA5 /* WebViewUIViViewController.swift */; };
 		F09DF0921EEAFB670092BFA5 /* WebViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF0911EEAFB670092BFA5 /* WebViewViewModel.swift */; };
 		F09DF0941EEB224C0092BFA5 /* UserAPI+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF0931EEB224C0092BFA5 /* UserAPI+Rx.swift */; };
+		F09DF0961EEB85140092BFA5 /* ContentSuggestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF0951EEB85140092BFA5 /* ContentSuggestionsViewController.swift */; };
+		F09DF0981EEB854D0092BFA5 /* ContentSuggestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF0971EEB854D0092BFA5 /* ContentSuggestionViewModel.swift */; };
 		F0A2251F1ECB9F2600170927 /* MoonFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A2251E1ECB9F2600170927 /* MoonFont.swift */; };
 		F0A2252D1ECBAA3E00170927 /* absolute.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F0A225211ECBAA3E00170927 /* absolute.jpeg */; };
 		F0A2252E1ECBAA3E00170927 /* bacardi.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F0A225221ECBAA3E00170927 /* bacardi.jpeg */; };
@@ -301,6 +303,8 @@
 		F09DF08F1EEAFAF90092BFA5 /* WebViewUIViViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewUIViViewController.swift; sourceTree = "<group>"; };
 		F09DF0911EEAFB670092BFA5 /* WebViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewViewModel.swift; sourceTree = "<group>"; };
 		F09DF0931EEB224C0092BFA5 /* UserAPI+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserAPI+Rx.swift"; sourceTree = "<group>"; };
+		F09DF0951EEB85140092BFA5 /* ContentSuggestionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentSuggestionsViewController.swift; sourceTree = "<group>"; };
+		F09DF0971EEB854D0092BFA5 /* ContentSuggestionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentSuggestionViewModel.swift; sourceTree = "<group>"; };
 		F0A2251E1ECB9F2600170927 /* MoonFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonFont.swift; sourceTree = "<group>"; };
 		F0A225211ECBAA3E00170927 /* absolute.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = absolute.jpeg; sourceTree = "<group>"; };
 		F0A225221ECBAA3E00170927 /* bacardi.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bacardi.jpeg; sourceTree = "<group>"; };
@@ -776,6 +780,7 @@
 			children = (
 				F04283AC1EC49DB600CCB5F3 /* MainViewController.swift */,
 				F0F210581ECA1C160027B50B /* SearchBarViewController.swift */,
+				F09DF0951EEB85140092BFA5 /* ContentSuggestionsViewController.swift */,
 			);
 			name = Master;
 			sourceTree = "<group>";
@@ -839,6 +844,7 @@
 			children = (
 				F0CA18961EE58BBD00428318 /* MainViewModel.swift */,
 				F0CA18A41EE58FD400428318 /* SearchBarViewModel.swift */,
+				F09DF0971EEB854D0092BFA5 /* ContentSuggestionViewModel.swift */,
 			);
 			name = Master;
 			sourceTree = "<group>";
@@ -1267,6 +1273,7 @@
 				F04283AF1EC4A92700CCB5F3 /* FeaturedViewController.swift in Sources */,
 				F044CD531ECDE28A00E47138 /* BottomGradientImageView.swift in Sources */,
 				F0CA18911EE584AF00428318 /* ProfileViewModel.swift in Sources */,
+				F09DF0981EEB854D0092BFA5 /* ContentSuggestionViewModel.swift in Sources */,
 				F0644C2B1EC37D0E00D92BF7 /* SpecialsViewController.swift in Sources */,
 				F0CA18931EE585D700428318 /* ProfileViewController.swift in Sources */,
 				F09DF08C1EEAF0610092BFA5 /* NotificationTableViewCell.swift in Sources */,
@@ -1292,6 +1299,7 @@
 				F0FD8F341EE19D9F0020D131 /* ForgotPasswordViewModel.swift in Sources */,
 				F098FF9E1EDF47D400A59594 /* ValidationUtility.swift in Sources */,
 				F0CF159A1EDEEE9000531DCF /* EmailUsernameViewController.swift in Sources */,
+				F09DF0961EEB85140092BFA5 /* ContentSuggestionsViewController.swift in Sources */,
 				F0CF15941EDEEE2300531DCF /* PasswordsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

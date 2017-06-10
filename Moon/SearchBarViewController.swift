@@ -16,6 +16,8 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
     
     var viewModel: SearchBarViewModel!
     
+    private let bag = DisposeBag()
+    
     fileprivate var profileButton: IconButton!
     fileprivate var settingsButton: IconButton!
     fileprivate var searchIcon: IconButton!
@@ -27,6 +29,8 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
         prepareStatusBar()
         prepapreSearchIcon()
         prepareSearchBar()
+        
+        listenToSearchBar()
     }
     
     func bindViewModel() {
@@ -41,6 +45,18 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
     
     func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
         return false
+    }
+    
+    func listenToSearchBar() {
+        searchBar.textField.rx.controlEvent(.editingDidBegin).subscribe(onNext: { [weak self] in
+            self?.viewModel.onShowSearchResults().execute()
+        })
+        .addDisposableTo(bag)
+        
+        searchBar.textField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: {
+            self.viewModel.onShowMainController().execute()
+        })
+        .addDisposableTo(bag)
     }
 }
 

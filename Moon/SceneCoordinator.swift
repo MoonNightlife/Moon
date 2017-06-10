@@ -72,7 +72,13 @@ class SceneCoordinator: SceneCoordinatorType {
                 self.currentViewController = SceneCoordinator.actualViewController(for: viewController)
                 subject.onCompleted()
             }
-            
+        case .searchRoot:
+            guard let searchController = currentViewController as? SearchBarViewController else {
+                fatalError("To change the root controller of search bar, current view controller must be of type SearchBarViewController")
+            }
+            searchController.transition(to: viewController, duration: 0.5, options: .curveEaseIn, animations: nil, completion: { _ in
+                subject.onCompleted()
+            })
         }
         return subject.asObservable()
             .take(1)

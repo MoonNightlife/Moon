@@ -50,5 +50,35 @@
             </objects>
             <point key="canvasLocation" x="1944.8" y="116.49175412293854"/>
         </scene>
+        <!--Content Suggestions View Controller-->
+        <scene sceneID="plB-38-Wd4">
+            <objects>
+                <viewController storyboardIdentifier="ContentSuggestions" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ACH-GR-BE9" customClass="ContentSuggestionsViewController" customModule="Moon" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kED-He-eSe"/>
+                        <viewControllerLayoutGuide type="bottom" id="xQ4-Ab-Hql"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vf4-5z-r6F">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suggested Friends/Bars" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COQ-wr-bQs">
+                                <rect key="frame" x="95" y="323" width="184" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="COQ-wr-bQs" firstAttribute="centerY" secondItem="vf4-5z-r6F" secondAttribute="centerY" id="ZbU-rC-TuB"/>
+                            <constraint firstItem="COQ-wr-bQs" firstAttribute="centerX" secondItem="vf4-5z-r6F" secondAttribute="centerX" id="d84-VA-Hro"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7YU-hB-u1a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2712" y="119"/>
+        </scene>
     </scenes>
 </document>

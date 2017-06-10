@@ -32,7 +32,9 @@ enum Scene {
     }
     
     enum Master: SceneType {
-        case main((searchBar: SearchBarViewModel, mainView: MainViewModel))
+        case searchWithMain((searchBar: SearchBarViewModel, mainView: MainViewModel))
+        case contentSuggestions(ContentSuggestionsViewModel)
+        case main(MainViewModel)
     }
     
     enum Explore: SceneType {

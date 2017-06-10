@@ -94,14 +94,23 @@ extension Scene.Master {
     internal func viewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Master", bundle: nil)
         switch self {
-        case .main((let searchBarVM, let mainVM)):
+        case .searchWithMain((let searchBarVM, let mainVM)):
             var vc = storyBoard.instantiateViewController(withIdentifier: "Main") as! MainViewController
             vc.bindViewModel(to: mainVM)
             var searchController = SearchBarViewController(rootViewController: vc)
             searchController.bindViewModel(to: searchBarVM)
             let nc = UINavigationController(rootViewController: searchController)
             return nc
+        case .main(let viewModel):
+            var vc = storyBoard.instantiateViewController(withIdentifier: "Main") as! MainViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        case .contentSuggestions(let viewModel):
+            var vc = storyBoard.instantiateViewController(withIdentifier: "ContentSuggestions") as! ContentSuggestionsViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
         }
+
     }
 }
 
