@@ -48,9 +48,9 @@ extension SpecialCarouselView {
     
     fileprivate func prepareView() {
         self.layer.shadowColor = UIColor.lightGray.cgColor
-        self.layer.shadowOffset = CGSize(width: 5, height: 5)
+        self.layer.shadowOffset = CGSize(width: 1, height: 1)
         self.layer.shadowOpacity = 0.5
-        self.layer.shadowRadius = 1.0
+        self.layer.shadowRadius = 1
     }
     
     fileprivate func prepareToPresentView() {

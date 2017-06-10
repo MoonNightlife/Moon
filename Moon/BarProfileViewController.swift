@@ -105,7 +105,7 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         goingCarousel.reloadData()
        
         eventsCarousel.isPagingEnabled = true
-        eventsCarousel.type = .linear
+        eventsCarousel.type = .coverFlow
         eventsCarousel.bounces = false
         eventsCarousel.tag = 1
         eventsCarousel.reloadData()
