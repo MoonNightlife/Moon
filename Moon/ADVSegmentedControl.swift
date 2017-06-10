@@ -50,7 +50,7 @@ import UIKit
         }
     }
     
-    @IBInspectable var font: UIFont! = UIFont.systemFont(ofSize: 12) {
+    @IBInspectable var font: UIFont! = UIFont.systemFont(ofSize: 14) {
         didSet {
             setFont()
         }
@@ -96,8 +96,8 @@ import UIKit
             label.text = items[index - 1]
             label.backgroundColor = UIColor.clear
             label.textAlignment = .center
-            label.font = UIFont(name: "Roboto-Bold", size: 10)
-            label.font = label.font.withSize(10)
+            label.font = UIFont(name: "Roboto", size: 14)
+            label.font = label.font.withSize(14)
             label.textColor = index == 1 ? selectedLabelColor : unselectedLabelColor
             label.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(label)
@@ -153,7 +153,7 @@ import UIKit
         
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: [], animations: {
             self.thumbView.frame = label.frame
-            self.thumbView.frame.size.height = 5
+            self.thumbView.frame.size.height = 2.5
             self.thumbView.position.y = label.frame.size.height - 5
             
             }, completion: nil)

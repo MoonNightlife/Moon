@@ -22,6 +22,8 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     @IBOutlet weak var specialsCarousel: iCarousel!
     @IBOutlet weak var eventsCarousel: iCarousel!
     
+    @IBOutlet weak var eventsLabel: UILabel!
+    @IBOutlet weak var specialsLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     var viewModel: BarProfileViewModel!
     
@@ -29,6 +31,7 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     var barPics = [String]()
     var barName = String()
     var peoplePics = [String]()
+    var peopleNames = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +40,8 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         
         //Fake Data loading
         barPics = ["b1.jpg", "b2.jpg", "b3.jpg", "b4.jpg", "b5.jpg"]
-        peoplePics = ["pp2.jpg", "p1.jpg", "p2.jpg", "p3.jpg", "p4.jpg", "p5.jpg", "p6.jpg", "p7.jpg"]
+        peoplePics = ["pp2.jpg", "p1.jpg", "p2.jpg", "p3.jpg", "p4.jpg", "p5.jpg", "p6.jpg", "p7.jpg", "p8.jpg"]
+        peopleNames = ["Marisol Leiva", "Collin Duzyk", "Camden Moore", "Mony Gonzalez", "Molly Smith", "Sarah Smith", "Sloan Stearman", "Henry Berlhe", "Andrea Adler"]
         barName = "Avenu Lounge"
         
         //prepare the UI
@@ -47,6 +51,7 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         prepareToolBar()
         preparePageControl()
         prepareNavigationBackButton()
+        prepareLabels()
       
     }
     
@@ -79,19 +84,17 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         navBackButton.tintColor = .lightGray
         self.navigationItem.leftBarButtonItem = navBackButton
         self.navigationItem.title = "Avenu Lounge"
-    
     }
     
     func prepareSegmentControl() {
         //segment set up
         segmentControl.items = ["People Going", "Friends Going"]
-        segmentControl.selectedLabelColor = .moonBlue
+        segmentControl.selectedLabelColor = .moonPurple
         segmentControl.borderColor = .clear
         segmentControl.backgroundColor = .clear
         segmentControl.selectedIndex = 0
         segmentControl.unselectedLabelColor = .lightGray
-        segmentControl.thumbColor = .moonBlue
-  
+        segmentControl.thumbColor = .moonPurple
     }
     
     func prepareCarousels() {
@@ -120,7 +123,6 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         specialsCarousel.bounces = false
         specialsCarousel.tag = 3
         specialsCarousel.reloadData()
-        
     }
     
     func preparePageControl() {
@@ -145,11 +147,21 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         fullString.append(NSAttributedString(string: " " + "20")) //people going
         
         toolBar.titleLabel.attributedText = fullString
-        
-        toolBar.backgroundColor = .clear
         toolBar.titleLabel.textColor = .white
-        toolBar.detailLabel.text = ""
+        toolBar.backgroundColor = .clear
+        
+        toolBar.leftViews = [IconButton(image: Icon.cm.moreHorizontal, tintColor: .white)]
         toolBar.rightViews = [IconButton(image: #imageLiteral(resourceName: "goButton"))]
+    }
+    
+    func prepareLabels() {
+        specialsLabel.textColor = .moonBlue
+        specialsLabel.dividerColor = .moonBlue
+        specialsLabel.dividerThickness = 1.8
+        
+        eventsLabel.textColor = .moonRed
+        eventsLabel.dividerColor = .moonRed
+        eventsLabel.dividerThickness = 1.8
     }
 
 }
@@ -208,17 +220,22 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
     }
     
     func setUpGoingView(index: Int) -> UIView {
-        let size = goingCarousel.frame.size.height - 25
+        let size = goingCarousel.frame.size.height - 50
         let frame = CGRect(x: goingCarousel.frame.size.width / 2, y: goingCarousel.frame.size.height / 2, width: size, height: size)
         let view = PeopleGoingCarouselView()
-        view.initializeViewWith(imageName: peoplePics[index], name: "Name", frame: frame)
+        view.initializeViewWith(imageName: peoplePics[index], name: peopleNames[index], frame: frame)
         
         return view
     }
     
     func setUpSpecialView() -> UIView {
         
-        return UIView(frame: specialsCarousel.frame)
+        let view = SpecialCarouselView()
+        let size = specialsCarousel.frame.size.height - 30
+        let frame = CGRect(x: specialsCarousel.frame.size.width / 2, y: specialsCarousel.frame.size.height / 2, width: size, height: size)
+        view.initializeViewWith(image: #imageLiteral(resourceName: "s1.jpg"), description: "$2 shots", frame: frame)
+        
+        return view
     }
     
     func setUpEventView(event: FeaturedEvent, index: Int) -> UIView {

@@ -1,5 +1,5 @@
 //
-//  PeopleGoingCarouselView.swift
+//  SpecialCarouselView.swift
 //  Moon
 //
 //  Created by Gabriel I Leyva Merino on 6/9/17.
@@ -7,43 +7,42 @@
 //
 
 import Foundation
-import UIKit
 import Material
+import UIKit
 
-class PeopleGoingCarouselView: UIView {
-    
+class SpecialCarouselView: UIView {
     fileprivate var view: UIView!
     
     /// Content area.
     fileprivate var imageView: UIImageView!
     fileprivate var label: UILabel!
     
-    func initializeViewWith(imageName: String, name: String, frame: CGRect) {
+    func initializeViewWith(image: UIImage, description: String, frame: CGRect) {
         self.frame = frame
         prepareView()
-        prepareImageView(imageName: imageName)
-        prepareNameLable(name: name)
+        prepareImageView(image: image)
+        prepareNameLable(description: description)
         prepareToPresentView()
     }
 
 }
 
-extension PeopleGoingCarouselView {
+extension SpecialCarouselView {
     
-    fileprivate func prepareImageView(imageName: String) {
-        let image = UIImage(named: imageName)
+    fileprivate func prepareImageView(image: UIImage) {
         imageView = UIImageView(image: image)
         imageView.contentMode = UIViewContentMode.scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height / 1.2)
+        imageView.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height / 1.6)
     }
     
-    fileprivate func prepareNameLable(name: String) {
+    fileprivate func prepareNameLable(description: String) {
         label = UILabel()
-        label.text =  name
+        label.text =  description
         label.textColor = .lightGray
         label.textAlignment = .center
-        label.font = UIFont(name: "Roboto", size: 15)
+        label.font = UIFont(name: "Roboto", size: 10)
+        label.numberOfLines = 5
         label.frame = CGRect(x: 0, y: self.frame.size.height - 26, width: self.frame.size.width, height: 21)
     }
     
