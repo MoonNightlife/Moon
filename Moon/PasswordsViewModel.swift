@@ -52,7 +52,7 @@ struct PasswordsViewModel {
         return CocoaAction(workFactory: { _ in
             let mainVM = MainViewModel(coordinator: this.sceneCoordinator)
             let searchVM = SearchBarViewModel(coordinator: this.sceneCoordinator)
-            return this.sceneCoordinator.transition(to: Scene.Master.searchWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
+            return this.sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
         })
     }(self)
     

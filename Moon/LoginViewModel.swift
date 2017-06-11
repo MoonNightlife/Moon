@@ -47,7 +47,7 @@ struct LoginViewModel {
         return CocoaAction {
             let mainVM = MainViewModel(coordinator: self.sceneCoordinator)
             let searchVM = SearchBarViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: Scene.Master.searchWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
+            return self.sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
         }
     }
 

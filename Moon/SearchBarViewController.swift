@@ -21,6 +21,8 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
     fileprivate var profileButton: IconButton!
     fileprivate var settingsButton: IconButton!
     fileprivate var searchIcon: IconButton!
+    fileprivate var cancelButton: IconButton!
+    fileprivate var searchBarButton: UIButton!
     
     open override func prepare() {
         super.prepare()
@@ -28,9 +30,24 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
         prepareSettingsButton()
         prepareStatusBar()
         prepapreSearchIcon()
+        prepareCancelButton()
         prepareSearchBar()
+        prepareSearchBarButtonOverlay()
         
-        listenToSearchBar()
+        listenToSearchBarButton()
+    }
+    
+    open func prepareSearchBarForSearch() {
+        searchBar.rightViews = [cancelButton]
+        searchBar.createLineUnderSearchTextAndIcon(color: .white)
+        searchBarButton.removeFromSuperview()
+    }
+    
+    open func prepareSearchBarForMainView() {
+        searchBar.rightViews = [profileButton, settingsButton]
+        searchBar.createLineUnderSearchTextAndIcon(color: .white)
+        searchBarButton.frame = searchBar.textField.frame
+        searchBar.textField.addSubview(searchBarButton)
     }
     
     func bindViewModel() {
@@ -47,17 +64,42 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
         return false
     }
     
-    func listenToSearchBar() {
-        searchBar.textField.rx.controlEvent(.editingDidBegin).subscribe(onNext: { [weak self] in
-            self?.viewModel.onShowSearchResults().execute()
+    func listenToSearchBarButton() {
+        searchBarButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] in
+            self?.prepareSearchBarForSearch()
+            self?.viewModel.onShowSearch().execute()
         })
         .addDisposableTo(bag)
         
-        searchBar.textField.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: {
-            self.viewModel.onShowMainController().execute()
+        cancelButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] in
+            self?.searchBar.textField.text = ""
+            self?.searchBar.textField.endEditing(true)
+            self?.viewModel.onShowMainController().execute()
         })
         .addDisposableTo(bag)
+        
+        let textedEnteredInSearchBar = searchBar.textField.rx.text.orEmpty.map({ $0.characters.count > 0 })
+        
+        textedEnteredInSearchBar.subscribe(onNext: { [weak self] isTextEntered in
+            self?.searchBar.clearButton.isHidden = !isTextEntered
+            if let searchVC = self?.rootViewController as? SearchViewController {
+                searchVC.searchResultsView.isHidden = !isTextEntered
+                searchVC.suggestedContentView.isHidden = isTextEntered
+            }
+        }).addDisposableTo(bag)
+        
+        searchBar.clearButton.rx.controlEvent(.touchUpInside)
+            .subscribe(onNext: { [weak self] in
+                self?.searchBar.clearButton.isHidden = true
+                if let searchVC = self?.rootViewController as? SearchViewController {
+                    searchVC.searchResultsView.isHidden = true
+                    searchVC.suggestedContentView.isHidden = false
+                }
+            })
+            .addDisposableTo(bag)
+
     }
+
 }
 
 extension SearchBarViewController {
@@ -74,6 +116,10 @@ extension SearchBarViewController {
         settingsButton = IconButton(image: Icon.cm.settings, tintColor: .white)
     }
     
+    fileprivate func prepareCancelButton() {
+        cancelButton = IconButton(image: Icon.cm.close, tintColor: .white)
+    }
+    
     fileprivate func prepareStatusBar() {
         statusBarStyle = .lightContent
     }
@@ -88,10 +134,15 @@ extension SearchBarViewController {
         searchIcon.isUserInteractionEnabled = false
     }
     
+    fileprivate func prepareSearchBarButtonOverlay() {
+        searchBarButton = UIButton()
+        searchBarButton.frame = searchBar.textField.frame
+    }
+    
     fileprivate func prepareSearchBar() {
         searchBar.leftViews = [searchIcon]
-        searchBar.rightViews = [profileButton, settingsButton]
         searchBar.placeholderColor = .white
+        searchBar.textColor = .white
     }
 
 }

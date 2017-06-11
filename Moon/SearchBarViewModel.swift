@@ -40,17 +40,18 @@ struct SearchBarViewModel {
         }
     }
     
-    func onShowSearchResults() -> CocoaAction {
-        return CocoaAction {
-            let vm = ContentSuggestionsViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: Scene.Master.contentSuggestions(vm), type: .searchRoot)
-        }
-    }
-    
     func onShowMainController() -> CocoaAction {
         return CocoaAction {
             let vm = MainViewModel(coordinator: self.sceneCoordinator)
             return self.sceneCoordinator.transition(to: Scene.Master.main(vm), type: .searchRoot)
         }
     }
+    
+    func onShowSearch() -> CocoaAction {
+        return CocoaAction {
+            let vm = SearchViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.Master.search(vm), type: .searchRoot)
+        }
+    }
+    
 }

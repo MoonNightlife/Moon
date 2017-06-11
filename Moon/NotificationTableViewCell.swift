@@ -12,7 +12,6 @@ class NotificationTableViewCell: UITableViewCell {
     @IBOutlet weak var enableSwitch: UISwitch!
     @IBOutlet weak var title: UILabel!
     
-    
     func initCellWith(setting: NotifcationSetting) {
         title.text = setting.name
         enableSwitch.isOn = setting.enabled

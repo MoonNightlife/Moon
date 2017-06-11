@@ -99,6 +99,10 @@
 		F049896C1EE068BE00064F58 /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F049896B1EE068BE00064F58 /* SceneTransitionType.swift */; };
 		F049896E1EE068E000064F58 /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F049896D1EE068E000064F58 /* SceneCoordinator.swift */; };
 		F04989701EE0746400064F58 /* UINavigationController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F049896F1EE0746400064F58 /* UINavigationController+Rx.swift */; };
+		F04A4B1F1EEC53ED00DBA9A6 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A4B1E1EEC53ED00DBA9A6 /* UserCell.swift */; };
+		F04A4B231EEC549300DBA9A6 /* BarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A4B221EEC549300DBA9A6 /* BarCell.swift */; };
+		F04A4B251EEC553900DBA9A6 /* BarSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A4B241EEC553900DBA9A6 /* BarSearchTableViewCell.swift */; };
+		F04A4B271EEC595700DBA9A6 /* UserSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A4B261EEC595700DBA9A6 /* UserSearchCollectionViewCell.swift */; };
 		F04F445C1ECF840700D5FC62 /* BarAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */; };
 		F0644C2B1EC37D0E00D92BF7 /* SpecialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0644C2A1EC37D0E00D92BF7 /* SpecialsViewController.swift */; };
 		F07060061EC525A10020B3BE /* default_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = F07060051EC525A10020B3BE /* default_pic.png */; };
@@ -129,6 +133,10 @@
 		F0A225381ECBAA3E00170927 /* redwine.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F0A2252C1ECBAA3E00170927 /* redwine.jpeg */; };
 		F0A2253A1ECBAAE300170927 /* whitewine.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F0A225391ECBAAE300170927 /* whitewine.jpeg */; };
 		F0A2253C1ECBAB2400170927 /* sky.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F0A2253B1ECBAB2400170927 /* sky.jpeg */; };
+		F0A52CC41EEDE3D60067E8DD /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A52CC31EEDE3D60067E8DD /* SearchResultsViewController.swift */; };
+		F0A52CC61EEDE3EB0067E8DD /* SearchResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A52CC51EEDE3EB0067E8DD /* SearchResultsViewModel.swift */; };
+		F0A52CC81EEDE7740067E8DD /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A52CC71EEDE7740067E8DD /* SearchViewController.swift */; };
+		F0A52CCA1EEDE7A80067E8DD /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A52CC91EEDE7A80067E8DD /* SearchViewModel.swift */; };
 		F0A8E2D81EC3C6B2001D9993 /* ImageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A8E2D71EC3C6B2001D9993 /* ImageViewCell.swift */; };
 		F0A8E2E31EC3C858001D9993 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2DA1EC3C858001D9993 /* button.png */; };
 		F0A8E2E41EC3C858001D9993 /* eventButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2DB1EC3C858001D9993 /* eventButton.png */; };
@@ -288,6 +296,10 @@
 		F049896B1EE068BE00064F58 /* SceneTransitionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
 		F049896D1EE068E000064F58 /* SceneCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
 		F049896F1EE0746400064F58 /* UINavigationController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Rx.swift"; sourceTree = "<group>"; };
+		F04A4B1E1EEC53ED00DBA9A6 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		F04A4B221EEC549300DBA9A6 /* BarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarCell.swift; sourceTree = "<group>"; };
+		F04A4B241EEC553900DBA9A6 /* BarSearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarSearchTableViewCell.swift; sourceTree = "<group>"; };
+		F04A4B261EEC595700DBA9A6 /* UserSearchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAnnotation.swift; sourceTree = "<group>"; };
 		F0644C2A1EC37D0E00D92BF7 /* SpecialsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialsViewController.swift; sourceTree = "<group>"; };
 		F07060051EC525A10020B3BE /* default_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_pic.png; sourceTree = "<group>"; };
@@ -318,6 +330,10 @@
 		F0A2252C1ECBAA3E00170927 /* redwine.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = redwine.jpeg; sourceTree = "<group>"; };
 		F0A225391ECBAAE300170927 /* whitewine.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = whitewine.jpeg; sourceTree = "<group>"; };
 		F0A2253B1ECBAB2400170927 /* sky.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sky.jpeg; sourceTree = "<group>"; };
+		F0A52CC31EEDE3D60067E8DD /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		F0A52CC51EEDE3EB0067E8DD /* SearchResultsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModel.swift; sourceTree = "<group>"; };
+		F0A52CC71EEDE7740067E8DD /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		F0A52CC91EEDE7A80067E8DD /* SearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		F0A8E2D71EC3C6B2001D9993 /* ImageViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewCell.swift; sourceTree = "<group>"; };
 		F0A8E2DA1EC3C858001D9993 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		F0A8E2DB1EC3C858001D9993 /* eventButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eventButton.png; sourceTree = "<group>"; };
@@ -639,6 +655,8 @@
 				F0CA18BA1EE6108200428318 /* Special.swift */,
 				F03C78B61EE9E023002AEDAD /* Settings.swift */,
 				F0CA18B61EE6101200428318 /* TopBar.swift */,
+				F04A4B1E1EEC53ED00DBA9A6 /* UserCell.swift */,
+				F04A4B221EEC549300DBA9A6 /* BarCell.swift */,
 				F02D9AA51EE61B3D00D6C969 /* BarActivity.swift */,
 				F0CA18BC1EE610CB00428318 /* FeaturedEvent.swift */,
 				F0CA18B21EE5AE7500428318 /* Enums.swift */,
@@ -726,6 +744,8 @@
 				F09DF08B1EEAF0610092BFA5 /* NotificationTableViewCell.swift */,
 				F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */,
 				F0942F0C1ECCEC550038E389 /* FeaturedEventCollectionViewCell.swift */,
+				F04A4B241EEC553900DBA9A6 /* BarSearchTableViewCell.swift */,
+				F04A4B261EEC595700DBA9A6 /* UserSearchCollectionViewCell.swift */,
 			);
 			name = Subclasses;
 			sourceTree = "<group>";
@@ -780,7 +800,9 @@
 			children = (
 				F04283AC1EC49DB600CCB5F3 /* MainViewController.swift */,
 				F0F210581ECA1C160027B50B /* SearchBarViewController.swift */,
+				F0A52CC71EEDE7740067E8DD /* SearchViewController.swift */,
 				F09DF0951EEB85140092BFA5 /* ContentSuggestionsViewController.swift */,
+				F0A52CC31EEDE3D60067E8DD /* SearchResultsViewController.swift */,
 			);
 			name = Master;
 			sourceTree = "<group>";
@@ -844,7 +866,9 @@
 			children = (
 				F0CA18961EE58BBD00428318 /* MainViewModel.swift */,
 				F0CA18A41EE58FD400428318 /* SearchBarViewModel.swift */,
+				F0A52CC91EEDE7A80067E8DD /* SearchViewModel.swift */,
 				F09DF0971EEB854D0092BFA5 /* ContentSuggestionViewModel.swift */,
+				F0A52CC51EEDE3EB0067E8DD /* SearchResultsViewModel.swift */,
 			);
 			name = Master;
 			sourceTree = "<group>";
@@ -1222,12 +1246,16 @@
 				F0CF15981EDEEE8900531DCF /* BrithdaySexViewController.swift in Sources */,
 				F03C78C51EE9EA3C002AEDAD /* EmailSettingsViewModel.swift in Sources */,
 				F0CF15901EDEED9600531DCF /* BirthdaySexViewModel.swift in Sources */,
+				F04A4B271EEC595700DBA9A6 /* UserSearchCollectionViewCell.swift in Sources */,
 				F03C78C31EE9EA2D002AEDAD /* NameSettingsViewModel.swift in Sources */,
+				F0A52CC41EEDE3D60067E8DD /* SearchResultsViewController.swift in Sources */,
+				F0A52CC81EEDE7740067E8DD /* SearchViewController.swift in Sources */,
 				F03C78C91EE9EA5C002AEDAD /* DeleteAccountViewModel.swift in Sources */,
 				F09DF08E1EEAF1240092BFA5 /* NotificationSetting.swift in Sources */,
 				F0F210591ECA1C160027B50B /* SearchBarViewController.swift in Sources */,
 				F0CA18AB1EE5AA4C00428318 /* FeaturedViewModel.swift in Sources */,
 				F04283AD1EC49DB600CCB5F3 /* MainViewController.swift in Sources */,
+				F0A52CCA1EEDE7A80067E8DD /* SearchViewModel.swift in Sources */,
 				F0CA18971EE58BBD00428318 /* MainViewModel.swift in Sources */,
 				F0CA18B71EE6101200428318 /* TopBar.swift in Sources */,
 				F09B9D081EC3571800B2385A /* ExploreViewController.swift in Sources */,
@@ -1244,12 +1272,14 @@
 				F03C78B31EE9DB2C002AEDAD /* SettingsViewController.swift in Sources */,
 				F0CF15961EDEEE7B00531DCF /* NameViewController.swift in Sources */,
 				F0CF15921EDEEDA500531DCF /* EmailUsernameViewModel.swift in Sources */,
+				F0A52CC61EEDE3EB0067E8DD /* SearchResultsViewModel.swift in Sources */,
 				F0388CF91EE9D35C00E8ED48 /* BarProfileViewModel.swift in Sources */,
 				F09DF0921EEAFB670092BFA5 /* WebViewViewModel.swift in Sources */,
 				F0E6ED121ECB3C54009508FC /* SearchBar.swift in Sources */,
 				F09C09221ECC7D3B003076CC /* FloatingBottomTabBar.swift in Sources */,
 				F03C78BE1EE9E98F002AEDAD /* NotificationSettingsViewController.swift in Sources */,
 				F09DF0901EEAFAF90092BFA5 /* WebViewUIViViewController.swift in Sources */,
+				F04A4B231EEC549300DBA9A6 /* BarCell.swift in Sources */,
 				F098FF9B1EDF1DEA00A59594 /* NewUser.swift in Sources */,
 				F001BAC11EC50E9700CDF9BC /* BarActivityFeedViewController.swift in Sources */,
 				F04F445C1ECF840700D5FC62 /* BarAnnotation.swift in Sources */,
@@ -1262,6 +1292,7 @@
 				F04989661EE0651800064F58 /* SceneCoordinatorType.swift in Sources */,
 				F09DF0941EEB224C0092BFA5 /* UserAPI+Rx.swift in Sources */,
 				F02D9AA61EE61B3D00D6C969 /* BarActivity.swift in Sources */,
+				F04A4B1F1EEC53ED00DBA9A6 /* UserCell.swift in Sources */,
 				F0D168531ECA62940064F642 /* MoonColor.swift in Sources */,
 				F0CA18A51EE58FD400428318 /* SearchBarViewModel.swift in Sources */,
 				F0FD8F301EE178650020D131 /* LoginViewModel.swift in Sources */,
@@ -1287,6 +1318,7 @@
 				F0CA18B31EE5AE7500428318 /* Enums.swift in Sources */,
 				F03C78B71EE9E023002AEDAD /* Settings.swift in Sources */,
 				F049896E1EE068E000064F58 /* SceneCoordinator.swift in Sources */,
+				F04A4B251EEC553900DBA9A6 /* BarSearchTableViewCell.swift in Sources */,
 				F0055D691EC5E64B005544B4 /* CityOverviewViewController.swift in Sources */,
 				F04989641EE0641300064F58 /* Scene.swift in Sources */,
 				F0388CFB1EE9D40B00E8ED48 /* BarProfileViewController.swift in Sources */,
