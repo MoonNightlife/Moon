@@ -32,6 +32,7 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     var barName = String()
     var peoplePics = [String]()
     var peopleNames = [String]()
+    var fakeUsers = [BarActivity]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +44,7 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         peoplePics = ["pp2.jpg", "p1.jpg", "p2.jpg", "p3.jpg", "p4.jpg", "p5.jpg", "p6.jpg", "p7.jpg", "p8.jpg"]
         peopleNames = ["Marisol Leiva", "Collin Duzyk", "Camden Moore", "Mony Gonzalez", "Molly Smith", "Sarah Smith", "Sloan Stearman", "Henry Berlhe", "Andrea Adler"]
         barName = "Avenu Lounge"
+        fakeUsers = createFakeBarActivities()
         
         //prepare the UI
         prepareScrollView()
@@ -184,7 +186,7 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
     func numberOfItems(in carousel: iCarousel) -> Int {
         
         if carousel.tag == 0 {
-            return peoplePics.count //returns number of people going
+            return fakeUsers.count //returns number of people going
         } else if carousel.tag == 1 {
             return fakeEvents.count //returns number of fake events
         } else if carousel.tag == 2 {
@@ -223,7 +225,8 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         let size = goingCarousel.frame.size.height - 50
         let frame = CGRect(x: goingCarousel.frame.size.width / 2, y: goingCarousel.frame.size.height / 2, width: size, height: size)
         let view = PeopleGoingCarouselView()
-        view.initializeViewWith(imageName: peoplePics[index], name: peopleNames[index], frame: frame)
+        view.frame = frame
+        view.initializeViewWith(user: fakeUsers[index], index: index)
         
         return view
     }

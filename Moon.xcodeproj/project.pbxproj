@@ -25,6 +25,7 @@
 		C0552C5C1EE0922A007B84F6 /* Moon_Title2.png in Resources */ = {isa = PBXBuildFile; fileRef = C0552C5B1EE0922A007B84F6 /* Moon_Title2.png */; };
 		C0552C661EE0A1FB007B84F6 /* facebookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C0552C651EE0A1FB007B84F6 /* facebookButton.png */; };
 		C0552C681EE0A200007B84F6 /* googleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C0552C671EE0A200007B84F6 /* googleButton.png */; };
+		C08AFB291EECBA4F007D33D6 /* ImageCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08AFB281EECBA4F007D33D6 /* ImageCardView.swift */; };
 		C0AE92661EEB3DA00048BEDF /* SpecialCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AE92651EEB3DA00048BEDF /* SpecialCarouselView.swift */; };
 		C0DAD30B1EE5EBC4008BAF05 /* ProfileFakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DAD30A1EE5EBC4008BAF05 /* ProfileFakeData.swift */; };
 		C0DAD3101EE5EDD5008BAF05 /* pp1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0DAD30F1EE5EDD5008BAF05 /* pp1.jpg */; };
@@ -198,6 +199,7 @@
 		C0552C5B1EE0922A007B84F6 /* Moon_Title2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Moon_Title2.png; sourceTree = "<group>"; };
 		C0552C651EE0A1FB007B84F6 /* facebookButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebookButton.png; sourceTree = "<group>"; };
 		C0552C671EE0A200007B84F6 /* googleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = googleButton.png; sourceTree = "<group>"; };
+		C08AFB281EECBA4F007D33D6 /* ImageCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCardView.swift; sourceTree = "<group>"; };
 		C0AE92651EEB3DA00048BEDF /* SpecialCarouselView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialCarouselView.swift; sourceTree = "<group>"; };
 		C0DAD30A1EE5EBC4008BAF05 /* ProfileFakeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFakeData.swift; sourceTree = "<group>"; };
 		C0DAD30F1EE5EDD5008BAF05 /* pp1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pp1.jpg; sourceTree = "<group>"; };
@@ -420,6 +422,31 @@
 				C0296B0A1EDF16A60074F0FA /* Web_Background.png */,
 			);
 			name = "Login Images";
+			sourceTree = "<group>";
+		};
+		C08AFB261EECB9DA007D33D6 /* Generic */ = {
+			isa = PBXGroup;
+			children = (
+				C08AFB281EECBA4F007D33D6 /* ImageCardView.swift */,
+			);
+			name = Generic;
+			sourceTree = "<group>";
+		};
+		C08AFB271EECB9E8007D33D6 /* Moon Specific */ = {
+			isa = PBXGroup;
+			children = (
+				F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */,
+				F0A8E2D71EC3C6B2001D9993 /* ImageViewCell.swift */,
+				F09C09211ECC7D3B003076CC /* FloatingBottomTabBar.swift */,
+				C0DAD32D1EEA1263008BAF05 /* ADVSegmentedControl.swift */,
+				F044CD521ECDE28A00E47138 /* BottomGradientImageView.swift */,
+				F001BAC21EC50F7500CDF9BC /* BarActivityTableViewCell.swift */,
+				F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */,
+				F0942F0C1ECCEC550038E389 /* FeaturedEventCollectionViewCell.swift */,
+				C0F45BA51EEB19D8008ED6A7 /* PeopleGoingCarouselView.swift */,
+				C0AE92651EEB3DA00048BEDF /* SpecialCarouselView.swift */,
+			);
+			name = "Moon Specific";
 			sourceTree = "<group>";
 		};
 		C0DAD30E1EE5EDBA008BAF05 /* Fake Profile Pics */ = {
@@ -683,16 +710,8 @@
 		F09B9D0B1EC363D200B2385A /* Subclasses */ = {
 			isa = PBXGroup;
 			children = (
-				F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */,
-				F0A8E2D71EC3C6B2001D9993 /* ImageViewCell.swift */,
-				F09C09211ECC7D3B003076CC /* FloatingBottomTabBar.swift */,
-				C0DAD32D1EEA1263008BAF05 /* ADVSegmentedControl.swift */,
-				F044CD521ECDE28A00E47138 /* BottomGradientImageView.swift */,
-				F001BAC21EC50F7500CDF9BC /* BarActivityTableViewCell.swift */,
-				F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */,
-				F0942F0C1ECCEC550038E389 /* FeaturedEventCollectionViewCell.swift */,
-				C0F45BA51EEB19D8008ED6A7 /* PeopleGoingCarouselView.swift */,
-				C0AE92651EEB3DA00048BEDF /* SpecialCarouselView.swift */,
+				C08AFB271EECB9E8007D33D6 /* Moon Specific */,
+				C08AFB261EECB9DA007D33D6 /* Generic */,
 			);
 			name = Subclasses;
 			sourceTree = "<group>";
@@ -1226,6 +1245,7 @@
 				F048F11D1EA3B7A5000F0161 /* LoginViewController.swift in Sources */,
 				F0A2251F1ECB9F2600170927 /* MoonFont.swift in Sources */,
 				F049896C1EE068BE00064F58 /* SceneTransitionType.swift in Sources */,
+				C08AFB291EECBA4F007D33D6 /* ImageCardView.swift in Sources */,
 				F04283AF1EC4A92700CCB5F3 /* FeaturedViewController.swift in Sources */,
 				F044CD531ECDE28A00E47138 /* BottomGradientImageView.swift in Sources */,
 				F0CA18911EE584AF00428318 /* ProfileViewModel.swift in Sources */,
