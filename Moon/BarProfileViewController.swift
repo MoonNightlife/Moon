@@ -32,7 +32,8 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     var barName = String()
     var peoplePics = [String]()
     var peopleNames = [String]()
-    var fakeUsers = [BarActivity]()
+    var fakeUsers = [FakeUser]()
+    var fakeSpecials = [Special]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +45,8 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         peoplePics = ["pp2.jpg", "p1.jpg", "p2.jpg", "p3.jpg", "p4.jpg", "p5.jpg", "p6.jpg", "p7.jpg", "p8.jpg"]
         peopleNames = ["Marisol Leiva", "Collin Duzyk", "Camden Moore", "Mony Gonzalez", "Molly Smith", "Sarah Smith", "Sloan Stearman", "Henry Berlhe", "Andrea Adler"]
         barName = "Avenu Lounge"
-        fakeUsers = createFakeBarActivities()
+        fakeUsers = createFakeUsers()
+        fakeSpecials = createFakeSpecials()
         
         //prepare the UI
         prepareScrollView()
@@ -211,7 +213,7 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         if carousel == pictureCarousel {
             return setUpPictureView(index: index)
         } else if carousel == specialsCarousel {
-            return setUpSpecialView()
+            return setUpSpecialView(index: index)
         } else if carousel == goingCarousel {
             return setUpGoingView(index: index)
         } else if carousel == eventsCarousel {
@@ -231,12 +233,13 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         return view
     }
     
-    func setUpSpecialView() -> UIView {
+    func setUpSpecialView(index: Int) -> UIView {
         
         let view = SpecialCarouselView()
         let size = specialsCarousel.frame.size.height - 30
         let frame = CGRect(x: specialsCarousel.frame.size.width / 2, y: specialsCarousel.frame.size.height / 2, width: size, height: size)
-        view.initializeViewWith(image: #imageLiteral(resourceName: "s1.jpg"), description: "$2 shots", frame: frame)
+        view.frame = frame
+        view.initializeViewWith(special: fakeSpecials[index], index: index)
         
         return view
     }

@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -26,9 +26,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1150"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nwR-VY-bxp">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nwR-VY-bxp">
                                 <rect key="frame" x="0.0" y="64" width="375" height="1086"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rBw-er-Wex" customClass="iCarousel">
                                         <rect key="frame" x="0.0" y="-64" width="375" height="224"/>
@@ -79,11 +78,11 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NXI-rs-fQU" userLabel="SpecialsView">
-                                        <rect key="frame" x="0.0" y="432" width="375" height="200"/>
+                                        <rect key="frame" x="0.0" y="432" width="375" height="264"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UjQ-kw-8fD" customClass="iCarousel">
-                                                <rect key="frame" x="0.0" y="37" width="375" height="163"/>
+                                                <rect key="frame" x="0.0" y="37" width="375" height="219"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <connections>
@@ -102,7 +101,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8nl-DG-5DF" userLabel="EventsView">
-                                        <rect key="frame" x="0.0" y="640" width="375" height="382"/>
+                                        <rect key="frame" x="0.0" y="704" width="375" height="310"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Upcoming Events" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUn-zm-0dS">
@@ -113,7 +112,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4NK-I2-H5g" customClass="iCarousel">
-                                                <rect key="frame" x="0.0" y="66" width="375" height="292"/>
+                                                <rect key="frame" x="0.0" y="38" width="375" height="252"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <connections>
@@ -131,6 +130,12 @@
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="nwR-VY-bxp" secondAttribute="trailing" id="4PG-x4-ekP"/>
+                            <constraint firstItem="nwR-VY-bxp" firstAttribute="leading" secondItem="Ktm-fQ-fff" secondAttribute="leading" id="Euu-Ud-1uH"/>
+                            <constraint firstItem="nwR-VY-bxp" firstAttribute="top" secondItem="q1v-Sy-alW" secondAttribute="bottom" id="gVN-BW-egq"/>
+                            <constraint firstItem="FWU-ph-iBL" firstAttribute="top" secondItem="nwR-VY-bxp" secondAttribute="bottom" id="nKw-u9-ruR"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="tpt-7Z-YeB">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="sI1-fY-SKI"/>
@@ -160,7 +165,7 @@
             <objects>
                 <navigationController storyboardIdentifier="BarProfile" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="i7n-Cc-4af" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Pzu-vm-nHf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Pzu-vm-nHf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

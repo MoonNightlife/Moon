@@ -12,14 +12,19 @@ import Material
 
 class PeopleGoingCarouselView: ImageCardView {
     
-    fileprivate var user: BarActivity!
-    fileprivate var index: Int?
+    fileprivate var user: FakeUser!
+    fileprivate var index: Int!
     fileprivate var likeButton: IconButton!
+    fileprivate var numberOfLikesButton: IconButton!
     
-    func initializeViewWith(user: BarActivity, index: Int) {
+    func initializeViewWith(user: FakeUser, index: Int) {
+        self.user = user
+        self.index = index
         
-        self.initializeImageCardView(text: user.name!, imageName: user.profileImage!)
+        self.initializeImageCardViewWith(type: .small(image: (user.pics?[0])!, text: user.firstName!))
         prepareLikeButton()
+        prepareNumberOfLikesButton(likes: "19")
+        prepareToolBar()
     }
     
 }
@@ -28,6 +33,15 @@ extension PeopleGoingCarouselView {
     
     fileprivate func prepareLikeButton() {
         likeButton = IconButton(image: Icon.favorite, tintColor: .lightGray)
-        self.toolBar.rightViews = [likeButton]
+    }
+    
+    fileprivate func prepareNumberOfLikesButton(likes: String) {
+        numberOfLikesButton = IconButton(title: likes)
+        numberOfLikesButton.titleColor = .lightGray
+        numberOfLikesButton.titleLabel?.font = UIFont(name: "Roboto", size: 10)
+    }
+    
+    fileprivate func prepareToolBar() {
+        self.bottomToolbar.addRightViews(view1: numberOfLikesButton, view2: likeButton)
     }
 }

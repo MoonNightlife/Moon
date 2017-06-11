@@ -26,6 +26,7 @@
 		C0552C661EE0A1FB007B84F6 /* facebookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C0552C651EE0A1FB007B84F6 /* facebookButton.png */; };
 		C0552C681EE0A200007B84F6 /* googleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C0552C671EE0A200007B84F6 /* googleButton.png */; };
 		C08AFB291EECBA4F007D33D6 /* ImageCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08AFB281EECBA4F007D33D6 /* ImageCardView.swift */; };
+		C0949D951EEDD1F500C6F72C /* MoonToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0949D941EEDD1F500C6F72C /* MoonToolbar.swift */; };
 		C0AE92661EEB3DA00048BEDF /* SpecialCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AE92651EEB3DA00048BEDF /* SpecialCarouselView.swift */; };
 		C0DAD30B1EE5EBC4008BAF05 /* ProfileFakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DAD30A1EE5EBC4008BAF05 /* ProfileFakeData.swift */; };
 		C0DAD3101EE5EDD5008BAF05 /* pp1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0DAD30F1EE5EDD5008BAF05 /* pp1.jpg */; };
@@ -200,6 +201,7 @@
 		C0552C651EE0A1FB007B84F6 /* facebookButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebookButton.png; sourceTree = "<group>"; };
 		C0552C671EE0A200007B84F6 /* googleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = googleButton.png; sourceTree = "<group>"; };
 		C08AFB281EECBA4F007D33D6 /* ImageCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCardView.swift; sourceTree = "<group>"; };
+		C0949D941EEDD1F500C6F72C /* MoonToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonToolbar.swift; sourceTree = "<group>"; };
 		C0AE92651EEB3DA00048BEDF /* SpecialCarouselView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialCarouselView.swift; sourceTree = "<group>"; };
 		C0DAD30A1EE5EBC4008BAF05 /* ProfileFakeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFakeData.swift; sourceTree = "<group>"; };
 		C0DAD30F1EE5EDD5008BAF05 /* pp1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pp1.jpg; sourceTree = "<group>"; };
@@ -428,6 +430,8 @@
 			isa = PBXGroup;
 			children = (
 				C08AFB281EECBA4F007D33D6 /* ImageCardView.swift */,
+				C0949D941EEDD1F500C6F72C /* MoonToolbar.swift */,
+				F044CD521ECDE28A00E47138 /* BottomGradientImageView.swift */,
 			);
 			name = Generic;
 			sourceTree = "<group>";
@@ -439,7 +443,6 @@
 				F0A8E2D71EC3C6B2001D9993 /* ImageViewCell.swift */,
 				F09C09211ECC7D3B003076CC /* FloatingBottomTabBar.swift */,
 				C0DAD32D1EEA1263008BAF05 /* ADVSegmentedControl.swift */,
-				F044CD521ECDE28A00E47138 /* BottomGradientImageView.swift */,
 				F001BAC21EC50F7500CDF9BC /* BarActivityTableViewCell.swift */,
 				F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */,
 				F0942F0C1ECCEC550038E389 /* FeaturedEventCollectionViewCell.swift */,
@@ -1272,6 +1275,7 @@
 				F0FD8F341EE19D9F0020D131 /* ForgotPasswordViewModel.swift in Sources */,
 				F098FF9E1EDF47D400A59594 /* ValidationUtility.swift in Sources */,
 				F0CF159A1EDEEE9000531DCF /* EmailUsernameViewController.swift in Sources */,
+				C0949D951EEDD1F500C6F72C /* MoonToolbar.swift in Sources */,
 				F0CF15941EDEEE2300531DCF /* PasswordsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
