@@ -27,6 +27,12 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     @IBOutlet weak var scrollView: UIScrollView!
     var viewModel: BarProfileViewModel!
     
+    //Constraints outlets
+    @IBOutlet weak var pictureCarouselConstraint: NSLayoutConstraint!
+    @IBOutlet weak var goingViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var specialViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var eventViewConstraint: NSLayoutConstraint!
+    
     //fake variabls
     var barPics = [String]()
     var barName = String()
@@ -56,7 +62,13 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         preparePageControl()
         prepareNavigationBackButton()
         prepareLabels()
-      
+        
+        //Dynamic Heights for each view
+        let phoneSize = self.view.frame.size.height
+        pictureCarouselConstraint.constant = phoneSize * 0.34
+        goingViewConstraint.constant = phoneSize * 0.38
+        specialViewConstraint.constant = phoneSize * 0.35
+        //eventViewConstraint.constant = phoneSize * 0.38
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -224,7 +236,7 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
     }
     
     func setUpGoingView(index: Int) -> UIView {
-        let size = goingCarousel.frame.size.height - 50
+        let size = (self.view.frame.size.height * 0.325) - 50
         let frame = CGRect(x: goingCarousel.frame.size.width / 2, y: goingCarousel.frame.size.height / 2, width: size, height: size)
         let view = PeopleGoingCarouselView()
         view.frame = frame
@@ -234,10 +246,9 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
     }
     
     func setUpSpecialView(index: Int) -> UIView {
-        
         let view = SpecialCarouselView()
-        let size = specialsCarousel.frame.size.height - 60
-        let frame = CGRect(x: specialsCarousel.frame.size.width / 2, y: specialsCarousel.frame.size.height / 2, width: size, height: size)
+        let size = (self.view.frame.size.height * 0.298) - 50
+        let frame = CGRect(x: specialsCarousel.frame.size.width / 2, y: specialsCarousel.frame.size.height / 2, width: size + 20, height: size)
         view.frame = frame
         view.initializeViewWith(special: fakeSpecials[index], index: index)
         
@@ -245,9 +256,8 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
     }
     
     func setUpEventView(event: FeaturedEvent, index: Int) -> UIView {
-                
         let view = FeaturedEventView()
-        let size = eventsCarousel.frame.size.height - 60
+        let size = (self.view.frame.size.height * 0.513) - 60
         view.frame = CGRect(x: eventsCarousel.frame.size.width / 2, y: eventsCarousel.frame.size.height / 2, width: size + 60, height: size)
         view.backgroundColor = .clear
         view.initializeCellWith(event: event, index: index)
@@ -256,7 +266,6 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
     }
     
     func setUpPictureView(index: Int) -> UIView {
-        
         let barPic = BottomGradientImageView(frame: pictureCarousel.frame)
         barPic.image = UIImage(named: barPics[index])
         //profilePic.contentMode = UIViewContentMode.scaleAspectFill

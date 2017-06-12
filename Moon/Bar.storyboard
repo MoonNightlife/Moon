@@ -201,13 +201,17 @@
                     <size key="freeformSize" width="375" height="1184"/>
                     <connections>
                         <outlet property="backButton" destination="sI1-fY-SKI" id="O8v-3M-NRJ"/>
+                        <outlet property="eventViewConstraint" destination="eJ3-Ea-6Ki" id="c6G-oN-Pb0"/>
                         <outlet property="eventsCarousel" destination="4NK-I2-H5g" id="1fR-Yo-2lS"/>
                         <outlet property="eventsLabel" destination="OUn-zm-0dS" id="BDH-WI-WoE"/>
                         <outlet property="goingCarousel" destination="Ohd-3u-6eB" id="eRX-Ck-5PC"/>
+                        <outlet property="goingViewConstraint" destination="Rzz-bl-3OP" id="vRA-Ng-ch9"/>
                         <outlet property="pageController" destination="KyB-Ya-c9J" id="J3X-Xh-Fcc"/>
                         <outlet property="pictureCarousel" destination="rBw-er-Wex" id="lwe-6n-4jY"/>
+                        <outlet property="pictureCarouselConstraint" destination="d6i-bf-ukr" id="Oho-2n-sKo"/>
                         <outlet property="scrollView" destination="nwR-VY-bxp" id="D8t-Sa-6B7"/>
                         <outlet property="segmentControl" destination="ele-ap-Q3G" id="uV4-Ns-p0Y"/>
+                        <outlet property="specialViewConstraint" destination="ZYf-fQ-zFV" id="HTC-Es-TVw"/>
                         <outlet property="specialsCarousel" destination="UjQ-kw-8fD" id="HpD-dI-VGq"/>
                         <outlet property="specialsLabel" destination="w1f-8h-YSY" id="xge-YE-vUe"/>
                         <outlet property="toolBar" destination="Bhx-KQ-7Tr" id="r1s-9c-XKl"/>
