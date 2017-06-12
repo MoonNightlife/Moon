@@ -45,3 +45,9 @@ var fakeSpecialData13 = Special(type: .liquor, day: .wednesday, description: "Ha
 var fakeSpecialData14 = Special(type: .liquor, day: .thursday, description: "$5 Moscow Mules", likes: 9, image: #imageLiteral(resourceName: "s14.jpg"), barName: ginger, specialID: nil)
 
 let fakeSpecials = [fakeSpecialData1, fakeSpecialData2, fakeSpecialData3, fakeSpecialData4, fakeSpecialData6, fakeSpecialData7, fakeSpecialData8, fakeSpecialData9, fakeSpecialData10, fakeSpecialData11, fakeSpecialData12, fakeSpecialData13, fakeSpecialData14]
+
+func createFakeSpecials() -> [Special] {
+     let fs = [fakeSpecialData2, fakeSpecialData3, fakeSpecialData4, fakeSpecialData6, fakeSpecialData8, fakeSpecialData9, fakeSpecialData10, fakeSpecialData12, fakeSpecialData13, fakeSpecialData14]
+    
+    return fs
+}

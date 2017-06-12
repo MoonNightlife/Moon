@@ -13,8 +13,6 @@ import Material
 class ProfileViewController: UIViewController, BindableType {
     
     var viewModel: ProfileViewModel!
-    var fakeUser: FakeUser!
-    var pics = [String]()
 
     @IBOutlet weak var carousel: iCarousel!
     @IBOutlet weak var dismissButton: UIButton!
@@ -27,11 +25,15 @@ class ProfileViewController: UIViewController, BindableType {
     
     var friendsButton: IconButton!
     
+    //fake variables
+    var fakeUser: FakeUser!
+    var pics = [UIImage]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        pics = ["pp1.jpg", "pp2.jpg", "pp3.jpg", "pp4.jpg", "pp5.jpg"]
+        pics = [#imageLiteral(resourceName: "pp1.jpg"), #imageLiteral(resourceName: "pp2.jpg"), #imageLiteral(resourceName: "pp3.jpg"), #imageLiteral(resourceName: "pp4.jpg"), #imageLiteral(resourceName: "pp5.jpg")]
         fakeUser = FakeUser(firstName: "Marisol", lastName: "Leiva", city: "Dallas", username: "marisolleiva", pics: pics, bio:"Mexico -> SMU 2018 | KKG | Tequila Lover", plan: "The Standard Pour")
         
         setupCarousel()
@@ -132,7 +134,7 @@ extension ProfileViewController: iCarouselDataSource, iCarouselDelegate {
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         let profilePic = BottomGradientImageView(frame: carousel.frame)
-        profilePic.image = UIImage(named: pics[index])
+        profilePic.image = pics[index]
         //profilePic.contentMode = UIViewContentMode.scaleAspectFill
         print(index)
    
