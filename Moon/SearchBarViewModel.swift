@@ -50,7 +50,15 @@ struct SearchBarViewModel {
     func onShowSearch() -> CocoaAction {
         return CocoaAction {
             let vm = SearchViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: Scene.Master.search(vm), type: .searchRoot)
+            let searchResultsViewModel = SearchResultsViewModel(coordinator: self.sceneCoordinator)
+            let suggestedContentViewModel = ContentSuggestionsViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.Master.search(searchViewModel: vm, searchResultsViewModel: searchResultsViewModel, contentSuggestionViewModel: suggestedContentViewModel), type: .searchRoot)
+        }
+    }
+    
+    func onShow(view: View.Search) -> CocoaAction {
+        return CocoaAction {_ in 
+            self.sceneCoordinator.changeChild(To: view)
         }
     }
     

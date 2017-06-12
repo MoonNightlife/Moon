@@ -105,17 +105,14 @@ extension Scene.Master {
             var vc = storyBoard.instantiateViewController(withIdentifier: "Main") as! MainViewController
             vc.bindViewModel(to: viewModel)
             return vc
-        case .contentSuggestions(let viewModel):
-            var vc = storyBoard.instantiateViewController(withIdentifier: "ContentSuggestions") as! ContentSuggestionsViewController
-            vc.bindViewModel(to: viewModel)
-            return vc
-        case .searchResults(let viewModel):
-            var vc = storyBoard.instantiateViewController(withIdentifier: "SearchResults") as! SearchResultsViewController
-            vc.bindViewModel(to: viewModel)
-            return vc
-        case .search(let viewModel):
+        case .search(let searchVM, let searchResultVM, let contentSuggestionVM):
             var vc = storyBoard.instantiateViewController(withIdentifier: "Search") as! SearchViewController
-            vc.bindViewModel(to: viewModel)
+            var vcSC = storyBoard.instantiateViewController(withIdentifier: "ContentSuggestions") as! ContentSuggestionsViewController
+            var vcSR = storyBoard.instantiateViewController(withIdentifier: "SearchResults") as! SearchResultsViewController
+            vc.bindViewModel(to: searchVM)
+            vcSR.bindViewModel(to: searchResultVM)
+            vcSC.bindViewModel(to: contentSuggestionVM)
+            vc.generateChildern(child1: vcSC, child2: vcSR)
             return vc
         }
 

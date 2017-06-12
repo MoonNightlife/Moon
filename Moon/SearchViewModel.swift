@@ -19,12 +19,4 @@ struct SearchViewModel {
     init(coordinator: SceneCoordinatorType) {
         sceneCoordinator = coordinator
     }
-    
-    func createContentSuggestedViewModel() -> ContentSuggestionsViewModel {
-        return ContentSuggestionsViewModel(coordinator: sceneCoordinator)
-    }
-    
-    func createSearchResultsViewModel() -> SearchResultsViewModel {
-        return SearchResultsViewModel(coordinator: sceneCoordinator)
-    }
 }

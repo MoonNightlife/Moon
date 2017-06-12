@@ -8,43 +8,38 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, BindableType {
+class SearchViewController: UIViewController, BindableType, ParentType {
     
     var viewModel: SearchViewModel!
+    
+    // Protocal Implementation
+    var view1: UIView! {
+        get {
+            return suggestedContentView
+        }
+        set {
+            suggestedContentView = newValue
+        }
+    }
+    
+    var view2: UIView! {
+        get {
+            return searchResultsView
+        }
+        set {
+            searchResultsView = newValue
+        }
+    }
 
     @IBOutlet weak var suggestedContentView: UIView!
     @IBOutlet weak var searchResultsView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        createViewsForContainers()
     }
     
     func bindViewModel() {
         
-    }
-    
-    func createViewsForContainers() {
-        
-        // Search Results
-        let searchResults = Scene.Master.searchResults(viewModel.createSearchResultsViewModel()).viewController()
-        
-        addChildViewController(searchResults)
-        
-        searchResults.view.frame = CGRect(x: 0, y: 0, width: searchResultsView.frame.width, height: searchResultsView.frame.height)
-        searchResultsView.addSubview(searchResults.view)
-        searchResults.didMove(toParentViewController: self)
-        
-        // Map Overview
-        let suggestedVC = Scene.Master.contentSuggestions(viewModel.createContentSuggestedViewModel()).viewController()
-        
-        addChildViewController(suggestedVC)
-        suggestedVC.view.frame = CGRect(x: 0, y: 0, width: suggestedContentView.frame.width, height: suggestedContentView.frame.height)
-        suggestedContentView.addSubview(suggestedVC.view)
-        suggestedVC.didMove(toParentViewController: self)
-        
-        searchResultsView.isHidden = true
-        suggestedContentView.isHidden = false
     }
 
 }

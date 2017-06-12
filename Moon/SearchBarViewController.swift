@@ -53,6 +53,18 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
     func bindViewModel() {
         profileButton.rx.action = viewModel.onShowProfile()
         settingsButton.rx.action = viewModel.onShowSettings()
+        
+        let textedEnteredInSearchBar = searchBar.textField.rx.text.orEmpty.map({ $0.characters.count > 0 }).share()
+        textedEnteredInSearchBar.skip(2).subscribe(onNext: { [weak self] in
+            if $0 {
+                self?.viewModel.onShow(view: .results).execute()
+            } else {
+                self?.viewModel.onShow(view: .suggestions).execute()
+            }
+        }).addDisposableTo(bag)
+        textedEnteredInSearchBar.subscribe(onNext: { [weak self] isTextEntered in
+            self?.searchBar.clearButton.isHidden = !isTextEntered
+        }).addDisposableTo(bag)
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
@@ -78,23 +90,10 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
         })
         .addDisposableTo(bag)
         
-        let textedEnteredInSearchBar = searchBar.textField.rx.text.orEmpty.map({ $0.characters.count > 0 })
-        
-        textedEnteredInSearchBar.subscribe(onNext: { [weak self] isTextEntered in
-            self?.searchBar.clearButton.isHidden = !isTextEntered
-            if let searchVC = self?.rootViewController as? SearchViewController {
-                searchVC.searchResultsView.isHidden = !isTextEntered
-                searchVC.suggestedContentView.isHidden = isTextEntered
-            }
-        }).addDisposableTo(bag)
-        
         searchBar.clearButton.rx.controlEvent(.touchUpInside)
             .subscribe(onNext: { [weak self] in
                 self?.searchBar.clearButton.isHidden = true
-                if let searchVC = self?.rootViewController as? SearchViewController {
-                    searchVC.searchResultsView.isHidden = true
-                    searchVC.suggestedContentView.isHidden = false
-                }
+                self?.viewModel?.onShow(view: .suggestions).execute()
             })
             .addDisposableTo(bag)
 

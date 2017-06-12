@@ -45,7 +45,6 @@ class BirthdaySexViewController: UIViewController, BindableType {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        progressView.setProgress(0.25, animated: true, completion: nil)
     }
     
     func bindViewModel() {
@@ -142,7 +141,7 @@ extension BirthdaySexViewController {
     fileprivate func prepareProgressView() {
         
         progressView = MDCProgressView()
-        progressView.progress = 0.0
+        progressView.progress = 0.25
         progressView.trackTintColor = .moonGreenLight
         progressView.progressTintColor = .moonGreen
         

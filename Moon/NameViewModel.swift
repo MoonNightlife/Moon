@@ -20,11 +20,14 @@ struct NameViewModel {
     
     // Private
     private let disposeBag = DisposeBag()
-    private let dataValid: Driver<Bool>
+    
     
     // Inputs
     var firstName = BehaviorSubject<String?>(value: nil)
     var lastName = BehaviorSubject<String?>(value: nil)
+    
+    // Outputs
+    var dataValid: Driver<Bool>
     
     init(coordinator: SceneCoordinatorType, user: RegistrationProfile) {
         self.sceneCoordinator = coordinator
@@ -50,7 +53,7 @@ struct NameViewModel {
     }
 
     func nextSignUpScreen() -> CocoaAction {
-        return CocoaAction(enabledIf: dataValid.asObservable(), workFactory: {
+        return CocoaAction(workFactory: {
             let viewModel = BirthdaySexViewModel(coordinator: self.sceneCoordinator, user: self.newUser)
             return self.sceneCoordinator.transition(to: Scene.SignUp.birthdaySex(viewModel), type: .push)
         })
