@@ -236,7 +236,7 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
     func setUpSpecialView(index: Int) -> UIView {
         
         let view = SpecialCarouselView()
-        let size = specialsCarousel.frame.size.height - 30
+        let size = specialsCarousel.frame.size.height - 60
         let frame = CGRect(x: specialsCarousel.frame.size.width / 2, y: specialsCarousel.frame.size.height / 2, width: size, height: size)
         view.frame = frame
         view.initializeViewWith(special: fakeSpecials[index], index: index)
