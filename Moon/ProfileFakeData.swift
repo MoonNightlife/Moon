@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct FakeUser {
     
@@ -14,7 +15,7 @@ struct FakeUser {
     var lastName: String?
     var city: String?
     var username: String?
-    var pics: [String]?
+    var pics: [UIImage]?
     var bio: String?
     var plan: String?
         

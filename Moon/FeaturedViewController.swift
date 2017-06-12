@@ -40,10 +40,30 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
         return fakeEvents.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let cellsAcross: CGFloat = CGFloat(fakeEvents.count)
+        let spaceBetweenCells: CGFloat = 0.8
+        let dim = (collectionView.bounds.width - (cellsAcross - 1) * spaceBetweenCells) / cellsAcross
+        
+        return CGSize(width: dim, height: dim)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         //swiftlint:disable:next force_cast
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredCellIdenifier, for: indexPath) as! FeaturedEventCollectionViewCell
-        cell.initializeCellWith(event: fakeEvents[indexPath.row], index: indexPath.row)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredCellIdenifier, for: indexPath)
+        cell.clearsContextBeforeDrawing = true
+        
+        let height = CGFloat(250)
+        let width = self.view.frame.size.width - 40
+        
+        let view = FeaturedEventView()
+        view.frame = CGRect(x: (cell.frame.size.width / 2) - (width / 2), y: (cell.frame.size.height / 2) - (height / 2), width: width, height: height)
+        view.backgroundColor = .clear
+        view.initializeCellWith(event: fakeEvents[indexPath.row], index: indexPath.row)
+        
+        cell.addSubview(view)
+        
         return cell
     }
 }
