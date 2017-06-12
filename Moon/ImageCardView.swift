@@ -15,19 +15,20 @@ class ImageCardView: UIView {
     enum CardType {
         case small(image: UIImage, text: String)
         case medium(image: UIImage, text: String)
-        case large(image: UIImage, titleText: String, detailText: String, text: String, date: DateFormatter, likeText: String)
+        case large(image: UIImage, titleText: String, detailText: String, text: String)
     }
     
     fileprivate var index: Int?
     fileprivate var card: ImageCard!
     
-    // Image
+    // Image View
     var imageView: UIImageView!
     
     // Tool Bar views.
     var toolbar: Toolbar!
     var bottomToolbar: MoonToolbar!
     
+    //Content View
     var content: UILabel!
     
     func initializeImageCardViewWith(type: CardType) {
@@ -44,11 +45,13 @@ class ImageCardView: UIView {
             self.prepareBottomToolBar(text: "")
             self.preparePresenterCard()
             break
-        case .large:
+        case .large(let image, let titleText, let detailText, let text):
+            self.prepareGradiendImage(image: image)
+            self.prepareToolBar(text: titleText, detailText: detailText)
+            self.prepareContentView(text: text, color: .black)
+            self.prepareBottomToolBar(text: "")
+            self.preparePresenterCard()
             break
-        default:
-            break
-            
         }
     }
     
@@ -79,18 +82,18 @@ extension ImageCardView {
     }
     
     fileprivate func prepareGradiendImage(image: UIImage) {
-//        imageView = UIImageView(frame:  CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height / 1.2)) as! BottomGradientImageView!
-//        imageView.image = image
-//        imageView.contentMode = .scaleAspectFill
-//        imageView.clipsToBounds = true
+        imageView = BottomGradientImageView(frame:  CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height / 1.2)) as BottomGradientImageView!
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
     }
     
-    fileprivate func prepareToolBar(text: String) {
+    fileprivate func prepareToolBar(text: String, detailText: String) {
         toolbar = Toolbar()
         toolbar.backgroundColor = .clear
+        
         toolbar.title = text
-        toolbar.titleLabel.textColor = .lightGray
-        toolbar.titleLabel.font = UIFont(name: "Roboto", size: 12)
+        toolbar.detail = detailText
     }
     
     fileprivate func prepareBottomToolBar(text: String) {

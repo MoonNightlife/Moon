@@ -246,7 +246,7 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
     
     func setUpEventView(event: FeaturedEvent, index: Int) -> UIView {
                 
-        let view = FeaturedEventCollectionViewCell()
+        let view = FeaturedEventView()
         let size = eventsCarousel.frame.size.height - 60
         view.frame = CGRect(x: eventsCarousel.frame.size.width / 2, y: eventsCarousel.frame.size.height / 2, width: size + 60, height: size)
         view.backgroundColor = .clear

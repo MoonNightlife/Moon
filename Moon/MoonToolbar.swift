@@ -19,11 +19,9 @@ class MoonToolbar: Toolbar {
     fileprivate var rightView2: UIView!
     
     func addRightViews(view1: UIView, view2: UIView) {
-        let size = CGFloat(self.frame.size.width * 0.117)
-        
-        print (size)
-        
-        view1.frame = CGRect(x: self.frame.size.width - size, y: self.frame.size.height / 3.5, width: size, height: size)
+        let size = CGFloat(self.frame.size.width * 0.12)
+    
+        view1.frame = CGRect(x: self.frame.size.width - size, y: (self.frame.size.height / 2) - (size / 2), width: size, height: size)
         rightView = view1
         self.addSubview(rightView)
         
@@ -35,13 +33,13 @@ class MoonToolbar: Toolbar {
     func addLeftViews(view1: UIView, view2: UIView) {
         let size = CGFloat(self.frame.size.width * 0.12)
         
-        view1.frame = CGRect(x: size, y: self.frame.size.height / 3.5, width: size, height: size)
+        view1.frame = CGRect(x: 5, y: (self.frame.size.height / 2) - (size / 2), width: size, height: size)
         leftView = view1
-        self.addSubview(rightView)
+        self.addSubview(leftView)
         
-        view2.frame = CGRect(x: view1.frame.size.width + 20, y: self.frame.size.height / 3.5, width: size, height: size)
+        view2.frame = CGRect(x: view1.frame.size.width + 1, y: (self.frame.size.height / 2) - (size / 2), width: size, height: size)
         leftView2 = view2
-        self.addSubview(rightView2)
+        self.addSubview(leftView2)
     }
     
 }
