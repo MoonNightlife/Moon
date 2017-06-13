@@ -1,5 +1,5 @@
 //
-//  UserCell.swift
+//  SearchSnapshot.swift
 //  Moon
 //
 //  Created by Evan Noble on 6/10/17.
@@ -8,22 +8,22 @@
 
 import Foundation
 import RxDataSources
-import RxSwift
+import UIKit
 
-struct UserCell {
+struct SearchSnapshot {
     let name: String
     let id: String
     let picture: String
 }
 
-extension UserCell: IdentifiableType {
+extension SearchSnapshot: IdentifiableType {
     var identity: String {
         return id
     }
 }
 
-extension UserCell: Equatable {
-    static func == (lhs: UserCell, rhs: UserCell) -> Bool {
+extension SearchSnapshot: Equatable {
+    static func == (lhs: SearchSnapshot, rhs: SearchSnapshot) -> Bool {
         return lhs.id == rhs.id
     }
 }

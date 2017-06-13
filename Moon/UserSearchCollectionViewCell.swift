@@ -14,7 +14,7 @@ class UserSearchCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addButton: UIButton!
     
-    func initCellWith(user: UserCell) {
+    func initCellWith(user: SearchSnapshot) {
         self.imageView.image = UIImage(named: user.picture)
         self.nameLabel.text = user.name
     }

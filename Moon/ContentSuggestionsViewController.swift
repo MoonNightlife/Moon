@@ -11,17 +11,16 @@ import RxDataSources
 import RxCocoa
 import RxSwift
 
-typealias BarSearchSection = AnimatableSectionModel<String, BarCell>
-typealias UserSearchSection = AnimatableSectionModel<String, UserCell>
+typealias SearchSection = AnimatableSectionModel<String, SearchSnapshot>
 
 class ContentSuggestionsViewController: UIViewController, BindableType {
     
     var viewModel: ContentSuggestionsViewModel!
     
-    private let barTableCellResuseIdenifier = "BarSearchTableViewCell"
+    private let barTableCellResuseIdenifier = "BarSnapshotCell"
     private let userCollectionCellReuseIdenifier = "UserSearchCollectionViewCell"
-    let barDataSource = RxTableViewSectionedAnimatedDataSource<BarSearchSection>()
-    let userDataSource = RxCollectionViewSectionedAnimatedDataSource<UserSearchSection>()
+    let barDataSource = RxTableViewSectionedAnimatedDataSource<SearchSection>()
+    let userDataSource = RxCollectionViewSectionedAnimatedDataSource<SearchSection>()
     private let bag = DisposeBag()
     
     @IBOutlet var suggestedUserColletionView: UICollectionView!
@@ -58,9 +57,9 @@ class ContentSuggestionsViewController: UIViewController, BindableType {
         barDataSource.configureCell = {
             [weak self] dataSource, tableView, indexPath, item in
             //swiftlint:disable force_cast
-            let cell = tableView.dequeueReusableCell(withIdentifier: self!.barTableCellResuseIdenifier, for: indexPath) as! BarSearchTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: self!.barTableCellResuseIdenifier, for: indexPath) as! BarSnapshotTableViewCell
             if let strongSelf = self {
-                cell.initCellWith(bar: item)
+                cell.initCellWith(snapshot: item)
             }
             return cell
         }

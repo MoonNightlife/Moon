@@ -19,24 +19,24 @@ struct ContentSuggestionsViewModel {
     // Inputs
     
     // Outputs
-    var suggestedFriends: Driver<[UserSearchSection]>!
-    var suggestedBars: Driver<[BarSearchSection]>!
+    var suggestedFriends: Driver<[SearchSection]>!
+    var suggestedBars: Driver<[SearchSection]>!
     
     init(coordinator: SceneCoordinatorType) {
         sceneCoordinator = coordinator
         
         let activities = createFakeBarActivities()
         let friendSuggestions = activities.map({ activity in
-            return UserCell(name: activity.name!, id: activity.userId!, picture: activity.profileImage!)
+            return SearchSnapshot(name: activity.name!, id: activity.userId!, picture: activity.profileImage!)
         })
         
-        self.suggestedFriends = Observable.just([UserSearchSection(model: "", items: friendSuggestions)]).asDriver(onErrorJustReturn: [UserSearchSection(model: "", items: [])])
+        self.suggestedFriends = Observable.just([SearchSection(model: "", items: friendSuggestions)]).asDriver(onErrorJustReturn: [SearchSection(model: "", items: [])])
         
         let bars = createTempTopBarData()
         let barSuggestions = bars.map({ bar in
-            return BarCell(name: bar.barName, id: "336", picture: bar.imageName)
+            return SearchSnapshot(name: bar.barName, id: "336", picture: bar.imageName)
         })
         
-        self.suggestedBars = Observable.just([BarSearchSection(model: "", items: barSuggestions)]).asDriver(onErrorJustReturn: [BarSearchSection(model: "", items: [])])
+        self.suggestedBars = Observable.just([SearchSection(model: "", items: barSuggestions)]).asDriver(onErrorJustReturn: [SearchSection(model: "", items: [])])
     }
 }

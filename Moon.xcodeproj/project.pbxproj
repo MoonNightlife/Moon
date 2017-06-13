@@ -99,12 +99,13 @@
 		F049896C1EE068BE00064F58 /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F049896B1EE068BE00064F58 /* SceneTransitionType.swift */; };
 		F049896E1EE068E000064F58 /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F049896D1EE068E000064F58 /* SceneCoordinator.swift */; };
 		F04989701EE0746400064F58 /* UINavigationController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F049896F1EE0746400064F58 /* UINavigationController+Rx.swift */; };
-		F04A4B1F1EEC53ED00DBA9A6 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A4B1E1EEC53ED00DBA9A6 /* UserCell.swift */; };
-		F04A4B231EEC549300DBA9A6 /* BarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A4B221EEC549300DBA9A6 /* BarCell.swift */; };
-		F04A4B251EEC553900DBA9A6 /* BarSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A4B241EEC553900DBA9A6 /* BarSearchTableViewCell.swift */; };
+		F04A4B231EEC549300DBA9A6 /* SearchSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A4B221EEC549300DBA9A6 /* SearchSnapshot.swift */; };
+		F04A4B251EEC553900DBA9A6 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A4B241EEC553900DBA9A6 /* SearchTableViewCell.swift */; };
 		F04A4B271EEC595700DBA9A6 /* UserSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A4B261EEC595700DBA9A6 /* UserSearchCollectionViewCell.swift */; };
 		F04A6D521EEECA95000D898B /* ParentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A6D511EEECA95000D898B /* ParentType.swift */; };
 		F04A6D541EEEDBBF000D898B /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A6D531EEEDBBF000D898B /* Views.swift */; };
+		F04A6D561EEEF931000D898B /* SeachTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A6D551EEEF931000D898B /* SeachTableViewCell.swift */; };
+		F04A6D5A1EEF2B8C000D898B /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A6D591EEF2B8C000D898B /* LoadMoreTableViewCell.swift */; };
 		F04F445C1ECF840700D5FC62 /* BarAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */; };
 		F0644C2B1EC37D0E00D92BF7 /* SpecialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0644C2A1EC37D0E00D92BF7 /* SpecialsViewController.swift */; };
 		F07060061EC525A10020B3BE /* default_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = F07060051EC525A10020B3BE /* default_pic.png */; };
@@ -298,12 +299,13 @@
 		F049896B1EE068BE00064F58 /* SceneTransitionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
 		F049896D1EE068E000064F58 /* SceneCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
 		F049896F1EE0746400064F58 /* UINavigationController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Rx.swift"; sourceTree = "<group>"; };
-		F04A4B1E1EEC53ED00DBA9A6 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
-		F04A4B221EEC549300DBA9A6 /* BarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarCell.swift; sourceTree = "<group>"; };
-		F04A4B241EEC553900DBA9A6 /* BarSearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarSearchTableViewCell.swift; sourceTree = "<group>"; };
+		F04A4B221EEC549300DBA9A6 /* SearchSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSnapshot.swift; sourceTree = "<group>"; };
+		F04A4B241EEC553900DBA9A6 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		F04A4B261EEC595700DBA9A6 /* UserSearchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		F04A6D511EEECA95000D898B /* ParentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentType.swift; sourceTree = "<group>"; };
 		F04A6D531EEEDBBF000D898B /* Views.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
+		F04A6D551EEEF931000D898B /* SeachTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeachTableViewCell.swift; sourceTree = "<group>"; };
+		F04A6D591EEF2B8C000D898B /* LoadMoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreTableViewCell.swift; sourceTree = "<group>"; };
 		F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAnnotation.swift; sourceTree = "<group>"; };
 		F0644C2A1EC37D0E00D92BF7 /* SpecialsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialsViewController.swift; sourceTree = "<group>"; };
 		F07060051EC525A10020B3BE /* default_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_pic.png; sourceTree = "<group>"; };
@@ -661,8 +663,7 @@
 				F0CA18BA1EE6108200428318 /* Special.swift */,
 				F03C78B61EE9E023002AEDAD /* Settings.swift */,
 				F0CA18B61EE6101200428318 /* TopBar.swift */,
-				F04A4B1E1EEC53ED00DBA9A6 /* UserCell.swift */,
-				F04A4B221EEC549300DBA9A6 /* BarCell.swift */,
+				F04A4B221EEC549300DBA9A6 /* SearchSnapshot.swift */,
 				F02D9AA51EE61B3D00D6C969 /* BarActivity.swift */,
 				F0CA18BC1EE610CB00428318 /* FeaturedEvent.swift */,
 				F0CA18B21EE5AE7500428318 /* Enums.swift */,
@@ -750,8 +751,10 @@
 				F09DF08B1EEAF0610092BFA5 /* NotificationTableViewCell.swift */,
 				F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */,
 				F0942F0C1ECCEC550038E389 /* FeaturedEventCollectionViewCell.swift */,
-				F04A4B241EEC553900DBA9A6 /* BarSearchTableViewCell.swift */,
+				F04A4B241EEC553900DBA9A6 /* SearchTableViewCell.swift */,
 				F04A4B261EEC595700DBA9A6 /* UserSearchCollectionViewCell.swift */,
+				F04A6D551EEEF931000D898B /* SeachTableViewCell.swift */,
+				F04A6D591EEF2B8C000D898B /* LoadMoreTableViewCell.swift */,
 			);
 			name = Subclasses;
 			sourceTree = "<group>";
@@ -1286,7 +1289,7 @@
 				F09C09221ECC7D3B003076CC /* FloatingBottomTabBar.swift in Sources */,
 				F03C78BE1EE9E98F002AEDAD /* NotificationSettingsViewController.swift in Sources */,
 				F09DF0901EEAFAF90092BFA5 /* WebViewUIViViewController.swift in Sources */,
-				F04A4B231EEC549300DBA9A6 /* BarCell.swift in Sources */,
+				F04A4B231EEC549300DBA9A6 /* SearchSnapshot.swift in Sources */,
 				F098FF9B1EDF1DEA00A59594 /* NewUser.swift in Sources */,
 				F001BAC11EC50E9700CDF9BC /* BarActivityFeedViewController.swift in Sources */,
 				F04F445C1ECF840700D5FC62 /* BarAnnotation.swift in Sources */,
@@ -1299,12 +1302,12 @@
 				F04989661EE0651800064F58 /* SceneCoordinatorType.swift in Sources */,
 				F09DF0941EEB224C0092BFA5 /* UserAPI+Rx.swift in Sources */,
 				F02D9AA61EE61B3D00D6C969 /* BarActivity.swift in Sources */,
-				F04A4B1F1EEC53ED00DBA9A6 /* UserCell.swift in Sources */,
 				F0D168531ECA62940064F642 /* MoonColor.swift in Sources */,
 				F0CA18A51EE58FD400428318 /* SearchBarViewModel.swift in Sources */,
 				F0FD8F301EE178650020D131 /* LoginViewModel.swift in Sources */,
 				F048F11D1EA3B7A5000F0161 /* LoginViewController.swift in Sources */,
 				F0A2251F1ECB9F2600170927 /* MoonFont.swift in Sources */,
+				F04A6D5A1EEF2B8C000D898B /* LoadMoreTableViewCell.swift in Sources */,
 				F03C78BC1EE9E97E002AEDAD /* EmailSettingsViewController.swift in Sources */,
 				F049896C1EE068BE00064F58 /* SceneTransitionType.swift in Sources */,
 				F03C78C01EE9E99D002AEDAD /* DeleteAccountViewController.swift in Sources */,
@@ -1320,12 +1323,13 @@
 				F0A8E2D81EC3C6B2001D9993 /* ImageViewCell.swift in Sources */,
 				F0942F0B1ECCEBA40038E389 /* FakeEventData.swift in Sources */,
 				F0FD8F371EE1DC950020D131 /* ErrorTextField+Rx.swift in Sources */,
+				F04A6D561EEEF931000D898B /* SeachTableViewCell.swift in Sources */,
 				F0CA18AF1EE5AA6C00428318 /* BarActivityFeedViewModel.swift in Sources */,
 				F0CF158E1EDEED8600531DCF /* NameViewModel.swift in Sources */,
 				F0CA18B31EE5AE7500428318 /* Enums.swift in Sources */,
 				F03C78B71EE9E023002AEDAD /* Settings.swift in Sources */,
 				F049896E1EE068E000064F58 /* SceneCoordinator.swift in Sources */,
-				F04A4B251EEC553900DBA9A6 /* BarSearchTableViewCell.swift in Sources */,
+				F04A4B251EEC553900DBA9A6 /* SearchTableViewCell.swift in Sources */,
 				F0055D691EC5E64B005544B4 /* CityOverviewViewController.swift in Sources */,
 				F04989641EE0641300064F58 /* Scene.swift in Sources */,
 				F0388CFB1EE9D40B00E8ED48 /* BarProfileViewController.swift in Sources */,
