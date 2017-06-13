@@ -18,5 +18,6 @@ struct FakeUser {
     var pics: [UIImage]?
     var bio: String?
     var plan: String?
+    var id: String?
         
 }

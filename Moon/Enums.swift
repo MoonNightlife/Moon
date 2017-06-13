@@ -59,19 +59,3 @@ enum SettingSections {
         case support = 2
     }
 }
-
-enum ImageSource: CustomStringConvertible {
-    case lastPhotoTaken
-    case imagePicker
-    
-    var description: String {
-        switch self {
-        case .lastPhotoTaken:
-            return "Last photo taken"
-        case .imagePicker:
-            return "Choose image from library"
-        }
-    }
-}
-
-

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 import iCarousel
 import Material
 import MaterialComponents.MaterialCollections
@@ -25,6 +27,7 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     @IBOutlet weak var specialsLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     var viewModel: BarProfileViewModel!
+    private let bag = DisposeBag()
     var backButton: UIBarButtonItem!
     var moreInfoButton: IconButton!
     var goButton: IconButton!
@@ -35,26 +38,15 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     @IBOutlet weak var specialViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var eventViewConstraint: NSLayoutConstraint!
     
-    //fake variabls
-    var barPics = [String]()
-    var barName = String()
-    var peoplePics = [String]()
-    var peopleNames = [String]()
-    var fakeUsers = [FakeUser]()
-    var fakeSpecials = [Special]()
+    // Data
+    var barPics = Variable<[UIImage]>([])
+    var barName = Variable<String>("")
+    var usersGoing = Variable<[FakeUser]>([])
+    var specials = Variable<[Special]>([])
+    var events = Variable<[FeaturedEvent]>([])
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        
-        //Fake Data loading
-        barPics = ["b1.jpg", "b2.jpg", "b3.jpg", "b4.jpg", "b5.jpg"]
-        peoplePics = ["pp2.jpg", "p1.jpg", "p2.jpg", "p3.jpg", "p4.jpg", "p5.jpg", "p6.jpg", "p7.jpg", "p8.jpg"]
-        peopleNames = ["Marisol Leiva", "Collin Duzyk", "Camden Moore", "Mony Gonzalez", "Molly Smith", "Sarah Smith", "Sloan Stearman", "Henry Berlhe", "Andrea Adler"]
-        barName = "Avenu Lounge"
-        fakeUsers = createFakeUsers()
-        fakeSpecials = createFakeSpecials()
         
         //prepare the UI
         prepareScrollView()
@@ -77,7 +69,6 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         super.viewWillAppear(animated)
 //        self.navigationController?.navigationBar.barTintColor = .moonGrey
         self.navigationController?.navigationBar.barStyle = UIBarStyle.default
-        self.title = "Avenu Lounge"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.lightGray]
     }
 
@@ -90,6 +81,42 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         backButton.rx.action = viewModel.onBack()
         moreInfoButton.rx.action = viewModel.onShowInfo()
         goButton.rx.action = viewModel.onAttendBar()
+        
+        segmentControl.rx.controlEvent(UIControlEvents.valueChanged)
+            .map({ [weak self] in
+                return UsersGoingType(rawValue: self?.segmentControl.selectedIndex ?? 0) ?? .everyone
+            })
+            .subscribe(viewModel.selectedUserIndex.inputs)
+            .addDisposableTo(bag)
+        
+        viewModel.selectedUserIndex.elements.subscribe(onNext: { [weak self] in
+            self?.usersGoing.value = $0
+            self?.goingCarousel.reloadData()
+        }).addDisposableTo(bag)
+        
+        // Execute action manually the first time
+        viewModel.selectedUserIndex.execute(.everyone)
+
+        viewModel.barName.drive(onNext: { [weak self] in
+            self?.title = $0
+        }).addDisposableTo(bag)
+        
+        viewModel.barPictures.drive(onNext: { [weak self] in
+            self?.barPics.value = $0
+            self?.pageController.numberOfPages = $0.count
+            self?.pictureCarousel.reloadData()
+        }).addDisposableTo(bag)
+        
+        viewModel.specials.drive(onNext: { [weak self] in
+            self?.specials.value = $0
+            self?.specialsCarousel.reloadData()
+        }).addDisposableTo(bag)
+        
+        viewModel.events.drive(onNext: { [weak self] in
+            self?.events.value = $0
+            self?.eventsCarousel.reloadData()
+        }).addDisposableTo(bag)
+        
     }
     
     func prepareScrollView() {
@@ -103,7 +130,6 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         backButton.image = Icon.cm.arrowBack
         backButton.tintColor = .lightGray
         self.navigationItem.leftBarButtonItem = backButton
-        self.navigationItem.title = "Avenu Lounge"
     }
     
     func prepareSegmentControl() {
@@ -146,7 +172,7 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     }
     
     func preparePageControl() {
-        pageController.numberOfPages = barPics.count
+        pageController.numberOfPages = barPics.value.count
         pageController.currentPageIndicatorTintColor = .white
         pageController.pageIndicatorTintColor = .lightGray
         pageController.currentPage = 0
@@ -189,7 +215,7 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
 }
 
 extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
-
+    
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
         
         if carousel == pictureCarousel {
@@ -206,11 +232,11 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
     func numberOfItems(in carousel: iCarousel) -> Int {
         
         if carousel.tag == 0 {
-            return fakeUsers.count //returns number of people going
+            return usersGoing.value.count //returns number of people going
         } else if carousel.tag == 1 {
-            return fakeEvents.count //returns number of fake events
+            return events.value.count //returns number of fake events
         } else if carousel.tag == 2 {
-            return barPics.count //returns number of bar pictures
+            return barPics.value.count //returns number of bar pictures
         } else if carousel.tag == 3 {
             return 10 //returns number of specials
         }
@@ -235,7 +261,7 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         } else if carousel == goingCarousel {
             return setUpGoingView(index: index)
         } else if carousel == eventsCarousel {
-            return setUpEventView(event: fakeEvents[index], index: index)
+            return setUpEventView(index: index)
         }
         
         return UIView(frame: carousel.frame)
@@ -246,7 +272,7 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         let frame = CGRect(x: goingCarousel.frame.size.width / 2, y: goingCarousel.frame.size.height / 2, width: size, height: size)
         let view = PeopleGoingCarouselView()
         view.frame = frame
-        view.initializeViewWith(user: fakeUsers[index], index: index)
+        view.initializeViewWith(user: usersGoing.value[index], index: index, viewProfile: viewModel.onShowProfile, likeActivity: viewModel.onLikeActivity, viewLikers: viewModel.onViewLikers)
         
         return view
     }
@@ -256,24 +282,24 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         let size = (self.view.frame.size.height * 0.298) - 50
         let frame = CGRect(x: specialsCarousel.frame.size.width / 2, y: specialsCarousel.frame.size.height / 2, width: size + 20, height: size)
         view.frame = frame
-        view.initializeViewWith(special: fakeSpecials[index], index: index)
+        view.initializeViewWith(special: specials.value[index], index: index, likeAction: viewModel.onLikeSpecial)
         
         return view
     }
     
-    func setUpEventView(event: FeaturedEvent, index: Int) -> UIView {
+    func setUpEventView(index: Int) -> UIView {
         let view = FeaturedEventView()
         let size = (self.view.frame.size.height * 0.513) - 60
         view.frame = CGRect(x: eventsCarousel.frame.size.width / 2, y: eventsCarousel.frame.size.height / 2, width: size + 60, height: size)
         view.backgroundColor = .clear
-        view.initializeCellWith(event: event, index: index)
+        view.initializeCellWith(event: events.value[index], index: index, likeAction: viewModel.onLikeEvent, shareAction: viewModel.onShareEvent)
         
         return view
     }
     
     func setUpPictureView(index: Int) -> UIView {
         let barPic = BottomGradientImageView(frame: pictureCarousel.frame)
-        barPic.image = UIImage(named: barPics[index])
+        barPic.image = barPics.value[index]
         //profilePic.contentMode = UIViewContentMode.scaleAspectFill
         
         return barPic

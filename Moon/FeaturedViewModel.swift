@@ -19,6 +19,19 @@ struct FeaturedViewModel {
     private let sceneCoordinator: SceneCoordinatorType
     
     // Inputs
+    lazy var onLikeEvent: Action<String, Void> = { this in
+        return Action<String, Void> {_ in
+            print("Like Event")
+            return Observable.empty()
+        }
+    }(self)
+    
+    lazy var onShareEvent: Action<String, Void> = { this in
+        return Action<String, Void> {_ in
+            print("Share Event")
+            return Observable.empty()
+        }
+    }(self)
     
     // Outputs
     

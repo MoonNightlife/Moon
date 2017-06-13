@@ -193,6 +193,11 @@
 		F0E59F2A1EEF73B4007A3323 /* BarInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E59F291EEF73B4007A3323 /* BarInfoViewModel.swift */; };
 		F0E6ED121ECB3C54009508FC /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E6ED111ECB3C54009508FC /* SearchBar.swift */; };
 		F0EBA0BF1ECCAE9F00056EF9 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EBA0BE1ECCAE9F00056EF9 /* ActionButton.swift */; };
+		F0EF69381EF08BAE0028A32B /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EF69371EF08BAE0028A32B /* UsersTableViewController.swift */; };
+		F0EF693A1EF08BCB0028A32B /* UsersTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EF69391EF08BCB0028A32B /* UsersTableViewModel.swift */; };
+		F0EF693C1EF0949C0028A32B /* UsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EF693B1EF0949C0028A32B /* UsersTableViewCell.swift */; };
+		F0EF693E1EF09AD90028A32B /* BackType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EF693D1EF09AD90028A32B /* BackType.swift */; };
+		F0EF69401EF0A2210028A32B /* UserSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EF693F1EF0A2210028A32B /* UserSnapshot.swift */; };
 		F0F210591ECA1C160027B50B /* SearchBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F210581ECA1C160027B50B /* SearchBarViewController.swift */; };
 		F0FD8F301EE178650020D131 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */; };
 		F0FD8F321EE19D4E0020D131 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F311EE19D4E0020D131 /* ForgotPasswordViewController.swift */; };
@@ -406,6 +411,11 @@
 		F0E59F291EEF73B4007A3323 /* BarInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarInfoViewModel.swift; sourceTree = "<group>"; };
 		F0E6ED111ECB3C54009508FC /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		F0EBA0BE1ECCAE9F00056EF9 /* ActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
+		F0EF69371EF08BAE0028A32B /* UsersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
+		F0EF69391EF08BCB0028A32B /* UsersTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewModel.swift; sourceTree = "<group>"; };
+		F0EF693B1EF0949C0028A32B /* UsersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewCell.swift; sourceTree = "<group>"; };
+		F0EF693D1EF09AD90028A32B /* BackType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackType.swift; sourceTree = "<group>"; };
+		F0EF693F1EF0A2210028A32B /* UserSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSnapshot.swift; sourceTree = "<group>"; };
 		F0F210581ECA1C160027B50B /* SearchBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarViewController.swift; sourceTree = "<group>"; };
 		F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		F0FD8F311EE19D4E0020D131 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
@@ -502,7 +512,6 @@
 		C08AFB271EECB9E8007D33D6 /* Moon Specific */ = {
 			isa = PBXGroup;
 			children = (
-				C0DAD32D1EEA1263008BAF05 /* ADVSegmentedControl.swift */,
 				C0F45BA51EEB19D8008ED6A7 /* PeopleGoingCarouselView.swift */,
 				C0AE92651EEB3DA00048BEDF /* SpecialCarouselView.swift */,
 			);
@@ -718,9 +727,11 @@
 			isa = PBXGroup;
 			children = (
 				F098FF9A1EDF1DEA00A59594 /* NewUser.swift */,
+				F0EF693F1EF0A2210028A32B /* UserSnapshot.swift */,
 				F0B5F93E1EEF790A0095F12E /* BarInfo.swift */,
 				F04989691EE0661E00064F58 /* BindableType.swift */,
 				F04A6D511EEECA95000D898B /* ParentType.swift */,
+				F0EF693D1EF09AD90028A32B /* BackType.swift */,
 				F0CA18BA1EE6108200428318 /* Special.swift */,
 				F03C78B61EE9E023002AEDAD /* Settings.swift */,
 				F0CA18B61EE6101200428318 /* TopBar.swift */,
@@ -816,8 +827,10 @@
 				F04A4B261EEC595700DBA9A6 /* UserSearchCollectionViewCell.swift */,
 				F04A6D551EEEF931000D898B /* SeachTableViewCell.swift */,
 				F04A6D591EEF2B8C000D898B /* LoadMoreTableViewCell.swift */,
+				C0DAD32D1EEA1263008BAF05 /* ADVSegmentedControl.swift */,
 				C08AFB271EECB9E8007D33D6 /* Moon Specific */,
 				C08AFB261EECB9DA007D33D6 /* Generic */,
+				F0EF693B1EF0949C0028A32B /* UsersTableViewCell.swift */,
 			);
 			name = Subclasses;
 			sourceTree = "<group>";
@@ -910,6 +923,7 @@
 			isa = PBXGroup;
 			children = (
 				F0CA18921EE585D700428318 /* ProfileViewController.swift */,
+				F0EF69371EF08BAE0028A32B /* UsersTableViewController.swift */,
 				F03C78B81EE9E931002AEDAD /* Settings */,
 			);
 			name = User;
@@ -928,6 +942,7 @@
 			isa = PBXGroup;
 			children = (
 				F0CA18901EE584AF00428318 /* ProfileViewModel.swift */,
+				F0EF69391EF08BCB0028A32B /* UsersTableViewModel.swift */,
 				F03C78C11EE9EA1E002AEDAD /* Settings */,
 			);
 			name = User;
@@ -1325,6 +1340,7 @@
 				F0CF15901EDEED9600531DCF /* BirthdaySexViewModel.swift in Sources */,
 				F04A4B271EEC595700DBA9A6 /* UserSearchCollectionViewCell.swift in Sources */,
 				F03C78C31EE9EA2D002AEDAD /* NameSettingsViewModel.swift in Sources */,
+				F0EF693A1EF08BCB0028A32B /* UsersTableViewModel.swift in Sources */,
 				F0A52CC41EEDE3D60067E8DD /* SearchResultsViewController.swift in Sources */,
 				F0E59F281EEF735A007A3323 /* BarInfoViewController.swift in Sources */,
 				F0A52CC81EEDE7740067E8DD /* SearchViewController.swift in Sources */,
@@ -1344,8 +1360,10 @@
 				F0CA18B11EE5AA7900428318 /* CityOverviewViewModel.swift in Sources */,
 				F04A6D541EEEDBBF000D898B /* Views.swift in Sources */,
 				F0CA18BB1EE6108200428318 /* Special.swift in Sources */,
+				F0EF69381EF08BAE0028A32B /* UsersTableViewController.swift in Sources */,
 				F0CA18BF1EE611C100428318 /* Date.swift in Sources */,
 				F0CA18A91EE5AA3A00428318 /* SpecialsViewModel.swift in Sources */,
+				F0EF693C1EF0949C0028A32B /* UsersTableViewCell.swift in Sources */,
 				F04283B11EC4A96200CCB5F3 /* MoonsViewViewController.swift in Sources */,
 				F03C78BA1EE9E973002AEDAD /* NameSettingsViewController.swift in Sources */,
 				C0DAD32E1EEA1263008BAF05 /* ADVSegmentedControl.swift in Sources */,
@@ -1379,6 +1397,7 @@
 				F048F11D1EA3B7A5000F0161 /* LoginViewController.swift in Sources */,
 				F0A2251F1ECB9F2600170927 /* MoonFont.swift in Sources */,
 				F04A6D5A1EEF2B8C000D898B /* LoadMoreTableViewCell.swift in Sources */,
+				F0EF69401EF0A2210028A32B /* UserSnapshot.swift in Sources */,
 				F03C78BC1EE9E97E002AEDAD /* EmailSettingsViewController.swift in Sources */,
 				F049896C1EE068BE00064F58 /* SceneTransitionType.swift in Sources */,
 				F03C78C01EE9E99D002AEDAD /* DeleteAccountViewController.swift in Sources */,
@@ -1399,6 +1418,7 @@
 				F04A6D561EEEF931000D898B /* SeachTableViewCell.swift in Sources */,
 				F0CA18AF1EE5AA6C00428318 /* BarActivityFeedViewModel.swift in Sources */,
 				F0CF158E1EDEED8600531DCF /* NameViewModel.swift in Sources */,
+				F0EF693E1EF09AD90028A32B /* BackType.swift in Sources */,
 				F0CA18B31EE5AE7500428318 /* Enums.swift in Sources */,
 				F03C78B71EE9E023002AEDAD /* Settings.swift in Sources */,
 				C0F45BA61EEB19D8008ED6A7 /* PeopleGoingCarouselView.swift in Sources */,

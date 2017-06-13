@@ -10,37 +10,63 @@ import Foundation
 import RxSwift
 import RxCocoa
 import Action
+import CoreLocation
 
 struct BarInfoViewModel {
     // Private
-    private let defaultInfo = BarInfo(website: "www.pornhub.com", address: "6969 Master Bateson Lane", phoneNumber: "1-800-jack-off")
+    private let defaultInfo = BarInfo(website: "www.apple.com", address: "108 Mast Ct, Mooresville NC", phoneNumber: "1-800–692–7753")
+    let barInfo: Observable<BarInfo>
     
     // Dependencies
     let sceneCoordinator: SceneCoordinatorType
+    let geocoder: CLGeocoder
     
-    // Output
-    var address: Driver<String>!
-    var website: Driver<String>!
-    var phoneNumber: Driver<String>!
+    // Outputs
+    var addressString: Driver<String>!
+    var websiteString: Driver<String>!
+    var phoneNumberString: Driver<String>!
     
-    // Input
+    // Inputs
+    lazy var onCall: Action<Void, URL?> = { this in
+        return Action(workFactory: {_ in
+            return this.barInfo.map({ $0.phoneNumber }).map(this.createPhoneNumberURL)
+        })
+    }(self)
     
-    init(coordinator: SceneCoordinatorType) {
+    lazy var onViewWebsite: Action<Void, URL?> = { this in
+        return Action(workFactory: {_ in
+            return this.barInfo.map({ info in
+                return URL(string: "http://\(info.website)")
+            })
+        })
+    }(self)
+    
+    lazy var onViewAddress: Action<Void, URL?> = { this in
+        return Action(workFactory: {_ in
+            return this.barInfo.map({ $0.address }).map(this.createAddressURL)
+        })
+    }(self)
+    
+    init(coordinator: SceneCoordinatorType, geocoder: CLGeocoder = CLGeocoder()) {
         sceneCoordinator = coordinator
+        self.geocoder = geocoder
         
-        let barInfo = getFakeInfo().share()
+        barInfo = {
+            let barInfo = BarInfo(website: "www.apple.com", address: "108 Mast Ct, Mooresville NC", phoneNumber: "1-800–692–7753")
+            return Observable.just(barInfo)
+        }()
         
-        address = barInfo.map({
+        addressString = barInfo.map({
             $0.address
         }).asDriver(onErrorJustReturn: defaultInfo.address)
         
-        website = barInfo.map({
+        websiteString = barInfo.map({
             $0.website
-        }).asDriver(onErrorJustReturn: defaultInfo.address)
+        }).asDriver(onErrorJustReturn: defaultInfo.website)
         
-        phoneNumber = barInfo.map({
+        phoneNumberString = barInfo.map({
             $0.phoneNumber
-        }).asDriver(onErrorJustReturn: defaultInfo.address)
+        }).asDriver(onErrorJustReturn: defaultInfo.phoneNumber)
         
     }
     
@@ -49,30 +75,16 @@ struct BarInfoViewModel {
             return self.sceneCoordinator.pop()
         }
     }
-    
-    func onCall() -> CocoaAction {
-        return CocoaAction {
-            print("Make Call")
-            return Observable.empty()
-        }
+}
+
+extension BarInfoViewModel {
+    fileprivate func createPhoneNumberURL(phoneNumber: String) -> URL? {
+        let formattedPhoneNumber = phoneNumber.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        return URL(string: "tel://\(formattedPhoneNumber)")
     }
     
-    func onViewWebsite() -> CocoaAction {
-        return CocoaAction {
-            print("View Website")
-            return Observable.empty()
-        }
-    }
-    
-    func onGetDirections() -> CocoaAction {
-        return CocoaAction {
-            print("View in map")
-            return Observable.empty()
-        }
-    }
-    
-    func getFakeInfo() -> Observable<BarInfo> {
-        let barInfo = BarInfo(website: "www.pornhub.com", address: "6969 Master Bateson Lane", phoneNumber: "1-800-jack-off")
-        return Observable.just(barInfo)
+    fileprivate func createAddressURL(address: String) -> URL? {
+        let formattedAddress = address.replacingOccurrences(of: " ", with: "%20")
+        return URL(string: "http://maps.apple.com/?address=\(formattedAddress)")
     }
 }

@@ -60,7 +60,7 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
         let view = FeaturedEventView()
         view.frame = CGRect(x: (cell.frame.size.width / 2) - (width / 2), y: (cell.frame.size.height / 2) - (height / 2), width: width, height: height)
         view.backgroundColor = .clear
-        view.initializeCellWith(event: fakeEvents[indexPath.row], index: indexPath.row)
+        view.initializeCellWith(event: fakeEvents[indexPath.row], index: indexPath.row, likeAction: viewModel.onLikeEvent, shareAction: viewModel.onShareEvent)
         
         cell.addSubview(view)
         
