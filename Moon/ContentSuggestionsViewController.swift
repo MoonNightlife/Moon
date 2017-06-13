@@ -67,10 +67,16 @@ class ContentSuggestionsViewController: UIViewController, BindableType {
         userDataSource.configureCell = {
             [weak self] dataSource, collectionView, indexPath, item in
             //swiftlint:disable force_cast
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self!.userCollectionCellReuseIdenifier, for: indexPath) as! UserSearchCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self!.userCollectionCellReuseIdenifier, for: indexPath)
+            
+            let view = UserSearchCollectionViewCell()
+            view.frame = CGRect(x:5, y: 0, width: 150, height: 150)
+            view.backgroundColor = .clear
+            
             if let strongSelf = self {
-                cell.initCellWith(user: item)
+                view.initCellWith(user: item)
             }
+            cell.addSubview(view)
             return cell
         }
     }

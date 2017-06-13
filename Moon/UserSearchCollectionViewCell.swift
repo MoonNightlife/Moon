@@ -7,15 +7,40 @@
 //
 
 import UIKit
+import Material
 
-class UserSearchCollectionViewCell: UICollectionViewCell {
+class UserSearchCollectionViewCell: ImageCardView {
     
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var addButton: UIButton!
+    fileprivate var addFriendButton: IconButton!
+    fileprivate var nameLabel: UILabel!
     
     func initCellWith(user: SearchSnapshot) {
-        self.imageView.image = UIImage(named: user.picture)
-        self.nameLabel.text = user.name
+        let image = UIImage(named: user.picture)
+        self.initializeImageCardViewWith(type: .small(image: image!, text: ""))
+        prepareAddFriendButton()
+        prepareNameLabel(text: user.name)
+        prepareToolbar()
+    }
+}
+
+extension UserSearchCollectionViewCell {
+    
+    fileprivate func prepareNameLabel(text: String) {
+        nameLabel = UILabel()
+        nameLabel.text = text
+        nameLabel.textColor = .lightGray
+        nameLabel.font = UIFont(name: "Roboto", size: 10)
+        nameLabel.sizeToFit()
+    }
+    
+    fileprivate func prepareAddFriendButton() {
+        var image = #imageLiteral(resourceName: "AddFriendIcon")
+        image = image.withRenderingMode(.alwaysTemplate)
+        addFriendButton = IconButton(image: image, tintColor: .lightGray)
+    }
+    
+    fileprivate func prepareToolbar() {
+        self.bottomToolbar.rightViews = [addFriendButton]
+        self.bottomToolbar.leftViews = [nameLabel]
     }
 }

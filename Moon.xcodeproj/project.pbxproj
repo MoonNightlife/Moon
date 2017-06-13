@@ -487,9 +487,9 @@
 		C08AFB261EECB9DA007D33D6 /* Generic */ = {
 			isa = PBXGroup;
 			children = (
+				C0DAD32D1EEA1263008BAF05 /* ADVSegmentedControl.swift */,
 				C08AFB281EECBA4F007D33D6 /* ImageCardView.swift */,
 				C0949D941EEDD1F500C6F72C /* MoonToolbar.swift */,
-				F044CD521ECDE28A00E47138 /* BottomGradientImageView.swift */,
 			);
 			name = Generic;
 			sourceTree = "<group>";
@@ -497,14 +497,19 @@
 		C08AFB271EECB9E8007D33D6 /* Moon Specific */ = {
 			isa = PBXGroup;
 			children = (
+				C0F45BA51EEB19D8008ED6A7 /* PeopleGoingCarouselView.swift */,
 				F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */,
 				F0A8E2D71EC3C6B2001D9993 /* ImageViewCell.swift */,
 				F09C09211ECC7D3B003076CC /* FloatingBottomTabBar.swift */,
-				C0DAD32D1EEA1263008BAF05 /* ADVSegmentedControl.swift */,
+				F044CD521ECDE28A00E47138 /* BottomGradientImageView.swift */,
 				F001BAC21EC50F7500CDF9BC /* BarActivityTableViewCell.swift */,
+				F09DF08B1EEAF0610092BFA5 /* NotificationTableViewCell.swift */,
 				F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */,
 				F0942F0C1ECCEC550038E389 /* FeaturedEventView.swift */,
-				C0F45BA51EEB19D8008ED6A7 /* PeopleGoingCarouselView.swift */,
+				F04A4B241EEC553900DBA9A6 /* SearchTableViewCell.swift */,
+				F04A4B261EEC595700DBA9A6 /* UserSearchCollectionViewCell.swift */,
+				F04A6D551EEEF931000D898B /* SeachTableViewCell.swift */,
+				F04A6D591EEF2B8C000D898B /* LoadMoreTableViewCell.swift */,
 				C0AE92651EEB3DA00048BEDF /* SpecialCarouselView.swift */,
 			);
 			name = "Moon Specific";
@@ -802,18 +807,6 @@
 		F09B9D0B1EC363D200B2385A /* Subclasses */ = {
 			isa = PBXGroup;
 			children = (
-				F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */,
-				F0A8E2D71EC3C6B2001D9993 /* ImageViewCell.swift */,
-				F09C09211ECC7D3B003076CC /* FloatingBottomTabBar.swift */,
-				F044CD521ECDE28A00E47138 /* BottomGradientImageView.swift */,
-				F001BAC21EC50F7500CDF9BC /* BarActivityTableViewCell.swift */,
-				F09DF08B1EEAF0610092BFA5 /* NotificationTableViewCell.swift */,
-				F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */,
-				F0942F0C1ECCEC550038E389 /* FeaturedEventCollectionViewCell.swift */,
-				F04A4B241EEC553900DBA9A6 /* SearchTableViewCell.swift */,
-				F04A4B261EEC595700DBA9A6 /* UserSearchCollectionViewCell.swift */,
-				F04A6D551EEEF931000D898B /* SeachTableViewCell.swift */,
-				F04A6D591EEF2B8C000D898B /* LoadMoreTableViewCell.swift */,
 				C08AFB271EECB9E8007D33D6 /* Moon Specific */,
 				C08AFB261EECB9DA007D33D6 /* Generic */,
 			);
