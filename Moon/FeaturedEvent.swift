@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import UIKit
 
 struct FeaturedEvent {
-    var imageName: String
+    var image: UIImage
     var barName: String
     var date: String
     var description: String
