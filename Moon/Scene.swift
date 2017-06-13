@@ -51,5 +51,6 @@ enum Scene {
     
     enum  Bar: SceneType {
         case profile(BarProfileViewModel)
+        case info(BarInfoViewModel)
     }
 }

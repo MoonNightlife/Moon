@@ -163,6 +163,10 @@ extension Scene.Bar {
             var vc = storyBoard.instantiateViewController(withIdentifier: "BarProfile") as! BarProfileViewController
             vc.bindViewModel(to: viewModel)
             return vc
+        case .info(let viewModel):
+            var vc = storyBoard.instantiateViewController(withIdentifier: "BarInfo") as! BarInfoViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
         }
     }
 }

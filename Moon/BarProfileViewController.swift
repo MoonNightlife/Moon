@@ -26,6 +26,8 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     @IBOutlet weak var scrollView: UIScrollView!
     var viewModel: BarProfileViewModel!
     var backButton: UIBarButtonItem!
+    var moreInfoButton: IconButton!
+    var goButton: IconButton!
     
     //Constraints outlets
     @IBOutlet weak var pictureCarouselConstraint: NSLayoutConstraint!
@@ -86,6 +88,8 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     
     func bindViewModel() {
         backButton.rx.action = viewModel.onBack()
+        moreInfoButton.rx.action = viewModel.onShowInfo()
+        goButton.rx.action = viewModel.onAttendBar()
     }
     
     func prepareScrollView() {
@@ -166,8 +170,10 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         toolBar.titleLabel.textColor = .white
         toolBar.backgroundColor = .clear
         
-        toolBar.leftViews = [IconButton(image: Icon.cm.moreHorizontal, tintColor: .white)]
-        toolBar.rightViews = [IconButton(image: #imageLiteral(resourceName: "goButton"))]
+        moreInfoButton = IconButton(image: Icon.cm.moreHorizontal, tintColor: .white)
+        goButton = IconButton(image: #imageLiteral(resourceName: "goButton"))
+        toolBar.leftViews = [moreInfoButton]
+        toolBar.rightViews = [goButton]
     }
     
     func prepareLabels() {
@@ -273,4 +279,15 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         return barPic
     }
 
+}
+
+extension BarProfileViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        
+        return UIModalPresentationStyle.none
+    }
+    
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        return false
+    }
 }

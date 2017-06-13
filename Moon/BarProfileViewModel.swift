@@ -24,4 +24,18 @@ struct BarProfileViewModel {
             return self.sceneCoordinator.pop()
         }
     }
+    
+    func onShowInfo() -> CocoaAction {
+        return CocoaAction {
+            let vm = BarInfoViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.Bar.info(vm), type: .popover)
+        }
+    }
+    
+    func onAttendBar() -> CocoaAction {
+        return CocoaAction {
+            print("Show attend bar")
+            return Observable.empty()
+        }
+    }
 }
