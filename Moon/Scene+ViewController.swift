@@ -59,7 +59,31 @@ extension Scene.User {
         let storyboard = UIStoryboard(name: "User", bundle: nil)
         switch self {
         case .profile(let viewModel):
-            var vc = storyboard .instantiateViewController(withIdentifier: "Profile") as! ProfileViewController
+            var vc = storyboard.instantiateViewController(withIdentifier: "Profile") as! ProfileViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        case .settings(let viewModel):
+            var vc = storyboard.instantiateViewController(withIdentifier: "Settings") as! SettingsViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        case .deleteAccount(let viewModel):
+            var vc = storyboard.instantiateViewController(withIdentifier: "DeleteAccount") as! DeleteAccountViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        case .email(let viewModel):
+            var vc = storyboard.instantiateViewController(withIdentifier: "EmailSettings") as! EmailSettingsViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        case .name(let viewModel):
+            var vc = storyboard.instantiateViewController(withIdentifier: "NameSettings") as! NameSettingsViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        case .notification(let viewModel):
+            var vc = storyboard.instantiateViewController(withIdentifier: "NotificationSettings") as! NotificationSettingsViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        case .webView(let viewModel):
+            var vc = storyboard.instantiateViewController(withIdentifier: "WebView") as! WebViewUIViViewController
             vc.bindViewModel(to: viewModel)
             return vc
         }
@@ -70,13 +94,28 @@ extension Scene.Master {
     internal func viewController() -> UIViewController {
         let storyBoard = UIStoryboard(name: "Master", bundle: nil)
         switch self {
-        case .main((let searchBarVM, let mainVM)):
+        case .searchBarWithMain((let searchBarVM, let mainVM)):
             var vc = storyBoard.instantiateViewController(withIdentifier: "Main") as! MainViewController
             vc.bindViewModel(to: mainVM)
             var searchController = SearchBarViewController(rootViewController: vc)
             searchController.bindViewModel(to: searchBarVM)
-            return searchController
+            let nc = UINavigationController(rootViewController: searchController)
+            return nc
+        case .main(let viewModel):
+            var vc = storyBoard.instantiateViewController(withIdentifier: "Main") as! MainViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        case .search(let searchVM, let searchResultVM, let contentSuggestionVM):
+            var vc = storyBoard.instantiateViewController(withIdentifier: "Search") as! SearchViewController
+            var vcSC = storyBoard.instantiateViewController(withIdentifier: "ContentSuggestions") as! ContentSuggestionsViewController
+            var vcSR = storyBoard.instantiateViewController(withIdentifier: "SearchResults") as! SearchResultsViewController
+            vc.bindViewModel(to: searchVM)
+            vcSR.bindViewModel(to: searchResultVM)
+            vcSC.bindViewModel(to: contentSuggestionVM)
+            vc.generateChildern(child1: vcSC, child2: vcSR)
+            return vc
         }
+
     }
 }
 
@@ -121,10 +160,9 @@ extension Scene.Bar {
         let storyBoard = UIStoryboard(name: "Bar", bundle: nil)
         switch self {
         case .profile(let viewModel):
-            let nc = storyBoard.instantiateViewController(withIdentifier: "BarProfile") as! UINavigationController
-            var vc = nc.viewControllers.first as! BarProfileViewController
+            var vc = storyBoard.instantiateViewController(withIdentifier: "BarProfile") as! BarProfileViewController
             vc.bindViewModel(to: viewModel)
-            return nc
+            return vc
         }
     }
 }

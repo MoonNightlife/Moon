@@ -32,4 +32,34 @@ struct SearchBarViewModel {
             return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
         }
     }
+    
+    func onShowSettings() -> CocoaAction {
+        return CocoaAction {
+            let vm = SettingsViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.User.settings(vm), type: .push)
+        }
+    }
+    
+    func onShowMainController() -> CocoaAction {
+        return CocoaAction {
+            let vm = MainViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.Master.main(vm), type: .searchRoot)
+        }
+    }
+    
+    func onShowSearch() -> CocoaAction {
+        return CocoaAction {
+            let vm = SearchViewModel(coordinator: self.sceneCoordinator)
+            let searchResultsViewModel = SearchResultsViewModel(coordinator: self.sceneCoordinator)
+            let suggestedContentViewModel = ContentSuggestionsViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.Master.search(searchViewModel: vm, searchResultsViewModel: searchResultsViewModel, contentSuggestionViewModel: suggestedContentViewModel), type: .searchRoot)
+        }
+    }
+    
+    func onShow(view: View.Search) -> CocoaAction {
+        return CocoaAction {_ in 
+            self.sceneCoordinator.changeChild(To: view)
+        }
+    }
+    
 }

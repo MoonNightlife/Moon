@@ -23,10 +23,18 @@ enum Scene {
     
     enum User: SceneType {
         case profile(ProfileViewModel)
+        case settings(SettingsViewModel)
+        case name(NameSettingsViewModel)
+        case email(EmailSettingsViewModel)
+        case notification(NotificationSettingsViewModel)
+        case deleteAccount(DeleteAccountViewModel)
+        case webView(WebViewViewModel)
     }
     
     enum Master: SceneType {
-        case main((searchBar: SearchBarViewModel, mainView: MainViewModel))
+        case searchBarWithMain((searchBar: SearchBarViewModel, mainView: MainViewModel))
+        case main(MainViewModel)
+        case search(searchViewModel: SearchViewModel, searchResultsViewModel: SearchResultsViewModel, contentSuggestionViewModel: ContentSuggestionsViewModel)
     }
     
     enum Explore: SceneType {

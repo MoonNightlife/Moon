@@ -1,12 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -28,31 +30,40 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bG2-7p-UaO" customClass="TextField" customModule="Material">
-                                <rect key="frame" x="16" y="280" width="343" height="30"/>
+                                <rect key="frame" x="16" y="318" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vKg-V1-7Ym" customClass="TextField" customModule="Material">
-                                <rect key="frame" x="16" y="208" width="343" height="30"/>
+                                <rect key="frame" x="16" y="264" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="97X-F5-zmf">
-                                <rect key="frame" x="172" y="318" width="30" height="30"/>
+                                <rect key="frame" x="172" y="356" width="30" height="30"/>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pp1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="GhD-4U-ps3">
+                                <rect key="frame" x="125" y="115" width="125" height="125"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="GhD-4U-ps3" secondAttribute="height" multiplier="1:1" id="bQ5-pE-6zW"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="vKg-V1-7Ym" firstAttribute="trailing" secondItem="wcY-Zz-cIz" secondAttribute="trailingMargin" id="9gb-W2-8P6"/>
-                            <constraint firstItem="97X-F5-zmf" firstAttribute="centerY" secondItem="wcY-Zz-cIz" secondAttribute="centerY" id="HP3-Kj-1IT"/>
-                            <constraint firstItem="vKg-V1-7Ym" firstAttribute="leading" secondItem="wcY-Zz-cIz" secondAttribute="leadingMargin" id="IEa-jd-Z6M"/>
-                            <constraint firstItem="vKg-V1-7Ym" firstAttribute="trailing" secondItem="bG2-7p-UaO" secondAttribute="trailing" id="KZn-Gt-t6o"/>
-                            <constraint firstItem="vKg-V1-7Ym" firstAttribute="leading" secondItem="bG2-7p-UaO" secondAttribute="leading" id="VA4-5U-oDx"/>
-                            <constraint firstItem="97X-F5-zmf" firstAttribute="top" secondItem="bG2-7p-UaO" secondAttribute="bottom" constant="8" symbolic="YES" id="bQV-1q-AL1"/>
-                            <constraint firstItem="bG2-7p-UaO" firstAttribute="top" secondItem="vKg-V1-7Ym" secondAttribute="bottom" constant="42" id="jQK-MY-UUt"/>
-                            <constraint firstItem="bG2-7p-UaO" firstAttribute="centerX" secondItem="97X-F5-zmf" secondAttribute="centerX" id="oZS-2a-u6M"/>
+                            <constraint firstItem="vKg-V1-7Ym" firstAttribute="leading" secondItem="wcY-Zz-cIz" secondAttribute="leadingMargin" id="3cR-oJ-BGM"/>
+                            <constraint firstItem="bG2-7p-UaO" firstAttribute="centerY" secondItem="wcY-Zz-cIz" secondAttribute="centerY" id="CMA-M7-cj5"/>
+                            <constraint firstItem="bG2-7p-UaO" firstAttribute="centerX" secondItem="97X-F5-zmf" secondAttribute="centerX" id="IdT-r7-VS4"/>
+                            <constraint firstItem="bG2-7p-UaO" firstAttribute="top" secondItem="vKg-V1-7Ym" secondAttribute="bottom" constant="24" id="UWs-wO-lMO"/>
+                            <constraint firstItem="vKg-V1-7Ym" firstAttribute="trailing" secondItem="bG2-7p-UaO" secondAttribute="trailing" id="VOn-aa-RMG"/>
+                            <constraint firstItem="GhD-4U-ps3" firstAttribute="height" secondItem="wcY-Zz-cIz" secondAttribute="height" multiplier="0.1874" id="dxV-T5-Aiu"/>
+                            <constraint firstItem="97X-F5-zmf" firstAttribute="top" secondItem="bG2-7p-UaO" secondAttribute="bottom" constant="8" symbolic="YES" id="hM9-VU-yeX"/>
+                            <constraint firstItem="GhD-4U-ps3" firstAttribute="centerX" secondItem="vKg-V1-7Ym" secondAttribute="centerX" id="jkR-Rf-5AC"/>
+                            <constraint firstItem="vKg-V1-7Ym" firstAttribute="trailing" secondItem="wcY-Zz-cIz" secondAttribute="trailingMargin" id="l4n-XE-B4o"/>
+                            <constraint firstItem="vKg-V1-7Ym" firstAttribute="leading" secondItem="bG2-7p-UaO" secondAttribute="leading" id="rqP-df-wdb"/>
+                            <constraint firstItem="vKg-V1-7Ym" firstAttribute="top" secondItem="GhD-4U-ps3" secondAttribute="bottom" constant="24" id="xzr-Y5-AcS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="tvv-ds-VzV"/>
@@ -64,7 +75,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RpT-El-BWF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="629.5" y="113.5"/>
+            <point key="canvasLocation" x="628" y="112.89355322338831"/>
         </scene>
         <!--Birthday Sex View Controller-->
         <scene sceneID="1sC-Am-xaV">
@@ -234,4 +245,7 @@
             <point key="canvasLocation" x="2192.8000000000002" y="113.79310344827587"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pp1.jpg" width="958" height="957"/>
+    </resources>
 </document>
