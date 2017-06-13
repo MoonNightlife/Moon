@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import Action
+import SwaggerClient
 
 struct LoginViewModel {
     
@@ -29,7 +30,7 @@ struct LoginViewModel {
     
     func onSignUp() -> CocoaAction {
         return CocoaAction {
-            let newUser = NewUser()
+            let newUser = RegistrationProfile()
             let viewModel = NameViewModel(coordinator: self.sceneCoordinator, user: newUser)
             return self.sceneCoordinator.transition(to: Scene.SignUp.name(viewModel), type: .push)
         }
@@ -46,7 +47,7 @@ struct LoginViewModel {
         return CocoaAction {
             let mainVM = MainViewModel(coordinator: self.sceneCoordinator)
             let searchVM = SearchBarViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: Scene.Master.main(searchBar: searchVM, mainView: mainVM), type: .modal)
+            return self.sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
         }
     }
 

@@ -10,22 +10,26 @@ import Foundation
 import RxSwift
 import Action
 import RxCocoa
+import SwaggerClient
 
 struct NameViewModel {
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
-    private let newUser: NewUser
+    private let newUser: RegistrationProfile
     
     // Private
     private let disposeBag = DisposeBag()
-    private let dataValid: Driver<Bool>
+    
     
     // Inputs
     var firstName = BehaviorSubject<String?>(value: nil)
     var lastName = BehaviorSubject<String?>(value: nil)
     
-    init(coordinator: SceneCoordinatorType, user: NewUser) {
+    // Outputs
+    var dataValid: Driver<Bool>
+    
+    init(coordinator: SceneCoordinatorType, user: RegistrationProfile) {
         self.sceneCoordinator = coordinator
         self.newUser = user
         
@@ -49,7 +53,7 @@ struct NameViewModel {
     }
 
     func nextSignUpScreen() -> CocoaAction {
-        return CocoaAction(enabledIf: dataValid.asObservable(), workFactory: {
+        return CocoaAction(workFactory: {
             let viewModel = BirthdaySexViewModel(coordinator: self.sceneCoordinator, user: self.newUser)
             return self.sceneCoordinator.transition(to: Scene.SignUp.birthdaySex(viewModel), type: .push)
         })

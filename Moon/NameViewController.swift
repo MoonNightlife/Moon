@@ -38,15 +38,41 @@ class NameViewController: UIViewController, BindableType {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.barTintColor = .moonPurple
         self.navigationController?.navigationBar.backgroundColor = .moonPurple
+        progressView.progress = 0.0
     }
     
     func bindViewModel() {
         firstNameTextField.rx.textInput.text.orEmpty.bind(to: viewModel.firstName).addDisposableTo(disposeBag)
         lastNameTextField.rx.textInput.text.orEmpty.bind(to: viewModel.lastName).addDisposableTo(disposeBag)
+        
+        viewModel.dataValid.drive(nextScreenButton.rx.isEnabled).addDisposableTo(disposeBag)
 
-        nextScreenButton.rx.action = viewModel.nextSignUpScreen()
+        nextScreenButton.rx
+            .controlEvent(.touchUpInside)
+            .do(onNext: { [weak self] in
+                self?.progressView.setProgress(0.25, animated: true, completion: nil)
+            })
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.nextSignUpScreen().execute()
+            })
+            .addDisposableTo(disposeBag)
+        
         navBackButton.rx.action = viewModel.onBack()
         
+    }
+    
+    func progressAction() -> Action<Void, Void> {
+        return Action(workFactory: { [unowned self] _ in
+            return Observable.create({ (observer) -> Disposable in
+                self.progressView.setProgress(0.25, animated: true, completion: { (completed) in
+                    if completed {
+                        return observer.onNext()
+                    }
+                    return observer.onCompleted()
+                })
+                return Disposables.create()
+            })
+        })
     }
 
 }
@@ -84,7 +110,6 @@ extension NameViewController {
         navBackButton.image = Icon.cm.arrowBack
         navBackButton.tintColor = .white
         self.navigationItem.leftBarButtonItem = navBackButton
-        
     }
     
     fileprivate func prepareNextScreenButton() {
@@ -102,7 +127,6 @@ extension NameViewController {
     fileprivate func prepareProgressView() {
         
         progressView = MDCProgressView()
-        progressView.progress = 0
         progressView.trackTintColor = .moonGreenLight
         progressView.progressTintColor = .moonGreen
         

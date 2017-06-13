@@ -10,11 +10,12 @@ import Foundation
 import RxSwift
 import Action
 import RxCocoa
+import SwaggerClient
 
 struct EmailUsernameViewModel {
     
     // Dependencies
-    private let newUser: NewUser
+    private let newUser: RegistrationProfile
     private let sceneCoordinator: SceneCoordinatorType
     private let disposeBag = DisposeBag()
     
@@ -53,7 +54,7 @@ struct EmailUsernameViewModel {
         return Observable.combineLatest(username.map(ValidationUtility.validUsername), email.map(ValidationUtility.validEmail)).map({$0 && $1})
     }
     
-    init(coordinator: SceneCoordinatorType, user: NewUser) {
+    init(coordinator: SceneCoordinatorType, user: RegistrationProfile) {
         self.sceneCoordinator = coordinator
         self.newUser = user
         subscribeToInputs()

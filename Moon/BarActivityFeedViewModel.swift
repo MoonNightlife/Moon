@@ -53,7 +53,7 @@ struct BarActivityFeedViewModel {
     func onViewBar(activity: BarActivity) -> CocoaAction {
         return CocoaAction {
             let vm = BarProfileViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
+            return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .push)
         }
     }
     

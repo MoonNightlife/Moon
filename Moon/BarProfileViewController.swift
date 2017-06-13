@@ -17,7 +17,6 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     @IBOutlet weak var toolBar: Toolbar!
     @IBOutlet weak var goingCarousel: iCarousel!
     @IBOutlet weak var pictureCarousel: iCarousel!
-    @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var pageController: UIPageControl!
     @IBOutlet weak var specialsCarousel: iCarousel!
     @IBOutlet weak var eventsCarousel: iCarousel!
@@ -26,6 +25,7 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     @IBOutlet weak var specialsLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     var viewModel: BarProfileViewModel!
+    var backButton: UIBarButtonItem!
     
     //Constraints outlets
     @IBOutlet weak var pictureCarouselConstraint: NSLayoutConstraint!
@@ -95,10 +95,10 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     }
     
     func prepareNavigationBackButton() {
-        let navBackButton = UIBarButtonItem()
-        navBackButton.image = Icon.cm.arrowBack
-        navBackButton.tintColor = .lightGray
-        self.navigationItem.leftBarButtonItem = navBackButton
+        backButton = UIBarButtonItem()
+        backButton.image = Icon.cm.arrowBack
+        backButton.tintColor = .lightGray
+        self.navigationItem.leftBarButtonItem = backButton
         self.navigationItem.title = "Avenu Lounge"
     }
     

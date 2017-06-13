@@ -10,7 +10,8 @@ import Foundation
 import Material
 
 extension SearchBar {
-    open func drawLineUnderSearchTextAndIcon(color: UIColor) {
+    
+    open func createLineUnderSearchTextAndIcon(color: UIColor) {
         // The search icon is not part of the content view (text field),
         // so we need to start the line at the beginning of the search icon
         let widthOfLeftSearchIcon = leftViews[0].width
@@ -30,6 +31,14 @@ extension SearchBar {
         shapeLayer.path = path.cgPath
         shapeLayer.strokeColor = color.cgColor
         shapeLayer.lineWidth = 2
+        shapeLayer.name = "searchBarLine"
+
+        // Remove old layer
+        if let layers = contentView.layer.sublayers {
+            for (index, layer) in layers.enumerated() where layer.name == "searchBarLine" {
+                contentView.layer.sublayers?.remove(at: index)
+            }
+        }
         
         contentView.layer.addSublayer(shapeLayer)
     }
@@ -50,5 +59,6 @@ extension SearchBar {
         for icon in rightViews {
             icon.tintColor = color
         }
-    }    
+    }
+    
 }

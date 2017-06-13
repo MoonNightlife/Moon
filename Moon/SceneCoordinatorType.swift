@@ -22,6 +22,9 @@ protocol SceneCoordinatorType {
     
     @discardableResult
     func tab(to scene: MainView) -> Observable<Void>
+    
+    @discardableResult
+    func changeChild(To view: ChildViewType) -> Observable<Void>
 }
 
 extension SceneCoordinatorType {

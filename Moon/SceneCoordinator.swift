@@ -58,6 +58,7 @@ class SceneCoordinator: SceneCoordinatorType {
             currentViewController = SceneCoordinator.actualViewController(for: viewController)
         case .popover:
             viewController.modalPresentationStyle = .popover
+            print(currentViewController)
             guard let delegateViewController = currentViewController as? UIPopoverPresentationControllerDelegate else {
                 fatalError("Presenting contorller does not adapt to popover delegate")
             }
@@ -66,10 +67,18 @@ class SceneCoordinator: SceneCoordinatorType {
             // Remove the arrow from the popover
             viewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
             viewController.popoverPresentationController?.sourceRect = CGRect(x: currentViewController.view.bounds.midX, y: currentViewController.view.bounds.midY, width: 0, height: 0)
+            print(currentViewController)
             currentViewController.present(viewController, animated: true) {
+                self.currentViewController = SceneCoordinator.actualViewController(for: viewController)
                 subject.onCompleted()
             }
-            currentViewController = SceneCoordinator.actualViewController(for: viewController)
+        case .searchRoot:
+            guard let searchController = currentViewController as? SearchBarViewController else {
+                fatalError("To change the root controller of search bar, current view controller must be of type SearchBarViewController")
+            }
+            searchController.transition(to: viewController, duration: 0.0, options: .curveEaseIn, animations: nil, completion: { _ in
+                subject.onCompleted()
+            })
         }
         return subject.asObservable()
             .take(1)
@@ -110,6 +119,17 @@ class SceneCoordinator: SceneCoordinatorType {
         }
 
         presenter.moveToPage(view.rawValue, animated: true)
+        
+        return subject.asObserver().take(1).ignoreElements()
+    }
+    
+    @discardableResult
+    func changeChild(To view: ChildViewType) -> Observable<Void> {
+        let subject = PublishSubject<Void>()
+        guard let presenter = (currentViewController as? SearchBarViewController)?.rootViewController as? SearchViewController else {
+            fatalError("Presenting controller must conform to ParentType")
+        }
+        presenter.showView(view: view.getViewID())
         
         return subject.asObserver().take(1).ignoreElements()
     }

@@ -30,12 +30,24 @@ class MainViewController: EZSwipeController, BindableType {
         setupTabBar()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     
         // Has to be called after view is showen
-        prepareSearchBar()
-        // Has to be called after view is showen
+        if let searchBarController = searchBarController as? SearchBarViewController {
+            searchBarController.prepareSearchBarForMainView()
+        }
+  
         setFrameForCurrentOrientation()
         
         changeColorForTabBarAndSearchBar(nextView: .moons)
@@ -114,25 +126,5 @@ extension MainViewController: EZSwipeControllerDataSource {
     
     func indexOfStartingPage() -> Int {
         return MainView.moons.rawValue
-    }
-}
-
-extension MainViewController: SearchBarDelegate {
-    fileprivate func prepareSearchBar() {
-        guard let searchBar = searchBarController?.searchBar else {
-            return
-        }
-        
-        searchBar.delegate = self
-        // Has to be called after the searchBar is loaded in view controller
-        searchBar.drawLineUnderSearchTextAndIcon(color: .white)
-    }
-    
-    func searchBar(searchBar: SearchBar, didChange textField: UITextField, with text: String?) {
-        print("search database for \(text ?? "error")")
-    }
-    
-    func searchBar(searchBar: SearchBar, willClear textField: UITextField, with text: String?) {
-        print("clear")
     }
 }
