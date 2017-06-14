@@ -21,6 +21,7 @@ struct NameViewModel {
     // Private
     private let disposeBag = DisposeBag()
     
+    
     // Inputs
     var firstName = BehaviorSubject<String?>(value: nil)
     var lastName = BehaviorSubject<String?>(value: nil)
