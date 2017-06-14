@@ -47,8 +47,24 @@ class MoonToolbar: Toolbar {
         self.addSubview(leftView2)
     }
     
-}
-
-extension MoonToolbar {
+    func addRightView(view: UIView) {
+        let size = CGFloat(20)
+        
+        view.frame = CGRect(x: self.frame.size.width - size, y: (self.frame.size.height / 2) - (size / 2), width: self.frame.size.width / 2, height: size)
+        rightView = view
+        rightView.frame = view.frame
+        
+        self.addSubview(rightView)
+    }
+    
+    func addLeftView(view: UIView) {
+        let size = CGFloat(20)
+        
+        view.frame = CGRect(x: 5, y: (self.frame.size.height / 2) - (size / 2), width: self.frame.size.width / 2, height: size)
+        leftView = view
+        leftView.frame = view.frame
+        
+        self.addSubview(leftView)
+    }
     
 }

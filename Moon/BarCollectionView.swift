@@ -30,6 +30,7 @@ extension BarCollectionView {
         nameLabel = UILabel()
         nameLabel.text = text
         nameLabel.textColor = .lightGray
+        nameLabel.numberOfLines = 1
         nameLabel.font = UIFont(name: "Roboto", size: 10)
     }
     
@@ -39,6 +40,7 @@ extension BarCollectionView {
     
     fileprivate func prepareToolbar() {
         self.bottomToolbar.rightViews = [goButton]
-        self.bottomToolbar.leftViews = [nameLabel]
+        self.bottomToolbar.addLeftView(view: nameLabel)
+        
     }
 }
