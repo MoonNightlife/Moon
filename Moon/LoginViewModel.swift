@@ -30,7 +30,7 @@ struct LoginViewModel {
     
     func onSignUp() -> CocoaAction {
         return CocoaAction {
-            let newUser = RegistrationProfile()
+            let newUser = NewUser()
             let viewModel = NameViewModel(coordinator: self.sceneCoordinator, user: newUser)
             return self.sceneCoordinator.transition(to: Scene.SignUp.name(viewModel), type: .push)
         }

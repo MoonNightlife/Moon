@@ -25,7 +25,7 @@ class UsersTableViewController: UIViewController, BindableType {
     }
 
     func bindViewModel() {
-        viewModel.users.drive(userTableView.rx.items(cellIdentifier: "UsersTableCell", cellType: UsersTableViewCell.self)) { (row, element, cell) in
+        viewModel.users.drive(userTableView.rx.items(cellIdentifier: "UsersTableCell", cellType: UsersTableViewCell.self)) { (_, element, cell) in
                 cell.profilePicture.image = element.picture
                 cell.name.text = element.name
             }
