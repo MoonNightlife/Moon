@@ -189,6 +189,7 @@
 		F0CF159C1EDEEEA100531DCF /* PasswordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF159B1EDEEEA100531DCF /* PasswordsViewController.swift */; };
 		F0D168531ECA62940064F642 /* MoonColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D168521ECA62940064F642 /* MoonColor.swift */; };
 		F0D797B71ECF837A007BDB9C /* Dallas.gpx in Resources */ = {isa = PBXBuildFile; fileRef = F0D797B61ECF837A007BDB9C /* Dallas.gpx */; };
+		F0DCCAE91EF18E7900C9F5A9 /* RxReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DCCAE81EF18E7900C9F5A9 /* RxReachability.swift */; };
 		F0E59F281EEF735A007A3323 /* BarInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E59F271EEF735A007A3323 /* BarInfoViewController.swift */; };
 		F0E59F2A1EEF73B4007A3323 /* BarInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E59F291EEF73B4007A3323 /* BarInfoViewModel.swift */; };
 		F0E6ED121ECB3C54009508FC /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E6ED111ECB3C54009508FC /* SearchBar.swift */; };
@@ -407,6 +408,7 @@
 		F0CF159B1EDEEEA100531DCF /* PasswordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordsViewController.swift; sourceTree = "<group>"; };
 		F0D168521ECA62940064F642 /* MoonColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonColor.swift; sourceTree = "<group>"; };
 		F0D797B61ECF837A007BDB9C /* Dallas.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Dallas.gpx; sourceTree = "<group>"; };
+		F0DCCAE81EF18E7900C9F5A9 /* RxReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxReachability.swift; sourceTree = "<group>"; };
 		F0E59F271EEF735A007A3323 /* BarInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarInfoViewController.swift; sourceTree = "<group>"; };
 		F0E59F291EEF73B4007A3323 /* BarInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarInfoViewModel.swift; sourceTree = "<group>"; };
 		F0E6ED111ECB3C54009508FC /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -1028,6 +1030,7 @@
 				F0FD8F361EE1DC950020D131 /* ErrorTextField+Rx.swift */,
 				F0CA18B41EE5AEEC00428318 /* FloatingBottomTabBar+Rx.swift */,
 				F09DF0931EEB224C0092BFA5 /* UserAPI+Rx.swift */,
+				F0DCCAE81EF18E7900C9F5A9 /* RxReachability.swift */,
 			);
 			name = RxExtensions;
 			sourceTree = "<group>";
@@ -1415,6 +1418,7 @@
 				F0A8E2D81EC3C6B2001D9993 /* ImageViewCell.swift in Sources */,
 				F0942F0B1ECCEBA40038E389 /* FakeEventData.swift in Sources */,
 				F0FD8F371EE1DC950020D131 /* ErrorTextField+Rx.swift in Sources */,
+				F0DCCAE91EF18E7900C9F5A9 /* RxReachability.swift in Sources */,
 				F04A6D561EEEF931000D898B /* SeachTableViewCell.swift in Sources */,
 				F0CA18AF1EE5AA6C00428318 /* BarActivityFeedViewModel.swift in Sources */,
 				F0CF158E1EDEED8600531DCF /* NameViewModel.swift in Sources */,

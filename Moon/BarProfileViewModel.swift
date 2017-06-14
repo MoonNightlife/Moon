@@ -36,7 +36,7 @@ struct BarProfileViewModel {
     }()
     
     lazy var onShowProfile: Action<String, Void> = { this in
-        return Action<String, Void> {_ in 
+        return Action<String, Void> {_ in
             let vm = ProfileViewModel(coordinator: this.sceneCoordinator)
             return this.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
         }
