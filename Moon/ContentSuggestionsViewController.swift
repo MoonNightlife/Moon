@@ -14,17 +14,19 @@ import RxSwift
 typealias SearchSection = AnimatableSectionModel<String, SearchSnapshot>
 
 class ContentSuggestionsViewController: UIViewController, BindableType {
+    @IBOutlet weak var suggestedUsersLabel: UILabel!
+    @IBOutlet weak var suggestedBarsLabel: UILabel!
     
     var viewModel: ContentSuggestionsViewModel!
     
-    private let barTableCellResuseIdenifier = "BarSnapshotCell"
+    private let barCollectionCellResuseIdenifier = "BarSnapshotCell"
     private let userCollectionCellReuseIdenifier = "UserSearchCollectionViewCell"
-    let barDataSource = RxTableViewSectionedAnimatedDataSource<SearchSection>()
+    let barDataSource = RxCollectionViewSectionedAnimatedDataSource<SearchSection>()
     let userDataSource = RxCollectionViewSectionedAnimatedDataSource<SearchSection>()
     private let bag = DisposeBag()
     
     @IBOutlet var suggestedUserColletionView: UICollectionView!
-    @IBOutlet var suggestedBarTableView: UITableView!
+    @IBOutlet var suggestedBarCollectionView: UICollectionView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -40,7 +42,7 @@ class ContentSuggestionsViewController: UIViewController, BindableType {
         super.viewDidLoad()
 
         configureDataSource()
-        
+        prepareLabels()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,19 +50,51 @@ class ContentSuggestionsViewController: UIViewController, BindableType {
         searchBarController?.searchBar.textField.becomeFirstResponder()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        searchBarController?.searchBar.textField.resignFirstResponder()
+    }
+    
+    func prepareLabels() {
+        suggestedUsersLabel.textColor = .lightGray
+        suggestedUsersLabel.dividerThickness = 1.8
+        suggestedUsersLabel.dividerColor = .moonGrey
+        
+        suggestedBarsLabel.textColor = .lightGray
+        suggestedBarsLabel.dividerThickness = 1.8
+        suggestedBarsLabel.dividerColor = .moonGrey
+    }
+    
     func bindViewModel() {
-        viewModel.suggestedBars.drive(suggestedBarTableView.rx.items(dataSource: barDataSource)).disposed(by: bag)
+        viewModel.suggestedBars.drive(suggestedBarCollectionView.rx.items(dataSource: barDataSource)).disposed(by: bag)
         viewModel.suggestedFriends.drive(suggestedUserColletionView.rx.items(dataSource: userDataSource)).disposed(by: bag)
     }
     
     fileprivate func configureDataSource() {
         barDataSource.configureCell = {
-            [weak self] dataSource, tableView, indexPath, item in
+            [weak self] dataSource, collectionView, indexPath, item in
             //swiftlint:disable force_cast
-            let cell = tableView.dequeueReusableCell(withIdentifier: self!.barTableCellResuseIdenifier, for: indexPath) as! BarSnapshotTableViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self!.barCollectionCellResuseIdenifier, for: indexPath)
+            
+//            print("Cell Size: " , cell.frame.size.height)
+//            print("CollectionView Heigh: t", collectionView.frame.size.height)
+//            print("iPhone Height: ", self?.view.frame.size.height)
+//            print("iPhone Width: " , self?.view.frame.size.width)
+            
+            let cellSize = collectionView.frame.size.height * 0.526
+            cell.frame.size.height = cellSize
+            cell.frame.size.width = cellSize
+            
+            let size = cellSize * 0.833
+            
+            let view = BarCollectionView()
+            view.frame = CGRect(x: (cell.frame.size.width / 2) - (size / 2), y: (cell.frame.size.height / 2) - (size / 2), width: size, height: size)
+            view.backgroundColor = .clear
+            
             if let strongSelf = self {
-                cell.initCellWith(snapshot: item)
+               view.initViewWith(bar: item)
             }
+            
+            cell.addSubview(view)
             return cell
         }
         
@@ -69,13 +103,18 @@ class ContentSuggestionsViewController: UIViewController, BindableType {
             //swiftlint:disable force_cast
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self!.userCollectionCellReuseIdenifier, for: indexPath)
             
-            let view = UserSearchCollectionViewCell()
-            view.frame = CGRect(x:5, y: 0, width: 150, height: 150)
+            print(collectionView.frame.size.height)
+            
+            let size = collectionView.frame.size.height * 0.86
+            
+            let view = UserCollectionView()
+            view.frame = CGRect(x: 2, y: 0, width: size, height: size)
             view.backgroundColor = .clear
             
             if let strongSelf = self {
-                view.initCellWith(user: item)
+                view.initViewWith(user: item)
             }
+            
             cell.addSubview(view)
             return cell
         }
