@@ -54,16 +54,14 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
         profileButton.rx.action = viewModel.onShowProfile()
         settingsButton.rx.action = viewModel.onShowSettings()
         
-        let textedEnteredInSearchBar = searchBar.textField.rx.text.orEmpty.map({ $0.characters.count > 0 }).share()
-        textedEnteredInSearchBar.skip(2).subscribe(onNext: { [weak self] in
-            if $0 {
+        let textedEnteredInSearchBar = searchBar.textField.rx.text.orEmpty.share()
+        
+        textedEnteredInSearchBar.filter({ $0.characters.count > 0 }).subscribe(onNext: { [weak self] _ in
                 self?.viewModel.onShow(view: .results).execute()
-            } else {
-                self?.viewModel.onShow(view: .suggestions).execute()
-            }
         }).addDisposableTo(bag)
-        textedEnteredInSearchBar.subscribe(onNext: { [weak self] isTextEntered in
-            self?.searchBar.clearButton.isHidden = !isTextEntered
+        
+        textedEnteredInSearchBar.map({ $0.characters.count == 0 }).subscribe(onNext: { [weak self] noTextEntered in
+            self?.searchBar.clearButton.isHidden = noTextEntered
         }).addDisposableTo(bag)
     }
     

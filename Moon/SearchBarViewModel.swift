@@ -59,7 +59,7 @@ struct SearchBarViewModel {
     
     func onShow(view: View.Search) -> CocoaAction {
         return CocoaAction {_ in 
-            self.sceneCoordinator.changeChild(To: view)
+            return self.sceneCoordinator.changeChild(To: view)
         }
     }
     

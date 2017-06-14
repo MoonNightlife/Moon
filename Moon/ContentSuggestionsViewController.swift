@@ -103,8 +103,8 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
     fileprivate func configureDataSource() {
         barDataSource.configureCell = {
             [weak self] dataSource, collectionView, indexPath, item in
-            //swiftlint:disable force_cast
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self!.barCollectionCellResuseIdenifier, for: indexPath)
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BarSnapshotCell", for: indexPath)
             
             collectionView.collectionViewLayout = (self?.cellsPerRowVertical(cells: 2, collectionView: collectionView))!
             
@@ -129,8 +129,8 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
         
         userDataSource.configureCell = {
             [weak self] dataSource, collectionView, indexPath, item in
-            //swiftlint:disable force_cast
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self!.userCollectionCellReuseIdenifier, for: indexPath)
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserSearchCollectionViewCell", for: indexPath)
             
             collectionView.collectionViewLayout = (self?.cellsPerRowHorizontal(cells: 1, collectionView: collectionView))!
             

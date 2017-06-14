@@ -38,8 +38,16 @@ struct SearchResultsViewModel {
         })
     }(self)
     
-    // Outputs
-    var searchResults: Driver<[SearchSectionModel]>!
+    lazy var selectedSearchType: Action<SearchType, [SearchSectionModel]> = { this in
+        return Action(workFactory: {
+            switch $0 {
+            case .bars:
+                return this.getBarSnapShots().map({[SearchSectionModel.searchResultsSection(title: "Bars", items: $0)]})
+            case .users:
+                return this.getUserSnapShots().map({[SearchSectionModel.searchResultsSection(title: "Users", items: $0)]})
+            }
+        })
+    }(self)
     
     init(coordinator: SceneCoordinatorType) {
         sceneCoordinator = coordinator
@@ -49,18 +57,7 @@ struct SearchResultsViewModel {
         }
         .addDisposableTo(bag)
     
-        let users = getUserSnapShots().map({SearchSectionModel.searchResultsSection(title: "Users", items: $0)})
-        let bars = getBarSnapShots().map({SearchSectionModel.searchResultsSection(title: "Bars", items: $0)})
-        let loadMore = SearchSectionModel.loadMore(title: "Load More", items: [.loadMoreItem(loadAction: loadMoreUserResults)])
-        
-        //let results = Observable.combineLatest(users, bars)
-        
-        searchResults = searchText
-            .withLatestFrom(users)
-            .map({
-                return [$0, loadMore]
-            })
-            .asDriver(onErrorJustReturn: [])
+        let _ = SearchSectionModel.loadMore(title: "Load More", items: [.loadMoreItem(loadAction: loadMoreUserResults)])
     }
     
     func getUserSnapShots() -> Observable<[SearchSectionItem]> {
@@ -77,6 +74,13 @@ struct SearchResultsViewModel {
             return SearchSectionItem.searchResultItem(snapshot: SearchSnapshot(name: bar.barName, id: "336", picture: bar.imageName))
         })
         return Observable.just(bars)
+    }
+    
+    func onShowProfile() -> Action<String, Void> {
+        return Action(workFactory: { _ in
+            let vm = ProfileViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
+        })
     }
 
 }

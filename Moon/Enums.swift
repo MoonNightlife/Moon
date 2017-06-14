@@ -74,3 +74,7 @@ enum ImageSource: CustomStringConvertible {
     }
 }
 
+enum SearchType: Int {
+    case users
+    case bars
+}
