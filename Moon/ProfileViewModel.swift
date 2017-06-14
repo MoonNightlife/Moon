@@ -31,4 +31,12 @@ struct ProfileViewModel {
             return self.scenceCoordinator.pop()
         }
     }
+    
+    func onShowFriends() -> CocoaAction {
+        return CocoaAction {
+            let vm = UsersTableViewModel(coordinator: self.scenceCoordinator)
+            return self.scenceCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
+        }
+    }
+    
 }

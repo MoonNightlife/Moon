@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Action
 
 struct UsersTableViewModel: BackType {
 
@@ -27,5 +28,12 @@ struct UsersTableViewModel: BackType {
     
     init(coordinator: SceneCoordinatorType) {
         sceneCoordinator = coordinator
+    }
+    
+    func onShowUser() -> CocoaAction {
+        return CocoaAction {
+            let vm = ProfileViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
+        }
     }
 }

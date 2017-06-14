@@ -16,7 +16,7 @@ struct NameViewModel {
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
-    private let newUser: RegistrationProfile
+    private let newUser: NewUser
     
     // Private
     private let disposeBag = DisposeBag()
@@ -28,7 +28,7 @@ struct NameViewModel {
     // Outputs
     var dataValid: Driver<Bool>
     
-    init(coordinator: SceneCoordinatorType, user: RegistrationProfile) {
+    init(coordinator: SceneCoordinatorType, user: NewUser) {
         self.sceneCoordinator = coordinator
         self.newUser = user
         
