@@ -144,7 +144,7 @@ import UIKit
     }
     
     func displayNewSelectedIndex() {
-        for (_, item) in labels.enumerated() {
+        for (item) in labels {
             item.textColor = unselectedLabelColor
         }
         
