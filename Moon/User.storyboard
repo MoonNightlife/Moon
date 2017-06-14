@@ -150,6 +150,76 @@
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="-177.66116941529236"/>
         </scene>
+        <!--Users Table View Controller-->
+        <scene sceneID="zYg-tj-lHo">
+            <objects>
+                <viewController storyboardIdentifier="UsersTable" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Fdw-mi-B9Y" customClass="UsersTableViewController" customModule="Moon" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="adC-Ea-H59"/>
+                        <viewControllerLayoutGuide type="bottom" id="BWH-x7-YeU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="z6c-yd-www">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qut-De-cO8">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UsersTableCell" rowHeight="75" id="ZMc-rh-Hx8" customClass="UsersTableViewCell" customModule="Moon" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZMc-rh-Hx8" id="6NI-5j-crw">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="74.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="p1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zB7-lL-naR">
+                                                    <rect key="frame" x="8" y="12.5" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="hew-qN-Sxz"/>
+                                                        <constraint firstAttribute="height" constant="50" id="kf9-sV-ByN"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Evan Noble" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozC-d5-mVa">
+                                                    <rect key="frame" x="66" y="27" width="301" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="zB7-lL-naR" firstAttribute="leading" secondItem="6NI-5j-crw" secondAttribute="leadingMargin" id="21y-uj-hcY"/>
+                                                <constraint firstItem="zB7-lL-naR" firstAttribute="centerY" secondItem="6NI-5j-crw" secondAttribute="centerY" id="AA9-Cc-WWQ"/>
+                                                <constraint firstItem="ozC-d5-mVa" firstAttribute="trailing" secondItem="6NI-5j-crw" secondAttribute="trailingMargin" id="a6o-Oj-RUI"/>
+                                                <constraint firstItem="ozC-d5-mVa" firstAttribute="leading" secondItem="zB7-lL-naR" secondAttribute="trailing" constant="8" symbolic="YES" id="naA-h7-RQk"/>
+                                                <constraint firstItem="zB7-lL-naR" firstAttribute="centerY" secondItem="ozC-d5-mVa" secondAttribute="centerY" id="pN4-Ad-WPb"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="name" destination="ozC-d5-mVa" id="Gh5-de-j6R"/>
+                                            <outlet property="profilePicture" destination="zB7-lL-naR" id="iHW-s3-MKv"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qut-De-cO8" firstAttribute="bottom" secondItem="BWH-x7-YeU" secondAttribute="top" id="9zW-bA-zu0"/>
+                            <constraint firstItem="qut-De-cO8" firstAttribute="top" secondItem="z6c-yd-www" secondAttribute="top" id="VaX-ai-OoC"/>
+                            <constraint firstAttribute="trailing" secondItem="qut-De-cO8" secondAttribute="trailing" id="jz2-Gw-bGc"/>
+                            <constraint firstItem="qut-De-cO8" firstAttribute="leading" secondItem="z6c-yd-www" secondAttribute="leading" id="k71-xd-Vje"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Py6-pX-GXa"/>
+                    <connections>
+                        <outlet property="userTableView" destination="qut-De-cO8" id="5hr-vS-hrU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XRT-Kz-D0V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1864.8" y="-642.72863568215894"/>
+        </scene>
         <!--Settings-->
         <scene sceneID="gKr-T8-3M5">
             <objects>
@@ -361,7 +431,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jfs-5x-Gl9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1880.8" y="-178.56071964017991"/>
+            <point key="canvasLocation" x="2820" y="-178.56071964017991"/>
         </scene>
         <!--Delete Account View Controller-->
         <scene sceneID="dLb-cE-10Y">
@@ -464,7 +534,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1JY-CX-UZZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2868" y="-641.82908545727139"/>
+            <point key="canvasLocation" x="3807.1999999999998" y="-641.82908545727139"/>
         </scene>
         <!--Notification Settings View Controller-->
         <scene sceneID="eJe-oN-vzw">
@@ -528,7 +598,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rh4-Mf-gTy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3620" y="-532.98350824587715"/>
+            <point key="canvasLocation" x="4559.1999999999998" y="-532.98350824587715"/>
         </scene>
         <!--Web ViewUI Vi View Controller-->
         <scene sceneID="WQg-pB-IXJ">
@@ -599,8 +669,27 @@
             </objects>
             <point key="canvasLocation" x="3506" y="200"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="PjN-zC-2LD">
+            <objects>
+                <navigationController storyboardIdentifier="UsersTableNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yeY-eT-m5M" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="I3D-k4-L5c">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Fdw-mi-B9Y" kind="relationship" relationship="rootViewController" id="Xbj-U9-eeF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QgD-is-rO3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="925.60000000000002" y="-642.72863568215894"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bioBase.png" width="750" height="90"/>
+        <image name="p1.jpg" width="510" height="561"/>
     </resources>
 </document>

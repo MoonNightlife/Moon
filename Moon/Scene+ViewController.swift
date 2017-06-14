@@ -62,6 +62,11 @@ extension Scene.User {
             var vc = storyboard.instantiateViewController(withIdentifier: "Profile") as! ProfileViewController
             vc.bindViewModel(to: viewModel)
             return vc
+        case .usersTable(let viewModel):
+            let nc = storyboard.instantiateViewController(withIdentifier: "UsersTableNavigation") as! UINavigationController
+            var vc = nc.viewControllers.first as! UsersTableViewController
+            vc.bindViewModel(to: viewModel)
+            return nc
         case .settings(let viewModel):
             var vc = storyboard.instantiateViewController(withIdentifier: "Settings") as! SettingsViewController
             vc.bindViewModel(to: viewModel)
@@ -160,7 +165,12 @@ extension Scene.Bar {
         let storyBoard = UIStoryboard(name: "Bar", bundle: nil)
         switch self {
         case .profile(let viewModel):
-            var vc = storyBoard.instantiateViewController(withIdentifier: "BarProfile") as! BarProfileViewController
+            let nc = storyBoard.instantiateViewController(withIdentifier: "BarProfileNavigationController") as! UINavigationController
+            var vc = nc.viewControllers.first as! BarProfileViewController
+            vc.bindViewModel(to: viewModel)
+            return nc
+        case .info(let viewModel):
+            var vc = storyBoard.instantiateViewController(withIdentifier: "BarInfo") as! BarInfoViewController
             vc.bindViewModel(to: viewModel)
             return vc
         }

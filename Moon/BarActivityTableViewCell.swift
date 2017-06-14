@@ -28,11 +28,6 @@ class BarActivityTableViewCell: UITableViewCell {
         
         self.activity = activity
         
-        user.rx.action = userAction
-        bar.rx.action = barAction
-        likeButton.rx.action = likeAction
-        numLikeButton.rx.action = userLikedAction
-        
         backgroundColor = .clear
         
         setupProfilePicture()
@@ -44,10 +39,16 @@ class BarActivityTableViewCell: UITableViewCell {
         setupLocationImage()
         setupIsGoingToLabel()
         setupTimeImageView()
+        
+        user.rx.action = userAction
+        bar.rx.action = barAction
+        likeButton.rx.action = likeAction
+        numLikeButton.rx.action = userLikedAction
     }
 }
 
 extension BarActivityTableViewCell {
+    
     fileprivate func setupProfilePicture() {
         // Sets a circular profile pic
         self.profilePicture.image = UIImage(named: activity.profileImage!)

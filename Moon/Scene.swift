@@ -23,6 +23,7 @@ enum Scene {
     
     enum User: SceneType {
         case profile(ProfileViewModel)
+        case usersTable(UsersTableViewModel)
         case settings(SettingsViewModel)
         case name(NameSettingsViewModel)
         case email(EmailSettingsViewModel)
@@ -51,5 +52,6 @@ enum Scene {
     
     enum  Bar: SceneType {
         case profile(BarProfileViewModel)
+        case info(BarInfoViewModel)
     }
 }

@@ -17,7 +17,7 @@
         <!--Data Source-->
         <scene sceneID="ClF-cY-CtO">
             <objects>
-                <viewController storyboardIdentifier="BarProfile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="H0c-iM-lFa" customClass="BarProfileViewController" customModule="Moon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BarProfile" id="H0c-iM-lFa" customClass="BarProfileViewController" customModule="Moon" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="q1v-Sy-alW"/>
                         <viewControllerLayoutGuide type="bottom" id="FWU-ph-iBL"/>
@@ -219,7 +219,77 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgx-35-uax" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="700" y="-53.973013493253376"/>
+            <point key="canvasLocation" x="1639.2" y="-53.973013493253376"/>
+        </scene>
+        <!--Bar Info View Controller-->
+        <scene sceneID="jzE-CG-koe">
+            <objects>
+                <viewController storyboardIdentifier="BarInfo" id="kdn-40-f4b" customClass="BarInfoViewController" customModule="Moon" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="U0Y-l8-3b5"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vg6-5J-hY5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="V1c-3o-1jj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R4K-TG-WNX">
+                                <rect key="frame" x="136" y="318" width="103" height="30"/>
+                                <state key="normal" title="Phone Number"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bX5-ic-fcr">
+                                <rect key="frame" x="159" y="280" width="56" height="30"/>
+                                <state key="normal" title="Website"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jyi-fx-GVR">
+                                <rect key="frame" x="159" y="356" width="57" height="30"/>
+                                <state key="normal" title="Address"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fu1-yM-0SW">
+                                <rect key="frame" x="329" y="20" width="30" height="30"/>
+                                <state key="normal" title="X"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jyi-fx-GVR" firstAttribute="top" secondItem="R4K-TG-WNX" secondAttribute="bottom" constant="8" symbolic="YES" id="7Gq-sM-XTL"/>
+                            <constraint firstItem="bX5-ic-fcr" firstAttribute="centerX" secondItem="V1c-3o-1jj" secondAttribute="centerX" id="EKq-D8-KQk"/>
+                            <constraint firstItem="Fu1-yM-0SW" firstAttribute="trailing" secondItem="V1c-3o-1jj" secondAttribute="trailingMargin" id="ELA-MZ-ToO"/>
+                            <constraint firstItem="Fu1-yM-0SW" firstAttribute="top" secondItem="U0Y-l8-3b5" secondAttribute="bottom" id="FKf-Op-PZk"/>
+                            <constraint firstItem="bX5-ic-fcr" firstAttribute="centerX" secondItem="R4K-TG-WNX" secondAttribute="centerX" id="W8f-ao-Y7K"/>
+                            <constraint firstItem="R4K-TG-WNX" firstAttribute="centerY" secondItem="V1c-3o-1jj" secondAttribute="centerY" id="etG-a6-pSV"/>
+                            <constraint firstItem="bX5-ic-fcr" firstAttribute="leading" secondItem="jyi-fx-GVR" secondAttribute="leading" id="mXa-nO-nlh"/>
+                            <constraint firstItem="R4K-TG-WNX" firstAttribute="top" secondItem="bX5-ic-fcr" secondAttribute="bottom" constant="8" symbolic="YES" id="nbX-Xp-2e9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="addressButton" destination="jyi-fx-GVR" id="0Xy-O0-fUE"/>
+                        <outlet property="backButton" destination="Fu1-yM-0SW" id="RcW-Ip-FbM"/>
+                        <outlet property="phoneNumberButton" destination="R4K-TG-WNX" id="Jhd-Ib-vQ6"/>
+                        <outlet property="websiteButton" destination="bX5-ic-fcr" id="YHD-9K-EcX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HQL-If-XW7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2568.8000000000002" y="-287.40629685157421"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ssi-z6-ih5">
+            <objects>
+                <navigationController storyboardIdentifier="BarProfileNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xRq-dO-d7q" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AXV-yR-ygg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="H0c-iM-lFa" kind="relationship" relationship="rootViewController" id="hHR-cb-8a6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pjp-9d-ACe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="700" y="-54.422788605697157"/>
         </scene>
     </scenes>
 </document>

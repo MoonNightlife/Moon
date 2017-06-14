@@ -70,6 +70,7 @@ class SceneCoordinator: SceneCoordinatorType {
             print(currentViewController)
             currentViewController.present(viewController, animated: true) {
                 self.currentViewController = SceneCoordinator.actualViewController(for: viewController)
+                print(self.currentViewController)
                 subject.onCompleted()
             }
         case .searchRoot:
@@ -91,6 +92,7 @@ class SceneCoordinator: SceneCoordinatorType {
         if let presenter = currentViewController.presentingViewController {
             // dismiss a modal controller
             currentViewController.dismiss(animated: animated) {
+                print(presenter)
                 self.currentViewController = SceneCoordinator.actualViewController(for: presenter)
                 subject.onCompleted()
             }
