@@ -34,7 +34,7 @@ class ProfileViewController: UIViewController, BindableType {
 
         // Do any additional setup after loading the view.
         pics = [#imageLiteral(resourceName: "pp1.jpg"), #imageLiteral(resourceName: "pp2.jpg"), #imageLiteral(resourceName: "pp3.jpg"), #imageLiteral(resourceName: "pp4.jpg"), #imageLiteral(resourceName: "pp5.jpg")]
-        fakeUser = FakeUser(firstName: "Marisol", lastName: "Leiva", city: "Dallas", username: "marisolleiva", pics: pics, bio:"Mexico -> SMU 2018 | KKG | Tequila Lover", plan: "The Standard Pour")
+        fakeUser = FakeUser(firstName: "Marisol", lastName: "Leiva", city: "Dallas", username: "marisolleiva", pics: pics, bio:"Mexico -> SMU 2018 | KKG | Tequila Lover", plan: "The Standard Pour", id: "")
         
         setupCarousel()
         setUpPageController()

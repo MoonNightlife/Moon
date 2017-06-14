@@ -15,4 +15,5 @@ struct FeaturedEvent {
     var date: String
     var description: String
     var title: String
+    var id: String 
 }
