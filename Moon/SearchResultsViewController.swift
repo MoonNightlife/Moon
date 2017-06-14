@@ -53,10 +53,8 @@ extension SearchSectionModel: SectionModelType {
     }
 }
 
-class SearchResultsViewController: UIViewController, BindableType, UITableViewDelegate {
+class SearchResultsViewController: UIViewController, BindableType {
     
-    @IBOutlet weak var segmentControl: ADVSegmentedControl!
-
     private let bag = DisposeBag()
     var viewModel: SearchResultsViewModel!
 
@@ -68,9 +66,6 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
         super.viewDidLoad()
         
         configureDataSource()
-        prepareSegmentControl()
-        
-        searchResultsTableView.rx.setDelegate(self).disposed(by: bag)
     }
     func bindViewModel() {
         viewModel.searchResults.drive(searchResultsTableView.rx.items(dataSource: resultsDataSource)).addDisposableTo(bag)
@@ -80,21 +75,6 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
         }
         
         searchBar.textField.rx.textInput.text.bind(to: viewModel.searchText).addDisposableTo(bag)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70.0;//Choose your custom row height
-    }
-    
-    fileprivate func prepareSegmentControl() {
-        //segment set up
-        segmentControl.items = ["People", "Bars"]
-        segmentControl.selectedLabelColor = .lightGray
-        segmentControl.borderColor = .clear
-        segmentControl.backgroundColor = .clear
-        segmentControl.selectedIndex = 0
-        segmentControl.unselectedLabelColor = .moonGrey
-        segmentControl.thumbColor = .moonGrey
     }
     
     fileprivate func configureDataSource() {
@@ -121,12 +101,9 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
                 //swiftlint:disable:next force_cast
                 (cell as! LoadMoreTableViewCell).initCell(loadAction: action)
             }
-            
             return cell
         }
     }
-    
-    
 }
 
 extension Reactive where Base : UITableView {}
