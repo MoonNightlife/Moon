@@ -9,9 +9,10 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Action
 import Material
 
-class UsersTableViewController: UIViewController, BindableType {
+class UsersTableViewController: UIViewController, BindableType, UIPopoverPresentationControllerDelegate {
 
     var viewModel: UsersTableViewModel!
     private let bag = DisposeBag()
@@ -31,13 +32,29 @@ class UsersTableViewController: UIViewController, BindableType {
             }
             .disposed(by: bag)
         
+        let selectedItem = userTableView.rx.itemSelected
+        selectedItem.subscribe(onNext: { [weak self] _ in
+            self?.viewModel.onShowUser().execute()
+        })
+        .disposed(by: bag)
+        
         backButton.rx.action = viewModel.onBack()
     }
     
     func prepareNavigationBackButton() {
         backButton = UIBarButtonItem()
-        backButton.image = Icon.cm.arrowBack
+        backButton.image = Icon.cm.arrowDownward
         backButton.tintColor = .lightGray
         self.navigationItem.leftBarButtonItem = backButton
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        
+        return UIModalPresentationStyle.none
+    }
+    
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        viewModel.onBack().execute()
+        return false
     }
 }

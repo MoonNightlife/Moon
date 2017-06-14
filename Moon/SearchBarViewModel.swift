@@ -62,6 +62,12 @@ struct SearchBarViewModel {
             self.sceneCoordinator.changeChild(To: view)
         }
     }
+    
+    func onPopProfile() -> CocoaAction {
+        return CocoaAction {
+            return self.sceneCoordinator.pop()
+        }
+    }
 
 //    let searchInput = searchText
 //        .filter { ($0 ?? "").characters.count > 0 }

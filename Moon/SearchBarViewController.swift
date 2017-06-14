@@ -73,6 +73,7 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
     }
     
     func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        viewModel.onPopProfile().execute()
         return false
     }
     

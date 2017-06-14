@@ -51,6 +51,7 @@ class ProfileViewController: UIViewController, BindableType {
     @IBOutlet weak var exitButton: UIButton!
 
     func bindViewModel() {
+        friendsButton.rx.action = viewModel.onShowFriends()
         dismissButton.rx.action = viewModel.onDismiss()
     }
     
