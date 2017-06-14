@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import Material
+import RxSwift
+import Action
 
 class PeopleGoingCarouselView: ImageCardView {
     
@@ -16,20 +18,53 @@ class PeopleGoingCarouselView: ImageCardView {
     fileprivate var index: Int!
     fileprivate var likeButton: IconButton!
     fileprivate var numberOfLikesButton: IconButton!
+    fileprivate var viewProfileOverlayButton: UIButton!
+    fileprivate var bag = DisposeBag()
     
-    func initializeViewWith(user: FakeUser, index: Int) {
+    func initializeViewWith(user: FakeUser, index: Int, viewProfile: Action<String, Void>, likeActivity: Action<String, Void>, viewLikers: Action<String, Void>) {
         self.user = user
         self.index = index
         
         self.initializeImageCardViewWith(type: .small(image: (user.pics?[0])!, text: user.firstName!))
         prepareLikeButton()
         prepareNumberOfLikesButton(likes: "19")
+        prepareOverlayButton()
         prepareToolBar()
+        
+        bindActions(viewProfile: viewProfile, likeActivity: likeActivity, viewLikers: viewLikers)
     }
     
 }
 
 extension PeopleGoingCarouselView {
+    
+    fileprivate func bindActions(viewProfile: Action<String, Void>, likeActivity: Action<String, Void>, viewLikers: Action<String, Void>) {
+        
+        viewProfileOverlayButton.rx.controlEvent(.touchUpInside).map({ [weak self] in
+            return self?.user.id ?? "0"
+        })
+        .subscribe(viewProfile.inputs)
+        .addDisposableTo(bag)
+        
+        likeButton.rx.controlEvent(.touchUpInside).map({ [weak self] in
+            return self?.user.id ?? "0"
+        })
+        .subscribe(likeActivity.inputs)
+        .addDisposableTo(bag)
+        
+        numberOfLikesButton.rx.controlEvent(.touchUpInside).map({ [weak self] in
+            return self?.user.id ?? "0"
+        })
+        .subscribe(viewLikers.inputs)
+        .addDisposableTo(bag)
+
+    }
+    
+    fileprivate func prepareOverlayButton() {
+        viewProfileOverlayButton = UIButton(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.imageView.frame.height))
+        self.imageView.addSubview(viewProfileOverlayButton)
+        print(self.imageView.subviews)
+    }
     
     fileprivate func prepareLikeButton() {
         likeButton = IconButton(image: Icon.favorite, tintColor: .lightGray)

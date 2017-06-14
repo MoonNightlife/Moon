@@ -45,22 +45,22 @@ struct BarActivityFeedViewModel {
     
     func onViewUser(activity: BarActivity) -> CocoaAction {
         return CocoaAction {
-            print("Show \(activity)")
-            return Observable.empty()
+            let vm = ProfileViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
         }
     }
     
     func onViewBar(activity: BarActivity) -> CocoaAction {
         return CocoaAction {
             let vm = BarProfileViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .push)
+            return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
         }
     }
     
     func onViewLikers(activity: BarActivity) -> CocoaAction {
         return CocoaAction {
-            print("Show \(activity)")
-            return Observable.empty()
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
     }
 }

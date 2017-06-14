@@ -8,12 +8,15 @@
 
 import UIKit
 import Material
+import Action
+import RxSwift
 
 class FeaturedEventView: ImageCardView {
     
     //Main Variables
     fileprivate var event: FeaturedEvent!
     fileprivate var index: Int?
+    fileprivate var bag = DisposeBag()
     
     //Buttons
     fileprivate var favoriteButton: IconButton!
@@ -25,7 +28,7 @@ class FeaturedEventView: ImageCardView {
     fileprivate var dateFormatter: DateFormatter!
     fileprivate var dateLabel: UILabel!
     
-    func initializeCellWith(event: FeaturedEvent, index: Int) {
+    func initializeCellWith(event: FeaturedEvent, index: Int, likeAction: Action<String, Void>, shareAction: Action<String, Void>) {
         self.event = event
         self.index = index
         
@@ -40,11 +43,29 @@ class FeaturedEventView: ImageCardView {
         prepareNumberOfLikesButton(likes: "200")
         prepareToolbar()
         prepareBottomBar()
+        
+        bindAction(likeAction: likeAction, shareAction: shareAction)
     }
 
 }
 
 extension FeaturedEventView {
+    
+    fileprivate func bindAction(likeAction: Action<String, Void>, shareAction: Action<String, Void>) {
+        favoriteButton.rx.controlEvent(.touchUpInside)
+            .map({ [weak self] in
+                return self?.event.id ?? "0"
+            })
+            .subscribe(likeAction.inputs)
+            .addDisposableTo(bag)
+        
+        shareButton.rx.controlEvent(.touchUpInside)
+            .map({ [weak self] in
+                return self?.event.id ?? "0"
+            })
+            .subscribe(shareAction.inputs)
+            .addDisposableTo(bag)
+    }
     
     fileprivate func prepareFavoriteButton() {
         favoriteButton = IconButton(image: Icon.favorite, tintColor: .lightGray)
