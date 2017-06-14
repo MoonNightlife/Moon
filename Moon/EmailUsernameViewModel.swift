@@ -15,7 +15,7 @@ import SwaggerClient
 struct EmailUsernameViewModel {
     
     // Dependencies
-    private let newUser: RegistrationProfile
+    private let newUser: NewUser
     private let sceneCoordinator: SceneCoordinatorType
     private let disposeBag = DisposeBag()
     
@@ -54,7 +54,7 @@ struct EmailUsernameViewModel {
         return Observable.combineLatest(username.map(ValidationUtility.validUsername), email.map(ValidationUtility.validEmail)).map({$0 && $1})
     }
     
-    init(coordinator: SceneCoordinatorType, user: RegistrationProfile) {
+    init(coordinator: SceneCoordinatorType, user: NewUser) {
         self.sceneCoordinator = coordinator
         self.newUser = user
         subscribeToInputs()

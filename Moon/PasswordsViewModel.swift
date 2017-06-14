@@ -14,7 +14,7 @@ import SwaggerClient
 struct PasswordsViewModel {
     
     // Dependencies
-    private let newUser: RegistrationProfile
+    private let newUser: NewUser
     private let sceneCoordinator: SceneCoordinatorType
     private let disposeBag = DisposeBag()
     
@@ -44,7 +44,8 @@ struct PasswordsViewModel {
     
     lazy var createUser: CocoaAction = { this in
         return CocoaAction(enabledIf: this.allValid, workFactory: {_ in
-            return UserAPI.createNewUser(user: this.newUser)
+            print("Create User")
+            return Observable.empty()
         })
     }(self)
     
@@ -56,7 +57,7 @@ struct PasswordsViewModel {
         })
     }(self)
     
-    init(coordinator: SceneCoordinatorType, user: RegistrationProfile) {
+    init(coordinator: SceneCoordinatorType, user: NewUser) {
         self.sceneCoordinator = coordinator
         self.newUser = user
         subscribeToInputs()

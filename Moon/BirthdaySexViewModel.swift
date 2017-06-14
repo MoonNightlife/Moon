@@ -17,7 +17,7 @@ struct BirthdaySexViewModel {
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
-    private let newUser: RegistrationProfile
+    private let newUser: NewUser
     
     // Private
     private let validInfo: Observable<Bool>
@@ -36,7 +36,7 @@ struct BirthdaySexViewModel {
     var birthdayString: Observable<String>!
     var sexString: Observable<String>!
     
-    init(coordinator: SceneCoordinatorType, user: RegistrationProfile) {
+    init(coordinator: SceneCoordinatorType, user: NewUser) {
         self.sceneCoordinator = coordinator
         self.newUser = user
         
