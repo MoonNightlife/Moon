@@ -119,6 +119,11 @@
 		F04F445C1ECF840700D5FC62 /* BarAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */; };
 		F0644C2B1EC37D0E00D92BF7 /* SpecialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0644C2A1EC37D0E00D92BF7 /* SpecialsViewController.swift */; };
 		F07060061EC525A10020B3BE /* default_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = F07060051EC525A10020B3BE /* default_pic.png */; };
+		F07C06221EF1958F00B78865 /* BarAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06211EF1958F00B78865 /* BarAPIController.swift */; };
+		F07C06241EF195A500B78865 /* UserAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06231EF195A500B78865 /* UserAPIController.swift */; };
+		F07C06261EF19D7400B78865 /* RxErrorHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06251EF19D7400B78865 /* RxErrorHandlers.swift */; };
+		F07C062A1EF1A08500B78865 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06281EF1A08500B78865 /* InfoView.swift */; };
+		F07C062B1EF1A08500B78865 /* InfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F07C06291EF1A08500B78865 /* InfoView.xib */; };
 		F0942F0B1ECCEBA40038E389 /* FakeEventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0942F0A1ECCEBA40038E389 /* FakeEventData.swift */; };
 		F0942F0D1ECCEC550038E389 /* FeaturedEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0942F0C1ECCEC550038E389 /* FeaturedEventView.swift */; };
 		F098FF9B1EDF1DEA00A59594 /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FF9A1EDF1DEA00A59594 /* NewUser.swift */; };
@@ -130,7 +135,6 @@
 		F09DF08E1EEAF1240092BFA5 /* NotificationSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF08D1EEAF1240092BFA5 /* NotificationSetting.swift */; };
 		F09DF0901EEAFAF90092BFA5 /* WebViewUIViViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF08F1EEAFAF90092BFA5 /* WebViewUIViViewController.swift */; };
 		F09DF0921EEAFB670092BFA5 /* WebViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF0911EEAFB670092BFA5 /* WebViewViewModel.swift */; };
-		F09DF0941EEB224C0092BFA5 /* UserAPI+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF0931EEB224C0092BFA5 /* UserAPI+Rx.swift */; };
 		F09DF0961EEB85140092BFA5 /* ContentSuggestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF0951EEB85140092BFA5 /* ContentSuggestionsViewController.swift */; };
 		F09DF0981EEB854D0092BFA5 /* ContentSuggestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF0971EEB854D0092BFA5 /* ContentSuggestionViewModel.swift */; };
 		F0A2251F1ECB9F2600170927 /* MoonFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A2251E1ECB9F2600170927 /* MoonFont.swift */; };
@@ -338,6 +342,11 @@
 		F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAnnotation.swift; sourceTree = "<group>"; };
 		F0644C2A1EC37D0E00D92BF7 /* SpecialsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialsViewController.swift; sourceTree = "<group>"; };
 		F07060051EC525A10020B3BE /* default_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_pic.png; sourceTree = "<group>"; };
+		F07C06211EF1958F00B78865 /* BarAPIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAPIController.swift; sourceTree = "<group>"; };
+		F07C06231EF195A500B78865 /* UserAPIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPIController.swift; sourceTree = "<group>"; };
+		F07C06251EF19D7400B78865 /* RxErrorHandlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxErrorHandlers.swift; sourceTree = "<group>"; };
+		F07C06281EF1A08500B78865 /* InfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		F07C06291EF1A08500B78865 /* InfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoView.xib; sourceTree = "<group>"; };
 		F0942F0A1ECCEBA40038E389 /* FakeEventData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeEventData.swift; sourceTree = "<group>"; };
 		F0942F0C1ECCEC550038E389 /* FeaturedEventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedEventView.swift; sourceTree = "<group>"; };
 		F098FF9A1EDF1DEA00A59594 /* NewUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
@@ -349,7 +358,6 @@
 		F09DF08D1EEAF1240092BFA5 /* NotificationSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSetting.swift; sourceTree = "<group>"; };
 		F09DF08F1EEAFAF90092BFA5 /* WebViewUIViViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewUIViViewController.swift; sourceTree = "<group>"; };
 		F09DF0911EEAFB670092BFA5 /* WebViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewViewModel.swift; sourceTree = "<group>"; };
-		F09DF0931EEB224C0092BFA5 /* UserAPI+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserAPI+Rx.swift"; sourceTree = "<group>"; };
 		F09DF0951EEB85140092BFA5 /* ContentSuggestionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentSuggestionsViewController.swift; sourceTree = "<group>"; };
 		F09DF0971EEB854D0092BFA5 /* ContentSuggestionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentSuggestionViewModel.swift; sourceTree = "<group>"; };
 		F0A2251E1ECB9F2600170927 /* MoonFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonFont.swift; sourceTree = "<group>"; };
@@ -725,6 +733,15 @@
 			name = Scenes;
 			sourceTree = "<group>";
 		};
+		F07C06271EF1A07700B78865 /* InfoView */ = {
+			isa = PBXGroup;
+			children = (
+				F07C06281EF1A08500B78865 /* InfoView.swift */,
+				F07C06291EF1A08500B78865 /* InfoView.xib */,
+			);
+			name = InfoView;
+			sourceTree = "<group>";
+		};
 		F098FF991EDF1DDA00A59594 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -749,6 +766,7 @@
 		F098FF9C1EDF46EF00A59594 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				F07C06271EF1A07700B78865 /* InfoView */,
 				F098FF9D1EDF47D400A59594 /* ValidationUtility.swift */,
 			);
 			name = Utilities;
@@ -1028,9 +1046,11 @@
 			children = (
 				F049896F1EE0746400064F58 /* UINavigationController+Rx.swift */,
 				F0FD8F361EE1DC950020D131 /* ErrorTextField+Rx.swift */,
+				F07C06251EF19D7400B78865 /* RxErrorHandlers.swift */,
 				F0CA18B41EE5AEEC00428318 /* FloatingBottomTabBar+Rx.swift */,
-				F09DF0931EEB224C0092BFA5 /* UserAPI+Rx.swift */,
 				F0DCCAE81EF18E7900C9F5A9 /* RxReachability.swift */,
+				F07C06211EF1958F00B78865 /* BarAPIController.swift */,
+				F07C06231EF195A500B78865 /* UserAPIController.swift */,
 			);
 			name = RxExtensions;
 			sourceTree = "<group>";
@@ -1159,6 +1179,7 @@
 				C034E2CB1ECCF2F5008EA4BA /* p3.jpg in Resources */,
 				F048F1221EA3B7A5000F0161 /* Assets.xcassets in Resources */,
 				C0DAD32A1EEA04C7008BAF05 /* b4.jpg in Resources */,
+				F07C062B1EF1A08500B78865 /* InfoView.xib in Resources */,
 				F001BABE1EC50D2600CDF9BC /* Profile_base.png in Resources */,
 				C0FC627F1ECF53560087FA3B /* s8.jpg in Resources */,
 				C0FC628A1ECF69730087FA3B /* e2.jpg in Resources */,
@@ -1341,6 +1362,7 @@
 				F0CF15981EDEEE8900531DCF /* BrithdaySexViewController.swift in Sources */,
 				F03C78C51EE9EA3C002AEDAD /* EmailSettingsViewModel.swift in Sources */,
 				F0CF15901EDEED9600531DCF /* BirthdaySexViewModel.swift in Sources */,
+				F07C06261EF19D7400B78865 /* RxErrorHandlers.swift in Sources */,
 				F04A4B271EEC595700DBA9A6 /* UserSearchCollectionViewCell.swift in Sources */,
 				F03C78C31EE9EA2D002AEDAD /* NameSettingsViewModel.swift in Sources */,
 				F0EF693A1EF08BCB0028A32B /* UsersTableViewModel.swift in Sources */,
@@ -1383,6 +1405,7 @@
 				F09DF0901EEAFAF90092BFA5 /* WebViewUIViViewController.swift in Sources */,
 				F04A4B231EEC549300DBA9A6 /* SearchSnapshot.swift in Sources */,
 				F098FF9B1EDF1DEA00A59594 /* NewUser.swift in Sources */,
+				F07C062A1EF1A08500B78865 /* InfoView.swift in Sources */,
 				F001BAC11EC50E9700CDF9BC /* BarActivityFeedViewController.swift in Sources */,
 				F04F445C1ECF840700D5FC62 /* BarAnnotation.swift in Sources */,
 				F04989701EE0746400064F58 /* UINavigationController+Rx.swift in Sources */,
@@ -1392,7 +1415,6 @@
 				F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */,
 				F0CA18B51EE5AEEC00428318 /* FloatingBottomTabBar+Rx.swift in Sources */,
 				F04989661EE0651800064F58 /* SceneCoordinatorType.swift in Sources */,
-				F09DF0941EEB224C0092BFA5 /* UserAPI+Rx.swift in Sources */,
 				F02D9AA61EE61B3D00D6C969 /* BarActivity.swift in Sources */,
 				F0D168531ECA62940064F642 /* MoonColor.swift in Sources */,
 				F0CA18A51EE58FD400428318 /* SearchBarViewModel.swift in Sources */,
@@ -1403,6 +1425,7 @@
 				F0EF69401EF0A2210028A32B /* UserSnapshot.swift in Sources */,
 				F03C78BC1EE9E97E002AEDAD /* EmailSettingsViewController.swift in Sources */,
 				F049896C1EE068BE00064F58 /* SceneTransitionType.swift in Sources */,
+				F07C06241EF195A500B78865 /* UserAPIController.swift in Sources */,
 				F03C78C01EE9E99D002AEDAD /* DeleteAccountViewController.swift in Sources */,
 				C08AFB291EECBA4F007D33D6 /* ImageCardView.swift in Sources */,
 				F04283AF1EC4A92700CCB5F3 /* FeaturedViewController.swift in Sources */,
@@ -1430,6 +1453,7 @@
 				F04A4B251EEC553900DBA9A6 /* SearchTableViewCell.swift in Sources */,
 				F0055D691EC5E64B005544B4 /* CityOverviewViewController.swift in Sources */,
 				F04989641EE0641300064F58 /* Scene.swift in Sources */,
+				F07C06221EF1958F00B78865 /* BarAPIController.swift in Sources */,
 				F0388CFB1EE9D40B00E8ED48 /* BarProfileViewController.swift in Sources */,
 				F0CF159C1EDEEEA100531DCF /* PasswordsViewController.swift in Sources */,
 				F03C78B51EE9DB3C002AEDAD /* SettingsViewModel.swift in Sources */,

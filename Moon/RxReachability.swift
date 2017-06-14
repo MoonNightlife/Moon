@@ -48,9 +48,7 @@ class RxReachability {
   
   private static var _status = Variable<Reachability>(.unknown)
   var status: Observable<Reachability> {
-    get {
       return RxReachability._status.asObservable().distinctUntilChanged()
-    }
   }
   
   class func reachabilityStatus() -> Reachability {
@@ -69,7 +67,7 @@ class RxReachability {
   private var reachability: SCNetworkReachability?
   
   func startMonitor(_ host: String) -> Bool {
-    if let _ = reachability {
+    if reachability != nil {
       return true
     }
     
@@ -93,7 +91,7 @@ class RxReachability {
   
   func stopMonitor() {
     if let _reachability = reachability {
-      SCNetworkReachabilityUnscheduleFromRunLoop(_reachability, CFRunLoopGetMain(), CFRunLoopMode.commonModes.rawValue);
+      SCNetworkReachabilityUnscheduleFromRunLoop(_reachability, CFRunLoopGetMain(), CFRunLoopMode.commonModes.rawValue)
       reachability = nil
     }
   }
