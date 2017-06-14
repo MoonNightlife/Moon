@@ -51,13 +51,14 @@ struct SearchResultsViewModel {
     
         let users = getUserSnapShots().map({SearchSectionModel.searchResultsSection(title: "Users", items: $0)})
         let bars = getBarSnapShots().map({SearchSectionModel.searchResultsSection(title: "Bars", items: $0)})
+        let loadMore = SearchSectionModel.loadMore(title: "Load More", items: [.loadMoreItem(loadAction: loadMoreUserResults)])
         
-        let results = Observable.combineLatest(users, bars)
+        //let results = Observable.combineLatest(users, bars)
         
         searchResults = searchText
-            .withLatestFrom(results)
+            .withLatestFrom(users)
             .map({
-                return [$0, $1]
+                return [$0, loadMore]
             })
             .asDriver(onErrorJustReturn: [])
     }

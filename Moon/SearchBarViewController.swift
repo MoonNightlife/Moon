@@ -137,6 +137,7 @@ extension SearchBarViewController {
     fileprivate func prepareSearchBarButtonOverlay() {
         searchBarButton = UIButton()
         searchBarButton.frame = searchBar.textField.frame
+        searchBarButton.backgroundColor = .black
     }
     
     fileprivate func prepareSearchBar() {

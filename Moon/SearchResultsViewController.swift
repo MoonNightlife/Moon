@@ -97,16 +97,7 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
         segmentControl.thumbColor = .moonGrey
     }
     
-    fileprivate func configureDataSource() {
-        resultsDataSource.titleForHeaderInSection = { ds, index in
-            let models = ds.sectionModels
-            if (index == 0 || index == 2) && !models[index].items.isEmpty {
-                return models[index].titles
-            } else {
-                return ""
-            }
-        }
-        
+    fileprivate func configureDataSource() {        
         resultsDataSource.configureCell = {
             dataSource, tableView, indexPath, item in
             
@@ -125,7 +116,6 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
             return cell
         }
     }
-    
     
 }
 
