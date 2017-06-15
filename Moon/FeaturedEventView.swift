@@ -106,8 +106,8 @@ extension FeaturedEventView {
     }
         
     fileprivate func prepareBottomBar() {
-        self.bottomToolbar.rightViews = [shareButton]
         self.bottomToolbar.centerViews = [dateLabel]
-        self.bottomToolbar.addLeftViews(view1: favoriteButton, view2: numberOfLikesButton)
+        self.bottomToolbar.addLeftView(view: shareButton)
+        self.bottomToolbar.addRightViews(view1: numberOfLikesButton, view2: favoriteButton)
     }
 }

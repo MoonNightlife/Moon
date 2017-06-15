@@ -27,7 +27,7 @@ class PeopleGoingCarouselView: ImageCardView {
         
         self.initializeImageCardViewWith(type: .small(image: (user.pics?[0])!, text: user.firstName!))
         prepareLikeButton()
-        prepareNumberOfLikesButton(likes: "19")
+        prepareNumberOfLikes(likes: "19")
         prepareOverlayButton()
         prepareToolBar()
         
@@ -70,13 +70,13 @@ extension PeopleGoingCarouselView {
         likeButton = IconButton(image: Icon.favorite, tintColor: .lightGray)
     }
     
-    fileprivate func prepareNumberOfLikesButton(likes: String) {
-        numberOfLikesButton = IconButton(title: likes)
-        numberOfLikesButton.titleColor = .lightGray
+    fileprivate func prepareNumberOfLikes(likes: String) {
+        numberOfLikesButton = IconButton(title: likes, titleColor: .lightGray)
         numberOfLikesButton.titleLabel?.font = UIFont(name: "Roboto", size: 10)
     }
     
     fileprivate func prepareToolBar() {
         self.bottomToolbar.addRightViews(view1: numberOfLikesButton, view2: likeButton)
+       
     }
 }
