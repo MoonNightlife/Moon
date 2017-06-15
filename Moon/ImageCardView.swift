@@ -70,6 +70,13 @@ class ImageCardView: UIView {
         
         return fullString
     }
+    
+    func changeImageTintColor(image: UIImage, color: UIColor) -> UIImage {
+        var newImage = image.withRenderingMode(.alwaysTemplate)
+        newImage =  newImage.tint(with: color)!
+        
+        return newImage
+    }
 }
 
 extension ImageCardView {
@@ -98,11 +105,15 @@ extension ImageCardView {
     
     fileprivate func prepareBottomToolBar(text: String) {
         bottomToolbar = MoonToolbar()
-
         bottomToolbar.backgroundColor = .clear
+        
         bottomToolbar.title = text
         bottomToolbar.titleLabel.textColor = .lightGray
         bottomToolbar.titleLabel.font = UIFont(name: "Roboto", size: 12)
+        
+        bottomToolbar.detail = ""
+        bottomToolbar.detailLabel.textColor = .lightGray
+        bottomToolbar.detailLabel.font = UIFont(name: "Roboto", size: 8)
     }
     
     fileprivate func prepareContentView(text: String, color: UIColor) {
