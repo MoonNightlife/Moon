@@ -18,7 +18,8 @@ target 'Moon' do
   pod 'EZSwipeController'
   pod 'Action', '~> 3.0'
   pod 'RxDataSources', '~> 1.0'
-  pod 'SwaggerClient', :path => '../swift3-client-generated-2'
+  pod 'SwaggerClient', :path => '../moon_mock_api/frontend'
+  pod 'SinchVerification'
 
   target 'MoonTests' do
     inherit! :search_paths

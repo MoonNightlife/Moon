@@ -118,6 +118,7 @@ extension Scene.Master {
             vcSR.bindViewModel(to: searchResultVM)
             vcSC.bindViewModel(to: contentSuggestionVM)
             vc.generateChildern(child1: vcSC, child2: vcSR)
+        
             return vc
         }
 
@@ -173,6 +174,27 @@ extension Scene.Bar {
             var vc = storyBoard.instantiateViewController(withIdentifier: "BarInfo") as! BarInfoViewController
             vc.bindViewModel(to: viewModel)
             return vc
+        }
+    }
+}
+
+extension Scene.UserDiscovery {
+    func viewController() -> UIViewController {
+        let storyBoard = UIStoryboard(name: "UserDiscovery", bundle: nil)
+        switch self {
+        case .enterPhoneNumber(let viewModel):
+            var vc = storyBoard.instantiateViewController(withIdentifier: "EnterPhoneNumber") as! EnterPhoneNumberViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        case .enterCode(let viewModel):
+            var vc = storyBoard.instantiateViewController(withIdentifier: "EnterCode") as! EnterCodeViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        case .countryCode(let viewModel):
+            let nc = storyBoard.instantiateViewController(withIdentifier: "CountryCodeNavigation") as! UINavigationController
+            var vc = nc.viewControllers.first as! CountryCodeViewController
+            vc.bindViewModel(to: viewModel)
+            return nc
         }
     }
 }
