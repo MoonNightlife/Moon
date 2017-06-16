@@ -34,7 +34,6 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
         prepareSearchBar()
         prepareSearchBarButtonOverlay()
         
-        listenToSearchBarButton()
     }
     
     open func prepareSearchBarForSearch() {
@@ -53,6 +52,27 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
     func bindViewModel() {
         profileButton.rx.action = viewModel.onShowProfile()
         settingsButton.rx.action = viewModel.onShowSettings()
+        searchBar.textField.rx.textInput.text.orEmpty.bind(to: viewModel.searchText).addDisposableTo(bag)
+        
+        searchBarButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] in
+            self?.prepareSearchBarForSearch()
+            self?.viewModel.onShowSearch().execute()
+        })
+            .addDisposableTo(bag)
+        
+        cancelButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] in
+            self?.searchBar.textField.text = ""
+            self?.searchBar.textField.endEditing(true)
+            self?.viewModel.onShowMainController().execute()
+        })
+            .addDisposableTo(bag)
+        
+        searchBar.clearButton.rx.controlEvent(.touchUpInside)
+            .subscribe(onNext: { [weak self] in
+                self?.searchBar.clearButton.isHidden = true
+                self?.viewModel?.onShow(view: .suggestions).execute()
+            })
+            .addDisposableTo(bag)
         
         let textedEnteredInSearchBar = searchBar.textField.rx.text.orEmpty.share()
         
@@ -73,29 +93,6 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
     func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
         viewModel.onPopProfile().execute()
         return false
-    }
-    
-    func listenToSearchBarButton() {
-        searchBarButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] in
-            self?.prepareSearchBarForSearch()
-            self?.viewModel.onShowSearch().execute()
-        })
-        .addDisposableTo(bag)
-        
-        cancelButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] in
-            self?.searchBar.textField.text = ""
-            self?.searchBar.textField.endEditing(true)
-            self?.viewModel.onShowMainController().execute()
-        })
-        .addDisposableTo(bag)
-        
-        searchBar.clearButton.rx.controlEvent(.touchUpInside)
-            .subscribe(onNext: { [weak self] in
-                self?.searchBar.clearButton.isHidden = true
-                self?.viewModel?.onShow(view: .suggestions).execute()
-            })
-            .addDisposableTo(bag)
-
     }
 
 }

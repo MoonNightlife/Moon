@@ -8,19 +8,26 @@
 
 import UIKit
 import Material
+import Action
+import RxSwift
+import RxCocoa
 
 class UserCollectionView: ImageCardView {
     
     fileprivate var addFriendButton: IconButton!
     fileprivate var nameLabel: UILabel!
+    fileprivate let bag = DisposeBag()
     
-    func initViewWith(user: SearchSnapshot) {
+    func initViewWith(user: SearchSnapshot, addAction: CocoaAction) {
         let image = UIImage(named: user.picture)
         self.initializeImageCardViewWith(type: .small(image: image!, text: ""))
         prepareAddFriendButton()
         prepareNameLabel(text: user.name)
         prepareToolbar()
+        
+        addFriendButton.rx.action = addAction
     }
+
 }
 
 extension UserCollectionView {

@@ -31,28 +31,21 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
         
         searchResultsTableView.rx.setDelegate(self).disposed(by: bag)
     }
+
     func bindViewModel() {
         
-        searchResultsTableView.rx.itemSelected.map({ $0.row }).subscribe(onNext: { [weak self] _ in
-            self?.viewModel.onShowProfile().execute("123")
-        }).addDisposableTo(bag)
-        
-        viewModel.selectedSearchType.elements.bind(to: searchResultsTableView.rx.items(dataSource: resultsDataSource)).addDisposableTo(bag)
+        viewModel.searchResults.drive(searchResultsTableView.rx.items(dataSource: resultsDataSource)).addDisposableTo(bag)
     
         segmentControl.rx.controlEvent(UIControlEvents.valueChanged)
             .map({ [weak self] in
                 return SearchType(rawValue: self?.segmentControl.selectedIndex ?? 0) ?? .users
             })
-            .subscribe(viewModel.selectedSearchType.inputs)
+            .subscribe(viewModel.selectedSearchType)
             .addDisposableTo(bag)
         
-        viewModel.selectedSearchType.execute(.users)
-        
-        guard let searchBar = searchBarController?.searchBar else {
-            return
-        }
-        
-        searchBar.textField.rx.textInput.text.bind(to: viewModel.searchText).addDisposableTo(bag)
+        searchResultsTableView.rx.itemSelected.map({
+            return $0.row
+        }).subscribe(viewModel.onShowResult.inputs).addDisposableTo(bag)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

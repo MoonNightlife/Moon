@@ -192,6 +192,14 @@
 		F0CF15981EDEEE8900531DCF /* BrithdaySexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF15971EDEEE8900531DCF /* BrithdaySexViewController.swift */; };
 		F0CF159A1EDEEE9000531DCF /* EmailUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF15991EDEEE9000531DCF /* EmailUsernameViewController.swift */; };
 		F0CF159C1EDEEEA100531DCF /* PasswordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF159B1EDEEEA100531DCF /* PasswordsViewController.swift */; };
+		F0CF7F151EF37B97005C068C /* UserDiscovery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0CF7F141EF37B97005C068C /* UserDiscovery.storyboard */; };
+		F0CF7F191EF37D54005C068C /* EnterPhoneNumberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF7F181EF37D54005C068C /* EnterPhoneNumberViewModel.swift */; };
+		F0CF7F1B1EF37D5E005C068C /* EnterCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF7F1A1EF37D5E005C068C /* EnterCodeViewModel.swift */; };
+		F0CF7F1D1EF37D80005C068C /* CountryCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF7F1C1EF37D80005C068C /* CountryCodeViewModel.swift */; };
+		F0CF7F1F1EF37E71005C068C /* EnterPhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF7F1E1EF37E71005C068C /* EnterPhoneNumberViewController.swift */; };
+		F0CF7F211EF37E7A005C068C /* EnterCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF7F201EF37E7A005C068C /* EnterCodeViewController.swift */; };
+		F0CF7F231EF37E83005C068C /* CountryCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF7F221EF37E83005C068C /* CountryCodeViewController.swift */; };
+		F0CF7F251EF3850F005C068C /* CountryCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF7F241EF3850F005C068C /* CountryCode.swift */; };
 		F0D168531ECA62940064F642 /* MoonColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D168521ECA62940064F642 /* MoonColor.swift */; };
 		F0D797B71ECF837A007BDB9C /* Dallas.gpx in Resources */ = {isa = PBXBuildFile; fileRef = F0D797B61ECF837A007BDB9C /* Dallas.gpx */; };
 		F0DCCAE91EF18E7900C9F5A9 /* RxReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DCCAE81EF18E7900C9F5A9 /* RxReachability.swift */; };
@@ -416,6 +424,14 @@
 		F0CF15971EDEEE8900531DCF /* BrithdaySexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrithdaySexViewController.swift; sourceTree = "<group>"; };
 		F0CF15991EDEEE9000531DCF /* EmailUsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailUsernameViewController.swift; sourceTree = "<group>"; };
 		F0CF159B1EDEEEA100531DCF /* PasswordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordsViewController.swift; sourceTree = "<group>"; };
+		F0CF7F141EF37B97005C068C /* UserDiscovery.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserDiscovery.storyboard; sourceTree = "<group>"; };
+		F0CF7F181EF37D54005C068C /* EnterPhoneNumberViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterPhoneNumberViewModel.swift; sourceTree = "<group>"; };
+		F0CF7F1A1EF37D5E005C068C /* EnterCodeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterCodeViewModel.swift; sourceTree = "<group>"; };
+		F0CF7F1C1EF37D80005C068C /* CountryCodeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodeViewModel.swift; sourceTree = "<group>"; };
+		F0CF7F1E1EF37E71005C068C /* EnterPhoneNumberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterPhoneNumberViewController.swift; sourceTree = "<group>"; };
+		F0CF7F201EF37E7A005C068C /* EnterCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterCodeViewController.swift; sourceTree = "<group>"; };
+		F0CF7F221EF37E83005C068C /* CountryCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodeViewController.swift; sourceTree = "<group>"; };
+		F0CF7F241EF3850F005C068C /* CountryCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCode.swift; sourceTree = "<group>"; };
 		F0D168521ECA62940064F642 /* MoonColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonColor.swift; sourceTree = "<group>"; };
 		F0D797B61ECF837A007BDB9C /* Dallas.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Dallas.gpx; sourceTree = "<group>"; };
 		F0DCCAE81EF18E7900C9F5A9 /* RxReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxReachability.swift; sourceTree = "<group>"; };
@@ -792,6 +808,7 @@
 				F0CA18B21EE5AE7500428318 /* Enums.swift */,
 				F09DF08D1EEAF1240092BFA5 /* NotificationSetting.swift */,
 				F0335A751EF1F7DD005118B4 /* RxDataSourceSearchModel.swift */,
+				F0CF7F241EF3850F005C068C /* CountryCode.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -817,6 +834,7 @@
 				F04283B21EC4A9E100CCB5F3 /* Featured.storyboard */,
 				F09B9D051EC356BA00B2385A /* Explore.storyboard */,
 				F04283B41EC4A9F600CCB5F3 /* MoonsView.storyboard */,
+				F0CF7F141EF37B97005C068C /* UserDiscovery.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -832,6 +850,7 @@
 				F0CA189A1EE58BFD00428318 /* Explore */,
 				F0CA189B1EE58C0700428318 /* Featured */,
 				F0CA189C1EE58C0D00428318 /* MoonsView */,
+				F0CF7F161EF37CF9005C068C /* UserDiscovery */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -847,6 +866,7 @@
 				F0388CF61EE9D32600E8ED48 /* Bar */,
 				F0CA18A21EE58CDD00428318 /* Featured */,
 				F0CA18A31EE58CE300428318 /* MoonsView */,
+				F0CF7F171EF37D15005C068C /* UserDiscovery */,
 			);
 			name = "View Models";
 			sourceTree = "<group>";
@@ -1056,6 +1076,26 @@
 			name = SignUp;
 			sourceTree = "<group>";
 		};
+		F0CF7F161EF37CF9005C068C /* UserDiscovery */ = {
+			isa = PBXGroup;
+			children = (
+				F0CF7F1E1EF37E71005C068C /* EnterPhoneNumberViewController.swift */,
+				F0CF7F201EF37E7A005C068C /* EnterCodeViewController.swift */,
+				F0CF7F221EF37E83005C068C /* CountryCodeViewController.swift */,
+			);
+			name = UserDiscovery;
+			sourceTree = "<group>";
+		};
+		F0CF7F171EF37D15005C068C /* UserDiscovery */ = {
+			isa = PBXGroup;
+			children = (
+				F0CF7F181EF37D54005C068C /* EnterPhoneNumberViewModel.swift */,
+				F0CF7F1A1EF37D5E005C068C /* EnterCodeViewModel.swift */,
+				F0CF7F1C1EF37D80005C068C /* CountryCodeViewModel.swift */,
+			);
+			name = UserDiscovery;
+			sourceTree = "<group>";
+		};
 		F0D168541ECA62EF0064F642 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1242,6 +1282,7 @@
 				F0D797B71ECF837A007BDB9C /* Dallas.gpx in Resources */,
 				C0552C5C1EE0922A007B84F6 /* Moon_Title2.png in Resources */,
 				F0A2252F1ECBAA3E00170927 /* budlight.jpeg in Resources */,
+				F0CF7F151EF37B97005C068C /* UserDiscovery.storyboard in Resources */,
 				F001BABD1EC50D2600CDF9BC /* Header_base.png in Resources */,
 				F09B9D061EC356BA00B2385A /* Explore.storyboard in Resources */,
 				C0DAD3141EE5EDE1008BAF05 /* pp3.jpg in Resources */,
@@ -1387,6 +1428,7 @@
 				F0CA18BD1EE610CB00428318 /* FeaturedEvent.swift in Sources */,
 				F049896A1EE0661E00064F58 /* BindableType.swift in Sources */,
 				F0CF15981EDEEE8900531DCF /* BrithdaySexViewController.swift in Sources */,
+				F0CF7F1F1EF37E71005C068C /* EnterPhoneNumberViewController.swift in Sources */,
 				F03C78C51EE9EA3C002AEDAD /* EmailSettingsViewModel.swift in Sources */,
 				F0CF15901EDEED9600531DCF /* BirthdaySexViewModel.swift in Sources */,
 				F07C06261EF19D7400B78865 /* RxErrorHandlers.swift in Sources */,
@@ -1399,9 +1441,12 @@
 				F03C78C91EE9EA5C002AEDAD /* DeleteAccountViewModel.swift in Sources */,
 				F09DF08E1EEAF1240092BFA5 /* NotificationSetting.swift in Sources */,
 				F0E59F2A1EEF73B4007A3323 /* BarInfoViewModel.swift in Sources */,
+				F0CF7F1B1EF37D5E005C068C /* EnterCodeViewModel.swift in Sources */,
+				F0CF7F191EF37D54005C068C /* EnterPhoneNumberViewModel.swift in Sources */,
 				F0F210591ECA1C160027B50B /* SearchBarViewController.swift in Sources */,
 				F0CA18AB1EE5AA4C00428318 /* FeaturedViewModel.swift in Sources */,
 				F04283AD1EC49DB600CCB5F3 /* MainViewController.swift in Sources */,
+				F0CF7F1D1EF37D80005C068C /* CountryCodeViewModel.swift in Sources */,
 				F0A52CCA1EEDE7A80067E8DD /* SearchViewModel.swift in Sources */,
 				F0CA18971EE58BBD00428318 /* MainViewModel.swift in Sources */,
 				F0CA18B71EE6101200428318 /* TopBar.swift in Sources */,
@@ -1442,6 +1487,7 @@
 				F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */,
 				F0CA18B51EE5AEEC00428318 /* FloatingBottomTabBar+Rx.swift in Sources */,
 				F04989661EE0651800064F58 /* SceneCoordinatorType.swift in Sources */,
+				F0CF7F231EF37E83005C068C /* CountryCodeViewController.swift in Sources */,
 				F02D9AA61EE61B3D00D6C969 /* BarActivity.swift in Sources */,
 				F0D168531ECA62940064F642 /* MoonColor.swift in Sources */,
 				F0CA18A51EE58FD400428318 /* SearchBarViewModel.swift in Sources */,
@@ -1460,7 +1506,9 @@
 				F044CD531ECDE28A00E47138 /* BottomGradientImageView.swift in Sources */,
 				F0CA18911EE584AF00428318 /* ProfileViewModel.swift in Sources */,
 				F09DF0981EEB854D0092BFA5 /* ContentSuggestionViewModel.swift in Sources */,
+				F0CF7F211EF37E7A005C068C /* EnterCodeViewController.swift in Sources */,
 				F0644C2B1EC37D0E00D92BF7 /* SpecialsViewController.swift in Sources */,
+				F0CF7F251EF3850F005C068C /* CountryCode.swift in Sources */,
 				F0CA18931EE585D700428318 /* ProfileViewController.swift in Sources */,
 				F09DF08C1EEAF0610092BFA5 /* NotificationTableViewCell.swift in Sources */,
 				F03776A21EC3A44100B92E6B /* FakeSpecialData.swift in Sources */,

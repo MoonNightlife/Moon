@@ -69,6 +69,12 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
     func bindViewModel() {
         viewModel.suggestedBars.drive(suggestedBarCollectionView.rx.items(dataSource: barDataSource)).disposed(by: bag)
         viewModel.suggestedFriends.drive(suggestedUserColletionView.rx.items(dataSource: userDataSource)).disposed(by: bag)
+        
+        let barSelected = suggestedBarCollectionView.rx.itemSelected
+        let userSelected = suggestedUserColletionView.rx.itemSelected
+        
+        barSelected.map({ $0.row }).subscribe(viewModel.onShowBar.inputs).addDisposableTo(bag)
+        userSelected.map({ $0.row }).subscribe(viewModel.onShowUser.inputs).addDisposableTo(bag)
     }
     
     fileprivate func cellsPerRowVertical(cells: Int, collectionView: UICollectionView) -> UICollectionViewFlowLayout {
@@ -120,7 +126,7 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
             view.backgroundColor = .clear
             
             if let strongSelf = self {
-               view.initViewWith(bar: item)
+               view.initViewWith(bar: item, goAction: strongSelf.viewModel.onChangeAttendance(barID: item.id))
             }
 
             cell.addSubview(view)
@@ -146,7 +152,7 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
             view.backgroundColor = .clear
             
             if let strongSelf = self {
-                view.initViewWith(user: item)
+                view.initViewWith(user: item, addAction: strongSelf.viewModel.onAddFriend(userID: item.id))
             }
             
             cell.addSubview(view)
