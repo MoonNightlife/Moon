@@ -76,15 +76,23 @@ class MoonsViewViewController: UIViewController, BindableType {
 
 extension MoonsViewViewController {
     
+    fileprivate func setImageTintColor(color: UIColor, image: UIImage) -> UIImage {
+        var newImage = image.withRenderingMode(.alwaysTemplate)
+        newImage = newImage.tint(with: color)!
+        
+        return newImage
+    }
+    
     fileprivate func setupActionButtonItems() -> [ActionButtonItem] {
-        let friendFeedAction = ActionButtonItem(title: "Feed", image: Icon.cm.moreVertical)
+        
+        let friendFeedAction = ActionButtonItem(title: "Feed", image: setImageTintColor(color: .moonPurple, image: Icon.menu!))
         friendFeedAction.action = { item in
             self.friendFeedContainer.isHidden = false
             self.mapViewContainerView.isHidden = true
             self.changeViewActionButton.toggleMenu()
         }
         
-        let mapViewAction = ActionButtonItem(title: "Map", image: Icon.cm.photoCamera)
+        let mapViewAction = ActionButtonItem(title: "Map", image: setImageTintColor(color: .moonPurple, image: #imageLiteral(resourceName: "LocationIcon")))
         mapViewAction.action = { item in
             self.mapViewContainerView.isHidden = false
             self.friendFeedContainer.isHidden = true
