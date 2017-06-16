@@ -32,8 +32,14 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
     @IBAction func zoomToLocation(_ sender: Any) {
         locationManager?.startUpdatingLocation()
     }
+    
+    //data 
+    var usersGoing = [FakeUser]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        usersGoing = createFakeUsers()
         
         locationManager = CLLocationManager()
         locationManager?.delegate = self
@@ -51,7 +57,8 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
         let locationImage = #imageLiteral(resourceName: "Location").withRenderingMode(.alwaysTemplate).tint(with: .moonPurple)
         zoomToLocationButton.setImage(locationImage, for: .normal)
         
-        goingCarousel.isHidden = true
+        prepareSegmentControl()
+        prepareCarousel()
 
     }
     
@@ -83,23 +90,47 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
         }
     }
     
-    func animateViewUp() {
-        goingCarousel.isHidden = false
+    func prepareSegmentControl() {
+        //segment set up
+        segmentControl.items = ["People Going", "Friends Going"]
+        segmentControl.selectedLabelColor = .moonPurple
+        segmentControl.borderColor = .clear
+        segmentControl.backgroundColor = .clear
+        segmentControl.selectedIndex = 0
+        segmentControl.unselectedLabelColor = .lightGray
+        segmentControl.thumbColor = .moonPurple
+    }
+    
+    func prepareCarousel() {
+        goingCarousel.delegate = self
+        goingCarousel.dataSource = self
         
-        UIView.animate(withDuration: Double(2.0), animations: {
-            self.goingCarouselHeightConstraint.constant = 200
+        goingCarousel.contentView.isHidden = true
+        
+        goingCarousel.bringSubview(toFront: segmentControl)
+        goingCarousel.backgroundColor = .white
+        goingCarousel.isPagingEnabled = true
+        goingCarousel.type = .linear
+        goingCarousel.bounces = false
+        goingCarousel.reloadData()
+    }
+    
+    func animateViewUp() {
+        UIView.animate(withDuration: Double(0.3), animations: {
+            self.goingCarouselHeightConstraint.constant = self.view.frame.height * 0.5
             self.view.layoutIfNeeded()
         })
+        
+        goingCarousel.contentView.isHidden = false
     }
     
     func animateViewDown() {
-        
-        UIView.animate(withDuration: Double(2.0), animations: {
+        UIView.animate(withDuration: Double(0.3), animations: {
             self.goingCarouselHeightConstraint.constant = 0
             self.view.layoutIfNeeded()
         })
         
-        //goingCarousel.isHidden = true
+        goingCarousel.contentView.isHidden = true
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -173,6 +204,40 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
             //swiftlint:disable:next force_cast
             self.cityMapView.addAnnotation(annotationView.annotation!)
         }
+    }
+
+}
+
+extension CityOverviewViewController: iCarouselDelegate, iCarouselDataSource {
+    func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
+        if option == .spacing {
+            return value * 1.1
+        }
+        
+        return value
+    }
+    
+    func numberOfItems(in carousel: iCarousel) -> Int {
+        return usersGoing.count
+    }
+    
+    func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
+        
+        let view = setUpGoingView(index: index)
+        
+        return view
+    }
+    
+    func setUpGoingView(index: Int) -> UIView {
+        let size = CGFloat(150)//(self.view.frame.size.height * 0.325) - 50
+        //let size = self.view.frame.size.height * 0.22
+        let frame = CGRect(x: self.view.frame.size.width / 2, y: 0, width: size, height: size)
+        let view = PeopleGoingCarouselView()
+        view.frame = frame
+        //view.initializeViewWith(user: usersGoing.value[index], index: index, viewProfile: viewModel.onShowProfile, likeActivity: viewModel.onLikeActivity, viewLikers: viewModel.onViewLikers)
+        view.initFake(user: usersGoing[index], index: index)
+        
+        return view
     }
 
 }

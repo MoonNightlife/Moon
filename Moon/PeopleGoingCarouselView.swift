@@ -34,6 +34,16 @@ class PeopleGoingCarouselView: ImageCardView {
         bindActions(viewProfile: viewProfile, likeActivity: likeActivity, viewLikers: viewLikers)
     }
     
+    func initFake(user: FakeUser, index: Int) {
+        self.user = user
+        self.index = index
+        
+        self.initializeImageCardViewWith(type: .small(image: (user.pics?[0])!, text: user.firstName!))
+        prepareLikeButton()
+        prepareNumberOfLikes(likes: "19")
+        prepareToolBar()
+    }
+    
 }
 
 extension PeopleGoingCarouselView {
