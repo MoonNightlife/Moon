@@ -11,6 +11,7 @@ import MapKit
 import MaterialComponents
 import Material
 import iCarousel
+import NVActivityIndicatorView
 
 class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, BindableType {
 
@@ -22,6 +23,7 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
     
     var viewModel: CityOverviewViewModel!
     var screenHeight: CGFloat!
+    var pinAnimation: NVActivityIndicatorView!
     
     @IBOutlet weak var goingCarouselHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var segmentControl: ADVSegmentedControl!
@@ -146,10 +148,30 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         animateViewDown()
+        
+        if pinAnimation != nil {
+            pinAnimation.stopAnimating()
+        }
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         animateViewUp()
+        
+        let tempAnimation = animatePinWith(frame: view.frame, color: .moonPurple)
+        pinAnimation = tempAnimation
+        
+        view.addSubview(pinAnimation)
+        pinAnimation.startAnimating()
+    }
+    
+    func animatePinWith(frame: CGRect, color: UIColor) -> NVActivityIndicatorView {
+        let width = frame.size.width
+        let height = frame.size.height
+        let newFrame = CGRect(x: -8, y: height - 25, width: width, height: height)
+        
+        let view = NVActivityIndicatorView(frame: newFrame, type: .ballScaleRipple, color: color, padding: CGFloat(10))
+        
+        return view
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -188,7 +210,7 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
     func addAnnotations() {
         for data in fakeTopBars {
             let pointAnnotation = BarAnnotation()
-            
+    
             switch arc4random_uniform(3) {
             case 0:
                 pointAnnotation.tintColor = UIColor.red
