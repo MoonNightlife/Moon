@@ -59,5 +59,6 @@ enum Scene {
         case enterPhoneNumber(EnterPhoneNumberViewModel)
         case enterCode(EnterCodeViewModel)
         case countryCode(CountryCodeViewModel)
+        case contacts(ContactsViewModel)
     }
 }

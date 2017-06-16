@@ -36,4 +36,11 @@ struct UsersTableViewModel: BackType {
             return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
         }
     }
+    
+    func onShowContacts() -> CocoaAction {
+        return CocoaAction {
+            let vm = ContactsViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.UserDiscovery.contacts(vm), type: .push)
+        }
+    }
 }
