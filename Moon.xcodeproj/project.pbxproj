@@ -166,6 +166,7 @@
 		F0A8E2EA1EC3C858001D9993 /* pic6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2E11EC3C858001D9993 /* pic6.jpg */; };
 		F0A8E2EB1EC3C858001D9993 /* Pic7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2E21EC3C858001D9993 /* Pic7.jpg */; };
 		F0B5F93F1EEF790A0095F12E /* BarInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B5F93E1EEF790A0095F12E /* BarInfo.swift */; };
+		F0C66BDF1EF41C9400B22811 /* SinchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C66BDE1EF41C9400B22811 /* SinchService.swift */; };
 		F0CA18911EE584AF00428318 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18901EE584AF00428318 /* ProfileViewModel.swift */; };
 		F0CA18931EE585D700428318 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18921EE585D700428318 /* ProfileViewController.swift */; };
 		F0CA18951EE5867700428318 /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0CA18941EE5867700428318 /* User.storyboard */; };
@@ -398,6 +399,7 @@
 		F0A8E2E11EC3C858001D9993 /* pic6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic6.jpg; sourceTree = "<group>"; };
 		F0A8E2E21EC3C858001D9993 /* Pic7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Pic7.jpg; sourceTree = "<group>"; };
 		F0B5F93E1EEF790A0095F12E /* BarInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarInfo.swift; sourceTree = "<group>"; };
+		F0C66BDE1EF41C9400B22811 /* SinchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinchService.swift; sourceTree = "<group>"; };
 		F0CA18901EE584AF00428318 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		F0CA18921EE585D700428318 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F0CA18941EE5867700428318 /* User.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = User.storyboard; sourceTree = "<group>"; };
@@ -752,6 +754,7 @@
 				F09B9D021EC3552D00B2385A /* View Controllers */,
 				F09B9D0B1EC363D200B2385A /* Subclasses */,
 				F09B9D011EC3551F00B2385A /* Storyboards */,
+				F0C66BDD1EF41C7800B22811 /* Services */,
 				F0D168541ECA62EF0064F642 /* Extensions */,
 				F0FD8F351EE1DC600020D131 /* RxExtensions */,
 				F09B9D041EC3555300B2385A /* Supporting Files */,
@@ -936,6 +939,14 @@
 			);
 			name = FakeBarImages;
 			path = Images;
+			sourceTree = "<group>";
+		};
+		F0C66BDD1EF41C7800B22811 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F0C66BDE1EF41C9400B22811 /* SinchService.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 		F0CA18981EE58BEC00428318 /* Login */ = {
@@ -1533,6 +1544,7 @@
 				F0388CFB1EE9D40B00E8ED48 /* BarProfileViewController.swift in Sources */,
 				F0CF159C1EDEEEA100531DCF /* PasswordsViewController.swift in Sources */,
 				F03C78B51EE9DB3C002AEDAD /* SettingsViewModel.swift in Sources */,
+				F0C66BDF1EF41C9400B22811 /* SinchService.swift in Sources */,
 				F048F11B1EA3B7A5000F0161 /* AppDelegate.swift in Sources */,
 				F0EBA0BF1ECCAE9F00056EF9 /* ActionButton.swift in Sources */,
 				C0DAD30B1EE5EBC4008BAF05 /* ProfileFakeData.swift in Sources */,

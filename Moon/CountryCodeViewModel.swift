@@ -12,6 +12,7 @@ import RxSwift
 
 struct CountryCodeViewModel: BackType {
     // Private
+    private let bag = DisposeBag()
     
     // Dependencies
     let sceneCoordinator: SceneCoordinatorType
@@ -23,11 +24,17 @@ struct CountryCodeViewModel: BackType {
     
     // Outputs
     var countryCodes: Observable<[String]> {
-        return Observable.just([CountryCode.US.description, CountryCode.BZ.description])
+        return Observable.just(CountryCode.nameArray())
     }
     
     init(coordinator: SceneCoordinatorType, updateCountryCode: Action<CountryCode, Void>) {
         self.sceneCoordinator = coordinator
         self.updateCode = updateCountryCode
+        
+        updateCode.executionObservables.take(1)
+            .subscribe(onNext: { _ in
+                coordinator.pop()
+            })
+            .disposed(by: bag)
     }
 }

@@ -27,14 +27,14 @@
                                 <state key="normal" title="Send Code"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k9O-r3-koQ">
-                                <rect key="frame" x="16" y="280" width="46" height="30"/>
+                                <rect key="frame" x="16" y="280" width="72" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="OmY-fI-aUu"/>
+                                    <constraint firstAttribute="width" constant="72" id="jPB-7i-Ulb"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ww2-qJ-bBR">
-                                <rect key="frame" x="70" y="280" width="289" height="30"/>
+                                <rect key="frame" x="96" y="280" width="263" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -42,13 +42,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ww2-qJ-bBR" firstAttribute="leading" secondItem="k9O-r3-koQ" secondAttribute="trailing" constant="8" symbolic="YES" id="0Pa-ls-8e3"/>
-                            <constraint firstItem="bBM-Iw-gcC" firstAttribute="centerY" secondItem="Q6C-Il-oP4" secondAttribute="centerY" id="HQT-CJ-x1a"/>
-                            <constraint firstItem="k9O-r3-koQ" firstAttribute="leading" secondItem="Q6C-Il-oP4" secondAttribute="leadingMargin" id="TMh-HX-hsJ"/>
-                            <constraint firstItem="k9O-r3-koQ" firstAttribute="top" secondItem="ww2-qJ-bBR" secondAttribute="top" id="hlv-1y-fEy"/>
-                            <constraint firstItem="bBM-Iw-gcC" firstAttribute="top" secondItem="ww2-qJ-bBR" secondAttribute="bottom" constant="8" symbolic="YES" id="puW-et-zwu"/>
-                            <constraint firstItem="ww2-qJ-bBR" firstAttribute="trailing" secondItem="Q6C-Il-oP4" secondAttribute="trailingMargin" id="sEJ-sM-JGv"/>
-                            <constraint firstItem="bBM-Iw-gcC" firstAttribute="centerX" secondItem="Q6C-Il-oP4" secondAttribute="centerX" id="yLL-5v-S4p"/>
+                            <constraint firstItem="ww2-qJ-bBR" firstAttribute="trailing" secondItem="Q6C-Il-oP4" secondAttribute="trailingMargin" id="9UY-VA-hDB"/>
+                            <constraint firstItem="bBM-Iw-gcC" firstAttribute="centerY" secondItem="Q6C-Il-oP4" secondAttribute="centerY" id="9mA-dU-NgC"/>
+                            <constraint firstItem="bBM-Iw-gcC" firstAttribute="centerX" secondItem="Q6C-Il-oP4" secondAttribute="centerX" id="Phh-VM-4XX"/>
+                            <constraint firstItem="bBM-Iw-gcC" firstAttribute="top" secondItem="ww2-qJ-bBR" secondAttribute="bottom" constant="8" symbolic="YES" id="ZMK-h8-nvP"/>
+                            <constraint firstItem="k9O-r3-koQ" firstAttribute="top" secondItem="ww2-qJ-bBR" secondAttribute="top" id="rmQ-OJ-4eq"/>
+                            <constraint firstItem="k9O-r3-koQ" firstAttribute="leading" secondItem="Q6C-Il-oP4" secondAttribute="leadingMargin" id="t2l-j6-LlY"/>
+                            <constraint firstItem="ww2-qJ-bBR" firstAttribute="leading" secondItem="k9O-r3-koQ" secondAttribute="trailing" constant="8" symbolic="YES" id="wnJ-PQ-a3k"/>
                         </constraints>
                     </view>
                     <connections>
@@ -59,7 +59,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WxY-v0-eQ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="100" y="81"/>
+            <point key="canvasLocation" x="100" y="80.50974512743629"/>
         </scene>
         <!--Enter Code View Controller-->
         <scene sceneID="a3b-2u-ZFj">
@@ -151,7 +151,7 @@
             <objects>
                 <navigationController storyboardIdentifier="CountryCodeNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gcj-bz-Nj7" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="bfb-kP-X7a">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bfb-kP-X7a">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

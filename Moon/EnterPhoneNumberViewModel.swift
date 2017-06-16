@@ -15,6 +15,7 @@ struct EnterPhoneNumberViewModel: BackType {
     
     // Dependencies
     let sceneCoordinator: SceneCoordinatorType
+    let smsVerification: SMSValidationService
     
     // Inputs
     var phoneNumber = BehaviorSubject<String>(value: "")
@@ -23,13 +24,24 @@ struct EnterPhoneNumberViewModel: BackType {
     
     // Outputs
     var phoneNumberString: Observable<String>
+    var enableEnterCode: Observable<Bool>
     
     var countryCode = Variable<CountryCode>(.US)
     
-    init(coordinator: SceneCoordinatorType) {
+    init(coordinator: SceneCoordinatorType, smsVerification: SMSValidationService = SinchService()) {
         self.sceneCoordinator = coordinator
+        self.smsVerification = smsVerification
         
-        phoneNumberString = phoneNumber
+        let validPhoneNumber = Observable.combineLatest(phoneNumber, countryCode.asObservable())
+            .map({
+                smsVerification.formatPhoneNumberForGuiFrom(string: $0, countryCode: $1)
+            })
+        
+        enableEnterCode = validPhoneNumber.map({
+            return ($0 == nil) ? false : true
+        })
+        
+        phoneNumberString = validPhoneNumber.filter({ $0 != nil }).map({ $0! })
     }
     
     func onShowEnterCode() -> CocoaAction {

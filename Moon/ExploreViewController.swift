@@ -10,6 +10,7 @@ import UIKit
 import Material
 import PageMenu
 import iCarousel
+import SwaggerClient
 
 class ExploreViewController: UIViewController, BindableType {
     
@@ -28,10 +29,12 @@ class ExploreViewController: UIViewController, BindableType {
     @IBOutlet weak var viewForPageMenu: UIView!
     var pageMenu: CAPSPageMenu?
     var controllerArray = [UIViewController]()
+    
+    var topBars = [Any]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         setupPagingMenuController()
         setupCarousel()
         

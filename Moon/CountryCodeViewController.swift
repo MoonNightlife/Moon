@@ -32,7 +32,9 @@ class CountryCodeViewController: UIViewController, BindableType {
         }.addDisposableTo(bag)
         
         let selectedIndex = countryCodeTableView.rx.itemSelected
-        selectedIndex.map({ $0.row }).map({ CountryCode(rawValue: $0) ?? CountryCode.US }).subscribe(viewModel.updateCode.inputs).addDisposableTo(bag)
+        selectedIndex.map({ $0.row }).map({ CountryCode.getCodeFor(index: $0) }).subscribe(viewModel.updateCode.inputs).addDisposableTo(bag)
+        
+        navBackButton.rx.action = viewModel.onBack()
     }
     
     fileprivate func prepareNavigationBackButton() {

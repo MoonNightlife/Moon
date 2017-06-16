@@ -15,6 +15,7 @@ class EnterCodeViewController: UIViewController, BindableType {
 
     var viewModel: EnterCodeViewModel!
     var navBackButton: UIBarButtonItem!
+    private let bag = DisposeBag()
     
     @IBOutlet weak var codeTextField: UITextField!
     @IBOutlet weak var enterCodeButton: UIButton!
@@ -26,7 +27,11 @@ class EnterCodeViewController: UIViewController, BindableType {
     }
 
     func bindViewModel() {
+        navBackButton.rx.action = viewModel.onBack()
         
+        codeTextField.rx.textInput.text.orEmpty.bind(to: viewModel.code).addDisposableTo(bag)
+        viewModel.enableCheckCodeButton.bind(to: enterCodeButton.rx.isEnabled).addDisposableTo(bag)
+        viewModel.codeText.bind(to: codeTextField.rx.text).addDisposableTo(bag)
     }
     
     fileprivate func prepareNavigationBackButton() {

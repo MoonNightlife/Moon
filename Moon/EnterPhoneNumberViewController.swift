@@ -28,11 +28,20 @@ class EnterPhoneNumberViewController: UIViewController, BindableType {
     }
     
     func bindViewModel() {
+        navBackButton.rx.action = viewModel.onBack()
+        
         changeCountryCodeButton.rx.action = viewModel.editCountryCode()
         sendCodeButton.rx.action = viewModel.onShowEnterCode()
+        viewModel.enableEnterCode.bind(to: sendCodeButton.rx.isEnabled).addDisposableTo(bag)
         
         phoneNumberTextField.rx.textInput.text.orEmpty.bind(to: viewModel.phoneNumber).addDisposableTo(bag)
         viewModel.phoneNumberString.bind(to: phoneNumberTextField.rx.text).addDisposableTo(bag)
+        
+        viewModel.countryCode.asObservable().subscribe(onNext: { [weak self] code in
+            let title = code.description
+            self?.changeCountryCodeButton.setTitle(title, for: .normal)
+        })
+        .addDisposableTo(bag)
         
     }
     
@@ -45,6 +54,6 @@ class EnterPhoneNumberViewController: UIViewController, BindableType {
 
 }
 
-extension Reactive where Base: UIButton{
+extension Reactive where Base: UIButton {
     
 }
