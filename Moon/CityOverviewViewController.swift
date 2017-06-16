@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import MaterialComponents
 import Material
+import iCarousel
 
 class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, BindableType {
 
@@ -21,6 +22,9 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
     
     var viewModel: CityOverviewViewModel!
     
+    @IBOutlet weak var goingCarouselHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var segmentControl: ADVSegmentedControl!
+    @IBOutlet weak var goingCarousel: iCarousel!
     @IBOutlet weak var zoomToLocationButton: MDCFloatingButton!
     @IBOutlet weak var cityMapView: MKMapView!
     var locationManager: CLLocationManager?
@@ -46,6 +50,8 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
         zoomToLocationButton.backgroundColor = .white
         let locationImage = #imageLiteral(resourceName: "Location").withRenderingMode(.alwaysTemplate).tint(with: .moonPurple)
         zoomToLocationButton.setImage(locationImage, for: .normal)
+        
+        goingCarousel.isHidden = true
 
     }
     
@@ -77,12 +83,39 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
         }
     }
     
+    func animateViewUp() {
+        goingCarousel.isHidden = false
+        
+        UIView.animate(withDuration: Double(2.0), animations: {
+            self.goingCarouselHeightConstraint.constant = 200
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    func animateViewDown() {
+        
+        UIView.animate(withDuration: Double(2.0), animations: {
+            self.goingCarouselHeightConstraint.constant = 0
+            self.view.layoutIfNeeded()
+        })
+        
+        //goingCarousel.isHidden = true
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         let location = locations.first!
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 2000, 2000)
         cityMapView.setRegion(coordinateRegion, animated: true)
         locationManager?.stopUpdatingLocation()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        animateViewDown()
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        animateViewUp()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

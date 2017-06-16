@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -223,25 +223,50 @@
                                     <action selector="zoomToLocation:" destination="fRQ-IH-wvJ" eventType="touchUpInside" id="Xhk-7l-LEh"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C8l-0h-ODI" customClass="iCarousel">
+                                <rect key="frame" x="0.0" y="603" width="375" height="64"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WeK-c7-HZk" customClass="ADVSegmentedControl" customModule="Moon" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="17" width="359" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="hsY-4s-7XD"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="038-80-9Y8"/>
+                                    <constraint firstAttribute="trailing" secondItem="WeK-c7-HZk" secondAttribute="trailing" constant="8" id="7OK-Fo-PSo"/>
+                                    <constraint firstItem="WeK-c7-HZk" firstAttribute="leading" secondItem="C8l-0h-ODI" secondAttribute="leading" constant="8" id="diP-WR-Kt2"/>
+                                    <constraint firstItem="WeK-c7-HZk" firstAttribute="top" secondItem="C8l-0h-ODI" secondAttribute="top" constant="17" id="tQ7-eV-hrU"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="i9M-5i-LRs" firstAttribute="leading" secondItem="xaT-Yi-cff" secondAttribute="leading" id="0RJ-fQ-ht9"/>
                             <constraint firstItem="vps-kE-bir" firstAttribute="top" secondItem="huY-hJ-v5U" secondAttribute="bottom" constant="8" symbolic="YES" id="1Pg-YO-lkC"/>
                             <constraint firstAttribute="trailing" secondItem="i9M-5i-LRs" secondAttribute="trailing" id="8CM-pG-HLC"/>
+                            <constraint firstItem="8EG-cs-fVW" firstAttribute="top" secondItem="C8l-0h-ODI" secondAttribute="bottom" id="9Gr-f3-njI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vps-kE-bir" secondAttribute="trailing" id="CJf-gL-bGv"/>
+                            <constraint firstItem="C8l-0h-ODI" firstAttribute="leading" secondItem="xaT-Yi-cff" secondAttribute="leading" id="U07-qX-miB"/>
+                            <constraint firstAttribute="trailing" secondItem="C8l-0h-ODI" secondAttribute="trailing" id="hEK-iK-xuO"/>
                             <constraint firstItem="i9M-5i-LRs" firstAttribute="top" secondItem="huY-hJ-v5U" secondAttribute="bottom" id="reS-Uh-Ij4"/>
                             <constraint firstItem="i9M-5i-LRs" firstAttribute="bottom" secondItem="8EG-cs-fVW" secondAttribute="top" id="zVx-iO-QVA"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cityMapView" destination="i9M-5i-LRs" id="s42-uG-pxV"/>
+                        <outlet property="goingCarousel" destination="C8l-0h-ODI" id="sSd-BW-n7S"/>
+                        <outlet property="goingCarouselHeightConstraint" destination="038-80-9Y8" id="T32-hF-ux1"/>
+                        <outlet property="segmentControl" destination="WeK-c7-HZk" id="ibd-0c-57J"/>
                         <outlet property="zoomToLocationButton" destination="vps-kE-bir" id="2Za-Sk-GgJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8TM-iN-hsY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1161" y="492"/>
+            <point key="canvasLocation" x="1160.8" y="491.60419790104953"/>
         </scene>
     </scenes>
     <resources>
