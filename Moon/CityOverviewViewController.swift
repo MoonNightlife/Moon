@@ -21,6 +21,7 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
     }
     
     var viewModel: CityOverviewViewModel!
+    var screenHeight: CGFloat!
     
     @IBOutlet weak var goingCarouselHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var segmentControl: ADVSegmentedControl!
@@ -38,6 +39,8 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        screenHeight = self.view.frame.size.height
         
         usersGoing = createFakeUsers()
         
@@ -117,7 +120,7 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
     
     func animateViewUp() {
         UIView.animate(withDuration: Double(0.3), animations: {
-            self.goingCarouselHeightConstraint.constant = self.view.frame.height * 0.5
+            self.goingCarouselHeightConstraint.constant = self.view.frame.height * 0.55
             self.view.layoutIfNeeded()
         })
         
@@ -198,7 +201,7 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
             pointAnnotation.coordinate = data.coordinates
             pointAnnotation.title = data.barName
             pointAnnotation.placeID = "123123"
-            pointAnnotation.subtitle = "Users Going: \(data.usersGoing)"
+            pointAnnotation.subtitle = "People Going: \(data.usersGoing)"
             let annotationView = MKPinAnnotationView(annotation: pointAnnotation, reuseIdentifier: "pin")
             
             //swiftlint:disable:next force_cast
@@ -229,9 +232,9 @@ extension CityOverviewViewController: iCarouselDelegate, iCarouselDataSource {
     }
     
     func setUpGoingView(index: Int) -> UIView {
-        let size = CGFloat(150)//(self.view.frame.size.height * 0.325) - 50
+        let size = screenHeight * 0.22
         //let size = self.view.frame.size.height * 0.22
-        let frame = CGRect(x: self.view.frame.size.width / 2, y: 0, width: size, height: size)
+        let frame = CGRect(x: self.view.frame.size.width / 2, y: 0, width: size + 20, height: size)
         let view = PeopleGoingCarouselView()
         view.frame = frame
         //view.initializeViewWith(user: usersGoing.value[index], index: index, viewProfile: viewModel.onShowProfile, likeActivity: viewModel.onLikeActivity, viewLikers: viewModel.onViewLikers)
