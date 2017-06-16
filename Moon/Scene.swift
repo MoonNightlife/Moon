@@ -54,4 +54,10 @@ enum Scene {
         case profile(BarProfileViewModel)
         case info(BarInfoViewModel)
     }
+    
+    enum UserDiscovery: SceneType {
+        case enterPhoneNumber(EnterPhoneNumberViewModel)
+        case enterCode(EnterCodeViewModel)
+        case countryCode(CountryCodeViewModel)
+    }
 }

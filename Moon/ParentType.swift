@@ -15,7 +15,7 @@ protocol ParentType {
 }
 
 extension ParentType where Self: UIViewController {
-    func generateChildern(child1: UIViewController, child2: UIViewController) {
+    mutating func generateChildern(child1: UIViewController, child2: UIViewController) {
         addChildViewController(child1)
         addChildViewController(child2)
         

@@ -14,6 +14,7 @@ let names = ["Collin Duzyk", "Camden Moore", "Mony Gonzalez", "Molly Smith", "Ma
 
 let fakeNames = ["Collin", "Camden", "Mony", "Marisol", "Molly", "Sloan", "Henry", "Andrea"]
 let fakeLastNames = ["Duzyk", "Moore", "Gonzalez", "Leiva", "Smith", "Stearman", "Brlhe", "Adler"]
+let fakeIDs = ["1", "2", "3", "4", "5", "6", "7", "8"]
 
 let barNames = ["The Barley House", "Avenu Lounge", "The Standard Pour", "Next Door", "Avenu Lounge", "Piano Bar", "The Fat Rabbit", "Trophy Room"]
 
@@ -24,7 +25,7 @@ func createFakeBarActivities() -> [BarActivity] {
     
     for i in 0..<names.count {
     
-        let activity = BarActivity(barId: "123", barName: barNames[i], name: names[i], time: Date(), username: names[i], userId: "666", activityId: "456", likes: i * 3, profileImage: profilePics[i])
+        let activity = BarActivity(barId: "123", barName: barNames[i], name: names[i], time: Date(), username: names[i], userId: fakeIDs[i], activityId: "456", likes: i * 3, profileImage: profilePics[i])
        activities.append(activity)
     }
     return activities

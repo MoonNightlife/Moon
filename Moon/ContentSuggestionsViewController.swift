@@ -69,6 +69,12 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
     func bindViewModel() {
         viewModel.suggestedBars.drive(suggestedBarCollectionView.rx.items(dataSource: barDataSource)).disposed(by: bag)
         viewModel.suggestedFriends.drive(suggestedUserColletionView.rx.items(dataSource: userDataSource)).disposed(by: bag)
+        
+        let barSelected = suggestedBarCollectionView.rx.itemSelected
+        let userSelected = suggestedUserColletionView.rx.itemSelected
+        
+        barSelected.map({ $0.row }).subscribe(viewModel.onShowBar.inputs).addDisposableTo(bag)
+        userSelected.map({ $0.row }).subscribe(viewModel.onShowUser.inputs).addDisposableTo(bag)
     }
     
     fileprivate func cellsPerRowVertical(cells: Int, collectionView: UICollectionView) -> UICollectionViewFlowLayout {
@@ -103,8 +109,8 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
     fileprivate func configureDataSource() {
         barDataSource.configureCell = {
             [weak self] dataSource, collectionView, indexPath, item in
-            //swiftlint:disable force_cast
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self!.barCollectionCellResuseIdenifier, for: indexPath)
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BarSnapshotCell", for: indexPath)
             
             collectionView.collectionViewLayout = (self?.cellsPerRowVertical(cells: 2, collectionView: collectionView))!
             
@@ -120,7 +126,7 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
             view.backgroundColor = .clear
             
             if let strongSelf = self {
-               view.initViewWith(bar: item)
+               view.initViewWith(bar: item, goAction: strongSelf.viewModel.onChangeAttendance(barID: item.id))
             }
 
             cell.addSubview(view)
@@ -129,8 +135,8 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
         
         userDataSource.configureCell = {
             [weak self] dataSource, collectionView, indexPath, item in
-            //swiftlint:disable force_cast
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self!.userCollectionCellReuseIdenifier, for: indexPath)
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserSearchCollectionViewCell", for: indexPath)
             
             collectionView.collectionViewLayout = (self?.cellsPerRowHorizontal(cells: 1, collectionView: collectionView))!
             
@@ -146,7 +152,7 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
             view.backgroundColor = .clear
             
             if let strongSelf = self {
-                view.initViewWith(user: item)
+                view.initViewWith(user: item, addAction: strongSelf.viewModel.onAddFriend(userID: item.id))
             }
             
             cell.addSubview(view)

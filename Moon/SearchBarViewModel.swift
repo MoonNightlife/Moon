@@ -19,7 +19,7 @@ struct SearchBarViewModel {
     private let sceneCoordinator: SceneCoordinatorType
     
     // Inputs
-    var searchText: BehaviorSubject<String?>!
+    var searchText = BehaviorSubject<String>(value: "")
     
     // Outputs
     
@@ -51,7 +51,7 @@ struct SearchBarViewModel {
     func onShowSearch() -> CocoaAction {
         return CocoaAction {
             let vm = SearchViewModel(coordinator: self.sceneCoordinator)
-            let searchResultsViewModel = SearchResultsViewModel(coordinator: self.sceneCoordinator)
+            let searchResultsViewModel = SearchResultsViewModel(coordinator: self.sceneCoordinator, searchText: self.searchText)
             let suggestedContentViewModel = ContentSuggestionsViewModel(coordinator: self.sceneCoordinator)
             return self.sceneCoordinator.transition(to: Scene.Master.search(searchViewModel: vm, searchResultsViewModel: searchResultsViewModel, contentSuggestionViewModel: suggestedContentViewModel), type: .searchRoot)
         }
@@ -59,7 +59,7 @@ struct SearchBarViewModel {
     
     func onShow(view: View.Search) -> CocoaAction {
         return CocoaAction {_ in 
-            self.sceneCoordinator.changeChild(To: view)
+            return self.sceneCoordinator.changeChild(To: view)
         }
     }
     

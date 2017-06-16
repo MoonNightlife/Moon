@@ -67,23 +67,23 @@ class MainViewController: EZSwipeController, BindableType {
     func bindViewModel() {
 
         tabBar.rx.showExploreView
-            .subscribe(onNext: { [unowned self] in
-                self.viewModel.onChangeView().execute(.explore)
-                self.changeColorForTabBarAndSearchBar(nextView: .explore)
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.onChangeView().execute(.explore)
+                self?.changeColorForTabBarAndSearchBar(nextView: .explore)
             })
             .addDisposableTo(bag)
         
         tabBar.rx.showFeatured
-            .subscribe(onNext: { [unowned self] in
-                self.viewModel.onChangeView().execute(.featured)
-                self.changeColorForTabBarAndSearchBar(nextView: .featured)
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.onChangeView().execute(.featured)
+                self?.changeColorForTabBarAndSearchBar(nextView: .featured)
             })
             .addDisposableTo(bag)
         
         tabBar.rx.showMoonsView
-            .subscribe(onNext: { [unowned self] in
-                self.viewModel.onChangeView().execute(.moons)
-                self.changeColorForTabBarAndSearchBar(nextView: .moons)
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.onChangeView().execute(.moons)
+                self?.changeColorForTabBarAndSearchBar(nextView: .moons)
             })
             .addDisposableTo(bag)
     }

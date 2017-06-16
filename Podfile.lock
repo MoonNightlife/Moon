@@ -177,6 +177,7 @@ PODS:
     - RxCocoa (~> 3.0)
     - RxSwift (~> 3.0)
   - RxSwift (3.4.0)
+  - SinchVerification (2.0.4)
   - Spring (1.0.3)
   - SwaggerClient (0.0.1):
     - Alamofire (~> 4.0)
@@ -193,8 +194,9 @@ DEPENDENCIES:
   - RxCocoa
   - RxDataSources (~> 1.0)
   - RxSwift
+  - SinchVerification
   - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
-  - SwaggerClient (from `../swift3-client-generated-2`)
+  - SwaggerClient (from `../moon_mock_api/frontend`)
   - SwiftLint
 
 EXTERNAL SOURCES:
@@ -204,7 +206,7 @@ EXTERNAL SOURCES:
     :branch: swift3
     :git: https://github.com/MengTo/Spring.git
   SwaggerClient:
-    :path: ../swift3-client-generated-2
+    :path: ../moon_mock_api/frontend
 
 CHECKOUT OPTIONS:
   Material:
@@ -227,10 +229,11 @@ SPEC CHECKSUMS:
   RxCocoa: d14ef6b6029e1ddc6e966508c09289090de68ff9
   RxDataSources: a021a0e944ba5f7991259829d973afdbfa719c0b
   RxSwift: 3789a1af753002a14edecdb698a2424624296a9c
+  SinchVerification: 71af34426dfa35a86cfa9fa157ca5c3e170ec829
   Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
-  SwaggerClient: c0415b80d67a8ab942e40170bd2200f96c2efeca
+  SwaggerClient: 42a5fb2f34db03c66cd09f9ce76a99d554fb0660
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
 
-PODFILE CHECKSUM: 4a6a753c1f3812725c547bc7faa8dbe1e20f9fa0
+PODFILE CHECKSUM: 8543faaa7bd207cdf66874fc53e69138979fab57
 
 COCOAPODS: 1.2.1

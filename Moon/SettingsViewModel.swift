@@ -64,6 +64,9 @@ struct SettingsViewModel {
         case .changeName:
             let vm = NameSettingsViewModel(coordinator: self.sceneCoordinator)
             return Scene.User.name(vm)
+        case .changePhoneNumber:
+            let vm = EnterPhoneNumberViewModel(coordinator: self.sceneCoordinator)
+            return Scene.UserDiscovery.enterPhoneNumber(vm)
         case .notifications:
             let vm = NotificationSettingsViewModel(coordinator: self.sceneCoordinator)
             return Scene.User.notification(vm)

@@ -12,47 +12,6 @@ import RxCocoa
 import Action
 import RxSwift
 
-enum SearchSectionModel {
-    case searchResultsSection(title: String, items: [SearchSectionItem])
-    case loadMore(title: String, items: [SearchSectionItem])
-}
-
-enum SearchSectionItem {
-    case searchResultItem(snapshot: SearchSnapshot)
-    case loadMoreItem(loadAction: CocoaAction)
-}
-
-extension SearchSectionModel: SectionModelType {
-    typealias Item = SearchSectionItem
-    
-    var items: [SearchSectionItem] {
-        switch self {
-        case let .searchResultsSection(_, items):
-            return items.map {$0}
-        case let .loadMore(_, items):
-            return items.map {$0}
-        }
-    }
-    
-    var titles: String {
-        switch self {
-        case let .searchResultsSection(title, _):
-            return title
-        case let .loadMore(title, _):
-            return title
-        }
-    }
-    
-    init(original: SearchSectionModel, items: [Item]) {
-        switch original {
-        case let .searchResultsSection(t, _):
-            self = .searchResultsSection(title: t, items: items)
-        case let .loadMore(t, _):
-            self = .loadMore(title: t, items: items)
-        }
-    }
-}
-
 class SearchResultsViewController: UIViewController, BindableType, UITableViewDelegate {
     
     @IBOutlet weak var segmentControl: ADVSegmentedControl!
@@ -72,14 +31,21 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
         
         searchResultsTableView.rx.setDelegate(self).disposed(by: bag)
     }
+
     func bindViewModel() {
+        
         viewModel.searchResults.drive(searchResultsTableView.rx.items(dataSource: resultsDataSource)).addDisposableTo(bag)
+    
+        segmentControl.rx.controlEvent(UIControlEvents.valueChanged)
+            .map({ [weak self] in
+                return SearchType(rawValue: self?.segmentControl.selectedIndex ?? 0) ?? .users
+            })
+            .subscribe(viewModel.selectedSearchType)
+            .addDisposableTo(bag)
         
-        guard let searchBar = searchBarController?.searchBar else {
-            return
-        }
-        
-        searchBar.textField.rx.textInput.text.bind(to: viewModel.searchText).addDisposableTo(bag)
+        searchResultsTableView.rx.itemSelected.map({
+            return $0.row
+        }).subscribe(viewModel.onShowResult.inputs).addDisposableTo(bag)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

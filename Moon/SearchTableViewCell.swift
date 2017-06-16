@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Action
 
 class SearchTableViewCell: UITableViewCell {
     
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    
     
     func initCellWith(snapshot: SearchSnapshot) {
         mainImageView.image = UIImage(named: snapshot.picture)
@@ -29,4 +31,5 @@ class SearchTableViewCell: UITableViewCell {
     fileprivate func prepareLabel() {
         nameLabel.textColor = .lightGray
     }
+
 }

@@ -44,8 +44,9 @@ enum Setting {
 enum SettingSections {
     enum MyAccount: Int {
         case changeName = 0
-        case changeEmail = 2
-        case notifications = 3
+        case changePhoneNumber = 2
+        case changeEmail = 3
+        case notifications = 4
     }
     
     enum AccountActions: Int {
@@ -74,3 +75,7 @@ enum ImageSource: CustomStringConvertible {
     }
 }
 
+enum SearchType: Int {
+    case users
+    case bars
+}

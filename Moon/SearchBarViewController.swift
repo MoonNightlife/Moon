@@ -34,7 +34,6 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
         prepareSearchBar()
         prepareSearchBarButtonOverlay()
         
-        listenToSearchBarButton()
     }
     
     open func prepareSearchBarForSearch() {
@@ -53,17 +52,36 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
     func bindViewModel() {
         profileButton.rx.action = viewModel.onShowProfile()
         settingsButton.rx.action = viewModel.onShowSettings()
+        searchBar.textField.rx.textInput.text.orEmpty.bind(to: viewModel.searchText).addDisposableTo(bag)
         
-        let textedEnteredInSearchBar = searchBar.textField.rx.text.orEmpty.map({ $0.characters.count > 0 }).share()
-        textedEnteredInSearchBar.skip(2).subscribe(onNext: { [weak self] in
-            if $0 {
+        searchBarButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] in
+            self?.prepareSearchBarForSearch()
+            self?.viewModel.onShowSearch().execute()
+        })
+            .addDisposableTo(bag)
+        
+        cancelButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] in
+            self?.searchBar.textField.text = ""
+            self?.searchBar.textField.endEditing(true)
+            self?.viewModel.onShowMainController().execute()
+        })
+            .addDisposableTo(bag)
+        
+        searchBar.clearButton.rx.controlEvent(.touchUpInside)
+            .subscribe(onNext: { [weak self] in
+                self?.searchBar.clearButton.isHidden = true
+                self?.viewModel?.onShow(view: .suggestions).execute()
+            })
+            .addDisposableTo(bag)
+        
+        let textedEnteredInSearchBar = searchBar.textField.rx.text.orEmpty.share()
+        
+        textedEnteredInSearchBar.filter({ $0.characters.count > 0 }).subscribe(onNext: { [weak self] _ in
                 self?.viewModel.onShow(view: .results).execute()
-            } else {
-                self?.viewModel.onShow(view: .suggestions).execute()
-            }
         }).addDisposableTo(bag)
-        textedEnteredInSearchBar.subscribe(onNext: { [weak self] isTextEntered in
-            self?.searchBar.clearButton.isHidden = !isTextEntered
+        
+        textedEnteredInSearchBar.map({ $0.characters.count == 0 }).subscribe(onNext: { [weak self] noTextEntered in
+            self?.searchBar.clearButton.isHidden = noTextEntered
         }).addDisposableTo(bag)
     }
     
@@ -75,29 +93,6 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
     func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
         viewModel.onPopProfile().execute()
         return false
-    }
-    
-    func listenToSearchBarButton() {
-        searchBarButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] in
-            self?.prepareSearchBarForSearch()
-            self?.viewModel.onShowSearch().execute()
-        })
-        .addDisposableTo(bag)
-        
-        cancelButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] in
-            self?.searchBar.textField.text = ""
-            self?.searchBar.textField.endEditing(true)
-            self?.viewModel.onShowMainController().execute()
-        })
-        .addDisposableTo(bag)
-        
-        searchBar.clearButton.rx.controlEvent(.touchUpInside)
-            .subscribe(onNext: { [weak self] in
-                self?.searchBar.clearButton.isHidden = true
-                self?.viewModel?.onShow(view: .suggestions).execute()
-            })
-            .addDisposableTo(bag)
-
     }
 
 }
@@ -137,7 +132,6 @@ extension SearchBarViewController {
     fileprivate func prepareSearchBarButtonOverlay() {
         searchBarButton = UIButton()
         searchBarButton.frame = searchBar.textField.frame
-        searchBarButton.backgroundColor = .black
     }
     
     fileprivate func prepareSearchBar() {
