@@ -33,11 +33,13 @@ class MainViewController: EZSwipeController, BindableType {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.isHidden = false
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
     }
 
     override func viewDidAppear(_ animated: Bool) {
