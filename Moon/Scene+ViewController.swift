@@ -62,6 +62,11 @@ extension Scene.User {
             var vc = storyboard.instantiateViewController(withIdentifier: "Profile") as! ProfileViewController
             vc.bindViewModel(to: viewModel)
             return vc
+        case .edit(let viewModel):
+            let nc = storyboard.instantiateViewController(withIdentifier: "EditProfileNavigation") as! UINavigationController
+            var vc = nc.viewControllers.first as! EditProfileViewController
+            vc.bindViewModel(to: viewModel)
+            return nc
         case .usersTable(let viewModel):
             let nc = storyboard.instantiateViewController(withIdentifier: "UsersTableNavigation") as! UINavigationController
             var vc = nc.viewControllers.first as! UsersTableViewController
@@ -195,6 +200,10 @@ extension Scene.UserDiscovery {
             var vc = nc.viewControllers.first as! CountryCodeViewController
             vc.bindViewModel(to: viewModel)
             return nc
+        case .contacts(let viewModel):
+            var vc = storyBoard.instantiateViewController(withIdentifier: "Contacts") as! ContactsViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
         }
     }
 }

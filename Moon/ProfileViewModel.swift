@@ -39,4 +39,11 @@ struct ProfileViewModel {
         }
     }
     
+    func onEdit() -> CocoaAction {
+        return CocoaAction {
+            let vm = EditProfileViewModel(coordinator: self.scenceCoordinator)
+            return self.scenceCoordinator.transition(to: Scene.User.edit(vm), type: .modal)
+        }
+    }
+    
 }

@@ -53,6 +53,7 @@ class ProfileViewController: UIViewController, BindableType {
     func bindViewModel() {
         friendsButton.rx.action = viewModel.onShowFriends()
         dismissButton.rx.action = viewModel.onDismiss()
+        editProfileButton.rx.action = viewModel.onEdit()
     }
     
     private func setUpPageController() {
