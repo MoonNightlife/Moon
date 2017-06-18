@@ -48,7 +48,6 @@ class ContactsViewController: UIViewController, BindableType {
         }
     }
 
-    
     fileprivate func prepareNavigationBackButton() {
         navBackButton = UIBarButtonItem()
         navBackButton.image = Icon.cm.arrowDownward
