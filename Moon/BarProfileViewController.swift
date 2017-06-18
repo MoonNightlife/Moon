@@ -42,7 +42,7 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     var barPics = Variable<[UIImage]>([])
     var barName = Variable<String>("")
     var usersGoing = Variable<[FakeUser]>([])
-    var specials = Variable<[Special]>([])
+    var specials = Variable<[SpecialCell]>([])
     var events = Variable<[FeaturedEvent]>([])
     
     override func viewDidLoad() {

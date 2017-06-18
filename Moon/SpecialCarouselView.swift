@@ -16,11 +16,11 @@ class SpecialCarouselView: ImageCardView {
    
     fileprivate var likeButton: IconButton!
     fileprivate var index: Int!
-    fileprivate var special: Special!
+    fileprivate var special: SpecialCell!
     fileprivate var numberOfLikesButton: IconButton!
     fileprivate let bag = DisposeBag()
         
-    func initializeViewWith(special: Special, index: Int, likeAction: Action<String, Void>) {
+    func initializeViewWith(special: SpecialCell, index: Int, likeAction: Action<String, Void>) {
         self.special = special
         self.index = index
         self.initializeImageCardViewWith(type: .medium(image: special.image, text: special.description))
@@ -38,7 +38,7 @@ extension SpecialCarouselView {
     fileprivate func bindAction(likeAction: Action<String, Void>) {
         likeButton.rx.controlEvent(UIControlEvents.touchUpInside)
             .map({ [weak self] in
-                self?.special.specialID ?? "0"
+                self?.special.id ?? ""
             })
             .subscribe(likeAction.inputs)
             .addDisposableTo(bag)

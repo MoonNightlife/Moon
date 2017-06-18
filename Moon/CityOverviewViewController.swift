@@ -198,7 +198,7 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
                 pointAnnotation.tintColor = UIColor.green
             }
             
-            pointAnnotation.coordinate = data.coordinates
+            pointAnnotation.coordinate = data.coordinates!
             pointAnnotation.title = data.barName
             pointAnnotation.placeID = "123123"
             pointAnnotation.subtitle = "People Going: \(data.usersGoing)"

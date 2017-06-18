@@ -21,9 +21,18 @@ struct ExploreViewModel {
     // Inputs
     
     // Outputs
+    var topBars: Action<Void, [TopBar]>
     
-    init(coordinator: SceneCoordinatorType) {
+    init(coordinator: SceneCoordinatorType, barAPI: BarAPIType = BarAPIController()) {
         self.sceneCoordinator = coordinator
+        
+        topBars = Action(workFactory: {_ in 
+            return barAPI.getTopBarsIn(region: "dallas").map({
+                return $0.map({ bar in
+                    return TopBar(imageName: bar.barPics?.first ?? "pic1.jpg", barName: bar.name ?? "No Name", usersGoing: "\(bar.numPeopleAttending ?? 0)", coordinates: nil)
+                })
+            })
+        })
     }
     
     func createSpecialViewModel() -> SpecialsViewModel {

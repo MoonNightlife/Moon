@@ -78,7 +78,7 @@ struct BarProfileViewModel {
     }(self)
     
     // Outputs
-    var specials: Driver<[Special]> {
+    var specials: Driver<[SpecialCell]> {
         return getSpecials()
     }
     var events: Driver<[FeaturedEvent]> {
@@ -119,7 +119,7 @@ struct BarProfileViewModel {
 
 extension BarProfileViewModel {
     
-    fileprivate func getSpecials() -> Driver<[Special]> {
+    fileprivate func getSpecials() -> Driver<[SpecialCell]> {
         return Observable.just(createFakeSpecials()).asDriver(onErrorJustReturn: [])
     }
     

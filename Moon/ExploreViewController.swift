@@ -9,6 +9,8 @@
 import UIKit
 import Material
 import PageMenu
+import RxSwift
+import RxCocoa
 import iCarousel
 import SwaggerClient
 
@@ -30,7 +32,8 @@ class ExploreViewController: UIViewController, BindableType {
     var pageMenu: CAPSPageMenu?
     var controllerArray = [UIViewController]()
     
-    var topBars = [Any]()
+    var topBars = [TopBar]()
+    private let bag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +44,12 @@ class ExploreViewController: UIViewController, BindableType {
         topBarPageController.superview?.bringSubview(toFront: topBarPageController)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.topBars.execute()
+    }
+    
     private func setupCarousel() {
         topBarCarousel.isPagingEnabled = true
         topBarCarousel.type = .linear
@@ -48,7 +57,11 @@ class ExploreViewController: UIViewController, BindableType {
     }
     
     func bindViewModel() {
-        
+        viewModel.topBars.elements.subscribe(onNext: { [weak self] topBars in
+            self?.topBars = topBars
+            self?.topBarCarousel.reloadData()
+        })
+        .addDisposableTo(bag)
     }
 
 }
@@ -58,19 +71,16 @@ extension ExploreViewController {
         var beerSpecialsController = SpecialsViewController.instantiateFromStoryboard()
         beerSpecialsController.bindViewModel(to: viewModel.createSpecialViewModel())
         beerSpecialsController.title = "Beer"
-        beerSpecialsController.specialData = fakeSpecials.filter({$0.type == .beer})
         controllerArray.append(beerSpecialsController)
         
         var liquorSpecialsController = SpecialsViewController.instantiateFromStoryboard()
         liquorSpecialsController.bindViewModel(to: viewModel.createSpecialViewModel())
         liquorSpecialsController.title = "Liquor"
-        liquorSpecialsController.specialData = fakeSpecials.filter({$0.type == .liquor})
         controllerArray.append(liquorSpecialsController)
         
         var wineSpecialsController = SpecialsViewController.instantiateFromStoryboard()
         wineSpecialsController.bindViewModel(to: viewModel.createSpecialViewModel())
         wineSpecialsController.title = "Wine"
-        wineSpecialsController.specialData = fakeSpecials.filter({$0.type == .wine})
         controllerArray.append(wineSpecialsController)
         
         let parameters: [CAPSPageMenuOption] = [
@@ -104,12 +114,12 @@ extension ExploreViewController: iCarouselDataSource, iCarouselDelegate {
     }
     
     func numberOfItems(in carousel: iCarousel) -> Int {
-        return fakeTopBars.count
+        return topBars.count
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         let topBarView = ImageViewCell(frame: carousel.frame)
-        topBarView.initializeImageCardViewWith(data: fakeTopBars[index])
+        topBarView.initializeImageCardViewWith(data: topBars[index])
         return topBarView
     }
 }

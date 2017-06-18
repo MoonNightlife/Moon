@@ -22,7 +22,7 @@ class SpecialTableViewCell: UITableViewCell {
         // Initialization code
     }
      
-    func initilizeSpecialCellWith(data: Special, likeAction: CocoaAction) {
+    func initilizeSpecialCellWith(data: SpecialCell, likeAction: CocoaAction) {
         setupImageView()
         
         mainImage.image = data.image

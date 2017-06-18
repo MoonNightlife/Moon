@@ -13,5 +13,5 @@ struct TopBar {
     let imageName: String
     let barName: String
     let usersGoing: String
-    let coordinates: CLLocationCoordinate2D
+    let coordinates: CLLocationCoordinate2D?
 }
