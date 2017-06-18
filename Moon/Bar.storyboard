@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -233,33 +234,114 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R4K-TG-WNX">
-                                <rect key="frame" x="136" y="318" width="103" height="30"/>
-                                <state key="normal" title="Phone Number"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bX5-ic-fcr">
-                                <rect key="frame" x="159" y="280" width="56" height="30"/>
-                                <state key="normal" title="Website"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jyi-fx-GVR">
-                                <rect key="frame" x="159" y="356" width="57" height="30"/>
-                                <state key="normal" title="Address"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fu1-yM-0SW">
-                                <rect key="frame" x="329" y="20" width="30" height="30"/>
-                                <state key="normal" title="X"/>
+                                <rect key="frame" x="329" y="28" width="30" height="30"/>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lu3-d0-6sD">
+                                <rect key="frame" x="0.0" y="244" width="375" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bX5-ic-fcr">
+                                        <rect key="frame" x="56" y="5" width="311" height="30"/>
+                                        <state key="normal" title="Website"/>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WebsiteIcon" translatesAutoresizingMaskIntoConstraints="NO" id="czG-SH-GWu">
+                                        <rect key="frame" x="8" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="uAs-De-JkC"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="czG-SH-GWu" secondAttribute="bottom" id="1Q7-qf-6U8"/>
+                                    <constraint firstItem="bX5-ic-fcr" firstAttribute="top" secondItem="lu3-d0-6sD" secondAttribute="top" constant="5" id="8Bu-tv-hep"/>
+                                    <constraint firstItem="czG-SH-GWu" firstAttribute="top" secondItem="lu3-d0-6sD" secondAttribute="top" id="Ask-DO-BUp"/>
+                                    <constraint firstItem="bX5-ic-fcr" firstAttribute="leading" secondItem="czG-SH-GWu" secondAttribute="trailing" constant="8" id="DFw-kl-BDx"/>
+                                    <constraint firstAttribute="trailing" secondItem="bX5-ic-fcr" secondAttribute="trailing" constant="8" id="Fab-Sk-vUW"/>
+                                    <constraint firstAttribute="bottom" secondItem="bX5-ic-fcr" secondAttribute="bottom" constant="5" id="XfZ-w9-yYT"/>
+                                    <constraint firstItem="czG-SH-GWu" firstAttribute="leading" secondItem="lu3-d0-6sD" secondAttribute="leading" constant="8" id="r5C-JC-79d"/>
+                                    <constraint firstAttribute="height" constant="40" id="zkV-JN-s5u"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gnx-1L-lWJ">
+                                <rect key="frame" x="0.0" y="313" width="375" height="40"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhoneIcon" translatesAutoresizingMaskIntoConstraints="NO" id="bw2-Lg-kIX">
+                                        <rect key="frame" x="8" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="SBY-y6-W1Q"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R4K-TG-WNX">
+                                        <rect key="frame" x="56" y="5" width="311" height="30"/>
+                                        <state key="normal" title="Phone Number"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="R4K-TG-WNX" secondAttribute="trailing" constant="8" id="1ur-76-PV4"/>
+                                    <constraint firstItem="R4K-TG-WNX" firstAttribute="leading" secondItem="bw2-Lg-kIX" secondAttribute="trailing" constant="8" id="CzT-nl-IBc"/>
+                                    <constraint firstAttribute="bottom" secondItem="R4K-TG-WNX" secondAttribute="bottom" constant="5" id="EEr-Sk-5Jx"/>
+                                    <constraint firstAttribute="height" constant="40" id="QPX-74-3W1"/>
+                                    <constraint firstAttribute="bottom" secondItem="bw2-Lg-kIX" secondAttribute="bottom" id="Zx0-Pk-Y4f"/>
+                                    <constraint firstItem="bw2-Lg-kIX" firstAttribute="leading" secondItem="gnx-1L-lWJ" secondAttribute="leading" constant="8" id="h8x-ec-eDL"/>
+                                    <constraint firstItem="bw2-Lg-kIX" firstAttribute="top" secondItem="gnx-1L-lWJ" secondAttribute="top" id="lJp-eu-2vE"/>
+                                    <constraint firstItem="R4K-TG-WNX" firstAttribute="top" secondItem="gnx-1L-lWJ" secondAttribute="top" constant="5" id="t2e-xa-Xhl"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LdL-ad-Qaa">
+                                <rect key="frame" x="0.0" y="382" width="375" height="40"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LocationIcon" translatesAutoresizingMaskIntoConstraints="NO" id="RCX-cx-7Yh">
+                                        <rect key="frame" x="8" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="DYB-7t-dr0"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jyi-fx-GVR">
+                                        <rect key="frame" x="56" y="5" width="311" height="30"/>
+                                        <state key="normal" title="Address"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="RCX-cx-7Yh" firstAttribute="leading" secondItem="LdL-ad-Qaa" secondAttribute="leading" constant="8" id="2wA-JO-3XE"/>
+                                    <constraint firstAttribute="bottom" secondItem="jyi-fx-GVR" secondAttribute="bottom" constant="5" id="A3W-z9-dvP"/>
+                                    <constraint firstAttribute="height" constant="40" id="AiP-r5-EfC"/>
+                                    <constraint firstItem="RCX-cx-7Yh" firstAttribute="top" secondItem="LdL-ad-Qaa" secondAttribute="top" id="E5A-w4-zsc"/>
+                                    <constraint firstItem="jyi-fx-GVR" firstAttribute="top" secondItem="LdL-ad-Qaa" secondAttribute="top" constant="5" id="I66-Wc-YgV"/>
+                                    <constraint firstAttribute="trailing" secondItem="jyi-fx-GVR" secondAttribute="trailing" constant="8" id="YYv-ik-TSr"/>
+                                    <constraint firstAttribute="bottom" secondItem="RCX-cx-7Yh" secondAttribute="bottom" id="feB-bK-nvv"/>
+                                    <constraint firstItem="jyi-fx-GVR" firstAttribute="leading" secondItem="RCX-cx-7Yh" secondAttribute="trailing" constant="8" id="oGX-aq-arT"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Information" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4FA-2f-rr0">
+                                <rect key="frame" x="16" y="108" width="343" height="22.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22.5" id="wmy-dn-afy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="jyi-fx-GVR" firstAttribute="top" secondItem="R4K-TG-WNX" secondAttribute="bottom" constant="8" symbolic="YES" id="7Gq-sM-XTL"/>
-                            <constraint firstItem="bX5-ic-fcr" firstAttribute="centerX" secondItem="V1c-3o-1jj" secondAttribute="centerX" id="EKq-D8-KQk"/>
+                            <constraint firstItem="LdL-ad-Qaa" firstAttribute="top" secondItem="gnx-1L-lWJ" secondAttribute="bottom" constant="29" id="3lV-KM-x6W"/>
+                            <constraint firstItem="gnx-1L-lWJ" firstAttribute="centerY" secondItem="V1c-3o-1jj" secondAttribute="centerY" id="41J-ko-Zek"/>
+                            <constraint firstAttribute="trailing" secondItem="LdL-ad-Qaa" secondAttribute="trailing" id="45d-g3-mR8"/>
+                            <constraint firstItem="4FA-2f-rr0" firstAttribute="trailing" secondItem="V1c-3o-1jj" secondAttribute="trailingMargin" id="9ui-Lk-Smo"/>
                             <constraint firstItem="Fu1-yM-0SW" firstAttribute="trailing" secondItem="V1c-3o-1jj" secondAttribute="trailingMargin" id="ELA-MZ-ToO"/>
-                            <constraint firstItem="Fu1-yM-0SW" firstAttribute="top" secondItem="U0Y-l8-3b5" secondAttribute="bottom" id="FKf-Op-PZk"/>
-                            <constraint firstItem="bX5-ic-fcr" firstAttribute="centerX" secondItem="R4K-TG-WNX" secondAttribute="centerX" id="W8f-ao-Y7K"/>
-                            <constraint firstItem="R4K-TG-WNX" firstAttribute="centerY" secondItem="V1c-3o-1jj" secondAttribute="centerY" id="etG-a6-pSV"/>
-                            <constraint firstItem="bX5-ic-fcr" firstAttribute="leading" secondItem="jyi-fx-GVR" secondAttribute="leading" id="mXa-nO-nlh"/>
-                            <constraint firstItem="R4K-TG-WNX" firstAttribute="top" secondItem="bX5-ic-fcr" secondAttribute="bottom" constant="8" symbolic="YES" id="nbX-Xp-2e9"/>
+                            <constraint firstItem="Fu1-yM-0SW" firstAttribute="top" secondItem="U0Y-l8-3b5" secondAttribute="bottom" constant="8" id="FKf-Op-PZk"/>
+                            <constraint firstItem="4FA-2f-rr0" firstAttribute="leading" secondItem="V1c-3o-1jj" secondAttribute="leadingMargin" id="KMA-SH-be5"/>
+                            <constraint firstItem="gnx-1L-lWJ" firstAttribute="top" secondItem="lu3-d0-6sD" secondAttribute="bottom" constant="29" id="Kdu-FJ-7lx"/>
+                            <constraint firstAttribute="trailing" secondItem="lu3-d0-6sD" secondAttribute="trailing" id="QOD-jk-1L8"/>
+                            <constraint firstItem="gnx-1L-lWJ" firstAttribute="leading" secondItem="V1c-3o-1jj" secondAttribute="leading" id="Wpo-WM-opd"/>
+                            <constraint firstItem="4FA-2f-rr0" firstAttribute="top" secondItem="Fu1-yM-0SW" secondAttribute="bottom" constant="50" id="YTt-FD-Pkf"/>
+                            <constraint firstItem="LdL-ad-Qaa" firstAttribute="leading" secondItem="V1c-3o-1jj" secondAttribute="leading" id="aco-1K-u8s"/>
+                            <constraint firstItem="lu3-d0-6sD" firstAttribute="leading" secondItem="V1c-3o-1jj" secondAttribute="leading" id="cqZ-x9-6Mk"/>
+                            <constraint firstAttribute="trailing" secondItem="gnx-1L-lWJ" secondAttribute="trailing" id="fih-l9-jdm"/>
+                            <constraint firstItem="gnx-1L-lWJ" firstAttribute="centerX" secondItem="V1c-3o-1jj" secondAttribute="centerX" id="jqF-9x-LDK"/>
                         </constraints>
                     </view>
                     <connections>
@@ -278,7 +360,7 @@
             <objects>
                 <navigationController storyboardIdentifier="BarProfileNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xRq-dO-d7q" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AXV-yR-ygg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AXV-yR-ygg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -292,4 +374,9 @@
             <point key="canvasLocation" x="700" y="-54.422788605697157"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="LocationIcon" width="40" height="40"/>
+        <image name="PhoneIcon" width="40" height="40"/>
+        <image name="WebsiteIcon" width="40" height="40"/>
+    </resources>
 </document>

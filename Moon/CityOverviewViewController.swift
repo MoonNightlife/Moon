@@ -167,9 +167,9 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
     func animatePinWith(frame: CGRect, color: UIColor) -> NVActivityIndicatorView {
         let width = frame.size.width
         let height = frame.size.height
-        let newFrame = CGRect(x: -8, y: height - 25, width: width, height: height)
+        let newFrame = CGRect(x: 0, y: height - 20, width: width, height: height)
         
-        let view = NVActivityIndicatorView(frame: newFrame, type: .ballScaleRipple, color: color, padding: CGFloat(10))
+        let view = NVActivityIndicatorView(frame: newFrame, type: .ballPulse, color: color, padding: CGFloat(10))
         
         return view
     }
@@ -186,10 +186,10 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
         }
         
         let reuseIdentifier = "pin"
+        var v = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
         
-        var v = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? MKPinAnnotationView
         if v == nil {
-            v = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+            v = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
             v!.canShowCallout = true
             
             let btn = UIButton(type: .detailDisclosure)
@@ -200,9 +200,9 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
         
         //swiftlint:disable:next force_cast
         let customPointAnnotation = annotation as! BarAnnotation
-        
-        v?.pinTintColor = customPointAnnotation.tintColor
-        v!.alpha = 1
+    
+        v?.image = customPointAnnotation.image
+        v?.tintColor = customPointAnnotation.tintColor
         
         return v
     }
@@ -210,21 +210,24 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
     func addAnnotations() {
         for data in fakeTopBars {
             let pointAnnotation = BarAnnotation()
-    
+            var image = UIImage()
+           
             switch arc4random_uniform(3) {
             case 0:
-                pointAnnotation.tintColor = UIColor.red
+                image = #imageLiteral(resourceName: "RedPin")
             case 1:
-                pointAnnotation.tintColor = UIColor.yellow
+                image = #imageLiteral(resourceName: "YellowPin")
             default:
-                pointAnnotation.tintColor = UIColor.green
+                image = #imageLiteral(resourceName: "GreenPin")
             }
             
             pointAnnotation.coordinate = data.coordinates
             pointAnnotation.title = data.barName
             pointAnnotation.placeID = "123123"
+            pointAnnotation.image = image
             pointAnnotation.subtitle = "People Going: \(data.usersGoing)"
-            let annotationView = MKPinAnnotationView(annotation: pointAnnotation, reuseIdentifier: "pin")
+            
+            let annotationView = MKAnnotationView(annotation: pointAnnotation, reuseIdentifier: "pin")
             
             //swiftlint:disable:next force_cast
             self.cityMapView.addAnnotation(annotationView.annotation!)
