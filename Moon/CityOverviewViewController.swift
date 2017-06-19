@@ -238,7 +238,6 @@ extension CityOverviewViewController: iCarouselDelegate, iCarouselDataSource {
         let view = PeopleGoingCarouselView()
         view.frame = frame
         //view.initializeViewWith(user: usersGoing.value[index], index: index, viewProfile: viewModel.onShowProfile, likeActivity: viewModel.onLikeActivity, viewLikers: viewModel.onViewLikers)
-        view.initFake(user: usersGoing[index], index: index)
         
         return view
     }

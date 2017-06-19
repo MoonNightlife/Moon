@@ -272,7 +272,7 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         let frame = CGRect(x: goingCarousel.frame.size.width / 2, y: goingCarousel.frame.size.height / 2, width: size, height: size)
         let view = PeopleGoingCarouselView()
         view.frame = frame
-        view.initializeViewWith(user: usersGoing.value[index], index: index, viewProfile: viewModel.onShowProfile, likeActivity: viewModel.onLikeActivity, viewLikers: viewModel.onViewLikers)
+        view.initializeViewWith(user: usersGoing.value[index], index: index, viewProfile: viewModel.onShowProfile(), likeActivity: viewModel.onLikeActivity(), viewLikers: viewModel.onViewLikers(), downloadImage: viewModel.downloadImage(url: baseURL))
         
         return view
     }
@@ -282,7 +282,7 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         let size = (self.view.frame.size.height * 0.298) - 50
         let frame = CGRect(x: specialsCarousel.frame.size.width / 2, y: specialsCarousel.frame.size.height / 2, width: size + 20, height: size)
         view.frame = frame
-        view.initializeViewWith(special: specials.value[index], index: index, likeAction: viewModel.onLikeSpecial)
+        view.initializeViewWith(special: specials.value[index], index: index, likeAction: viewModel.onLikeSpecial())
         
         return view
     }
@@ -292,7 +292,7 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         let size = (self.view.frame.size.height * 0.513) - 60
         view.frame = CGRect(x: eventsCarousel.frame.size.width / 2, y: eventsCarousel.frame.size.height / 2, width: size + 60, height: size)
         view.backgroundColor = .clear
-        view.initializeCellWith(event: events.value[index], index: index, likeAction: viewModel.onLikeEvent, shareAction: viewModel.onShareEvent)
+        view.initializeCellWith(event: events.value[index], index: index, likeAction: viewModel.onLikeEvent(), shareAction: viewModel.onShareEvent(), downloadImage: viewModel.downloadImage(url: events.value[index].imageURL))
         
         return view
     }

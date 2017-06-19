@@ -20,29 +20,20 @@ class SpecialCarouselView: ImageCardView {
     fileprivate var numberOfLikesButton: IconButton!
     fileprivate let bag = DisposeBag()
         
-    func initializeViewWith(special: SpecialCell, index: Int, likeAction: Action<String, Void>) {
+    func initializeViewWith(special: SpecialCell, index: Int, likeAction: CocoaAction) {
         self.special = special
         self.index = index
-        self.initializeImageCardViewWith(type: .medium(image: special.image, text: special.description))
+        //self.initializeImageCardViewWith(type: .medium(image: special.image, text: special.description))
         prepareLikeButton()
         prepareNumberOfLikesButton(likes: "100")
         prepareToolBar()
         
-        bindAction(likeAction: likeAction)
+        likeButton.rx.action = likeAction
     }
 
 }
 
 extension SpecialCarouselView {
-    
-    fileprivate func bindAction(likeAction: Action<String, Void>) {
-        likeButton.rx.controlEvent(UIControlEvents.touchUpInside)
-            .map({ [weak self] in
-                self?.special.id ?? ""
-            })
-            .subscribe(likeAction.inputs)
-            .addDisposableTo(bag)
-    }
     
     fileprivate func prepareLikeButton() {
         likeButton = IconButton(image: Icon.favorite, tintColor: .lightGray)

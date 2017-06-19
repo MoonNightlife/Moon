@@ -12,7 +12,7 @@ import RxCocoa
 import Action
 import RxDataSources
 
-struct ContentSuggestionsViewModel {
+struct ContentSuggestionsViewModel: ImageDownloadType {
     
     // Private
     private let bag = DisposeBag()
@@ -21,6 +21,7 @@ struct ContentSuggestionsViewModel {
     
     // Dependencies
     let sceneCoordinator: SceneCoordinatorType
+    var photoService: PhotoService
     
     // Actions
     lazy var onShowUser: Action<Int, Void> = { this in
@@ -47,8 +48,9 @@ struct ContentSuggestionsViewModel {
     var suggestedFriends: Driver<[SearchSection]>!
     var suggestedBars: Driver<[SearchSection]>!
     
-    init(coordinator: SceneCoordinatorType) {
-        sceneCoordinator = coordinator
+    init(coordinator: SceneCoordinatorType, photoService: PhotoService = KingFisherPhotoService()) {
+        self.sceneCoordinator = coordinator
+        self.photoService = photoService
         
         self.suggestedFriends = users.map({ [SearchSection(model: "", items: $0)] }).asDriver(onErrorJustReturn: [SearchSection(model: "", items: [])])
         self.suggestedBars = bars.map({ [SearchSection(model: "", items: $0)] }).asDriver(onErrorJustReturn: [SearchSection(model: "", items: [])])
@@ -71,7 +73,7 @@ struct ContentSuggestionsViewModel {
     static func getBarSuggestions() -> Observable<[SearchSnapshot]> {
         let bars = createTempTopBarData()
         let barSuggestions = bars.map({ bar in
-            return SearchSnapshot(name: bar.barName, id: "336", picture: bar.imageName)
+            return SearchSnapshot(name: bar.barName, id: "336", picture: bar.imageURL.absoluteString)
         })
         return Observable.just(barSuggestions)
     }

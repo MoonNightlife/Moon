@@ -28,12 +28,12 @@ class FeaturedEventView: ImageCardView {
     fileprivate var dateFormatter: DateFormatter!
     fileprivate var dateLabel: UILabel!
     
-    func initializeCellWith(event: FeaturedEvent, index: Int, likeAction: Action<String, Void>, shareAction: Action<String, Void>) {
+    func initializeCellWith(event: FeaturedEvent, index: Int, likeAction: CocoaAction, shareAction: CocoaAction, downloadImage: Action<Void, UIImage>) {
         self.event = event
         self.index = index
         
         print(event)
-        self.initializeImageCardViewWith(type: .large(image: event.image, titleText: event.title, detailText: event.barName, text: event.description))
+        self.initializeImageCardViewWith(type: .large(image: downloadImage, titleText: event.title, detailText: event.barName, text: event.description))
         self.imageView.frame = CGRect(x: 0, y: 0, width: self.width, height: (self.height + 200) * 0.372)
         prepareFavoriteButton()
         prepareShareButton()
@@ -44,28 +44,13 @@ class FeaturedEventView: ImageCardView {
         prepareToolbar()
         prepareBottomBar()
         
-        bindAction(likeAction: likeAction, shareAction: shareAction)
+        favoriteButton.rx.action = likeAction
+        shareButton.rx.action = shareAction
     }
 
 }
 
 extension FeaturedEventView {
-    
-    fileprivate func bindAction(likeAction: Action<String, Void>, shareAction: Action<String, Void>) {
-        favoriteButton.rx.controlEvent(.touchUpInside)
-            .map({ [weak self] in
-                return self?.event.id ?? "0"
-            })
-            .subscribe(likeAction.inputs)
-            .addDisposableTo(bag)
-        
-        shareButton.rx.controlEvent(.touchUpInside)
-            .map({ [weak self] in
-                return self?.event.id ?? "0"
-            })
-            .subscribe(shareAction.inputs)
-            .addDisposableTo(bag)
-    }
     
     fileprivate func prepareFavoriteButton() {
         favoriteButton = IconButton(image: Icon.favorite, tintColor: .lightGray)

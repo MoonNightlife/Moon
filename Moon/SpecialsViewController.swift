@@ -26,9 +26,6 @@ class SpecialsViewController: UIViewController, BindableType {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        specialsTableView.reloadData()
         configureDataSource()
     }
     
@@ -47,7 +44,7 @@ class SpecialsViewController: UIViewController, BindableType {
             //swiftlint:disable force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: self!.specialCellIdenifier, for: indexPath) as! SpecialTableViewCell
             if let strongSelf = self {
-                cell.initilizeSpecialCellWith(data: item, likeAction: strongSelf.viewModel.onLike(specialID: item.id))
+                cell.initilizeSpecialCellWith(data: item, likeAction: strongSelf.viewModel.onLike(specialID: item.id), downloadImage: strongSelf.viewModel.downloadImage(url: item.imageURL))
             }
             return cell
         }

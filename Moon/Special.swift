@@ -10,14 +10,15 @@ import Foundation
 import UIKit
 import RxDataSources
 import SwaggerClient
+import Action
 
 struct SpecialCell {
     let description: String
     let likes: String
-    let image: UIImage
     let barName: String
     let id: String
     let barID: String
+    let imageURL: URL
     
     init(from special: Specials) {
         self.description = special.description ?? ""
@@ -25,7 +26,8 @@ struct SpecialCell {
         self.barName = special.name ?? ""
         self.id = special.id ?? ""
         self.barID = special.barID ?? ""
-        self.image = #imageLiteral(resourceName: "s10.jpg")
+        self.imageURL = baseURL.appendingPathComponent(special.pic ?? "")
+        
     }
 }
 

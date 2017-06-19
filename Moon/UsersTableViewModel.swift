@@ -19,7 +19,7 @@ struct UsersTableViewModel: BackType {
     // Outputs
     var users: Driver<[UserSnapshot]> = {
         let userSnapshot = createFakeUsers().map({
-            return UserSnapshot(name: $0.firstName!, id: $0.id!, picture: ($0.pics?[0])!)
+            return UserSnapshot(name: $0.firstName!, id: $0.id!, picture: #imageLiteral(resourceName: "pic5.jpg"))
         })
         return Observable.just(userSnapshot).asDriver(onErrorJustReturn: [])
     }()

@@ -10,32 +10,43 @@ import Foundation
 import RxSwift
 import Action
 
-struct FeaturedViewModel {
+struct FeaturedViewModel: ImageDownloadType {
     
-    // Private
+    // Local
     private let disposeBag = DisposeBag()
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
+    private let barAPI: BarAPIType
+    private let userAPI: UserAPIType
+    var photoService: PhotoService
     
     // Inputs
-    lazy var onLikeEvent: Action<String, Void> = { this in
-        return Action<String, Void> {_ in
+    var loadEvents: Action<Void, [FeaturedEvent]>
+    // Outputs
+    
+    init(coordinator: SceneCoordinatorType, barAPI: BarAPIType = BarAPIController(), userAPI: UserAPIType = UserAPIController(), photoService: PhotoService = KingFisherPhotoService()) {
+        self.sceneCoordinator = coordinator
+        self.barAPI = barAPI
+        self.userAPI = userAPI
+        self.photoService = photoService
+        
+        loadEvents = Action(workFactory: { _ in
+            return barAPI.getEventsIn(region: "dallas").map({ $0.map(FeaturedEvent.init) })
+        })
+    }
+    
+    func onLikeEvent(eventID: String) -> CocoaAction {
+        return CocoaAction { _ in
             print("Like Event")
             return Observable.empty()
         }
-    }(self)
+    }
     
-    lazy var onShareEvent: Action<String, Void> = { this in
-        return Action<String, Void> {_ in
+    func onShareEvent(eventID: String) -> CocoaAction {
+        return CocoaAction { _ in
             print("Share Event")
             return Observable.empty()
         }
-    }(self)
-    
-    // Outputs
-    
-    init(coordinator: SceneCoordinatorType) {
-        self.sceneCoordinator = coordinator
     }
 }

@@ -21,6 +21,7 @@ target 'Moon' do
   pod 'SwaggerClient', :path => '../moon_mock_api/frontend'
   pod 'SinchVerification'
   pod 'NVActivityIndicatorView'
+  pod 'Kingfisher', '~> 3.0'
 
   target 'MoonTests' do
     inherit! :search_paths

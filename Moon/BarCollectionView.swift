@@ -17,9 +17,8 @@ class BarCollectionView: ImageCardView {
     fileprivate var goButton: IconButton!
     fileprivate var nameLabel: UILabel!
     
-    func initViewWith(bar: SearchSnapshot, goAction: CocoaAction) {
-        let image = UIImage(named: bar.picture) ?? #imageLiteral(resourceName: "pic1.jpg")
-        self.initializeImageCardViewWith(type: .small(image: image, text: ""))
+    func initViewWith(bar: SearchSnapshot, goAction: CocoaAction, downloadImage: Action<Void, UIImage>) {
+        self.initializeImageCardViewWith(type: .small(image: downloadImage, text: ""))
         prepareAddFriendButton()
         prepareNameLabel(text: bar.name)
         prepareToolbar()

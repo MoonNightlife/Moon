@@ -10,6 +10,9 @@ import Foundation
 import RxSwift
 import SwaggerClient
 
+
+let baseURL = URL(string: "http://localhost:8081")!
+
 protocol BarAPIType {
     func getBarFriends(barID: String, userID: String) -> Observable<[UserProfile]>
     func getBarPeople(barID: String) -> Observable<[UserProfile]>
@@ -115,7 +118,16 @@ extension BarAPIController {
     func getEventsIn(region: String) -> Observable<[BarEvents]> {
         return Observable.create({ (observer) -> Disposable in
             print("No Correct APi Call yet")
-            observer.onCompleted()
+            //TODO: this is the wrong api call, just using it to test till we get the real one
+            BarAPI.listBarEvents(barID: "01", completion: { (events, error) in
+                if let events = events {
+                    observer.onNext(events)
+                } else if let e = error {
+                    observer.onError(e)
+                }
+                observer.onCompleted()
+            })
+            
             return Disposables.create()
         })
     }

@@ -58,7 +58,7 @@ struct ContactsViewModel: BackType {
     
     static func getUsersWith(phoneNumbers: [String]) -> Observable<[UserSnapshot]> {
         let userSnapshot = createFakeUsers().map({
-            return UserSnapshot(name: $0.firstName!, id: $0.id!, picture: ($0.pics?[0])!)
+            return UserSnapshot(name: $0.firstName!, id: $0.id!, picture: #imageLiteral(resourceName: "pic1.jpg"))
         })
         return Observable.just(userSnapshot)
     }

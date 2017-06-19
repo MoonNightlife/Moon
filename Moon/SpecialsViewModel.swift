@@ -13,7 +13,7 @@ import RxDataSources
 
 typealias SpecialSection = AnimatableSectionModel<String, SpecialCell>
 
-struct SpecialsViewModel {
+struct SpecialsViewModel: ImageDownloadType {
     
     // Private
     private let disposeBag = DisposeBag()
@@ -22,16 +22,18 @@ struct SpecialsViewModel {
     private let sceneCoordinator: SceneCoordinatorType
     private let barAPI: BarAPIType
     private let userAPI: UserAPIType
+    let photoService: PhotoService
     
     // Inputs
     
     // Outputs
     var specials: Action<Void, [SpecialSection]>
     
-    init(coordinator: SceneCoordinatorType, barAPI: BarAPIType = BarAPIController(), userAPI: UserAPIType = UserAPIController()) {
+    init(coordinator: SceneCoordinatorType, barAPI: BarAPIType = BarAPIController(), userAPI: UserAPIType = UserAPIController(), photoService: PhotoService = KingFisherPhotoService()) {
         self.sceneCoordinator = coordinator
         self.barAPI = barAPI
         self.userAPI = userAPI
+        self.photoService = photoService
         
         specials = Action(workFactory: { _ in
             return barAPI.getSpecialsIn(region: "dallas").map({
@@ -51,4 +53,5 @@ struct SpecialsViewModel {
             return self.userAPI.likeSpecial(userID: "123", specialID: specialID)
         }
     }
+
 }

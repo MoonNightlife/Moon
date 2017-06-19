@@ -6,6 +6,7 @@ PODS:
   - Alamofire (4.4.0)
   - EZSwipeController (0.6.1)
   - iCarousel (1.8.3)
+  - Kingfisher (3.9.1)
   - Material (2.6.3):
     - Material/Core (= 2.6.3)
   - Material/Core (2.6.3)
@@ -189,6 +190,7 @@ DEPENDENCIES:
   - ActionButton
   - EZSwipeController
   - iCarousel
+  - Kingfisher (~> 3.0)
   - Material (from `https://github.com/CosmicMind/Material`)
   - MaterialComponents
   - NVActivityIndicatorView
@@ -224,6 +226,7 @@ SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   EZSwipeController: 255b0f8aed31963b0236802c926e27dd006a2532
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
+  Kingfisher: 6729a0baaa458245bfb8cd5a1296c71c10d6eb6c
   Material: 68440da8f2564c19344d5da2ee5dde5618be5f95
   MaterialComponents: fc0b6f9725db1f434aa3f8d7feb7832ac99a3692
   MDFTextAccessibility: 94098925e0853551c5a311ce7c1ecefbe297cdb6
@@ -237,6 +240,6 @@ SPEC CHECKSUMS:
   SwaggerClient: 42a5fb2f34db03c66cd09f9ce76a99d554fb0660
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
 
-PODFILE CHECKSUM: a5f645f2e8728190977ddd6d63c510f67fa97a83
+PODFILE CHECKSUM: 9a48131c6233b74cef7fe9389d312609a7ecc72c
 
 COCOAPODS: 1.2.1
