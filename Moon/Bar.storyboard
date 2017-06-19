@@ -360,7 +360,7 @@
             <objects>
                 <navigationController storyboardIdentifier="BarProfileNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xRq-dO-d7q" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AXV-yR-ygg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AXV-yR-ygg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

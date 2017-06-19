@@ -23,6 +23,7 @@ class EmailSettingsViewController: UIViewController, BindableType {
 
         prepareNavigationBackButton()
         prepareEmailTextField()
+        prepareSaveButton()
     }
 
     func bindViewModel() {
@@ -32,17 +33,23 @@ class EmailSettingsViewController: UIViewController, BindableType {
     fileprivate func prepareNavigationBackButton() {
         navBackButton = UIBarButtonItem()
         navBackButton.image = Icon.cm.arrowBack
-        navBackButton.tintColor = .white
+        navBackButton.tintColor = .lightGray
         self.navigationItem.leftBarButtonItem = navBackButton
+    }
+    
+    fileprivate func prepareSaveButton() {
+        saveButton.backgroundColor = .moonGreen
+        saveButton.tintColor = .white
+        saveButton.layer.cornerRadius = 5
     }
     
     fileprivate func prepareEmailTextField() {
         emailField.placeholder = "Email"
         emailField.detail = "Invalid Email"
         emailField.isClearIconButtonEnabled = true
-        emailField.placeholderActiveColor = .moonRed
-        emailField.dividerActiveColor = .moonRed
-        emailField.dividerNormalColor = .moonRed
+        emailField.placeholderActiveColor = .moonGreen
+        emailField.dividerActiveColor = .moonGreen
+        emailField.dividerNormalColor = .moonGreen
         
         let leftView = UIImageView()
         leftView.image = #imageLiteral(resourceName: "emailIcon")
@@ -50,7 +57,7 @@ class EmailSettingsViewController: UIViewController, BindableType {
         leftView.tintColor = .lightGray
         
         emailField.leftView = leftView
-        emailField.leftViewActiveColor = .moonRed
+        emailField.leftViewActiveColor = .moonGreen
         
     }
 }

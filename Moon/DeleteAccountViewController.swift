@@ -26,6 +26,7 @@ class DeleteAccountViewController: UIViewController, BindableType {
         prepareNavigationBackButton()
         prepareEmailTextField()
         preparePasswordTextField()
+        prepareDeleteButton()
     }
 
     func bindViewModel() {
@@ -35,7 +36,7 @@ class DeleteAccountViewController: UIViewController, BindableType {
     fileprivate func prepareNavigationBackButton() {
         navBackButton = UIBarButtonItem()
         navBackButton.image = Icon.cm.arrowBack
-        navBackButton.tintColor = .white
+        navBackButton.tintColor = .lightGray
         self.navigationItem.leftBarButtonItem = navBackButton
     }
     
@@ -60,9 +61,9 @@ class DeleteAccountViewController: UIViewController, BindableType {
         passwordField.placeholder = "Password"
         passwordField.isClearIconButtonEnabled = true
         passwordField.isSecureTextEntry = true
-        passwordField.placeholderActiveColor = .moonGreen
-        passwordField.dividerActiveColor = .moonGreen
-        passwordField.dividerNormalColor = .moonGreen
+        passwordField.placeholderActiveColor = .moonRed
+        passwordField.dividerActiveColor = .moonRed
+        passwordField.dividerNormalColor = .moonRed
         
         let leftView = UIImageView()
         leftView.image = #imageLiteral(resourceName: "passwordIcon")
@@ -70,6 +71,12 @@ class DeleteAccountViewController: UIViewController, BindableType {
         leftView.tintColor = .lightGray
         
         passwordField.leftView = leftView
-        passwordField.leftViewActiveColor = .moonGreen
+        passwordField.leftViewActiveColor = .moonRed
+    }
+    
+    fileprivate func prepareDeleteButton() {
+        saveButton.backgroundColor = .moonRed
+        saveButton.tintColor = .white
+        saveButton.layer.cornerRadius = 5
     }
 }
