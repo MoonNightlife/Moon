@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let firstScene = Scene.Login.login(viewModel)
         sceneCoordinator.transition(to: firstScene, type: .root)
         
+        UIApplication.shared.statusBarStyle = .lightContent
+
         return true
     }
 

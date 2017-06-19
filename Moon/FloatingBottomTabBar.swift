@@ -22,10 +22,16 @@ class FloatingBottomTabBar: Bar {
     var exploreButton: IconButton!
     var moonsViewButton: IconButton!
     var floting: MDCFloatingButton!
+    var size: CGFloat!
+    var contentFrame: CGSize!
     
     weak var delegate: FloatingBottomTabBarDelegate!
     
     func initializeTabBar() {
+        size = self.frame.size.width * 0.25
+        self.contentView.frame = self.frame
+        contentFrame = self.contentView.frame.size
+        
         setupFeaturedButton()
         setupExploreButton()
         setupMoonsViewButton()
@@ -36,35 +42,50 @@ class FloatingBottomTabBar: Bar {
 
 extension FloatingBottomTabBar {
     fileprivate func setupFeaturedButton() {
-       // let featuredImage = #imageLiteral(resourceName: "eventsSM").withRenderingMode(.alwaysTemplate)
- 
         featuredButton = IconButton(image: #imageLiteral(resourceName: "eventsSM"))
         featuredButton.addTarget(self, action: #selector(featuredButtonClicked), for: .touchUpInside)
         
     }
     
     fileprivate func setupExploreButton() {
-        //let exploreImage = #imageLiteral(resourceName: "searchLG").withRenderingMode(.alwaysTemplate)
-        
         exploreButton = IconButton(image: #imageLiteral(resourceName: "searchSM"))
         exploreButton.addTarget(self, action: #selector(exploreButtonClicked), for: .touchUpInside)
     }
     
     fileprivate func setupMoonsViewButton() {
-        //let moonImage = #imageLiteral(resourceName: "moonSM").withRenderingMode(.alwaysTemplate)
-        //moonsViewButton = IconButton(image: moonImage, tintColor: .moonPurple)
         moonsViewButton = IconButton(image: #imageLiteral(resourceName: "moonSM"))
-        
         moonsViewButton.addTarget(self, action: #selector(moonsViewButtonClicked), for: .touchUpInside)
     }
     
+    fileprivate func addRighView(view: UIView) {
+        view.frame = CGRect(x: (contentFrame.width - size) - 10, y: (contentFrame.height / 2) - (size / 2) - 5, width: size, height: size)
+        
+        self.contentView.addSubview(view)
+        self.contentView.bringSubview(toFront: view)
+    }
+    
+    func addLeftView(view: UIView) {
+        view.frame = CGRect(x: 5, y: (contentFrame.height / 2) - (size / 2) - 5, width: size, height: size)
+        
+        self.contentView.addSubview(view)
+        self.contentView.bringSubview(toFront: view )
+    }
+    
+    func addCenterView(view: UIView) {
+        view.frame = CGRect(x: (contentFrame.width / 2) - (size / 2), y: (contentFrame.height / 2) - (size / 2) - 5, width: size, height: size)
+        
+        self.contentView.addSubview(view)
+        self.contentView.bringSubview(toFront: view)
+    }
+    
     fileprivate func setupTabBar() {
-        leftViews = [featuredButton]
-        centerViews = [moonsViewButton]
-        rightViews = [exploreButton]
+        addLeftView(view: featuredButton)
+        addCenterView(view: moonsViewButton)
+        addRighView(view: exploreButton)
         
         backgroundColor = Color.grey.lighten4
         cornerRadius = height / 2
+        
         layer.shadowOpacity = 1
         layer.shadowRadius = 2
         layer.shadowOffset = CGSize(width: 1, height: 1)

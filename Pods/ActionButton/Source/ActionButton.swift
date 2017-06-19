@@ -74,7 +74,7 @@ open class ActionButton: NSObject {
     fileprivate let itemOffset = -55
     
     /// the float button's radius
-    fileprivate let floatButtonRadius = 50
+    fileprivate var floatButtonRadius = 50
     
     public init(attachedToView view: UIView, items: [ActionButtonItem]?) {
         super.init()
@@ -84,6 +84,7 @@ open class ActionButton: NSObject {
         let bounds = self.parentView.bounds
         
         self.floatButton = UIButton(type: .custom)
+        self.floatButtonRadius = Int(self.parentView.frame.size.height * 0.075) //Added by Gabo
         self.floatButton.layer.cornerRadius = CGFloat(floatButtonRadius / 2)
         self.floatButton.layer.shadowOpacity = 1
         self.floatButton.layer.shadowRadius = 2
