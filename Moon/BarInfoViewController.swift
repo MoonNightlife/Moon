@@ -11,6 +11,7 @@ import MapKit
 import RxCocoa
 import RxSwift
 import Action
+import Material
 
 class BarInfoViewController: UIViewController, BindableType {
 
@@ -24,7 +25,11 @@ class BarInfoViewController: UIViewController, BindableType {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        prepareBackButton()
+        prepareWebsite()
+        preparePhoneButton()
+        prepareAddress()
     }
     
     func bindViewModel() {
@@ -80,4 +85,29 @@ class BarInfoViewController: UIViewController, BindableType {
         mapItem.openInMaps(launchOptions: options)
     }
 
+}
+
+extension BarInfoViewController {
+    
+    fileprivate func prepareBackButton() {
+        var image = Icon.close
+        image = image?.tint(with: .moonRed)
+        
+        backButton.setImage(image, for: .normal)
+    }
+    
+    fileprivate func preparePhoneButton() {
+        phoneNumberButton.tintColor = .lightGray
+        phoneNumberButton.titleLabel?.font = UIFont(name: "Roboto", size: 12)
+    }
+    
+    fileprivate func prepareWebsite() {
+        websiteButton.tintColor = .lightGray
+        websiteButton.titleLabel?.font = UIFont(name: "Roboto", size: 12)
+    }
+    
+    fileprivate func prepareAddress() {
+        addressButton.tintColor = .lightGray
+        addressButton.titleLabel?.font = UIFont(name: "Roboto", size: 12)
+    }
 }

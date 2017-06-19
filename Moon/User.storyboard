@@ -476,7 +476,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jfs-5x-Gl9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2830" y="-594"/>
+            <point key="canvasLocation" x="2697" y="-643"/>
         </scene>
         <!--Edit Profile View Controller-->
         <scene sceneID="ey1-I4-ZI1">
@@ -510,32 +510,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dgv-bB-g4E" customClass="TextField" customModule="Material">
-                                <rect key="frame" x="16" y="280.5" width="343" height="30"/>
+                                <rect key="frame" x="16" y="259" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1xV-q5-oqz" customClass="TextField" customModule="Material">
+                                <rect key="frame" x="16" y="189" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Po-0a-lu5">
-                                <rect key="frame" x="170" y="318.5" width="34" height="30"/>
-                                <state key="normal" title="Save"/>
+                                <rect key="frame" x="137" y="313" width="100" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="Hh3-Ul-6nQ"/>
+                                    <constraint firstAttribute="height" constant="40" id="fD8-VX-3Dh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                                <state key="normal" title="Delete"/>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1xV-q5-oqz" customClass="TextField" customModule="Material">
-                                <rect key="frame" x="16" y="208.5" width="343" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="2Po-0a-lu5" firstAttribute="centerY" secondItem="p3x-do-Phb" secondAttribute="centerY" id="4eG-cm-bSl"/>
-                            <constraint firstItem="1xV-q5-oqz" firstAttribute="trailing" secondItem="dgv-bB-g4E" secondAttribute="trailing" id="A75-bZ-xAS"/>
-                            <constraint firstItem="1xV-q5-oqz" firstAttribute="leading" secondItem="p3x-do-Phb" secondAttribute="leadingMargin" id="EkA-hW-eis"/>
-                            <constraint firstItem="1xV-q5-oqz" firstAttribute="leading" secondItem="dgv-bB-g4E" secondAttribute="leading" id="LEE-zC-1yf"/>
-                            <constraint firstItem="dgv-bB-g4E" firstAttribute="top" secondItem="1xV-q5-oqz" secondAttribute="bottom" constant="42" id="MrH-lr-f7r"/>
-                            <constraint firstItem="2Po-0a-lu5" firstAttribute="top" secondItem="dgv-bB-g4E" secondAttribute="bottom" constant="8" symbolic="YES" id="Qte-FA-SUo"/>
-                            <constraint firstItem="dgv-bB-g4E" firstAttribute="centerX" secondItem="2Po-0a-lu5" secondAttribute="centerX" id="ftM-Yv-sHY"/>
-                            <constraint firstItem="1xV-q5-oqz" firstAttribute="trailing" secondItem="p3x-do-Phb" secondAttribute="trailingMargin" id="sb2-Ye-1LG"/>
+                            <constraint firstItem="2Po-0a-lu5" firstAttribute="centerY" secondItem="p3x-do-Phb" secondAttribute="centerY" id="7XM-1F-tCj"/>
+                            <constraint firstItem="2Po-0a-lu5" firstAttribute="centerX" secondItem="p3x-do-Phb" secondAttribute="centerX" id="BKt-B6-tZW"/>
+                            <constraint firstItem="2Po-0a-lu5" firstAttribute="top" secondItem="dgv-bB-g4E" secondAttribute="bottom" constant="24" id="OUP-Y7-ieL"/>
+                            <constraint firstItem="1xV-q5-oqz" firstAttribute="leading" secondItem="p3x-do-Phb" secondAttribute="leadingMargin" id="bXO-UU-NGa"/>
+                            <constraint firstItem="1xV-q5-oqz" firstAttribute="trailing" secondItem="p3x-do-Phb" secondAttribute="trailingMargin" id="d7E-Z6-zFV"/>
+                            <constraint firstItem="dgv-bB-g4E" firstAttribute="leading" secondItem="p3x-do-Phb" secondAttribute="leadingMargin" id="mlF-qa-fgN"/>
+                            <constraint firstItem="dgv-bB-g4E" firstAttribute="trailing" secondItem="p3x-do-Phb" secondAttribute="trailingMargin" id="t9c-Xl-Wtu"/>
+                            <constraint firstItem="dgv-bB-g4E" firstAttribute="top" secondItem="1xV-q5-oqz" secondAttribute="bottom" constant="40" id="tCh-mH-Fgv"/>
                         </constraints>
                     </view>
                     <connections>
@@ -546,7 +551,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MtW-If-L69" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2736.8000000000002" y="580.65967016491754"/>
+            <point key="canvasLocation" x="1864.8" y="135.38230884557723"/>
         </scene>
         <!--Name Settings View Controller-->
         <scene sceneID="EZC-gx-epa">
@@ -598,7 +603,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1JY-CX-UZZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3807.1999999999998" y="-641.82908545727139"/>
+            <point key="canvasLocation" x="3481" y="-631"/>
         </scene>
         <!--Notification Settings View Controller-->
         <scene sceneID="eJe-oN-vzw">
@@ -662,7 +667,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rh4-Mf-gTy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4559.1999999999998" y="-532.98350824587715"/>
+            <point key="canvasLocation" x="4286" y="-631"/>
         </scene>
         <!--Web ViewUI Vi View Controller-->
         <scene sceneID="WQg-pB-IXJ">
@@ -695,7 +700,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fKt-iZ-Zo9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3647.1999999999998" y="103.89805097451276"/>
+            <point key="canvasLocation" x="2698" y="135"/>
         </scene>
         <!--Email Settings View Controller-->
         <scene sceneID="Gox-Hj-YxO">
@@ -709,20 +714,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E2r-gD-LZP" customClass="ErrorTextField" customModule="Material">
-                                <rect key="frame" x="16" y="280" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ouz-0u-mVK">
+                                <rect key="frame" x="137" y="313" width="100" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="AVW-Qa-KFX"/>
+                                    <constraint firstAttribute="height" constant="40" id="c13-gk-JeK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                                <state key="normal" title="Save"/>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E2r-gD-LZP" customClass="ErrorTextField" customModule="Material">
+                                <rect key="frame" x="16" y="259" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ouz-0u-mVK">
-                                <rect key="frame" x="170" y="318" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Save"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ouz-0u-mVK" firstAttribute="centerX" secondItem="8Dr-WJ-2Bo" secondAttribute="centerX" id="1i5-ph-jVE"/>
+                            <constraint firstItem="E2r-gD-LZP" firstAttribute="leading" secondItem="8Dr-WJ-2Bo" secondAttribute="leadingMargin" id="3wa-UP-LpM"/>
+                            <constraint firstItem="E2r-gD-LZP" firstAttribute="centerY" secondItem="8Dr-WJ-2Bo" secondAttribute="centerY" constant="-59.5" id="S65-YQ-Gll"/>
+                            <constraint firstItem="E2r-gD-LZP" firstAttribute="trailing" secondItem="8Dr-WJ-2Bo" secondAttribute="trailingMargin" id="b3l-vf-rIJ"/>
+                            <constraint firstItem="Ouz-0u-mVK" firstAttribute="centerY" secondItem="8Dr-WJ-2Bo" secondAttribute="centerY" id="cBW-TS-HKI"/>
+                            <constraint firstItem="Ouz-0u-mVK" firstAttribute="top" secondItem="E2r-gD-LZP" secondAttribute="bottom" constant="24" id="hoN-uI-7p0"/>
+                            <constraint firstItem="E2r-gD-LZP" firstAttribute="centerX" secondItem="8Dr-WJ-2Bo" secondAttribute="centerX" id="nlq-8Y-YGk"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="emailField" destination="E2r-gD-LZP" id="7xd-yD-Idq"/>
@@ -731,7 +748,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hgd-nw-ktf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4444" y="199.25037481259372"/>
+            <point key="canvasLocation" x="3480.8000000000002" y="134.48275862068968"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PjN-zC-2LD">

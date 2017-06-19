@@ -30,7 +30,7 @@ class NotificationSettingsViewController: UIViewController, BindableType {
     fileprivate func prepareNavigationBackButton() {
         navBackButton = UIBarButtonItem()
         navBackButton.image = Icon.cm.arrowBack
-        navBackButton.tintColor = .white
+        navBackButton.tintColor = .lightGray
         self.navigationItem.leftBarButtonItem = navBackButton
     }
 }

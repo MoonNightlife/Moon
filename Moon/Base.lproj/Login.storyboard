@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ccw-F9-fGg">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ccw-F9-fGg">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -252,20 +252,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gOs-JC-mOZ">
-                                <rect key="frame" x="128" y="318" width="119" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Send Reset Email"/>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fRc-VJ-cLj" customClass="TextField" customModule="Material">
-                                <rect key="frame" x="16" y="280" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fRc-VJ-cLj" customClass="TextField" customModule="Material">
+                                <rect key="frame" x="16" y="275.5" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your email associated with your account and we will send you a temporary password" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sn0-Yi-niG">
+                                <rect key="frame" x="16" y="28" width="343" height="73"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="73" id="3WW-Mu-4jp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gOs-JC-mOZ">
+                                <rect key="frame" x="147" y="313.5" width="80" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="1Hw-co-xXN"/>
+                                    <constraint firstAttribute="height" constant="40" id="jU7-cr-7ZJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
+                                <state key="normal" title="Submit"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fRc-VJ-cLj" firstAttribute="trailing" secondItem="3Jy-mn-IKi" secondAttribute="trailingMargin" id="0bi-uT-LIE"/>
+                            <constraint firstItem="gOs-JC-mOZ" firstAttribute="top" secondItem="fRc-VJ-cLj" secondAttribute="bottom" constant="8" id="1pg-WT-tyk"/>
+                            <constraint firstItem="sn0-Yi-niG" firstAttribute="leading" secondItem="3Jy-mn-IKi" secondAttribute="leadingMargin" id="22D-qY-DLd"/>
+                            <constraint firstItem="gOs-JC-mOZ" firstAttribute="centerX" secondItem="3Jy-mn-IKi" secondAttribute="centerX" id="B0z-DR-Aep"/>
+                            <constraint firstItem="fRc-VJ-cLj" firstAttribute="leading" secondItem="3Jy-mn-IKi" secondAttribute="leadingMargin" id="DBf-a7-5Mh"/>
+                            <constraint firstItem="gOs-JC-mOZ" firstAttribute="centerY" secondItem="3Jy-mn-IKi" secondAttribute="centerY" id="LHh-8b-wbp"/>
+                            <constraint firstItem="sn0-Yi-niG" firstAttribute="trailing" secondItem="3Jy-mn-IKi" secondAttribute="trailingMargin" id="U4r-f3-Zb7"/>
+                            <constraint firstItem="gOs-JC-mOZ" firstAttribute="top" secondItem="fRc-VJ-cLj" secondAttribute="bottom" constant="8" id="orQ-nJ-Mma"/>
+                            <constraint firstItem="sn0-Yi-niG" firstAttribute="top" secondItem="N61-A8-z6d" secondAttribute="bottom" constant="8" id="vHk-UV-gKa"/>
+                            <constraint firstItem="gOs-JC-mOZ" firstAttribute="centerX" secondItem="fRc-VJ-cLj" secondAttribute="centerX" id="w6o-pt-AVx"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="fRc-VJ-cLj" id="12r-Jn-tSO"/>
@@ -281,7 +305,7 @@
             <objects>
                 <navigationController storyboardIdentifier="Login" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ccw-F9-fGg" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Hw5-Vu-eYV">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hw5-Vu-eYV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -59,8 +59,7 @@ extension BarActivityTableViewCell {
     }
     
     fileprivate func setupLocationImage() {
-        locationIcon.image = #imageLiteral(resourceName: "LocationIcon").withRenderingMode(.alwaysTemplate)
-        locationIcon.tintColor = .moonPurple
+        locationIcon.image = #imageLiteral(resourceName: "LocationIcon")
     }
     
     fileprivate func setupUsername() {

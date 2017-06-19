@@ -11,4 +11,5 @@ import UIKit
 class UsersTableViewCell: UITableViewCell {
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var name: UILabel!
+
 }
