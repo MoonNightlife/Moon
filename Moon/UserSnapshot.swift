@@ -7,10 +7,23 @@
 //
 
 import Foundation
+import RxDataSources
 import UIKit
 
 struct UserSnapshot {
     let name: String
     let id: String
     let picture: UIImage
+}
+
+extension UserSnapshot: IdentifiableType {
+    var identity: String {
+        return id
+    }
+}
+
+extension UserSnapshot: Equatable {
+    static func == (lhs: UserSnapshot, rhs: UserSnapshot) -> Bool {
+        return lhs.id == rhs.id
+    }
 }

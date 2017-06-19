@@ -17,12 +17,15 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
     var viewModel: UsersTableViewModel!
     private let bag = DisposeBag()
     @IBOutlet weak var userTableView: UITableView!
+    @IBOutlet weak var showContactsButton: UIButton!
     var backButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         prepareNavigationBackButton()
+        
+        self.view.backgroundColor = UIColor.lightGray
     }
 
     func bindViewModel() {
@@ -43,6 +46,7 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
         .disposed(by: bag)
         
         backButton.rx.action = viewModel.onBack()
+        showContactsButton.rx.action = viewModel.onShowContacts()
     }
     
     func prepareNavigationBackButton() {
