@@ -17,7 +17,6 @@ class EnterCodeViewController: UIViewController, BindableType {
     var navBackButton: UIBarButtonItem!
     private let bag = DisposeBag()
     
-    
     @IBOutlet weak var codeTextField: TextField!
     @IBOutlet weak var enterCodeButton: UIButton!
     @IBOutlet weak var infoLabel: UILabel!

@@ -32,8 +32,8 @@
                                 <rect key="frame" x="87.5" y="599" width="200" height="60"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="CUC-S3-JXb"/>
-                                    <constraint firstAttribute="width" constant="200" id="hU7-Fc-Gxq"/>
+                                    <constraint firstAttribute="width" constant="200" id="E4P-9d-MEJ"/>
+                                    <constraint firstAttribute="height" constant="60" id="OIY-jN-IMf"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
@@ -51,6 +51,8 @@
                     <navigationItem key="navigationItem" id="Xq1-Vq-rCJ"/>
                     <connections>
                         <outlet property="tabBar" destination="fw2-l8-sXr" id="iYB-Jx-MKZ"/>
+                        <outlet property="tabBarHeightConstraint" destination="OIY-jN-IMf" id="qBX-Hf-hnj"/>
+                        <outlet property="tabBarWidthConstraint" destination="E4P-9d-MEJ" id="HoD-gX-M7l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iPa-mt-ZcO" userLabel="First Responder" sceneMemberID="firstResponder"/>

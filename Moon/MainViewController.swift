@@ -21,7 +21,9 @@ class MainViewController: EZSwipeController, BindableType {
     private let bag = DisposeBag()
 
     @IBOutlet weak var tabBar: FloatingBottomTabBar!
+    @IBOutlet weak var tabBarHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var tabBarWidthConstraint: NSLayoutConstraint!
     let numberOfMainViews = 3
     
     override func viewDidLoad() {
@@ -63,7 +65,11 @@ class MainViewController: EZSwipeController, BindableType {
     private func setupTabBar() {
         // Bring tab bar to front of all other views
         tabBar.superview?.bringSubview(toFront: tabBar)
-        tabBar.initializeTabBar()
+        tabBarHeightConstraint.constant = self.view.frame.size.height * 0.0899
+        tabBarWidthConstraint.constant = self.view.frame.size.width * 0.533
+        tabBar.frame.size.width = tabBarWidthConstraint.constant
+        tabBar.frame.size.height = tabBarHeightConstraint.constant
+        tabBar.initializeTabBar()        
     }
     
     func bindViewModel() {
