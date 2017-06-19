@@ -72,6 +72,86 @@
             </objects>
             <point key="canvasLocation" x="100" y="147"/>
         </scene>
+        <!--Contacts View Controller-->
+        <scene sceneID="Eob-hL-zPv">
+            <objects>
+                <viewController storyboardIdentifier="Contacts" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Yqx-AR-dRI" customClass="ContactsViewController" customModule="Moon" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dRU-Ob-chd"/>
+                        <viewControllerLayoutGuide type="bottom" id="zv1-Me-8LW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AXW-ce-XnC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0Vy-50-kyU">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactCell" rowHeight="70" id="Jdo-2w-IiQ" customClass="ContactTableViewCell" customModule="Moon" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jdo-2w-IiQ" id="uJp-Ew-ENv">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z6g-B9-c6k">
+                                                    <rect key="frame" x="8" y="9" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="Qae-od-cOT"/>
+                                                        <constraint firstAttribute="height" constant="50" id="sRP-2T-KeQ"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Evan Noble" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKv-mp-loA">
+                                                    <rect key="frame" x="66" y="25" width="263" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nsO-y2-lrD">
+                                                    <rect key="frame" x="337" y="20.5" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="1vq-bS-aMm"/>
+                                                        <constraint firstAttribute="width" constant="30" id="chn-lb-qbo"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Add"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="VKv-mp-loA" firstAttribute="centerY" secondItem="uJp-Ew-ENv" secondAttribute="centerY" id="8wH-fe-8bl"/>
+                                                <constraint firstItem="Z6g-B9-c6k" firstAttribute="centerY" secondItem="uJp-Ew-ENv" secondAttribute="centerY" id="K5s-fD-91e"/>
+                                                <constraint firstItem="VKv-mp-loA" firstAttribute="leading" secondItem="Z6g-B9-c6k" secondAttribute="trailing" constant="8" symbolic="YES" id="X5x-7w-DJa"/>
+                                                <constraint firstItem="VKv-mp-loA" firstAttribute="baseline" secondItem="nsO-y2-lrD" secondAttribute="baseline" id="d8Q-Wk-51w"/>
+                                                <constraint firstItem="Z6g-B9-c6k" firstAttribute="leading" secondItem="uJp-Ew-ENv" secondAttribute="leadingMargin" id="kRZ-AL-cpT"/>
+                                                <constraint firstItem="nsO-y2-lrD" firstAttribute="leading" secondItem="VKv-mp-loA" secondAttribute="trailing" constant="8" symbolic="YES" id="upc-u7-jv5"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="nsO-y2-lrD" secondAttribute="trailing" id="vRL-iI-4rb"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="addFriendButton" destination="nsO-y2-lrD" id="vPi-0E-Xzt"/>
+                                            <outlet property="name" destination="VKv-mp-loA" id="xqn-nx-Dng"/>
+                                            <outlet property="profilePicture" destination="Z6g-B9-c6k" id="twc-iT-EEz"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="0Vy-50-kyU" secondAttribute="trailing" id="CeP-Do-w4g"/>
+                            <constraint firstItem="0Vy-50-kyU" firstAttribute="bottom" secondItem="zv1-Me-8LW" secondAttribute="top" id="Rwy-OR-1MC"/>
+                            <constraint firstItem="0Vy-50-kyU" firstAttribute="top" secondItem="AXW-ce-XnC" secondAttribute="top" id="gYq-kd-MT2"/>
+                            <constraint firstItem="0Vy-50-kyU" firstAttribute="leading" secondItem="AXW-ce-XnC" secondAttribute="leading" id="khH-2s-aD7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="contactsTableView" destination="0Vy-50-kyU" id="s4U-bB-Il7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JZd-go-7Vp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="85.599999999999994" y="821.73913043478262"/>
+        </scene>
         <!--Enter Code View Controller-->
         <scene sceneID="a3b-2u-ZFj">
             <objects>
@@ -192,7 +272,7 @@
             <objects>
                 <navigationController storyboardIdentifier="CountryCodeNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gcj-bz-Nj7" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bfb-kP-X7a">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="bfb-kP-X7a">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -23,6 +23,7 @@ enum Scene {
     
     enum User: SceneType {
         case profile(ProfileViewModel)
+        case edit(EditProfileViewModel)
         case usersTable(UsersTableViewModel)
         case settings(SettingsViewModel)
         case name(NameSettingsViewModel)
@@ -59,5 +60,6 @@ enum Scene {
         case enterPhoneNumber(EnterPhoneNumberViewModel)
         case enterCode(EnterCodeViewModel)
         case countryCode(CountryCodeViewModel)
+        case contacts(ContactsViewModel)
     }
 }
