@@ -172,15 +172,15 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="88O-ZL-gLX" firstAttribute="bottom" secondItem="feT-OJ-Xgr" secondAttribute="bottomMargin" id="9Cx-SV-fQx"/>
-                                    <constraint firstItem="88O-ZL-gLX" firstAttribute="leading" secondItem="feT-OJ-Xgr" secondAttribute="leadingMargin" id="IzC-qj-S4A"/>
+                                    <constraint firstItem="88O-ZL-gLX" firstAttribute="top" secondItem="feT-OJ-Xgr" secondAttribute="top" constant="8" id="555-9I-CKs"/>
+                                    <constraint firstAttribute="bottom" secondItem="88O-ZL-gLX" secondAttribute="bottom" constant="8" id="MOB-Em-gwX"/>
                                     <constraint firstAttribute="height" constant="75" id="W9k-dC-5UW"/>
-                                    <constraint firstItem="88O-ZL-gLX" firstAttribute="top" secondItem="feT-OJ-Xgr" secondAttribute="topMargin" id="b64-6r-VRD"/>
-                                    <constraint firstItem="88O-ZL-gLX" firstAttribute="trailing" secondItem="feT-OJ-Xgr" secondAttribute="trailingMargin" id="pmP-Ph-W41"/>
+                                    <constraint firstItem="88O-ZL-gLX" firstAttribute="leading" secondItem="feT-OJ-Xgr" secondAttribute="leading" constant="8" id="ffe-Oe-ccs"/>
+                                    <constraint firstAttribute="trailing" secondItem="88O-ZL-gLX" secondAttribute="trailing" constant="8" id="sJJ-tS-dMW"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qut-De-cO8">
-                                <rect key="frame" x="0.0" y="147" width="375" height="520"/>
+                                <rect key="frame" x="0.0" y="139" width="375" height="528"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UsersTableCell" rowHeight="75" id="ZMc-rh-Hx8" customClass="UsersTableViewCell" customModule="Moon" customModuleProvider="target">
@@ -224,7 +224,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="feT-OJ-Xgr" secondAttribute="trailing" id="1oz-RY-V7H"/>
                             <constraint firstItem="feT-OJ-Xgr" firstAttribute="trailing" secondItem="qut-De-cO8" secondAttribute="trailing" id="DuF-X6-G7D"/>
-                            <constraint firstItem="qut-De-cO8" firstAttribute="top" secondItem="feT-OJ-Xgr" secondAttribute="bottom" constant="8" symbolic="YES" id="Ws8-gh-0QE"/>
+                            <constraint firstItem="qut-De-cO8" firstAttribute="top" secondItem="feT-OJ-Xgr" secondAttribute="bottom" id="Ws8-gh-0QE"/>
                             <constraint firstItem="feT-OJ-Xgr" firstAttribute="leading" secondItem="qut-De-cO8" secondAttribute="leading" id="Yjj-Bn-sm6"/>
                             <constraint firstItem="qut-De-cO8" firstAttribute="bottom" secondItem="BWH-x7-YeU" secondAttribute="top" id="ZNE-Fv-pai"/>
                             <constraint firstItem="feT-OJ-Xgr" firstAttribute="leading" secondItem="z6c-yd-www" secondAttribute="leading" id="ZgT-ON-Bd5"/>
@@ -233,6 +233,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Py6-pX-GXa"/>
                     <connections>
+                        <outlet property="contactsViewHeightConstraint" destination="W9k-dC-5UW" id="tb2-Na-ZKI"/>
                         <outlet property="showContactsButton" destination="88O-ZL-gLX" id="3ha-xk-ggJ"/>
                         <outlet property="userTableView" destination="qut-De-cO8" id="5hr-vS-hrU"/>
                     </connections>
@@ -755,7 +756,7 @@
             <objects>
                 <navigationController storyboardIdentifier="UsersTableNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yeY-eT-m5M" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="I3D-k4-L5c">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="I3D-k4-L5c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -773,7 +774,7 @@
             <objects>
                 <navigationController storyboardIdentifier="EditProfileNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QzI-hj-80w" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pEm-nR-26j">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="pEm-nR-26j">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -20,12 +20,24 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
     @IBOutlet weak var showContactsButton: UIButton!
     var backButton: UIBarButtonItem!
     
+    @IBOutlet weak var contactsViewHeightConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         prepareNavigationBackButton()
+        prepareContactButton()
         
         self.view.backgroundColor = UIColor.lightGray
+        contactsViewHeightConstraint.constant = 0
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        // Animation Logic
+        if true {
+        animateView()
+        }
     }
 
     func bindViewModel() {
@@ -47,6 +59,18 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
         
         backButton.rx.action = viewModel.onBack()
         showContactsButton.rx.action = viewModel.onShowContacts()
+    }
+    
+    func prepareContactButton() {
+        showContactsButton.tintColor = .moonBlue
+        showContactsButton.titleLabel?.font = UIFont(name: "Roboto", size: 14)
+    }
+    
+    func animateView() {
+        UIView.animate(withDuration: Double(0.5), animations: {
+            self.contactsViewHeightConstraint.constant = 75
+            self.view.layoutIfNeeded()
+        })
     }
     
     func prepareNavigationBackButton() {
