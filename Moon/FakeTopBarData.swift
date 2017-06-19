@@ -12,8 +12,8 @@ import CoreLocation
 func createTempTopBarData() -> [TopBar] {
     var a = [TopBar]()
     for i in 0..<images.count {
-        let data = TopBar(imageName: images[i], barName: barNames[i], usersGoing: "\(UInt32(i) * arc4random_uniform(20)+2)", coordinates: coordinates[i])
-        a.append(data)
+        //let data = TopBar(imageURLs: images[i], barName: barNames[i], usersGoing: "\(UInt32(i) * arc4random_uniform(20)+2)", coordinates: coordinates[i])
+        //a.append(data)
     }
     return a
 }

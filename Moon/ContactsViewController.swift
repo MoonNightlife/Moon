@@ -29,11 +29,24 @@ class ContactsViewController: UIViewController, BindableType {
         configureDataSource()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    
+        viewModel.checkContactAccess.execute()
+    }
+    
     func bindViewModel() {
+        
         navBackButton.rx.action = viewModel.onBack()
-        let rx_tableView = contactsTableView.rx
-        viewModel.usersInContacts.drive(rx_tableView.items(dataSource: dataSource)).disposed(by: bag)
-
+        
+        viewModel.UserInContacts.bind(to: contactsTableView.rx.items(dataSource: dataSource)).addDisposableTo(bag)
+        
+        viewModel.checkContactAccess.elements.subscribe(onNext: { [weak self] accessGranted in
+            if !accessGranted {
+                self?.showMessage(message: "Please allow moon to use your contacts to find your friends.")
+            }
+        }).addDisposableTo(bag)
+    
     }
     
     fileprivate func configureDataSource() {
@@ -48,6 +61,24 @@ class ContactsViewController: UIViewController, BindableType {
         }
     }
 
+    func showMessage(message: String) {
+        let alertController = UIAlertController(title: "Moon", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        
+        let dismissAction = UIAlertAction(title: "Settings", style: UIAlertActionStyle.default) { (_) -> Void in
+            guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+                return
+            }
+            
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
+            }
+        }
+
+        alertController.addAction(dismissAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+
     fileprivate func prepareNavigationBackButton() {
         navBackButton = UIBarButtonItem()
         navBackButton.image = Icon.cm.arrowDownward
@@ -55,8 +86,4 @@ class ContactsViewController: UIViewController, BindableType {
         self.navigationItem.leftBarButtonItem = navBackButton
     }
 
-}
-
-extension Reactive where Base: UITableView {
-    
 }

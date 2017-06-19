@@ -221,7 +221,7 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
                 image = #imageLiteral(resourceName: "GreenPin")
             }
             
-            pointAnnotation.coordinate = data.coordinates
+            pointAnnotation.coordinate = data.coordinates!
             pointAnnotation.title = data.barName
             pointAnnotation.placeID = "123123"
             pointAnnotation.image = image
@@ -263,7 +263,6 @@ extension CityOverviewViewController: iCarouselDelegate, iCarouselDataSource {
         let view = PeopleGoingCarouselView()
         view.frame = frame
         //view.initializeViewWith(user: usersGoing.value[index], index: index, viewProfile: viewModel.onShowProfile, likeActivity: viewModel.onLikeActivity, viewLikers: viewModel.onViewLikers)
-        view.initFake(user: usersGoing[index], index: index)
         
         return view
     }

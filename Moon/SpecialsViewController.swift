@@ -13,7 +13,6 @@ import RxSwift
 class SpecialsViewController: UIViewController, BindableType {
     
     let specialCellIdenifier = "SpecialCell"
-    var specialData = [Special]()
     var viewModel: SpecialsViewModel!
     let disposeBag = DisposeBag()
     let dataSource = RxTableViewSectionedAnimatedDataSource<SpecialSection>()
@@ -27,14 +26,17 @@ class SpecialsViewController: UIViewController, BindableType {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        specialsTableView.reloadData()
         configureDataSource()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.specials.execute()
     }
 
     func bindViewModel() {
-        viewModel.specials.bind(to: specialsTableView.rx.items(dataSource: dataSource)).addDisposableTo(disposeBag)
+        viewModel.specials.elements.bind(to: specialsTableView.rx.items(dataSource: dataSource)).addDisposableTo(disposeBag)
     }
     
     func configureDataSource() {
@@ -42,7 +44,7 @@ class SpecialsViewController: UIViewController, BindableType {
             //swiftlint:disable force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: self!.specialCellIdenifier, for: indexPath) as! SpecialTableViewCell
             if let strongSelf = self {
-                cell.initilizeSpecialCellWith(data: item, likeAction: strongSelf.viewModel.onLike())
+                cell.initilizeSpecialCellWith(data: item, likeAction: strongSelf.viewModel.onLike(specialID: item.id), downloadImage: strongSelf.viewModel.downloadImage(url: item.imageURL))
             }
             return cell
         }

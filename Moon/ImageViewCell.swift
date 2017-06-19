@@ -8,8 +8,12 @@
 
 import UIKit
 import Material
+import Action
+import RxCocoa
+import RxSwift
 
 class ImageViewCell: UIView {
+    fileprivate var bag = DisposeBag()
     fileprivate var card: ImageCard!
     
     /// Content area.
@@ -20,21 +24,23 @@ class ImageViewCell: UIView {
     fileprivate var moreButton: IconButton!
     fileprivate var goButton: IconButton!
     
-    func initializeImageCardViewWith(data: TopBar) {
+    func initializeImageCardViewWith(data: TopBar, downloadAction: Action<Void, UIImage>) {
         
-        prepareImageViewWith(imageName: data.imageName)
+        prepareImageView()
         prepareMoreButton()
         prepareGoButton()
         prepareToolbarWith(title: data.barName, subtitle: data.usersGoing)
         preparePresenterCard()
+        
+        downloadAction.elements.bind(to: imageView.rx.image).addDisposableTo(bag)
+        downloadAction.execute()
     }
 
 }
 
 extension ImageViewCell {
-    fileprivate func prepareImageViewWith(imageName: String) {
+    fileprivate func prepareImageView() {
         imageView = BottomGradientImageView(frame: self.frame)
-        imageView.image = UIImage(named: imageName)
         imageView.contentMode = UIViewContentMode.scaleAspectFill
     }
     

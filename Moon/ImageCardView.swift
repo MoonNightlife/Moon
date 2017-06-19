@@ -9,17 +9,20 @@
 import Foundation
 import UIKit
 import Material
+import Action
+import RxSwift
 
 class ImageCardView: UIView {
     
     enum CardType {
-        case small(image: UIImage, text: String)
-        case medium(image: UIImage, text: String)
-        case large(image: UIImage, titleText: String, detailText: String, text: String)
+        case small(image: Action<Void, UIImage>, text: String)
+        case medium(image: Action<Void, UIImage>, text: String)
+        case large(image: Action<Void, UIImage>, titleText: String, detailText: String, text: String)
     }
     
     fileprivate var index: Int?
     fileprivate var card: ImageCard!
+    fileprivate var bag = DisposeBag()
     
     // Image View
     var imageView: UIImageView!
@@ -81,16 +84,18 @@ class ImageCardView: UIView {
 
 extension ImageCardView {
     
-    fileprivate func prepareImageView(image: UIImage) {
+    fileprivate func prepareImageView(image: Action<Void, UIImage>) {
         imageView = UIImageView(frame:  CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height / 1.2))
-        imageView.image = image
+        image.elements.bind(to: imageView.rx.image).addDisposableTo(bag)
+        image.execute()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
     }
     
-    fileprivate func prepareGradiendImage(image: UIImage) {
+    fileprivate func prepareGradiendImage(image: Action<Void, UIImage>) {
         imageView = BottomGradientImageView(frame:  CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height / 1.2)) as BottomGradientImageView!
-        imageView.image = image
+        image.elements.bind(to: imageView.rx.image).addDisposableTo(bag)
+        image.execute()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
     }
