@@ -676,6 +676,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F0017AC41EF8905200C56039 /* Display Models */ = {
+			isa = PBXGroup;
+			children = (
+				F0CA18BC1EE610CB00428318 /* FeaturedEvent.swift */,
+				F0EF693F1EF0A2210028A32B /* UserSnapshot.swift */,
+				F0CA18BA1EE6108200428318 /* Special.swift */,
+				F0CA18B61EE6101200428318 /* TopBar.swift */,
+			);
+			name = "Display Models";
+			sourceTree = "<group>";
+		};
 		F001BAB21EC50CDB00CDF9BC /* Designs */ = {
 			isa = PBXGroup;
 			children = (
@@ -831,14 +842,11 @@
 			children = (
 				F01CA2981EF713B700F83799 /* Backend Models */,
 				F098FF9A1EDF1DEA00A59594 /* NewUser.swift */,
-				F0EF693F1EF0A2210028A32B /* UserSnapshot.swift */,
-				F0CA18BA1EE6108200428318 /* Special.swift */,
+				F0017AC41EF8905200C56039 /* Display Models */,
 				F0B5F93E1EEF790A0095F12E /* BarInfo.swift */,
 				F0C72F471EF835B800B25C52 /* VC and VM Types */,
-				F0CA18B61EE6101200428318 /* TopBar.swift */,
 				F04A4B221EEC549300DBA9A6 /* SearchSnapshot.swift */,
 				F02D9AA51EE61B3D00D6C969 /* BarActivity.swift */,
-				F0CA18BC1EE610CB00428318 /* FeaturedEvent.swift */,
 				F0CA18B21EE5AE7500428318 /* Enums.swift */,
 				F09DF08D1EEAF1240092BFA5 /* NotificationSetting.swift */,
 				F0335A751EF1F7DD005118B4 /* RxDataSourceSearchModel.swift */,
