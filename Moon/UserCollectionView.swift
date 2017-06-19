@@ -18,9 +18,9 @@ class UserCollectionView: ImageCardView {
     fileprivate var nameLabel: UILabel!
     fileprivate let bag = DisposeBag()
     
-    func initViewWith(user: SearchSnapshot, addAction: CocoaAction) {
-        let image = UIImage(named: user.picture)
-        self.initializeImageCardViewWith(type: .small(image: image!, text: ""))
+    func initViewWith(user: SearchSnapshot, addAction: CocoaAction, downloadImage: Action<Void, UIImage>) {
+        
+        self.initializeImageCardViewWith(type: .small(image: downloadImage, text: ""))
         prepareAddFriendButton()
         prepareNameLabel(text: user.name)
         prepareToolbar()

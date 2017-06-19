@@ -18,10 +18,10 @@ var descriptions = ["Come watch blink 182 Live! Event starts at 9:00 pm and will
 func createFakeEvents() -> [FeaturedEvent] {
     var events = [FeaturedEvent]()
     
-    for index in 0..<images.count {
-        events.append(FeaturedEvent(image: eventImages[index], barName: barNames[index], date: dates[index], description: descriptions[index], title: titles[index], id: "123"))
-    }
-    
+//    for index in 0..<images.count {
+//        events.append(FeaturedEvent(image: eventImages[index], barName: barNames[index], date: dates[index], description: descriptions[index], title: titles[index], id: "123"))
+//    }
+//    
     return events
 }
 

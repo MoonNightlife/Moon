@@ -33,10 +33,10 @@ func createFakeBarActivities() -> [BarActivity] {
 
 func createFakeUsers() -> [FakeUser] {
     var fakeUsers = [FakeUser]()
-    for i in 0..<profilePicsImages.count {
-        let fakeUser = FakeUser(firstName: fakeNames[i], lastName: fakeLastNames[i], city: "", username: "", pics: [profilePicsImages[i]], bio: "", plan: "", id: "")
-        fakeUsers.append(fakeUser)
-    }
+//    for i in 0..<profilePicsImages.count {
+//        let fakeUser = FakeUser(firstName: fakeNames[i], lastName: fakeLastNames[i], city: "", username: "", pics: [profilePicsImages[i]], bio: "", plan: "", id: "")
+//        fakeUsers.append(fakeUser)
+//    }
     
     return fakeUsers
 }

@@ -13,21 +13,37 @@ import RxSwift
 class ContactService {
     
     let contactStore = CNContactStore()
-    let keysToFetch = [String]()
+    let keysToFetch = [CNContactPhoneNumbersKey] as [CNKeyDescriptor]
     
-    func getContacts() -> Observable<[CNContact]> {
+    func getContacts() -> Observable<[String]> {
         return Observable.create({ (observer) -> Disposable in
+            let fetchRequest = CNContactFetchRequest(keysToFetch: self.keysToFetch)
+            fetchRequest.unifyResults = true
+            
+            var phoneNumbers = [String]()
             do {
-                //contactStore
-                //observer.onNext(contacts)
-                
+                try self.contactStore.enumerateContacts(with: fetchRequest, usingBlock: { (contact, _) in
+                    let numbers = self.phoneNumbersFrom(contact: contact)
+                    phoneNumbers.append(contentsOf: numbers)
+                })
+            } catch {
+                print("Error getting contacts")
             }
-            catch {
-                
-            }
+            
+            observer.onNext(phoneNumbers)
             
             return Disposables.create()
         })
+    }
+    
+    private func phoneNumbersFrom(contact: CNContact) -> [String] {
+        var phoneNumbers = [String]()
+        
+        contact.phoneNumbers.forEach { (labeledNumbers) in
+            phoneNumbers.append(labeledNumbers.value.stringValue)
+        }
+        
+        return phoneNumbers
     }
     
     func requestForAccess() -> Observable<Bool> {
@@ -37,19 +53,12 @@ class ContactService {
             switch authorizationStatus {
             case .authorized:
                 observer.onNext(true)
-            case .denied, .notDetermined:
+            case .notDetermined:
                 self.contactStore.requestAccess(for: CNEntityType.contacts, completionHandler: { (access, _) -> Void in
-                    if access {
-                        observer.onNext(access)
-                    } else {
-                        if authorizationStatus == CNAuthorizationStatus.denied {
-                            observer.onNext(false)
-                        }
-                    }
+                    observer.onNext(access)
                 })
-                
             default:
-                observer.onNext(true)
+                observer.onNext(false)
             }
             
             return Disposables.create()

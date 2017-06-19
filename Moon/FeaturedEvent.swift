@@ -8,12 +8,22 @@
 
 import Foundation
 import UIKit
+import SwaggerClient
 
 struct FeaturedEvent {
-    var image: UIImage
+    var imageURL: URL
     var barName: String
     var date: String
     var description: String
     var title: String
-    var id: String 
+    var id: String
+    
+    init(from event: BarEvents) {
+        self.barName = event.barId ?? "No Bar Name"
+        self.imageURL = baseURL.appendingPathComponent(event.pic ?? "")
+        self.date = event.date ?? "No Date"
+        self.description = event.description ?? "No Description"
+        self.title = event.title ?? "No Title"
+        self.id = event.id ?? "No ID"
+    }
 }

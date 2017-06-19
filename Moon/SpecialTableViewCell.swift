@@ -8,6 +8,8 @@
 
 import UIKit
 import Action
+import RxCocoa
+import RxSwift
 
 class SpecialTableViewCell: UITableViewCell {
 
@@ -17,15 +19,19 @@ class SpecialTableViewCell: UITableViewCell {
     @IBOutlet weak var subTitle: UILabel!
     @IBOutlet weak var secondarySubtitle: UILabel!
     
+    private var bag = DisposeBag()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
      
-    func initilizeSpecialCellWith(data: Special, likeAction: CocoaAction) {
+    func initilizeSpecialCellWith(data: SpecialCell, likeAction: CocoaAction, downloadImage: Action<Void, UIImage>) {
         setupImageView()
         
-        mainImage.image = data.image
+        downloadImage.elements.bind(to: mainImage.rx.image).addDisposableTo(bag)
+        downloadImage.execute()
+        
         mainTitle.text = data.description
         subTitle.text = data.barName
         secondarySubtitle.text = "\(data.likes)"
@@ -46,10 +52,8 @@ class SpecialTableViewCell: UITableViewCell {
         }
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    override func prepareForReuse() {
+        bag = DisposeBag()
     }
 
 }

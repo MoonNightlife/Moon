@@ -15,9 +15,10 @@ struct FakeUser {
     var lastName: String?
     var city: String?
     var username: String?
-    var pics: [UIImage]?
+    var pics: [URL]?
     var bio: String?
     var plan: String?
     var id: String?
-        
+    
+    
 }

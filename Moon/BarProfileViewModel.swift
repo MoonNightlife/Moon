@@ -16,10 +16,11 @@ enum UsersGoingType: Int {
     case friends = 1
 }
 
-struct BarProfileViewModel {
+struct BarProfileViewModel: ImageDownloadType {
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
+    var photoService: PhotoService
     
     // Inputs
     lazy var selectedUserIndex: Action<UsersGoingType, [FakeUser]> = {
@@ -35,50 +36,50 @@ struct BarProfileViewModel {
         })
     }()
     
-    lazy var onShowProfile: Action<String, Void> = { this in
-        return Action<String, Void> {_ in
-            let vm = ProfileViewModel(coordinator: this.sceneCoordinator)
-            return this.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
+    func onShowProfile() -> CocoaAction {
+        return CocoaAction {_ in
+            let vm = ProfileViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
         }
-    }(self)
+    }
     
-    lazy var onViewLikers: Action<String, Void> = { this in
-        return Action<String, Void> {_ in
-            let vm = UsersTableViewModel(coordinator: this.sceneCoordinator)
-            return this.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
+    func onViewLikers() -> CocoaAction {
+        return CocoaAction {_ in
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
-    }(self)
+    }
     
-    lazy var onLikeActivity: Action<String, Void> = { this in
-        return Action<String, Void> {_ in 
+    func onLikeActivity() -> CocoaAction {
+        return CocoaAction {_ in
             print("Like Activity")
             return Observable.empty()
         }
-    }(self)
+    }
     
-    lazy var onLikeEvent: Action<String, Void> = { this in
-        return Action<String, Void> {_ in
+    func onLikeEvent() -> CocoaAction {
+        return CocoaAction {_ in
             print("Like Event")
             return Observable.empty()
         }
-    }(self)
+    }
     
-    lazy var onShareEvent: Action<String, Void> = { this in
-        return Action<String, Void> {_ in
+    func onShareEvent() -> CocoaAction {
+        return CocoaAction {_ in
             print("Share Event")
             return Observable.empty()
         }
-    }(self)
+    }
     
-    lazy var onLikeSpecial: Action<String, Void> = { this in
-        return Action<String, Void> {_ in
+    func onLikeSpecial() -> CocoaAction {
+        return CocoaAction {_ in
             print("Like Special")
             return Observable.empty()
         }
-    }(self)
+    }
     
     // Outputs
-    var specials: Driver<[Special]> {
+    var specials: Driver<[SpecialCell]> {
         return getSpecials()
     }
     var events: Driver<[FeaturedEvent]> {
@@ -91,9 +92,9 @@ struct BarProfileViewModel {
         return getBarName()
     }
     
-    init(coordinator: SceneCoordinatorType) {
+    init(coordinator: SceneCoordinatorType, photoService: PhotoService = KingFisherPhotoService()) {
         self.sceneCoordinator = coordinator
-
+        self.photoService = photoService
     }
     
     func onBack() -> CocoaAction {
@@ -119,7 +120,7 @@ struct BarProfileViewModel {
 
 extension BarProfileViewModel {
     
-    fileprivate func getSpecials() -> Driver<[Special]> {
+    fileprivate func getSpecials() -> Driver<[SpecialCell]> {
         return Observable.just(createFakeSpecials()).asDriver(onErrorJustReturn: [])
     }
     

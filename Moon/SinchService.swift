@@ -13,8 +13,8 @@ import RxSwift
 protocol SMSValidationService {
 //    func sendVerificationCodeTo(PhoneNumber phoneNumber: String) -> Observable<Void>
 //    func verifyNumberWith(Code code: String) -> Observable<Void>
-    func formatPhoneNumberForGuiFrom(string: String, countryCode: CountryCode) -> String?
-    func formatPhoneNumberForStorageFrom(string: String, countryCode: CountryCode) -> String?
+    static func formatPhoneNumberForGuiFrom(string: String, countryCode: CountryCode) -> String?
+    static func formatPhoneNumberForStorageFrom(string: String, countryCode: CountryCode) -> String?
 }
 
 class SinchService: NSObject, SMSValidationService {
@@ -26,7 +26,7 @@ class SinchService: NSObject, SMSValidationService {
     private let sinchAPIKey = "1c4d1e22-0863-479a-8d15-4ecc6d2f6807"
     private var verification: SINVerificationProtocol?
     
-    func formatPhoneNumberForGuiFrom(string: String, countryCode: CountryCode) -> String? {
+    static func formatPhoneNumberForGuiFrom(string: String, countryCode: CountryCode) -> String? {
         do {
             let phoneNumber = try SINPhoneNumberUtil().parse(string, defaultRegion: countryCode.isoAlpha2)
             return SINPhoneNumberUtil().formatNumber(phoneNumber, format: .national)
@@ -35,7 +35,7 @@ class SinchService: NSObject, SMSValidationService {
         }
     }
     
-    func formatPhoneNumberForStorageFrom(string: String, countryCode: CountryCode) -> String? {
+    static func formatPhoneNumberForStorageFrom(string: String, countryCode: CountryCode) -> String? {
         do {
             let phoneNumber = try SINPhoneNumberUtil().parse(string, defaultRegion: countryCode.isoAlpha2)
             return SINPhoneNumberUtil().formatNumber(phoneNumber, format: .E164)

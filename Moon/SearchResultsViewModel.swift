@@ -108,7 +108,7 @@ struct SearchResultsViewModel {
     func getBarSnapShots() -> Observable<[SearchSectionItem]> {
         let fakeBars = createTempTopBarData()
         let bars = fakeBars.map({ bar in
-            return SearchSectionItem.searchResultItem(snapshot: SearchSnapshot(name: bar.barName, id: "336", picture: bar.imageName))
+            return SearchSectionItem.searchResultItem(snapshot: SearchSnapshot(name: bar.barName, id: "336", picture: bar.imageURL.absoluteString))
         })
         return Observable.just(bars)
     }
@@ -123,7 +123,7 @@ struct SearchResultsViewModel {
     static func getBars() -> Observable<[SearchSnapshot]> {
         let bars = createTempTopBarData()
         let barSuggestions = bars.map({ bar in
-            return SearchSnapshot(name: bar.barName, id: "336", picture: bar.imageName)
+            return SearchSnapshot(name: bar.barName, id: "336", picture: bar.imageURL.absoluteString)
         })
         return Observable.just(barSuggestions)
     }

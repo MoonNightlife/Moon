@@ -10,10 +10,11 @@ import Foundation
 import RxSwift
 import Action
 
-struct ExploreViewModel {
+struct ExploreViewModel: ImageDownloadType {
     
-    // Private
+    // Local
     private let disposeBag = DisposeBag()
+    var photoService: PhotoService
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
@@ -21,9 +22,19 @@ struct ExploreViewModel {
     // Inputs
     
     // Outputs
+    var topBars: Action<Void, [TopBar]>
     
-    init(coordinator: SceneCoordinatorType) {
+    init(coordinator: SceneCoordinatorType, barAPI: BarAPIType = BarAPIController(), photoService: PhotoService = KingFisherPhotoService()) {
         self.sceneCoordinator = coordinator
+        self.photoService = photoService
+        
+        topBars = Action(workFactory: {_ in 
+            return barAPI.getTopBarsIn(region: "dallas").map({
+                return $0.map({ bar in
+                    return TopBar(from: bar)
+                })
+            })
+        })
     }
     
     func createSpecialViewModel() -> SpecialsViewModel {

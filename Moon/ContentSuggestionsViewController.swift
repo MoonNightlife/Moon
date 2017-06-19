@@ -126,7 +126,7 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
             view.backgroundColor = .clear
             
             if let strongSelf = self {
-               view.initViewWith(bar: item, goAction: strongSelf.viewModel.onChangeAttendance(barID: item.id))
+               view.initViewWith(bar: item, goAction: strongSelf.viewModel.onChangeAttendance(barID: item.id), downloadImage: strongSelf.viewModel.downloadImage(url: baseURL))
             }
 
             cell.addSubview(view)
@@ -152,7 +152,7 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
             view.backgroundColor = .clear
             
             if let strongSelf = self {
-                view.initViewWith(user: item, addAction: strongSelf.viewModel.onAddFriend(userID: item.id))
+                view.initViewWith(user: item, addAction: strongSelf.viewModel.onAddFriend(userID: item.id), downloadImage: strongSelf.viewModel.downloadImage(url: baseURL))
             }
             
             cell.addSubview(view)
