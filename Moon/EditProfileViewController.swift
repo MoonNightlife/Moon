@@ -23,12 +23,16 @@ class EditProfileViewController: UIViewController, BindableType, RAReorderableLa
     //fake data
     var fakeImages = [#imageLiteral(resourceName: "pp2.jpg"), #imageLiteral(resourceName: "pp1.jpg"), #imageLiteral(resourceName: "pp3.jpg"), #imageLiteral(resourceName: "pp4.jpg"), #imageLiteral(resourceName: "pp5.jpg"), #imageLiteral(resourceName: "p1.jpg")]
     
+    @IBOutlet weak var firstNameTextField: TextField!
+    @IBOutlet weak var lastNameTextField: TextField!
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         prepareNavigationButtons()
         prepareCollectionView()
+        prepareFirstNameTextField()
+        prepareLastNameTextField()
         
         imagePicker.delegate = self
     }
@@ -63,10 +67,36 @@ class EditProfileViewController: UIViewController, BindableType, RAReorderableLa
         super.viewDidLayoutSubviews()
         collectionView.contentInset = UIEdgeInsets(top: topLayoutGuide.length, left: 0, bottom: 0, right: 0)
     }
+    
+    fileprivate func prepareFirstNameTextField() {
+        firstNameTextField.placeholder = "First Name"
+        firstNameTextField.isClearIconButtonEnabled = true
+        firstNameTextField.dividerActiveColor = .moonPurple
+        firstNameTextField.dividerNormalColor = .moonPurple
+        firstNameTextField.placeholderActiveColor = .moonPurple
+        
+        let leftView = UIImageView()
+        leftView.image = Icon.cm.pen
+        firstNameTextField.leftView = leftView
+        firstNameTextField.leftViewActiveColor = .moonPurple
+    }
+    
+    fileprivate func prepareLastNameTextField() {
+        lastNameTextField.placeholder = "Last Name"
+        lastNameTextField.isClearIconButtonEnabled = true
+        lastNameTextField.dividerActiveColor = .moonPurple
+        lastNameTextField.dividerNormalColor = .moonPurple
+        lastNameTextField.placeholderActiveColor = .moonPurple
+        
+        let leftView = UIImageView()
+        leftView.image = Icon.cm.pen
+        lastNameTextField.leftView = leftView
+        lastNameTextField.leftViewActiveColor = .moonPurple
+    }
 }
 
+// RAReorderableLayout delegate datasource
 extension EditProfileViewController {
-    // RAReorderableLayout delegate datasource
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screenWidth = UIScreen.main.bounds.width
@@ -151,8 +181,6 @@ extension EditProfileViewController {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-//            fakeImages[index].autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//            imageView.image.contentMode = .scaleAspectFill
             fakeImages[index.item] = pickedImage
             collectionView.reloadData()
         } else {

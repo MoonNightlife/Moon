@@ -492,10 +492,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DI1-KW-3MA">
-                                <rect key="frame" x="0.0" y="64" width="375" height="306"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="306" id="S2P-AQ-v3L"/>
+                                    <constraint firstAttribute="height" constant="300" id="S2P-AQ-v3L"/>
                                 </constraints>
                                 <collectionViewLayout key="collectionViewLayout" id="CLX-oY-nMh" customClass="RAReorderableLayout" customModule="Moon" customModuleProvider="target"/>
                                 <cells>
@@ -511,17 +511,37 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3ZZ-9q-Xds" customClass="TextField" customModule="Material">
+                                <rect key="frame" x="8" y="320" width="359" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OwT-tx-WXO" customClass="TextField" customModule="Material">
+                                <rect key="frame" x="8" y="370" width="359" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="DI1-KW-3MA" firstAttribute="top" secondItem="9V4-v6-Jqf" secondAttribute="bottom" id="l1L-gG-KwO"/>
+                            <constraint firstItem="3ZZ-9q-Xds" firstAttribute="top" secondItem="DI1-KW-3MA" secondAttribute="bottom" constant="20" id="CvR-Vq-nQc"/>
+                            <constraint firstAttribute="trailing" secondItem="OwT-tx-WXO" secondAttribute="trailing" constant="8" id="EAD-cH-aBg"/>
+                            <constraint firstItem="OwT-tx-WXO" firstAttribute="leading" secondItem="gA4-7w-RbV" secondAttribute="leading" constant="8" id="Hba-XY-Mey"/>
+                            <constraint firstAttribute="trailing" secondItem="3ZZ-9q-Xds" secondAttribute="trailing" constant="8" id="Omf-4J-lvs"/>
+                            <constraint firstItem="3ZZ-9q-Xds" firstAttribute="leading" secondItem="gA4-7w-RbV" secondAttribute="leading" constant="8" id="V2C-bs-cIm"/>
                             <constraint firstAttribute="trailing" secondItem="DI1-KW-3MA" secondAttribute="trailing" id="oro-eC-lvS"/>
+                            <constraint firstItem="OwT-tx-WXO" firstAttribute="top" secondItem="3ZZ-9q-Xds" secondAttribute="bottom" constant="20" id="rEf-xS-EcT"/>
+                            <constraint firstItem="DI1-KW-3MA" firstAttribute="top" secondItem="gA4-7w-RbV" secondAttribute="top" id="v9n-lV-BkE"/>
                             <constraint firstItem="DI1-KW-3MA" firstAttribute="leading" secondItem="gA4-7w-RbV" secondAttribute="leading" id="vFL-dB-7mh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="PW9-u0-Exq"/>
                     <connections>
                         <outlet property="collectionView" destination="DI1-KW-3MA" id="cAc-cm-SF8"/>
+                        <outlet property="firstNameTextField" destination="3ZZ-9q-Xds" id="8R9-RT-I2c"/>
+                        <outlet property="lastNameTextField" destination="OwT-tx-WXO" id="IAG-Oe-dIU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nc9-r8-S9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
