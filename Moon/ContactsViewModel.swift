@@ -11,16 +11,18 @@ import Action
 import RxCocoa
 import RxSwift
 import RxDataSources
+import SwaggerClient
 
 typealias SnapshotSectionModel = AnimatableSectionModel<String, UserSnapshot>
 
-struct ContactsViewModel: BackType {
+struct ContactsViewModel: BackType, ImageDownloadType {
     // Private
     let bag = DisposeBag()
     
     // Dependencies
     let sceneCoordinator: SceneCoordinatorType
     let contactService: ContactService
+    var photoService: PhotoService
 
     // Actions
     var checkContactAccess: Action<Void, Bool>
@@ -28,9 +30,10 @@ struct ContactsViewModel: BackType {
     // Outputs
     var UserInContacts: Observable<[SnapshotSectionModel]>
     
-    init(coordinator: SceneCoordinatorType, contactService: ContactService = ContactService()) {
+    init(coordinator: SceneCoordinatorType, contactService: ContactService = ContactService(), photoService: PhotoService = KingFisherPhotoService()) {
         self.sceneCoordinator = coordinator
         self.contactService = contactService
+        self.photoService = photoService
         
         checkContactAccess = Action(workFactory: {_ in 
             return contactService.requestForAccess()
@@ -57,10 +60,11 @@ struct ContactsViewModel: BackType {
     }
     
     static func getUsersWith(phoneNumbers: [String]) -> Observable<[UserSnapshot]> {
-        let userSnapshot = createFakeUsers().map({
-            return UserSnapshot(name: $0.firstName!, id: $0.id!, picture: #imageLiteral(resourceName: "pic1.jpg"))
-        })
-        return Observable.just(userSnapshot)
+//        let userSnapshot = createFakeUsers().map({
+//            return UserSnapshot(name: $0.firstName!, id: $0.id!, picture: #imageLiteral(resourceName: "pic1.jpg"))
+//        })
+//        return Observable.just(userSnapshot)
+        return Observable.empty()
     }
     
     static func userSnapshotsToSnapshotSectionModel(snapshots: [UserSnapshot]) -> SnapshotSectionModel {

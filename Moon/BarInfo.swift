@@ -9,7 +9,7 @@
 import Foundation
 
 struct BarInfo {
-    let website: String
-    let address: String
-    let phoneNumber: String
+    let website: String?
+    let address: String?
+    let phoneNumber: String?
 }

@@ -55,10 +55,10 @@ class BarActivityFeedViewController: UIViewController, BindableType {
             let cell = tableView.dequeueReusableCell(withIdentifier: self!.barActivityCellIdenifier, for: indexPath) as! BarActivityTableViewCell
             if let strongSelf = self {
                 cell.initializeCellWith(activity: item,
-                                        userAction: strongSelf.viewModel.onViewUser(activity: item),
-                                        barAction: strongSelf.viewModel.onViewBar(activity: item),
-                                        likeAction: strongSelf.viewModel.onLike(activity: item),
-                                        userLikedAction: strongSelf.viewModel.onViewLikers(activity: item))
+                                        userAction: strongSelf.viewModel.onViewUser(),
+                                        barAction: strongSelf.viewModel.onViewBar(),
+                                        likeAction: strongSelf.viewModel.onLike(),
+                                        userLikedAction: strongSelf.viewModel.onViewLikers())
             }
             return cell
         }

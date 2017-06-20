@@ -10,7 +10,6 @@ import Foundation
 import RxSwift
 import SwaggerClient
 
-
 let baseURL = URL(string: "http://localhost:8081")!
 
 protocol BarAPIType {
@@ -18,12 +17,12 @@ protocol BarAPIType {
     func getBarPeople(barID: String) -> Observable<[UserProfile]>
     
     func getBarInfo(barID: String) -> Observable<BarProfile>
-    func getBarEvents(barID: String) -> Observable<[BarEvents]>
-    func getBarSpecials(barID: String) -> Observable<[Specials]>
+    func getBarEvents(barID: String) -> Observable<[BarEvent]>
+    func getBarSpecials(barID: String) -> Observable<[Special]>
     
     func getBarsIn(region: String) -> Observable<[BarProfile]>
-    func getEventsIn(region: String) -> Observable<[BarEvents]>
-    func getSpecialsIn(region: String) -> Observable<[Specials]>
+    func getEventsIn(region: String) -> Observable<[BarEvent]>
+    func getSpecialsIn(region: String) -> Observable<[Special]>
     func getTopBarsIn(region: String) -> Observable<[BarProfile]>
     
     func getEventLikes(eventID: String) -> Observable<[UserProfile]>
@@ -73,9 +72,9 @@ extension BarAPIController {
             return Disposables.create()
         })
     }
-    func getBarEvents(barID: String) -> Observable<[BarEvents]> {
+    func getBarEvents(barID: String) -> Observable<[BarEvent]> {
         return Observable.create({ (observer) -> Disposable in
-            BarAPI.listBarEvents(barID: barID, completion: { (events, error) in
+            BarAPI.listBarEvent(barID: barID, completion: { (events, error) in
                 if let barEvents = events {
                     observer.onNext(barEvents)
                 } else if let e = error {
@@ -86,7 +85,7 @@ extension BarAPIController {
             return Disposables.create()
         })
     }
-    func getBarSpecials(barID: String) -> Observable<[Specials]> {
+    func getBarSpecials(barID: String) -> Observable<[Special]> {
         return Observable.create({ (observer) -> Disposable in
             BarAPI.listBarSpecials(barID: barID, completion: { (specials, error) in
                 if let s = specials {
@@ -115,28 +114,24 @@ extension BarAPIController {
             return Disposables.create()
         })
     }
-    func getEventsIn(region: String) -> Observable<[BarEvents]> {
+    func getEventsIn(region: String) -> Observable<[BarEvent]> {
         return Observable.create({ (observer) -> Disposable in
-            print("No Correct APi Call yet")
-            //TODO: this is the wrong api call, just using it to test till we get the real one
-            BarAPI.listBarEvents(barID: "01", completion: { (events, error) in
-                if let events = events {
-                    observer.onNext(events)
-                } else if let e = error {
-                    observer.onError(e)
+            BarAPI.listEvents(region: region, completion: { (events, error) in
+                if let e = events {
+                    observer.onNext(e)
+                } else if let er = error {
+                    observer.onError(er)
                 }
                 observer.onCompleted()
             })
-            
             return Disposables.create()
         })
     }
-    func getSpecialsIn(region: String) -> Observable<[Specials]> {
+    func getSpecialsIn(region: String) -> Observable<[Special]> {
         return Observable.create({ (observer) -> Disposable in
             BarAPI.listSpecials(region: region, completion: { (specials, error) in
                 if let s = specials {
-                    //TODO: API should return array of specials
-                    observer.onNext([s])
+                    observer.onNext(s)
                 } else if let e = error {
                     observer.onError(e)
                 }

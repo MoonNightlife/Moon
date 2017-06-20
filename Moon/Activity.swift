@@ -1,5 +1,5 @@
 //
-//  UserSnapshot.swift
+//  Activity.swift
 //  Moon
 //
 //  Created by Evan Noble on 6/20/17.
@@ -10,9 +10,9 @@ import Foundation
 import RxDataSources
 import SwaggerClient
 
-extension UserSnapshot: IdentifiableType {
+extension Activity: IdentifiableType {
     public var identity: String {
-        guard let id = id else {
+        guard let id = activityID else {
             return "0"
         }
         
@@ -20,8 +20,8 @@ extension UserSnapshot: IdentifiableType {
     }
 }
 
-extension UserSnapshot: Equatable {
-    public static func == (lhs: UserSnapshot, rhs: UserSnapshot) -> Bool {
-        return lhs.id == rhs.id
+extension Activity: Equatable {
+    public static func == (lhs: Activity, rhs: Activity) -> Bool {
+        return lhs.activityID == rhs.activityID && lhs.numLikes == rhs.numLikes
     }
 }

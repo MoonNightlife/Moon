@@ -10,31 +10,89 @@ import Foundation
 import Action
 import RxSwift
 import RxCocoa
+import SwaggerClient
 
 enum UsersGoingType: Int {
     case everyone = 0
     case friends = 1
 }
 
-struct BarProfileViewModel: ImageDownloadType {
+struct BarProfileViewModel: ImageDownloadType, BackType {
+    
+    // Local
+    private let bag = DisposeBag()
+    private let barInfo: Observable<BarInfo>
     
     // Dependencies
-    private let sceneCoordinator: SceneCoordinatorType
+    let sceneCoordinator: SceneCoordinatorType
     var photoService: PhotoService
+    let barAPI: BarAPIType
     
     // Inputs
-    lazy var selectedUserIndex: Action<UsersGoingType, [FakeUser]> = {
-        return Action(workFactory: {
-            switch $0 {
+    var selectedUserIndex = BehaviorSubject<UsersGoingType>(value: .everyone)
+    
+    // Outputs
+    var barPics = Variable<[UIImage]>([])
+    var barName: Observable<String>
+    var displayedUsers = Variable<[UserSnapshot]>([])
+    var specials = Variable<[SpecialCell]>([])
+    var events = Variable<[FeaturedEvent]>([])
+    
+    init(coordinator: SceneCoordinatorType, photoService: PhotoService = KingFisherPhotoService(), barAPI: BarAPIType = BarAPIController(), userAPI: UserAPIType = UserAPIController()) {
+        self.sceneCoordinator = coordinator
+        self.photoService = photoService
+        self.barAPI = barAPI
+        
+         let bar = barAPI.getBarInfo(barID: "123")
+        
+        barName = bar.map({ $0.name ?? "No Name" })
+        
+        bar.map({ $0.specials }).filter({ $0 != nil }).map({ return $0!.map(SpecialCell.init) }).bind(to: specials).addDisposableTo(bag)
+        bar.map({ $0.events }).filter({ $0 != nil }).map({ return $0!.map(FeaturedEvent.init) }).bind(to: events).addDisposableTo(bag)
+        
+        let usersGoing = bar.map({ $0.peopleAttending }).filter({ $0 != nil }).map({ $0! })
+        let friendsGoing = bar.map({ $0.friendsAttending }).filter({ $0 != nil }).map({ $0! })
+        Observable.combineLatest(usersGoing, friendsGoing, selectedUserIndex).map({ (users, friends, index) -> [UserSnapshot] in
+            switch index {
             case .everyone:
-                return Observable.just(createFakeUsers())
+                return users
             case .friends:
-                var users = createFakeUsers()
-                users.replaceSubrange(0...3, with: [])
-                return Observable.just(users)
+                return friends
             }
+        }).bind(to: displayedUsers).addDisposableTo(bag)
+        
+        bar.map({ $0.barPics }).filter({ $0 != nil }).flatMap({ pictureURLs in
+            return Observable.from(pictureURLs!).flatMap({
+                return photoService.getImageFor(url: baseURL.appendingPathComponent($0))
+            }).toArray()
+        }).bind(to: barPics).addDisposableTo(bag)
+        
+        barInfo = bar.map({ bar in
+            return BarInfo(website: bar.website, address: bar.address, phoneNumber: bar.phoneNumber)
         })
-    }()
+        
+    }
+    
+    func onShowInfo() -> CocoaAction {
+        return CocoaAction {
+            let vm = BarInfoViewModel(coordinator: self.sceneCoordinator, barInfo: self.barInfo)
+            return self.sceneCoordinator.transition(to: Scene.Bar.info(vm), type: .popover)
+        }
+    }
+    
+    func onAttendBar() -> CocoaAction {
+        return CocoaAction {
+            print("Attend bar")
+            return Observable.empty()
+        }
+    }
+    
+    func onViewMore() -> CocoaAction {
+        return CocoaAction {
+            print("View More")
+            return Observable.empty()
+        }
+    }
     
     func onShowProfile() -> CocoaAction {
         return CocoaAction {_ in
@@ -77,70 +135,5 @@ struct BarProfileViewModel: ImageDownloadType {
             return Observable.empty()
         }
     }
-    
-    // Outputs
-    var specials: Driver<[SpecialCell]> {
-        return getSpecials()
-    }
-    var events: Driver<[FeaturedEvent]> {
-        return getEvents()
-    }
-    var barPictures: Driver<[UIImage]> {
-        return getBarPics()
-    }
-    var barName: Driver<String> {
-        return getBarName()
-    }
-    
-    init(coordinator: SceneCoordinatorType, photoService: PhotoService = KingFisherPhotoService()) {
-        self.sceneCoordinator = coordinator
-        self.photoService = photoService
-    }
-    
-    func onBack() -> CocoaAction {
-        return CocoaAction {_ in 
-            return self.sceneCoordinator.pop()
-        }
-    }
-    
-    func onShowInfo() -> CocoaAction {
-        return CocoaAction {
-            let vm = BarInfoViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: Scene.Bar.info(vm), type: .popover)
-        }
-    }
-    
-    func onAttendBar() -> CocoaAction {
-        return CocoaAction {
-            print("Attend bar")
-            return Observable.empty()
-        }
-    }
-}
 
-extension BarProfileViewModel {
-    
-    fileprivate func getSpecials() -> Driver<[SpecialCell]> {
-        return Observable.just(createFakeSpecials()).asDriver(onErrorJustReturn: [])
-    }
-    
-    fileprivate func getEvents() -> Driver<[FeaturedEvent]> {
-        return Observable.just(createFakeEvents()).asDriver(onErrorJustReturn: [])
-    }
-    
-    fileprivate func getBarName() -> Driver<String> {
-        return Observable.just("Avenu Lounge").asDriver(onErrorJustReturn: "")
-    }
-    
-    fileprivate func getBarPics() -> Driver<[UIImage]> {
-        let barPicNames = ["b1.jpg", "b2.jpg", "b3.jpg", "b4.jpg", "b5.jpg"]
-        var images = [UIImage]()
-        barPicNames.forEach { (picName) in
-            guard let image = UIImage(named: picName) else {
-                return
-            }
-            images.append(image)
-        }
-        return Observable.just(images).asDriver(onErrorJustReturn: [])
-    }
 }

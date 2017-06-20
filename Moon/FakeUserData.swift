@@ -23,11 +23,11 @@ var profilePicsImages = [#imageLiteral(resourceName: "p1.jpg"), #imageLiteral(re
 func createFakeBarActivities() -> [BarActivity] {
     var activities = [BarActivity]()
     
-    for i in 0..<names.count {
-    
-        let activity = BarActivity(barId: "123", barName: barNames[i], name: names[i], time: Date(), username: names[i], userId: fakeIDs[i], activityId: "456", likes: i * 3, profileImage: profilePics[i])
-       activities.append(activity)
-    }
+//    for i in 0..<names.count {
+//    
+//        let activity = BarActivity(barId: "123", barName: barNames[i], name: names[i], time: Date(), username: names[i], userId: fakeIDs[i], activityId: "456", likes: i * 3, profileImage: profilePics[i])
+//       activities.append(activity)
+//    }
     return activities
 }
 

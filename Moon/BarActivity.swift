@@ -8,17 +8,26 @@
 
 import Foundation
 import RxDataSources
+import SwaggerClient
 
 struct BarActivity {
     var barId: String?
     var barName: String?
     var name: String?
     var time: Date?
-    var username: String?
     var userId: String?
     var activityId: String?
-    var likes: Int?
+    var likes: Int32?
     var profileImage: String?
+    
+    init(from activity: Activity) {
+        //TODO: change bar name and user name form id to actual name once api is fixed
+        self.barName = activity.barID
+        self.name = activity.userID
+        self.likes = activity.numLikes
+        //TODO: change once time stamp is double
+        //self.time = Date(timeIntervalSince1970: activity.timestamp)
+    }
 }
 
 extension BarActivity: IdentifiableType {

@@ -19,7 +19,6 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
     
     var viewModel: FeaturedViewModel!
     let featuredCellIdenifier = "featuredEventCell"
-    var featuredEvents = [FeaturedEvent]()
     private let bag = DisposeBag()
     
     @IBOutlet weak var eventCollectionView: UICollectionView!
@@ -43,20 +42,18 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func bindViewModel() {
-        viewModel.loadEvents.elements.subscribe(onNext: { [weak self] events in
-            self?.featuredEvents = events
-            self?.eventCollectionView.reloadData()
-        })
-        .addDisposableTo(bag)
+        viewModel.featuredEvents.asObservable().subscribe(onNext: { _ in
+            self.eventCollectionView.reloadData()
+        }).addDisposableTo(bag)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return featuredEvents.count
+        return viewModel.featuredEvents.value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let cellsAcross: CGFloat = CGFloat(featuredEvents.count)
+        let cellsAcross: CGFloat = CGFloat(viewModel.featuredEvents.value.count)
         let spaceBetweenCells: CGFloat = 0.8
         let dim = (collectionView.bounds.width - (cellsAcross - 1) * spaceBetweenCells) / cellsAcross
         
@@ -74,7 +71,12 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
         let view = FeaturedEventView()
         view.frame = CGRect(x: (cell.frame.size.width / 2) - (width / 2), y: (cell.frame.size.height / 2) - (height / 2), width: width, height: height)
         view.backgroundColor = .clear
-        view.initializeCellWith(event: featuredEvents[indexPath.row], index: indexPath.row, likeAction: viewModel.onLikeEvent(eventID: featuredEvents[indexPath.row].id), shareAction: viewModel.onShareEvent(eventID: featuredEvents[indexPath.row].id), downloadImage: viewModel.downloadImage(url: featuredEvents[indexPath.row].imageURL))
+        view.initializeCellWith(event: viewModel.featuredEvents.value[indexPath.row],
+                                index: indexPath.row,
+                                likeAction: viewModel.onLikeEvent(eventID: viewModel.featuredEvents.value[indexPath.row].id),
+                                shareAction: viewModel.onShareEvent(eventID: viewModel.featuredEvents.value[indexPath.row].id),
+                                downloadImage: viewModel.downloadImage(url: viewModel.featuredEvents.value[indexPath.row].imageURL),
+                                moreInfoAction: viewModel.onMoreInfo(eventID: viewModel.featuredEvents.value[indexPath.row].id))
         
         cell.addSubview(view)
         

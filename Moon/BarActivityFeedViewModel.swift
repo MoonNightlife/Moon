@@ -9,9 +9,10 @@
 import Foundation
 import RxSwift
 import RxDataSources
+import SwaggerClient
 import Action
 
-typealias ActivitySection = AnimatableSectionModel<String, BarActivity>
+typealias ActivitySection = AnimatableSectionModel<String, Activity>
 
 struct BarActivityFeedViewModel {
     
@@ -20,44 +21,46 @@ struct BarActivityFeedViewModel {
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
+    let userAPI: UserAPIType
     
     // Inputs
     
     // Outputs
-    lazy var refreshAction: Action<Void, [ActivitySection]> = {
+    lazy var refreshAction: Action<Void, [ActivitySection]> = { this in
         return Action { _ in
-            let section = [ActivitySection(model: "", items: createFakeBarActivities().slice(start: Int(arc4random_uniform(UInt32(createFakeBarActivities().count-1))), end: createFakeBarActivities().count-1))]
-            return Observable.just(section)
+            return this.userAPI.getActivityFeed(userID: "01").map({
+                [ActivitySection.init(model: "Activities", items: $0)]
+            })
         }
-    }()
+    }(self)
     
-    init(coordinator: SceneCoordinatorType) {
+    init(coordinator: SceneCoordinatorType, userAPI: UserAPIType = UserAPIController()) {
         self.sceneCoordinator = coordinator
+        self.userAPI = userAPI
 
     }
     
-    func onLike(activity: BarActivity) -> CocoaAction {
+    func onLike() -> CocoaAction {
         return CocoaAction {
-            print("Show \(activity)")
             return Observable.empty()
         }
     }
     
-    func onViewUser(activity: BarActivity) -> CocoaAction {
+    func onViewUser() -> CocoaAction {
         return CocoaAction {
             let vm = ProfileViewModel(coordinator: self.sceneCoordinator)
             return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
         }
     }
     
-    func onViewBar(activity: BarActivity) -> CocoaAction {
+    func onViewBar() -> CocoaAction {
         return CocoaAction {
             let vm = BarProfileViewModel(coordinator: self.sceneCoordinator)
             return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
         }
     }
     
-    func onViewLikers(activity: BarActivity) -> CocoaAction {
+    func onViewLikers() -> CocoaAction {
         return CocoaAction {
             let vm = UsersTableViewModel(coordinator: self.sceneCoordinator)
             return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)

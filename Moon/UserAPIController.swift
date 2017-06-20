@@ -19,12 +19,12 @@ protocol UserAPIType {
     
     func blockUser(userID: String, blockID: String) -> Observable<Void>
     func unblockUser(userID: String, blockID: String) -> Observable<Void>
-    func getBlockedUserList(userID: String) -> Observable<[UserProfile]>
+    func getBlockedUserList(userID: String) -> Observable<[UserSnapshot]>
     
     func getFriends(userID: String) -> Observable<[UserProfile]>
-    func getUserInfo(userID: String) -> Observable<UserProfile>
-    func getUserActivity(userID: String) -> Observable<Activity>
+    func getUserProfile(userID: String) -> Observable<UserProfile>
     func getActivityLikes(activityID: String) -> Observable<[UserProfile]>
+    func getActivityFeed(userID: String) -> Observable<[Activity]>
     
     func goToBar(userID: String, barID: String) -> Observable<Void>
     func likeActivity(userID: String, activityID: String) -> Observable<Void>
@@ -36,7 +36,7 @@ protocol UserAPIType {
 class UserAPIController: UserAPIType {
     func acceptFriend(userID: String, friendID: String) -> Observable<Void> {
         return Observable.create({ (observer) -> Disposable in
-            let body = Body4()
+            let body = Body5()
             body.userID = userID
             body.friendID = friendID
             UserAPI.acceptFriend(body: body, completion: { (error) in
@@ -50,7 +50,7 @@ class UserAPIController: UserAPIType {
     }
     func declineFriend(userID: String, friendID: String) -> Observable<Void> {
         return Observable.create({ (observer) -> Disposable in
-            let body = Body5()
+            let body = Body6()
             body.userID = userID
             body.friendID = friendID
             UserAPI.declineFriend(body: body, completion: { (error) in
@@ -64,7 +64,7 @@ class UserAPIController: UserAPIType {
     }
     func requestFriend(userID: String, friendID: String) -> Observable<Void> {
         return Observable.create({ (observer) -> Disposable in
-            let body = Body3()
+            let body = Body4()
             body.userID = userID
             body.friendID = friendID
             UserAPI.requestFriend(body: body, completion: { (error) in
@@ -87,7 +87,7 @@ class UserAPIController: UserAPIType {
 extension UserAPIController {
     func blockUser(userID: String, blockID: String) -> Observable<Void> {
         return Observable.create({ (observer) -> Disposable in
-            let body = Body6()
+            let body = Body7()
             body.userID = userID
             body.blockID = blockID
             UserAPI.blockUser(body: body, completion: { (error) in
@@ -101,7 +101,7 @@ extension UserAPIController {
     }
     func unblockUser(userID: String, blockID: String) -> Observable<Void> {
         return Observable.create({ (observer) -> Disposable in
-            let body = Body7()
+            let body = Body8()
             body.userID = userID
             body.blockID = blockID
             UserAPI.unblockUser(body: body, completion: { (error) in
@@ -113,7 +113,7 @@ extension UserAPIController {
             return Disposables.create()
         })
     }
-    func getBlockedUserList(userID: String) -> Observable<[UserProfile]> {
+    func getBlockedUserList(userID: String) -> Observable<[UserSnapshot]> {
         return Observable.create({ (observer) -> Disposable in
             UserAPI.getUserBlocklist(userID: userID, completion: { (profiles, error) in
                 if let p = profiles {
@@ -142,25 +142,11 @@ extension UserAPIController {
             return Disposables.create()
         })
     }
-    func getUserInfo(userID: String) -> Observable<UserProfile> {
+    func getUserProfile(userID: String) -> Observable<UserProfile> {
         return Observable.create({ (observer) -> Disposable in
             UserAPI.getUser(userID: userID, completion: { (profile, error) in
                 if let p = profile {
                     observer.onNext(p)
-                } else if let e = error {
-                    observer.onError(e)
-                }
-                observer.onCompleted()
-            })
-            return Disposables.create()
-        })
-    }
-    func getUserActivity(userID: String) -> Observable<Activity> {
-        return Observable.create({ (observer) -> Disposable in
-            UserAPI.getUserActivity(userID: userID, completion: { (activities, error) in
-                if let a = activities {
-                    //TODO: API should only return the latest Activity
-                    observer.onNext(a.first!)
                 } else if let e = error {
                     observer.onError(e)
                 }
@@ -174,6 +160,20 @@ extension UserAPIController {
             UserAPI.getActivityLikes(activityID: activityID, completion: { (profiles, error) in
                 if let p = profiles {
                     observer.onNext(p)
+                } else if let e = error {
+                    observer.onError(e)
+                }
+                observer.onCompleted()
+            })
+            return Disposables.create()
+        })
+    }
+    
+    func getActivityFeed(userID: String) -> Observable<[Activity]> {
+        return Observable.create({ (observer) -> Disposable in
+            UserAPI.getFeed(userID: userID, completion: { (activity, error) in
+                if let a = activity {
+                    observer.onNext(a)
                 } else if let e = error {
                     observer.onError(e)
                 }
@@ -229,7 +229,7 @@ extension UserAPIController {
     }
     func likeEvent(userID: String, eventID: String) -> Observable<Void> {
         return Observable.create({ (observer) -> Disposable in
-            //TODO: need api endpoint for liking an event
+            
             return Disposables.create()
         })
     }
