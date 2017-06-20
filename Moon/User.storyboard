@@ -490,13 +490,43 @@
                     <view key="view" contentMode="scaleToFill" id="gA4-7w-RbV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DI1-KW-3MA">
+                                <rect key="frame" x="0.0" y="64" width="375" height="306"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="306" id="S2P-AQ-v3L"/>
+                                </constraints>
+                                <collectionViewLayout key="collectionViewLayout" id="CLX-oY-nMh" customClass="RAReorderableLayout" customModule="Moon" customModuleProvider="target"/>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="YsV-kL-0dn" customClass="RACollectionViewCell" customModule="Moon" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <size key="customSize" width="100" height="100"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DI1-KW-3MA" firstAttribute="top" secondItem="9V4-v6-Jqf" secondAttribute="bottom" id="l1L-gG-KwO"/>
+                            <constraint firstAttribute="trailing" secondItem="DI1-KW-3MA" secondAttribute="trailing" id="oro-eC-lvS"/>
+                            <constraint firstItem="DI1-KW-3MA" firstAttribute="leading" secondItem="gA4-7w-RbV" secondAttribute="leading" id="vFL-dB-7mh"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="PW9-u0-Exq"/>
+                    <connections>
+                        <outlet property="collectionView" destination="DI1-KW-3MA" id="cAc-cm-SF8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nc9-r8-S9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1664.8" y="700.29985007496259"/>
+            <point key="canvasLocation" x="1605.5999999999999" y="895.50224887556226"/>
         </scene>
         <!--Delete Account View Controller-->
         <scene sceneID="dLb-cE-10Y">
@@ -785,7 +815,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4GV-Z2-CP6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="725.60000000000002" y="700.29985007496259"/>
+            <point key="canvasLocation" x="737" y="896"/>
         </scene>
     </scenes>
     <resources>
