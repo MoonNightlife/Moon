@@ -12,28 +12,36 @@ import RxSwift
 import Action
 import RAReorderableLayout
 
-class EditProfileViewController: UIViewController, BindableType, RAReorderableLayoutDelegate, RAReorderableLayoutDataSource, UIImagePickerControllerDelegate {
+class EditProfileViewController: UIViewController, BindableType, RAReorderableLayoutDelegate, RAReorderableLayoutDataSource, UIImagePickerControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate {
 
     var viewModel: EditProfileViewModel!
     var cancelButton: UIBarButtonItem!
     var saveButton: UIBarButtonItem!
+    var offSet: CGFloat!
+    var keyboardHeight: CGFloat!
     fileprivate let imagePicker = UIImagePickerController()
     fileprivate var index: NSIndexPath!
     
     //fake data
     var fakeImages = [#imageLiteral(resourceName: "pp2.jpg"), #imageLiteral(resourceName: "pp1.jpg"), #imageLiteral(resourceName: "pp3.jpg"), #imageLiteral(resourceName: "pp4.jpg"), #imageLiteral(resourceName: "pp5.jpg"), #imageLiteral(resourceName: "p1.jpg")]
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var bioTextField: TextField!
     @IBOutlet weak var firstNameTextField: TextField!
     @IBOutlet weak var lastNameTextField: TextField!
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Edit Profile"
 
         prepareNavigationButtons()
         prepareCollectionView()
         prepareFirstNameTextField()
         prepareLastNameTextField()
-        
+        prepareBioTextField()
+        prepareScrollView()
+
         imagePicker.delegate = self
     }
     
@@ -41,8 +49,39 @@ class EditProfileViewController: UIViewController, BindableType, RAReorderableLa
         cancelButton.rx.action = viewModel.onBack()
         saveButton.rx.action = viewModel.onSave()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionView.contentInset = UIEdgeInsets(top: topLayoutGuide.length, left: 0, bottom: 0, right: 0)
+    }
     
-    func prepareCollectionView() {
+    func keyboardWillShow(notification: NSNotification) {
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame: NSValue = (userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as? NSValue)!
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        keyboardHeight = keyboardRectangle.height
+        calculateOffset()
+        moveViewUp()
+    }
+    
+    fileprivate func moveViewUp() {
+        UIView.animate(withDuration: Double(0.3), animations: {
+            self.scrollView.contentOffset.y = self.offSet
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    fileprivate func moveViewDown() {
+        UIView.animate(withDuration: Double(0.3), animations: {
+            self.scrollView.contentOffset.y = 0
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    fileprivate func prepareCollectionView() {
         let nib = UINib(nibName: "ImageCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: "cell")
         collectionView.isScrollEnabled = false
@@ -51,7 +90,16 @@ class EditProfileViewController: UIViewController, BindableType, RAReorderableLa
         collectionView.dataSource = self
     }
     
-    func prepareNavigationButtons() {
+    fileprivate func calculateOffset() {
+        let screenHeight = self.view.frame.size.height
+        let bioY = screenHeight - bioTextField.y
+        let keyboardShift = keyboardHeight - bioY
+        let extraShift = CGFloat(10) + bioTextField.frame.size.height
+        
+        offSet = extraShift + keyboardShift
+    }
+    
+    fileprivate func prepareNavigationButtons() {
         cancelButton = UIBarButtonItem()
         cancelButton.image = Icon.cm.close
         cancelButton.tintColor = UIColor.moonRed
@@ -62,36 +110,77 @@ class EditProfileViewController: UIViewController, BindableType, RAReorderableLa
         saveButton.tintColor = UIColor.moonGreen
         self.navigationItem.rightBarButtonItem = saveButton
     }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        collectionView.contentInset = UIEdgeInsets(top: topLayoutGuide.length, left: 0, bottom: 0, right: 0)
-    }
     
     fileprivate func prepareFirstNameTextField() {
+        firstNameTextField.delegate = self
         firstNameTextField.placeholder = "First Name"
         firstNameTextField.isClearIconButtonEnabled = true
-        firstNameTextField.dividerActiveColor = .moonPurple
-        firstNameTextField.dividerNormalColor = .moonPurple
-        firstNameTextField.placeholderActiveColor = .moonPurple
+        firstNameTextField.dividerActiveColor = .moonBlue
+        firstNameTextField.dividerNormalColor = .moonBlue
+        firstNameTextField.placeholderActiveColor = .moonBlue
         
         let leftView = UIImageView()
         leftView.image = Icon.cm.pen
         firstNameTextField.leftView = leftView
-        firstNameTextField.leftViewActiveColor = .moonPurple
+        firstNameTextField.leftViewActiveColor = .moonBlue
     }
     
     fileprivate func prepareLastNameTextField() {
+        lastNameTextField.delegate = self
         lastNameTextField.placeholder = "Last Name"
         lastNameTextField.isClearIconButtonEnabled = true
-        lastNameTextField.dividerActiveColor = .moonPurple
-        lastNameTextField.dividerNormalColor = .moonPurple
-        lastNameTextField.placeholderActiveColor = .moonPurple
+        lastNameTextField.dividerActiveColor = .moonBlue
+        lastNameTextField.dividerNormalColor = .moonBlue
+        lastNameTextField.placeholderActiveColor = .moonBlue
         
         let leftView = UIImageView()
         leftView.image = Icon.cm.pen
         lastNameTextField.leftView = leftView
-        lastNameTextField.leftViewActiveColor = .moonPurple
+        lastNameTextField.leftViewActiveColor = .moonBlue
+    }
+    
+    fileprivate func prepareBioTextField() {
+        bioTextField.delegate = self
+        bioTextField.placeholder = "Bio"
+        bioTextField.isClearIconButtonEnabled = true
+        bioTextField.dividerActiveColor = .moonPurple
+        bioTextField.dividerNormalColor = .moonPurple
+        bioTextField.placeholderActiveColor = .moonPurple
+        
+        let leftView = UIImageView()
+        leftView.image = Icon.cm.edit
+        bioTextField.leftView = leftView
+        bioTextField.leftViewActiveColor = .moonPurple
+    }
+    
+    fileprivate func prepareScrollView() {
+        scrollView.delegate = self
+        scrollView.isUserInteractionEnabled = true
+        scrollView.isScrollEnabled = false
+        scrollView.bounces = false
+        scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: 700)
+    }
+}
+
+// TextField Delegate Functions
+extension EditProfileViewController {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == bioTextField {
+            bioTextField.resignFirstResponder()
+            self.moveViewDown()
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        bioTextField.resignFirstResponder()
+        firstNameTextField.resignFirstResponder()
+        lastNameTextField.resignFirstResponder()
+        self.moveViewDown()
+        
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
     }
 }
 
@@ -170,7 +259,7 @@ extension EditProfileViewController {
     }
 }
 
-//Image Picker Delegates and Functions
+//ImagePicker Delegate
 extension EditProfileViewController {
     func imageTouched() {
         imagePicker.allowsEditing = false
