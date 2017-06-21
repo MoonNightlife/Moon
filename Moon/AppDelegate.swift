@@ -10,6 +10,12 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    enum LaunchScreen {
+        case login
+        case barProfile
+        case main
+    }
 
     var window: UIWindow?
 
@@ -18,47 +24,65 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         UIApplication.shared.statusBarStyle = .lightContent
         
+        if let url = launchOptions?[.url] as? URL {
+            return executeDeepLink(with: url)
+        } else {
+            //TODO: check if user is logged in
+            prepareEntryViewController(vc: .login)
+            return true
+        }
+    }
+    
+    func application(_: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return url.scheme == "moonnightlife" && executeDeepLink(with: url)
+    }
+    
+    fileprivate func prepareEntryViewController(vc: LaunchScreen) {
         let sceneCoordinator = SceneCoordinator(window: window!)
         
-        let viewModel = LoginViewModel(coordinator: sceneCoordinator)
-        let firstScene = Scene.Login.login(viewModel)
-        sceneCoordinator.transition(to: firstScene, type: .root)
-        
-        UIApplication.shared.statusBarStyle = .lightContent
+        switch vc {
+        case .login:
+            let viewModel = LoginViewModel(coordinator: sceneCoordinator)
+            let firstScene = Scene.Login.login(viewModel)
+            sceneCoordinator.transition(to: firstScene, type: .root)
+        case .main:
+            let mainVM = MainViewModel(coordinator: sceneCoordinator)
+            let searchVM = SearchBarViewModel(coordinator: sceneCoordinator)
+            sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
+        case .barProfile:
+            let mainVM = MainViewModel(coordinator: sceneCoordinator)
+            let searchVM = SearchBarViewModel(coordinator: sceneCoordinator)
+            sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
+            let barVM = BarProfileViewModel(coordinator: sceneCoordinator)
+            sceneCoordinator.transition(to: Scene.Bar.profile(barVM), type: .modal)
+        }
+    }
+    
+}
 
+// MARK: - Deep Link
+extension AppDelegate {
+    fileprivate func executeDeepLink(with url: URL) -> Bool {
+        // Create a recognizer with this app's custom deep link types.
+        let recognizer = DeepLinkRecognizer(deepLinkTypes: [ShowEventDeepLink.self])
+        
+        // Try to create a deep link object based on the URL.
+        guard let deepLink = recognizer.deepLink(matching: url) else {
+            print("Unable to match URL: \(url.absoluteString)")
+            return false
+        }
+        
+        // Navigate to the view or content specified by the deep link.
+        switch deepLink {
+        case let link as ShowEventDeepLink: return showEvent(with: link)
+        default: fatalError("Unsupported DeepLink: \(type(of: deepLink))")
+        }
+    }
+    
+    fileprivate func showEvent(with deepLink: ShowEventDeepLink) -> Bool {
+        //TODO: Present bar profile for bar id in deep link if logged in
+        prepareEntryViewController(vc: .barProfile)
+        print("Show Event")
         return true
     }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. 
-        // This can occur for certain types of temporary interruptions 
-        // (such as an incoming phone call or SMS message) or when the user quits the application and 
-        // it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. 
-        // Games should use this method to pause the game.
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data,
-        // invalidate timers, and store enough application state information
-        // to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called
-        // instead of applicationWillTerminate: when the user quits.
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state;
-        // here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. 
-        // If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate.
-        // See also applicationDidEnterBackground:.
-    }
-
 }
