@@ -11,62 +11,37 @@ import RxSwift
 import RxCocoa
 import Action
 import CoreLocation
+import RxOptional
 
 struct BarInfoViewModel {
     // Private
     private let defaultInfo = BarInfo(website: "www.apple.com", address: "108 Mast Ct, Mooresville NC", phoneNumber: "1-800–692–7753")
-    let barInfo: Observable<BarInfo>
     
     // Dependencies
     let sceneCoordinator: SceneCoordinatorType
     let geocoder: CLGeocoder
     
     // Outputs
-    var addressString: Driver<String>!
-    var websiteString: Driver<String>!
-    var phoneNumberString: Driver<String>!
+    var addressString: Driver<String>
+    var addressURL: Observable<URL?>
+    var websiteString: Driver<String>
+    var websiteURL: Observable<URL?>
+    var phoneNumberString: Driver<String>
+    var phoneNumberURL: Observable<URL?>
     
     // Inputs
-    lazy var onCall: Action<Void, URL?> = { this in
-        return Action(workFactory: {_ in
-            return this.barInfo.map({ $0.phoneNumber }).map(this.createPhoneNumberURL)
-        })
-    }(self)
     
-    lazy var onViewWebsite: Action<Void, URL?> = { this in
-        return Action(workFactory: {_ in
-            return this.barInfo.map({ info in
-                return URL(string: "http://\(info.website)")
-            })
-        })
-    }(self)
-    
-    lazy var onViewAddress: Action<Void, URL?> = { this in
-        return Action(workFactory: {_ in
-            return this.barInfo.map({ $0.address }).map(this.createAddressURL)
-        })
-    }(self)
-    
-    init(coordinator: SceneCoordinatorType, geocoder: CLGeocoder = CLGeocoder()) {
+    init(coordinator: SceneCoordinatorType, geocoder: CLGeocoder = CLGeocoder(), barInfo: Observable<BarInfo>) {
         sceneCoordinator = coordinator
         self.geocoder = geocoder
+    
+        addressString = barInfo.map({ $0.address }).replaceNilWith("No Address").asDriver(onErrorJustReturn: defaultInfo.address!)
+        websiteString = barInfo.map({ $0.website }).replaceNilWith("No Website").asDriver(onErrorJustReturn: defaultInfo.website!)
+        phoneNumberString = barInfo.map({ $0.phoneNumber }).replaceNilWith("No Phone Number").asDriver(onErrorJustReturn: defaultInfo.phoneNumber!)
         
-        barInfo = {
-            let barInfo = BarInfo(website: "www.apple.com", address: "108 Mast Ct, Mooresville NC", phoneNumber: "1-800–692–7753")
-            return Observable.just(barInfo)
-        }()
-        
-        addressString = barInfo.map({
-            $0.address
-        }).asDriver(onErrorJustReturn: defaultInfo.address)
-        
-        websiteString = barInfo.map({
-            $0.website
-        }).asDriver(onErrorJustReturn: defaultInfo.website)
-        
-        phoneNumberString = barInfo.map({
-            $0.phoneNumber
-        }).asDriver(onErrorJustReturn: defaultInfo.phoneNumber)
+        addressURL = barInfo.map({ $0.phoneNumber }).map(BarInfoViewModel.createAddressURL)
+        websiteURL = barInfo.map({ $0.website }).map(BarInfoViewModel.createWebsiteURL)
+        phoneNumberURL = barInfo.map({ $0.website }).map(BarInfoViewModel.createPhoneNumberURL)
         
     }
     
@@ -78,13 +53,27 @@ struct BarInfoViewModel {
 }
 
 extension BarInfoViewModel {
-    fileprivate func createPhoneNumberURL(phoneNumber: String) -> URL? {
-        let formattedPhoneNumber = phoneNumber.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+    static func createPhoneNumberURL(phoneNumber: String?) -> URL? {
+        guard let formattedPhoneNumber = phoneNumber?.components(separatedBy: CharacterSet.decimalDigits.inverted).joined() else {
+            return nil
+        }
+        
         return URL(string: "tel://\(formattedPhoneNumber)")
     }
     
-    fileprivate func createAddressURL(address: String) -> URL? {
-        let formattedAddress = address.replacingOccurrences(of: " ", with: "%20")
+    static func createAddressURL(address: String?) -> URL? {
+        guard let formattedAddress = address?.replacingOccurrences(of: " ", with: "%20") else {
+            return nil
+        }
+        
         return URL(string: "http://maps.apple.com/?address=\(formattedAddress)")
+    }
+    
+    static func createWebsiteURL(website: String?) -> URL? {
+        guard let web = website else {
+            return nil
+        }
+        
+        return URL(string: "http://\(web)")
     }
 }

@@ -9,6 +9,7 @@
 import UIKit
 import Action
 import RxSwift
+import SwaggerClient
 
 class BarActivityTableViewCell: UITableViewCell {
     
@@ -22,9 +23,9 @@ class BarActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var numLikeButton: UIButton!
     @IBOutlet weak var timeImageView: UIImageView!
     
-    fileprivate var activity: BarActivity!
+    fileprivate var activity: Activity!
     
-    func initializeCellWith(activity: BarActivity, userAction: CocoaAction, barAction: CocoaAction, likeAction: CocoaAction, userLikedAction: CocoaAction) {
+    func initializeCellWith(activity: Activity, userAction: CocoaAction, barAction: CocoaAction, likeAction: CocoaAction, userLikedAction: CocoaAction) {
         
         self.activity = activity
         
@@ -51,8 +52,6 @@ extension BarActivityTableViewCell {
     
     fileprivate func setupProfilePicture() {
         // Sets a circular profile pic
-        self.profilePicture.image = UIImage(named: activity.profileImage!)
-        
         self.profilePicture.layer.masksToBounds = false
         self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.height/2
         self.profilePicture.clipsToBounds = true
@@ -63,7 +62,7 @@ extension BarActivityTableViewCell {
     }
     
     fileprivate func setupUsername() {
-        if let username = activity.name {
+        if let username = activity.userName {
             self.user.setTitle(username, for: .normal)
             self.user.setTitleColor(.darkGray, for: .normal)
             self.user.titleLabel?.font = UIFont.moonFont(size: 16)
@@ -79,8 +78,9 @@ extension BarActivityTableViewCell {
     }
     
     fileprivate func setupTime() {
-        if let time = activity.time {
-            self.timeLabel.text = time.getElaspedTimefromDate()
+        if let time = activity.timestamp {
+            let date = Date.init(timeIntervalSince1970: time)
+            self.timeLabel.text = date.getElaspedTimefromDate()
             self.timeLabel.textColor = .gray
 
         }
@@ -98,7 +98,7 @@ extension BarActivityTableViewCell {
     
     fileprivate func setupLikeNumber() {
         self.numLikeButton.titleLabel?.textColor = .lightGray
-        if let likes = activity.likes {
+        if let likes = activity.numLikes {
             self.numLikeButton.setTitle(String(likes), for: .normal)
         } else {
             self.numLikeButton.setTitle("0", for: .normal)

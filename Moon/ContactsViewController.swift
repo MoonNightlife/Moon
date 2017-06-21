@@ -55,7 +55,7 @@ class ContactsViewController: UIViewController, BindableType {
             //swiftlint:disable force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactTableViewCell
             if let strongSelf = self {
-                cell.initCell(user: item, addAction: strongSelf.viewModel.onAddFriend(userID: item.id))
+                cell.initCell(user: item, addAction: strongSelf.viewModel.onAddFriend(userID: item.id!), downloadAction: strongSelf.viewModel.downloadImage(url: baseURL.appendingPathComponent(item.profilePic!)))
             }
             return cell
         }

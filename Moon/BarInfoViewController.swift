@@ -35,23 +35,17 @@ class BarInfoViewController: UIViewController, BindableType {
     func bindViewModel() {
         backButton.rx.action = viewModel.onBack()
         
-        phoneNumberButton.rx.controlEvent(.touchUpInside).subscribe(viewModel.onCall.inputs).addDisposableTo(bag)
-        viewModel.onCall.elements.subscribe(onNext: { [weak self] in
+        phoneNumberButton.rx.controlEvent(.touchUpInside).withLatestFrom(viewModel.phoneNumberURL).subscribe(onNext: { [weak self] in
             self?.openURL(url: $0)
-        })
-        .addDisposableTo(bag)
+        }).addDisposableTo(bag)
         
-        websiteButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(viewModel.onViewWebsite.inputs).addDisposableTo(bag)
-        viewModel.onViewWebsite.elements.subscribe(onNext: { [weak self] in
+        websiteButton.rx.controlEvent(UIControlEvents.touchUpInside).withLatestFrom(viewModel.websiteURL).subscribe(onNext: { [weak self] in
             self?.openURL(url: $0)
-        })
-        .addDisposableTo(bag)
+        }).addDisposableTo(bag)
         
-        addressButton.rx.controlEvent(.touchUpInside).subscribe(viewModel.onViewAddress.inputs).addDisposableTo(bag)
-        viewModel.onViewAddress.elements.subscribe(onNext: { [weak self] in
+        addressButton.rx.controlEvent(.touchUpInside).withLatestFrom(viewModel.addressURL).subscribe(onNext: { [weak self] in
             self?.openURL(url: $0)
-        })
-        .addDisposableTo(bag)
+        }).addDisposableTo(bag)
         
         viewModel.addressString.drive(addressButton.rx.title(for: .normal)).addDisposableTo(bag)
         viewModel.phoneNumberString.drive(phoneNumberButton.rx.title(for: .normal)).addDisposableTo(bag)

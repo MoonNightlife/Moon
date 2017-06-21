@@ -36,11 +36,7 @@ struct SpecialsViewModel: ImageDownloadType {
         self.photoService = photoService
         
         specials = Action(workFactory: { _ in
-            return barAPI.getSpecialsIn(region: "dallas").map({
-                    return $0.map({ special in
-                        return SpecialCell(from: special)
-                    })
-                })
+            return barAPI.getSpecialsIn(region: "dallas").map({ return $0.map(SpecialCell.init) })
                 .map({
                     return [SpecialSection(model: "Specials", items: $0)]
                 })

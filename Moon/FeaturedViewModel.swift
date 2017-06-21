@@ -24,6 +24,7 @@ struct FeaturedViewModel: ImageDownloadType {
     // Inputs
     var loadEvents: Action<Void, [FeaturedEvent]>
     // Outputs
+    var featuredEvents = Variable<[FeaturedEvent]>([])
     
     init(coordinator: SceneCoordinatorType, barAPI: BarAPIType = BarAPIController(), userAPI: UserAPIType = UserAPIController(), photoService: PhotoService = KingFisherPhotoService()) {
         self.sceneCoordinator = coordinator
@@ -34,6 +35,8 @@ struct FeaturedViewModel: ImageDownloadType {
         loadEvents = Action(workFactory: { _ in
             return barAPI.getEventsIn(region: "dallas").map({ $0.map(FeaturedEvent.init) })
         })
+        
+        loadEvents.elements.bind(to: featuredEvents).addDisposableTo(disposeBag)
     }
     
     func onLikeEvent(eventID: String) -> CocoaAction {
@@ -46,6 +49,13 @@ struct FeaturedViewModel: ImageDownloadType {
     func onShareEvent(eventID: String) -> CocoaAction {
         return CocoaAction { _ in
             print("Share Event")
+            return Observable.empty()
+        }
+    }
+    
+    func onMoreInfo(eventID: String) -> CocoaAction {
+        return CocoaAction {
+            print("More Info")
             return Observable.empty()
         }
     }

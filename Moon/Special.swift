@@ -20,7 +20,7 @@ struct SpecialCell {
     let barID: String
     let imageURL: URL
     
-    init(from special: Specials) {
+    init(from special: Special) {
         self.description = special.description ?? ""
         self.likes = "\(special.numLikes ?? 0)"
         self.barName = special.name ?? ""
