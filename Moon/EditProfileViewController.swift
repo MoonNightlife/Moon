@@ -165,10 +165,7 @@ class EditProfileViewController: UIViewController, BindableType, RAReorderableLa
 // TextField Delegate Functions
 extension EditProfileViewController {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == bioTextField {
-            bioTextField.resignFirstResponder()
-            self.moveViewDown()
-        }
+
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
