@@ -9,10 +9,13 @@
 import UIKit
 import iCarousel
 import Material
+import RxCocoa
+import RxSwift
 
 class ProfileViewController: UIViewController, BindableType {
     
     var viewModel: ProfileViewModel!
+    private let bag = DisposeBag()
 
     @IBOutlet weak var carousel: iCarousel!
     @IBOutlet weak var dismissButton: UIButton!
@@ -25,16 +28,8 @@ class ProfileViewController: UIViewController, BindableType {
     
     var friendsButton: IconButton!
     
-    //fake variables
-    var fakeUser: FakeUser!
-    var pics = [UIImage]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        pics = [#imageLiteral(resourceName: "pp1.jpg"), #imageLiteral(resourceName: "pp2.jpg"), #imageLiteral(resourceName: "pp3.jpg"), #imageLiteral(resourceName: "pp4.jpg"), #imageLiteral(resourceName: "pp5.jpg")]
-        fakeUser = FakeUser(firstName: "Marisol", lastName: "Leiva", city: "Dallas", username: "marisolleiva", pics: [baseURL], bio:"Mexico -> SMU 2018 | KKG | Tequila Lover", plan: "The Standard Pour", id: "")
         
         setupCarousel()
         setUpPageController()
@@ -54,10 +49,21 @@ class ProfileViewController: UIViewController, BindableType {
         friendsButton.rx.action = viewModel.onShowFriends()
         dismissButton.rx.action = viewModel.onDismiss()
         editProfileButton.rx.action = viewModel.onEdit()
+        
+        viewModel.profilePictures.asObservable().subscribe(onNext: { [weak self] images in
+            self?.pageController.numberOfPages = images.count
+            self?.carousel.reloadData()
+        }).addDisposableTo(bag)
+        
+        viewModel.activityBarName.bind(to: planLabel.rx.text).addDisposableTo(bag)
+        viewModel.bio.bind(to: bioLabel.rx.text).addDisposableTo(bag)
+        viewModel.username.bind(to: usernameLabel.rx.text).addDisposableTo(bag)
+        viewModel.fullName.subscribe(onNext: { [weak self] name in
+            self?.toolBar.title = name
+        }).addDisposableTo(bag)
     }
     
     private func setUpPageController() {
-        pageController.numberOfPages = pics.count
         pageController.currentPageIndicatorTintColor = .white
         pageController.pageIndicatorTintColor = .lightGray
         pageController.currentPage = 0
@@ -87,16 +93,13 @@ class ProfileViewController: UIViewController, BindableType {
     
     private func setUpBioLabel() {
         bioLabel.textColor = .lightGray
-        bioLabel.text = fakeUser.bio
     }
     
     private func setUpUsernameLabel() {
-        usernameLabel.text = fakeUser.username
         usernameLabel.textColor = .lightGray
     }
     
     private func setUpPlanLabel() {
-        planLabel.placeholder = fakeUser.plan
         planLabel.isUserInteractionEnabled = false
         planLabel.placeholderNormalColor = .lightGray
         planLabel.dividerNormalColor = .clear
@@ -110,8 +113,6 @@ class ProfileViewController: UIViewController, BindableType {
     }
     
     private func setUpToolBar() {
-        toolBar.title = fakeUser.firstName! + " " + fakeUser.lastName!
-        toolBar.detail = fakeUser.city!
         toolBar.backgroundColor = .clear
         toolBar.titleLabel.textColor = .white
         toolBar.detailLabel.textColor = .moonGrey
@@ -127,7 +128,7 @@ extension ProfileViewController: iCarouselDataSource, iCarouselDelegate {
     }
     
     func numberOfItems(in carousel: iCarousel) -> Int {
-        return pics.count
+        return viewModel.profilePictures.value.count
     }
     
     func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
@@ -136,10 +137,7 @@ extension ProfileViewController: iCarouselDataSource, iCarouselDelegate {
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         let profilePic = BottomGradientImageView(frame: carousel.frame)
-        profilePic.image = pics[index]
-        //profilePic.contentMode = UIViewContentMode.scaleAspectFill
-        print(index)
-   
+        profilePic.image = viewModel.profilePictures.value[index]
         return profilePic
     }
 }

@@ -11,6 +11,8 @@ import RxSwift
 import RxCocoa
 import Action
 import Material
+import RxDataSources
+import SwaggerClient
 
 class UsersTableViewController: UIViewController, BindableType, UIPopoverPresentationControllerDelegate {
 
@@ -19,6 +21,8 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
     @IBOutlet weak var userTableView: UITableView!
     @IBOutlet weak var showContactsButton: UIButton!
     var backButton: UIBarButtonItem!
+    let dataSource = RxTableViewSectionedAnimatedDataSource<UserSectionModel>()
+    var refreshControl: UIRefreshControl = UIRefreshControl()
     
     @IBOutlet weak var contactsViewHeightConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
@@ -29,6 +33,11 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
         
         self.view.backgroundColor = UIColor.lightGray
         contactsViewHeightConstraint.constant = 0
+        
+        configureDataSource()
+        
+        // Add the refresh control
+        userTableView.addSubview(refreshControl)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,15 +50,10 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
     }
 
     func bindViewModel() {
-        viewModel.users.drive(userTableView.rx.items(cellIdentifier: "UsersTableCell", cellType: UsersTableViewCell.self)) { (_, element, cell) in
-                //cell.profilePicture.image = element.picture
-                cell.profilePicture.cornerRadius = cell.profilePicture.frame.size.width / 2
-                cell.profilePicture.clipsToBounds = true
-            
-                cell.name.text = element.fullName
-                cell.name.textColor = .lightGray
-            }
-            .disposed(by: bag)
+        
+        viewModel.users.do(onNext: { [weak self] _ in
+            self?.refreshControl.endRefreshing()
+        }).bind(to: userTableView.rx.items(dataSource: dataSource)).addDisposableTo(bag)
         
         let selectedItem = userTableView.rx.itemSelected
         selectedItem.subscribe(onNext: { [weak self] _ in
@@ -59,6 +63,77 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
         
         backButton.rx.action = viewModel.onBack()
         showContactsButton.rx.action = viewModel.onShowContacts()
+        
+        refreshControl.rx.controlEvent(.valueChanged).bind(to: viewModel.reload).addDisposableTo(bag)
+    }
+    
+    fileprivate func configureDataSource() {
+        
+        dataSource.titleForHeaderInSection = { ds, index in
+            return ds.sectionModels[index].titles
+        }
+        
+        dataSource.configureCell = {
+            [weak self] dataSource, tableView, indexPath, item in
+            
+            if let strongSelf = self {
+                switch item {
+                case .friend(let snap):
+                    
+                    //swiftlint:disable force_cast
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "UsersTableCell", for: indexPath) as! UsersTableViewCell
+                    
+                    let downloadAction = strongSelf.viewModel.downloadImage(url: baseURL.appendingPathComponent(snap.profilePic ?? ""))
+                    downloadAction
+                        .elements
+                        .bind(to: cell.profilePicture.rx.image)
+                        .addDisposableTo(cell.bag)
+                    downloadAction.execute()
+                    
+                    cell.profilePicture.cornerRadius = cell.profilePicture.frame.size.width / 2
+                    cell.profilePicture.clipsToBounds = true
+                    
+                    cell.name.text = snap.fullName
+                    cell.name.textColor = .lightGray
+                    
+                    return cell
+                    
+                case .friendRequest(let snap):
+                    //swiftlint:disable force_cast
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "FriendRequest", for: indexPath) as! FriendRequestTableViewCell
+                    
+                    let downloadAction = strongSelf.viewModel.downloadImage(url: baseURL.appendingPathComponent(snap.profilePic ?? ""))
+                    downloadAction
+                        .elements
+                        .bind(to: cell.profilePicture.rx.image)
+                        .addDisposableTo(cell.bag)
+                    downloadAction.execute()
+                    
+                    cell.profilePicture.cornerRadius = cell.profilePicture.frame.size.width / 2
+                    cell.profilePicture.clipsToBounds = true
+                    
+                    cell.name.text = snap.fullName
+                    cell.name.textColor = .lightGray
+                    
+                    cell.acceptButton.titleLabel?.text = nil
+                    cell.acceptButton.setImage(Icon.cm.check, for: .normal)
+                    cell.acceptButton.tintColor = UIColor.moonGreen
+                    
+                    cell.declineButton.titleLabel?.text = nil
+                    cell.declineButton.setImage(Icon.cm.close, for: .normal)
+                    cell.declineButton.tintColor = UIColor.moonRed
+                    
+                    cell.acceptButton.rx.action = self?.viewModel.onAcceptFriendRequest(userID: snap.id)
+                    cell.declineButton.rx.action = self?.viewModel.onDeclineFriendRequest(userID: snap.id)
+                    
+                    return cell
+            
+                }
+            }
+            
+            return UITableViewCell()
+
+        }
     }
     
     func prepareContactButton() {

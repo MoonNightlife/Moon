@@ -183,20 +183,21 @@
                                 <rect key="frame" x="0.0" y="139" width="375" height="528"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UsersTableCell" rowHeight="75" id="ZMc-rh-Hx8" customClass="UsersTableViewCell" customModule="Moon" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="75"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UsersTableCell" rowHeight="70" id="ZMc-rh-Hx8" customClass="UsersTableViewCell" customModule="Moon" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZMc-rh-Hx8" id="6NI-5j-crw">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="74.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="ZMc-rh-Hx8" id="6NI-5j-crw">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="69.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="p1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zB7-lL-naR">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="p1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zB7-lL-naR">
                                                     <rect key="frame" x="8" y="13" width="50" height="50"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="VdD-mF-phH"/>
                                                         <constraint firstAttribute="width" constant="50" id="hOb-pS-9VM"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Evan Noble" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozC-d5-mVa">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Evan Noble" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozC-d5-mVa">
                                                     <rect key="frame" x="66" y="27" width="301" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -215,6 +216,57 @@
                                         <connections>
                                             <outlet property="name" destination="ozC-d5-mVa" id="Gh5-de-j6R"/>
                                             <outlet property="profilePicture" destination="zB7-lL-naR" id="iHW-s3-MKv"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendRequest" rowHeight="70" id="VuK-5x-vuz" customClass="FriendRequestTableViewCell" customModule="Moon" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="98" width="375" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VuK-5x-vuz" id="m5t-dp-VOa">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="69.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1nT-Vg-L6O">
+                                                    <rect key="frame" x="8" y="9" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="Ek3-R9-1ee"/>
+                                                        <constraint firstAttribute="width" constant="50" id="M7h-Fx-6b2"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Evan Noble" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mnq-wf-32Q">
+                                                    <rect key="frame" x="66" y="25" width="87" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mvo-NH-CBc">
+                                                    <rect key="frame" x="299" y="21" width="68" height="30"/>
+                                                    <state key="normal" title="Accept"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7EB-fZ-xdl">
+                                                    <rect key="frame" x="239" y="21" width="52" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="52" id="gkU-YL-Wyp"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Decline"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="7EB-fZ-xdl" firstAttribute="baseline" secondItem="mnq-wf-32Q" secondAttribute="baseline" id="4RL-jD-qZ5"/>
+                                                <constraint firstItem="mnq-wf-32Q" firstAttribute="leading" secondItem="1nT-Vg-L6O" secondAttribute="trailing" constant="8" symbolic="YES" id="4Uc-KI-J4I"/>
+                                                <constraint firstItem="1nT-Vg-L6O" firstAttribute="centerY" secondItem="m5t-dp-VOa" secondAttribute="centerY" id="5dT-r3-kSY"/>
+                                                <constraint firstItem="7EB-fZ-xdl" firstAttribute="baseline" secondItem="Mvo-NH-CBc" secondAttribute="baseline" id="6bX-St-Tto"/>
+                                                <constraint firstItem="1nT-Vg-L6O" firstAttribute="leading" secondItem="m5t-dp-VOa" secondAttribute="leadingMargin" id="CrS-I4-hcx"/>
+                                                <constraint firstItem="Mvo-NH-CBc" firstAttribute="trailing" secondItem="m5t-dp-VOa" secondAttribute="trailingMargin" id="WFI-Ps-x39"/>
+                                                <constraint firstItem="7EB-fZ-xdl" firstAttribute="leading" secondItem="mnq-wf-32Q" secondAttribute="trailing" constant="86" id="YL7-N5-wsW"/>
+                                                <constraint firstItem="mnq-wf-32Q" firstAttribute="centerY" secondItem="m5t-dp-VOa" secondAttribute="centerY" id="knM-c1-7J8"/>
+                                                <constraint firstItem="Mvo-NH-CBc" firstAttribute="leading" secondItem="7EB-fZ-xdl" secondAttribute="trailing" constant="8" symbolic="YES" id="yFE-zf-X8j"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="acceptButton" destination="Mvo-NH-CBc" id="VRV-7B-O3M"/>
+                                            <outlet property="declineButton" destination="7EB-fZ-xdl" id="NPy-db-E02"/>
+                                            <outlet property="name" destination="mnq-wf-32Q" id="X7H-cD-qvj"/>
+                                            <outlet property="profilePicture" destination="1nT-Vg-L6O" id="fqk-So-tO7"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -806,7 +858,7 @@
             <objects>
                 <navigationController storyboardIdentifier="UsersTableNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yeY-eT-m5M" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="I3D-k4-L5c">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="I3D-k4-L5c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -824,7 +876,7 @@
             <objects>
                 <navigationController storyboardIdentifier="EditProfileNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QzI-hj-80w" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="pEm-nR-26j">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pEm-nR-26j">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
