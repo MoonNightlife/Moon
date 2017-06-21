@@ -38,13 +38,6 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     @IBOutlet weak var specialViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var eventViewConstraint: NSLayoutConstraint!
     
-    // Data
-    var barPics = Variable<[UIImage]>([])
-    var barName = Variable<String>("")
-    var usersGoing = Variable<[FakeUser]>([])
-    var specials = Variable<[SpecialCell]>([])
-    var events = Variable<[FeaturedEvent]>([])
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -85,35 +78,26 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         segmentControl.rx.controlEvent(UIControlEvents.valueChanged)
             .map({ [weak self] in
                 return UsersGoingType(rawValue: self?.segmentControl.selectedIndex ?? 0) ?? .everyone
-            })
-            .subscribe(viewModel.selectedUserIndex.inputs)
-            .addDisposableTo(bag)
+            }).bind(to: viewModel.selectedUserIndex).addDisposableTo(bag)
         
-        viewModel.selectedUserIndex.elements.subscribe(onNext: { [weak self] in
-            self?.usersGoing.value = $0
+        viewModel.displayedUsers.asObservable().subscribe(onNext: { [weak self] _ in
             self?.goingCarousel.reloadData()
         }).addDisposableTo(bag)
         
-        // Execute action manually the first time
-        viewModel.selectedUserIndex.execute(.everyone)
-
-        viewModel.barName.drive(onNext: { [weak self] in
+        viewModel.barName.subscribe(onNext: { [weak self] in
             self?.title = $0
         }).addDisposableTo(bag)
-        
-        viewModel.barPictures.drive(onNext: { [weak self] in
-            self?.barPics.value = $0
+
+        viewModel.barPics.asObservable().subscribe(onNext: { [weak self] in
             self?.pageController.numberOfPages = $0.count
             self?.pictureCarousel.reloadData()
         }).addDisposableTo(bag)
         
-        viewModel.specials.drive(onNext: { [weak self] in
-            self?.specials.value = $0
+        viewModel.specials.asObservable().subscribe(onNext: { [weak self] _ in
             self?.specialsCarousel.reloadData()
         }).addDisposableTo(bag)
         
-        viewModel.events.drive(onNext: { [weak self] in
-            self?.events.value = $0
+        viewModel.events.asObservable().subscribe(onNext: { [weak self] _ in
             self?.eventsCarousel.reloadData()
         }).addDisposableTo(bag)
         
@@ -172,7 +156,7 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     }
     
     func preparePageControl() {
-        pageController.numberOfPages = barPics.value.count
+        pageController.numberOfPages = viewModel.barPics.value.count
         pageController.currentPageIndicatorTintColor = .white
         pageController.pageIndicatorTintColor = .lightGray
         pageController.currentPage = 0
@@ -232,13 +216,13 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
     func numberOfItems(in carousel: iCarousel) -> Int {
         
         if carousel.tag == 0 {
-            return usersGoing.value.count //returns number of people going
+            return viewModel.displayedUsers.value.count //returns number of people going
         } else if carousel.tag == 1 {
-            return events.value.count //returns number of fake events
+            return viewModel.events.value.count //returns number of fake events
         } else if carousel.tag == 2 {
-            return barPics.value.count //returns number of bar pictures
+            return viewModel.barPics.value.count //returns number of bar pictures
         } else if carousel.tag == 3 {
-            return 10 //returns number of specials
+            return viewModel.specials.value.count //returns number of specials
         }
         
         return 0
@@ -272,7 +256,12 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         let frame = CGRect(x: goingCarousel.frame.size.width / 2, y: goingCarousel.frame.size.height / 2, width: size, height: size)
         let view = PeopleGoingCarouselView()
         view.frame = frame
-        view.initializeViewWith(user: usersGoing.value[index], index: index, viewProfile: viewModel.onShowProfile(), likeActivity: viewModel.onLikeActivity(), viewLikers: viewModel.onViewLikers(), downloadImage: viewModel.downloadImage(url: baseURL))
+        view.initializeViewWith(user: viewModel.displayedUsers.value[index],
+                                index: index,
+                                viewProfile: viewModel.onShowProfile(),
+                                likeActivity: viewModel.onLikeActivity(),
+                                viewLikers: viewModel.onViewLikers(),
+                                downloadImage: viewModel.downloadImage(url: baseURL.appendingPathComponent(viewModel.displayedUsers.value[index].profilePic!)))
         
         return view
     }
@@ -282,7 +271,7 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         let size = (self.view.frame.size.height * 0.298) - 50
         let frame = CGRect(x: specialsCarousel.frame.size.width / 2, y: specialsCarousel.frame.size.height / 2, width: size + 20, height: size)
         view.frame = frame
-        view.initializeViewWith(special: specials.value[index], index: index, likeAction: viewModel.onLikeSpecial())
+        view.initializeViewWith(special: viewModel.specials.value[index], index: index, likeAction: viewModel.onLikeSpecial(), downloadAction: viewModel.downloadImage(url: viewModel.specials.value[index].imageURL))
         
         return view
     }
@@ -292,15 +281,18 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         let size = (self.view.frame.size.height * 0.513) - 60
         view.frame = CGRect(x: eventsCarousel.frame.size.width / 2, y: eventsCarousel.frame.size.height / 2, width: size + 60, height: size)
         view.backgroundColor = .clear
-        view.initializeCellWith(event: events.value[index], index: index, likeAction: viewModel.onLikeEvent(), shareAction: viewModel.onShareEvent(), downloadImage: viewModel.downloadImage(url: events.value[index].imageURL))
+        view.initializeCellWith(event: viewModel.events.value[index],
+                                index: index, likeAction: viewModel.onLikeEvent(),
+                                shareAction: viewModel.onShareEvent(),
+                                downloadImage: viewModel.downloadImage(url: viewModel.events.value[index].imageURL),
+                                moreInfoAction: viewModel.onViewMore())
         
         return view
     }
     
     func setUpPictureView(index: Int) -> UIView {
         let barPic = BottomGradientImageView(frame: pictureCarousel.frame)
-        barPic.image = barPics.value[index]
-        //profilePic.contentMode = UIViewContentMode.scaleAspectFill
+        barPic.image = viewModel.barPics.value[index]
         
         return barPic
     }

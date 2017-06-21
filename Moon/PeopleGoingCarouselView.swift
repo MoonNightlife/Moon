@@ -11,21 +11,22 @@ import UIKit
 import Material
 import RxSwift
 import Action
+import SwaggerClient
 
 class PeopleGoingCarouselView: ImageCardView {
     
-    fileprivate var user: FakeUser!
+    fileprivate var user: UserSnapshot!
     fileprivate var index: Int!
     fileprivate var likeButton: IconButton!
     fileprivate var numberOfLikesButton: IconButton!
     fileprivate var viewProfileOverlayButton: UIButton!
     fileprivate var bag = DisposeBag()
     
-    func initializeViewWith(user: FakeUser, index: Int, viewProfile: CocoaAction, likeActivity: CocoaAction, viewLikers: CocoaAction, downloadImage: Action<Void, UIImage>) {
+    func initializeViewWith(user: UserSnapshot, index: Int, viewProfile: CocoaAction, likeActivity: CocoaAction, viewLikers: CocoaAction, downloadImage: Action<Void, UIImage>) {
         self.user = user
         self.index = index
         
-        self.initializeImageCardViewWith(type: .small(image: downloadImage, text: user.firstName!))
+        self.initializeImageCardViewWith(type: .small(image: downloadImage, text: user.fullName!))
         prepareLikeButton()
         prepareNumberOfLikes(likes: "19")
         prepareOverlayButton()

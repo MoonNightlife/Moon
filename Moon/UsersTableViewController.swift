@@ -30,11 +30,11 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
 
     func bindViewModel() {
         viewModel.users.drive(userTableView.rx.items(cellIdentifier: "UsersTableCell", cellType: UsersTableViewCell.self)) { (_, element, cell) in
-                cell.profilePicture.image = element.picture
+                //cell.profilePicture.image = element.picture
                 cell.profilePicture.cornerRadius = cell.profilePicture.frame.size.width / 2
                 cell.profilePicture.clipsToBounds = true
             
-                cell.name.text = element.name
+                cell.name.text = element.fullName
                 cell.name.textColor = .lightGray
             }
             .disposed(by: bag)

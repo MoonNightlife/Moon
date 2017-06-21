@@ -20,10 +20,10 @@ class SpecialCarouselView: ImageCardView {
     fileprivate var numberOfLikesButton: IconButton!
     fileprivate let bag = DisposeBag()
         
-    func initializeViewWith(special: SpecialCell, index: Int, likeAction: CocoaAction) {
+    func initializeViewWith(special: SpecialCell, index: Int, likeAction: CocoaAction, downloadAction: Action<Void, UIImage>) {
         self.special = special
         self.index = index
-        //self.initializeImageCardViewWith(type: .medium(image: special.image, text: special.description))
+        self.initializeImageCardViewWith(type: .medium(image: downloadAction, text: special.description))
         prepareLikeButton()
         prepareNumberOfLikesButton(likes: "100")
         prepareToolBar()
