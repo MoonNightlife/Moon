@@ -35,13 +35,14 @@ struct BarInfoViewModel {
         sceneCoordinator = coordinator
         self.geocoder = geocoder
     
-        addressString = barInfo.map({ $0.address }).replaceNilWith("No Address").asDriver(onErrorJustReturn: defaultInfo.address!)
-        websiteString = barInfo.map({ $0.website }).replaceNilWith("No Website").asDriver(onErrorJustReturn: defaultInfo.website!)
-        phoneNumberString = barInfo.map({ $0.phoneNumber }).replaceNilWith("No Phone Number").asDriver(onErrorJustReturn: defaultInfo.phoneNumber!)
+        let sharedBarInfo = barInfo.share()
+        addressString = sharedBarInfo.map({ $0.address }).replaceNilWith("No Address").asDriver(onErrorJustReturn: defaultInfo.address!)
+        websiteString = sharedBarInfo.map({ $0.website }).replaceNilWith("No Website").asDriver(onErrorJustReturn: defaultInfo.website!)
+        phoneNumberString = sharedBarInfo.map({ $0.phoneNumber }).replaceNilWith("No Phone Number").asDriver(onErrorJustReturn: defaultInfo.phoneNumber!)
         
-        addressURL = barInfo.map({ $0.phoneNumber }).map(BarInfoViewModel.createAddressURL)
-        websiteURL = barInfo.map({ $0.website }).map(BarInfoViewModel.createWebsiteURL)
-        phoneNumberURL = barInfo.map({ $0.website }).map(BarInfoViewModel.createPhoneNumberURL)
+        addressURL = sharedBarInfo.map({ $0.address }).map(BarInfoViewModel.createAddressURL)
+        websiteURL = sharedBarInfo.map({ $0.website }).map(BarInfoViewModel.createWebsiteURL)
+        phoneNumberURL = sharedBarInfo.map({ $0.phoneNumber }).map(BarInfoViewModel.createPhoneNumberURL)
         
     }
     
