@@ -23,6 +23,7 @@ target 'Moon' do
   pod 'NVActivityIndicatorView'
   pod 'Kingfisher', '~> 3.0'
   pod 'RAReorderableLayout'
+  pod 'RxOptional'
 
   target 'MoonTests' do
     inherit! :search_paths
