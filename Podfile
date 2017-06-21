@@ -22,6 +22,7 @@ target 'Moon' do
   pod 'SinchVerification'
   pod 'NVActivityIndicatorView'
   pod 'Kingfisher', '~> 3.0'
+  pod 'RxOptional'
 
   target 'MoonTests' do
     inherit! :search_paths
