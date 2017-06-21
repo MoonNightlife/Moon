@@ -131,6 +131,7 @@
 		F07C06261EF19D7400B78865 /* RxErrorHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06251EF19D7400B78865 /* RxErrorHandlers.swift */; };
 		F07C062A1EF1A08500B78865 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06281EF1A08500B78865 /* InfoView.swift */; };
 		F07C062B1EF1A08500B78865 /* InfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F07C06291EF1A08500B78865 /* InfoView.xib */; };
+		F07F694B1EFAED22000F854D /* DeepLinking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07F694A1EFAED22000F854D /* DeepLinking.swift */; };
 		F0942F0B1ECCEBA40038E389 /* FakeEventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0942F0A1ECCEBA40038E389 /* FakeEventData.swift */; };
 		F0942F0D1ECCEC550038E389 /* FeaturedEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0942F0C1ECCEC550038E389 /* FeaturedEventView.swift */; };
 		F098FF9B1EDF1DEA00A59594 /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FF9A1EDF1DEA00A59594 /* NewUser.swift */; };
@@ -376,6 +377,7 @@
 		F07C06251EF19D7400B78865 /* RxErrorHandlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxErrorHandlers.swift; sourceTree = "<group>"; };
 		F07C06281EF1A08500B78865 /* InfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		F07C06291EF1A08500B78865 /* InfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoView.xib; sourceTree = "<group>"; };
+		F07F694A1EFAED22000F854D /* DeepLinking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepLinking.swift; sourceTree = "<group>"; };
 		F0942F0A1ECCEBA40038E389 /* FakeEventData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeEventData.swift; sourceTree = "<group>"; };
 		F0942F0C1ECCEC550038E389 /* FeaturedEventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedEventView.swift; sourceTree = "<group>"; };
 		F098FF9A1EDF1DEA00A59594 /* NewUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
@@ -853,6 +855,7 @@
 			children = (
 				F07C06271EF1A07700B78865 /* InfoView */,
 				F098FF9D1EDF47D400A59594 /* ValidationUtility.swift */,
+				F07F694A1EFAED22000F854D /* DeepLinking.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1586,6 +1589,7 @@
 				F04283AF1EC4A92700CCB5F3 /* FeaturedViewController.swift in Sources */,
 				F044CD531ECDE28A00E47138 /* BottomGradientImageView.swift in Sources */,
 				F0CA18911EE584AF00428318 /* ProfileViewModel.swift in Sources */,
+				F07F694B1EFAED22000F854D /* DeepLinking.swift in Sources */,
 				F09DF0981EEB854D0092BFA5 /* ContentSuggestionViewModel.swift in Sources */,
 				F0CF7F211EF37E7A005C068C /* EnterCodeViewController.swift in Sources */,
 				F0644C2B1EC37D0E00D92BF7 /* SpecialsViewController.swift in Sources */,
