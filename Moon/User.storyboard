@@ -482,7 +482,7 @@
         <!--Edit Profile View Controller-->
         <scene sceneID="ey1-I4-ZI1">
             <objects>
-                <viewController id="ugd-Ji-SHN" customClass="EditProfileViewController" customModule="Moon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ugd-Ji-SHN" customClass="EditProfileViewController" customModule="Moon" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9V4-v6-Jqf"/>
                         <viewControllerLayoutGuide type="bottom" id="QPr-RF-DOU"/>
@@ -491,57 +491,78 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DI1-KW-3MA">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <scrollView verifyAmbiguity="off" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8kn-qY-hDs">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Rni-o6-Jf9">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="325.5"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <collectionViewLayout key="collectionViewLayout" id="yb4-3f-HXK" customClass="RAReorderableLayout" customModule="Moon" customModuleProvider="target"/>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="verticalCell" reuseIdentifier="ImageCell" id="a3O-B7-2Zj" customClass="RACollectionViewCell" customModule="Moon" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </view>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <size key="customSize" width="100" height="100"/>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OwT-tx-WXO" customClass="TextField" customModule="Material">
+                                        <rect key="frame" x="8" y="399.5" width="359" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3ZZ-9q-Xds" customClass="TextField" customModule="Material">
+                                        <rect key="frame" x="8" y="345.5" width="359" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ekc-pz-FEI" customClass="TextField" customModule="Material">
+                                        <rect key="frame" x="8" y="477.5" width="359" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
+                                    </textField>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="S2P-AQ-v3L"/>
+                                    <constraint firstItem="OwT-tx-WXO" firstAttribute="top" secondItem="3ZZ-9q-Xds" secondAttribute="bottom" constant="24" id="8ZZ-xw-JdU"/>
+                                    <constraint firstAttribute="trailing" secondItem="3ZZ-9q-Xds" secondAttribute="trailing" constant="8" id="Bn6-Iy-9G6"/>
+                                    <constraint firstItem="3ZZ-9q-Xds" firstAttribute="leading" secondItem="8kn-qY-hDs" secondAttribute="leading" constant="8" id="Eqe-80-O0z"/>
+                                    <constraint firstItem="ekc-pz-FEI" firstAttribute="top" secondItem="OwT-tx-WXO" secondAttribute="bottom" constant="48" id="FAO-KS-Slc"/>
+                                    <constraint firstAttribute="trailing" secondItem="OwT-tx-WXO" secondAttribute="trailing" constant="8" id="RgS-AX-21J"/>
+                                    <constraint firstAttribute="trailing" secondItem="ekc-pz-FEI" secondAttribute="trailing" constant="8" id="V13-5L-CNx"/>
+                                    <constraint firstItem="Rni-o6-Jf9" firstAttribute="centerX" secondItem="8kn-qY-hDs" secondAttribute="centerX" id="XT8-x6-ZPM"/>
+                                    <constraint firstItem="3ZZ-9q-Xds" firstAttribute="top" secondItem="Rni-o6-Jf9" secondAttribute="bottom" constant="20" id="ZTw-Wd-pfX"/>
+                                    <constraint firstItem="Rni-o6-Jf9" firstAttribute="leading" secondItem="8kn-qY-hDs" secondAttribute="leading" id="a7R-p9-1L7"/>
+                                    <constraint firstItem="OwT-tx-WXO" firstAttribute="leading" secondItem="8kn-qY-hDs" secondAttribute="leading" constant="8" id="bwC-Dj-4gb"/>
+                                    <constraint firstItem="Rni-o6-Jf9" firstAttribute="top" secondItem="8kn-qY-hDs" secondAttribute="top" id="epV-eO-mhi"/>
+                                    <constraint firstAttribute="trailing" secondItem="Rni-o6-Jf9" secondAttribute="trailing" id="pub-Zj-mzJ"/>
+                                    <constraint firstItem="ekc-pz-FEI" firstAttribute="leading" secondItem="8kn-qY-hDs" secondAttribute="leading" constant="8" id="tfq-3Z-jZZ"/>
                                 </constraints>
-                                <collectionViewLayout key="collectionViewLayout" id="CLX-oY-nMh" customClass="RAReorderableLayout" customModule="Moon" customModuleProvider="target"/>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="YsV-kL-0dn" customClass="RACollectionViewCell" customModule="Moon" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </view>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <size key="customSize" width="100" height="100"/>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3ZZ-9q-Xds" customClass="TextField" customModule="Material">
-                                <rect key="frame" x="8" y="320" width="359" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OwT-tx-WXO" customClass="TextField" customModule="Material">
-                                <rect key="frame" x="8" y="370" width="359" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="3ZZ-9q-Xds" firstAttribute="top" secondItem="DI1-KW-3MA" secondAttribute="bottom" constant="20" id="CvR-Vq-nQc"/>
-                            <constraint firstAttribute="trailing" secondItem="OwT-tx-WXO" secondAttribute="trailing" constant="8" id="EAD-cH-aBg"/>
-                            <constraint firstItem="OwT-tx-WXO" firstAttribute="leading" secondItem="gA4-7w-RbV" secondAttribute="leading" constant="8" id="Hba-XY-Mey"/>
-                            <constraint firstAttribute="trailing" secondItem="3ZZ-9q-Xds" secondAttribute="trailing" constant="8" id="Omf-4J-lvs"/>
-                            <constraint firstItem="3ZZ-9q-Xds" firstAttribute="leading" secondItem="gA4-7w-RbV" secondAttribute="leading" constant="8" id="V2C-bs-cIm"/>
-                            <constraint firstAttribute="trailing" secondItem="DI1-KW-3MA" secondAttribute="trailing" id="oro-eC-lvS"/>
-                            <constraint firstItem="OwT-tx-WXO" firstAttribute="top" secondItem="3ZZ-9q-Xds" secondAttribute="bottom" constant="20" id="rEf-xS-EcT"/>
-                            <constraint firstItem="DI1-KW-3MA" firstAttribute="top" secondItem="gA4-7w-RbV" secondAttribute="top" id="v9n-lV-BkE"/>
-                            <constraint firstItem="DI1-KW-3MA" firstAttribute="leading" secondItem="gA4-7w-RbV" secondAttribute="leading" id="vFL-dB-7mh"/>
+                            <constraint firstItem="Rni-o6-Jf9" firstAttribute="height" secondItem="gA4-7w-RbV" secondAttribute="height" multiplier="0.489" id="1jt-ic-fGU"/>
+                            <constraint firstItem="QPr-RF-DOU" firstAttribute="top" secondItem="8kn-qY-hDs" secondAttribute="bottom" id="Bsj-nu-jEr"/>
+                            <constraint firstItem="8kn-qY-hDs" firstAttribute="leading" secondItem="gA4-7w-RbV" secondAttribute="leading" id="MnG-cc-dl9"/>
+                            <constraint firstAttribute="trailing" secondItem="8kn-qY-hDs" secondAttribute="trailing" id="W0P-QC-gZm"/>
+                            <constraint firstItem="8kn-qY-hDs" firstAttribute="top" secondItem="gA4-7w-RbV" secondAttribute="top" id="dEb-qb-Gav"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="PW9-u0-Exq"/>
                     <connections>
-                        <outlet property="collectionView" destination="DI1-KW-3MA" id="cAc-cm-SF8"/>
+                        <outlet property="bioTextField" destination="ekc-pz-FEI" id="QUV-6W-pQj"/>
+                        <outlet property="collectionView" destination="Rni-o6-Jf9" id="NWE-UU-Sok"/>
                         <outlet property="firstNameTextField" destination="3ZZ-9q-Xds" id="8R9-RT-I2c"/>
                         <outlet property="lastNameTextField" destination="OwT-tx-WXO" id="IAG-Oe-dIU"/>
+                        <outlet property="scrollView" destination="8kn-qY-hDs" id="XVS-vt-OOh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nc9-r8-S9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
