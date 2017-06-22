@@ -48,7 +48,7 @@
                                     <constraint firstAttribute="height" constant="40" id="gug-bL-3Oh"/>
                                 </constraints>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pp1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="GhD-4U-ps3">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultProfilePic" translatesAutoresizingMaskIntoConstraints="NO" id="GhD-4U-ps3">
                                 <rect key="frame" x="125" y="101" width="125" height="125"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="GhD-4U-ps3" secondAttribute="height" multiplier="1:1" id="bQ5-pE-6zW"/>
@@ -258,6 +258,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="pp1.jpg" width="958" height="957"/>
+        <image name="DefaultProfilePic" width="62" height="62"/>
     </resources>
 </document>
