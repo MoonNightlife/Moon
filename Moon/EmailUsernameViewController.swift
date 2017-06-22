@@ -99,15 +99,11 @@ extension EmailUsernameViewController {
     }
     
     fileprivate func prepareNextScreenButton() {
-        
-        let nextArrow = UIImage(cgImage: (Icon.cm.arrowBack?.cgImage)!, scale: 1.5, orientation: UIImageOrientation.down)
-        
         nextButton.backgroundColor = .moonRed
-        nextButton.setTitle("", for: .normal)
+        nextButton.setTitle("Next", for: .normal)
         nextButton.tintColor = .white
+        nextButton.titleLabel?.font = UIFont(name: "Roboto", size: 14)
         nextButton.layer.cornerRadius = 5
-        nextButton.setBackgroundImage(nextArrow, for: .normal)
-        
     }
     
     fileprivate func prepareProgressView() {

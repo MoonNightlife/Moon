@@ -127,15 +127,11 @@ extension BirthdaySexViewController {
     }
     
     fileprivate func prepareNextScreenButton() {
-        
-        let nextArrow = UIImage(cgImage: (Icon.cm.arrowBack?.cgImage)!, scale: 1.5, orientation: UIImageOrientation.down)
-        
         nextScreenButton.backgroundColor = .moonBlue
-        nextScreenButton.setTitle("", for: .normal)
+        nextScreenButton.setTitle("Next", for: .normal)
         nextScreenButton.tintColor = .white
+        nextScreenButton.titleLabel?.font = UIFont(name: "Roboto", size: 14)
         nextScreenButton.layer.cornerRadius = 5
-        nextScreenButton.setBackgroundImage(nextArrow, for: .normal)
-        
     }
     
     fileprivate func prepareProgressView() {
@@ -149,7 +145,6 @@ extension BirthdaySexViewController {
         progressView.setHidden(false, animated: true)
         progressView.frame = CGRect(x: 0, y: 65, width: view.bounds.width, height: progressViewHeight)
         view.addSubview(progressView)
-        
     }
 
 }

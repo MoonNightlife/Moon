@@ -124,6 +124,7 @@ extension PasswordsViewController {
     fileprivate func prepareDoneButton() {
         doneButton.backgroundColor = .moonGreen
         doneButton.setTitle("Finish", for: .normal)
+        doneButton.titleLabel?.font = UIFont(name: "Roboto", size: 14)
         doneButton.tintColor = .white
         doneButton.layer.cornerRadius = 5
         
