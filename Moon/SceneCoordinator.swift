@@ -56,6 +56,7 @@ class SceneCoordinator: SceneCoordinatorType {
                 subject.onCompleted()
             }
             currentViewController = SceneCoordinator.actualViewController(for: viewController)
+            
         case .popover:
             viewController.modalPresentationStyle = .popover
             print(currentViewController)
@@ -72,7 +73,9 @@ class SceneCoordinator: SceneCoordinatorType {
                 self.currentViewController = SceneCoordinator.actualViewController(for: viewController)
                 print(self.currentViewController)
                 subject.onCompleted()
+                
             }
+            
         case .searchRoot:
             guard let searchController = currentViewController as? SearchBarViewController else {
                 fatalError("To change the root controller of search bar, current view controller must be of type SearchBarViewController")
@@ -128,7 +131,6 @@ class SceneCoordinator: SceneCoordinatorType {
     @discardableResult
     func changeChild(To view: ChildViewType) -> Observable<Void> {
         let subject = PublishSubject<Void>()
-        print((currentViewController as? SearchBarViewController)?.rootViewController)
         guard let presenter = (currentViewController as? SearchBarViewController)?.rootViewController as? SearchViewController else {
             fatalError("Presenting controller must conform to ParentType")
         }

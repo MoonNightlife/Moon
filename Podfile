@@ -24,6 +24,7 @@ target 'Moon' do
   pod 'Kingfisher', '~> 3.0'
   pod 'RAReorderableLayout'
   pod 'RxOptional'
+  pod 'Firebase/DynamicLinks'
 
   target 'MoonTests' do
     inherit! :search_paths

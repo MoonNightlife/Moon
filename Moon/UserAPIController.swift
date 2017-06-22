@@ -15,7 +15,7 @@ protocol UserAPIType {
     func acceptFriend(userID: String, friendID: String) -> Observable<Void>
     func declineFriend(userID: String, friendID: String) -> Observable<Void>
     func requestFriend(userID: String, friendID: String) -> Observable<Void>
-    func getFriendRequest(userID: String) -> Observable<[UserProfile]>
+    func getFriendRequest(userID: String) -> Observable<[UserSnapshot]>
     
     func blockUser(userID: String, blockID: String) -> Observable<Void>
     func unblockUser(userID: String, blockID: String) -> Observable<Void>
@@ -76,9 +76,16 @@ class UserAPIController: UserAPIType {
             return Disposables.create()
         })
     }
-    func getFriendRequest(userID: String) -> Observable<[UserProfile]> {
+    func getFriendRequest(userID: String) -> Observable<[UserSnapshot]> {
         return Observable.create({ (observer) -> Disposable in
-            //TODO: backend needs to implement this endpoint
+            UserAPI.getFriendRequests(userID: userID, completion: { (snapshots, error) in
+                if let snaps = snapshots {
+                    observer.onNext(snaps)
+                } else if let e = error {
+                    observer.onError(e)
+                }
+                observer.onCompleted()
+            })
             return Disposables.create()
         })
     }
