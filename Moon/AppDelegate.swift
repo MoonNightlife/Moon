@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         UIApplication.shared.statusBarStyle = .lightContent
         
+        FirebaseOptions.defaultOptions()?.deepLinkURLScheme = "moonnightlife"
+        FirebaseApp.configure()
+        
         if let url = launchOptions?[.url] as? URL {
             return executeDeepLink(with: url)
         } else {
@@ -32,9 +36,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
     }
+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+        let dynamicLink = DynamicLinks.dynamicLinks()?.dynamicLink(fromCustomSchemeURL: url)
+        if let dynamicLink = dynamicLink {
+            // Handle the deep link. For example, show the deep-linked content or
+            // apply a promotional offer to the user's account.
+            // ...
+            print(dynamicLink)
+            return true
+        }
+        
+        return false
+    }
     
-    func application(_: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        return url.scheme == "moonnightlife" && executeDeepLink(with: url)
+    @available(iOS 8.0, *)
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        guard let dynamicLinks = DynamicLinks.dynamicLinks() else {
+            return false
+        }
+        let handled = dynamicLinks.handleUniversalLink(userActivity.webpageURL!) { (dynamiclink, error) in
+            // ...
+            print(error)
+            print(dynamiclink)
+            print(dynamiclink?.url)
+        }
+        
+        return handled
     }
     
     fileprivate func prepareEntryViewController(vc: LaunchScreen) {

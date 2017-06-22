@@ -16,6 +16,19 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Bundle ID</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.NobleLeyva.Moon</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -25,27 +38,14 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Moon needs your location to find you specials in your area</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Moon needs to access your contacts to help you discover friends</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Moon needs your location to find you specials in your area</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Moon would like to access your Photo Library</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>com.NobleLeyva.Moon</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>moonnightlife</string>
-			</array>
-		</dict>
-	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Login</string>
 	<key>UIRequiredDeviceCapabilities</key>

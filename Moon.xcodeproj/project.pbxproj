@@ -132,6 +132,8 @@
 		F07C062A1EF1A08500B78865 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06281EF1A08500B78865 /* InfoView.swift */; };
 		F07C062B1EF1A08500B78865 /* InfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F07C06291EF1A08500B78865 /* InfoView.xib */; };
 		F07F694B1EFAED22000F854D /* DeepLinking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07F694A1EFAED22000F854D /* DeepLinking.swift */; };
+		F07F694D1EFAEFC5000F854D /* ShowEventDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07F694C1EFAEFC5000F854D /* ShowEventDeepLink.swift */; };
+		F07F69501EFB0A88000F854D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F07F694F1EFB0A88000F854D /* GoogleService-Info.plist */; };
 		F0942F0B1ECCEBA40038E389 /* FakeEventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0942F0A1ECCEBA40038E389 /* FakeEventData.swift */; };
 		F0942F0D1ECCEC550038E389 /* FeaturedEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0942F0C1ECCEC550038E389 /* FeaturedEventView.swift */; };
 		F098FF9B1EDF1DEA00A59594 /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FF9A1EDF1DEA00A59594 /* NewUser.swift */; };
@@ -378,6 +380,8 @@
 		F07C06281EF1A08500B78865 /* InfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		F07C06291EF1A08500B78865 /* InfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoView.xib; sourceTree = "<group>"; };
 		F07F694A1EFAED22000F854D /* DeepLinking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepLinking.swift; sourceTree = "<group>"; };
+		F07F694C1EFAEFC5000F854D /* ShowEventDeepLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowEventDeepLink.swift; sourceTree = "<group>"; };
+		F07F694F1EFB0A88000F854D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F0942F0A1ECCEBA40038E389 /* FakeEventData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeEventData.swift; sourceTree = "<group>"; };
 		F0942F0C1ECCEC550038E389 /* FeaturedEventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedEventView.swift; sourceTree = "<group>"; };
 		F098FF9A1EDF1DEA00A59594 /* NewUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
@@ -459,6 +463,7 @@
 		F0D168521ECA62940064F642 /* MoonColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonColor.swift; sourceTree = "<group>"; };
 		F0D797B61ECF837A007BDB9C /* Dallas.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Dallas.gpx; sourceTree = "<group>"; };
 		F0DCCAE81EF18E7900C9F5A9 /* RxReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxReachability.swift; sourceTree = "<group>"; };
+		F0DE764B1EFB295E0099989C /* Moon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Moon.entitlements; sourceTree = "<group>"; };
 		F0E59F271EEF735A007A3323 /* BarInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarInfoViewController.swift; sourceTree = "<group>"; };
 		F0E59F291EEF73B4007A3323 /* BarInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarInfoViewModel.swift; sourceTree = "<group>"; };
 		F0E6ED111ECB3C54009508FC /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -785,6 +790,7 @@
 		F048F1191EA3B7A5000F0161 /* Moon */ = {
 			isa = PBXGroup;
 			children = (
+				F0DE764B1EFB295E0099989C /* Moon.entitlements */,
 				C0DAD3191EE62B4B008BAF05 /* Profile Images */,
 				F04989621EE063F400064F58 /* Scenes */,
 				F098FF9C1EDF46EF00A59594 /* Utilities */,
@@ -834,10 +840,19 @@
 			name = InfoView;
 			sourceTree = "<group>";
 		};
+		F07F694E1EFAEFCA000F854D /* Deep Links */ = {
+			isa = PBXGroup;
+			children = (
+				F07F694C1EFAEFC5000F854D /* ShowEventDeepLink.swift */,
+			);
+			name = "Deep Links";
+			sourceTree = "<group>";
+		};
 		F098FF991EDF1DDA00A59594 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				F098FF9A1EDF1DEA00A59594 /* NewUser.swift */,
+				F07F694E1EFAEFCA000F854D /* Deep Links */,
 				F0017AC41EF8905200C56039 /* Display Models */,
 				F0B5F93E1EEF790A0095F12E /* BarInfo.swift */,
 				F09DF08D1EEAF1240092BFA5 /* NotificationSetting.swift */,
@@ -919,6 +934,7 @@
 				F001BAB21EC50CDB00CDF9BC /* Designs */,
 				F048F1211EA3B7A5000F0161 /* Assets.xcassets */,
 				F048F1261EA3B7A5000F0161 /* Info.plist */,
+				F07F694F1EFB0A88000F854D /* GoogleService-Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1255,6 +1271,11 @@
 						CreatedOnToolsVersion = 8.3.1;
 						DevelopmentTeam = BFP4MM8ANM;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
+						};
 					};
 					F048F12A1EA3B7A5000F0161 = {
 						CreatedOnToolsVersion = 8.3.1;
@@ -1329,6 +1350,7 @@
 				C0FC62791ECF50C30087FA3B /* s3.jpg in Resources */,
 				F0A2252E1ECBAA3E00170927 /* bacardi.jpeg in Resources */,
 				F0CA18951EE5867700428318 /* User.storyboard in Resources */,
+				F07F69501EFB0A88000F854D /* GoogleService-Info.plist in Resources */,
 				F0A8E2EB1EC3C858001D9993 /* Pic7.jpg in Resources */,
 				C0DAD3261EEA04B9008BAF05 /* b2.jpg in Resources */,
 				C0FC62731ECF50C30087FA3B /* s10.jpg in Resources */,
@@ -1508,6 +1530,7 @@
 				F07C06261EF19D7400B78865 /* RxErrorHandlers.swift in Sources */,
 				F04A4B271EEC595700DBA9A6 /* UserCollectionView.swift in Sources */,
 				F03C78C31EE9EA2D002AEDAD /* NameSettingsViewModel.swift in Sources */,
+				F07F694D1EFAEFC5000F854D /* ShowEventDeepLink.swift in Sources */,
 				F0EF693A1EF08BCB0028A32B /* UsersTableViewModel.swift in Sources */,
 				F0A52CC41EEDE3D60067E8DD /* SearchResultsViewController.swift in Sources */,
 				F0E59F281EEF735A007A3323 /* BarInfoViewController.swift in Sources */,
@@ -1773,6 +1796,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Moon/Moon.entitlements;
 				DEVELOPMENT_TEAM = BFP4MM8ANM;
 				INFOPLIST_FILE = Moon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1789,6 +1813,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Moon/Moon.entitlements;
 				DEVELOPMENT_TEAM = BFP4MM8ANM;
 				INFOPLIST_FILE = Moon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
