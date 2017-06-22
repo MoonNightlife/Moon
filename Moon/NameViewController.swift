@@ -13,16 +13,20 @@ import RxSwift
 import Action
 import MaterialComponents.MaterialProgressView
 
-class NameViewController: UIViewController, BindableType {
+class NameViewController: UIViewController, BindableType, UIImagePickerControllerDelegate {
     
     var viewModel: NameViewModel!
     let disposeBag = DisposeBag()
 
+    @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var lastNameTextField: TextField!
     @IBOutlet weak var firstNameTextField: TextField!
     @IBOutlet weak var nextScreenButton: UIButton!
+    
     var navBackButton: UIBarButtonItem!
     var progressView: MDCProgressView!
+    fileprivate let imagePicker = UIImagePickerController()
+    let tap = UITapGestureRecognizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +36,9 @@ class NameViewController: UIViewController, BindableType {
         prepareNavigationBackButton()
         prepareProgressView()
         prepareNextScreenButton()
+        prepareProfilePic()
+        
+        imagePicker.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,6 +81,22 @@ class NameViewController: UIViewController, BindableType {
             })
         })
     }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        print("working")
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            profilePic.image = pickedImage
+            print("Image picked")
+        } else {
+            print("Something went wrong")
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
 
 }
 
@@ -113,15 +136,11 @@ extension NameViewController {
     }
     
     fileprivate func prepareNextScreenButton() {
-        
-        let nextArrow = UIImage(cgImage: (Icon.cm.arrowBack?.cgImage)!, scale: 1.5, orientation: UIImageOrientation.down)
-        
         nextScreenButton.backgroundColor = .moonPurple
-        nextScreenButton.setTitle("", for: .normal)
+        nextScreenButton.setTitle("Next", for: .normal)
+        nextScreenButton.titleLabel?.font = UIFont(name: "Roboto", size: 14)
         nextScreenButton.tintColor = .white
         nextScreenButton.layer.cornerRadius = 5
-        nextScreenButton.setBackgroundImage(nextArrow, for: .normal)
-  
     }
     
     fileprivate func prepareProgressView() {
@@ -135,6 +154,23 @@ extension NameViewController {
         progressView.frame = CGRect(x: 0, y: 65, width: view.bounds.width, height: progressViewHeight)
         view.addSubview(progressView)
         
+    }
+    
+    @objc fileprivate func imageTouched() {
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    fileprivate func prepareProfilePic() {
+        profilePic.isUserInteractionEnabled = true
+        tap.addTarget(self, action: #selector(imageTouched))
+        profilePic.addGestureRecognizer(tap)
+        profilePic.layer.cornerRadius = profilePic.frame.size.height  / 2
+        profilePic.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        profilePic.contentMode = UIViewContentMode.scaleAspectFill
+        profilePic.clipsToBounds = true
     }
 
 }
