@@ -22,9 +22,9 @@ class ProfileViewController: UIViewController, BindableType {
     @IBOutlet weak var editProfileButton: UIButton!
     @IBOutlet weak var bioLabel: UILabel!
     @IBOutlet weak var toolBar: Toolbar!
-    @IBOutlet weak var planLabel: TextField!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var pageController: UIPageControl!
+    @IBOutlet weak var planButton: UIButton!
     
     var friendsButton: IconButton!
     
@@ -37,7 +37,7 @@ class ProfileViewController: UIViewController, BindableType {
         setUpExitButton()
         setUpFriendsButton()
         setUpBioLabel()
-        setUpPlanLabel()
+        setUpPlanButton()
         setUpToolBar()
         setUpUsernameLabel()
         
@@ -55,7 +55,7 @@ class ProfileViewController: UIViewController, BindableType {
             self?.carousel.reloadData()
         }).addDisposableTo(bag)
         
-        viewModel.activityBarName.bind(to: planLabel.rx.text).addDisposableTo(bag)
+        //viewModel.activityBarName.bind(to: planButton.titleLabel?.rx.text).addDisposableTo(bag)
         viewModel.bio.bind(to: bioLabel.rx.text).addDisposableTo(bag)
         viewModel.username.bind(to: usernameLabel.rx.text).addDisposableTo(bag)
         viewModel.fullName.subscribe(onNext: { [weak self] name in
@@ -99,17 +99,10 @@ class ProfileViewController: UIViewController, BindableType {
         usernameLabel.textColor = .lightGray
     }
     
-    private func setUpPlanLabel() {
-        planLabel.isUserInteractionEnabled = false
-        planLabel.placeholderNormalColor = .lightGray
-        planLabel.dividerNormalColor = .clear
-
-        let leftView = UIImageView()
-        leftView.image = #imageLiteral(resourceName: "LocationIcon")
-        leftView.image = leftView.image?.withRenderingMode(.alwaysTemplate)
-        planLabel.leftView = leftView
-        planLabel.leftViewNormalColor = .moonPurple
-       
+    private func setUpPlanButton() {
+        planButton.tintColor = .lightGray
+        planButton.titleLabel?.font = UIFont(name: "Roboto", size: 15)
+        planButton.setTitle("The Standard Pour", for: .normal)
     }
     
     private func setUpToolBar() {
@@ -138,6 +131,9 @@ extension ProfileViewController: iCarouselDataSource, iCarouselDelegate {
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         let profilePic = BottomGradientImageView(frame: carousel.frame)
         profilePic.image = viewModel.profilePictures.value[index]
+        profilePic.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        profilePic.contentMode = UIViewContentMode.scaleAspectFill
+        profilePic.clipsToBounds = true
         return profilePic
     }
 }
