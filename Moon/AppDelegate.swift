@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.statusBarStyle = .lightContent
         
         DynamicLinkingAPI.createDynamicLink()
-        FirebaseOptions.defaultOptions()?.deepLinkURLScheme = "moonnightlife"
         FirebaseApp.configure()
         
         if let url = launchOptions?[.url] as? URL {

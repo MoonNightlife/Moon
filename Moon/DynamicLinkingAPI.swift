@@ -15,7 +15,7 @@ struct DynamicLinkingAPI {
     
     static func createDynamicLink() {
     
-        guard let link = URL(string: "https://moonnightlife/show/event?barID=123?eventID=234") else { return }
+        guard let link = URL(string: "http:/moonnightlife/show/event?barID=123?eventID=234") else { return }
         let components = DynamicLinkComponents(link: link, domain: DynamicLinkingAPI.DYNAMIC_LINK_DOMAIN)
         
         let iOSParams = DynamicLinkIOSParameters(bundleID: "com.NobleLeyva.Moon")
