@@ -146,6 +146,7 @@ extension BarAPIController {
                 if let p = profiles {
                     observer.onNext(p)
                 } else if let e = error {
+                    print(e)
                     observer.onError(e)
                 }
                 observer.onCompleted()

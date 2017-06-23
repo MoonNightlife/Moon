@@ -50,16 +50,11 @@ struct BarProfileViewModel: ImageDownloadType, BackType {
         bar.map({ $0.specials }).filter({ $0 != nil }).map({ return $0!.map(SpecialCell.init) }).bind(to: specials).addDisposableTo(bag)
         bar.map({ $0.events }).filter({ $0 != nil }).map({ return $0!.map(FeaturedEvent.init) }).bind(to: events).addDisposableTo(bag)
         
-        let usersGoing = bar.map({ $0.peopleAttending }).filter({ $0 != nil }).map({ $0! })
-        let friendsGoing = bar.map({ $0.friendsAttending }).filter({ $0 != nil }).map({ $0! })
-        Observable.combineLatest(usersGoing, friendsGoing, selectedUserIndex).map({ (users, friends, index) -> [UserSnapshot] in
-            switch index {
-            case .everyone:
-                return users
-            case .friends:
-                return friends
-            }
-        }).bind(to: displayedUsers).addDisposableTo(bag)
+//        _ = bar.map({ $0.peopleAttending }).filter({ $0 != nil }).flatMap({ userIDs in
+//            return Observable.from(userIDs!).flatMap({
+//                //return userAPI.getUs
+//            }).toArray()
+//        })//.bind(to: displayedUsers).addDisposableTo(bag)
         
         bar.map({ $0.barPics }).filter({ $0 != nil }).flatMap({ pictureURLs in
             return Observable.from(pictureURLs!).flatMap({
