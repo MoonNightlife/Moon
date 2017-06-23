@@ -12,7 +12,7 @@ import SwaggerClient
 
 extension UserSnapshot: IdentifiableType {
     public var identity: String {
-        guard let id = id else {
+        guard let id = userID else {
             return "0"
         }
         
@@ -22,6 +22,6 @@ extension UserSnapshot: IdentifiableType {
 
 extension UserSnapshot: Equatable {
     public static func == (lhs: UserSnapshot, rhs: UserSnapshot) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.userID == rhs.userID
     }
 }

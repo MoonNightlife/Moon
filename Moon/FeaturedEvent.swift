@@ -20,7 +20,7 @@ struct FeaturedEvent {
     
     init(from event: BarEvent) {
         self.barName = event.name ?? "No Bar Name"
-        self.imageURL = baseURL.appendingPathComponent(event.pic ?? "")
+        self.imageURL = URL(string: event.pic ?? "")!
         self.date = event.date ?? "No Date"
         self.description = event.description ?? "No Description"
         self.title = event.title ?? "No Title"

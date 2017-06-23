@@ -21,7 +21,7 @@ class ContactTableViewCell: UITableViewCell {
     private var bag = DisposeBag()
 
     func initCell(user: UserSnapshot, addAction: CocoaAction, downloadAction: Action<Void, UIImage>) {
-        name.text = user.fullName
+        name.text = user.userName
         addFriendButton.rx.action = addAction
         downloadAction.elements.bind(to: profilePicture.rx.image).addDisposableTo(bag)
         downloadAction.execute()

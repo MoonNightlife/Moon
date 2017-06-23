@@ -21,7 +21,7 @@ class ImageViewCell: UIView {
     
     /// Toolbar views.
     fileprivate var toolbar: Toolbar!
-    fileprivate var moreButton: IconButton!
+    var moreButton: IconButton!
     fileprivate var goButton: IconButton!
     
     func initializeImageCardViewWith(data: TopBar, downloadAction: Action<Void, UIImage>) {

@@ -33,7 +33,7 @@ struct FeaturedViewModel: ImageDownloadType {
         self.photoService = photoService
         
         loadEvents = Action(workFactory: { _ in
-            return barAPI.getEventsIn(region: "dallas").map({ $0.map(FeaturedEvent.init) })
+            return barAPI.getEventsIn(region: "Dallas").map({ $0.map(FeaturedEvent.init) })
         })
         
         loadEvents.elements.bind(to: featuredEvents).addDisposableTo(disposeBag)
