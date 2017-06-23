@@ -26,7 +26,7 @@ class PeopleGoingCarouselView: ImageCardView {
         self.user = user
         self.index = index
         
-        self.initializeImageCardViewWith(type: .small(image: downloadImage, text: user.fullName!))
+        self.initializeImageCardViewWith(type: .small(image: downloadImage, text: user.userName!))
         prepareLikeButton()
         prepareNumberOfLikes(likes: "19")
         prepareOverlayButton()

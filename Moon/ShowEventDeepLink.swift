@@ -8,10 +8,11 @@
 
 import Foundation
 /// Represents presenting an image to the user.
-/// Example - moonnightlife://show/event?barID=123?eventID=234
+/// Example - moonnightlife/show/event?barID=123?eventID=234
 struct ShowEventDeepLink: DeepLink {
     
     static let template = DeepLinkTemplate()
+        .term("moonnightlife")
         .term("show")
         .term("event")
         .queryStringParameters([

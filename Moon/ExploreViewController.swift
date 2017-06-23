@@ -120,6 +120,7 @@ extension ExploreViewController: iCarouselDataSource, iCarouselDelegate {
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         let topBarView = ImageViewCell(frame: carousel.frame)
         topBarView.initializeImageCardViewWith(data: topBars[index], downloadAction: viewModel.downloadImage(url: topBars[index].imageURL))
+        topBarView.moreButton.rx.action = viewModel.showBar()
         return topBarView
     }
 }

@@ -261,7 +261,7 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
                                 viewProfile: viewModel.onShowProfile(),
                                 likeActivity: viewModel.onLikeActivity(),
                                 viewLikers: viewModel.onViewLikers(),
-                                downloadImage: viewModel.downloadImage(url: baseURL.appendingPathComponent(viewModel.displayedUsers.value[index].profilePic!)))
+                                downloadImage: viewModel.downloadImage(url: baseURL.appendingPathComponent(viewModel.displayedUsers.value[index].pic!)))
         
         return view
     }

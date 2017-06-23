@@ -34,9 +34,9 @@ struct UsersTableViewModel: BackType, ImageDownloadType {
             //TODO: remove this once api returns snapshots instead of profiles
             return profiles.map({ profile in
                 let snap = UserSnapshot()
-                snap.fullName = profile.firstName
-                snap.profilePic = profile.profilePics!.first
-                snap.id = profile.id
+                snap.userName = profile.firstName
+                snap.pic = profile.profilePics!.first
+                snap.userID = profile.id
                 return snap
             })
         }).map({

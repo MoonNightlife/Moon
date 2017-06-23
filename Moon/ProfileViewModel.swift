@@ -34,21 +34,21 @@ struct ProfileViewModel {
         
         let userProfile = userAPI.getUserProfile(userID: "01")
         
-        username = userProfile.map({ $0.username }).replaceNilWith("No Username")
+        username = userProfile.map({ $0.username }).replaceNilWith("No Username").catchErrorJustReturn("Fake Username")
         fullName = userProfile.map({
             let firstName = $0.firstName ?? "No First Name"
             let lastName = $0.lastName ?? "No Last Name"
             return firstName + " " + lastName
-        })
+        }).catchErrorJustReturn("Fake Name")
         //TODO: Add bio when api adds property to model
-        bio = userProfile.map({ _ in "No Bio" })
-        activityBarName = userProfile.map({ $0.activity }).filterNil().map({ $0.barName }).replaceNilWith("No Plans")
+        bio = userProfile.map({ _ in "No Bio" }).catchErrorJustReturn("Fake Bio")
+        activityBarName = userProfile.map({ $0.activity }).filterNil().map({ $0.barName }).replaceNilWith("No Plans").catchErrorJustReturn("Fake Planr")
         
         userProfile.map({ $0.profilePics }).filterNil().flatMap({ pictureURLs in
             return Observable.from(pictureURLs).flatMap({
                 return photoService.getImageFor(url: baseURL.appendingPathComponent($0))
             }).toArray()
-        }).bind(to: profilePictures).addDisposableTo(bag)
+        }).catchErrorJustReturn([]).bind(to: profilePictures).addDisposableTo(bag)
     }
     
     func onDismiss() -> CocoaAction {

@@ -43,24 +43,22 @@ struct BarProfileViewModel: ImageDownloadType, BackType {
         self.photoService = photoService
         self.barAPI = barAPI
         
-         let bar = barAPI.getBarInfo(barID: "123")
+         let bar = barAPI.getBarInfo(barID: "594bfb53fc13ae69de000cff")
         
         barName = bar.map({ $0.name ?? "No Name" })
         
-        bar.map({ $0.specials }).filter({ $0 != nil }).map({ return $0!.map(SpecialCell.init) }).bind(to: specials).addDisposableTo(bag)
-        bar.map({ $0.events }).filter({ $0 != nil }).map({ return $0!.map(FeaturedEvent.init) }).bind(to: events).addDisposableTo(bag)
+        bar.map({ $0.specials }).filter({ $0 != nil }).map({ return $0!.map(SpecialCell.init) })
+            .catchErrorJustReturn([]).bind(to: specials).addDisposableTo(bag)
+        bar.map({ $0.events }).filter({ $0 != nil }).map({ return $0!.map(FeaturedEvent.init) }).catchErrorJustReturn([]).bind(to: events).addDisposableTo(bag)
         
-//        _ = bar.map({ $0.peopleAttending }).filter({ $0 != nil }).flatMap({ userIDs in
-//            return Observable.from(userIDs!).flatMap({
-//                //return userAPI.getUs
-//            }).toArray()
-//        })//.bind(to: displayedUsers).addDisposableTo(bag)
+        bar.map({ $0.peopleAttending }).filterNil().bind(to: displayedUsers).addDisposableTo(bag)
         
         bar.map({ $0.barPics }).filter({ $0 != nil }).flatMap({ pictureURLs in
             return Observable.from(pictureURLs!).flatMap({
-                return photoService.getImageFor(url: baseURL.appendingPathComponent($0))
+                return photoService.getImageFor(url: URL(string: $0)!)
             }).toArray()
-        }).bind(to: barPics).addDisposableTo(bag)
+            
+        }).catchErrorJustReturn([]).bind(to: barPics).addDisposableTo(bag)
         
         barInfo = bar.map({ bar in
             return BarInfo(website: bar.website, address: bar.address, phoneNumber: bar.phoneNumber)

@@ -13,8 +13,8 @@ import SwaggerClient
 let baseURL = URL(string: "http://localhost:8081")!
 
 protocol BarAPIType {
-    func getBarFriends(barID: String, userID: String) -> Observable<[UserProfile]>
-    func getBarPeople(barID: String) -> Observable<[UserProfile]>
+    func getBarFriends(barID: String, userID: String) -> Observable<[UserSnapshot]>
+    func getBarPeople(barID: String) -> Observable<[UserSnapshot]>
     
     func getBarInfo(barID: String) -> Observable<BarProfile>
     func getBarEvents(barID: String) -> Observable<[BarEvent]>
@@ -29,7 +29,7 @@ protocol BarAPIType {
 }
 
 class BarAPIController: BarAPIType {
-    func getBarFriends(barID: String, userID: String) -> Observable<[UserProfile]> {
+    func getBarFriends(barID: String, userID: String) -> Observable<[UserSnapshot]> {
         return Observable.create({ (observer) -> Disposable in
             BarAPI.getBarFriends(barID: barID, userID: userID, completion: { (profiles, error) in
                 if let p = profiles {
@@ -43,7 +43,7 @@ class BarAPIController: BarAPIType {
         })
     }
     
-    func getBarPeople(barID: String) -> Observable<[UserProfile]> {
+    func getBarPeople(barID: String) -> Observable<[UserSnapshot]> {
         return Observable.create({ (observer) -> Disposable in
             BarAPI.getBarPeople(barID: barID, completion: { (profiles, error) in
                 if let p = profiles {

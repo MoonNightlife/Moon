@@ -25,9 +25,9 @@ enum UserSectionItem: IdentifiableType, Equatable {
     var identity: String {
         switch self {
         case let .friend(snapshot):
-            return snapshot.id ?? "0"
+            return snapshot.userID ?? "0"
         case let .friendRequest(snapshot):
-            return snapshot.id ?? "0"
+            return snapshot.userID ?? "0"
         }
     }
 
