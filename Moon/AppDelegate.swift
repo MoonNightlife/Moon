@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         UIApplication.shared.statusBarStyle = .lightContent
         
+        DynamicLinkingAPI.createDynamicLink()
         FirebaseOptions.defaultOptions()?.deepLinkURLScheme = "moonnightlife"
         FirebaseApp.configure()
         
@@ -39,12 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         let dynamicLink = DynamicLinks.dynamicLinks()?.dynamicLink(fromCustomSchemeURL: url)
-        if let dynamicLink = dynamicLink {
-            // Handle the deep link. For example, show the deep-linked content or
-            // apply a promotional offer to the user's account.
-            // ...
-            print(dynamicLink)
-            return true
+        if let dynamicLink = dynamicLink, let url = dynamicLink.url {
+            return executeDeepLink(with: url)
         }
         
         return false
@@ -55,11 +52,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let dynamicLinks = DynamicLinks.dynamicLinks() else {
             return false
         }
-        let handled = dynamicLinks.handleUniversalLink(userActivity.webpageURL!) { (dynamiclink, error) in
-            // ...
-            print(error)
-            print(dynamiclink)
-            print(dynamiclink?.url)
+        let handled = dynamicLinks.handleUniversalLink(userActivity.webpageURL!) { [weak self] (dynamiclink, error) in
+            if let url = dynamiclink?.url {
+                _ = self?.executeDeepLink(with: url)
+            } else if let e = error {
+                print(e)
+            }
         }
         
         return handled
@@ -108,7 +106,6 @@ extension AppDelegate {
     }
     
     fileprivate func showEvent(with deepLink: ShowEventDeepLink) -> Bool {
-        //TODO: Present bar profile for bar id in deep link if logged in
         prepareEntryViewController(vc: .barProfile)
         print("Show Event")
         return true
