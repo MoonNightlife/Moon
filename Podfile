@@ -25,7 +25,7 @@ target 'Moon' do
   pod 'RAReorderableLayout'
   pod 'RxOptional'
   pod 'Firebase/DynamicLinks'
-
+  pod 'Fusuma'
   target 'MoonTests' do
     inherit! :search_paths
     # Pods for testing

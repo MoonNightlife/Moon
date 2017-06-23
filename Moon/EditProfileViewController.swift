@@ -11,19 +11,20 @@ import Material
 import RxSwift
 import Action
 import RAReorderableLayout
+import Fusuma
 
-class EditProfileViewController: UIViewController, BindableType, RAReorderableLayoutDelegate, RAReorderableLayoutDataSource, UIImagePickerControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate {
+class EditProfileViewController: UIViewController, BindableType, RAReorderableLayoutDelegate, RAReorderableLayoutDataSource, UIScrollViewDelegate, UITextFieldDelegate, FusumaDelegate {
 
     var viewModel: EditProfileViewModel!
     var cancelButton: UIBarButtonItem!
     var saveButton: UIBarButtonItem!
     var offSet: CGFloat!
     var keyboardHeight: CGFloat!
-    fileprivate let imagePicker = UIImagePickerController()
+    let fusuma = FusumaViewController()
     fileprivate var index: NSIndexPath!
     
     //fake data
-    var fakeImages = [#imageLiteral(resourceName: "pp2.jpg"), #imageLiteral(resourceName: "pp1.jpg"), #imageLiteral(resourceName: "pp3.jpg"), #imageLiteral(resourceName: "pp4.jpg"), #imageLiteral(resourceName: "pp5.jpg"), #imageLiteral(resourceName: "p1.jpg")]
+    var fakeImages = [#imageLiteral(resourceName: "pp2.jpg"), #imageLiteral(resourceName: "AddMorePicsIcon"), #imageLiteral(resourceName: "AddMorePicsIcon"), #imageLiteral(resourceName: "AddMorePicsIcon"), #imageLiteral(resourceName: "AddMorePicsIcon"), #imageLiteral(resourceName: "AddMorePicsIcon")]
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var bioTextField: TextField!
@@ -41,8 +42,6 @@ class EditProfileViewController: UIViewController, BindableType, RAReorderableLa
         prepareLastNameTextField()
         prepareBioTextField()
         prepareScrollView()
-
-        imagePicker.delegate = self
     }
     
     func bindViewModel() {
@@ -160,6 +159,47 @@ class EditProfileViewController: UIViewController, BindableType, RAReorderableLa
         scrollView.bounces = false
         scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: 700)
     }
+    
+    fileprivate func prepareFusuma() {
+        fusuma.delegate = self
+        fusuma.hasVideo = false
+        fusumaTintColor = .moonPurple
+        fusumaBaseTintColor = .moonPurple
+        fusumaBackgroundColor = .white
+        fusumaCropImage = true
+        fusuma.cropHeightRatio = CGFloat(1)
+        fusuma.allowMultipleSelection = false
+    }
+    
+    // MARK: FUSUMA DELEGATES for image cropping
+    // Return the image which is selected from camera roll or is taken via the camera.
+    func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
+        //let i  = image.crop(toWidth: 200, toHeight: 200) // circle image
+        fakeImages[index.item] = image
+        collectionView.reloadData()
+        
+    }
+    
+    func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {
+        print("Multiple Images Selected")
+    }
+    
+    // Return the image but called after is dismissed.
+    func fusumaDismissedWithImage(image: UIImage) {
+        
+        print("Called just after FusumaViewController is dismissed.")
+    }
+    
+    func fusumaVideoCompleted(withFileURL fileURL: URL) {
+        
+        print("Called just after a video has been selected.")
+    }
+    
+    // When camera roll is not authorized, this method is called.
+    func fusumaCameraRollUnauthorized() {
+        
+        print("Camera roll unauthorized")
+    }
 }
 
 // TextField Delegate Functions
@@ -232,7 +272,8 @@ extension EditProfileViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //let cell = (collectionView.cellForItem(at: indexPath) as? RACollectionViewCell)!
         self.index = indexPath as NSIndexPath
-        self.imageTouched()
+        self.prepareFusuma()
+        present(fusuma, animated: true, completion: nil)
         
     }
     
@@ -253,30 +294,5 @@ extension EditProfileViewController {
     
     func scrollTrigerPaddingInCollectionView(_ collectionView: UICollectionView) -> UIEdgeInsets {
         return UIEdgeInsets(top: collectionView.contentInset.top, left: 0, bottom: collectionView.contentInset.bottom, right: 0)
-    }
-}
-
-//ImagePicker Delegate
-extension EditProfileViewController {
-    func imageTouched() {
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
-        
-        present(imagePicker, animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            fakeImages[index.item] = pickedImage
-            collectionView.reloadData()
-        } else {
-            print("Something went wrong")
-        }
-        
-        dismiss(animated: true, completion: nil)
-    }
-    
-    private func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
     }
 }

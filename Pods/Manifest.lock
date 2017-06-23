@@ -21,6 +21,7 @@ PODS:
     - FirebaseAnalytics (~> 4.0)
   - FirebaseInstanceID (2.0.0):
     - FirebaseCore (~> 4.0)
+  - Fusuma (1.1.0)
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
@@ -213,6 +214,7 @@ DEPENDENCIES:
   - ActionButton
   - EZSwipeController
   - Firebase/DynamicLinks
+  - Fusuma
   - iCarousel
   - Kingfisher (~> 3.0)
   - Material (from `https://github.com/CosmicMind/Material`)
@@ -256,6 +258,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 85ad466044c2f013cdb167f85d426d15b128114a
   FirebaseDynamicLinks: ad3bef2e8addfa1490af9db02201429c5c9447dd
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
+  Fusuma: 087dcf57cd0e8712d357dcf14559927da369642c
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   Kingfisher: 6729a0baaa458245bfb8cd5a1296c71c10d6eb6c
@@ -274,6 +277,6 @@ SPEC CHECKSUMS:
   SwaggerClient: 42a5fb2f34db03c66cd09f9ce76a99d554fb0660
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
 
-PODFILE CHECKSUM: d58423658cdb5416a030d543c82ae4722811ace1
+PODFILE CHECKSUM: ad9fd1e0307a19f1e49131361dbb8e4f4e0d7453
 
 COCOAPODS: 1.2.1

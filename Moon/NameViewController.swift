@@ -12,9 +12,9 @@ import RxCocoa
 import RxSwift
 import Action
 import MaterialComponents.MaterialProgressView
+import Fusuma
 
-class NameViewController: UIViewController, BindableType, UIImagePickerControllerDelegate {
-    
+class NameViewController: UIViewController, BindableType, FusumaDelegate {
     var viewModel: NameViewModel!
     let disposeBag = DisposeBag()
 
@@ -25,7 +25,8 @@ class NameViewController: UIViewController, BindableType, UIImagePickerControlle
     
     var navBackButton: UIBarButtonItem!
     var progressView: MDCProgressView!
-    fileprivate let imagePicker = UIImagePickerController()
+    let imagePicker = UIImagePickerController()
+    let fusuma = FusumaViewController()
     let tap = UITapGestureRecognizer()
     
     override func viewDidLoad() {
@@ -37,8 +38,6 @@ class NameViewController: UIViewController, BindableType, UIImagePickerControlle
         prepareProgressView()
         prepareNextScreenButton()
         prepareProfilePic()
-        
-        imagePicker.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,24 +81,34 @@ class NameViewController: UIViewController, BindableType, UIImagePickerControlle
         })
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        print("working")
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            profilePic.image = pickedImage
-            print("Image picked")
-        } else {
-            print("Something went wrong")
-        }
-        
-        dismiss(animated: true, completion: nil)
+    // MARK: FUSUMA DELEGATES for image cropping
+    // Return the image which is selected from camera roll or is taken via the camera.
+    func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
+        //let i  = image.crop(toWidth: 200, toHeight: 200) // circle image
+        profilePic.image = image
     }
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
+    func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {
+        print("Multiple Images Selected")
     }
-
+    
+    // Return the image but called after is dismissed.
+    func fusumaDismissedWithImage(image: UIImage) {
+        
+        print("Called just after FusumaViewController is dismissed.")
+    }
+    
+    func fusumaVideoCompleted(withFileURL fileURL: URL) {
+        
+        print("Called just after a video has been selected.")
+    }
+    
+    // When camera roll is not authorized, this method is called.
+    func fusumaCameraRollUnauthorized() {
+        
+        print("Camera roll unauthorized")
+    }
 }
-
 extension NameViewController {
     
     fileprivate func prepareFirstNameTextField() {
@@ -156,11 +165,20 @@ extension NameViewController {
         
     }
     
+    fileprivate func prepareFusuma() {
+        fusuma.delegate = self
+        fusuma.hasVideo = false
+        fusumaTintColor = .moonPurple
+        fusumaBaseTintColor = .moonPurple
+        fusumaBackgroundColor = .white
+        fusumaCropImage = true
+        fusuma.cropHeightRatio = CGFloat(1)
+        fusuma.allowMultipleSelection = false
+    }
+    
     @objc fileprivate func imageTouched() {
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
-        
-        present(imagePicker, animated: true, completion: nil)
+        prepareFusuma()
+        self.present(fusuma, animated: true, completion: nil)
     }
     
     fileprivate func prepareProfilePic() {
