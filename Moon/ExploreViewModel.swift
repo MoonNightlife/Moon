@@ -29,7 +29,7 @@ struct ExploreViewModel: ImageDownloadType {
         self.photoService = photoService
         
         topBars = Action(workFactory: {_ in 
-            return barAPI.getTopBarsIn(region: "dallas").map({
+            return barAPI.getTopBarsIn(region: "Dallas").map({
                 return $0.map({ bar in
                     return TopBar(from: bar)
                 })
