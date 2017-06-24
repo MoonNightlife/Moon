@@ -11,7 +11,7 @@ import RxDataSources
 import RxCocoa
 import RxSwift
 
-typealias SearchSection = AnimatableSectionModel<String, SearchSnapshot>
+typealias SearchSection = AnimatableSectionModel<String, Snapshot>
 
 class ContentSuggestionsViewController: UIViewController, BindableType, UICollectionViewDelegateFlowLayout {
     @IBOutlet weak var suggestedUsersLabel: UILabel!
@@ -126,7 +126,8 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
             view.backgroundColor = .clear
             
             if let strongSelf = self {
-               view.initViewWith(bar: item, goAction: strongSelf.viewModel.onChangeAttendance(barID: item.id), downloadImage: strongSelf.viewModel.downloadImage(url: URL(string:item.picture)!))
+               view.initViewWith()
+                strongSelf.populate(barCollectionView: view, snapshot: item)
             }
 
             cell.addSubview(view)
@@ -152,7 +153,8 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
             view.backgroundColor = .clear
             
             if let strongSelf = self {
-                view.initViewWith(user: item, addAction: strongSelf.viewModel.onAddFriend(userID: item.id), downloadImage: strongSelf.viewModel.downloadImage(url: URL(string:item.picture)!))
+                view.initViewWith()
+                strongSelf.populate(userCollectionView: view, snapshot: item)
             }
             
             cell.addSubview(view)
@@ -161,4 +163,28 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
     }
 }
 
-extension Reactive where Base : UITableView {}
+extension ContentSuggestionsViewController {
+    func populate(barCollectionView view: BarCollectionView, snapshot: Snapshot) {
+        
+        // Bind actions
+        if let id = snapshot._id {
+            view.goButton.rx.action = viewModel.onChangeAttendance(barID: id)
+        }
+        
+        // Bind labels
+        view.nameLabel.text = snapshot.name
+        
+        if let urlString = snapshot.pic, let url = URL(string: urlString) {
+            
+        }
+    }
+    
+    func populate(userCollectionView view: UserCollectionView, snapshot: Snapshot) {
+        if let id = snapshot._id {
+            view.addFriendButton.rx.action = viewModel.onAddFriend(userID: id)
+        }
+        
+        // Bind labels
+        view.nameLabel.text = snapshot.name
+    }
+}

@@ -12,12 +12,13 @@ import RxCocoa
 import RxDataSources
 import Action
 
-struct SearchResultsViewModel {
+struct SearchResultsViewModel: ImageDownloadType {
     
     private let bag = DisposeBag()
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
+    var photoService: PhotoService
     
     // Actions
     lazy var onShowResult: Action<Int, Void> = { this in
@@ -37,24 +38,29 @@ struct SearchResultsViewModel {
     var selectedSearchType = BehaviorSubject<SearchType>(value: .users)
     
     // Outputs
-    let searchResults: Driver<[SearchSectionModel]>!
+    let searchResults: Observable<[SnapshotSectionModel]>
     
-    init(coordinator: SceneCoordinatorType, searchText: BehaviorSubject<String>) {
+    init(coordinator: SceneCoordinatorType, searchText: BehaviorSubject<String>, photoService: PhotoService = KingFisherPhotoService()) {
         sceneCoordinator = coordinator
+        self.photoService = photoService
         
         searchText.subscribe(onNext: {
             print($0)
         })
         .addDisposableTo(bag)
         
-
-        searchResults = Observable.combineLatest(searchText, selectedSearchType)
-            .flatMap({ (text, type) -> Observable<[Snapshot]> in
-                return SearchResultsViewModel.getSearchResultsFor(text: text, type: type)
-                        .map(SearchResultsViewModel.snapshotsToSearchSectionItems)
-                        .map(SearchResultsViewModel.sectionItemsToSectionModel)
-            })
-            .asDriver(onErrorJustReturn: [SearchSectionModel.searchResultsSection(title: "", items: [])])
+        searchResults = Observable.empty()
+        _ = Observable.combineLatest(searchText, selectedSearchType)
+                .flatMapLatest({ (searchText, type) -> Observable<Void> in
+                    switch type {
+                    case .users: return Observable.empty()
+                        //TODO: add user search api call
+                        
+                    case .bars: return Observable.empty()
+                        //TODO: add bar search api call
+                    
+                    }
+                })
     
     }
     
@@ -72,29 +78,11 @@ struct SearchResultsViewModel {
         })
     }
     
-
-    
     func onShowProfile() -> Action<String, Void> {
         return Action(workFactory: { _ in
             let vm = ProfileViewModel(coordinator: self.sceneCoordinator)
             return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
         })
-    }
-    
-    
-    // MARK: - Helper functions to convert 
-    static func snapshotsToSearchSectionItems(snapshots: [Snapshot]) -> [SearchSectionItem] {
-        return snapshots.map({
-            SearchSectionItem.searchResultItem(snapshot: $0)
-        })
-    }
-    
-    static func sectionItemsToSectionModel(items: [SearchSectionItem]) -> [SearchSectionModel] {
-        return [SearchSectionModel.searchResultsSection(title: "Results", items: items)]
-    }
-    
-    static func loadMoreSectionModel(withAction: CocoaAction) -> SearchSectionModel {
-        return SearchSectionModel.loadMore(title: "Load More", items: [.loadMoreItem(loadAction: withAction)])
     }
 
 }

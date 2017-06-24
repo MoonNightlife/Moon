@@ -208,30 +208,30 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
     }
     
     func addAnnotations() {
-        for data in fakeTopBars {
-            let pointAnnotation = BarAnnotation()
-            var image = UIImage()
-           
-            switch arc4random_uniform(3) {
-            case 0:
-                image = #imageLiteral(resourceName: "RedPin")
-            case 1:
-                image = #imageLiteral(resourceName: "YellowPin")
-            default:
-                image = #imageLiteral(resourceName: "GreenPin")
-            }
-            
-            pointAnnotation.coordinate = data.coordinates!
-            pointAnnotation.title = data.barName
-            pointAnnotation.placeID = "123123"
-            pointAnnotation.image = image
-            pointAnnotation.subtitle = "People Going: \(data.usersGoing)"
-            
-            let annotationView = MKAnnotationView(annotation: pointAnnotation, reuseIdentifier: "pin")
-            
-            //swiftlint:disable:next force_cast
-            self.cityMapView.addAnnotation(annotationView.annotation!)
-        }
+//        for data in fakeTopBars {
+//            let pointAnnotation = BarAnnotation()
+//            var image = UIImage()
+//           
+//            switch arc4random_uniform(3) {
+//            case 0:
+//                image = #imageLiteral(resourceName: "RedPin")
+//            case 1:
+//                image = #imageLiteral(resourceName: "YellowPin")
+//            default:
+//                image = #imageLiteral(resourceName: "GreenPin")
+//            }
+//            
+//            pointAnnotation.coordinate = data.coordinates!
+//            pointAnnotation.title = data.barName
+//            pointAnnotation.placeID = "123123"
+//            pointAnnotation.image = image
+//            pointAnnotation.subtitle = "People Going: \(data.usersGoing)"
+//            
+//            let annotationView = MKAnnotationView(annotation: pointAnnotation, reuseIdentifier: "pin")
+//            
+//            //swiftlint:disable:next force_cast
+//            self.cityMapView.addAnnotation(annotationView.annotation!)
+//        }
     }
 
 }

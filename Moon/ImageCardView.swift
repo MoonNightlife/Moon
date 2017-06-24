@@ -15,14 +15,12 @@ import RxSwift
 class ImageCardView: UIView {
     
     enum CardType {
-        case small(image: Action<Void, UIImage>, text: String)
-        case medium(image: Action<Void, UIImage>, text: String)
-        case large(image: Action<Void, UIImage>, titleText: String, detailText: String, text: String)
+        case small
+        case medium
+        case large
     }
     
-    fileprivate var index: Int?
-    fileprivate var card: ImageCard!
-    fileprivate var bag = DisposeBag()
+    var card: ImageCard!
     
     // Image View
     var imageView: UIImageView!
@@ -37,22 +35,22 @@ class ImageCardView: UIView {
     func initializeImageCardViewWith(type: CardType) {
         
         switch type {
-        case .small(let image, let text):
-            self.prepareImageView(image: image)
-            self.prepareBottomToolBar(text: text)
+        case .small:
+            self.prepareImageView()
+            self.prepareBottomToolBar()
             self.preparePresenterCard()
             break
-        case .medium(let image, let text):
-            self.prepareImageView(image: image)
-            self.prepareContentView(text: text, color: .lightGray)
-            self.prepareBottomToolBar(text: "")
+        case .medium:
+            self.prepareImageView()
+            self.prepareContentView(color: .lightGray)
+            self.prepareBottomToolBar()
             self.preparePresenterCard()
             break
-        case .large(let image, let titleText, let detailText, let text):
-            self.prepareGradiendImage(image: image)
-            self.prepareToolBar(text: titleText, detailText: detailText)
-            self.prepareContentView(text: text, color: .black)
-            self.prepareBottomToolBar(text: "")
+        case .large:
+            self.prepareGradiendImage()
+            self.prepareToolBar()
+            self.prepareContentView(color: .black)
+            self.prepareBottomToolBar()
             self.preparePresenterCard()
             break
         }
@@ -84,48 +82,38 @@ class ImageCardView: UIView {
 
 extension ImageCardView {
     
-    fileprivate func prepareImageView(image: Action<Void, UIImage>) {
+    fileprivate func prepareImageView() {
         imageView = UIImageView(frame:  CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height / 1.2))
-        image.elements.bind(to: imageView.rx.image).addDisposableTo(bag)
-        image.execute()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
     }
     
-    fileprivate func prepareGradiendImage(image: Action<Void, UIImage>) {
+    fileprivate func prepareGradiendImage() {
         imageView = BottomGradientImageView(frame:  CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height / 1.2)) as BottomGradientImageView!
-        image.elements.bind(to: imageView.rx.image).addDisposableTo(bag)
-        image.execute()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
     }
     
-    fileprivate func prepareToolBar(text: String, detailText: String) {
+    fileprivate func prepareToolBar() {
         toolbar = Toolbar()
         toolbar.backgroundColor = .clear
-        
-        toolbar.title = text
-        toolbar.detail = detailText
     }
     
-    fileprivate func prepareBottomToolBar(text: String) {
+    fileprivate func prepareBottomToolBar() {
         bottomToolbar = MoonToolbar()
         bottomToolbar.backgroundColor = .clear
         
-        bottomToolbar.title = text
         bottomToolbar.titleLabel.textColor = .lightGray
         bottomToolbar.titleLabel.font = UIFont(name: "Roboto", size: 12)
         
-        bottomToolbar.detail = ""
         bottomToolbar.detailLabel.textColor = .lightGray
         bottomToolbar.detailLabel.font = UIFont(name: "Roboto", size: 8)
     }
     
-    fileprivate func prepareContentView(text: String, color: UIColor) {
+    fileprivate func prepareContentView(color: UIColor) {
         content = UILabel()
         content.numberOfLines = 0
         content.textAlignment = .center
-        content.text = text
         content.font = RobotoFont.regular(with: 12)
         content.textColor = color
     }

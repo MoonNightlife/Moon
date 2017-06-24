@@ -78,8 +78,10 @@
 		F0043A051EF45D8C0047E94A /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0043A041EF45D8C0047E94A /* ContactTableViewCell.swift */; };
 		F0055D691EC5E64B005544B4 /* CityOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0055D681EC5E64B005544B4 /* CityOverviewViewController.swift */; };
 		F01CE3DF1EFED68400EE9535 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01CE3DE1EFED68400EE9535 /* Snapshot.swift */; };
+		F01CE3E11EFEDE1000EE9535 /* SelectRegionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01CE3E01EFEDE1000EE9535 /* SelectRegionViewModel.swift */; };
+		F01CE3E31EFEDE9500EE9535 /* SelectRegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01CE3E21EFEDE9500EE9535 /* SelectRegionViewController.swift */; };
 		F02D9AA61EE61B3D00D6C969 /* BarActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02D9AA51EE61B3D00D6C969 /* BarActivity.swift */; };
-		F0335A761EF1F7DD005118B4 /* RxDataSourceSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0335A751EF1F7DD005118B4 /* RxDataSourceSearchModel.swift */; };
+		F0335A761EF1F7DD005118B4 /* RxDataSourceSnapshotModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0335A751EF1F7DD005118B4 /* RxDataSourceSnapshotModel.swift */; };
 		F03776A21EC3A44100B92E6B /* FakeSpecialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03776A11EC3A44100B92E6B /* FakeSpecialData.swift */; };
 		F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */; };
 		F03830601EC63C7300A0FF5D /* Master.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F038305F1EC63C7300A0FF5D /* Master.storyboard */; };
@@ -116,7 +118,6 @@
 		F049896C1EE068BE00064F58 /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F049896B1EE068BE00064F58 /* SceneTransitionType.swift */; };
 		F049896E1EE068E000064F58 /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F049896D1EE068E000064F58 /* SceneCoordinator.swift */; };
 		F04989701EE0746400064F58 /* UINavigationController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F049896F1EE0746400064F58 /* UINavigationController+Rx.swift */; };
-		F04A4B231EEC549300DBA9A6 /* SearchSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A4B221EEC549300DBA9A6 /* SearchSnapshot.swift */; };
 		F04A4B271EEC595700DBA9A6 /* UserCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A4B261EEC595700DBA9A6 /* UserCollectionView.swift */; };
 		F04A6D521EEECA95000D898B /* ParentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A6D511EEECA95000D898B /* ParentType.swift */; };
 		F04A6D541EEEDBBF000D898B /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A6D531EEEDBBF000D898B /* Views.swift */; };
@@ -321,8 +322,10 @@
 		F0043A041EF45D8C0047E94A /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		F0055D681EC5E64B005544B4 /* CityOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityOverviewViewController.swift; sourceTree = "<group>"; };
 		F01CE3DE1EFED68400EE9535 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
+		F01CE3E01EFEDE1000EE9535 /* SelectRegionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectRegionViewModel.swift; sourceTree = "<group>"; };
+		F01CE3E21EFEDE9500EE9535 /* SelectRegionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectRegionViewController.swift; sourceTree = "<group>"; };
 		F02D9AA51EE61B3D00D6C969 /* BarActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarActivity.swift; sourceTree = "<group>"; };
-		F0335A751EF1F7DD005118B4 /* RxDataSourceSearchModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxDataSourceSearchModel.swift; sourceTree = "<group>"; };
+		F0335A751EF1F7DD005118B4 /* RxDataSourceSnapshotModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxDataSourceSnapshotModel.swift; sourceTree = "<group>"; };
 		F03776A11EC3A44100B92E6B /* FakeSpecialData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeSpecialData.swift; sourceTree = "<group>"; };
 		F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialTableViewCell.swift; sourceTree = "<group>"; };
 		F038305F1EC63C7300A0FF5D /* Master.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Master.storyboard; sourceTree = "<group>"; };
@@ -364,7 +367,6 @@
 		F049896B1EE068BE00064F58 /* SceneTransitionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
 		F049896D1EE068E000064F58 /* SceneCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
 		F049896F1EE0746400064F58 /* UINavigationController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Rx.swift"; sourceTree = "<group>"; };
-		F04A4B221EEC549300DBA9A6 /* SearchSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSnapshot.swift; sourceTree = "<group>"; };
 		F04A4B261EEC595700DBA9A6 /* UserCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionView.swift; sourceTree = "<group>"; };
 		F04A6D511EEECA95000D898B /* ParentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentType.swift; sourceTree = "<group>"; };
 		F04A6D531EEEDBBF000D898B /* Views.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
@@ -690,7 +692,6 @@
 		F0017AC41EF8905200C56039 /* Display Models */ = {
 			isa = PBXGroup;
 			children = (
-				F04A4B221EEC549300DBA9A6 /* SearchSnapshot.swift */,
 				F0CA18B61EE6101200428318 /* TopBar.swift */,
 				F02D9AA51EE61B3D00D6C969 /* BarActivity.swift */,
 			);
@@ -743,6 +744,7 @@
 			children = (
 				F03C78B21EE9DB2C002AEDAD /* SettingsViewController.swift */,
 				F03C78B91EE9E973002AEDAD /* NameSettingsViewController.swift */,
+				F01CE3E21EFEDE9500EE9535 /* SelectRegionViewController.swift */,
 				F03C78BB1EE9E97E002AEDAD /* EmailSettingsViewController.swift */,
 				F03C78BD1EE9E98E002AEDAD /* NotificationSettingsViewController.swift */,
 				F09DF08F1EEAFAF90092BFA5 /* WebViewUIViViewController.swift */,
@@ -756,6 +758,7 @@
 			children = (
 				F03C78B41EE9DB3C002AEDAD /* SettingsViewModel.swift */,
 				F03C78C21EE9EA2D002AEDAD /* NameSettingsViewModel.swift */,
+				F01CE3E01EFEDE1000EE9535 /* SelectRegionViewModel.swift */,
 				F03C78C41EE9EA3C002AEDAD /* EmailSettingsViewModel.swift */,
 				F03C78C61EE9EA4B002AEDAD /* NotificationSettingsViewModel.swift */,
 				F09DF0911EEAFB670092BFA5 /* WebViewViewModel.swift */,
@@ -791,7 +794,7 @@
 				C0DAD3191EE62B4B008BAF05 /* Profile Images */,
 				F04989621EE063F400064F58 /* Scenes */,
 				F098FF9C1EDF46EF00A59594 /* Utilities */,
-				F0F017F91EF9A96D0086447E /* RxDataSources Model Extensions */,
+				F0F017F91EF9A96D0086447E /* RxDataSources Model/Extensions */,
 				F098FF991EDF1DDA00A59594 /* Models */,
 				C0465DB01EDF20820065FD7C /* Login Images */,
 				F09B9D031EC3552F00B2385A /* View Models */,
@@ -856,8 +859,6 @@
 				F09DF08D1EEAF1240092BFA5 /* NotificationSetting.swift */,
 				F0C72F471EF835B800B25C52 /* VC and VM Types */,
 				F0CA18B21EE5AE7500428318 /* Enums.swift */,
-				F0335A751EF1F7DD005118B4 /* RxDataSourceSearchModel.swift */,
-				F06B56FC1EFAA8750028552A /* RxDataSourceUserModel.swift */,
 				F0CF7F241EF3850F005C068C /* CountryCode.swift */,
 			);
 			name = Models;
@@ -1189,15 +1190,17 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
-		F0F017F91EF9A96D0086447E /* RxDataSources Model Extensions */ = {
+		F0F017F91EF9A96D0086447E /* RxDataSources Model/Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F06B56FC1EFAA8750028552A /* RxDataSourceUserModel.swift */,
+				F0335A751EF1F7DD005118B4 /* RxDataSourceSnapshotModel.swift */,
 				F0F017FA1EF9A9AB0086447E /* Activity.swift */,
 				F0F017FC1EF9B0760086447E /* UserSnapshot.swift */,
 				F01CE3DE1EFED68400EE9535 /* Snapshot.swift */,
 				F09F7E361EFEB74900021C13 /* Special.swift */,
 			);
-			name = "RxDataSources Model Extensions";
+			name = "RxDataSources Model/Extensions";
 			sourceTree = "<group>";
 		};
 		F0FD8F351EE1DC600020D131 /* RxExtensions */ = {
@@ -1546,6 +1549,7 @@
 				F0CA18971EE58BBD00428318 /* MainViewModel.swift in Sources */,
 				F0CA18B71EE6101200428318 /* TopBar.swift in Sources */,
 				F01CE3DF1EFED68400EE9535 /* Snapshot.swift in Sources */,
+				F01CE3E11EFEDE1000EE9535 /* SelectRegionViewModel.swift in Sources */,
 				F0043A031EF44F090047E94A /* ContactsViewModel.swift in Sources */,
 				F09B9D081EC3571800B2385A /* ExploreViewController.swift in Sources */,
 				F0942F0D1ECCEC550038E389 /* FeaturedEventView.swift in Sources */,
@@ -1575,7 +1579,6 @@
 				F09C09221ECC7D3B003076CC /* FloatingBottomTabBar.swift in Sources */,
 				F03C78BE1EE9E98F002AEDAD /* NotificationSettingsViewController.swift in Sources */,
 				F09DF0901EEAFAF90092BFA5 /* WebViewUIViViewController.swift in Sources */,
-				F04A4B231EEC549300DBA9A6 /* SearchSnapshot.swift in Sources */,
 				F0F017FD1EF9B0760086447E /* UserSnapshot.swift in Sources */,
 				F098FF9B1EDF1DEA00A59594 /* NewUser.swift in Sources */,
 				F07C062A1EF1A08500B78865 /* InfoView.swift in Sources */,
@@ -1624,7 +1627,7 @@
 				F0942F0B1ECCEBA40038E389 /* FakeEventData.swift in Sources */,
 				F0043A011EF44EF90047E94A /* ContactsViewController.swift in Sources */,
 				F0FD8F371EE1DC950020D131 /* ErrorTextField+Rx.swift in Sources */,
-				F0335A761EF1F7DD005118B4 /* RxDataSourceSearchModel.swift in Sources */,
+				F0335A761EF1F7DD005118B4 /* RxDataSourceSnapshotModel.swift in Sources */,
 				F0DCCAE91EF18E7900C9F5A9 /* RxReachability.swift in Sources */,
 				F04A6D561EEEF931000D898B /* SearchTableViewCell.swift in Sources */,
 				F0CA18AF1EE5AA6C00428318 /* BarActivityFeedViewModel.swift in Sources */,
@@ -1645,6 +1648,7 @@
 				F048F11B1EA3B7A5000F0161 /* AppDelegate.swift in Sources */,
 				F0EBA0BF1ECCAE9F00056EF9 /* ActionButton.swift in Sources */,
 				C0DAD30B1EE5EBC4008BAF05 /* ProfileFakeData.swift in Sources */,
+				F01CE3E31EFEDE9500EE9535 /* SelectRegionViewController.swift in Sources */,
 				C0E8BE921EF978F3007E9B52 /* RAReorderableLayout.swift in Sources */,
 				F04A6D521EEECA95000D898B /* ParentType.swift in Sources */,
 				F0F017FB1EF9A9AB0086447E /* Activity.swift in Sources */,

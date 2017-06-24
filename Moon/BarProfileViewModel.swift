@@ -36,7 +36,7 @@ struct BarProfileViewModel: ImageDownloadType, BackType {
     // Outputs
     var barPics = Variable<[UIImage]>([])
     var barName: Observable<String>
-    var displayedUsers = Variable<[UserSnapshot]>([])
+    var displayedUsers = Variable<[Activity]>([])
     var specials = Variable<[Special]>([])
     var events = Variable<[BarEvent]>([])
     
@@ -53,7 +53,7 @@ struct BarProfileViewModel: ImageDownloadType, BackType {
         bar.map({ $0.specials }).filterNil().catchErrorJustReturn([]).bind(to: specials).addDisposableTo(bag)
         bar.map({ $0.events }).filterNil().catchErrorJustReturn([]).bind(to: events).addDisposableTo(bag)
         
-        bar.map({ $0.peopleAttending }).filterNil().bind(to: displayedUsers).addDisposableTo(bag)
+//        bar.map({ $0.peopleAttending }).filterNil().bind(to: displayedUsers).addDisposableTo(bag)
         
         bar.map({ $0.barPics }).filter({ $0 != nil }).flatMap({ pictureURLs in
             return Observable.from(pictureURLs!).flatMap({
@@ -90,14 +90,28 @@ struct BarProfileViewModel: ImageDownloadType, BackType {
         }
     }
     
-    func onShowProfile() -> CocoaAction {
+    func onShowProfile(userID: String) -> CocoaAction {
         return CocoaAction {_ in
             let vm = ProfileViewModel(coordinator: self.sceneCoordinator)
             return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
         }
     }
     
-    func onViewLikers() -> CocoaAction {
+    func onViewLikers(eventID: String) -> CocoaAction {
+        return CocoaAction {_ in
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
+        }
+    }
+    
+    func onViewLikers(specialID: String) -> CocoaAction {
+        return CocoaAction {_ in
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
+        }
+    }
+    
+    func onViewLikers(activityID: String) -> CocoaAction {
         return CocoaAction {_ in
             let vm = UsersTableViewModel(coordinator: self.sceneCoordinator)
             return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)

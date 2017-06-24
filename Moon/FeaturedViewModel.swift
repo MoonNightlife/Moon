@@ -61,4 +61,11 @@ struct FeaturedViewModel: ImageDownloadType {
             return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
         }
     }
+    
+    func onViewLikers(eventID: String) -> CocoaAction {
+        return CocoaAction {
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
+        }
+    }
 }

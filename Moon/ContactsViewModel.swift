@@ -13,8 +13,6 @@ import RxSwift
 import RxDataSources
 import SwaggerClient
 
-typealias SnapshotSectionModel = AnimatableSectionModel<String, UserSnapshot>
-
 struct ContactsViewModel: BackType, ImageDownloadType {
     // Private
     let bag = DisposeBag()
@@ -42,11 +40,12 @@ struct ContactsViewModel: BackType, ImageDownloadType {
         UserInContacts = checkContactAccess.elements.filter({ $0 }).flatMap({ _ -> Observable<[String]> in
                 return ContactsViewModel.getPhoneNumbers(service: contactService)
             })
-            .flatMap({
-                ContactsViewModel.getUsersWith(phoneNumbers: $0)
+            .flatMap({_ in 
+                //TODO: get users with phonenumbers
+                return Observable.empty()
             })
             .map({
-                return [ContactsViewModel.userSnapshotsToSnapshotSectionModel(snapshots: $0)]
+                return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users", snapshots: $0)]
             })
         
     }
@@ -58,17 +57,16 @@ struct ContactsViewModel: BackType, ImageDownloadType {
             })
         })
     }
+
     
-    static func getUsersWith(phoneNumbers: [String]) -> Observable<[UserSnapshot]> {
-//        let userSnapshot = createFakeUsers().map({
-//            return UserSnapshot(name: $0.firstName!, id: $0.id!, picture: #imageLiteral(resourceName: "pic1.jpg"))
-//        })
-//        return Observable.just(userSnapshot)
-        return Observable.empty()
+    static func snapshotsToSnapshotSectionItem(snapshots: [Snapshot]) -> [SnapshotSectionItem] {
+        return snapshots.map({
+            return SnapshotSectionItem.searchResult(snapshot: $0)
+        })
     }
     
-    static func userSnapshotsToSnapshotSectionModel(snapshots: [UserSnapshot]) -> SnapshotSectionModel {
-        return SnapshotSectionModel(model: "Users", items: snapshots)
+    static func snapshotsToSnapshotSectionModel(sectionItems: [SnapshotSectionItem]) -> SnapshotSectionModel {
+        return SnapshotSectionModel.searchResults(title: "Results", items: sectionItems)
     }
     
     func onAddFriend(userID: String) -> CocoaAction {

@@ -21,7 +21,7 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
 
     @IBOutlet weak var searchResultsTableView: UITableView!
     
-    let resultsDataSource = RxTableViewSectionedReloadDataSource<SearchSectionModel>()
+    let resultsDataSource = RxTableViewSectionedReloadDataSource<SnapshotSectionModel>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,7 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
 
     func bindViewModel() {
         
-        viewModel.searchResults.drive(searchResultsTableView.rx.items(dataSource: resultsDataSource)).addDisposableTo(bag)
+        viewModel.searchResults.bind(to: searchResultsTableView.rx.items(dataSource: resultsDataSource)).addDisposableTo(bag)
     
         segmentControl.rx.controlEvent(UIControlEvents.valueChanged)
             .map({ [weak self] in
@@ -64,22 +64,25 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
     }
     
     fileprivate func configureDataSource() {        
-        resultsDataSource.configureCell = {
+        resultsDataSource.configureCell = { [weak self]
             dataSource, tableView, indexPath, item in
             
-            var cell: UITableViewCell
+            
             switch item {
-            case .searchResultItem(let snapshot):
-                cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath)
+            case .searchResult(let snapshot):
                 //swiftlint:disable:next force_cast
-                (cell as! SearchTableViewCell).initCellWith(snapshot: snapshot as! SnapshotType)
-            case .loadMoreItem(let action):
-                cell = tableView.dequeueReusableCell(withIdentifier: "LoadMore", for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as! SearchTableViewCell
+                cell.initCellWith()
+                cell.nameLabel.text = snapshot.name
+                self?.viewModel.downloadImage(url: URL(string: snapshot.pic!)!).elements.bind(to: cell.mainImageView.rx.image).addDisposableTo(cell.bag)
+                return cell
+            case .loadMore(let action):
                 //swiftlint:disable:next force_cast
-                (cell as! LoadMoreTableViewCell).initCell(loadAction: action)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "LoadMore", for: indexPath) as! LoadMoreTableViewCell
+                cell.initCell(loadAction: action)
+                return cell
             }
             
-            return cell
         }
     }
     

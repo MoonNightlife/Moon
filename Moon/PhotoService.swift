@@ -20,7 +20,7 @@ protocol PhotoService {
 
 struct KingFisherPhotoService: PhotoService {
     
-    func getImageFor(url: URL) -> Observable<UIImage> {
+    private func downloadImageFor(url: URL) -> Observable<UIImage> {
         
         let resouce = ImageResource(downloadURL: url)
         
@@ -45,4 +45,11 @@ struct KingFisherPhotoService: PhotoService {
             }
         })
     }
-}
+    
+    func getImageFor(url: URL) -> Observable<UIImage> {
+        return downloadImageFor(url: url)
+            .retryWhen(RxErrorHandlers.imageRetryHandler)
+            .startWith(#imageLiteral(resourceName: "DefaultProfilePic"))
+    }
+    
+    }

@@ -15,38 +15,30 @@ import SwaggerClient
 class FeaturedEventView: ImageCardView {
     
     //Main Variables
-    fileprivate var event: BarEvent!
-    fileprivate var index: Int?
-    fileprivate var bag = DisposeBag()
+    var bag = DisposeBag()
     
     //Buttons
-    fileprivate var favoriteButton: IconButton!
-    fileprivate var numberOfLikesButton: IconButton!
-    fileprivate var shareButton: IconButton!
-    fileprivate var moreButton: IconButton!
+    var favoriteButton: IconButton!
+    var numberOfLikesButton: IconButton!
+    var shareButton: IconButton!
+    var moreButton: IconButton!
     
     //Date Variables
     fileprivate var dateFormatter: DateFormatter!
-    fileprivate var dateLabel: UILabel!
+    var dateLabel: UILabel!
     
-    func initializeCellWith(event: BarEvent, index: Int, likeAction: CocoaAction, shareAction: CocoaAction, downloadImage: Action<Void, UIImage>, moreInfoAction: CocoaAction) {
-        self.event = event
-        self.index = index
+    func initializeCell() {
         
-        self.initializeImageCardViewWith(type: .large(image: downloadImage, titleText: event.title!, detailText: event.name!, text: event.description!))
+        self.initializeImageCardViewWith(type: .large)
         self.imageView.frame = CGRect(x: 0, y: 0, width: self.width, height: (self.height + 200) * 0.372)
         prepareFavoriteButton()
         prepareShareButton()
         prepareMoreButton()
         prepareDateFormatter()
         prepareDateLabel()
-        prepareNumberOfLikesButton(likes: "200")
+        prepareNumberOfLikesButton()
         prepareToolbar()
         prepareBottomBar()
-        
-        favoriteButton.rx.action = likeAction
-        shareButton.rx.action = shareAction
-        moreButton.rx.action = moreInfoAction
     }
 
 }
@@ -79,8 +71,8 @@ extension FeaturedEventView {
         dateLabel.text = dateFormatter.string(from: Date.distantFuture)
     }
     
-    fileprivate func prepareNumberOfLikesButton(likes: String) {
-        numberOfLikesButton = IconButton(title: likes)
+    fileprivate func prepareNumberOfLikesButton() {
+        numberOfLikesButton = IconButton()
         numberOfLikesButton.titleColor = .lightGray
         numberOfLikesButton.titleLabel?.font = UIFont(name: "Roboto", size: 10)
     }

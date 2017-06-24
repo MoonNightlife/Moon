@@ -8,17 +8,16 @@
 
 import UIKit
 import Action
+import RxSwift
 
 class SearchTableViewCell: UITableViewCell {
     
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
+    var bag = DisposeBag()
     
-    func initCellWith(snapshot: SearchSnapshot) {
-        mainImageView.image = UIImage(named: snapshot.picture)
-        nameLabel.text = snapshot.name
-        
+    func initCellWith() {
         prepareImageView()
         prepareLabel()
     }
@@ -30,6 +29,10 @@ class SearchTableViewCell: UITableViewCell {
     
     fileprivate func prepareLabel() {
         nameLabel.textColor = .lightGray
+    }
+    
+    override func prepareForReuse() {
+        bag = DisposeBag()
     }
 
 }
