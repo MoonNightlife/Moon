@@ -75,6 +75,6 @@ extension BarInfoViewModel {
             return nil
         }
         
-        return URL(string: "http://\(web)")
+        return URL(string: web)
     }
 }

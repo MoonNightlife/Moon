@@ -46,7 +46,7 @@ struct ProfileViewModel {
         
         userProfile.map({ $0.profilePics }).filterNil().flatMap({ pictureURLs in
             return Observable.from(pictureURLs).flatMap({
-                return photoService.getImageFor(url: baseURL.appendingPathComponent($0))
+                return photoService.getImageFor(url: URL(string: $0)!)
             }).toArray()
         }).catchErrorJustReturn([]).bind(to: profilePictures).addDisposableTo(bag)
     }

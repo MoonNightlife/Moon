@@ -1,44 +1,27 @@
 //
-//  SpecialCell.swift
+//  Special.swift
 //  Moon
 //
-//  Created by Evan Noble on 6/5/17.
+//  Created by Evan Noble on 6/24/17.
 //  Copyright © 2017 Evan Noble. All rights reserved.
 //
 
 import Foundation
-import UIKit
 import RxDataSources
 import SwaggerClient
-import Action
 
-struct SpecialCell {
-    let description: String
-    let likes: String
-    let barName: String
-    let id: String
-    let barID: String
-    let imageURL: URL
-    
-    init(from special: Special) {
-        self.description = special.description ?? ""
-        self.likes = "\(special.numLikes ?? 0)"
-        self.barName = special.name ?? ""
-        self.id = special.id ?? ""
-        self.barID = special.barID ?? ""
-        self.imageURL = baseURL.appendingPathComponent(special.pic ?? "")
+extension Special: IdentifiableType {
+    public var identity: String {
+        guard let id = id else {
+            return "0"
+        }
         
+        return id
     }
 }
 
-extension SpecialCell: Equatable {
-    static func == (lhs: SpecialCell, rhs: SpecialCell) -> Bool {
-        return lhs.id == rhs.id && lhs.likes == rhs.likes
-    }
-}
-
-extension SpecialCell: IdentifiableType {
-    var identity: String {
-        return id 
+extension Special: Equatable {
+    public static func == (lhs: Special, rhs: Special) -> Bool {
+        return lhs.id == rhs.id && lhs.numLikes == rhs.numLikes
     }
 }

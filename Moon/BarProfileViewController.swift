@@ -256,12 +256,13 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         let frame = CGRect(x: goingCarousel.frame.size.width / 2, y: goingCarousel.frame.size.height / 2, width: size, height: size)
         let view = PeopleGoingCarouselView()
         view.frame = frame
-        view.initializeViewWith(user: viewModel.displayedUsers.value[index],
+        let activity = viewModel.displayedUsers.value[index]
+        view.initializeViewWith(user: activity,
                                 index: index,
                                 viewProfile: viewModel.onShowProfile(),
-                                likeActivity: viewModel.onLikeActivity(),
+                                likeActivity: viewModel.onLikeActivity(activityID: "123123"),
                                 viewLikers: viewModel.onViewLikers(),
-                                downloadImage: viewModel.downloadImage(url: baseURL.appendingPathComponent(viewModel.displayedUsers.value[index].pic!)))
+                                downloadImage: viewModel.downloadImage(url: URL(string: activity.pic!)!))
         
         return view
     }
@@ -271,7 +272,8 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         let size = (self.view.frame.size.height * 0.298) - 50
         let frame = CGRect(x: specialsCarousel.frame.size.width / 2, y: specialsCarousel.frame.size.height / 2, width: size + 20, height: size)
         view.frame = frame
-        view.initializeViewWith(special: viewModel.specials.value[index], index: index, likeAction: viewModel.onLikeSpecial(), downloadAction: viewModel.downloadImage(url: viewModel.specials.value[index].imageURL))
+        let special = viewModel.specials.value[index]
+        view.initializeViewWith(special: special, index: index, likeAction: viewModel.onLikeSpecial(specialID: special.id!), downloadAction: viewModel.downloadImage(url: URL(string: special.pic!)!))
         
         return view
     }
@@ -281,10 +283,11 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         let size = (self.view.frame.size.height * 0.513) - 60
         view.frame = CGRect(x: eventsCarousel.frame.size.width / 2, y: eventsCarousel.frame.size.height / 2, width: size + 60, height: size)
         view.backgroundColor = .clear
-        view.initializeCellWith(event: viewModel.events.value[index],
-                                index: index, likeAction: viewModel.onLikeEvent(),
-                                shareAction: viewModel.onShareEvent(),
-                                downloadImage: viewModel.downloadImage(url: viewModel.events.value[index].imageURL),
+        let event = viewModel.events.value[index]
+        view.initializeCellWith(event: event,
+                                index: index, likeAction: viewModel.onLikeEvent(eventID: event.id!),
+                                shareAction: viewModel.onShareEvent(eventID: event.id!, barID: "123123"),
+                                downloadImage: viewModel.downloadImage(url: URL(string: event.pic!)!),
                                 moreInfoAction: viewModel.onViewMore())
         
         return view

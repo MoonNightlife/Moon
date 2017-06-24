@@ -10,6 +10,7 @@ import UIKit
 import Action
 import RxCocoa
 import RxSwift
+import SwaggerClient
 
 class SpecialTableViewCell: UITableViewCell {
 
@@ -26,15 +27,15 @@ class SpecialTableViewCell: UITableViewCell {
         // Initialization code
     }
      
-    func initilizeSpecialCellWith(data: SpecialCell, likeAction: CocoaAction, downloadImage: Action<Void, UIImage>) {
+    func initilizeSpecialCellWith(data: Special, likeAction: CocoaAction, downloadImage: Action<Void, UIImage>) {
         setupImageView()
         
         downloadImage.elements.bind(to: mainImage.rx.image).addDisposableTo(bag)
         downloadImage.execute()
         
         mainTitle.text = data.description
-        subTitle.text = data.barName
-        secondarySubtitle.text = "\(data.likes)"
+        subTitle.text = data.name
+        secondarySubtitle.text = "\(data.numLikes!)"
     }
     
     func setupImageView() {

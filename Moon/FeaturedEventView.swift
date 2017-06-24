@@ -10,11 +10,12 @@ import UIKit
 import Material
 import Action
 import RxSwift
+import SwaggerClient
 
 class FeaturedEventView: ImageCardView {
     
     //Main Variables
-    fileprivate var event: FeaturedEvent!
+    fileprivate var event: BarEvent!
     fileprivate var index: Int?
     fileprivate var bag = DisposeBag()
     
@@ -28,11 +29,11 @@ class FeaturedEventView: ImageCardView {
     fileprivate var dateFormatter: DateFormatter!
     fileprivate var dateLabel: UILabel!
     
-    func initializeCellWith(event: FeaturedEvent, index: Int, likeAction: CocoaAction, shareAction: CocoaAction, downloadImage: Action<Void, UIImage>, moreInfoAction: CocoaAction) {
+    func initializeCellWith(event: BarEvent, index: Int, likeAction: CocoaAction, shareAction: CocoaAction, downloadImage: Action<Void, UIImage>, moreInfoAction: CocoaAction) {
         self.event = event
         self.index = index
         
-        self.initializeImageCardViewWith(type: .large(image: downloadImage, titleText: event.title, detailText: event.barName, text: event.description))
+        self.initializeImageCardViewWith(type: .large(image: downloadImage, titleText: event.title!, detailText: event.name!, text: event.description!))
         self.imageView.frame = CGRect(x: 0, y: 0, width: self.width, height: (self.height + 200) * 0.372)
         prepareFavoriteButton()
         prepareShareButton()

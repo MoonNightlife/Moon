@@ -14,6 +14,7 @@ struct CityOverviewViewModel {
     
     // Private
     private let disposeBag = DisposeBag()
+    private let barAPI: BarAPIType
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
@@ -21,8 +22,18 @@ struct CityOverviewViewModel {
     // Inputs
     
     // Outputs
+    let bars: Observable<[TopBar]>
     
-    init(coordinator: SceneCoordinatorType) {
+    init(coordinator: SceneCoordinatorType, barAPI: BarAPIType = BarAPIController()) {
         self.sceneCoordinator = coordinator
+        self.barAPI = barAPI
+        
+        bars = barAPI.getTopBarsIn(region: "Dallas").map({
+            return $0.map({ bar in
+                return TopBar(from: bar)
+            })
+        })
     }
+    
+    
 }

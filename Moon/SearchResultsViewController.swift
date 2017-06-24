@@ -72,7 +72,7 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
             case .searchResultItem(let snapshot):
                 cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath)
                 //swiftlint:disable:next force_cast
-                (cell as! SearchTableViewCell).initCellWith(snapshot: snapshot)
+                (cell as! SearchTableViewCell).initCellWith(snapshot: snapshot as! SnapshotType)
             case .loadMoreItem(let action):
                 cell = tableView.dequeueReusableCell(withIdentifier: "LoadMore", for: indexPath)
                 //swiftlint:disable:next force_cast

@@ -10,20 +10,20 @@ import Foundation
 import RxDataSources
 import Action
 
-enum SearchSectionModel {
-    case searchResultsSection(title: String, items: [SearchSectionItem])
-    case loadMore(title: String, items: [SearchSectionItem])
+enum SnapshotSectionModel {
+    case searchResultsSection(title: String, items: [SnapshotSectionItem])
+    case loadMore(title: String, items: [SnapshotSectionItem])
 }
 
-enum SearchSectionItem {
-    case searchResultItem(snapshot: SearchSnapshot)
+enum SnapshotSectionItem {
+    case searchResultItem(snapshot: Snapshot)
     case loadMoreItem(loadAction: CocoaAction)
 }
 
-extension SearchSectionModel: SectionModelType {
-    typealias Item = SearchSectionItem
+extension SnapshotSectionModel: SectionModelType {
+    typealias Item = SnapshotSectionItem
     
-    var items: [SearchSectionItem] {
+    var items: [SnapshotSectionItem] {
         switch self {
         case let .searchResultsSection(_, items):
             return items.map {$0}
@@ -41,7 +41,7 @@ extension SearchSectionModel: SectionModelType {
         }
     }
     
-    init(original: SearchSectionModel, items: [Item]) {
+    init(original: SnapshotSectionModel, items: [Item]) {
         switch original {
         case let .searchResultsSection(t, _):
             self = .searchResultsSection(title: t, items: items)

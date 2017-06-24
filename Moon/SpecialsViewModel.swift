@@ -10,8 +10,9 @@ import Foundation
 import RxSwift
 import Action
 import RxDataSources
+import SwaggerClient
 
-typealias SpecialSection = AnimatableSectionModel<String, SpecialCell>
+typealias SpecialSection = AnimatableSectionModel<String, Special>
 
 struct SpecialsViewModel: ImageDownloadType {
     
@@ -36,7 +37,7 @@ struct SpecialsViewModel: ImageDownloadType {
         self.photoService = photoService
         
         specials = Action(workFactory: { _ in
-            return barAPI.getSpecialsIn(region: "Dallas").map({ return $0.map(SpecialCell.init) })
+            return barAPI.getSpecialsIn(region: "Dallas")
                 .map({
                     return [SpecialSection(model: "Specials", items: $0)]
                 })
@@ -47,6 +48,21 @@ struct SpecialsViewModel: ImageDownloadType {
         return CocoaAction {
             print("Liked Special")
             return self.userAPI.likeSpecial(userID: "123", specialID: specialID)
+        }
+    }
+    
+    func onViewBar(barID: String) -> CocoaAction {
+        return CocoaAction {
+            print("View Bar Profile")
+            let vm = BarProfileViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
+        }
+    }
+    
+    func onViewLikers(specialID: String) -> CocoaAction {
+        return CocoaAction {_ in
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
     }
 

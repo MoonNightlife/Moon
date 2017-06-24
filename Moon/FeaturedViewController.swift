@@ -71,12 +71,13 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
         let view = FeaturedEventView()
         view.frame = CGRect(x: (cell.frame.size.width / 2) - (width / 2), y: (cell.frame.size.height / 2) - (height / 2), width: width, height: height)
         view.backgroundColor = .clear
+        let event = viewModel.featuredEvents.value[indexPath.row]
         view.initializeCellWith(event: viewModel.featuredEvents.value[indexPath.row],
                                 index: indexPath.row,
-                                likeAction: viewModel.onLikeEvent(eventID: viewModel.featuredEvents.value[indexPath.row].id),
-                                shareAction: viewModel.onShareEvent(eventID: viewModel.featuredEvents.value[indexPath.row].id),
-                                downloadImage: viewModel.downloadImage(url: viewModel.featuredEvents.value[indexPath.row].imageURL),
-                                moreInfoAction: viewModel.onMoreInfo(eventID: viewModel.featuredEvents.value[indexPath.row].id))
+                                likeAction: viewModel.onLikeEvent(eventID: event.id!),
+                                shareAction: viewModel.onShareEvent(eventID: event.id!),
+                                downloadImage: viewModel.downloadImage(url: URL(string: event.pic!)!),
+                                moreInfoAction: viewModel.onMoreInfo(eventID: event.id!))
         
         cell.addSubview(view)
         

@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import Action
+import SwaggerClient
 
 struct FeaturedViewModel: ImageDownloadType {
     
@@ -22,9 +23,9 @@ struct FeaturedViewModel: ImageDownloadType {
     var photoService: PhotoService
     
     // Inputs
-    var loadEvents: Action<Void, [FeaturedEvent]>
+    var loadEvents: Action<Void, [BarEvent]>
     // Outputs
-    var featuredEvents = Variable<[FeaturedEvent]>([])
+    var featuredEvents = Variable<[BarEvent]>([])
     
     init(coordinator: SceneCoordinatorType, barAPI: BarAPIType = BarAPIController(), userAPI: UserAPIType = UserAPIController(), photoService: PhotoService = KingFisherPhotoService()) {
         self.sceneCoordinator = coordinator
@@ -33,7 +34,7 @@ struct FeaturedViewModel: ImageDownloadType {
         self.photoService = photoService
         
         loadEvents = Action(workFactory: { _ in
-            return barAPI.getEventsIn(region: "Dallas").map({ $0.map(FeaturedEvent.init) })
+            return barAPI.getEventsIn(region: "Dallas")
         })
         
         loadEvents.elements.bind(to: featuredEvents).addDisposableTo(disposeBag)
@@ -42,12 +43,13 @@ struct FeaturedViewModel: ImageDownloadType {
     func onLikeEvent(eventID: String) -> CocoaAction {
         return CocoaAction { _ in
             print("Like Event")
-            return Observable.empty()
+            return self.userAPI.likeEvent(userID: "123123", eventID: eventID)
         }
     }
     
     func onShareEvent(eventID: String) -> CocoaAction {
         return CocoaAction { _ in
+            //TODO: add share event code
             print("Share Event")
             return Observable.empty()
         }
@@ -55,8 +57,8 @@ struct FeaturedViewModel: ImageDownloadType {
     
     func onMoreInfo(eventID: String) -> CocoaAction {
         return CocoaAction {
-            print("More Info")
-            return Observable.empty()
+            let vm = BarProfileViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
         }
     }
 }
