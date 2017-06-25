@@ -342,7 +342,7 @@ extension BarProfileViewController {
         let activity = viewModel.displayedUsers.value[index]
         
         // Bind actions
-        if let activityID = activity.activityID, let userID = activity.userID {
+        if let activityID = activity.id, let userID = activity.userID {
             
             peopleGoingView.likeButton.rx.action = viewModel.onLikeActivity(activityID: activityID)
             peopleGoingView.numberOfLikesButton.rx.action = viewModel.onViewLikers(activityID: activityID)

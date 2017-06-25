@@ -23,12 +23,10 @@ class BarActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var numLikeButton: UIButton!
     @IBOutlet weak var timeImageView: UIImageView!
     
-    fileprivate var activity: Activity!
+    var bag = DisposeBag()
     
-    func initializeCellWith(activity: Activity, userAction: CocoaAction, barAction: CocoaAction, likeAction: CocoaAction, userLikedAction: CocoaAction) {
-        
-        self.activity = activity
-        
+    func initializeCell() {
+    
         backgroundColor = .clear
         
         setupProfilePicture()
@@ -40,11 +38,15 @@ class BarActivityTableViewCell: UITableViewCell {
         setupLocationImage()
         setupIsGoingToLabel()
         setupTimeImageView()
+    }
+    
+    override func prepareForReuse() {
+        bag = DisposeBag()
         
-        user.rx.action = userAction
-        bar.rx.action = barAction
-        likeButton.rx.action = likeAction
-        numLikeButton.rx.action = userLikedAction
+        likeButton.rx.action = nil
+        user.rx.action = nil
+        bar.rx.action = nil
+        numLikeButton.rx.action = nil
     }
 }
 
@@ -62,28 +64,17 @@ extension BarActivityTableViewCell {
     }
     
     fileprivate func setupUsername() {
-        if let username = activity.userName {
-            self.user.setTitle(username, for: .normal)
-            self.user.setTitleColor(.darkGray, for: .normal)
-            self.user.titleLabel?.font = UIFont.moonFont(size: 16)
-        }
+        self.user.setTitleColor(.darkGray, for: .normal)
+        self.user.titleLabel?.font = UIFont.moonFont(size: 16)
     }
     
     fileprivate func setupBarName() {
-        if let barName = activity.barName {
-            self.bar.setTitle(barName, for: .normal)
-            self.bar.setTitleColor(.gray, for: .normal)
-            self.bar.titleLabel?.font = UIFont.moonFont(size: 14)
-        }
+        self.bar.setTitleColor(.gray, for: .normal)
+        self.bar.titleLabel?.font = UIFont.moonFont(size: 14)
     }
     
     fileprivate func setupTime() {
-        if let time = activity.timestamp {
-            let date = Date.init(timeIntervalSince1970: time)
-            self.timeLabel.text = date.getElaspedTimefromDate()
-            self.timeLabel.textColor = .gray
-
-        }
+        self.timeLabel.textColor = .gray
     }
     
     fileprivate func setupLikeIcon() {
@@ -98,11 +89,7 @@ extension BarActivityTableViewCell {
     
     fileprivate func setupLikeNumber() {
         self.numLikeButton.titleLabel?.textColor = .lightGray
-        if let likes = activity.numLikes {
-            self.numLikeButton.setTitle(String(likes), for: .normal)
-        } else {
-            self.numLikeButton.setTitle("0", for: .normal)
-        }
+        self.numLikeButton.setTitle("0", for: .normal)
     }
     
     fileprivate func setupIsGoingToLabel() {

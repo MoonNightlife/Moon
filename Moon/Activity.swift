@@ -12,7 +12,7 @@ import SwaggerClient
 
 extension Activity: IdentifiableType {
     public var identity: String {
-        guard let id = activityID else {
+        guard let id = id else {
             return "0"
         }
         
@@ -22,6 +22,6 @@ extension Activity: IdentifiableType {
 
 extension Activity: Equatable {
     public static func == (lhs: Activity, rhs: Activity) -> Bool {
-        return lhs.activityID == rhs.activityID && lhs.numLikes == rhs.numLikes
+        return lhs.id == rhs.id && lhs.numLikes == rhs.numLikes
     }
 }

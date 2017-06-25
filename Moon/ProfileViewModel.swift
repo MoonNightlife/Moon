@@ -32,7 +32,7 @@ struct ProfileViewModel {
     init(coordinator: SceneCoordinatorType, userAPI: UserAPIType = UserAPIController(), photoService: PhotoService = KingFisherPhotoService()) {
         self.scenceCoordinator = coordinator
         
-        let userProfile = userAPI.getUserProfile(userID: "01")
+        let userProfile = userAPI.getUserProfile(userID: "594c2532fc13ae6572000000")
         
         username = userProfile.map({ $0.username }).replaceNilWith("No Username").catchErrorJustReturn("Fake Username")
         fullName = userProfile.map({

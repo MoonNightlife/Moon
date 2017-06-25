@@ -12,6 +12,7 @@ import RxDataSources
 import Action
 import RxSwift
 import RxCocoa
+import SwaggerClient
 
 class BarActivityFeedViewController: UIViewController, BindableType {
     
@@ -42,10 +43,13 @@ class BarActivityFeedViewController: UIViewController, BindableType {
     }
      
     func bindViewModel() {
-    
-        viewModel.refreshAction.elements.bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
-        viewModel.refreshAction.executionObservables.subscribe(onNext: { [unowned self] _ in self.refreshControl.endRefreshing() }).disposed(by: disposeBag)
+        viewModel.refreshAction.elements.do(onNext: { [weak self] _ in
+            self?.refreshControl.endRefreshing()
+            }, onError: { [weak self] _ in
+            self?.refreshControl.endRefreshing()
+        }).bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
         refreshControl.rx.controlEvent(.valueChanged).subscribe(viewModel.refreshAction.inputs).addDisposableTo(disposeBag)
+        viewModel.refreshAction.execute()
     }
     
     fileprivate func configureDataSource() {
@@ -54,13 +58,40 @@ class BarActivityFeedViewController: UIViewController, BindableType {
             //swiftlint:disable force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: self!.barActivityCellIdenifier, for: indexPath) as! BarActivityTableViewCell
             if let strongSelf = self {
-                cell.initializeCellWith(activity: item,
-                                        userAction: strongSelf.viewModel.onViewUser(),
-                                        barAction: strongSelf.viewModel.onViewBar(),
-                                        likeAction: strongSelf.viewModel.onLike(),
-                                        userLikedAction: strongSelf.viewModel.onViewLikers())
+                cell.initializeCell()
+                strongSelf.populate(activityCell: cell, activity: item)
             }
             return cell
+        }
+    }
+    
+    func populate(activityCell view: BarActivityTableViewCell, activity: Activity) {
+        // Bind actions
+        if let activityID = activity.id, let userID = activity.userID, let barID = activity.barID {
+            view.likeButton.rx.action = viewModel.onLike(activtyID: activityID)
+            view.user.rx.action = viewModel.onView(userID: userID)
+            view.bar.rx.action = viewModel.onView(barID: barID)
+            view.numLikeButton.rx.action = viewModel.onViewLikers(activityID: activityID)
+        }
+        
+        // Bind labels
+        view.user.setTitle(activity.userName, for: .normal)
+        view.bar.setTitle(activity.barName, for: .normal)
+        view.numLikeButton.setTitle("\(activity.numLikes ?? 0)", for: .normal)
+        
+        if let time = activity.timestamp {
+            let date = Date.init(timeIntervalSince1970: time)
+            view.timeLabel.text = date.getElaspedTimefromDate()
+        } else {
+            //TODO: Add empty data text for timestamp
+        }
+        
+        if let urlString = activity.pic, let url = URL(string: urlString) {
+            let downloader = viewModel.downloadImage(url: url)
+                downloader.elements.bind(to: view.profilePicture.rx.image).addDisposableTo(view.bag)
+                downloader.execute()
+        } else {
+            view.profilePicture.image = #imageLiteral(resourceName: "DefaultProfilePic")
         }
     }
 
