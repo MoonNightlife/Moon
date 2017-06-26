@@ -14,27 +14,24 @@ import RxCocoa
 
 class UserCollectionView: ImageCardView {
     
-    fileprivate var addFriendButton: IconButton!
-    fileprivate var nameLabel: UILabel!
-    fileprivate let bag = DisposeBag()
+    var addFriendButton: IconButton!
+    var nameLabel: UILabel!
+    let bag = DisposeBag()
     
-    func initViewWith(user: SearchSnapshot, addAction: CocoaAction, downloadImage: Action<Void, UIImage>) {
+    func initViewWith() {
         
-        self.initializeImageCardViewWith(type: .small(image: downloadImage, text: ""))
+        self.initializeImageCardViewWith(type: .small)
         prepareAddFriendButton()
-        prepareNameLabel(text: user.name)
+        prepareNameLabel()
         prepareToolbar()
-        
-        addFriendButton.rx.action = addAction
     }
 
 }
 
 extension UserCollectionView {
     
-    fileprivate func prepareNameLabel(text: String) {
+    fileprivate func prepareNameLabel() {
         nameLabel = UILabel()
-        nameLabel.text = text
         nameLabel.textColor = .lightGray
         nameLabel.font = UIFont(name: "Roboto", size: 10)
         nameLabel.sizeToFit()

@@ -11,24 +11,19 @@ import Material
 import UIKit
 import Action
 import RxSwift
+import SwaggerClient
 
 class SpecialCarouselView: ImageCardView {
    
-    fileprivate var likeButton: IconButton!
-    fileprivate var index: Int!
-    fileprivate var special: SpecialCell!
-    fileprivate var numberOfLikesButton: IconButton!
-    fileprivate let bag = DisposeBag()
+    var likeButton: IconButton!
+    var numberOfLikesButton: IconButton!
+    let bag = DisposeBag()
         
-    func initializeViewWith(special: SpecialCell, index: Int, likeAction: CocoaAction, downloadAction: Action<Void, UIImage>) {
-        self.special = special
-        self.index = index
-        self.initializeImageCardViewWith(type: .medium(image: downloadAction, text: special.description))
+    func initializeView() {
+        self.initializeImageCardViewWith(type: .medium)
         prepareLikeButton()
-        prepareNumberOfLikesButton(likes: "100")
+        prepareNumberOfLikesButton()
         prepareToolBar()
-        
-        likeButton.rx.action = likeAction
     }
 
 }
@@ -39,8 +34,8 @@ extension SpecialCarouselView {
         likeButton = IconButton(image: Icon.favorite, tintColor: .lightGray)
     }
     
-    fileprivate func prepareNumberOfLikesButton(likes: String) {
-        numberOfLikesButton = IconButton(title: likes)
+    fileprivate func prepareNumberOfLikesButton() {
+        numberOfLikesButton = IconButton()
         numberOfLikesButton.titleColor = .lightGray
         numberOfLikesButton.titleLabel?.font = UIFont(name: "Roboto", size: 10)
     }

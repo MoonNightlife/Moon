@@ -256,12 +256,8 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         let frame = CGRect(x: goingCarousel.frame.size.width / 2, y: goingCarousel.frame.size.height / 2, width: size, height: size)
         let view = PeopleGoingCarouselView()
         view.frame = frame
-        view.initializeViewWith(user: viewModel.displayedUsers.value[index],
-                                index: index,
-                                viewProfile: viewModel.onShowProfile(),
-                                likeActivity: viewModel.onLikeActivity(),
-                                viewLikers: viewModel.onViewLikers(),
-                                downloadImage: viewModel.downloadImage(url: baseURL.appendingPathComponent(viewModel.displayedUsers.value[index].pic!)))
+        view.initializeView()
+        populateGoing(peopleGoingView: view, index: index)
         
         return view
     }
@@ -271,7 +267,8 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         let size = (self.view.frame.size.height * 0.298) - 50
         let frame = CGRect(x: specialsCarousel.frame.size.width / 2, y: specialsCarousel.frame.size.height / 2, width: size + 20, height: size)
         view.frame = frame
-        view.initializeViewWith(special: viewModel.specials.value[index], index: index, likeAction: viewModel.onLikeSpecial(), downloadAction: viewModel.downloadImage(url: viewModel.specials.value[index].imageURL))
+        view.initializeView()
+        populate(specialView: view, index: index)
         
         return view
     }
@@ -281,14 +278,14 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         let size = (self.view.frame.size.height * 0.513) - 60
         view.frame = CGRect(x: eventsCarousel.frame.size.width / 2, y: eventsCarousel.frame.size.height / 2, width: size + 60, height: size)
         view.backgroundColor = .clear
-        view.initializeCellWith(event: viewModel.events.value[index],
-                                index: index, likeAction: viewModel.onLikeEvent(),
-                                shareAction: viewModel.onShareEvent(),
-                                downloadImage: viewModel.downloadImage(url: viewModel.events.value[index].imageURL),
-                                moreInfoAction: viewModel.onViewMore())
+        view.initializeCell()
+        populate(eventView: view, index: index)
         
         return view
     }
+    
+    
+
     
     func setUpPictureView(index: Int) -> UIView {
         let barPic = BottomGradientImageView(frame: pictureCarousel.frame)
@@ -297,6 +294,69 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         return barPic
     }
 
+}
+
+extension BarProfileViewController {
+    // MARK: - Populate view functions
+    // These functions should be handed in the view model of the cells, but we have not created them yet so they are here
+    
+    func populate(eventView: FeaturedEventView, index: Int) {
+        let event = viewModel.events.value[index]
+        
+        // Bind actions
+        if let id = event.id, let barID = event.barID {
+            eventView.favoriteButton.rx.action = viewModel.onLikeEvent(eventID: id)
+            eventView.numberOfLikesButton.rx.action = viewModel.onViewLikers(eventID: id)
+            eventView.shareButton.rx.action = viewModel.onShareEvent(eventID: id, barID: barID)
+            // No action for this button on the bar profile, so hide it
+            eventView.moreButton.isHidden = true
+        }
+        
+        // Bind labels
+        eventView.dateLabel.text = event.date
+        eventView.toolbar.detail = event.name
+        eventView.toolbar.title = event.title
+        eventView.content.text = event.description
+        eventView.numberOfLikesButton.title = "\(event.numLikes ?? 0)"
+        
+        // Bind image
+        if let urlString = event.pic, let url = URL(string: urlString) {
+            viewModel.downloadImage(url: url).elements.bind(to: eventView.imageView.rx.image).addDisposableTo(eventView.bag)
+        } else {
+            //TODO: change this to default bar picture
+            eventView.imageView.image = #imageLiteral(resourceName: "DefaultProfilePic")
+        }
+        
+    }
+    
+    func populate(specialView: SpecialCarouselView, index: Int) {
+        let special = viewModel.specials.value[index]
+        //TOOD: finish populating specials
+        // Bind actions
+        if let specialID = special.id {
+            specialView.likeButton.rx.action = viewModel.onLikeSpecial(specialID: specialID)
+        }
+    }
+    
+    func populateGoing(peopleGoingView: PeopleGoingCarouselView, index: Int) {
+        let activity = viewModel.displayedUsers.value[index]
+        
+        // Bind actions
+        if let activityID = activity.id, let userID = activity.userID {
+            
+            peopleGoingView.likeButton.rx.action = viewModel.onLikeActivity(activityID: activityID)
+            peopleGoingView.numberOfLikesButton.rx.action = viewModel.onViewLikers(activityID: activityID)
+            
+            // When the user taps the photo of a user the are directed to the user's profile
+            peopleGoingView.imageView.gestureRecognizers?.first?.rx.event.subscribe(onNext: { [weak self] in
+                print($0)
+                self?.viewModel.onShowProfile(userID: userID).execute()
+            }).addDisposableTo(peopleGoingView.bag)
+        }
+        
+        // Bind labels
+        peopleGoingView.numberOfLikesButton.title = "\(activity.numLikes ?? 0)"
+    }
 }
 
 extension BarProfileViewController: UIPopoverPresentationControllerDelegate {

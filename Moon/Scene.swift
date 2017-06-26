@@ -31,6 +31,7 @@ enum Scene {
         case notification(NotificationSettingsViewModel)
         case deleteAccount(DeleteAccountViewModel)
         case webView(WebViewViewModel)
+        case region(SelectRegionViewModel)
     }
     
     enum Master: SceneType {

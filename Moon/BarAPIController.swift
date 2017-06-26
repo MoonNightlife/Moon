@@ -10,8 +10,6 @@ import Foundation
 import RxSwift
 import SwaggerClient
 
-let baseURL = URL(string: "http://localhost:8081")!
-
 protocol BarAPIType {
     func getBarFriends(barID: String, userID: String) -> Observable<[UserSnapshot]>
     func getBarPeople(barID: String) -> Observable<[UserSnapshot]>

@@ -14,10 +14,11 @@ import Action
 
 typealias ActivitySection = AnimatableSectionModel<String, Activity>
 
-struct BarActivityFeedViewModel {
+struct BarActivityFeedViewModel: ImageDownloadType {
     
     // Private
     private let disposeBag = DisposeBag()
+    var photoService: PhotoService
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
@@ -28,39 +29,40 @@ struct BarActivityFeedViewModel {
     // Outputs
     lazy var refreshAction: Action<Void, [ActivitySection]> = { this in
         return Action { _ in
-            return this.userAPI.getActivityFeed(userID: "01").map({
+            return this.userAPI.getActivityFeed(userID: "594c2532fc13ae6572000000").map({
                 [ActivitySection.init(model: "Activities", items: $0)]
             })
         }
     }(self)
     
-    init(coordinator: SceneCoordinatorType, userAPI: UserAPIType = UserAPIController()) {
+    init(coordinator: SceneCoordinatorType, userAPI: UserAPIType = UserAPIController(), photoService: PhotoService = KingFisherPhotoService()) {
         self.sceneCoordinator = coordinator
         self.userAPI = userAPI
+        self.photoService = photoService
 
     }
     
-    func onLike() -> CocoaAction {
+    func onLike(activtyID: String) -> CocoaAction {
         return CocoaAction {
             return Observable.empty()
         }
     }
     
-    func onViewUser() -> CocoaAction {
+    func onView(userID: String) -> CocoaAction {
         return CocoaAction {
             let vm = ProfileViewModel(coordinator: self.sceneCoordinator)
             return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
         }
     }
     
-    func onViewBar() -> CocoaAction {
+    func onView(barID: String) -> CocoaAction {
         return CocoaAction {
             let vm = BarProfileViewModel(coordinator: self.sceneCoordinator)
             return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
         }
     }
     
-    func onViewLikers() -> CocoaAction {
+    func onViewLikers(activityID: String) -> CocoaAction {
         return CocoaAction {
             let vm = UsersTableViewModel(coordinator: self.sceneCoordinator)
             return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)

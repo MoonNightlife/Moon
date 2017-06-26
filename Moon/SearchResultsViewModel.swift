@@ -12,12 +12,13 @@ import RxCocoa
 import RxDataSources
 import Action
 
-struct SearchResultsViewModel {
+struct SearchResultsViewModel: ImageDownloadType {
     
     private let bag = DisposeBag()
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
+    var photoService: PhotoService
     
     // Actions
     lazy var onShowResult: Action<Int, Void> = { this in
@@ -37,24 +38,29 @@ struct SearchResultsViewModel {
     var selectedSearchType = BehaviorSubject<SearchType>(value: .users)
     
     // Outputs
-    let searchResults: Driver<[SearchSectionModel]>!
+    let searchResults: Observable<[SnapshotSectionModel]>
     
-    init(coordinator: SceneCoordinatorType, searchText: BehaviorSubject<String>) {
+    init(coordinator: SceneCoordinatorType, searchText: BehaviorSubject<String>, photoService: PhotoService = KingFisherPhotoService()) {
         sceneCoordinator = coordinator
+        self.photoService = photoService
         
         searchText.subscribe(onNext: {
             print($0)
         })
         .addDisposableTo(bag)
         
-
-        searchResults = Observable.combineLatest(searchText, selectedSearchType)
-            .flatMap({ (text, type) -> Observable<[SearchSectionModel]> in
-                return SearchResultsViewModel.getSearchResultsFor(text: text, type: type)
-                        .map(SearchResultsViewModel.snapshotsToSearchSectionItems)
-                        .map(SearchResultsViewModel.sectionItemsToSectionModel)
-            })
-            .asDriver(onErrorJustReturn: [SearchSectionModel.searchResultsSection(title: "", items: [])])
+        searchResults = Observable.empty()
+        _ = Observable.combineLatest(searchText, selectedSearchType)
+                .flatMapLatest({ (searchText, type) -> Observable<Void> in
+                    switch type {
+                    case .users: return Observable.empty()
+                        //TODO: add user search api call
+                        
+                    case .bars: return Observable.empty()
+                        //TODO: add bar search api call
+                    
+                    }
+                })
     
     }
     
@@ -63,54 +69,13 @@ struct SearchResultsViewModel {
         return Observable.just().withLatestFrom(selectedSearchResult).flatMapLatest({ (results, type) -> Observable<Void> in
             switch type {
             case .users:
-                let user = results[0]
                 let vm = ProfileViewModel(coordinator: self.sceneCoordinator)
                 return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
             case .bars:
-                let bar = results[0]
                 let vm = BarProfileViewModel(coordinator: self.sceneCoordinator)
                 return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
             }
         })
-    }
-    
-    static func getSearchResultsFor(text: String, type: SearchType) -> Observable<[SearchSnapshot]> {
-        switch type {
-        case .bars:
-            return SearchResultsViewModel.getBars()
-        case .users:
-            return SearchResultsViewModel.getUsers()
-        }
-    }
-    
-    static func snapshotsToSearchSectionItems(snapshots: [SearchSnapshot]) -> [SearchSectionItem] {
-        return snapshots.map({
-            SearchSectionItem.searchResultItem(snapshot: $0)
-        })
-    }
-    
-    static func sectionItemsToSectionModel(items: [SearchSectionItem]) -> [SearchSectionModel] {
-        return [SearchSectionModel.searchResultsSection(title: "Results", items: items)]
-    }
-    
-    func loadMoreSectionModel(withAction: CocoaAction) -> SearchSectionModel {
-        return SearchSectionModel.loadMore(title: "Load More", items: [.loadMoreItem(loadAction: withAction)])
-    }
-    
-    func getUserSnapShots() -> Observable<[SearchSectionItem]> {
-        let activities = createFakeBarActivities()
-        let users = activities.map({ activity in
-            return SearchSectionItem.searchResultItem(snapshot: SearchSnapshot(name: activity.name!, id: activity.userId!, picture: activity.profileImage!))
-        })
-        return Observable.just(users)
-    }
-    
-    func getBarSnapShots() -> Observable<[SearchSectionItem]> {
-        let fakeBars = createTempTopBarData()
-        let bars = fakeBars.map({ bar in
-            return SearchSectionItem.searchResultItem(snapshot: SearchSnapshot(name: bar.barName, id: "336", picture: bar.imageURL.absoluteString))
-        })
-        return Observable.just(bars)
     }
     
     func onShowProfile() -> Action<String, Void> {
@@ -118,22 +83,6 @@ struct SearchResultsViewModel {
             let vm = ProfileViewModel(coordinator: self.sceneCoordinator)
             return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
         })
-    }
-    
-    static func getBars() -> Observable<[SearchSnapshot]> {
-        let bars = createTempTopBarData()
-        let barSuggestions = bars.map({ bar in
-            return SearchSnapshot(name: bar.barName, id: "336", picture: bar.imageURL.absoluteString)
-        })
-        return Observable.just(barSuggestions)
-    }
-    
-    static func getUsers() -> Observable<[SearchSnapshot]> {
-        let activities = createFakeBarActivities()
-        let friendSuggestions = activities.map({ activity in
-            return SearchSnapshot(name: activity.name!, id: activity.userId!, picture: activity.profileImage!)
-        })
-        return Observable.just(friendSuggestions)
     }
 
 }

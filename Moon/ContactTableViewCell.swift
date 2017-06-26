@@ -18,16 +18,11 @@ class ContactTableViewCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var addFriendButton: UIButton!
     
-    private var bag = DisposeBag()
-
-    func initCell(user: UserSnapshot, addAction: CocoaAction, downloadAction: Action<Void, UIImage>) {
-        name.text = user.userName
-        addFriendButton.rx.action = addAction
-        downloadAction.elements.bind(to: profilePicture.rx.image).addDisposableTo(bag)
-        downloadAction.execute()
-    }
+    var bag = DisposeBag()
     
     override func prepareForReuse() {
+        // Create new dispose bag and remove action from button before resuse
         bag = DisposeBag()
+        addFriendButton.rx.action = nil
     }
 }

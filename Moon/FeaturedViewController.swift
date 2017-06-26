@@ -71,15 +71,40 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
         let view = FeaturedEventView()
         view.frame = CGRect(x: (cell.frame.size.width / 2) - (width / 2), y: (cell.frame.size.height / 2) - (height / 2), width: width, height: height)
         view.backgroundColor = .clear
-        view.initializeCellWith(event: viewModel.featuredEvents.value[indexPath.row],
-                                index: indexPath.row,
-                                likeAction: viewModel.onLikeEvent(eventID: viewModel.featuredEvents.value[indexPath.row].id),
-                                shareAction: viewModel.onShareEvent(eventID: viewModel.featuredEvents.value[indexPath.row].id),
-                                downloadImage: viewModel.downloadImage(url: viewModel.featuredEvents.value[indexPath.row].imageURL),
-                                moreInfoAction: viewModel.onMoreInfo(eventID: viewModel.featuredEvents.value[indexPath.row].id))
-        
+        view.initializeCell()
+        populate(view: view, indexPath: indexPath)
+
+        //TODO: probably need to remove the last subview from reused cell before adding another
         cell.addSubview(view)
         
         return cell
+    }
+    
+    func populate(view: FeaturedEventView, indexPath: IndexPath) {
+        let event = viewModel.featuredEvents.value[indexPath.row]
+        
+        // Bind actions
+        if let id = event.id {
+            view.favoriteButton.rx.action = viewModel.onLikeEvent(eventID: id)
+            view.numberOfLikesButton.rx.action = viewModel.onViewLikers(eventID: id)
+            view.shareButton.rx.action = viewModel.onShareEvent(eventID: id)
+            view.moreButton.rx.action = viewModel.onMoreInfo(eventID: id)
+        }
+        
+        // Bind labels
+        view.dateLabel.text = event.date
+        view.toolbar.detail = event.name
+        view.toolbar.title = event.title
+        view.content.text = event.description
+        view.numberOfLikesButton.title = "\(event.numLikes ?? 0)"
+        
+        // Bind image
+        if let urlString = event.pic, let url = URL(string: urlString) {
+            viewModel.downloadImage(url: url).elements.bind(to: view.imageView.rx.image).addDisposableTo(view.bag)
+        } else {
+            //TODO: change this to default bar picture
+            view.imageView.image = #imageLiteral(resourceName: "DefaultProfilePic")
+        }
+        
     }
 }
