@@ -22,11 +22,13 @@ struct BarProfileViewModel: ImageDownloadType, BackType {
     // Local
     private let bag = DisposeBag()
     private let barInfo: Observable<BarInfo>
+    private let bar: Observable<BarProfile>
     
     // Dependencies
     let sceneCoordinator: SceneCoordinatorType
     var photoService: PhotoService
     let barAPI: BarAPIType
+    private let userAPI: UserAPIType
     
     // Inputs
     var selectedUserIndex = BehaviorSubject<UsersGoingType>(value: .everyone)
@@ -34,24 +36,24 @@ struct BarProfileViewModel: ImageDownloadType, BackType {
     // Outputs
     var barPics = Variable<[UIImage]>([])
     var barName: Observable<String>
-    var displayedUsers = Variable<[UserSnapshot]>([])
-    var specials = Variable<[SpecialCell]>([])
-    var events = Variable<[FeaturedEvent]>([])
+    var displayedUsers = Variable<[Activity]>([])
+    var specials = Variable<[Special]>([])
+    var events = Variable<[BarEvent]>([])
     
     init(coordinator: SceneCoordinatorType, photoService: PhotoService = KingFisherPhotoService(), barAPI: BarAPIType = BarAPIController(), userAPI: UserAPIType = UserAPIController()) {
         self.sceneCoordinator = coordinator
         self.photoService = photoService
         self.barAPI = barAPI
+        self.userAPI = userAPI
         
-         let bar = barAPI.getBarInfo(barID: "594bfb53fc13ae69de000cff")
+         bar = barAPI.getBarInfo(barID: "594bfb53fc13ae69de000cff")
         
         barName = bar.map({ $0.name ?? "No Name" })
         
-        bar.map({ $0.specials }).filter({ $0 != nil }).map({ return $0!.map(SpecialCell.init) })
-            .catchErrorJustReturn([]).bind(to: specials).addDisposableTo(bag)
-        bar.map({ $0.events }).filter({ $0 != nil }).map({ return $0!.map(FeaturedEvent.init) }).catchErrorJustReturn([]).bind(to: events).addDisposableTo(bag)
+        bar.map({ $0.specials }).filterNil().catchErrorJustReturn([]).bind(to: specials).addDisposableTo(bag)
+        bar.map({ $0.events }).filterNil().catchErrorJustReturn([]).bind(to: events).addDisposableTo(bag)
         
-        bar.map({ $0.peopleAttending }).filterNil().bind(to: displayedUsers).addDisposableTo(bag)
+//        bar.map({ $0.peopleAttending }).filterNil().bind(to: displayedUsers).addDisposableTo(bag)
         
         bar.map({ $0.barPics }).filter({ $0 != nil }).flatMap({ pictureURLs in
             return Observable.from(pictureURLs!).flatMap({
@@ -76,56 +78,73 @@ struct BarProfileViewModel: ImageDownloadType, BackType {
     func onAttendBar() -> CocoaAction {
         return CocoaAction {
             print("Attend bar")
-            return Observable.empty()
+            return self.userAPI.goToBar(userID: "123123", barID: "594bfb53fc13ae69de000cff")
         }
     }
     
     func onViewMore() -> CocoaAction {
         return CocoaAction {
+            //TODO: probably should remove this from event card
             print("View More")
             return Observable.empty()
         }
     }
     
-    func onShowProfile() -> CocoaAction {
+    func onShowProfile(userID: String) -> CocoaAction {
         return CocoaAction {_ in
             let vm = ProfileViewModel(coordinator: self.sceneCoordinator)
             return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
         }
     }
     
-    func onViewLikers() -> CocoaAction {
+    func onViewLikers(eventID: String) -> CocoaAction {
         return CocoaAction {_ in
             let vm = UsersTableViewModel(coordinator: self.sceneCoordinator)
             return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
     }
     
-    func onLikeActivity() -> CocoaAction {
+    func onViewLikers(specialID: String) -> CocoaAction {
         return CocoaAction {_ in
-            print("Like Activity")
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
+        }
+    }
+    
+    func onViewLikers(activityID: String) -> CocoaAction {
+        return CocoaAction {_ in
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
+        }
+    }
+    
+    func onLikeActivity(activityID: String) -> CocoaAction {
+        return CocoaAction {_ in
+            //TODO: add api call
+            print("like activity needs implementation")
             return Observable.empty()
         }
     }
     
-    func onLikeEvent() -> CocoaAction {
+    func onLikeEvent(eventID: String) -> CocoaAction {
         return CocoaAction {_ in
             print("Like Event")
-            return Observable.empty()
+            return self.userAPI.likeEvent(userID: "123123", eventID: eventID)
         }
     }
     
-    func onShareEvent() -> CocoaAction {
+    func onShareEvent(eventID: String, barID: String) -> CocoaAction {
         return CocoaAction {_ in
-            print("Share Event")
+            //TODO: add api call
+            print("Share event needs implementation")
             return Observable.empty()
         }
     }
     
-    func onLikeSpecial() -> CocoaAction {
+    func onLikeSpecial(specialID: String) -> CocoaAction {
         return CocoaAction {_ in
             print("Like Special")
-            return Observable.empty()
+            return self.userAPI.likeSpecial(userID: "123123", specialID: specialID)
         }
     }
 

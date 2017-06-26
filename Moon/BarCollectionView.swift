@@ -14,25 +14,22 @@ import Action
 
 class BarCollectionView: ImageCardView {
     
-    fileprivate var goButton: IconButton!
-    fileprivate var nameLabel: UILabel!
+    var goButton: IconButton!
+    var nameLabel: UILabel!
     
-    func initViewWith(bar: SearchSnapshot, goAction: CocoaAction, downloadImage: Action<Void, UIImage>) {
-        self.initializeImageCardViewWith(type: .small(image: downloadImage, text: ""))
+    func initViewWith() {
+        self.initializeImageCardViewWith(type: .small)
         prepareAddFriendButton()
-        prepareNameLabel(text: bar.name)
+        prepareNameLabel()
         prepareToolbar()
-        
-        goButton.rx.action = goAction
     }
 
 }
 
 extension BarCollectionView {
     
-    fileprivate func prepareNameLabel(text: String) {
+    fileprivate func prepareNameLabel() {
         nameLabel = UILabel()
-        nameLabel.text = text
         nameLabel.textColor = .lightGray
         nameLabel.numberOfLines = 1
         nameLabel.font = UIFont(name: "Roboto", size: 10)

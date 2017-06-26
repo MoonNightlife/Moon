@@ -53,11 +53,18 @@ class ContactsViewController: UIViewController, BindableType {
         dataSource.configureCell = {
             [weak self] dataSource, tableView, indexPath, item in
             //swiftlint:disable force_cast
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactTableViewCell
-            if let strongSelf = self {
-                cell.initCell(user: item, addAction: strongSelf.viewModel.onAddFriend(userID: item.userID!), downloadAction: strongSelf.viewModel.downloadImage(url: baseURL.appendingPathComponent(item.pic!)))
+            switch item {
+            case .loadMore(_):
+                //TODO: turn the load more cell into a XIB and use it here
+                return UITableViewCell()
+            case let .searchResult(snapshot):
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactTableViewCell
+                cell.name.text = snapshot.name
+                cell.addFriendButton.rx.action = self?.viewModel.onAddFriend(userID: snapshot._id!)
+                self?.viewModel.downloadImage(url: URL(string: snapshot.pic!)!).elements.bind(to: cell.profilePicture.rx.image).addDisposableTo(cell.bag)
+                return cell
             }
-            return cell
+
         }
     }
 

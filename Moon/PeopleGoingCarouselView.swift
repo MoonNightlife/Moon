@@ -15,43 +15,36 @@ import SwaggerClient
 
 class PeopleGoingCarouselView: ImageCardView {
     
-    fileprivate var user: UserSnapshot!
-    fileprivate var index: Int!
-    fileprivate var likeButton: IconButton!
-    fileprivate var numberOfLikesButton: IconButton!
-    fileprivate var viewProfileOverlayButton: UIButton!
-    fileprivate var bag = DisposeBag()
+    var likeButton: IconButton!
+    var numberOfLikesButton: IconButton!
+    var bag = DisposeBag()
     
-    func initializeViewWith(user: UserSnapshot, index: Int, viewProfile: CocoaAction, likeActivity: CocoaAction, viewLikers: CocoaAction, downloadImage: Action<Void, UIImage>) {
-        self.user = user
-        self.index = index
+    var tapReconizer: UITapGestureRecognizer!
+    
+    func initializeView() {
         
-        self.initializeImageCardViewWith(type: .small(image: downloadImage, text: user.userName!))
+        self.initializeImageCardViewWith(type: .small)
         prepareLikeButton()
-        prepareNumberOfLikes(likes: "19")
-        prepareOverlayButton()
+        prepareNumberOfLikes()
         prepareToolBar()
-        
-        viewProfileOverlayButton.rx.action = viewProfile
-        likeButton.rx.action = likeActivity
-        numberOfLikesButton.rx.action = viewLikers
+        prepareImageViewTapReconizer()
+       
     }
 }
 
 extension PeopleGoingCarouselView {
-        
-    fileprivate func prepareOverlayButton() {
-        viewProfileOverlayButton = UIButton(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.imageView.frame.height))
-        self.imageView.addSubview(viewProfileOverlayButton)
-        print(self.imageView.subviews)
+    
+    fileprivate func prepareImageViewTapReconizer() {
+        tapReconizer = UITapGestureRecognizer()
+        imageView.addGestureRecognizer(tapReconizer)
     }
     
     fileprivate func prepareLikeButton() {
         likeButton = IconButton(image: Icon.favorite, tintColor: .lightGray)
     }
     
-    fileprivate func prepareNumberOfLikes(likes: String) {
-        numberOfLikesButton = IconButton(title: likes, titleColor: .lightGray)
+    fileprivate func prepareNumberOfLikes() {
+        numberOfLikesButton = IconButton(title: "0", titleColor: .lightGray)
         numberOfLikesButton.titleLabel?.font = UIFont(name: "Roboto", size: 10)
     }
     

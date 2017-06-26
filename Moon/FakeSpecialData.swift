@@ -46,8 +46,8 @@ let ginger = "The Ginger Man"
 
 //let fakeSpecials = [fakeSpecialData1, fakeSpecialData2, fakeSpecialData3, fakeSpecialData4, fakeSpecialData6, fakeSpecialData7, fakeSpecialData8, fakeSpecialData9, fakeSpecialData10, fakeSpecialData11, fakeSpecialData12, fakeSpecialData13, fakeSpecialData14]
 
-func createFakeSpecials() -> [SpecialCell] {
-//     let fs = [fakeSpecialData2, fakeSpecialData3, fakeSpecialData4, fakeSpecialData6, fakeSpecialData8, fakeSpecialData9, fakeSpecialData10, fakeSpecialData12, fakeSpecialData13, fakeSpecialData14]
-    
-    return []
-}
+//func createFakeSpecials() -> [SpecialCell] {
+////     let fs = [fakeSpecialData2, fakeSpecialData3, fakeSpecialData4, fakeSpecialData6, fakeSpecialData8, fakeSpecialData9, fakeSpecialData10, fakeSpecialData12, fakeSpecialData13, fakeSpecialData14]
+//    
+//    return []
+//}

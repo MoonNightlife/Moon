@@ -17,9 +17,9 @@ struct TopBar {
     let coordinates: CLLocationCoordinate2D?
     
     init(from profile: BarProfile) {
-        self.imageURL = baseURL.appendingPathComponent(profile.barPics!.first!)
+        self.imageURL = URL(string: profile.barPics!.first!)!
         self.barName = profile.name ?? "No Name"
         self.usersGoing = "\(profile.numPeopleAttending ?? 0)"
-        self.coordinates = nil
+        self.coordinates = fakeCoordinates[0]
     }
 }

@@ -96,6 +96,10 @@ extension Scene.User {
             var vc = storyboard.instantiateViewController(withIdentifier: "WebView") as! WebViewUIViViewController
             vc.bindViewModel(to: viewModel)
             return vc
+        case .region(let viewModel):
+            var vc = storyboard.instantiateViewController(withIdentifier: "SelectRegion") as! SelectRegionViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
         }
     }
 }

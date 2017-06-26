@@ -18,7 +18,7 @@ class RxErrorHandlers {
     
     static let maxAttempts = 4
     
-    let retryHandler: (Observable<Error>) -> Observable<Int> = { e in
+    static let retryHandler: (Observable<Error>) -> Observable<Int> = { e in
         return e.flatMapWithIndex { (error, attempt) -> Observable<Int> in
             if attempt >= maxAttempts - 1 {
                 return Observable.error(error)
@@ -27,12 +27,31 @@ class RxErrorHandlers {
 //                return ApiController.shared.apiKey
 //                    .filter {$0 != ""}
 //                    .map { _ in return 1 }
-            } else if let casted = error as? NSError, casted.code == -1009 {
+            } else if (error as NSError).code == -1009 {
                 return RxReachability.shared.status
                     .filter { $0 == .online }
                     .map({ _ in return 1 })
             }
             print("== retrying after \(attempt + 1) seconds ==")
+            return Observable<Int>.timer(Double(attempt + 1), scheduler:
+                MainScheduler.instance)
+                .take(1)
+        }
+    }
+    
+    static let imageRetryHandler: (Observable<Error>) -> Observable<Int> = { e in
+        return e.flatMapWithIndex { (error, attempt) -> Observable<Int> in
+            // If attemped to retrieve image 4 time with no success then throw error
+            if attempt >= 3 {
+                return Observable.error(error)
+            } else if (error as NSError).code == -1009 {
+                // If there is an internet connection error then wait till connection reestablished
+                return RxReachability.shared.status
+                    .filter { $0 == .online }
+                    .map({ _ in return 1 })
+            }
+            print("== retrying after \(attempt + 1) seconds ==")
+            // Increase the wait time between download attempts
             return Observable<Int>.timer(Double(attempt + 1), scheduler:
                 MainScheduler.instance)
                 .take(1)
