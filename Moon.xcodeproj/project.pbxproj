@@ -131,8 +131,6 @@
 		F07C06221EF1958F00B78865 /* BarAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06211EF1958F00B78865 /* BarAPIController.swift */; };
 		F07C06241EF195A500B78865 /* UserAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06231EF195A500B78865 /* UserAPIController.swift */; };
 		F07C06261EF19D7400B78865 /* RxErrorHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06251EF19D7400B78865 /* RxErrorHandlers.swift */; };
-		F07C062A1EF1A08500B78865 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06281EF1A08500B78865 /* InfoView.swift */; };
-		F07C062B1EF1A08500B78865 /* InfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F07C06291EF1A08500B78865 /* InfoView.xib */; };
 		F07F694B1EFAED22000F854D /* DeepLinking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07F694A1EFAED22000F854D /* DeepLinking.swift */; };
 		F07F694D1EFAEFC5000F854D /* ShowEventDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07F694C1EFAEFC5000F854D /* ShowEventDeepLink.swift */; };
 		F07F69501EFB0A88000F854D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F07F694F1EFB0A88000F854D /* GoogleService-Info.plist */; };
@@ -177,6 +175,7 @@
 		F0A8E2E91EC3C858001D9993 /* pic5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2E01EC3C858001D9993 /* pic5.jpg */; };
 		F0A8E2EA1EC3C858001D9993 /* pic6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2E11EC3C858001D9993 /* pic6.jpg */; };
 		F0A8E2EB1EC3C858001D9993 /* Pic7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2E21EC3C858001D9993 /* Pic7.jpg */; };
+		F0A8FE181F01857F003044B1 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A8FE171F01857F003044B1 /* Array.swift */; };
 		F0B5F93F1EEF790A0095F12E /* BarInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B5F93E1EEF790A0095F12E /* BarInfo.swift */; };
 		F0C66BDF1EF41C9400B22811 /* SinchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C66BDE1EF41C9400B22811 /* SinchService.swift */; };
 		F0C72F441EF81D7700B25C52 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C72F431EF81D7700B25C52 /* PhotoService.swift */; };
@@ -230,6 +229,7 @@
 		F0F017FB1EF9A9AB0086447E /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F017FA1EF9A9AB0086447E /* Activity.swift */; };
 		F0F017FD1EF9B0760086447E /* UserSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F017FC1EF9B0760086447E /* UserSnapshot.swift */; };
 		F0F210591ECA1C160027B50B /* SearchBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F210581ECA1C160027B50B /* SearchBarViewController.swift */; };
+		F0F6B5121F019FF1000C4489 /* DisplayErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B5111F019FF1000C4489 /* DisplayErrorType.swift */; };
 		F0FD8F301EE178650020D131 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */; };
 		F0FD8F321EE19D4E0020D131 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F311EE19D4E0020D131 /* ForgotPasswordViewController.swift */; };
 		F0FD8F341EE19D9F0020D131 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F331EE19D9F0020D131 /* ForgotPasswordViewModel.swift */; };
@@ -380,8 +380,6 @@
 		F07C06211EF1958F00B78865 /* BarAPIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAPIController.swift; sourceTree = "<group>"; };
 		F07C06231EF195A500B78865 /* UserAPIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPIController.swift; sourceTree = "<group>"; };
 		F07C06251EF19D7400B78865 /* RxErrorHandlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxErrorHandlers.swift; sourceTree = "<group>"; };
-		F07C06281EF1A08500B78865 /* InfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
-		F07C06291EF1A08500B78865 /* InfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoView.xib; sourceTree = "<group>"; };
 		F07F694A1EFAED22000F854D /* DeepLinking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepLinking.swift; sourceTree = "<group>"; };
 		F07F694C1EFAEFC5000F854D /* ShowEventDeepLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowEventDeepLink.swift; sourceTree = "<group>"; };
 		F07F694F1EFB0A88000F854D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -426,6 +424,7 @@
 		F0A8E2E01EC3C858001D9993 /* pic5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic5.jpg; sourceTree = "<group>"; };
 		F0A8E2E11EC3C858001D9993 /* pic6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic6.jpg; sourceTree = "<group>"; };
 		F0A8E2E21EC3C858001D9993 /* Pic7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Pic7.jpg; sourceTree = "<group>"; };
+		F0A8FE171F01857F003044B1 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		F0B5F93E1EEF790A0095F12E /* BarInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarInfo.swift; sourceTree = "<group>"; };
 		F0C66BDE1EF41C9400B22811 /* SinchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinchService.swift; sourceTree = "<group>"; };
 		F0C72F431EF81D7700B25C52 /* PhotoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
@@ -480,6 +479,7 @@
 		F0F017FA1EF9A9AB0086447E /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		F0F017FC1EF9B0760086447E /* UserSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSnapshot.swift; sourceTree = "<group>"; };
 		F0F210581ECA1C160027B50B /* SearchBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarViewController.swift; sourceTree = "<group>"; };
+		F0F6B5111F019FF1000C4489 /* DisplayErrorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayErrorType.swift; sourceTree = "<group>"; };
 		F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		F0FD8F311EE19D4E0020D131 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		F0FD8F331EE19D9F0020D131 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
@@ -841,15 +841,6 @@
 			name = DynamicLinking;
 			sourceTree = "<group>";
 		};
-		F07C06271EF1A07700B78865 /* InfoView */ = {
-			isa = PBXGroup;
-			children = (
-				F07C06281EF1A08500B78865 /* InfoView.swift */,
-				F07C06291EF1A08500B78865 /* InfoView.xib */,
-			);
-			name = InfoView;
-			sourceTree = "<group>";
-		};
 		F098FF991EDF1DDA00A59594 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -868,7 +859,6 @@
 			isa = PBXGroup;
 			children = (
 				F06B42331EFDC4D800BE7626 /* DynamicLinking */,
-				F07C06271EF1A07700B78865 /* InfoView */,
 				F098FF9D1EDF47D400A59594 /* ValidationUtility.swift */,
 				F0E8627A1EF58B6A00BEF5E9 /* ContactService.swift */,
 			);
@@ -1012,6 +1002,7 @@
 				F0C72F451EF835B200B25C52 /* ImageDownloadType.swift */,
 				F04A6D511EEECA95000D898B /* ParentType.swift */,
 				F0EF693D1EF09AD90028A32B /* BackType.swift */,
+				F0F6B5111F019FF1000C4489 /* DisplayErrorType.swift */,
 			);
 			name = "VC and VM Types";
 			sourceTree = "<group>";
@@ -1186,6 +1177,7 @@
 				F0CA18BE1EE611C100428318 /* Date.swift */,
 				F0EBA0BE1ECCAE9F00056EF9 /* ActionButton.swift */,
 				F0A2251E1ECB9F2600170927 /* MoonFont.swift */,
+				F0A8FE171F01857F003044B1 /* Array.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1343,7 +1335,6 @@
 				C034E2CB1ECCF2F5008EA4BA /* p3.jpg in Resources */,
 				F048F1221EA3B7A5000F0161 /* Assets.xcassets in Resources */,
 				C0DAD32A1EEA04C7008BAF05 /* b4.jpg in Resources */,
-				F07C062B1EF1A08500B78865 /* InfoView.xib in Resources */,
 				F001BABE1EC50D2600CDF9BC /* Profile_base.png in Resources */,
 				C0FC627F1ECF53560087FA3B /* s8.jpg in Resources */,
 				C0FC628A1ECF69730087FA3B /* e2.jpg in Resources */,
@@ -1576,12 +1567,12 @@
 				F0C72F441EF81D7700B25C52 /* PhotoService.swift in Sources */,
 				F09DF0921EEAFB670092BFA5 /* WebViewViewModel.swift in Sources */,
 				F0E6ED121ECB3C54009508FC /* SearchBar.swift in Sources */,
+				F0F6B5121F019FF1000C4489 /* DisplayErrorType.swift in Sources */,
 				F09C09221ECC7D3B003076CC /* FloatingBottomTabBar.swift in Sources */,
 				F03C78BE1EE9E98F002AEDAD /* NotificationSettingsViewController.swift in Sources */,
 				F09DF0901EEAFAF90092BFA5 /* WebViewUIViViewController.swift in Sources */,
 				F0F017FD1EF9B0760086447E /* UserSnapshot.swift in Sources */,
 				F098FF9B1EDF1DEA00A59594 /* NewUser.swift in Sources */,
-				F07C062A1EF1A08500B78865 /* InfoView.swift in Sources */,
 				F001BAC11EC50E9700CDF9BC /* BarActivityFeedViewController.swift in Sources */,
 				F04F445C1ECF840700D5FC62 /* BarAnnotation.swift in Sources */,
 				F04989701EE0746400064F58 /* UINavigationController+Rx.swift in Sources */,
@@ -1598,6 +1589,7 @@
 				C0E8BE901EF965D6007E9B52 /* RACollectionViewCell.swift in Sources */,
 				F0D168531ECA62940064F642 /* MoonColor.swift in Sources */,
 				F0CA18A51EE58FD400428318 /* SearchBarViewModel.swift in Sources */,
+				F0A8FE181F01857F003044B1 /* Array.swift in Sources */,
 				F0FD8F301EE178650020D131 /* LoginViewModel.swift in Sources */,
 				F0043A051EF45D8C0047E94A /* ContactTableViewCell.swift in Sources */,
 				F048F11D1EA3B7A5000F0161 /* LoginViewController.swift in Sources */,

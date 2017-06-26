@@ -120,7 +120,8 @@ extension ExploreViewController: iCarouselDataSource, iCarouselDelegate {
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         let topBarView = ImageViewCell(frame: carousel.frame)
         topBarView.initializeImageCardViewWith(data: topBars[index], downloadAction: viewModel.downloadImage(url: topBars[index].imageURL))
-        topBarView.moreButton.rx.action = viewModel.showBar()
+        //TODO: enter real bar id once api returns bar snapshot and i can get rid of the top bar model
+        topBarView.moreButton.rx.action = viewModel.showBar(barID: "123123")
         return topBarView
     }
 }

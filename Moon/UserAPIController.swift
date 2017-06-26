@@ -182,6 +182,7 @@ extension UserAPIController {
                 if let a = activity {
                     observer.onNext(a)
                 } else if let e = error {
+                    print(e)
                     observer.onError(e)
                 }
                 observer.onCompleted()

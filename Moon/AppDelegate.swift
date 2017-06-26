@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     enum LaunchScreen {
         case login
-        case barProfile
+        case barProfile(id: String)
         case main
     }
 
@@ -27,6 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         DynamicLinkingAPI.createDynamicLink()
         FirebaseApp.configure()
+        
+        if RxReachability.shared.startMonitor("apple.com") == false {
+            print("Reachability failed!")
+        }
         
         if let url = launchOptions?[.url] as? URL {
             return executeDeepLink(with: url)
@@ -74,11 +78,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let mainVM = MainViewModel(coordinator: sceneCoordinator)
             let searchVM = SearchBarViewModel(coordinator: sceneCoordinator)
             sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
-        case .barProfile:
+        case .barProfile(let id):
             let mainVM = MainViewModel(coordinator: sceneCoordinator)
             let searchVM = SearchBarViewModel(coordinator: sceneCoordinator)
             sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
-            let barVM = BarProfileViewModel(coordinator: sceneCoordinator)
+            let barVM = BarProfileViewModel(coordinator: sceneCoordinator, barID: id)
             sceneCoordinator.transition(to: Scene.Bar.profile(barVM), type: .modal)
         }
     }
@@ -105,7 +109,7 @@ extension AppDelegate {
     }
     
     fileprivate func showEvent(with deepLink: ShowEventDeepLink) -> Bool {
-        prepareEntryViewController(vc: .barProfile)
+        prepareEntryViewController(vc: .barProfile(id: deepLink.barID))
         print("Show Event")
         return true
     }

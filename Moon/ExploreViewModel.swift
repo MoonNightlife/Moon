@@ -41,9 +41,9 @@ struct ExploreViewModel: ImageDownloadType {
         return SpecialsViewModel(coordinator: sceneCoordinator)
     }
     
-    func showBar() -> CocoaAction {
+    func showBar(barID: String) -> CocoaAction {
         return CocoaAction {
-            let vm = BarProfileViewModel(coordinator: self.sceneCoordinator)
+            let vm = BarProfileViewModel(coordinator: self.sceneCoordinator, barID: barID)
             return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
         }
     }

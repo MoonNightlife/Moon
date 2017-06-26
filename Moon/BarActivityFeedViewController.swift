@@ -13,8 +13,9 @@ import Action
 import RxSwift
 import RxCocoa
 import SwaggerClient
+import Whisper
 
-class BarActivityFeedViewController: UIViewController, BindableType {
+class BarActivityFeedViewController: UIViewController, BindableType, DisplayErrorType {
     
     class func instantiateFromStoryboard() -> BarActivityFeedViewController {
         let storyboard = UIStoryboard(name: "MoonsView", bundle: nil)
@@ -43,13 +44,33 @@ class BarActivityFeedViewController: UIViewController, BindableType {
     }
      
     func bindViewModel() {
-        viewModel.refreshAction.elements.do(onNext: { [weak self] _ in
-            self?.refreshControl.endRefreshing()
-            }, onError: { [weak self] _ in
-            self?.refreshControl.endRefreshing()
-        }).bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
+        viewModel.refreshAction.elements.do(onNext: { [weak self] activities in
+            if let isEmpty = activities.first?.items.isEmpty, isEmpty, let strongSelf = self {
+                strongSelf.addEmpyDataView()
+            }
+            self?.refreshControl.endRefreshing()     
+            }).bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
+        
         refreshControl.rx.controlEvent(.valueChanged).subscribe(viewModel.refreshAction.inputs).addDisposableTo(disposeBag)
+        
+        viewModel.refreshAction.errors.subscribe(onNext: { [weak self] in
+            self?.refreshControl.endRefreshing()
+            if let strongSelf = self {
+                strongSelf.dispayErrorMessage(error: $0)
+            }
+        }).addDisposableTo(disposeBag)
+        
         viewModel.refreshAction.execute()
+        self.refreshControl.beginRefreshing()
+    }
+    
+    fileprivate func addEmpyDataView() {
+        let noDataLabel: UILabel     = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+        noDataLabel.text          = "No data available"
+        noDataLabel.textColor     = UIColor.black
+        noDataLabel.textAlignment = .center
+        tableView.backgroundView  = noDataLabel
+        tableView.separatorStyle  = .none
     }
     
     fileprivate func configureDataSource() {

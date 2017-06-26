@@ -88,7 +88,7 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
             view.favoriteButton.rx.action = viewModel.onLikeEvent(eventID: id)
             view.numberOfLikesButton.rx.action = viewModel.onViewLikers(eventID: id)
             view.shareButton.rx.action = viewModel.onShareEvent(eventID: id)
-            view.moreButton.rx.action = viewModel.onMoreInfo(eventID: id)
+            view.moreButton.rx.action = viewModel.onMoreInfo(barID: id)
         }
         
         // Bind labels

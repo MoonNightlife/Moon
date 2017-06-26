@@ -108,6 +108,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/RxSwift/RxSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Spring/Spring.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwaggerClient/SwaggerClient.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Whisper/Whisper.framework"
   install_framework "$BUILT_PRODUCTS_DIR/iCarousel/iCarousel.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -130,6 +131,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/RxSwift/RxSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Spring/Spring.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwaggerClient/SwaggerClient.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Whisper/Whisper.framework"
   install_framework "$BUILT_PRODUCTS_DIR/iCarousel/iCarousel.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

@@ -40,13 +40,13 @@ struct BarProfileViewModel: ImageDownloadType, BackType {
     var specials = Variable<[Special]>([])
     var events = Variable<[BarEvent]>([])
     
-    init(coordinator: SceneCoordinatorType, photoService: PhotoService = KingFisherPhotoService(), barAPI: BarAPIType = BarAPIController(), userAPI: UserAPIType = UserAPIController()) {
+    init(coordinator: SceneCoordinatorType, photoService: PhotoService = KingFisherPhotoService(), barAPI: BarAPIType = BarAPIController(), userAPI: UserAPIType = UserAPIController(), barID: String) {
         self.sceneCoordinator = coordinator
         self.photoService = photoService
         self.barAPI = barAPI
         self.userAPI = userAPI
         
-         bar = barAPI.getBarInfo(barID: "594bfb53fc13ae69de000cff")
+         bar = barAPI.getBarInfo(barID: barID)
         
         barName = bar.map({ $0.name ?? "No Name" })
         
@@ -92,28 +92,28 @@ struct BarProfileViewModel: ImageDownloadType, BackType {
     
     func onShowProfile(userID: String) -> CocoaAction {
         return CocoaAction {_ in
-            let vm = ProfileViewModel(coordinator: self.sceneCoordinator)
+            let vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: userID)
             return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
         }
     }
     
     func onViewLikers(eventID: String) -> CocoaAction {
         return CocoaAction {_ in
-            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator)
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .event(id: eventID))
             return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
     }
     
     func onViewLikers(specialID: String) -> CocoaAction {
         return CocoaAction {_ in
-            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator)
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .special(id: specialID))
             return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
     }
     
     func onViewLikers(activityID: String) -> CocoaAction {
         return CocoaAction {_ in
-            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator)
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .activity(id: activityID))
             return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
     }

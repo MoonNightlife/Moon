@@ -54,14 +54,14 @@ struct SpecialsViewModel: ImageDownloadType {
     func onViewBar(barID: String) -> CocoaAction {
         return CocoaAction {
             print("View Bar Profile")
-            let vm = BarProfileViewModel(coordinator: self.sceneCoordinator)
+            let vm = BarProfileViewModel(coordinator: self.sceneCoordinator, barID: barID)
             return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
         }
     }
     
     func onViewLikers(specialID: String) -> CocoaAction {
         return CocoaAction {_ in
-            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator)
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .special(id: specialID))
             return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
     }

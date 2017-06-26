@@ -67,21 +67,14 @@ enum SettingSections {
     }
 }
 
-enum ImageSource: CustomStringConvertible {
-    case lastPhotoTaken
-    case imagePicker
-    
-    var description: String {
-        switch self {
-        case .lastPhotoTaken:
-            return "Last photo taken"
-        case .imagePicker:
-            return "Choose image from library"
-        }
-    }
-}
-
 enum SearchType: Int {
     case users
     case bars
+}
+
+enum UserTableSource {
+    case user(id: String)
+    case special(id: String)
+    case event(id: String)
+    case activity(id: String)
 }

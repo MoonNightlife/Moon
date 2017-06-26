@@ -67,22 +67,28 @@ struct SearchResultsViewModel: ImageDownloadType {
     func performTransition(index: Int) -> Observable<Void> {
         let selectedSearchResult = Observable.combineLatest(searchResults.asObservable(), selectedSearchType)
         return Observable.just().withLatestFrom(selectedSearchResult).flatMapLatest({ (results, type) -> Observable<Void> in
-            switch type {
-            case .users:
-                let vm = ProfileViewModel(coordinator: self.sceneCoordinator)
-                return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
-            case .bars:
-                let vm = BarProfileViewModel(coordinator: self.sceneCoordinator)
-                return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
+            // The first section contains the search results
+            // That is why we can use results[0], results[1] is reserved for the load more section
+            if case let .searchResult(snapshot) = results[0].items[index] {
+                switch type {
+                case .users:
+                    let vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: snapshot._id ?? "0")
+                    return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
+                case .bars:
+                    let vm = BarProfileViewModel(coordinator: self.sceneCoordinator, barID: snapshot._id ?? "0")
+                    return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
+                }
+            } else {
+                return Observable.empty()
             }
         })
     }
     
-    func onShowProfile() -> Action<String, Void> {
-        return Action(workFactory: { _ in
-            let vm = ProfileViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
-        })
-    }
+//    func onShowProfile() -> Action<String, Void> {
+//        return Action(workFactory: { _ in
+//            let vm = ProfileViewModel(coordinator: self.sceneCoordinator)
+//            return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
+//        })
+//    }
 
 }

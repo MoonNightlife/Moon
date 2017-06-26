@@ -19,6 +19,7 @@ struct ProfileViewModel {
 
     // Dependecies
     private let scenceCoordinator: SceneCoordinatorType
+    private let userID: String
     
     // Inputs
     
@@ -29,10 +30,11 @@ struct ProfileViewModel {
     var activityBarName: Observable<String>
     var profilePictures = Variable<[UIImage]>([])
     
-    init(coordinator: SceneCoordinatorType, userAPI: UserAPIType = UserAPIController(), photoService: PhotoService = KingFisherPhotoService()) {
+    init(coordinator: SceneCoordinatorType, userAPI: UserAPIType = UserAPIController(), photoService: PhotoService = KingFisherPhotoService(), userID: String) {
         self.scenceCoordinator = coordinator
+        self.userID = userID
         
-        let userProfile = userAPI.getUserProfile(userID: "594c2532fc13ae6572000000")
+        let userProfile = userAPI.getUserProfile(userID: userID)
         
         username = userProfile.map({ $0.username }).replaceNilWith("No Username").catchErrorJustReturn("Fake Username")
         fullName = userProfile.map({
@@ -59,7 +61,7 @@ struct ProfileViewModel {
     
     func onShowFriends() -> CocoaAction {
         return CocoaAction {
-            let vm = UsersTableViewModel(coordinator: self.scenceCoordinator)
+            let vm = UsersTableViewModel(coordinator: self.scenceCoordinator, sourceID: .user(id: self.userID))
             return self.scenceCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
     }

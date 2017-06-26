@@ -208,6 +208,7 @@ PODS:
   - SwaggerClient (0.0.1):
     - Alamofire (~> 4.0)
   - SwiftLint (0.18.1)
+  - Whisper (5.0.0)
 
 DEPENDENCIES:
   - Action (~> 3.0)
@@ -230,6 +231,7 @@ DEPENDENCIES:
   - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
   - SwaggerClient (from `../moon_mock_api/frontend`)
   - SwiftLint
+  - Whisper
 
 EXTERNAL SOURCES:
   Material:
@@ -274,9 +276,10 @@ SPEC CHECKSUMS:
   RxSwift: 3789a1af753002a14edecdb698a2424624296a9c
   SinchVerification: 71af34426dfa35a86cfa9fa157ca5c3e170ec829
   Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
-  SwaggerClient: 42a5fb2f34db03c66cd09f9ce76a99d554fb0660
+  SwaggerClient: 1e31099934ba565a410079bbff3f567de07eb13e
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
+  Whisper: 051f25e704bf8992641ffd28b20d5682ddc5f5d3
 
-PODFILE CHECKSUM: ad9fd1e0307a19f1e49131361dbb8e4f4e0d7453
+PODFILE CHECKSUM: 2274cf4e219a1c4d337235efac479413bda78ff7
 
 COCOAPODS: 1.2.1

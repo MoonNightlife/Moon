@@ -56,8 +56,8 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
         }).bind(to: userTableView.rx.items(dataSource: dataSource)).addDisposableTo(bag)
         
         let selectedItem = userTableView.rx.itemSelected
-        selectedItem.subscribe(onNext: { [weak self] _ in
-            self?.viewModel.onShowUser().execute()
+        selectedItem.subscribe(onNext: { [weak self] indexPath in
+            self?.viewModel.onShowUser(indexPath: indexPath).execute()
         })
         .disposed(by: bag)
         
@@ -123,8 +123,10 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
                     cell.declineButton.setImage(Icon.cm.close, for: .normal)
                     cell.declineButton.tintColor = UIColor.moonRed
                     
-                    cell.acceptButton.rx.action = self?.viewModel.onAcceptFriendRequest(userID: snap.userID)
-                    cell.declineButton.rx.action = self?.viewModel.onDeclineFriendRequest(userID: snap.userID)
+                    if let userID = snap.userID {
+                        cell.acceptButton.rx.action = self?.viewModel.onAcceptFriendRequest(userID:userID)
+                        cell.declineButton.rx.action = self?.viewModel.onDeclineFriendRequest(userID:userID)
+                    }
                     
                     return cell
             
