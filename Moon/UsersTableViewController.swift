@@ -25,6 +25,7 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
     var refreshControl: UIRefreshControl = UIRefreshControl()
     
     @IBOutlet weak var contactsViewHeightConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,19 +38,19 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
         configureDataSource()
         
         // Add the refresh control
-        userTableView.addSubview(refreshControl)
+        userTableView.refreshControl = refreshControl
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        
-        // Animation Logic
-        if true {
-        animateView()
-        }
+        super.viewDidAppear(animated)
+    
     }
 
     func bindViewModel() {
+        
+        viewModel.currentSignedInUser.asObservable().filter { $0 == true }.do(onNext: { [weak self] _ in
+            self?.animateView()
+        }).subscribe().addDisposableTo(bag)
         
         viewModel.users.do(onNext: { [weak self] _ in
             self?.refreshControl.endRefreshing()
@@ -65,6 +66,7 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
         showContactsButton.rx.action = viewModel.onShowContacts()
         
         refreshControl.rx.controlEvent(.valueChanged).bind(to: viewModel.reload).addDisposableTo(bag)
+        viewModel.users.map {_ in return false}.bind(to: refreshControl.rx.isRefreshing).addDisposableTo(bag)
     }
     
     fileprivate func configureDataSource() {

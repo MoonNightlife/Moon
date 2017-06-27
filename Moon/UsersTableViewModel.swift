@@ -44,7 +44,7 @@ struct UsersTableViewModel: BackType, ImageDownloadType {
                     return [$1, $0]
                 })
             } else {
-                currentSignedInUser.value = true
+                currentSignedInUser.value = false
                 userSource = UsersTableViewModel.getFriends(userID: id, userAPI: userAPI).toArray()
             }
         case let .activity(id):
@@ -55,37 +55,41 @@ struct UsersTableViewModel: BackType, ImageDownloadType {
             userSource = UsersTableViewModel.getSpecialLikers(specialID: id, barAPI: barAPI)
         }
         
-        users = reload.flatMap({
+        users = Observable.of(Observable<Void>.just(()), reload).flatMap({_ in
             return userSource
         })
-
-        
     }
     
     static func getFriends(userID: String, userAPI: UserAPIType) -> Observable<UserSectionModel> {
         return userAPI.getFriends(userID: "01").map({ profiles -> [UserSnapshot] in
             //TODO: remove this once api returns snapshots instead of profiles
-            return profiles.map({ profile in
-                let snap = UserSnapshot()
-                snap.userName = profile.firstName
-                snap.pic = profile.profilePics!.first
-                snap.userID = profile.id
-                return snap
+                return profiles.map({ profile in
+                    let snap = UserSnapshot()
+                    snap.userName = profile.firstName
+                    snap.pic = profile.profilePics!.first
+                    snap.userID = profile.id
+                    return snap
+                })
             })
-        }).map({
-            return $0.map(UserSectionItem.friend)
-        }).map({
-            return UserSectionModel.friendsSection(title: "Friends", items: $0)
-        })
-
+            .catchError {_ in
+                return Observable.just([])
+            }
+            .map({
+                return $0.map(UserSectionItem.friend)
+            }).map({
+                return UserSectionModel.friendsSection(title: "Friends", items: $0)
+            })
     }
     
     static func getFriendRequest(userID: String, userAPI: UserAPIType) -> Observable<UserSectionModel> {
-        return userAPI.getFriendRequest(userID: "01").map({
-            return $0.map(UserSectionItem.friendRequest)
-        }).map({
-            return UserSectionModel.friendsSection(title: "Friend Requests", items: $0)
-        })
+        return userAPI.getFriendRequest(userID: "01")
+            .catchError {_ in
+                    return Observable.just([])
+            }.map({
+                return $0.map(UserSectionItem.friendRequest)
+            }).map({
+                return UserSectionModel.friendsSection(title: "Friend Requests", items: $0)
+            })
 
     }
     
