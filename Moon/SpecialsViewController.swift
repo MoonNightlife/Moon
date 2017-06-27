@@ -32,11 +32,11 @@ class SpecialsViewController: UIViewController, BindableType {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.specials.execute()
+        //viewModel.specials.execute()
     }
 
     func bindViewModel() {
-        viewModel.specials.elements.bind(to: specialsTableView.rx.items(dataSource: dataSource)).addDisposableTo(disposeBag)
+        //viewModel.specials.elements.bind(to: specialsTableView.rx.items(dataSource: dataSource)).addDisposableTo(disposeBag)
     }
     
     func configureDataSource() {

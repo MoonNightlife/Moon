@@ -27,10 +27,10 @@ class ExploreViewController: UIViewController, BindableType {
     @IBOutlet weak var topBarPageController: UIPageControl!
     @IBOutlet weak var topBarCarousel: iCarousel!
     fileprivate let reuseIdentifier = "TopBarCell"
+    @IBOutlet weak var specialsEmbeddedView: UIView!
+
     
-    @IBOutlet weak var viewForPageMenu: UIView!
-    var pageMenu: CAPSPageMenu?
-    var controllerArray = [UIViewController]()
+    var pageMenu: CAPSPageMenu!
     
     var topBars = [TopBar]()
     private let bag = DisposeBag()
@@ -47,7 +47,7 @@ class ExploreViewController: UIViewController, BindableType {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.topBars.execute()
+        //viewModel.topBars.execute()
     }
     
     private func setupCarousel() {
@@ -68,18 +68,20 @@ class ExploreViewController: UIViewController, BindableType {
 
 extension ExploreViewController {
     fileprivate func setupPagingMenuController() {
+        var controllerArray = [UIViewController]()
+        
         var beerSpecialsController = SpecialsViewController.instantiateFromStoryboard()
-        beerSpecialsController.bindViewModel(to: viewModel.createSpecialViewModel())
+        //beerSpecialsController.bindViewModel(to: viewModel.createSpecialViewModel(type: .beer))
         beerSpecialsController.title = "Beer"
         controllerArray.append(beerSpecialsController)
         
         var liquorSpecialsController = SpecialsViewController.instantiateFromStoryboard()
-        liquorSpecialsController.bindViewModel(to: viewModel.createSpecialViewModel())
+        //liquorSpecialsController.bindViewModel(to: viewModel.createSpecialViewModel(type: .liquor))
         liquorSpecialsController.title = "Liquor"
         controllerArray.append(liquorSpecialsController)
         
         var wineSpecialsController = SpecialsViewController.instantiateFromStoryboard()
-        wineSpecialsController.bindViewModel(to: viewModel.createSpecialViewModel())
+        //wineSpecialsController.bindViewModel(to: viewModel.createSpecialViewModel(type: .wine))
         wineSpecialsController.title = "Wine"
         controllerArray.append(wineSpecialsController)
         
@@ -97,13 +99,13 @@ extension ExploreViewController {
             .menuItemSeparatorColor(.clear)
         ]
         
-        let sizeOfFrame = CGRect(x: 0, y: 0, width: viewForPageMenu.frame.width, height: viewForPageMenu.frame.height)
+        let sizeOfFrame = CGRect(x: 0, y: 0, width: specialsEmbeddedView.frame.width, height: specialsEmbeddedView.frame.height)
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: sizeOfFrame, pageMenuOptions: parameters)
-        pageMenu?.view.backgroundColor = .lightGray
-        if let view = pageMenu?.view {
-            viewForPageMenu.addSubview(view)
-        }
+        pageMenu.view.backgroundColor = .lightGray
         
+        addChildViewController(pageMenu)
+        specialsEmbeddedView.addSubview(pageMenu.view)
+        pageMenu?.didMove(toParentViewController: self)
     }
 }
 

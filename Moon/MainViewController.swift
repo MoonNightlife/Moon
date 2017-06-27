@@ -29,7 +29,16 @@ class MainViewController: EZSwipeController, BindableType {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // This disables the scrolling of the EZSwipeController
+        // In the future we would want to just remove the EZSwipeController
+        for view in self.pageViewController.view.subviews {
+            if let subView = view as? UIScrollView {
+                subView.isScrollEnabled = false
+            }
+        }
+        
         setupTabBar()
+        setupView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,10 +60,10 @@ class MainViewController: EZSwipeController, BindableType {
         if let searchBarController = searchBarController as? SearchBarViewController {
             searchBarController.prepareSearchBarForMainView()
         }
-  
-        setFrameForCurrentOrientation()
         
-        changeColorForTabBarAndSearchBar(nextView: .moons)
+        // Changing the color needs to happen after the view has appeared. Once we include animations we will
+        // need ot move this to another section, so it wont animate every time a modal is dismissed
+        changeColorForTabBarAndSearchBar(nextView: MainView(rawValue: self.currentVCIndex) ?? .moons)
     }
     
     override func setupView() {
@@ -69,7 +78,7 @@ class MainViewController: EZSwipeController, BindableType {
         tabBarWidthConstraint.constant = self.view.frame.size.width * 0.533
         tabBar.frame.size.width = tabBarWidthConstraint.constant
         tabBar.frame.size.height = tabBarHeightConstraint.constant
-        tabBar.initializeTabBar()        
+        tabBar.initializeTabBar()
     }
     
     func bindViewModel() {

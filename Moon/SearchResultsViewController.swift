@@ -67,7 +67,6 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
         resultsDataSource.configureCell = { [weak self]
             dataSource, tableView, indexPath, item in
             
-            
             switch item {
             case .searchResult(let snapshot):
                 //swiftlint:disable:next force_cast

@@ -20,10 +20,10 @@ enum MainView: Int {
     case explore
 }
 
-enum AlcoholType {
-    case beer
-    case liquor
-    case wine
+enum AlcoholType: String {
+    case beer = "Beer"
+    case liquor = "Liquor"
+    case wine = "Wine"
 }
 
 enum DayOfWeek {

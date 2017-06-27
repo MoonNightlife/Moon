@@ -37,8 +37,8 @@ struct ExploreViewModel: ImageDownloadType {
         })
     }
     
-    func createSpecialViewModel() -> SpecialsViewModel {
-        return SpecialsViewModel(coordinator: sceneCoordinator)
+    func createSpecialViewModel(type: AlcoholType) -> SpecialsViewModel {
+        return SpecialsViewModel(coordinator: sceneCoordinator, type: type)
     }
     
     func showBar(barID: String) -> CocoaAction {

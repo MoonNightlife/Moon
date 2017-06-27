@@ -28,20 +28,19 @@ struct SpecialsViewModel: ImageDownloadType {
     // Inputs
     
     // Outputs
-    var specials: Action<Void, [SpecialSection]>
+    var specials: Observable<[SpecialSection]>
     
-    init(coordinator: SceneCoordinatorType, barAPI: BarAPIType = BarAPIController(), userAPI: UserAPIType = UserAPIController(), photoService: PhotoService = KingFisherPhotoService()) {
+    init(coordinator: SceneCoordinatorType, barAPI: BarAPIType = BarAPIController(), userAPI: UserAPIType = UserAPIController(), photoService: PhotoService = KingFisherPhotoService(), type: AlcoholType) {
         self.sceneCoordinator = coordinator
         self.barAPI = barAPI
         self.userAPI = userAPI
         self.photoService = photoService
         
-        specials = Action(workFactory: { _ in
-            return barAPI.getSpecialsIn(region: "Dallas")
-                .map({
-                    return [SpecialSection(model: "Specials", items: $0)]
-                })
-        })
+        //TODO: update api call to return special by time
+        specials = barAPI.getSpecialsIn(region: "Dallas", type: type.rawValue)
+            .map({
+                return [SpecialSection(model: "Specials", items: $0)]
+            })
     }
     
     func onLike(specialID: String) -> CocoaAction {
