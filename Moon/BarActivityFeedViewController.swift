@@ -61,7 +61,6 @@ class BarActivityFeedViewController: UIViewController, BindableType, DisplayErro
         }).addDisposableTo(disposeBag)
         
         viewModel.refreshAction.execute()
-        self.refreshControl.beginRefreshing()
     }
     
     fileprivate func addEmpyDataView() {

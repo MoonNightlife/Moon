@@ -77,6 +77,7 @@
 		F0043A031EF44F090047E94A /* ContactsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0043A021EF44F090047E94A /* ContactsViewModel.swift */; };
 		F0043A051EF45D8C0047E94A /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0043A041EF45D8C0047E94A /* ContactTableViewCell.swift */; };
 		F0055D691EC5E64B005544B4 /* CityOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0055D681EC5E64B005544B4 /* CityOverviewViewController.swift */; };
+		F019A5861F0318EF00FF7A27 /* BarProfileVCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F019A5851F0318EF00FF7A27 /* BarProfileVCExtensions.swift */; };
 		F01CE3DF1EFED68400EE9535 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01CE3DE1EFED68400EE9535 /* Snapshot.swift */; };
 		F01CE3E11EFEDE1000EE9535 /* SelectRegionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01CE3E01EFEDE1000EE9535 /* SelectRegionViewModel.swift */; };
 		F01CE3E31EFEDE9500EE9535 /* SelectRegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01CE3E21EFEDE9500EE9535 /* SelectRegionViewController.swift */; };
@@ -319,6 +320,7 @@
 		F0043A021EF44F090047E94A /* ContactsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewModel.swift; sourceTree = "<group>"; };
 		F0043A041EF45D8C0047E94A /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		F0055D681EC5E64B005544B4 /* CityOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityOverviewViewController.swift; sourceTree = "<group>"; };
+		F019A5851F0318EF00FF7A27 /* BarProfileVCExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarProfileVCExtensions.swift; sourceTree = "<group>"; };
 		F01CE3DE1EFED68400EE9535 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		F01CE3E01EFEDE1000EE9535 /* SelectRegionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectRegionViewModel.swift; sourceTree = "<group>"; };
 		F01CE3E21EFEDE9500EE9535 /* SelectRegionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectRegionViewController.swift; sourceTree = "<group>"; };
@@ -730,6 +732,7 @@
 			isa = PBXGroup;
 			children = (
 				F0388CFA1EE9D40B00E8ED48 /* BarProfileViewController.swift */,
+				F019A5851F0318EF00FF7A27 /* BarProfileVCExtensions.swift */,
 				F0E59F271EEF735A007A3323 /* BarInfoViewController.swift */,
 			);
 			name = Bar;
@@ -899,10 +902,10 @@
 			children = (
 				F0CF158C1EDEED1E00531DCF /* SignUp */,
 				F0CA189E1EE58CC400428318 /* Login */,
+				F0388CF61EE9D32600E8ED48 /* Bar */,
 				F0CA189F1EE58CCB00428318 /* User */,
 				F0CA18A01EE58CD000428318 /* Master */,
 				F0CA18A11EE58CD500428318 /* Explore */,
-				F0388CF61EE9D32600E8ED48 /* Bar */,
 				F0CA18A21EE58CDD00428318 /* Featured */,
 				F0CA18A31EE58CE300428318 /* MoonsView */,
 				F0CF7F171EF37D15005C068C /* UserDiscovery */,
@@ -1509,6 +1512,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F049896A1EE0661E00064F58 /* BindableType.swift in Sources */,
+				F019A5861F0318EF00FF7A27 /* BarProfileVCExtensions.swift in Sources */,
 				F0CF15981EDEEE8900531DCF /* BrithdaySexViewController.swift in Sources */,
 				F0CF7F1F1EF37E71005C068C /* EnterPhoneNumberViewController.swift in Sources */,
 				F03C78C51EE9EA3C002AEDAD /* EmailSettingsViewModel.swift in Sources */,

@@ -67,8 +67,9 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
     }
     
     func bindViewModel() {
-        viewModel.suggestedBars.drive(suggestedBarCollectionView.rx.items(dataSource: barDataSource)).disposed(by: bag)
-        viewModel.suggestedFriends.drive(suggestedUserColletionView.rx.items(dataSource: userDataSource)).disposed(by: bag)
+        //TODO: Uncommented onces swagger is updated
+//        viewModel.suggestedBars.drive(suggestedBarCollectionView.rx.items(dataSource: barDataSource)).disposed(by: bag)
+//        viewModel.suggestedFriends.drive(suggestedUserColletionView.rx.items(dataSource: userDataSource)).disposed(by: bag)
         
         let barSelected = suggestedBarCollectionView.rx.itemSelected
         let userSelected = suggestedUserColletionView.rx.itemSelected

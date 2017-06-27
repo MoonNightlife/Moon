@@ -32,6 +32,7 @@ struct BarProfileViewModel: ImageDownloadType, BackType {
     
     // Inputs
     var selectedUserIndex = BehaviorSubject<UsersGoingType>(value: .everyone)
+    var reloadDisplayUsers = PublishSubject<Void>()
     
     // Outputs
     var barPics = Variable<[UIImage]>([])
@@ -46,14 +47,12 @@ struct BarProfileViewModel: ImageDownloadType, BackType {
         self.barAPI = barAPI
         self.userAPI = userAPI
         
-         bar = barAPI.getBarInfo(barID: barID)
+        bar = barAPI.getBarInfo(barID: barID)
         
         barName = bar.map({ $0.name ?? "No Name" })
         
         bar.map({ $0.specials }).filterNil().catchErrorJustReturn([]).bind(to: specials).addDisposableTo(bag)
         bar.map({ $0.events }).filterNil().catchErrorJustReturn([]).bind(to: events).addDisposableTo(bag)
-        
-//        bar.map({ $0.peopleAttending }).filterNil().bind(to: displayedUsers).addDisposableTo(bag)
         
         bar.map({ $0.barPics }).filter({ $0 != nil }).flatMap({ pictureURLs in
             return Observable.from(pictureURLs!).flatMap({
@@ -65,6 +64,22 @@ struct BarProfileViewModel: ImageDownloadType, BackType {
         barInfo = bar.map({ bar in
             return BarInfo(website: bar.website, address: bar.address, phoneNumber: bar.phoneNumber)
         })
+        
+        let peopleGoing = barAPI.getBarPeople(barID: barID)
+        let friendsGoing = barAPI.getBarFriends(barID: barID, userID: SignedInUser.userID)
+        
+//         Observable.combineLatest(peopleGoing, friendsGoing, reloadDisplayUsers, selectedUserIndex)
+//            .map({ (people, friends, _, userType) -> [UserSnapshot] in
+//                switch userType {
+//                case .everyone:
+//                    return people
+//                case .friends:
+//                    return friends
+//                }
+//            })
+//            .bind(to: displayedUsers)
+//            .addDisposableTo(bag)
+        
         
     }
     

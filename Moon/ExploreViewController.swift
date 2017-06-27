@@ -71,6 +71,7 @@ class ExploreViewController: UIViewController, BindableType {
         topBarCarousel.isPagingEnabled = true
         topBarCarousel.type = .linear
         topBarCarousel.bounces = false
+        topBarCarousel.clipsToBounds = true
     }
     
     func bindViewModel() {

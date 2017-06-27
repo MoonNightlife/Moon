@@ -25,7 +25,6 @@ class SpecialCarouselView: ImageCardView {
         prepareNumberOfLikesButton()
         prepareToolBar()
     }
-
 }
 
 extension SpecialCarouselView {
