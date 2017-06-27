@@ -13,6 +13,7 @@ import RxSwift
 import RxCocoa
 import iCarousel
 import SwaggerClient
+import RxDataSources
 
 class ExploreViewController: UIViewController, BindableType {
     
@@ -24,13 +25,14 @@ class ExploreViewController: UIViewController, BindableType {
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! ExploreViewController
     }
     
+    let specialCellIdenifier = "SpecialCell"
+    let dataSource = RxTableViewSectionedAnimatedDataSource<SpecialSection>()
     @IBOutlet weak var topBarPageController: UIPageControl!
     @IBOutlet weak var topBarCarousel: iCarousel!
     fileprivate let reuseIdentifier = "TopBarCell"
-    @IBOutlet weak var specialsEmbeddedView: UIView!
-
     
-    var pageMenu: CAPSPageMenu!
+    @IBOutlet weak var specialsTypeSegmentController: ADVSegmentedControl!
+    @IBOutlet weak var specialsTableView: UITableView!
     
     var topBars = [TopBar]()
     private let bag = DisposeBag()
@@ -38,8 +40,10 @@ class ExploreViewController: UIViewController, BindableType {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupPagingMenuController()
+        view.backgroundColor = .white
+        prepareSegmentControl()
         setupCarousel()
+        configureDataSource()
         
         topBarPageController.superview?.bringSubview(toFront: topBarPageController)
     }
@@ -47,7 +51,20 @@ class ExploreViewController: UIViewController, BindableType {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //viewModel.topBars.execute()
+        viewModel.topBars.execute()
+        viewModel.reloadSpecial.onNext()
+    }
+    
+    func prepareSegmentControl() {
+        //segment set up
+        let segmentControl: ADVSegmentedControl = specialsTypeSegmentController
+        segmentControl.items = ["Beer", "Liquor", "Wine"]
+        segmentControl.selectedLabelColor = .moonPurple
+        segmentControl.borderColor = .clear
+        segmentControl.backgroundColor = .clear
+        segmentControl.selectedIndex = 0
+        segmentControl.unselectedLabelColor = .lightGray
+        segmentControl.thumbColor = .moonPurple
     }
     
     private func setupCarousel() {
@@ -57,56 +74,56 @@ class ExploreViewController: UIViewController, BindableType {
     }
     
     func bindViewModel() {
+        specialsTypeSegmentController.rx.controlEvent(UIControlEvents.valueChanged)            
+            .map({ [weak self] _ in
+                return AlcoholType.from(int: self?.specialsTypeSegmentController.selectedIndex ?? 0)
+            }).bind(to: viewModel.selectedSpecialIndex).addDisposableTo(bag)
+        
         viewModel.topBars.elements.subscribe(onNext: { [weak self] topBars in
             self?.topBars = topBars
             self?.topBarCarousel.reloadData()
         })
         .addDisposableTo(bag)
+        
+        viewModel.specials.bind(to: specialsTableView.rx.items(dataSource: dataSource)).addDisposableTo(bag)
+    }
+    
+    func configureDataSource() {
+        dataSource.configureCell = { [weak self] dataSource, tableView, indexPath, item in
+            //swiftlint:disable force_cast
+            let cell = tableView.dequeueReusableCell(withIdentifier: self!.specialCellIdenifier, for: indexPath) as! SpecialTableViewCell
+            if let strongSelf = self {
+                cell.initilizeSpecialCell()
+                strongSelf.populate(specialCell: cell, special: item)
+            }
+            return cell
+        }
+    }
+    
+    fileprivate func populate(specialCell cell: SpecialTableViewCell, special: Special) {
+        // Bind actions
+        if let specialID = special.id, let barID = special.barID {
+            cell.likeButton.rx.action = viewModel.onLike(specialID: specialID)
+            cell.numLikesButton.rx.action = viewModel.onViewLikers(specialID: specialID)
+            cell.barNameButton.rx.action = viewModel.onViewBar(barID: barID)
+        }
+        
+        // Bind labels
+        cell.mainTitle.text = special.description
+        cell.barNameButton.setTitle(special.name, for: .normal)
+        cell.numLikesButton.setTitle("\(special.numLikes ?? 0)", for: .normal)
+        
+        // Bind image
+        if let urlString = special.pic, let url = URL(string: urlString) {
+            let downloader = viewModel.downloadImage(url: url)
+            downloader.elements.bind(to: cell.mainImage.rx.image).addDisposableTo(cell.bag)
+            downloader.execute()
+        } else {
+            cell.mainImage.image = nil
+            cell.mainImage.backgroundColor = UIColor.moonGrey
+        }
     }
 
-}
-
-extension ExploreViewController {
-    fileprivate func setupPagingMenuController() {
-        var controllerArray = [UIViewController]()
-        
-        var beerSpecialsController = SpecialsViewController.instantiateFromStoryboard()
-        //beerSpecialsController.bindViewModel(to: viewModel.createSpecialViewModel(type: .beer))
-        beerSpecialsController.title = "Beer"
-        controllerArray.append(beerSpecialsController)
-        
-        var liquorSpecialsController = SpecialsViewController.instantiateFromStoryboard()
-        //liquorSpecialsController.bindViewModel(to: viewModel.createSpecialViewModel(type: .liquor))
-        liquorSpecialsController.title = "Liquor"
-        controllerArray.append(liquorSpecialsController)
-        
-        var wineSpecialsController = SpecialsViewController.instantiateFromStoryboard()
-        //wineSpecialsController.bindViewModel(to: viewModel.createSpecialViewModel(type: .wine))
-        wineSpecialsController.title = "Wine"
-        controllerArray.append(wineSpecialsController)
-        
-        let parameters: [CAPSPageMenuOption] = [
-            .menuItemSeparatorWidth(4.3),
-            .menuItemSeparatorPercentageHeight(0.1),
-            .scrollMenuBackgroundColor(.white),
-            .selectionIndicatorColor(.clear),
-            .addBottomMenuHairline(false),
-            .useMenuLikeSegmentedControl(true),
-            .selectionIndicatorColor(.moonBlue),
-            .unselectedMenuItemLabelColor(.lightGray),
-            .selectedMenuItemLabelColor(.darkGray),
-            .enableHorizontalBounce(false),
-            .menuItemSeparatorColor(.clear)
-        ]
-        
-        let sizeOfFrame = CGRect(x: 0, y: 0, width: specialsEmbeddedView.frame.width, height: specialsEmbeddedView.frame.height)
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: sizeOfFrame, pageMenuOptions: parameters)
-        pageMenu.view.backgroundColor = .lightGray
-        
-        addChildViewController(pageMenu)
-        specialsEmbeddedView.addSubview(pageMenu.view)
-        pageMenu?.didMove(toParentViewController: self)
-    }
 }
 
 extension ExploreViewController: iCarouselDataSource, iCarouselDelegate {

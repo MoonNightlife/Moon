@@ -15,27 +15,22 @@ import SwaggerClient
 class SpecialTableViewCell: UITableViewCell {
 
     @IBOutlet weak var mainImage: UIImageView!
-    @IBOutlet weak var secondaryImage: UIImageView!
     @IBOutlet weak var mainTitle: UILabel!
-    @IBOutlet weak var subTitle: UILabel!
-    @IBOutlet weak var secondarySubtitle: UILabel!
     
-    private var bag = DisposeBag()
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var numLikesButton: UIButton!
+    @IBOutlet weak var barNameButton: UIButton!
+    
+    var bag = DisposeBag()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
      
-    func initilizeSpecialCellWith(data: Special, likeAction: CocoaAction, downloadImage: Action<Void, UIImage>) {
+    func initilizeSpecialCell() {
         setupImageView()
-        
-        downloadImage.elements.bind(to: mainImage.rx.image).addDisposableTo(bag)
-        downloadImage.execute()
-        
-        mainTitle.text = data.description
-        subTitle.text = data.name
-        secondarySubtitle.text = "\(data.numLikes!)"
+        selectionStyle = .none
     }
     
     func setupImageView() {
@@ -47,9 +42,9 @@ class SpecialTableViewCell: UITableViewCell {
     func changeHeart(color: HeartColor) {
         switch color {
         case .red:
-            subTitle.tintColor = .moonRed
+            likeButton.tintColor = .moonRed
         case .gray:
-            subTitle.tintColor = .darkGray
+            likeButton.tintColor = .darkGray
         }
     }
     

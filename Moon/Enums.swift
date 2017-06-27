@@ -24,6 +24,19 @@ enum AlcoholType: String {
     case beer = "Beer"
     case liquor = "Liquor"
     case wine = "Wine"
+    
+    static func from(int: Int) -> AlcoholType {
+        switch int {
+        case 0:
+            return self.beer
+        case 1:
+            return self.liquor
+        case 2:
+            return self.wine
+        default:
+            return self.beer
+        }
+    }
 }
 
 enum DayOfWeek {

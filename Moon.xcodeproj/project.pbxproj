@@ -124,7 +124,6 @@
 		F04A6D561EEEF931000D898B /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A6D551EEEF931000D898B /* SearchTableViewCell.swift */; };
 		F04A6D5A1EEF2B8C000D898B /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A6D591EEF2B8C000D898B /* LoadMoreTableViewCell.swift */; };
 		F04F445C1ECF840700D5FC62 /* BarAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */; };
-		F0644C2B1EC37D0E00D92BF7 /* SpecialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0644C2A1EC37D0E00D92BF7 /* SpecialsViewController.swift */; };
 		F06B42321EFDAE9900BE7626 /* DynamicLinkingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B42311EFDAE9900BE7626 /* DynamicLinkingAPI.swift */; };
 		F06B56FD1EFAA8750028552A /* RxDataSourceUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B56FC1EFAA8750028552A /* RxDataSourceUserModel.swift */; };
 		F06B56FF1EFAAFD50028552A /* FriendRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B56FE1EFAAFD50028552A /* FriendRequestTableViewCell.swift */; };
@@ -186,7 +185,6 @@
 		F0CA18971EE58BBD00428318 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18961EE58BBD00428318 /* MainViewModel.swift */; };
 		F0CA18A51EE58FD400428318 /* SearchBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18A41EE58FD400428318 /* SearchBarViewModel.swift */; };
 		F0CA18A71EE5AA2A00428318 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18A61EE5AA2A00428318 /* ExploreViewModel.swift */; };
-		F0CA18A91EE5AA3A00428318 /* SpecialsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18A81EE5AA3A00428318 /* SpecialsViewModel.swift */; };
 		F0CA18AB1EE5AA4C00428318 /* FeaturedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18AA1EE5AA4C00428318 /* FeaturedViewModel.swift */; };
 		F0CA18AD1EE5AA5D00428318 /* MoonsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18AC1EE5AA5D00428318 /* MoonsViewViewModel.swift */; };
 		F0CA18AF1EE5AA6C00428318 /* BarActivityFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18AE1EE5AA6C00428318 /* BarActivityFeedViewModel.swift */; };
@@ -373,7 +371,6 @@
 		F04A6D551EEEF931000D898B /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		F04A6D591EEF2B8C000D898B /* LoadMoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreTableViewCell.swift; sourceTree = "<group>"; };
 		F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAnnotation.swift; sourceTree = "<group>"; };
-		F0644C2A1EC37D0E00D92BF7 /* SpecialsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialsViewController.swift; sourceTree = "<group>"; };
 		F06B42311EFDAE9900BE7626 /* DynamicLinkingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicLinkingAPI.swift; sourceTree = "<group>"; };
 		F06B56FC1EFAA8750028552A /* RxDataSourceUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxDataSourceUserModel.swift; sourceTree = "<group>"; };
 		F06B56FE1EFAAFD50028552A /* FriendRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestTableViewCell.swift; sourceTree = "<group>"; };
@@ -435,7 +432,6 @@
 		F0CA18961EE58BBD00428318 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		F0CA18A41EE58FD400428318 /* SearchBarViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarViewModel.swift; sourceTree = "<group>"; };
 		F0CA18A61EE5AA2A00428318 /* ExploreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
-		F0CA18A81EE5AA3A00428318 /* SpecialsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialsViewModel.swift; sourceTree = "<group>"; };
 		F0CA18AA1EE5AA4C00428318 /* FeaturedViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedViewModel.swift; sourceTree = "<group>"; };
 		F0CA18AC1EE5AA5D00428318 /* MoonsViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonsViewViewModel.swift; sourceTree = "<group>"; };
 		F0CA18AE1EE5AA6C00428318 /* BarActivityFeedViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarActivityFeedViewModel.swift; sourceTree = "<group>"; };
@@ -1032,7 +1028,6 @@
 			isa = PBXGroup;
 			children = (
 				F09B9D071EC3571800B2385A /* ExploreViewController.swift */,
-				F0644C2A1EC37D0E00D92BF7 /* SpecialsViewController.swift */,
 			);
 			name = Explore;
 			sourceTree = "<group>";
@@ -1102,7 +1097,6 @@
 			isa = PBXGroup;
 			children = (
 				F0CA18A61EE5AA2A00428318 /* ExploreViewModel.swift */,
-				F0CA18A81EE5AA3A00428318 /* SpecialsViewModel.swift */,
 			);
 			name = Explore;
 			sourceTree = "<group>";
@@ -1552,7 +1546,6 @@
 				F04A6D541EEEDBBF000D898B /* Views.swift in Sources */,
 				F0EF69381EF08BAE0028A32B /* UsersTableViewController.swift in Sources */,
 				F0CA18BF1EE611C100428318 /* Date.swift in Sources */,
-				F0CA18A91EE5AA3A00428318 /* SpecialsViewModel.swift in Sources */,
 				F0EF693C1EF0949C0028A32B /* UsersTableViewCell.swift in Sources */,
 				F04283B11EC4A96200CCB5F3 /* MoonsViewViewController.swift in Sources */,
 				F03C78BA1EE9E973002AEDAD /* NameSettingsViewController.swift in Sources */,
@@ -1608,7 +1601,6 @@
 				F07F694B1EFAED22000F854D /* DeepLinking.swift in Sources */,
 				F09DF0981EEB854D0092BFA5 /* ContentSuggestionViewModel.swift in Sources */,
 				F0CF7F211EF37E7A005C068C /* EnterCodeViewController.swift in Sources */,
-				F0644C2B1EC37D0E00D92BF7 /* SpecialsViewController.swift in Sources */,
 				F0CF7F251EF3850F005C068C /* CountryCode.swift in Sources */,
 				F0CA18931EE585D700428318 /* ProfileViewController.swift in Sources */,
 				F09DF08C1EEAF0610092BFA5 /* NotificationTableViewCell.swift in Sources */,
