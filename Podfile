@@ -27,6 +27,7 @@ target 'Moon' do
   pod 'Firebase/DynamicLinks'
   pod 'Fusuma'
   pod 'Whisper'
+  pod "MIBadgeButton-Swift", :git => 'https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git', :branch => 'master'
 
   target 'MoonTests' do
     inherit! :search_paths

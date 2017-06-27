@@ -191,6 +191,7 @@ PODS:
   - MaterialComponents/Typography (23.0.2):
     - MaterialComponents/private/Application
   - MDFTextAccessibility (1.2.0)
+  - MIBadgeButton-Swift (0.5)
   - NVActivityIndicatorView (3.6.1)
   - PageMenu (2.0.0)
   - RAReorderableLayout (0.6.1)
@@ -220,6 +221,7 @@ DEPENDENCIES:
   - Kingfisher (~> 3.0)
   - Material (from `https://github.com/CosmicMind/Material`)
   - MaterialComponents
+  - MIBadgeButton-Swift (from `https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git`, branch `master`)
   - NVActivityIndicatorView
   - PageMenu
   - RAReorderableLayout
@@ -236,6 +238,9 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   Material:
     :git: https://github.com/CosmicMind/Material
+  MIBadgeButton-Swift:
+    :branch: master
+    :git: https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git
   Spring:
     :branch: swift3
     :git: https://github.com/MengTo/Spring.git
@@ -246,6 +251,9 @@ CHECKOUT OPTIONS:
   Material:
     :commit: 6bfd58cfc65a930a0bde660a588f2e75c2a533e8
     :git: https://github.com/CosmicMind/Material
+  MIBadgeButton-Swift:
+    :commit: 3c2638d2e6e46ec2e6dd978d8ada8863df3df5e6
+    :git: https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git
   Spring:
     :commit: 8201b5c93bd7ebdf4cd18160bcde1e6e88c2be64
     :git: https://github.com/MengTo/Spring.git
@@ -267,6 +275,7 @@ SPEC CHECKSUMS:
   Material: 68440da8f2564c19344d5da2ee5dde5618be5f95
   MaterialComponents: fc0b6f9725db1f434aa3f8d7feb7832ac99a3692
   MDFTextAccessibility: 94098925e0853551c5a311ce7c1ecefbe297cdb6
+  MIBadgeButton-Swift: 9e57309b00b168d75ca8fecb45bc75124a8ffddf
   NVActivityIndicatorView: 9f52a7f84bf5c6a798722c450fe3c198e01c56ed
   PageMenu: 9c38fd7e0d9ef4b1408320f55bb907bbc0e538dc
   RAReorderableLayout: 5b6b87dd4022ee1747fd475623b14f5df940f754
@@ -280,6 +289,6 @@ SPEC CHECKSUMS:
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
   Whisper: 051f25e704bf8992641ffd28b20d5682ddc5f5d3
 
-PODFILE CHECKSUM: 2274cf4e219a1c4d337235efac479413bda78ff7
+PODFILE CHECKSUM: 1c7cdea1d1dce5da9537b4a8fa97d7e94f3669be
 
 COCOAPODS: 1.2.1

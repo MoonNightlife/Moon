@@ -11,6 +11,7 @@ import Material
 import Action
 import RxSwift
 import RxCocoa
+import MIBadgeButton_Swift
 
 class SearchBarViewController: SearchBarController, BindableType, UIPopoverPresentationControllerDelegate {
     
@@ -18,7 +19,7 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
     
     private let bag = DisposeBag()
     
-    fileprivate var profileButton: IconButton!
+    fileprivate var profileButton: MIBadgeButton!
     fileprivate var settingsButton: IconButton!
     fileprivate var searchIcon: IconButton!
     fileprivate var cancelButton: IconButton!
@@ -102,9 +103,13 @@ extension SearchBarViewController {
         // Resize the icon to match the icons in material design
         let sizeReference = Icon.cm.moreVertical
         
-        let profileIconImage = #imageLiteral(resourceName: "ProfileIcon").resize(toWidth: (sizeReference?.width)!)?.resize(toHeight: (sizeReference?.height)!)?.withRenderingMode(.alwaysTemplate)
+        let profileIconImage = #imageLiteral(resourceName: "ProfileIcon").resize(toWidth: (sizeReference?.width)!)?.resize(toHeight: (sizeReference?.height)!)
         
-        profileButton = IconButton(image: profileIconImage, tintColor: .white)
+        profileButton = MIBadgeButton()
+        profileButton.badgeEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 0, right: 0)
+        profileButton.setImage(profileIconImage, for: .normal)
+        profileButton.badgeString = "12"
+        
     }
     
     fileprivate func prepareSettingsButton() {

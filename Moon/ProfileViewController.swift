@@ -11,6 +11,7 @@ import iCarousel
 import Material
 import RxCocoa
 import RxSwift
+import MIBadgeButton_Swift
 
 class ProfileViewController: UIViewController, BindableType {
     
@@ -26,7 +27,7 @@ class ProfileViewController: UIViewController, BindableType {
     @IBOutlet weak var pageController: UIPageControl!
     @IBOutlet weak var planButton: UIButton!
     
-    var friendsButton: IconButton!
+    var friendsButton: MIBadgeButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,7 +101,10 @@ class ProfileViewController: UIViewController, BindableType {
     }
     
     private func setUpFriendsButton() {
-        friendsButton = IconButton(image: #imageLiteral(resourceName: "friendsIcon"))
+        friendsButton = MIBadgeButton()
+        friendsButton.badgeEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 0)
+        friendsButton.setImage(#imageLiteral(resourceName: "friendsIcon"), for: .normal)
+        friendsButton.badgeString = "12"
     }
     
     private func setUpBioLabel() {
