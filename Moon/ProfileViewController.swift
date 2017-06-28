@@ -11,6 +11,7 @@ import iCarousel
 import Material
 import RxCocoa
 import RxSwift
+import MIBadgeButton_Swift
 
 class ProfileViewController: UIViewController, BindableType {
     
@@ -26,7 +27,7 @@ class ProfileViewController: UIViewController, BindableType {
     @IBOutlet weak var pageController: UIPageControl!
     @IBOutlet weak var planButton: UIButton!
     
-    var friendsButton: IconButton!
+    var friendsButton: MIBadgeButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,14 +49,27 @@ class ProfileViewController: UIViewController, BindableType {
     func bindViewModel() {
         friendsButton.rx.action = viewModel.onShowFriends()
         dismissButton.rx.action = viewModel.onDismiss()
-        editProfileButton.rx.action = viewModel.onEdit()
+        planButton.rx.action = viewModel.onViewBar()
+        
+        viewModel.isSignedInUserProfile.asObservable().subscribe(onNext: { [weak self] in
+            
+            guard let strongSelf = self else {
+                return
+            }
+            
+            strongSelf.editProfileButton.rx.action = $0 ? strongSelf.viewModel.onEdit() : strongSelf.viewModel.onAddFriend()
+            
+            let image = $0 ? Icon.cm.edit : #imageLiteral(resourceName: "AddFriendIcon").withRenderingMode(.alwaysTemplate)
+            strongSelf.editProfileButton.setBackgroundImage(image, for: .normal)
+            
+        }).addDisposableTo(bag)
         
         viewModel.profilePictures.asObservable().subscribe(onNext: { [weak self] images in
             self?.pageController.numberOfPages = images.count
             self?.carousel.reloadData()
         }).addDisposableTo(bag)
         
-        //viewModel.activityBarName.bind(to: planButton.titleLabel?.rx.text).addDisposableTo(bag)
+        viewModel.activityBarName.bind(to: planButton.rx.title()).addDisposableTo(bag)
         viewModel.bio.bind(to: bioLabel.rx.text).addDisposableTo(bag)
         viewModel.username.bind(to: usernameLabel.rx.text).addDisposableTo(bag)
         viewModel.fullName.subscribe(onNext: { [weak self] name in
@@ -78,7 +92,6 @@ class ProfileViewController: UIViewController, BindableType {
     }
     
     private func setUpEditProfileButton() {
-        editProfileButton.setBackgroundImage(Icon.cm.edit, for: .normal)
         editProfileButton.tintColor = .moonGreen
     }
     
@@ -88,7 +101,10 @@ class ProfileViewController: UIViewController, BindableType {
     }
     
     private func setUpFriendsButton() {
-        friendsButton = IconButton(image: #imageLiteral(resourceName: "friendsIcon"))
+        friendsButton = MIBadgeButton()
+        friendsButton.badgeEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 0)
+        friendsButton.setImage(#imageLiteral(resourceName: "friendsIcon"), for: .normal)
+        friendsButton.badgeString = "12"
     }
     
     private func setUpBioLabel() {

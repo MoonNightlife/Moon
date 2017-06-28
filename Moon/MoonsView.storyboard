@@ -97,7 +97,7 @@
                                                         <constraint firstAttribute="height" constant="15" id="QbI-fq-yPo"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vfp-2k-JUk">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vfp-2k-JUk">
                                                     <rect key="frame" x="337" y="14" width="30" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="7zc-77-EG7"/>
@@ -129,14 +129,14 @@
                                                     <state key="normal" title="Button"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWW-0D-fp0">
-                                                    <rect key="frame" x="337" y="42" width="30" height="20"/>
+                                                    <rect key="frame" x="337" y="42.5" width="30" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="QEZ-SO-Te0"/>
                                                         <constraint firstAttribute="height" constant="20" id="ylD-VZ-cvc"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <state key="normal" title="999">
+                                                    <state key="normal" title="0">
                                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>

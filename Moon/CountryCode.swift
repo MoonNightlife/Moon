@@ -45,10 +45,10 @@ extension CountryCode {
     }
     
     var description: String {
-        get { return String(describing: self) + " (+\(self.rawValue))" }
+         return String(describing: self) + " (+\(self.rawValue))"
     }
     
     var isoAlpha2: String {
-        get { return String(describing: self) }
+         return String(describing: self) 
     }
 }

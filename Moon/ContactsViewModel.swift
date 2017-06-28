@@ -58,7 +58,6 @@ struct ContactsViewModel: BackType, ImageDownloadType {
         })
     }
 
-    
     static func snapshotsToSnapshotSectionItem(snapshots: [Snapshot]) -> [SnapshotSectionItem] {
         return snapshots.map({
             return SnapshotSectionItem.searchResult(snapshot: $0)

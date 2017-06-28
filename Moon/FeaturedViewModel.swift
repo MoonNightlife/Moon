@@ -55,16 +55,16 @@ struct FeaturedViewModel: ImageDownloadType {
         }
     }
     
-    func onMoreInfo(eventID: String) -> CocoaAction {
+    func onMoreInfo(barID: String) -> CocoaAction {
         return CocoaAction {
-            let vm = BarProfileViewModel(coordinator: self.sceneCoordinator)
+            let vm = BarProfileViewModel(coordinator: self.sceneCoordinator, barID: barID)
             return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
         }
     }
     
     func onViewLikers(eventID: String) -> CocoaAction {
         return CocoaAction {
-            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator)
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .event(id: eventID))
             return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
     }

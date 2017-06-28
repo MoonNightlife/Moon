@@ -295,7 +295,6 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="feT-OJ-Xgr" secondAttribute="trailing" id="1oz-RY-V7H"/>
                             <constraint firstItem="feT-OJ-Xgr" firstAttribute="trailing" secondItem="qut-De-cO8" secondAttribute="trailing" id="DuF-X6-G7D"/>

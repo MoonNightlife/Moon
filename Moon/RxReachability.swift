@@ -47,6 +47,7 @@ class RxReachability {
   fileprivate init() {}
   
   private static var _status = Variable<Reachability>(.unknown)
+    
   var status: Observable<Reachability> {
       return RxReachability._status.asObservable().distinctUntilChanged()
   }
@@ -77,6 +78,7 @@ class RxReachability {
       
       SCNetworkReachabilitySetCallback(reachability, { (_, flags, _) in
         let status = Reachability(reachabilityFlags: flags)
+        print(status)
         RxReachability._status.value = status
       }, &context)
       

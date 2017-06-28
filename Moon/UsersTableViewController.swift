@@ -25,6 +25,7 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
     var refreshControl: UIRefreshControl = UIRefreshControl()
     
     @IBOutlet weak var contactsViewHeightConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,27 +38,27 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
         configureDataSource()
         
         // Add the refresh control
-        userTableView.addSubview(refreshControl)
+        userTableView.refreshControl = refreshControl
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        
-        // Animation Logic
-        if true {
-        animateView()
-        }
+        super.viewDidAppear(animated)
+    
     }
 
     func bindViewModel() {
+        
+        viewModel.currentSignedInUser.asObservable().filter { $0 == true }.do(onNext: { [weak self] _ in
+            self?.animateView()
+        }).subscribe().addDisposableTo(bag)
         
         viewModel.users.do(onNext: { [weak self] _ in
             self?.refreshControl.endRefreshing()
         }).bind(to: userTableView.rx.items(dataSource: dataSource)).addDisposableTo(bag)
         
         let selectedItem = userTableView.rx.itemSelected
-        selectedItem.subscribe(onNext: { [weak self] _ in
-            self?.viewModel.onShowUser().execute()
+        selectedItem.subscribe(onNext: { [weak self] indexPath in
+            self?.viewModel.onShowUser(indexPath: indexPath).execute()
         })
         .disposed(by: bag)
         
@@ -65,6 +66,7 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
         showContactsButton.rx.action = viewModel.onShowContacts()
         
         refreshControl.rx.controlEvent(.valueChanged).bind(to: viewModel.reload).addDisposableTo(bag)
+        viewModel.users.map {_ in return false}.bind(to: refreshControl.rx.isRefreshing).addDisposableTo(bag)
     }
     
     fileprivate func configureDataSource() {
@@ -123,8 +125,10 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
                     cell.declineButton.setImage(Icon.cm.close, for: .normal)
                     cell.declineButton.tintColor = UIColor.moonRed
                     
-                    cell.acceptButton.rx.action = self?.viewModel.onAcceptFriendRequest(userID: snap.userID)
-                    cell.declineButton.rx.action = self?.viewModel.onDeclineFriendRequest(userID: snap.userID)
+                    if let userID = snap.userID {
+                        cell.acceptButton.rx.action = self?.viewModel.onAcceptFriendRequest(userID:userID)
+                        cell.declineButton.rx.action = self?.viewModel.onDeclineFriendRequest(userID:userID)
+                    }
                     
                     return cell
             

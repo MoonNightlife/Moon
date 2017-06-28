@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol RAReorderableLayoutDelegate: UICollectionViewDelegateFlowLayout {
+public protocol RAReorderableLayoutDelegate: class, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, at: IndexPath, willMoveTo toIndexPath: IndexPath)
     func collectionView(_ collectionView: UICollectionView, at: IndexPath, didMoveTo toIndexPath: IndexPath)
     func collectionView(_ collectionView: UICollectionView, allowMoveAt indexPath: IndexPath) -> Bool
@@ -108,7 +108,7 @@ open class RAReorderableLayout: UICollectionViewFlowLayout, UIGestureRecognizerD
     
     fileprivate var fakeCellCenter: CGPoint?
     
-    fileprivate var trigerInsets = UIEdgeInsetsMake(100.0, 100.0, 100.0, 100.0)
+    fileprivate var trigerInsets = UIEdgeInsets(top: 100.0, left: 100.0, bottom: 100.0, right: 100.0)
     
     fileprivate var trigerPadding = UIEdgeInsets.zero
     
@@ -221,7 +221,7 @@ open class RAReorderableLayout: UICollectionViewFlowLayout, UIGestureRecognizerD
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "collectionView" {
             setUpGestureRecognizers()
-        }else {
+        } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
@@ -271,7 +271,7 @@ open class RAReorderableLayout: UICollectionViewFlowLayout, UIGestureRecognizerD
         guard atIndexPath != toIndexPath else { return }
         
         // can move item
-        if let canMove = delegate?.collectionView(collectionView!, at: atIndexPath, canMoveTo: toIndexPath) , !canMove {
+        if let canMove = delegate?.collectionView(collectionView!, at: atIndexPath, canMoveTo: toIndexPath), !canMove {
             return
         }
         
@@ -361,7 +361,7 @@ open class RAReorderableLayout: UICollectionViewFlowLayout, UIGestureRecognizerD
         panGesture?.delegate = self
         panGesture?.maximumNumberOfTouches = 1
         let gestures: NSArray! = collectionView.gestureRecognizers as NSArray!
-        gestures.enumerateObjects(options: []) { gestureRecognizer, index, finish in
+        gestures.enumerateObjects(options: []) { gestureRecognizer, _, _ in
             if gestureRecognizer is UILongPressGestureRecognizer {
                 (gestureRecognizer as AnyObject).require(toFail: self.longPress!)
             }
@@ -520,11 +520,11 @@ private class RACellFakeView: UIView {
         
         cellFakeImageView = UIImageView(frame: self.bounds)
         cellFakeImageView?.contentMode = UIViewContentMode.scaleAspectFill
-        cellFakeImageView?.autoresizingMask = [.flexibleWidth , .flexibleHeight]
+        cellFakeImageView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         cellFakeHightedView = UIImageView(frame: self.bounds)
         cellFakeHightedView?.contentMode = UIViewContentMode.scaleAspectFill
-        cellFakeHightedView?.autoresizingMask = [.flexibleWidth , .flexibleHeight]
+        cellFakeHightedView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         cell.isHighlighted = true
         cellFakeHightedView?.image = getCellImage()
@@ -557,7 +557,7 @@ private class RACellFakeView: UIView {
             animations: {
                 self.center = self.originalCenter!
                 self.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-                self.cellFakeHightedView!.alpha = 0;
+                self.cellFakeHightedView!.alpha = 0
                 let shadowAnimation = CABasicAnimation(keyPath: "shadowOpacity")
                 shadowAnimation.fromValue = 0
                 shadowAnimation.toValue = 0.7
@@ -571,7 +571,7 @@ private class RACellFakeView: UIView {
         )
     }
     
-    func pushBackView(_ completion: (()->Void)?) {
+    func pushBackView(_ completion: (() -> Void)?) {
         UIView.animate(
             withDuration: 0.3,
             delay: 0,
@@ -602,6 +602,6 @@ private class RACellFakeView: UIView {
 }
 
 // Convenience method
-private func ~= (obj:NSObjectProtocol?, r:UIGestureRecognizer) -> Bool {
+private func ~= (obj: NSObjectProtocol?, r: UIGestureRecognizer) -> Bool {
     return r.isEqual(obj)
 }

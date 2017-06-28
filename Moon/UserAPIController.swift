@@ -182,6 +182,7 @@ extension UserAPIController {
                 if let a = activity {
                     observer.onNext(a)
                 } else if let e = error {
+                    print(e)
                     observer.onError(e)
                 }
                 observer.onCompleted()
@@ -234,9 +235,18 @@ extension UserAPIController {
             return Disposables.create()
         })
     }
+    
     func likeEvent(userID: String, eventID: String) -> Observable<Void> {
         return Observable.create({ (observer) -> Disposable in
-            
+            let body = Body3()
+            body.eventID = eventID
+            body.userID = userID
+            UserAPI.likeEvent(body: body, completion: { (error) in
+                if let e = error {
+                    observer.onError(e)
+                }
+                observer.onCompleted()
+            })
             return Disposables.create()
         })
     }

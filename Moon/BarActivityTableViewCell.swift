@@ -28,6 +28,7 @@ class BarActivityTableViewCell: UITableViewCell {
     func initializeCell() {
     
         backgroundColor = .clear
+        selectionStyle = .none
         
         setupProfilePicture()
         setupUsername()

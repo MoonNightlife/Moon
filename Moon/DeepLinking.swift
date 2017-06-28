@@ -17,7 +17,6 @@ public protocol DeepLink {
     init(values: DeepLinkValues)
 }
 
-
 // MARK: - DeepLinkValues
 /// Data values extracted from a URL by a deep link template.
 public struct DeepLinkValues {
@@ -36,7 +35,6 @@ public struct DeepLinkValues {
         self.fragment = fragment
     }
 }
-
 
 // MARK: - DeepLinkTemplate
 /// Describes how to extract a deep link's values from a URL.
@@ -84,8 +82,8 @@ public struct DeepLinkTemplate {
     
     /// A named value in a URL's query string.
     public enum QueryStringParameter {
-        case requiredInt(named: String),    optionalInt(named: String)
-        case requiredBool(named: String),   optionalBool(named: String)
+        case requiredInt(named: String), optionalInt(named: String)
+        case requiredBool(named: String), optionalBool(named: String)
         case requiredDouble(named: String), optionalDouble(named: String)
         case requiredString(named: String), optionalString(named: String)
     }
@@ -111,7 +109,6 @@ public struct DeepLinkTemplate {
     fileprivate let pathParts: [PathPart]
     fileprivate let parameters: Set<QueryStringParameter>
 }
-
 
 // MARK: - DeepLinkRecognizer
 /// Creates a deep link object that matches a URL.
@@ -142,11 +139,12 @@ public struct DeepLinkRecognizer {
         return DeepLinkValues(path: pathValues, query: queryValues, fragment: url.fragment)
     }
     
+    //swiftlint:disable:next cyclomatic_complexity
     private static func extractPathValues(in template: DeepLinkTemplate, from url: URL) -> [String: Any]? {
         let allComponents = url.host.map { [$0] + url.pathComponents } ?? url.pathComponents
         let components = allComponents
             .filter { $0 != "/" }
-            .map    { $0.removingPercentEncoding ?? "" }
+            .map { $0.removingPercentEncoding ?? "" }
         guard components.count == template.pathParts.count else { return nil }
         var values = [String: Any]()
         for (pathPart, component) in zip(template.pathParts, components) {
@@ -207,9 +205,9 @@ public struct DeepLinkRecognizer {
         // Transforms "a=b&c=d" to [(a, b), (c, d)]
         let keyValuePairs = query
             .components(separatedBy: "&")
-            .map    { $0.components(separatedBy: "=") }
+            .map { $0.components(separatedBy: "=") }
             .filter { $0.count == 2 }
-            .map    { ($0[0], $0[1]) }
+            .map { ($0[0], $0[1]) }
         
         var queryMap = QueryMap()
         for (key, value) in keyValuePairs {
@@ -229,14 +227,13 @@ public struct DeepLinkRecognizer {
     }
 }
 
-
 // MARK: - QueryStringParameter extension
 extension DeepLinkTemplate.QueryStringParameter: Hashable, Equatable {
     public var hashValue: Int {
         return name.hashValue
     }
     
-    public static func ==(lhs: DeepLinkTemplate.QueryStringParameter, rhs: DeepLinkTemplate.QueryStringParameter) -> Bool {
+    public static func == (lhs: DeepLinkTemplate.QueryStringParameter, rhs: DeepLinkTemplate.QueryStringParameter) -> Bool {
         return lhs.name == rhs.name
     }
     
@@ -256,8 +253,8 @@ extension DeepLinkTemplate.QueryStringParameter: Hashable, Equatable {
     fileprivate enum ParameterType { case string, int, double, bool }
     fileprivate var type: ParameterType {
         switch self {
-        case .requiredInt,    .optionalInt:    return .int
-        case .requiredBool,   .optionalBool:   return .bool
+        case .requiredInt, .optionalInt:    return .int
+        case .requiredBool, .optionalBool:   return .bool
         case .requiredDouble, .optionalDouble: return .double
         case .requiredString, .optionalString: return .string
         }

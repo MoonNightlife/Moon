@@ -67,8 +67,9 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
     }
     
     func bindViewModel() {
-        viewModel.suggestedBars.drive(suggestedBarCollectionView.rx.items(dataSource: barDataSource)).disposed(by: bag)
-        viewModel.suggestedFriends.drive(suggestedUserColletionView.rx.items(dataSource: userDataSource)).disposed(by: bag)
+        //TODO: Uncommented onces swagger is updated
+//        viewModel.suggestedBars.drive(suggestedBarCollectionView.rx.items(dataSource: barDataSource)).disposed(by: bag)
+//        viewModel.suggestedFriends.drive(suggestedUserColletionView.rx.items(dataSource: userDataSource)).disposed(by: bag)
         
         let barSelected = suggestedBarCollectionView.rx.itemSelected
         let userSelected = suggestedUserColletionView.rx.itemSelected
@@ -175,7 +176,9 @@ extension ContentSuggestionsViewController {
         view.nameLabel.text = snapshot.name
         
         if let urlString = snapshot.pic, let url = URL(string: urlString) {
-            
+            let downloader = viewModel.downloadImage(url: url)
+            downloader.elements.bind(to: view.imageView.rx.image).addDisposableTo(view.bag)
+            downloader.execute()
         }
     }
     
@@ -183,8 +186,14 @@ extension ContentSuggestionsViewController {
         if let id = snapshot._id {
             view.addFriendButton.rx.action = viewModel.onAddFriend(userID: id)
         }
-        
+    
         // Bind labels
         view.nameLabel.text = snapshot.name
+        
+        if let urlString = snapshot.pic, let url = URL(string: urlString) {
+            let downloader = viewModel.downloadImage(url: url)
+            downloader.elements.bind(to: view.imageView.rx.image).addDisposableTo(view.bag)
+            downloader.execute()
+        }
     }
 }

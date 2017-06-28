@@ -23,6 +23,7 @@ struct SettingsViewModel {
         })
     }(self)
     
+    // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
     
     init(coordinator: SceneCoordinatorType) {
@@ -34,7 +35,7 @@ struct SettingsViewModel {
             return self.sceneCoordinator.pop()
         }
     }
-    
+
     fileprivate func getSceneFor(section: Setting) -> SceneType? {
         switch section {
         case .accountActions(let option):

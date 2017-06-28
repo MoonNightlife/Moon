@@ -74,7 +74,13 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
         view.initializeCell()
         populate(view: view, indexPath: indexPath)
 
-        //TODO: probably need to remove the last subview from reused cell before adding another
+        // Remove the last featured view from the cell if there is one
+        for view in cell.subviews {
+            if let subview = view as? FeaturedEventView {
+                subview.removeFromSuperview()
+            }
+        }
+        
         cell.addSubview(view)
         
         return cell
@@ -88,7 +94,7 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
             view.favoriteButton.rx.action = viewModel.onLikeEvent(eventID: id)
             view.numberOfLikesButton.rx.action = viewModel.onViewLikers(eventID: id)
             view.shareButton.rx.action = viewModel.onShareEvent(eventID: id)
-            view.moreButton.rx.action = viewModel.onMoreInfo(eventID: id)
+            view.moreButton.rx.action = viewModel.onMoreInfo(barID: id)
         }
         
         // Bind labels
@@ -100,10 +106,12 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
         
         // Bind image
         if let urlString = event.pic, let url = URL(string: urlString) {
-            viewModel.downloadImage(url: url).elements.bind(to: view.imageView.rx.image).addDisposableTo(view.bag)
+            let downloader = viewModel.downloadImage(url: url)
+            downloader.elements.bind(to: view.imageView.rx.image).addDisposableTo(view.bag)
+            downloader.execute()
         } else {
-            //TODO: change this to default bar picture
-            view.imageView.image = #imageLiteral(resourceName: "DefaultProfilePic")
+            view.imageView.image = nil
+            view.imageView.backgroundColor = UIColor.moonGrey
         }
         
     }

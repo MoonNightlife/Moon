@@ -29,7 +29,7 @@ struct SearchBarViewModel {
     
     func onShowProfile() -> CocoaAction {
         return CocoaAction {
-            let vm = ProfileViewModel(coordinator: self.sceneCoordinator)
+            let vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: SignedInUser.userID)
             return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
         }
     }

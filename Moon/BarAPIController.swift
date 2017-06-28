@@ -21,6 +21,7 @@ protocol BarAPIType {
     func getBarsIn(region: String) -> Observable<[BarProfile]>
     func getEventsIn(region: String) -> Observable<[BarEvent]>
     func getSpecialsIn(region: String) -> Observable<[Special]>
+    func getSpecialsIn(region: String, type: String) -> Observable<[Special]>
     func getTopBarsIn(region: String) -> Observable<[BarProfile]>
     
     func getEventLikes(eventID: String) -> Observable<[UserProfile]>
@@ -128,6 +129,19 @@ extension BarAPIController {
     func getSpecialsIn(region: String) -> Observable<[Special]> {
         return Observable.create({ (observer) -> Disposable in
             BarAPI.listSpecials(region: region, completion: { (specials, error) in
+                if let s = specials {
+                    observer.onNext(s)
+                } else if let e = error {
+                    observer.onError(e)
+                }
+                observer.onCompleted()
+            })
+            return Disposables.create()
+        })
+    }
+    func getSpecialsIn(region: String, type: String) -> Observable<[Special]> {
+        return Observable.create({ (observer) -> Disposable in
+            BarAPI.listSpecialsByType(region: region, type: type, completion: { (specials, error) in
                 if let s = specials {
                     observer.onNext(s)
                 } else if let e = error {

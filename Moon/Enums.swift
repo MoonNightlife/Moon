@@ -20,10 +20,23 @@ enum MainView: Int {
     case explore
 }
 
-enum AlcoholType {
-    case beer
-    case liquor
-    case wine
+enum AlcoholType: String {
+    case beer = "Beer"
+    case liquor = "Liquor"
+    case wine = "Wine"
+    
+    static func from(int: Int) -> AlcoholType {
+        switch int {
+        case 0:
+            return self.beer
+        case 1:
+            return self.liquor
+        case 2:
+            return self.wine
+        default:
+            return self.beer
+        }
+    }
 }
 
 enum DayOfWeek {
@@ -67,21 +80,14 @@ enum SettingSections {
     }
 }
 
-enum ImageSource: CustomStringConvertible {
-    case lastPhotoTaken
-    case imagePicker
-    
-    var description: String {
-        switch self {
-        case .lastPhotoTaken:
-            return "Last photo taken"
-        case .imagePicker:
-            return "Choose image from library"
-        }
-    }
-}
-
 enum SearchType: Int {
     case users
     case bars
+}
+
+enum UserTableSource {
+    case user(id: String)
+    case special(id: String)
+    case event(id: String)
+    case activity(id: String)
 }

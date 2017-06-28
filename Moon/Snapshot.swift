@@ -29,4 +29,3 @@ extension Snapshot: Equatable {
         return lhs._id == rhs._id
     }
 }
-
