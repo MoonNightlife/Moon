@@ -68,17 +68,17 @@ struct BarProfileViewModel: ImageDownloadType, BackType {
         let peopleGoing = barAPI.getBarPeople(barID: barID)
         let friendsGoing = barAPI.getBarFriends(barID: barID, userID: SignedInUser.userID)
         
-//         Observable.combineLatest(peopleGoing, friendsGoing, reloadDisplayUsers, selectedUserIndex)
-//            .map({ (people, friends, _, userType) -> [UserSnapshot] in
-//                switch userType {
-//                case .everyone:
-//                    return people
-//                case .friends:
-//                    return friends
-//                }
-//            })
-//            .bind(to: displayedUsers)
-//            .addDisposableTo(bag)
+         Observable.combineLatest(peopleGoing, friendsGoing, reloadDisplayUsers, selectedUserIndex)
+            .map({ (people, friends, _, userType) -> [Activity] in
+                switch userType {
+                case .everyone:
+                    return people
+                case .friends:
+                    return friends
+                }
+            })
+            .bind(to: displayedUsers)
+            .addDisposableTo(bag)
         
     }
     

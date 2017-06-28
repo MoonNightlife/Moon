@@ -8,15 +8,11 @@
 
 import Foundation
 import RxDataSources
+import SwaggerClient
 
-struct Snapshot {
-    let _id: String?
-    let name: String?
-    let pic: String?
-}
 extension Snapshot: IdentifiableType {
     public var identity: String {
-        if let id = _id {
+        if let id = id {
             return id
         } else {
             return "0"
@@ -26,6 +22,6 @@ extension Snapshot: IdentifiableType {
 
 extension Snapshot: Equatable {
     public static func == (lhs: Snapshot, rhs: Snapshot) -> Bool {
-        return lhs._id == rhs._id
+        return lhs.id == rhs.id
     }
 }

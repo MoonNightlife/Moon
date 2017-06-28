@@ -95,7 +95,7 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
                     cell.profilePicture.cornerRadius = cell.profilePicture.frame.size.width / 2
                     cell.profilePicture.clipsToBounds = true
                     
-                    cell.name.text = snap.userName
+                    cell.name.text = snap.name
                     cell.name.textColor = .lightGray
                     
                     return cell
@@ -114,7 +114,7 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
                     cell.profilePicture.cornerRadius = cell.profilePicture.frame.size.width / 2
                     cell.profilePicture.clipsToBounds = true
                     
-                    cell.name.text = snap.userName
+                    cell.name.text = snap.name
                     cell.name.textColor = .lightGray
                     
                     cell.acceptButton.titleLabel?.text = nil
@@ -125,7 +125,7 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
                     cell.declineButton.setImage(Icon.cm.close, for: .normal)
                     cell.declineButton.tintColor = UIColor.moonRed
                     
-                    if let userID = snap.userID {
+                    if let userID = snap.id {
                         cell.acceptButton.rx.action = self?.viewModel.onAcceptFriendRequest(userID:userID)
                         cell.declineButton.rx.action = self?.viewModel.onDeclineFriendRequest(userID:userID)
                     }

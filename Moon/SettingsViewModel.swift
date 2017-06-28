@@ -19,7 +19,11 @@ struct SettingsViewModel {
             guard let scene = this.getSceneFor(section: $0) else {
                 return Observable.empty()
             }
-            return this.sceneCoordinator.transition(to: scene, type: .push)
+            if case Scene.Login.login(_) = scene {
+                return this.sceneCoordinator.transition(to: scene, type: .root)
+            } else {
+                return this.sceneCoordinator.transition(to: scene, type: .push)
+            }
         })
     }(self)
     
@@ -53,7 +57,8 @@ struct SettingsViewModel {
             let vm = DeleteAccountViewModel(coordinator: self.sceneCoordinator)
             return Scene.User.deleteAccount(vm)
         case .logOut:
-            return nil
+            let vm = LoginViewModel(coordinator: self.sceneCoordinator)
+            return Scene.Login.login(vm)
         }
     }
     

@@ -48,7 +48,7 @@ struct UsersTableViewModel: BackType, ImageDownloadType {
                 userSource = UsersTableViewModel.getFriends(userID: id, userAPI: userAPI).toArray()
             }
         case let .activity(id):
-            userSource = UsersTableViewModel.getActivityLikers(activityID: id, barAPI: barAPI)
+            userSource = UsersTableViewModel.getActivityLikers(activityID: id, userAPI: userAPI)
         case let .event(id):
             userSource = UsersTableViewModel.getEventLikers(eventID: id, barAPI: barAPI)
         case let .special(id):
@@ -61,19 +61,7 @@ struct UsersTableViewModel: BackType, ImageDownloadType {
     }
     
     static func getFriends(userID: String, userAPI: UserAPIType) -> Observable<UserSectionModel> {
-        return userAPI.getFriends(userID: "01").map({ profiles -> [UserSnapshot] in
-            //TODO: remove this once api returns snapshots instead of profiles
-                return profiles.map({ profile in
-                    let snap = UserSnapshot()
-                    snap.userName = profile.firstName
-                    snap.pic = profile.profilePics!.first
-                    snap.userID = profile.id
-                    return snap
-                })
-            })
-            .catchError {_ in
-                return Observable.just([])
-            }
+        return userAPI.getFriends(userID: userID)
             .map({
                 return $0.map(UserSectionItem.friend)
             }).map({
@@ -82,20 +70,23 @@ struct UsersTableViewModel: BackType, ImageDownloadType {
     }
     
     static func getFriendRequest(userID: String, userAPI: UserAPIType) -> Observable<UserSectionModel> {
-        return userAPI.getFriendRequest(userID: "01")
-            .catchError {_ in
-                    return Observable.just([])
-            }.map({
+        return userAPI.getFriendRequest(userID: userID)
+            .map({
                 return $0.map(UserSectionItem.friendRequest)
             }).map({
-                return UserSectionModel.friendsSection(title: "Friend Requests", items: $0)
+                return UserSectionModel.friendRequestsSection(title: "Friend Requests", items: $0)
             })
 
     }
     
-    static func getActivityLikers(activityID: String, barAPI: BarAPIType) -> Observable<[UserSectionModel]> {
-        //TODO: implement once api returns snapshot instead of profile
-        return Observable.empty()
+    static func getActivityLikers(activityID: String, userAPI: UserAPIType) -> Observable<[UserSectionModel]> {
+        return userAPI.getActivityLikes(activityID: activityID)
+            .map({
+                return $0.map(UserSectionItem.friend)
+            }).map({
+                return UserSectionModel.friendsSection(title: "Activity Likes", items: $0)
+            }).toArray()
+        
     }
     
     static func getSpecialLikers(specialID: String, barAPI: BarAPIType) -> Observable<[UserSectionModel]> {
@@ -104,8 +95,12 @@ struct UsersTableViewModel: BackType, ImageDownloadType {
     }
     
     static func getEventLikers(eventID: String, barAPI: BarAPIType) -> Observable<[UserSectionModel]> {
-        //TODO: implement once api returns snapshot instead of profile
-        return Observable.empty()
+        return barAPI.getEventLikes(eventID: eventID)
+            .map({
+                return $0.map(UserSectionItem.friend)
+            }).map({
+                return UserSectionModel.friendsSection(title: "Event Likes", items: $0)
+            }).toArray()
     }
     
     func onShowUser(indexPath: IndexPath) -> CocoaAction {
@@ -113,10 +108,10 @@ struct UsersTableViewModel: BackType, ImageDownloadType {
             return Observable.just().withLatestFrom(self.users).map({ sectionModel in
                 var vm: ProfileViewModel!
                 if case let .friend(snapshot) = sectionModel[indexPath.section].items[indexPath.row] {
-                    vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: snapshot.userID ??
+                    vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: snapshot.id ??
                 "0")
                 } else if case let .friendRequest(snapshot) = sectionModel[indexPath.section].items[indexPath.row] {
-                    vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: snapshot.userID ?? "0")
+                    vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: snapshot.id ?? "0")
                 }
                 return vm
             }).flatMap({

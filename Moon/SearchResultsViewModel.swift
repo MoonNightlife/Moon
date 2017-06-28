@@ -72,10 +72,10 @@ struct SearchResultsViewModel: ImageDownloadType {
             if case let .searchResult(snapshot) = results[0].items[index] {
                 switch type {
                 case .users:
-                    let vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: snapshot._id ?? "0")
+                    let vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: snapshot.id ?? "0")
                     return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
                 case .bars:
-                    let vm = BarProfileViewModel(coordinator: self.sceneCoordinator, barID: snapshot._id ?? "0")
+                    let vm = BarProfileViewModel(coordinator: self.sceneCoordinator, barID: snapshot.id ?? "0")
                     return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
                 }
             } else {

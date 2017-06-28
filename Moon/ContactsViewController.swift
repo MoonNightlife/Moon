@@ -60,7 +60,7 @@ class ContactsViewController: UIViewController, BindableType {
             case let .searchResult(snapshot):
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactTableViewCell
                 cell.name.text = snapshot.name
-                cell.addFriendButton.rx.action = self?.viewModel.onAddFriend(userID: snapshot._id!)
+                cell.addFriendButton.rx.action = self?.viewModel.onAddFriend(userID: snapshot.id!)
                 self?.viewModel.downloadImage(url: URL(string: snapshot.pic!)!).elements.bind(to: cell.profilePicture.rx.image).addDisposableTo(cell.bag)
                 return cell
             }

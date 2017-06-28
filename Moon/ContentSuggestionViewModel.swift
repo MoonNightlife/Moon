@@ -26,7 +26,7 @@ struct ContentSuggestionsViewModel: ImageDownloadType {
         return Action(workFactory: { index in
             return Observable.just().withLatestFrom(this.suggestedFriends.asObservable())
                 .map({ searchSection in
-                    return ProfileViewModel(coordinator: this.sceneCoordinator, userID: searchSection[0].items[index]._id ?? "0")
+                    return ProfileViewModel(coordinator: this.sceneCoordinator, userID: searchSection[0].items[index].id ?? "0")
                 })
                 .flatMap({
                     return this.sceneCoordinator.transition(to: Scene.User.profile($0), type: .popover)
@@ -38,7 +38,7 @@ struct ContentSuggestionsViewModel: ImageDownloadType {
         return Action(workFactory: { index in
             return Observable.just().withLatestFrom(this.suggestedFriends.asObservable())
                 .map({ searchSection in
-                    return BarProfileViewModel(coordinator: this.sceneCoordinator, barID: searchSection[0].items[index]._id ?? "0")
+                    return BarProfileViewModel(coordinator: this.sceneCoordinator, barID: searchSection[0].items[index].id ?? "0")
                 })
                 .flatMap({
                     return this.sceneCoordinator.transition(to: Scene.Bar.profile($0), type: .modal)
@@ -53,6 +53,8 @@ struct ContentSuggestionsViewModel: ImageDownloadType {
     init(coordinator: SceneCoordinatorType, photoService: PhotoService = KingFisherPhotoService()) {
         self.sceneCoordinator = coordinator
         self.photoService = photoService
+        
+        
 
     }
     

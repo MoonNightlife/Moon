@@ -226,7 +226,6 @@
 		F0EF693C1EF0949C0028A32B /* UsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EF693B1EF0949C0028A32B /* UsersTableViewCell.swift */; };
 		F0EF693E1EF09AD90028A32B /* BackType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EF693D1EF09AD90028A32B /* BackType.swift */; };
 		F0F017FB1EF9A9AB0086447E /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F017FA1EF9A9AB0086447E /* Activity.swift */; };
-		F0F017FD1EF9B0760086447E /* UserSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F017FC1EF9B0760086447E /* UserSnapshot.swift */; };
 		F0F210591ECA1C160027B50B /* SearchBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F210581ECA1C160027B50B /* SearchBarViewController.swift */; };
 		F0F6B5121F019FF1000C4489 /* DisplayErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B5111F019FF1000C4489 /* DisplayErrorType.swift */; };
 		F0FD8F301EE178650020D131 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */; };
@@ -475,7 +474,6 @@
 		F0EF693B1EF0949C0028A32B /* UsersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewCell.swift; sourceTree = "<group>"; };
 		F0EF693D1EF09AD90028A32B /* BackType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackType.swift; sourceTree = "<group>"; };
 		F0F017FA1EF9A9AB0086447E /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
-		F0F017FC1EF9B0760086447E /* UserSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSnapshot.swift; sourceTree = "<group>"; };
 		F0F210581ECA1C160027B50B /* SearchBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarViewController.swift; sourceTree = "<group>"; };
 		F0F6B5111F019FF1000C4489 /* DisplayErrorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayErrorType.swift; sourceTree = "<group>"; };
 		F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -1185,7 +1183,6 @@
 				F06B56FC1EFAA8750028552A /* RxDataSourceUserModel.swift */,
 				F0335A751EF1F7DD005118B4 /* RxDataSourceSnapshotModel.swift */,
 				F0F017FA1EF9A9AB0086447E /* Activity.swift */,
-				F0F017FC1EF9B0760086447E /* UserSnapshot.swift */,
 				F01CE3DE1EFED68400EE9535 /* Snapshot.swift */,
 				F09F7E361EFEB74900021C13 /* Special.swift */,
 			);
@@ -1568,7 +1565,6 @@
 				F09C09221ECC7D3B003076CC /* FloatingBottomTabBar.swift in Sources */,
 				F03C78BE1EE9E98F002AEDAD /* NotificationSettingsViewController.swift in Sources */,
 				F09DF0901EEAFAF90092BFA5 /* WebViewUIViViewController.swift in Sources */,
-				F0F017FD1EF9B0760086447E /* UserSnapshot.swift in Sources */,
 				F098FF9B1EDF1DEA00A59594 /* NewUser.swift in Sources */,
 				F001BAC11EC50E9700CDF9BC /* BarActivityFeedViewController.swift in Sources */,
 				F04F445C1ECF840700D5FC62 /* BarAnnotation.swift in Sources */,

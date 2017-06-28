@@ -11,8 +11,8 @@ import RxSwift
 import SwaggerClient
 
 protocol BarAPIType {
-    func getBarFriends(barID: String, userID: String) -> Observable<[UserSnapshot]>
-    func getBarPeople(barID: String) -> Observable<[UserSnapshot]>
+    func getBarFriends(barID: String, userID: String) -> Observable<[Activity]>
+    func getBarPeople(barID: String) -> Observable<[Activity]>
     
     func getBarInfo(barID: String) -> Observable<BarProfile>
     func getBarEvents(barID: String) -> Observable<[BarEvent]>
@@ -24,11 +24,11 @@ protocol BarAPIType {
     func getSpecialsIn(region: String, type: String) -> Observable<[Special]>
     func getTopBarsIn(region: String) -> Observable<[BarProfile]>
     
-    func getEventLikes(eventID: String) -> Observable<[UserProfile]>
+    func getEventLikes(eventID: String) -> Observable<[Snapshot]>
 }
 
 class BarAPIController: BarAPIType {
-    func getBarFriends(barID: String, userID: String) -> Observable<[UserSnapshot]> {
+    func getBarFriends(barID: String, userID: String) -> Observable<[Activity]> {
         return Observable.create({ (observer) -> Disposable in
             BarAPI.getBarFriends(barID: barID, userID: userID, completion: { (profiles, error) in
                 if let p = profiles {
@@ -42,7 +42,7 @@ class BarAPIController: BarAPIType {
         })
     }
     
-    func getBarPeople(barID: String) -> Observable<[UserSnapshot]> {
+    func getBarPeople(barID: String) -> Observable<[Activity]> {
         return Observable.create({ (observer) -> Disposable in
             BarAPI.getBarPeople(barID: barID, completion: { (profiles, error) in
                 if let p = profiles {
@@ -169,7 +169,7 @@ extension BarAPIController {
 }
 
 extension BarAPIController {
-    func getEventLikes(eventID: String) -> Observable<[UserProfile]> {
+    func getEventLikes(eventID: String) -> Observable<[Snapshot]> {
         return Observable.create({ (observer) -> Disposable in
             BarAPI.listLiked(eventID: eventID, completion: { (profiles, error) in
                 if let p = profiles {

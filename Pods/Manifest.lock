@@ -273,7 +273,7 @@ SPEC CHECKSUMS:
   RxOptional: b97b59183af80d1e729ac9e51d09a10be668d6a8
   RxSwift: 3789a1af753002a14edecdb698a2424624296a9c
   SinchVerification: 71af34426dfa35a86cfa9fa157ca5c3e170ec829
-  SwaggerClient: 1e31099934ba565a410079bbff3f567de07eb13e
+  SwaggerClient: 520e448f1035bd05c2c2450a968dbe7ea5abb995
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
   Whisper: 051f25e704bf8992641ffd28b20d5682ddc5f5d3
 

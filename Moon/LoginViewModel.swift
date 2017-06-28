@@ -23,7 +23,7 @@ struct LoginViewModel {
     // Ouputs
     var showLoadingIndicator = Variable(false)
     
-    init(coordinator: SceneCoordinator) {
+    init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator
         
     }

@@ -9,6 +9,7 @@
 import UIKit
 import RxDataSources
 import RxCocoa
+import SwaggerClient
 import RxSwift
 
 typealias SearchSection = AnimatableSectionModel<String, Snapshot>
@@ -168,7 +169,7 @@ extension ContentSuggestionsViewController {
     func populate(barCollectionView view: BarCollectionView, snapshot: Snapshot) {
         
         // Bind actions
-        if let id = snapshot._id {
+        if let id = snapshot.id {
             view.goButton.rx.action = viewModel.onChangeAttendance(barID: id)
         }
         
@@ -183,7 +184,7 @@ extension ContentSuggestionsViewController {
     }
     
     func populate(userCollectionView view: UserCollectionView, snapshot: Snapshot) {
-        if let id = snapshot._id {
+        if let id = snapshot.id {
             view.addFriendButton.rx.action = viewModel.onAddFriend(userID: id)
         }
     
