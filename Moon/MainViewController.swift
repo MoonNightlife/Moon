@@ -10,7 +10,6 @@ import UIKit
 import iCarousel
 import MaterialComponents
 import Material
-import Spring
 import EZSwipeController
 import RxSwift
 import RxCocoa

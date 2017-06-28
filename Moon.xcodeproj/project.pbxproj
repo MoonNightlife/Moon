@@ -1692,6 +1692,7 @@
 		F048F1321EA3B7A5000F0161 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1742,6 +1743,7 @@
 		F048F1331EA3B7A5000F0161 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1786,7 +1788,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 448C01FBA79545B4FB94346A /* Pods-Moon.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Moon/Moon.entitlements;
@@ -1804,7 +1806,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1F7FD5079D2BC22343A5BEFC /* Pods-Moon.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Moon/Moon.entitlements;
@@ -1822,7 +1824,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 80DC1C4A5C45AFA862F99FB2 /* Pods-MoonTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = BFP4MM8ANM;
 				INFOPLIST_FILE = MoonTests/Info.plist;
@@ -1838,7 +1840,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C4C4DBD54FFB0BEB382262E5 /* Pods-MoonTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = BFP4MM8ANM;
 				INFOPLIST_FILE = MoonTests/Info.plist;

@@ -8,7 +8,6 @@
 
 import UIKit
 import Material
-import PageMenu
 import RxSwift
 import RxCocoa
 import iCarousel
