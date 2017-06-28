@@ -19,15 +19,6 @@ struct BarActivity {
     var activityId: String?
     var likes: Int32?
     var profileImage: String?
-    
-    init(from activity: Activity) {
-        //TODO: change bar name and user name form id to actual name once api is fixed
-        self.barName = activity.barID
-        self.name = activity.userID
-        self.likes = activity.numLikes
-        //TODO: change once time stamp is double
-        //self.time = Date(timeIntervalSince1970: activity.timestamp)
-    }
 }
 
 extension BarActivity: IdentifiableType {

@@ -36,7 +36,7 @@ struct DynamicLinkingAPI {
         let longLink = components.url
         print(longLink?.absoluteString ?? "")
         
-        components.shorten { (shortURL, warnings, error) in
+        components.shorten { (shortURL, _, error) in
             // Handle shortURL.
             if let error = error {
                 print(error.localizedDescription)

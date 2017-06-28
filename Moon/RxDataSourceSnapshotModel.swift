@@ -17,7 +17,7 @@ enum SnapshotSectionModel {
 
 enum SnapshotSectionItem: IdentifiableType, Equatable {
     
-    static func ==(lhs: SnapshotSectionItem, rhs: SnapshotSectionItem) -> Bool {
+    static func == (lhs: SnapshotSectionItem, rhs: SnapshotSectionItem) -> Bool {
         return lhs.identity == rhs.identity
     }
     

@@ -102,8 +102,6 @@ class BarActivityFeedViewController: UIViewController, BindableType, DisplayErro
         if let time = activity.timestamp {
             let date = Date.init(timeIntervalSince1970: time)
             view.timeLabel.text = date.getElaspedTimefromDate()
-        } else {
-            //TODO: Add empty data text for timestamp
         }
         
         if let urlString = activity.pic, let url = URL(string: urlString) {

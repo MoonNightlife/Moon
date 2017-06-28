@@ -16,6 +16,7 @@ class BarCollectionView: ImageCardView {
     
     var goButton: IconButton!
     var nameLabel: UILabel!
+    var bag = DisposeBag()
     
     func initViewWith() {
         self.initializeImageCardViewWith(type: .small)

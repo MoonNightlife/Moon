@@ -176,7 +176,9 @@ extension ContentSuggestionsViewController {
         view.nameLabel.text = snapshot.name
         
         if let urlString = snapshot.pic, let url = URL(string: urlString) {
-            
+            let downloader = viewModel.downloadImage(url: url)
+            downloader.elements.bind(to: view.imageView.rx.image).addDisposableTo(view.bag)
+            downloader.execute()
         }
     }
     
@@ -184,8 +186,14 @@ extension ContentSuggestionsViewController {
         if let id = snapshot._id {
             view.addFriendButton.rx.action = viewModel.onAddFriend(userID: id)
         }
-        
+    
         // Bind labels
         view.nameLabel.text = snapshot.name
+        
+        if let urlString = snapshot.pic, let url = URL(string: urlString) {
+            let downloader = viewModel.downloadImage(url: url)
+            downloader.elements.bind(to: view.imageView.rx.image).addDisposableTo(view.bag)
+            downloader.execute()
+        }
     }
 }

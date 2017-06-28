@@ -44,8 +44,6 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
         
         screenHeight = self.view.frame.size.height
         
-        usersGoing = createFakeUsers()
-        
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         

@@ -50,7 +50,7 @@ import UIKit
         }
     }
     
-    @IBInspectable var font: UIFont! = UIFont.systemFont(ofSize: 14) {
+    var font: UIFont = UIFont.systemFont(ofSize: 14) {
         didSet {
             setFont()
         }

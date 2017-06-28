@@ -81,8 +81,7 @@ struct ProfileViewModel {
             .catchErrorJustReturn([])
             .startWith([#imageLiteral(resourceName: "DefaultProfilePic")])
             .bind(to: profilePictures).addDisposableTo(bag)
-        
-        
+    
     }
     
     func onDismiss() -> CocoaAction {

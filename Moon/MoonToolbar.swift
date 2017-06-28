@@ -18,7 +18,6 @@ class MoonToolbar: Toolbar {
     fileprivate var rightView: UIView!
     fileprivate var rightView2: UIView!
     
-    
     func addRightViews(view1: UIView, view2: UIView) {
         let size = CGFloat(20)
         print(self.frame.size.width)

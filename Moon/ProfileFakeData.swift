@@ -20,5 +20,4 @@ struct FakeUser {
     var plan: String?
     var id: String?
     
-    
 }

@@ -80,7 +80,6 @@ struct BarProfileViewModel: ImageDownloadType, BackType {
 //            .bind(to: displayedUsers)
 //            .addDisposableTo(bag)
         
-        
     }
     
     func onShowInfo() -> CocoaAction {
@@ -94,14 +93,6 @@ struct BarProfileViewModel: ImageDownloadType, BackType {
         return CocoaAction {
             print("Attend bar")
             return self.userAPI.goToBar(userID: "123123", barID: "594bfb53fc13ae69de000cff")
-        }
-    }
-    
-    func onViewMore() -> CocoaAction {
-        return CocoaAction {
-            //TODO: probably should remove this from event card
-            print("View More")
-            return Observable.empty()
         }
     }
     
@@ -135,9 +126,7 @@ struct BarProfileViewModel: ImageDownloadType, BackType {
     
     func onLikeActivity(activityID: String) -> CocoaAction {
         return CocoaAction {_ in
-            //TODO: add api call
-            print("like activity needs implementation")
-            return Observable.empty()
+            return self.userAPI.likeActivity(userID: SignedInUser.userID, activityID: activityID)
         }
     }
     

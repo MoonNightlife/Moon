@@ -18,7 +18,7 @@ enum UserSectionModel {
 
 enum UserSectionItem: IdentifiableType, Equatable {
 
-    static func ==(lhs: UserSectionItem, rhs: UserSectionItem) -> Bool {
+    static func == (lhs: UserSectionItem, rhs: UserSectionItem) -> Bool {
         return lhs.identity == rhs.identity
     }
 
@@ -33,8 +33,7 @@ enum UserSectionItem: IdentifiableType, Equatable {
 
     case friend(snapshot: UserSnapshot)
     case friendRequest(snapshot: UserSnapshot)
-    
-    
+        
 }
 
 extension UserSectionModel: AnimatableSectionModelType {
