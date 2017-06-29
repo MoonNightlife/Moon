@@ -2,17 +2,41 @@
 //  Activity.swift
 //  Moon
 //
-//  Created by Evan Noble on 6/20/17.
+//  Created by Evan Noble on 6/29/17.
 //  Copyright © 2017 Evan Noble. All rights reserved.
 //
 
 import Foundation
+import ObjectMapper
 import RxDataSources
-import SwaggerClient
 
-extension Activity: IdentifiableType {
-    public var identity: String {
-        guard let id = id else {
+class Activity: Mappable {
+    var id: String?
+    var barID: String?
+    var barName: String?
+    var userID: String?
+    var userName: String?
+    var timestamp: Double?
+    var numLikes: Int?
+    var pic: String?
+    
+    public init() {}
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        barID <- map["barId"]
+        barName <- map["barName"]
+        userID <- map["userId"]
+        userName <- map["userName"]
+        timestamp <- map["timeStamp"]
+        numLikes <- map["numberOfLikes"]
+        pic <- map["photoThumbnail"]
+    }
+}
+
+extension BarActivity: IdentifiableType {
+    var identity: String {
+        guard let id = activityId else {
             return "0"
         }
         
@@ -20,8 +44,8 @@ extension Activity: IdentifiableType {
     }
 }
 
-extension Activity: Equatable {
-    public static func == (lhs: Activity, rhs: Activity) -> Bool {
-        return lhs.id == rhs.id && lhs.numLikes == rhs.numLikes
+extension BarActivity: Equatable {
+    static func == (lhs: BarActivity, rhs: BarActivity) -> Bool {
+        return lhs.activityId == rhs.activityId && lhs.likes == rhs.likes
     }
 }

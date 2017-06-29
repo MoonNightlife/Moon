@@ -108,7 +108,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/RxDataSources/RxDataSources.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RxOptional/RxOptional.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RxSwift/RxSwift.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/SwaggerClient/SwaggerClient.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Whisper/Whisper.framework"
   install_framework "$BUILT_PRODUCTS_DIR/iCarousel/iCarousel.framework"
 fi
@@ -132,7 +131,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/RxDataSources/RxDataSources.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RxOptional/RxOptional.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RxSwift/RxSwift.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/SwaggerClient/SwaggerClient.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Whisper/Whisper.framework"
   install_framework "$BUILT_PRODUCTS_DIR/iCarousel/iCarousel.framework"
 fi

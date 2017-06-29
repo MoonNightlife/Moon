@@ -210,8 +210,6 @@ PODS:
     - RxSwift
   - RxSwift (3.4.0)
   - SinchVerification (2.0.4)
-  - SwaggerClient (0.0.1):
-    - Alamofire (~> 4.0)
   - SwiftLint (0.18.1)
   - Whisper (5.0.0)
 
@@ -235,7 +233,6 @@ DEPENDENCIES:
   - RxOptional
   - RxSwift
   - SinchVerification
-  - SwaggerClient (from `../moon_mock_api/frontend`)
   - SwiftLint
   - Whisper
 
@@ -245,8 +242,6 @@ EXTERNAL SOURCES:
   MIBadgeButton-Swift:
     :branch: master
     :git: https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git
-  SwaggerClient:
-    :path: ../moon_mock_api/frontend
 
 CHECKOUT OPTIONS:
   Material:
@@ -283,10 +278,9 @@ SPEC CHECKSUMS:
   RxOptional: b97b59183af80d1e729ac9e51d09a10be668d6a8
   RxSwift: 3789a1af753002a14edecdb698a2424624296a9c
   SinchVerification: 71af34426dfa35a86cfa9fa157ca5c3e170ec829
-  SwaggerClient: 520e448f1035bd05c2c2450a968dbe7ea5abb995
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
   Whisper: 051f25e704bf8992641ffd28b20d5682ddc5f5d3
 
-PODFILE CHECKSUM: 8b44d8878a1c6130536c515725c47be6ffd01f8f
+PODFILE CHECKSUM: 3ac83be58c3d0c2ad95fa47c14b9431d97195173
 
 COCOAPODS: 1.2.1

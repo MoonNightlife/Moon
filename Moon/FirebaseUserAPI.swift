@@ -8,6 +8,8 @@
 
 import Foundation
 import RxSwift
+import RxAlamofire
+import ObjectMapper
 
 class FirebaseUserAPI: UserAPIType {
     func acceptFriend(userID: String, friendID: String) -> Observable<Void> {

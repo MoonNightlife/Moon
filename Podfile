@@ -16,7 +16,6 @@ target 'Moon' do
   pod 'EZSwipeController'
   pod 'Action', '~> 3.0'
   pod 'RxDataSources', '~> 1.0'
-  pod 'SwaggerClient', :path => '../moon_mock_api/frontend'
   pod 'SinchVerification'
   pod 'NVActivityIndicatorView'
   pod 'Kingfisher', '~> 3.0'

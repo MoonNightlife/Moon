@@ -2,26 +2,17 @@
 //  Snapshot.swift
 //  Moon
 //
-//  Created by Evan Noble on 6/24/17.
+//  Created by Evan Noble on 6/29/17.
 //  Copyright © 2017 Evan Noble. All rights reserved.
 //
 
 import Foundation
-import RxDataSources
-import SwaggerClient
+import ObjectMapper
 
-extension Snapshot: IdentifiableType {
-    public var identity: String {
-        if let id = id {
-            return id
-        } else {
-            return "0"
-        }
-    }
-}
+class Snapshot: Mappable {
+    var id: String?
+    var name: String?
+    var pic: String?
 
-extension Snapshot: Equatable {
-    public static func == (lhs: Snapshot, rhs: Snapshot) -> Bool {
-        return lhs.id == rhs.id
-    }
+
 }

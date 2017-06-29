@@ -1,5 +1,5 @@
 //
-//  Special.swift
+//  BarEvent.swift
 //  Moon
 //
 //  Created by Evan Noble on 6/29/17.
@@ -8,12 +8,13 @@
 
 import Foundation
 
-open class Special {
+open class BarEvent {
     public var id: String?
-    public var numLikes: Int32?
-    public var pic: String?
-    public var name: String?
-    public var description: String?
     public var barID: String?
-    public var type: String?
+    public var title: String?
+    public var name: String?
+    public var pic: String?
+    public var date: String?
+    public var description: String?
+    public var numLikes: Int32?
 }
