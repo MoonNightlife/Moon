@@ -8,53 +8,36 @@
 
 import Foundation
 import RxSwift
-import SwaggerClient
 import Action
 import RxDataSources
 
 typealias SpecialSection = AnimatableSectionModel<String, Special>
 
-struct ExploreViewModel: ImageDownloadType {
+struct ExploreViewModel: ImageNetworkingInjected, NetworkingInjected {
     
     // Local
     private let disposeBag = DisposeBag()
-    let beerSpecials: Observable<[SpecialSection]>
-    let wineSpecials: Observable<[SpecialSection]>
-    let liquorSpecials: Observable<[SpecialSection]>
 
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
-    private let barAPI: BarAPIType
-    private let userAPI: UserAPIType
-    var photoService: PhotoService
     
     // Inputs
     var selectedSpecialIndex = BehaviorSubject<AlcoholType>(value: .beer)
     var reloadSpecial = PublishSubject<Void>()
     
     // Outputs
-    var topBars: Action<Void, [TopBar]>
-    var specials: Observable<[SpecialSection]>
-    
-    init(coordinator: SceneCoordinatorType, barAPI: BarAPIType = BarAPIController(), photoService: PhotoService = KingFisherPhotoService(), userAPI: UserAPIType = UserAPIController()) {
-        self.sceneCoordinator = coordinator
-        self.photoService = photoService
-        self.barAPI = barAPI
-        self.userAPI = userAPI
-        
-        topBars = Action(workFactory: {_ in 
-            return barAPI.getTopBarsIn(region: "Dallas").map({
+    lazy var topBars: Action<Void, [TopBar]> = { this in
+        return Action(workFactory: {_ in
+            return this.barAPI.getTopBarsIn(region: "Dallas").map({
                 return $0.map({ bar in
                     return TopBar(from: bar)
                 })
             })
         })
-        
-        beerSpecials = ExploreViewModel.specialSectionObservable(type: .beer, barAPI: barAPI)
-        wineSpecials = ExploreViewModel.specialSectionObservable(type: .wine, barAPI: barAPI)
-        liquorSpecials = ExploreViewModel.specialSectionObservable(type: .liquor, barAPI: barAPI)
-        
-        specials = Observable.combineLatest(beerSpecials, wineSpecials, liquorSpecials, reloadSpecial, selectedSpecialIndex)
+    }(self)
+    
+    lazy var specials: Observable<[SpecialSection]> = { this in
+        return Observable.combineLatest(this.specialSectionObservable(type: .beer), this.specialSectionObservable(type: .wine), this.specialSectionObservable(type: .liquor), this.reloadSpecial, this.selectedSpecialIndex)
             .map({ (beer, wine, liquor, _, index) -> [SpecialSection] in
                 switch index {
                 case .beer:
@@ -65,10 +48,15 @@ struct ExploreViewModel: ImageDownloadType {
                     return wine
                 }
             })
+    }(self)
+    
+    init(coordinator: SceneCoordinatorType) {
+        self.sceneCoordinator = coordinator
+        
     }
     
-    static func specialSectionObservable(type: AlcoholType, barAPI: BarAPIType) -> Observable<[SpecialSection]> {
-        return barAPI.getSpecialsIn(region: "Dallas", type: type.rawValue)
+    func specialSectionObservable(type: AlcoholType) -> Observable<[SpecialSection]> {
+        return self.barAPI.getSpecialsIn(region: "Dallas", type: type.rawValue)
             .map({
                 return [SpecialSection(model: "Specials", items: $0)]
             })

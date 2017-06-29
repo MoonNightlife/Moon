@@ -10,14 +10,13 @@ import Foundation
 import Action
 import RxSwift
 import RxCocoa
-import SwaggerClient
 
 enum UsersGoingType: Int {
     case everyone = 0
     case friends = 1
 }
 
-struct BarProfileViewModel: ImageDownloadType, BackType {
+struct BarProfileViewModel: ImageNetworkingInjected, NetworkingInjected, BackType {
     
     // Local
     private let bag = DisposeBag()
@@ -26,9 +25,6 @@ struct BarProfileViewModel: ImageDownloadType, BackType {
     
     // Dependencies
     let sceneCoordinator: SceneCoordinatorType
-    var photoService: PhotoService
-    let barAPI: BarAPIType
-    private let userAPI: UserAPIType
     
     // Inputs
     var selectedUserIndex = BehaviorSubject<UsersGoingType>(value: .everyone)
@@ -41,11 +37,8 @@ struct BarProfileViewModel: ImageDownloadType, BackType {
     var specials = Variable<[Special]>([])
     var events = Variable<[BarEvent]>([])
     
-    init(coordinator: SceneCoordinatorType, photoService: PhotoService = KingFisherPhotoService(), barAPI: BarAPIType = BarAPIController(), userAPI: UserAPIType = UserAPIController(), barID: String) {
+    init(coordinator: SceneCoordinatorType, barID: String, barAPI: BarAPIType = FirebaseBarAPI()) {
         self.sceneCoordinator = coordinator
-        self.photoService = photoService
-        self.barAPI = barAPI
-        self.userAPI = userAPI
         
         bar = barAPI.getBarInfo(barID: barID)
         
@@ -53,13 +46,14 @@ struct BarProfileViewModel: ImageDownloadType, BackType {
         
         bar.map({ $0.specials }).filterNil().catchErrorJustReturn([]).bind(to: specials).addDisposableTo(bag)
         bar.map({ $0.events }).filterNil().catchErrorJustReturn([]).bind(to: events).addDisposableTo(bag)
-        
-        bar.map({ $0.barPics }).filter({ $0 != nil }).flatMap({ pictureURLs in
-            return Observable.from(pictureURLs!).flatMap({
-                return photoService.getImageFor(url: URL(string: $0)!)
-            }).toArray()
-            
-        }).catchErrorJustReturn([]).bind(to: barPics).addDisposableTo(bag)
+
+        //TODO: fix
+//        bar.map({ $0.barPics }).filter({ $0 != nil }).flatMap({ pictureURLs in
+//            return Observable.from(pictureURLs!).flatMap({
+//                return photoService.getImageFor(url: URL(string: $0)!)
+//            }).toArray()
+//            
+//        }).catchErrorJustReturn([]).bind(to: barPics).addDisposableTo(bag)
         
         barInfo = bar.map({ bar in
             return BarInfo(website: bar.website, address: bar.address, phoneNumber: bar.phoneNumber)

@@ -12,7 +12,6 @@ import RxCocoa
 import Action
 import Material
 import RxDataSources
-import SwaggerClient
 
 class UsersTableViewController: UIViewController, BindableType, UIPopoverPresentationControllerDelegate {
 

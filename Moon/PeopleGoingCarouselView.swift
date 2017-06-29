@@ -11,7 +11,6 @@ import UIKit
 import Material
 import RxSwift
 import Action
-import SwaggerClient
 
 class PeopleGoingCarouselView: ImageCardView {
     

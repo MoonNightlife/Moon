@@ -33,7 +33,7 @@ class UserProfile: Mappable {
         birthday <- map["birthday"]
         sex <- map["sex"]
         profilePics <- map["id"]
-        activity <- Map["id"]
+        activity <- map["activity"]
     }
 
 }

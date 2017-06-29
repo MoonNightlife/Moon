@@ -9,7 +9,6 @@
 import UIKit
 import Action
 import RxSwift
-import SwaggerClient
 
 class BarActivityTableViewCell: UITableViewCell {
     

@@ -10,7 +10,6 @@ import UIKit
 import Action
 import RxCocoa
 import RxSwift
-import SwaggerClient
 
 class SpecialTableViewCell: UITableViewCell {
 

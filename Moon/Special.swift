@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import ObjectMapper
+import RxDataSources
 
-open class Special {
+class Special {
     public var id: String?
     public var numLikes: Int32?
     public var pic: String?
@@ -16,4 +18,16 @@ open class Special {
     public var description: String?
     public var barID: String?
     public var type: String?
+}
+
+extension Special: IdentifiableType {
+    var identity: String {
+        return id!
+    }
+}
+
+extension Special: Equatable {
+    static func == (lhs: Special, rhs: Special) -> Bool {
+        return lhs.id == rhs.id
+    }
 }

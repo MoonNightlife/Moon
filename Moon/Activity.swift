@@ -20,7 +20,11 @@ class Activity: Mappable {
     var numLikes: Int?
     var pic: String?
     
-    public init() {}
+    required init?(map: Map) {
+        if map.JSON["id"] == nil {
+            return nil
+        }
+    }
     
     func mapping(map: Map) {
         id <- map["id"]
@@ -34,18 +38,14 @@ class Activity: Mappable {
     }
 }
 
-extension BarActivity: IdentifiableType {
+extension Activity: IdentifiableType {
     var identity: String {
-        guard let id = activityId else {
-            return "0"
-        }
-        
-        return id
+        return id!
     }
 }
 
-extension BarActivity: Equatable {
-    static func == (lhs: BarActivity, rhs: BarActivity) -> Bool {
-        return lhs.activityId == rhs.activityId && lhs.likes == rhs.likes
+extension Activity: Equatable {
+    static func == (lhs: Activity, rhs: Activity) -> Bool {
+        return lhs.id == rhs.id
     }
 }

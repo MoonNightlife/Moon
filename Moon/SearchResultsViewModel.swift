@@ -12,13 +12,12 @@ import RxCocoa
 import RxDataSources
 import Action
 
-struct SearchResultsViewModel: ImageDownloadType {
+struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected {
     
     private let bag = DisposeBag()
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
-    var photoService: PhotoService
     
     // Actions
     lazy var onShowResult: Action<Int, Void> = { this in
@@ -40,9 +39,8 @@ struct SearchResultsViewModel: ImageDownloadType {
     // Outputs
     let searchResults: Observable<[SnapshotSectionModel]>
     
-    init(coordinator: SceneCoordinatorType, searchText: BehaviorSubject<String>, photoService: PhotoService = KingFisherPhotoService()) {
+    init(coordinator: SceneCoordinatorType, searchText: BehaviorSubject<String>) {
         sceneCoordinator = coordinator
-        self.photoService = photoService
         
         searchText.subscribe(onNext: {
             print($0)

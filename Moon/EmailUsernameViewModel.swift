@@ -10,7 +10,6 @@ import Foundation
 import RxSwift
 import Action
 import RxCocoa
-import SwaggerClient
 
 struct EmailUsernameViewModel {
     

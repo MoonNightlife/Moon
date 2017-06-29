@@ -9,7 +9,6 @@
 import Foundation
 import RxDataSources
 import Action
-import SwaggerClient
 
 enum UserSectionModel {
     case friendsSection(title: String, items: [UserSectionItem])

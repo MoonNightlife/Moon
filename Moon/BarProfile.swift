@@ -8,16 +8,16 @@
 
 import Foundation
 
-open class BarProfile {
-    public var id: String?
-    public var name: String?
-    public var phoneNumber: String?
-    public var location: String?
-    public var website: String?
-    public var address: String?
-    public var numPeopleAttending: Int32?
-    public var peopleAttending: [Activity]?
-    public var specials: [Special]?
-    public var barPics: [String]?
-    public var events: [BarEvent]?
+class BarProfile {
+    var id: String?
+    var name: String?
+    var phoneNumber: String?
+    var location: String?
+    var website: String?
+    var address: String?
+    var numPeopleAttending: Int32?
+    var peopleAttending: [Activity]?
+    var specials: [Special]?
+    var barPics: [String]?
+    var events: [BarEvent]?
 }

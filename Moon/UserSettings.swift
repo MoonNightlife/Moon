@@ -8,8 +8,7 @@
 
 import Foundation
 
-
-open class UserSettings: JSONEncodable {
+open class UserSettings {
     public var id: String?
     public var privacy: Bool?
     public var blockedUsers: [String]?

@@ -11,7 +11,6 @@ import Material
 import RxSwift
 import RxCocoa
 import iCarousel
-import SwaggerClient
 import RxDataSources
 
 class ExploreViewController: UIViewController, BindableType {

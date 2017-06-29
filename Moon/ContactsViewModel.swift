@@ -11,16 +11,14 @@ import Action
 import RxCocoa
 import RxSwift
 import RxDataSources
-import SwaggerClient
 
-struct ContactsViewModel: BackType, ImageDownloadType {
+struct ContactsViewModel: BackType, ImageNetworkingInjected, NetworkingInjected {
     // Private
     let bag = DisposeBag()
     
     // Dependencies
     let sceneCoordinator: SceneCoordinatorType
     let contactService: ContactService
-    var photoService: PhotoService
 
     // Actions
     var checkContactAccess: Action<Void, Bool>
@@ -28,10 +26,9 @@ struct ContactsViewModel: BackType, ImageDownloadType {
     // Outputs
     var UserInContacts: Observable<[SnapshotSectionModel]>
     
-    init(coordinator: SceneCoordinatorType, contactService: ContactService = ContactService(), photoService: PhotoService = KingFisherPhotoService()) {
+    init(coordinator: SceneCoordinatorType, contactService: ContactService = ContactService()) {
         self.sceneCoordinator = coordinator
         self.contactService = contactService
-        self.photoService = photoService
         
         checkContactAccess = Action(workFactory: {_ in 
             return contactService.requestForAccess()

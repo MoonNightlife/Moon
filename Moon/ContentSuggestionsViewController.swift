@@ -9,7 +9,7 @@
 import UIKit
 import RxDataSources
 import RxCocoa
-import SwaggerClient
+
 import RxSwift
 
 typealias SearchSection = AnimatableSectionModel<String, Snapshot>

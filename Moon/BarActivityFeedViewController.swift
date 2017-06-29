@@ -12,7 +12,6 @@ import RxDataSources
 import Action
 import RxSwift
 import RxCocoa
-import SwaggerClient
 import Whisper
 
 class BarActivityFeedViewController: UIViewController, BindableType, DisplayErrorType {

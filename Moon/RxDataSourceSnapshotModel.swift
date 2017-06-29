@@ -8,7 +8,6 @@
 
 import Foundation
 import RxDataSources
-import SwaggerClient
 import Action
 
 enum SnapshotSectionModel {

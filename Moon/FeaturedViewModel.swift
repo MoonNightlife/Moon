@@ -9,33 +9,26 @@
 import Foundation
 import RxSwift
 import Action
-import SwaggerClient
 
-struct FeaturedViewModel: ImageDownloadType {
+struct FeaturedViewModel: ImageNetworkingInjected, NetworkingInjected {
     
     // Local
     private let disposeBag = DisposeBag()
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
-    private let barAPI: BarAPIType
-    private let userAPI: UserAPIType
-    var photoService: PhotoService
     
     // Inputs
-    var loadEvents: Action<Void, [BarEvent]>
+    lazy var loadEvents: Action<Void, [BarEvent]> = { this in
+        return Action(workFactory: { _ in
+            return this.barAPI.getEventsIn(region: "Dallas")
+        })
+    }(self)
     // Outputs
     var featuredEvents = Variable<[BarEvent]>([])
     
-    init(coordinator: SceneCoordinatorType, barAPI: BarAPIType = BarAPIController(), userAPI: UserAPIType = UserAPIController(), photoService: PhotoService = KingFisherPhotoService()) {
+    init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator
-        self.barAPI = barAPI
-        self.userAPI = userAPI
-        self.photoService = photoService
-        
-        loadEvents = Action(workFactory: { _ in
-            return barAPI.getEventsIn(region: "Dallas")
-        })
         
         loadEvents.elements.bind(to: featuredEvents).addDisposableTo(disposeBag)
     }

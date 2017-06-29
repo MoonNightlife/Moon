@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreLocation
-import SwaggerClient
 
 struct TopBar {
     let imageURL: URL

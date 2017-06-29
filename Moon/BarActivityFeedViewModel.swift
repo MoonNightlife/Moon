@@ -9,7 +9,6 @@
 import Foundation
 import RxSwift
 import RxDataSources
-import SwaggerClient
 import Action
 
 struct SignedInUser {
@@ -18,27 +17,29 @@ struct SignedInUser {
 
 typealias ActivitySection = AnimatableSectionModel<String, Activity>
 
-struct BarActivityFeedViewModel: ImageDownloadType {
+struct BarActivityFeedViewModel: ImageNetworkingInjected, NetworkingInjected {
     
     // Private
     private let disposeBag = DisposeBag()
-    var photoService: PhotoService
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
-    let userAPI: UserAPIType
-    let barAPI: BarAPIType
     
     // Inputs
     
     // Outputs
-    var refreshAction: Action<Void, [ActivitySection]>
+    lazy var refreshAction: Action<Void, [ActivitySection]> = { this in
+       return  Action { _ in
+            return this.userAPI.getActivityFeed(userID: SignedInUser.userID)
+                .retryWhen(RxErrorHandlers.retryHandler)
+                .map({
+                    [ActivitySection.init(model: "Activities", items: $0)]
+                })
+        }
+    }(self)
     
-    init(coordinator: SceneCoordinatorType, userAPI: UserAPIType = UserAPIController(), photoService: PhotoService = KingFisherPhotoService(), barAPI: BarAPIType = BarAPIController()) {
+    init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator
-        self.userAPI = userAPI
-        self.photoService = photoService
-        self.barAPI = barAPI
 
 //        let numOfBlanks = (0..<7)
 //        let blankActivities = numOfBlanks.map { index -> Activity in
@@ -47,15 +48,6 @@ struct BarActivityFeedViewModel: ImageDownloadType {
 //            return activity
 //        }
         
-        refreshAction = Action { _ in
-            return userAPI.getActivityFeed(userID: SignedInUser.userID)
-                .retryWhen(RxErrorHandlers.retryHandler)
-                .map({
-                    [ActivitySection.init(model: "Activities", items: $0)]
-                })
-                //.startWith([ActivitySection.init(model: "Blank Activities", items: blankActivities)])
-        }
-
     }
     
     func onLike(activtyID: String) -> CocoaAction {

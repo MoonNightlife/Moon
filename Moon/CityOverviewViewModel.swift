@@ -10,11 +10,10 @@ import Foundation
 import RxSwift
 import Action
 
-struct CityOverviewViewModel {
+struct CityOverviewViewModel: NetworkingInjected {
     
     // Private
     private let disposeBag = DisposeBag()
-    private let barAPI: BarAPIType
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
@@ -22,17 +21,17 @@ struct CityOverviewViewModel {
     // Inputs
     
     // Outputs
-    let bars: Observable<[TopBar]>
-    
-    init(coordinator: SceneCoordinatorType, barAPI: BarAPIType = BarAPIController()) {
-        self.sceneCoordinator = coordinator
-        self.barAPI = barAPI
-        
-        bars = barAPI.getTopBarsIn(region: "Dallas").map({
+    var bars: Observable<[TopBar]> {
+        return barAPI.getTopBarsIn(region: "Dallas").map({
             return $0.map({ bar in
                 return TopBar(from: bar)
             })
         })
+    }
+    
+    init(coordinator: SceneCoordinatorType) {
+        self.sceneCoordinator = coordinator
+        
     }
 
 }

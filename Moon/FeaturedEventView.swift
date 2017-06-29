@@ -10,7 +10,6 @@ import UIKit
 import Material
 import Action
 import RxSwift
-import SwaggerClient
 
 class FeaturedEventView: ImageCardView {
     

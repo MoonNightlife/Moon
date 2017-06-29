@@ -12,14 +12,13 @@ import RxCocoa
 import Action
 import RxDataSources
 
-struct ContentSuggestionsViewModel: ImageDownloadType {
+struct ContentSuggestionsViewModel: ImageNetworkingInjected, NetworkingInjected {
     
     // Private
     private let bag = DisposeBag()
     
     // Dependencies
     let sceneCoordinator: SceneCoordinatorType
-    var photoService: PhotoService
     
     // Actions
     lazy var onShowUser: Action<Int, Void> = { this in
@@ -50,12 +49,9 @@ struct ContentSuggestionsViewModel: ImageDownloadType {
     var suggestedFriends: Driver<[SearchSection]>!
     var suggestedBars: Driver<[SearchSection]>!
     
-    init(coordinator: SceneCoordinatorType, photoService: PhotoService = KingFisherPhotoService()) {
+    init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator
-        self.photoService = photoService
-        
-        
-
+    
     }
     
     func onAddFriend(userID: String) -> CocoaAction {

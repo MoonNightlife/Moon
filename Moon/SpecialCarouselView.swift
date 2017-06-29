@@ -11,7 +11,6 @@ import Material
 import UIKit
 import Action
 import RxSwift
-import SwaggerClient
 
 class SpecialCarouselView: ImageCardView {
    

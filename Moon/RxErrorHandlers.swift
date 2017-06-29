@@ -8,7 +8,6 @@
 
 import Foundation
 import RxSwift
-import SwaggerClient
 
 class RxErrorHandlers {
     
@@ -24,7 +23,7 @@ class RxErrorHandlers {
             // If attemped to retrieve image 4 time with no success then throw error
             if attempt >= maxAttempts - 1 {
                 return Observable.error(error)
-            } else if case let SwaggerClient.ErrorResponse.Error(_, _, nsError) = error, (nsError as NSError).code == -1009 {
+            } else if (error as NSError).code == -1009 {
                 return Observable.error(error)
             }
             print("== retrying after \(attempt + 1) seconds ==")
@@ -40,7 +39,7 @@ class RxErrorHandlers {
             // If attemped to retrieve image 4 time with no success then throw error
             if attempt >= maxAttempts - 1 {
                 return Observable.error(error)
-            } else if case let SwaggerClient.ErrorResponse.Error(_, _, nsError) = error, (nsError as NSError).code == -1009 {
+            } else if (error as NSError).code == -1009 {
                 // If there is an internet connection error then wait till connection reestablished
                 return RxReachability.shared.status
                     .filter {

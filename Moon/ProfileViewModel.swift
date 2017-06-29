@@ -11,18 +11,17 @@ import RxSwift
 import RxCocoa
 import Action
 import RxOptional
-import SwaggerClient
 
-struct ProfileViewModel {
+struct ProfileViewModel: ImageNetworkingInjected {
     
     // Local
     private let bag = DisposeBag()
     private let barID = Variable<String?>(nil)
-
+    private let userID: String
+    
     // Dependecies
     private let scenceCoordinator: SceneCoordinatorType
-    private let userID: String
-    private let userAPI: UserAPIType
+    var userAPI: UserAPIType
     
     // Inputs
     
@@ -31,12 +30,13 @@ struct ProfileViewModel {
     var fullName: Observable<String>
     var bio: Observable<String>
     var activityBarName: Observable<String>
-    var profilePictures = Variable<[UIImage]>([])
     var isSignedInUserProfile = Variable(false)
-    var numFriendRequests = Variable<String?>(nil)
+    var numFriendRequests = Variable<String?>(nil) 
+    var profilePictures = Variable<[UIImage]>([])
     
-    init(coordinator: SceneCoordinatorType, userAPI: UserAPIType = UserAPIController(), photoService: PhotoService = KingFisherPhotoService(), userID: String) {
+    init(coordinator: SceneCoordinatorType, userID: String, userAPI: UserAPIType = FirebaseUserAPI(), photoService: PhotoService = KingFisherPhotoService()) {
         self.scenceCoordinator = coordinator
+        
         self.userID = userID
         self.userAPI = userAPI
         
@@ -56,7 +56,7 @@ struct ProfileViewModel {
             isSignedInUserProfile.value = false
         }
         
-        let user = userAPI.getUserProfile(userID: userID).catchErrorJustReturn(UserProfile())
+        let user = userAPI.getUserProfile(userID: userID)
         
         user.map({ user in
             return user.activity?.barID
@@ -71,7 +71,7 @@ struct ProfileViewModel {
         //TODO: Add bio when api adds property to model
         bio = user.map({ _ in "No Bio" })
         activityBarName = user.map({ $0.activity }).filterNil().map({ $0.barName }).replaceNilWith("No Plans")
-        
+
         user.map({ $0.profilePics }).filterNil()
             .flatMap({ pictureURLs in
                 return Observable.from(pictureURLs).flatMap({
