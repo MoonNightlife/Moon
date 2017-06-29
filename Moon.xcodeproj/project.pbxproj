@@ -221,6 +221,8 @@
 		F0E8627D1EF6B85400BEF5E9 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E8627C1EF6B85400BEF5E9 /* EditProfileViewModel.swift */; };
 		F0E8627F1EF6B8DB00BEF5E9 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E8627E1EF6B8DB00BEF5E9 /* EditProfileViewController.swift */; };
 		F0EBA0BF1ECCAE9F00056EF9 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EBA0BE1ECCAE9F00056EF9 /* ActionButton.swift */; };
+		F0ED6B3D1F057909005D04D6 /* FirebaseUserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0ED6B3C1F057909005D04D6 /* FirebaseUserAPI.swift */; };
+		F0ED6B3F1F057916005D04D6 /* FirebaseBarAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0ED6B3E1F057916005D04D6 /* FirebaseBarAPI.swift */; };
 		F0EF69381EF08BAE0028A32B /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EF69371EF08BAE0028A32B /* UsersTableViewController.swift */; };
 		F0EF693A1EF08BCB0028A32B /* UsersTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EF69391EF08BCB0028A32B /* UsersTableViewModel.swift */; };
 		F0EF693C1EF0949C0028A32B /* UsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EF693B1EF0949C0028A32B /* UsersTableViewCell.swift */; };
@@ -469,6 +471,8 @@
 		F0E8627C1EF6B85400BEF5E9 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		F0E8627E1EF6B8DB00BEF5E9 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		F0EBA0BE1ECCAE9F00056EF9 /* ActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
+		F0ED6B3C1F057909005D04D6 /* FirebaseUserAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseUserAPI.swift; sourceTree = "<group>"; };
+		F0ED6B3E1F057916005D04D6 /* FirebaseBarAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseBarAPI.swift; sourceTree = "<group>"; };
 		F0EF69371EF08BAE0028A32B /* UsersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
 		F0EF69391EF08BCB0028A32B /* UsersTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewModel.swift; sourceTree = "<group>"; };
 		F0EF693B1EF0949C0028A32B /* UsersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewCell.swift; sourceTree = "<group>"; };
@@ -792,6 +796,7 @@
 				F04989621EE063F400064F58 /* Scenes */,
 				F098FF9C1EDF46EF00A59594 /* Utilities */,
 				F0F017F91EF9A96D0086447E /* RxDataSources Model/Extensions */,
+				F0ED6B401F0579D8005D04D6 /* NewModels  */,
 				F098FF991EDF1DDA00A59594 /* Models */,
 				C0465DB01EDF20820065FD7C /* Login Images */,
 				F09B9D031EC3552F00B2385A /* View Models */,
@@ -988,6 +993,8 @@
 				F07C06211EF1958F00B78865 /* BarAPIController.swift */,
 				F07C06231EF195A500B78865 /* UserAPIController.swift */,
 				F0C72F431EF81D7700B25C52 /* PhotoService.swift */,
+				F0ED6B3C1F057909005D04D6 /* FirebaseUserAPI.swift */,
+				F0ED6B3E1F057916005D04D6 /* FirebaseBarAPI.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -1175,6 +1182,13 @@
 				F0A8FE171F01857F003044B1 /* Array.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		F0ED6B401F0579D8005D04D6 /* NewModels  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "NewModels ";
 			sourceTree = "<group>";
 		};
 		F0F017F91EF9A96D0086447E /* RxDataSources Model/Extensions */ = {
@@ -1526,6 +1540,7 @@
 				F09DF08E1EEAF1240092BFA5 /* NotificationSetting.swift in Sources */,
 				F0E59F2A1EEF73B4007A3323 /* BarInfoViewModel.swift in Sources */,
 				F0CF7F1B1EF37D5E005C068C /* EnterCodeViewModel.swift in Sources */,
+				F0ED6B3D1F057909005D04D6 /* FirebaseUserAPI.swift in Sources */,
 				F0CF7F191EF37D54005C068C /* EnterPhoneNumberViewModel.swift in Sources */,
 				F0F210591ECA1C160027B50B /* SearchBarViewController.swift in Sources */,
 				F0CA18AB1EE5AA4C00428318 /* FeaturedViewModel.swift in Sources */,
@@ -1540,6 +1555,7 @@
 				F09B9D081EC3571800B2385A /* ExploreViewController.swift in Sources */,
 				F0942F0D1ECCEC550038E389 /* FeaturedEventView.swift in Sources */,
 				F0E8627B1EF58B6A00BEF5E9 /* ContactService.swift in Sources */,
+				F0ED6B3F1F057916005D04D6 /* FirebaseBarAPI.swift in Sources */,
 				F0CA18A71EE5AA2A00428318 /* ExploreViewModel.swift in Sources */,
 				F0CA18AD1EE5AA5D00428318 /* MoonsViewViewModel.swift in Sources */,
 				F06B56FD1EFAA8750028552A /* RxDataSourceUserModel.swift in Sources */,

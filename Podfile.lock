@@ -193,7 +193,13 @@ PODS:
   - MDFTextAccessibility (1.2.0)
   - MIBadgeButton-Swift (0.5)
   - NVActivityIndicatorView (3.6.1)
+  - ObjectMapper (2.2.7)
   - RAReorderableLayout (0.6.1)
+  - RxAlamofire (3.0.3):
+    - RxAlamofire/Core (= 3.0.3)
+  - RxAlamofire/Core (3.0.3):
+    - Alamofire (~> 4.0)
+    - RxSwift (~> 3.0)
   - RxCocoa (3.4.0):
     - RxSwift (~> 3.4)
   - RxDataSources (1.0.3):
@@ -221,7 +227,9 @@ DEPENDENCIES:
   - MaterialComponents
   - MIBadgeButton-Swift (from `https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git`, branch `master`)
   - NVActivityIndicatorView
+  - ObjectMapper
   - RAReorderableLayout
+  - RxAlamofire
   - RxCocoa
   - RxDataSources (~> 1.0)
   - RxOptional
@@ -267,7 +275,9 @@ SPEC CHECKSUMS:
   MDFTextAccessibility: 94098925e0853551c5a311ce7c1ecefbe297cdb6
   MIBadgeButton-Swift: 9e57309b00b168d75ca8fecb45bc75124a8ffddf
   NVActivityIndicatorView: 9f52a7f84bf5c6a798722c450fe3c198e01c56ed
+  ObjectMapper: 65abcfd9a61cf7396cbd14a4fb22fddfcc46577e
   RAReorderableLayout: 5b6b87dd4022ee1747fd475623b14f5df940f754
+  RxAlamofire: 5eb39188c4917ad98127c0ecb4878a61b7517003
   RxCocoa: d14ef6b6029e1ddc6e966508c09289090de68ff9
   RxDataSources: a021a0e944ba5f7991259829d973afdbfa719c0b
   RxOptional: b97b59183af80d1e729ac9e51d09a10be668d6a8
@@ -277,6 +287,6 @@ SPEC CHECKSUMS:
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
   Whisper: 051f25e704bf8992641ffd28b20d5682ddc5f5d3
 
-PODFILE CHECKSUM: d78af2b4db0a76972a6a62d96a924c37d2754b93
+PODFILE CHECKSUM: 8b44d8878a1c6130536c515725c47be6ffd01f8f
 
 COCOAPODS: 1.2.1
