@@ -16,6 +16,7 @@ enum Sex: Int {
     case male
     case female
     case none
+    
 }
 
 enum MainView: Int {

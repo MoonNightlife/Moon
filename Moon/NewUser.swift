@@ -12,10 +12,13 @@ class NewUser {
     var firstName: String?
     var lastName: String?
     var birthday: String?
-    var sex: String?
+    var sex: Int?
     var password: String?
     var email: String?
     var username: String?
+    var image: Data?
+    var downloadURL: String?
+    var id: String?
     
     func listPropertiesWithValues(reflect: Mirror? = nil) {
         let mirror = reflect ?? Mirror(reflecting: self)

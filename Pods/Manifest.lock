@@ -14,6 +14,9 @@ PODS:
   - Firebase/DynamicLinks (4.0.0):
     - Firebase/Core
     - FirebaseDynamicLinks (= 2.0.0)
+  - Firebase/Storage (4.0.0):
+    - Firebase/Core
+    - FirebaseStorage (= 2.0.0)
   - FirebaseAnalytics (4.0.0):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
@@ -28,6 +31,10 @@ PODS:
     - FirebaseAnalytics (~> 4.0)
   - FirebaseInstanceID (2.0.0):
     - FirebaseCore (~> 4.0)
+  - FirebaseStorage (2.0.0):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseCore (~> 4.0)
+    - GTMSessionFetcher/Core (~> 1.1)
   - Fusuma (1.1.0)
   - GoogleToolboxForMac/DebugUtils (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
@@ -233,7 +240,9 @@ DEPENDENCIES:
   - ActionButton
   - EZSwipeController
   - Firebase/Auth
+  - Firebase/Core
   - Firebase/DynamicLinks
+  - Firebase/Storage
   - Fusuma
   - iCarousel
   - Kingfisher (~> 3.0)
@@ -278,6 +287,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 85ad466044c2f013cdb167f85d426d15b128114a
   FirebaseDynamicLinks: ad3bef2e8addfa1490af9db02201429c5c9447dd
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
+  FirebaseStorage: 8110a1ed2034c8fbfd83890d2acc9cdbbd99afec
   Fusuma: 087dcf57cd0e8712d357dcf14559927da369642c
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
@@ -299,6 +309,6 @@ SPEC CHECKSUMS:
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
   Whisper: 051f25e704bf8992641ffd28b20d5682ddc5f5d3
 
-PODFILE CHECKSUM: 427e9fb26e46dbbc5d5f14ea6fd1df8db763c67a
+PODFILE CHECKSUM: 8583333debcc77fa2d0af888a19c53184bf14a72
 
 COCOAPODS: 1.2.1

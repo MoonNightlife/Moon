@@ -10,8 +10,9 @@ import Foundation
 import RxSwift
 import Action
 import FirebaseAuth
+import FirebaseStorage
 
-struct PasswordsViewModel {
+struct PasswordsViewModel: NetworkingInjected {
     
     // Dependencies
     private let newUser: NewUser
@@ -48,6 +49,7 @@ struct PasswordsViewModel {
                 if let email = self.newUser.email, let password = self.newUser.password {
                     Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
                         if user != nil {
+                            self.newUser.id = user?.uid
                             observer.onNext()
                         } else if let e = error {
                             observer.onError(e)
@@ -60,17 +62,46 @@ struct PasswordsViewModel {
                 }
                 return Disposables.create()
             }).flatMap({
-                return self.loginAction().execute()
+                return self.uploadImage()
+            }).flatMap({
+                return self.createUserNode()
+            }).flatMap({
+                return self.loginAction()
             })
         })
     }
     
-    func loginAction() -> CocoaAction {
-        return CocoaAction(workFactory: { _ in
-            let mainVM = MainViewModel(coordinator: self.sceneCoordinator)
-            let searchVM = SearchBarViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
-        })
+    func uploadImage() -> Observable<Void> {
+            return Observable.create({ (observer) -> Disposable in
+                print(self.newUser.listPropertiesWithValues())
+                if let uid = Auth.auth().currentUser?.uid, let imageData = self.newUser.image {
+                    let ref = Storage.storage().reference().child(uid).child("profilePictures").child("fullSize")
+                    ref.putData(imageData, metadata: nil, completion: { (metadata, error) in
+                        if let downloadURLString = metadata?.downloadURLs?.first?.path {
+                            self.newUser.downloadURL = downloadURLString
+                            observer.onNext()
+                        } else {
+                            print("Failed to upload photo")
+                            print(error ?? MyError.SignUpError)
+                        }
+                        observer.onCompleted()
+                    })
+                } else {
+                    observer.onNext()
+                    observer.onCompleted()
+                }
+                return Disposables.create()
+            })
+    }
+    
+    func createUserNode() -> Observable<Void> {
+        return self.userAPI.createProfile(profile: self.newUser)
+    }
+    
+    func loginAction() -> Observable<Void> {
+        let mainVM = MainViewModel(coordinator: self.sceneCoordinator)
+        let searchVM = SearchBarViewModel(coordinator: self.sceneCoordinator)
+        return self.sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
     }
     
     init(coordinator: SceneCoordinatorType, user: NewUser) {

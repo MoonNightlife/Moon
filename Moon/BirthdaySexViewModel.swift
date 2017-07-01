@@ -64,9 +64,9 @@ struct BirthdaySexViewModel {
             })
             .addDisposableTo(disposeBag)
         
-        sexString
+            sex
             .subscribe(onNext: {
-                self.newUser.sex = $0
+                self.newUser.sex = $0.0
             })
             .addDisposableTo(disposeBag)
     }

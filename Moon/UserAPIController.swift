@@ -30,6 +30,7 @@ protocol UserAPIType {
     func likeSpecial(userID: String, specialID: String) -> Observable<Void>
     func likeEvent(userID: String, eventID: String) -> Observable<Void>
     func update(profile: UserProfile) -> Observable<Void>
+    func createProfile(profile: NewUser) ->  Observable<Void>
 }
 
 //class UserAPIController: UserAPIType {

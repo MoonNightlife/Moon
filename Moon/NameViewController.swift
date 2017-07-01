@@ -86,6 +86,7 @@ class NameViewController: UIViewController, BindableType, FusumaDelegate {
     func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
         //let i  = image.crop(toWidth: 200, toHeight: 200) // circle image
         profilePic.image = image
+        viewModel.imageData.value = UIImageJPEGRepresentation(image, 1.0)
     }
     
     func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {

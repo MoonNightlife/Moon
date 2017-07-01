@@ -11,6 +11,7 @@ import RxSwift
 import RxAlamofire
 import ObjectMapper
 import RxOptional
+import Alamofire
 
 struct FirebaseUserAPI: UserAPIType {
     
@@ -76,5 +77,35 @@ struct FirebaseUserAPI: UserAPIType {
     }
     func update(profile: UserProfile) -> Observable<Void> {
         return Observable.empty()
+    }
+    func createProfile(profile: NewUser) ->  Observable<Void> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "firstName": profile.firstName ?? "No First Name",
+                "lastName": profile.lastName ?? "No Last Name",
+                "birthday": profile.birthday ?? "No Birthday",
+                "sex": profile.firstName ?? Sex.none.rawValue,
+                "username": profile.username ?? "No username",
+                "id": profile.id ?? "No id",
+                "bio": "No Bio",
+                "photoUrls": [profile.downloadURL ?? "No Photo"]
+            ]
+            let request = Alamofire.request(UserFunction.updateProfile, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate().responseJSON { response in
+                    switch response.result {
+                    case .success:
+                        print("Validation Successful")
+                    case .failure(let error):
+                        print(error)
+                    }
+                    observer.onNext()
+                    observer.onCompleted()
+            }
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+        
     }
 }

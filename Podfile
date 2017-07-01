@@ -28,6 +28,8 @@ target 'Moon' do
   pod 'RxAlamofire'
   pod 'ObjectMapper'
   pod 'Firebase/Auth'
+  pod 'Firebase/Core'
+  pod 'Firebase/Storage'
 
   target 'MoonTests' do
     inherit! :search_paths
