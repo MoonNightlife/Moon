@@ -10,6 +10,7 @@ import Foundation
 import Action
 import RxSwift
 import RxDataSources
+import FirebaseAuth
 
 struct SettingsViewModel {
     
@@ -20,7 +21,13 @@ struct SettingsViewModel {
                 return Observable.empty()
             }
             if case Scene.Login.login(_) = scene {
-                return this.sceneCoordinator.transition(to: scene, type: .root)
+                do {
+                    try Auth.auth().signOut()
+                    return this.sceneCoordinator.transition(to: scene, type: .root)
+                } catch let signOutError as NSError {
+                    print("Sign Out Error")
+                    return Observable.empty()
+                }
             } else {
                 return this.sceneCoordinator.transition(to: scene, type: .push)
             }
@@ -92,4 +99,5 @@ struct SettingsViewModel {
             return Scene.User.webView(vm)
         }
     }
+
 }

@@ -27,6 +27,7 @@ target 'Moon' do
   pod "MIBadgeButton-Swift", :git => 'https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git', :branch => 'master'
   pod 'RxAlamofire'
   pod 'ObjectMapper'
+  pod 'Firebase/Auth'
 
   target 'MoonTests' do
     inherit! :search_paths

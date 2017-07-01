@@ -137,9 +137,9 @@
 		F07C06221EF1958F00B78865 /* BarAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06211EF1958F00B78865 /* BarAPIController.swift */; };
 		F07C06241EF195A500B78865 /* UserAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06231EF195A500B78865 /* UserAPIController.swift */; };
 		F07C06261EF19D7400B78865 /* RxErrorHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06251EF19D7400B78865 /* RxErrorHandlers.swift */; };
+		F07C31BB1F05B65C00EB5793 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F07C31BA1F05B65C00EB5793 /* GoogleService-Info.plist */; };
 		F07F694B1EFAED22000F854D /* DeepLinking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07F694A1EFAED22000F854D /* DeepLinking.swift */; };
 		F07F694D1EFAEFC5000F854D /* ShowEventDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07F694C1EFAEFC5000F854D /* ShowEventDeepLink.swift */; };
-		F07F69501EFB0A88000F854D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F07F694F1EFB0A88000F854D /* GoogleService-Info.plist */; };
 		F0942F0B1ECCEBA40038E389 /* FakeEventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0942F0A1ECCEBA40038E389 /* FakeEventData.swift */; };
 		F0942F0D1ECCEC550038E389 /* FeaturedEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0942F0C1ECCEC550038E389 /* FeaturedEventView.swift */; };
 		F098FF9B1EDF1DEA00A59594 /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FF9A1EDF1DEA00A59594 /* NewUser.swift */; };
@@ -390,9 +390,9 @@
 		F07C06211EF1958F00B78865 /* BarAPIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAPIController.swift; sourceTree = "<group>"; };
 		F07C06231EF195A500B78865 /* UserAPIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPIController.swift; sourceTree = "<group>"; };
 		F07C06251EF19D7400B78865 /* RxErrorHandlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxErrorHandlers.swift; sourceTree = "<group>"; };
+		F07C31BA1F05B65C00EB5793 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F07F694A1EFAED22000F854D /* DeepLinking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepLinking.swift; sourceTree = "<group>"; };
 		F07F694C1EFAEFC5000F854D /* ShowEventDeepLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowEventDeepLink.swift; sourceTree = "<group>"; };
-		F07F694F1EFB0A88000F854D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F0942F0A1ECCEBA40038E389 /* FakeEventData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeEventData.swift; sourceTree = "<group>"; };
 		F0942F0C1ECCEC550038E389 /* FeaturedEventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedEventView.swift; sourceTree = "<group>"; };
 		F098FF9A1EDF1DEA00A59594 /* NewUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
@@ -933,7 +933,7 @@
 				F001BAB21EC50CDB00CDF9BC /* Designs */,
 				F048F1211EA3B7A5000F0161 /* Assets.xcassets */,
 				F048F1261EA3B7A5000F0161 /* Info.plist */,
-				F07F694F1EFB0A88000F854D /* GoogleService-Info.plist */,
+				F07C31BA1F05B65C00EB5793 /* GoogleService-Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1363,7 +1363,6 @@
 				C0FC62791ECF50C30087FA3B /* s3.jpg in Resources */,
 				F0A2252E1ECBAA3E00170927 /* bacardi.jpeg in Resources */,
 				F0CA18951EE5867700428318 /* User.storyboard in Resources */,
-				F07F69501EFB0A88000F854D /* GoogleService-Info.plist in Resources */,
 				F0A8E2EB1EC3C858001D9993 /* Pic7.jpg in Resources */,
 				C0DAD3261EEA04B9008BAF05 /* b2.jpg in Resources */,
 				C0FC62731ECF50C30087FA3B /* s10.jpg in Resources */,
@@ -1403,6 +1402,7 @@
 				C0FC62891ECF69730087FA3B /* e1.jpg in Resources */,
 				C0DAD3161EE5EDE9008BAF05 /* pp4.jpg in Resources */,
 				F03830601EC63C7300A0FF5D /* Master.storyboard in Resources */,
+				F07C31BB1F05B65C00EB5793 /* GoogleService-Info.plist in Resources */,
 				F0A2253A1ECBAAE300170927 /* whitewine.jpeg in Resources */,
 				C0DAD3121EE5EDDB008BAF05 /* pp2.jpg in Resources */,
 				C0465DB81EDF43B70065FD7C /* OR_icon.png in Resources */,

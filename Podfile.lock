@@ -5,6 +5,9 @@ PODS:
   - ActionButton (0.1.5)
   - Alamofire (4.4.0)
   - EZSwipeController (0.6.1)
+  - Firebase/Auth (4.0.0):
+    - Firebase/Core
+    - FirebaseAuth (= 4.0.0)
   - Firebase/Core (4.0.0):
     - FirebaseAnalytics (= 4.0.0)
     - FirebaseCore (= 4.0.0)
@@ -15,6 +18,10 @@ PODS:
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseAuth (4.0.0):
+    - FirebaseAnalytics (~> 4.0)
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseCore (4.0.0):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseDynamicLinks (2.0.0):
@@ -22,9 +29,17 @@ PODS:
   - FirebaseInstanceID (2.0.0):
     - FirebaseCore (~> 4.0)
   - Fusuma (1.1.0)
+  - GoogleToolboxForMac/DebugUtils (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1):
+    - GoogleToolboxForMac/DebugUtils (= 2.1.1)
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
+  - GTMSessionFetcher/Core (1.1.10)
   - iCarousel (1.8.3)
   - Kingfisher (3.9.1)
   - Material (2.6.3):
@@ -217,6 +232,7 @@ DEPENDENCIES:
   - Action (~> 3.0)
   - ActionButton
   - EZSwipeController
+  - Firebase/Auth
   - Firebase/DynamicLinks
   - Fusuma
   - iCarousel
@@ -258,11 +274,13 @@ SPEC CHECKSUMS:
   EZSwipeController: 255b0f8aed31963b0236802c926e27dd006a2532
   Firebase: 284eea779b73fdff309791817da7c68bff8dd572
   FirebaseAnalytics: 6f08e746f7d66f5452931bc2e822b5df9c66b64a
+  FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
   FirebaseCore: 85ad466044c2f013cdb167f85d426d15b128114a
   FirebaseDynamicLinks: ad3bef2e8addfa1490af9db02201429c5c9447dd
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
   Fusuma: 087dcf57cd0e8712d357dcf14559927da369642c
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   Kingfisher: 6729a0baaa458245bfb8cd5a1296c71c10d6eb6c
   Material: 68440da8f2564c19344d5da2ee5dde5618be5f95
@@ -281,6 +299,6 @@ SPEC CHECKSUMS:
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
   Whisper: 051f25e704bf8992641ffd28b20d5682ddc5f5d3
 
-PODFILE CHECKSUM: 3ac83be58c3d0c2ad95fa47c14b9431d97195173
+PODFILE CHECKSUM: 427e9fb26e46dbbc5d5f14ea6fd1df8db763c67a
 
 COCOAPODS: 1.2.1

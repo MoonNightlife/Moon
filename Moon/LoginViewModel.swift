@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import Action
+import FirebaseAuth
 
 struct LoginViewModel {
     
@@ -16,8 +17,8 @@ struct LoginViewModel {
     let sceneCoordinator: SceneCoordinatorType
     
     // Inputs
-    var email = BehaviorSubject<String?>(value: nil)
-    var password = BehaviorSubject<String?>(value: nil)
+    var email = Variable<String?>(nil)
+    var password = Variable<String?>(nil)
     
     // Ouputs
     var showLoadingIndicator = Variable(false)
@@ -43,11 +44,34 @@ struct LoginViewModel {
     }
     
     func onSignIn() -> CocoaAction {
-        return CocoaAction {
+        return CocoaAction {_ in
+            return Observable.create({ (observer) -> Disposable in
+                if let email = self.email.value, let password = self.password.value {
+                    Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
+                        if user != nil {
+                            observer.onNext()
+                        } else if let e = error {
+                            observer.onError(e)
+                        } else {
+                            observer.onError(MyError.SignUpError)
+                        }
+                    })
+                } else {
+                    observer.onError(MyError.SignUpError)
+                }
+                return Disposables.create()
+            }).flatMap({
+                return self.loginAction().execute()
+            })
+        }
+    }
+    
+    func loginAction() -> CocoaAction {
+        return CocoaAction(workFactory: { _ in
             let mainVM = MainViewModel(coordinator: self.sceneCoordinator)
             let searchVM = SearchBarViewModel(coordinator: self.sceneCoordinator)
             return self.sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
-        }
+        })
     }
 
 }

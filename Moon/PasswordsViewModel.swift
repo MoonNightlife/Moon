@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import Action
+import FirebaseAuth
 
 struct PasswordsViewModel {
     
@@ -41,20 +42,36 @@ struct PasswordsViewModel {
             })
     }
     
-    lazy var createUser: CocoaAction = { this in
-        return CocoaAction(enabledIf: this.allValid, workFactory: {_ in
-            print("Create User")
-            return Observable.empty()
+    func createUser() -> CocoaAction {
+        return CocoaAction(enabledIf: self.allValid, workFactory: {_ in
+            return Observable.create({ (observer) -> Disposable in
+                if let email = self.newUser.email, let password = self.newUser.password {
+                    Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
+                        if user != nil {
+                            observer.onNext()
+                        } else if let e = error {
+                            observer.onError(e)
+                        } else {
+                            observer.onError(MyError.SignUpError)
+                        }
+                    })
+                } else {
+                    observer.onError(MyError.SignUpError)
+                }
+                return Disposables.create()
+            }).flatMap({
+                return self.loginAction().execute()
+            })
         })
-    }(self)
+    }
     
-    lazy var loginAction: CocoaAction = { this in
+    func loginAction() -> CocoaAction {
         return CocoaAction(workFactory: { _ in
-            let mainVM = MainViewModel(coordinator: this.sceneCoordinator)
-            let searchVM = SearchBarViewModel(coordinator: this.sceneCoordinator)
-            return this.sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
+            let mainVM = MainViewModel(coordinator: self.sceneCoordinator)
+            let searchVM = SearchBarViewModel(coordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
         })
-    }(self)
+    }
     
     init(coordinator: SceneCoordinatorType, user: NewUser) {
         self.sceneCoordinator = coordinator

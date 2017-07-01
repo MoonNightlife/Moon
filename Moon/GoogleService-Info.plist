@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>134242726616-4ljttv2foenftjlq1hq8qfip9d9slnhb.apps.googleusercontent.com</string>
+	<string>899696771124-p9k6qbpmkaonto2k0h9rs1m2f7ak0ts1.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.134242726616-4ljttv2foenftjlq1hq8qfip9d9slnhb</string>
+	<string>com.googleusercontent.apps.899696771124-p9k6qbpmkaonto2k0h9rs1m2f7ak0ts1</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCziWOnPe-fm4MnbUeIOuzrrvkJOk5G2sY</string>
+	<string>AIzaSyDks2k2-oBvzPWO_WwRvMJ6gBMd7nLWB7Q</string>
 	<key>GCM_SENDER_ID</key>
-	<string>134242726616</string>
+	<string>899696771124</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.NobleLeyva.Moon</string>
 	<key>PROJECT_ID</key>
-	<string>moon-b4dc6</string>
+	<string>moon-4409e</string>
 	<key>STORAGE_BUCKET</key>
-	<string>moon-b4dc6.appspot.com</string>
+	<string>moon-4409e.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:134242726616:ios:d7771c3775daf4e6</string>
+	<string>1:899696771124:ios:d7771c3775daf4e6</string>
 	<key>DATABASE_URL</key>
-	<string>https://moon-b4dc6.firebaseio.com</string>
+	<string>https://moon-4409e.firebaseio.com</string>
 </dict>
 </plist>

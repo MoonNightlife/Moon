@@ -35,7 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let url = launchOptions?[.url] as? URL {
             return executeDeepLink(with: url)
         } else {
-            //TODO: check if user is logged in
+            Auth.auth().addStateDidChangeListener { (auth, user) in
+                // ...
+            }
             prepareEntryViewController(vc: .login)
             return true
         }

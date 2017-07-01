@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum MyError: Error {
+    case SignUpError
+}
+
 enum Sex: Int {
     case male
     case female
