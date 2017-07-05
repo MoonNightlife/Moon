@@ -12,7 +12,7 @@ import RxSwift
 import RxDataSources
 import FirebaseAuth
 
-struct SettingsViewModel {
+struct SettingsViewModel: AuthNetworkingInjected {
     
     // Outputs
     lazy var showNextScreen: Action<Setting, Void> = { this in
@@ -21,13 +21,9 @@ struct SettingsViewModel {
                 return Observable.empty()
             }
             if case Scene.Login.login(_) = scene {
-                do {
-                    try Auth.auth().signOut()
+                return this.authAPI.signOut().flatMap({
                     return this.sceneCoordinator.transition(to: scene, type: .root)
-                } catch let signOutError as NSError {
-                    print("Sign Out Error")
-                    return Observable.empty()
-                }
+                })
             } else {
                 return this.sceneCoordinator.transition(to: scene, type: .push)
             }
@@ -39,6 +35,7 @@ struct SettingsViewModel {
     
     init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator
+     
     }
     
     func onBack() -> CocoaAction {

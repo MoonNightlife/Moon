@@ -11,7 +11,7 @@ import RxSwift
 import Action
 import FirebaseAuth
 
-struct LoginViewModel {
+struct LoginViewModel: AuthNetworkingInjected {
     
     // Dependencies
     let sceneCoordinator: SceneCoordinatorType
@@ -45,33 +45,22 @@ struct LoginViewModel {
     
     func onSignIn() -> CocoaAction {
         return CocoaAction {_ in
-            return Observable.create({ (observer) -> Disposable in
-                if let email = self.email.value, let password = self.password.value {
-                    Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
-                        if user != nil {
-                            observer.onNext()
-                        } else if let e = error {
-                            observer.onError(e)
-                        } else {
-                            observer.onError(MyError.SignUpError)
-                        }
+            if let email = self.email.value, let password = self.password.value {
+                return self.authAPI.login(credentials: .email(email: email, password: password))
+                    .flatMap({
+                        return self.loginAction()
                     })
-                } else {
-                    observer.onError(MyError.SignUpError)
-                }
-                return Disposables.create()
-            }).flatMap({
-                return self.loginAction().execute()
-            })
+
+            } else {
+                return Observable.empty()
+            }
         }
     }
     
-    func loginAction() -> CocoaAction {
-        return CocoaAction(workFactory: { _ in
-            let mainVM = MainViewModel(coordinator: self.sceneCoordinator)
-            let searchVM = SearchBarViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
-        })
+    func loginAction() -> Observable<Void> {
+        let mainVM = MainViewModel(coordinator: self.sceneCoordinator)
+        let searchVM = SearchBarViewModel(coordinator: self.sceneCoordinator)
+        return self.sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
     }
 
 }

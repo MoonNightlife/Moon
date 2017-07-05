@@ -10,13 +10,6 @@ import Foundation
 import SinchVerification
 import RxSwift
 
-protocol SMSValidationService {
-//    func sendVerificationCodeTo(PhoneNumber phoneNumber: String) -> Observable<Void>
-//    func verifyNumberWith(Code code: String) -> Observable<Void>
-    static func formatPhoneNumberForGuiFrom(string: String, countryCode: CountryCode) -> String?
-    static func formatPhoneNumberForStorageFrom(string: String, countryCode: CountryCode) -> String?
-}
-
 class SinchService: NSObject, SMSValidationService {
     
     enum SinchError: Error {

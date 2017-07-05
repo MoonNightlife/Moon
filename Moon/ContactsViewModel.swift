@@ -18,7 +18,7 @@ struct ContactsViewModel: BackType, ImageNetworkingInjected, NetworkingInjected 
     
     // Dependencies
     let sceneCoordinator: SceneCoordinatorType
-    let contactService: ContactService
+    let contactService: ContactUtility
 
     // Actions
     var checkContactAccess: Action<Void, Bool>
@@ -26,7 +26,7 @@ struct ContactsViewModel: BackType, ImageNetworkingInjected, NetworkingInjected 
     // Outputs
     var UserInContacts: Observable<[SnapshotSectionModel]>
     
-    init(coordinator: SceneCoordinatorType, contactService: ContactService = ContactService()) {
+    init(coordinator: SceneCoordinatorType, contactService: ContactUtility = ContactUtility()) {
         self.sceneCoordinator = coordinator
         self.contactService = contactService
         
@@ -47,7 +47,7 @@ struct ContactsViewModel: BackType, ImageNetworkingInjected, NetworkingInjected 
         
     }
     
-    static func getPhoneNumbers(service: ContactService) -> Observable<[String]> {
+    static func getPhoneNumbers(service: ContactUtility) -> Observable<[String]> {
         return service.getContacts().map({
             return $0.flatMap({
                 SinchService.formatPhoneNumberForStorageFrom(string: $0, countryCode: CountryCode.US)

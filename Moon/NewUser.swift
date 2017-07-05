@@ -19,18 +19,4 @@ class NewUser {
     var image: Data?
     var downloadURL: String?
     var id: String?
-    
-    func listPropertiesWithValues(reflect: Mirror? = nil) {
-        let mirror = reflect ?? Mirror(reflecting: self)
-        if mirror.superclassMirror != nil {
-            self.listPropertiesWithValues(reflect: mirror.superclassMirror)
-        }
-        
-        for (index, attr) in mirror.children.enumerated() {
-            if let property_name = attr.label as String! {
-                //You can represent the results however you want here!!!
-                print("\(mirror.description) \(index): \(property_name) = \(attr.value)")
-            }
-        }
-    }
 }

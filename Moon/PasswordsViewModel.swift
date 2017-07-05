@@ -12,7 +12,7 @@ import Action
 import FirebaseAuth
 import FirebaseStorage
 
-struct PasswordsViewModel: NetworkingInjected {
+struct PasswordsViewModel: NetworkingInjected, AuthNetworkingInjected, StorageNetworkingInjected {
     
     // Dependencies
     private let newUser: NewUser
@@ -45,59 +45,23 @@ struct PasswordsViewModel: NetworkingInjected {
     
     func createUser() -> CocoaAction {
         return CocoaAction(enabledIf: self.allValid, workFactory: {_ in
-            return Observable.create({ (observer) -> Disposable in
-                if let email = self.newUser.email, let password = self.newUser.password {
-                    Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
-                        if user != nil {
-                            self.newUser.id = user?.uid
-                            observer.onNext()
-                        } else if let e = error {
-                            observer.onError(e)
-                        } else {
-                            observer.onError(MyError.SignUpError)
-                        }
-                    })
-                } else {
-                    observer.onError(MyError.SignUpError)
-                }
-                return Disposables.create()
-            }).flatMap({
-                return self.uploadImage()
-            }).flatMap({
-                return self.createUserNode()
-            }).flatMap({
-                return self.loginAction()
-            })
+            return self.authAPI.createAccount(newUser: self.newUser)
+                .flatMap({ id -> Observable<Void> in
+                    if let photoData = self.newUser.image {
+                        return self.storageAPI.uploadProfilePictureFrom(data: photoData, forUser: id)
+                    } else {
+                        return Observable.empty()
+                    }
+                })
+                .flatMap({
+                    return self.userAPI.createProfile(profile: self.newUser)
+                })
+                .flatMap({
+                    return self.loginAction()
+                })
         })
     }
-    
-    func uploadImage() -> Observable<Void> {
-            return Observable.create({ (observer) -> Disposable in
-                print(self.newUser.listPropertiesWithValues())
-                if let uid = Auth.auth().currentUser?.uid, let imageData = self.newUser.image {
-                    let ref = Storage.storage().reference().child(uid).child("profilePictures").child("fullSize")
-                    ref.putData(imageData, metadata: nil, completion: { (metadata, error) in
-                        if let downloadURLString = metadata?.downloadURLs?.first?.path {
-                            self.newUser.downloadURL = downloadURLString
-                            observer.onNext()
-                        } else {
-                            print("Failed to upload photo")
-                            print(error ?? MyError.SignUpError)
-                        }
-                        observer.onCompleted()
-                    })
-                } else {
-                    observer.onNext()
-                    observer.onCompleted()
-                }
-                return Disposables.create()
-            })
-    }
-    
-    func createUserNode() -> Observable<Void> {
-        return self.userAPI.createProfile(profile: self.newUser)
-    }
-    
+
     func loginAction() -> Observable<Void> {
         let mainVM = MainViewModel(coordinator: self.sceneCoordinator)
         let searchVM = SearchBarViewModel(coordinator: self.sceneCoordinator)

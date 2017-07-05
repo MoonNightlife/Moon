@@ -10,7 +10,7 @@ import Foundation
 import Contacts
 import RxSwift
 
-class ContactService {
+class ContactUtility {
     
     let contactStore = CNContactStore()
     let keysToFetch = [CNContactPhoneNumbersKey] as [CNKeyDescriptor]
