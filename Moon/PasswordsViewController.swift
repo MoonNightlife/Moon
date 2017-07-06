@@ -11,6 +11,8 @@ import Material
 import RxSwift
 import RxCocoa
 import MaterialComponents.MDCProgressView
+import EZLoadingActivity
+
 class PasswordsViewController: UIViewController, BindableType {
 
     let disposeBag = DisposeBag()
@@ -53,8 +55,19 @@ class PasswordsViewController: UIViewController, BindableType {
         viewModel.showPasswordsMatchError.bind(to: retypePasswordTextField.rx.isErrorRevealed).addDisposableTo(disposeBag)
         
         viewModel.allValid.bind(to: doneButton.rx.isEnabled).addDisposableTo(disposeBag)
-        doneButton.rx.action = viewModel.createUser()
         
+        let createUserAction = viewModel.createUser()
+        doneButton.rx.action = createUserAction
+        createUserAction.executing.do(onNext: {
+            if $0 {
+                EZLoadingActivity.show("Creating Account", disableUI: true)
+            } else {
+                EZLoadingActivity.hide()
+            }
+        }, onError: { _ in
+            EZLoadingActivity.hide()
+        }).subscribe().addDisposableTo(disposeBag)
+
         navBackButton.rx.action = viewModel.onBack()
     }
     

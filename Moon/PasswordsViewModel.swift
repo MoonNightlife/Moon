@@ -43,18 +43,20 @@ struct PasswordsViewModel: NetworkingInjected, AuthNetworkingInjected, StorageNe
             })
     }
     
+    var showLoadingIndicator = Variable(false)
+    
     func createUser() -> CocoaAction {
         return CocoaAction(enabledIf: self.allValid, workFactory: {_ in
             return self.authAPI.createAccount(newUser: self.newUser)
+                .flatMap({
+                    return self.authAPI.login(credentials: .email(email: self.newUser.email!, password: self.newUser.password!))
+                })
                 .flatMap({ id -> Observable<Void> in
                     if let photoData = self.newUser.image {
                         return self.storageAPI.uploadProfilePictureFrom(data: photoData, forUser: id)
                     } else {
-                        return Observable.empty()
+                        return Observable.just()
                     }
-                })
-                .flatMap({
-                    return self.userAPI.createProfile(profile: self.newUser)
                 })
                 .flatMap({
                     return self.loginAction()

@@ -10,6 +10,7 @@ import UIKit
 import Material
 import RxCocoa
 import RxSwift
+import EZLoadingActivity
 
 class LoginViewController: UIViewController, BindableType {
     
@@ -95,7 +96,17 @@ class LoginViewController: UIViewController, BindableType {
     func bindViewModel() {
         signUpButton.rx.action = viewModel.onSignUp()
         recoverButton.rx.action = viewModel.onForgotPassword()
-        loginButton.rx.action = viewModel.onSignIn()
+        
+        let signInAction = viewModel.onSignIn()
+        loginButton.rx.action = signInAction
+        signInAction.executing.do(onNext: {
+            if $0 {
+                EZLoadingActivity.show("Signing In", disableUI: true)
+            } else {
+                EZLoadingActivity.hide()
+            }
+        }).subscribe().addDisposableTo(disposeBag)
+        
         emailTextField.rx.textInput.text.bind(to: viewModel.email).addDisposableTo(disposeBag)
         passwordTextField.rx.textInput.text.bind(to: viewModel.password).addDisposableTo(disposeBag)
     }

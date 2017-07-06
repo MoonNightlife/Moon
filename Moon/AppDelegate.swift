@@ -35,10 +35,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let url = launchOptions?[.url] as? URL {
             return executeDeepLink(with: url)
         } else {
-            Auth.auth().addStateDidChangeListener { (auth, user) in
-                // ...
+            if Auth.auth().currentUser != nil {
+                prepareEntryViewController(vc: .main)
+            } else {
+                prepareEntryViewController(vc: .login)
             }
-            prepareEntryViewController(vc: .login)
+            
             return true
         }
     }

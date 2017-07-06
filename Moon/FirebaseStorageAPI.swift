@@ -17,8 +17,10 @@ struct FirebaseStorageAPI: StorageAPIType {
             let task = ref.putData(data, metadata: nil, completion: { (_, error) in
                 if let e = error {
                     observer.onError(e)
+                } else {
+                    observer.onNext()
+                    observer.onCompleted()
                 }
-                observer.onCompleted()
             })
 
             return Disposables.create {

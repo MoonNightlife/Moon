@@ -47,7 +47,7 @@ struct LoginViewModel: AuthNetworkingInjected {
         return CocoaAction {_ in
             if let email = self.email.value, let password = self.password.value {
                 return self.authAPI.login(credentials: .email(email: email, password: password))
-                    .flatMap({
+                    .flatMap({_ in 
                         return self.loginAction()
                     })
 

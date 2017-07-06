@@ -21,7 +21,7 @@ enum AuthErrors: Error {
 }
 
 protocol AuthAPIType {
-    func login(credentials: LoginCredentials) -> Observable<Void>
+    func login(credentials: LoginCredentials) -> Observable<UserID>
     func signOut() -> Observable<Void>
-    func createAccount(newUser: NewUser) -> Observable<UserID>
+    func createAccount(newUser: NewUser) -> Observable<Void>
 }

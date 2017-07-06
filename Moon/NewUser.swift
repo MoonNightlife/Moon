@@ -7,16 +7,35 @@
 //
 
 import Foundation
+import ObjectMapper
 
-class NewUser {
+class NewUser: Mappable {
     var firstName: String?
     var lastName: String?
     var birthday: String?
-    var sex: Int?
+    var sex: Sex?
     var password: String?
     var email: String?
     var username: String?
     var image: Data?
-    var downloadURL: String?
-    var id: String?
+    
+    init() {
+
+    }
+    
+    required init?(map: Map) {
+
+    }
+    
+    func mapping(map: Map) {
+        firstName <- map["firstName"]
+        lastName <- map["lastName"]
+        birthday <- map["birthday"]
+        sex <- (map["sex"], SexTransform)
+        password <- map["password"]
+        email <- map["email"]
+        username <- map["username"]
+    }
+    
 }
+
