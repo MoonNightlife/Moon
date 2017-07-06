@@ -67,10 +67,10 @@ enum Setting {
 
 enum SettingSections {
     enum MyAccount: Int {
-        case changeName = 0
-        case changePhoneNumber = 2
-        case changeEmail = 3
-        case notifications = 4
+        case username = 0
+        case changePhoneNumber = 1
+        case changeEmail = 2
+        case notifications = 3
     }
     
     enum AccountActions: Int {

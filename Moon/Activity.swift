@@ -11,14 +11,17 @@ import ObjectMapper
 import RxDataSources
 
 class Activity: Mappable {
-    var id: String?
     var barID: String?
     var barName: String?
     var userID: String?
-    var userName: String?
+    var firstName: String?
+    var lastName: String?
     var timestamp: Double?
     var numLikes: Int?
     var pic: String?
+    var userName: String {
+        return (firstName ?? "") + (lastName ?? "")
+    }
     
     required init?(map: Map) {
         if map.JSON["id"] == nil {
@@ -27,25 +30,24 @@ class Activity: Mappable {
     }
     
     func mapping(map: Map) {
-        id <- map["id"]
-        barID <- map["barId"]
-        barName <- map["barName"]
-        userID <- map["userId"]
-        userName <- map["userName"]
-        timestamp <- map["timeStamp"]
-        numLikes <- map["numberOfLikes"]
-        pic <- map["photoThumbnail"]
+        userID <- map["id"]
+        barID <- map["activityInfo/barId"]
+        barName <- map["activityInfo/barName"]
+        firstName <- map["firstName"]
+        lastName <- map["lastName"]
+        timestamp <- map["activityInfo/timeStamp"]
+        numLikes <- map["activityInfo/numberOfLikes"]
     }
 }
 
 extension Activity: IdentifiableType {
     var identity: String {
-        return id!
+        return userID!
     }
 }
 
 extension Activity: Equatable {
     static func == (lhs: Activity, rhs: Activity) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.userID == rhs.userID
     }
 }

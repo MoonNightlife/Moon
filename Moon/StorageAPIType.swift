@@ -9,6 +9,11 @@
 import RxSwift
 import Foundation
 
+enum StorageError: Error {
+    case unknown
+}
+
 protocol StorageAPIType {
     func uploadProfilePictureFrom(data: Data, forUser id: String) -> Observable<Void>
+    func getProfilePictureDownloadUrlForUser(id: String) -> Observable<URL?>
 }

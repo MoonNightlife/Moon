@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import Action
 
-struct UsersTableViewModel: BackType, ImageNetworkingInjected, NetworkingInjected {
+struct UsersTableViewModel: BackType, ImageNetworkingInjected, NetworkingInjected, AuthNetworkingInjected {
 
     // Local
     let sourceID: UserTableSource
@@ -25,7 +25,7 @@ struct UsersTableViewModel: BackType, ImageNetworkingInjected, NetworkingInjecte
         
         switch this.sourceID {
         case let .user(id):
-            if id == SignedInUser.userID {
+            if id == this.authAPI.SignedInUserID {
                 this.currentSignedInUser.value = true
                 userSource = Observable.zip(this.getFriends(userID: id), this.getFriendRequest(userID: id)).map({
                     // The order of the two elements in the array will determine which section shows first
@@ -62,6 +62,7 @@ struct UsersTableViewModel: BackType, ImageNetworkingInjected, NetworkingInjecte
     
     func getFriends(userID: String) -> Observable<UserSectionModel> {
         return userAPI.getFriends(userID: userID)
+            .catchErrorJustReturn([])
             .map({
                 return $0.map(UserSectionItem.friend)
             }).map({
@@ -71,6 +72,7 @@ struct UsersTableViewModel: BackType, ImageNetworkingInjected, NetworkingInjecte
     
     func getFriendRequest(userID: String) -> Observable<UserSectionModel> {
         return userAPI.getFriendRequest(userID: userID)
+            .catchErrorJustReturn([])
             .map({
                 return $0.map(UserSectionItem.friendRequest)
             }).map({
@@ -130,14 +132,14 @@ struct UsersTableViewModel: BackType, ImageNetworkingInjected, NetworkingInjecte
     }
     
     func onAcceptFriendRequest(userID: String) -> CocoaAction {
-        return CocoaAction {
-            return self.userAPI.declineFriend(userID: SignedInUser.userID, friendID: userID)
+        return CocoaAction {_ in 
+            return self.userAPI.declineFriend(userID: self.authAPI.SignedInUserID, friendID: userID)
         }
     }
     
     func onDeclineFriendRequest(userID: String) -> CocoaAction {
         return CocoaAction {
-            return self.userAPI.acceptFriend(userID: SignedInUser.userID, friendID: userID)
+            return self.userAPI.acceptFriend(userID: self.authAPI.SignedInUserID, friendID: userID)
         }
     }
 }

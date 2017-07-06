@@ -97,11 +97,9 @@
 		F0388CFB1EE9D40B00E8ED48 /* BarProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0388CFA1EE9D40B00E8ED48 /* BarProfileViewController.swift */; };
 		F03C78B31EE9DB2C002AEDAD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03C78B21EE9DB2C002AEDAD /* SettingsViewController.swift */; };
 		F03C78B51EE9DB3C002AEDAD /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03C78B41EE9DB3C002AEDAD /* SettingsViewModel.swift */; };
-		F03C78BA1EE9E973002AEDAD /* NameSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03C78B91EE9E973002AEDAD /* NameSettingsViewController.swift */; };
 		F03C78BC1EE9E97E002AEDAD /* EmailSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03C78BB1EE9E97E002AEDAD /* EmailSettingsViewController.swift */; };
 		F03C78BE1EE9E98F002AEDAD /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03C78BD1EE9E98E002AEDAD /* NotificationSettingsViewController.swift */; };
 		F03C78C01EE9E99D002AEDAD /* DeleteAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03C78BF1EE9E99D002AEDAD /* DeleteAccountViewController.swift */; };
-		F03C78C31EE9EA2D002AEDAD /* NameSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03C78C21EE9EA2D002AEDAD /* NameSettingsViewModel.swift */; };
 		F03C78C51EE9EA3C002AEDAD /* EmailSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03C78C41EE9EA3C002AEDAD /* EmailSettingsViewModel.swift */; };
 		F03C78C71EE9EA4B002AEDAD /* NotificationSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03C78C61EE9EA4B002AEDAD /* NotificationSettingsViewModel.swift */; };
 		F03C78C91EE9EA5C002AEDAD /* DeleteAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03C78C81EE9EA5C002AEDAD /* DeleteAccountViewModel.swift */; };
@@ -354,11 +352,9 @@
 		F0388CFA1EE9D40B00E8ED48 /* BarProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarProfileViewController.swift; sourceTree = "<group>"; };
 		F03C78B21EE9DB2C002AEDAD /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		F03C78B41EE9DB3C002AEDAD /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		F03C78B91EE9E973002AEDAD /* NameSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameSettingsViewController.swift; sourceTree = "<group>"; };
 		F03C78BB1EE9E97E002AEDAD /* EmailSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSettingsViewController.swift; sourceTree = "<group>"; };
 		F03C78BD1EE9E98E002AEDAD /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
 		F03C78BF1EE9E99D002AEDAD /* DeleteAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteAccountViewController.swift; sourceTree = "<group>"; };
-		F03C78C21EE9EA2D002AEDAD /* NameSettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameSettingsViewModel.swift; sourceTree = "<group>"; };
 		F03C78C41EE9EA3C002AEDAD /* EmailSettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSettingsViewModel.swift; sourceTree = "<group>"; };
 		F03C78C61EE9EA4B002AEDAD /* NotificationSettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewModel.swift; sourceTree = "<group>"; };
 		F03C78C81EE9EA5C002AEDAD /* DeleteAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteAccountViewModel.swift; sourceTree = "<group>"; };
@@ -718,7 +714,6 @@
 		F0017AC41EF8905200C56039 /* Display Models */ = {
 			isa = PBXGroup;
 			children = (
-				F0CA18B61EE6101200428318 /* TopBar.swift */,
 			);
 			name = "Display Models";
 			sourceTree = "<group>";
@@ -782,7 +777,6 @@
 			isa = PBXGroup;
 			children = (
 				F03C78B21EE9DB2C002AEDAD /* SettingsViewController.swift */,
-				F03C78B91EE9E973002AEDAD /* NameSettingsViewController.swift */,
 				F01CE3E21EFEDE9500EE9535 /* SelectRegionViewController.swift */,
 				F03C78BB1EE9E97E002AEDAD /* EmailSettingsViewController.swift */,
 				F03C78BD1EE9E98E002AEDAD /* NotificationSettingsViewController.swift */,
@@ -796,7 +790,6 @@
 			isa = PBXGroup;
 			children = (
 				F03C78B41EE9DB3C002AEDAD /* SettingsViewModel.swift */,
-				F03C78C21EE9EA2D002AEDAD /* NameSettingsViewModel.swift */,
 				F01CE3E01EFEDE1000EE9535 /* SelectRegionViewModel.swift */,
 				F03C78C41EE9EA3C002AEDAD /* EmailSettingsViewModel.swift */,
 				F03C78C61EE9EA4B002AEDAD /* NotificationSettingsViewModel.swift */,
@@ -1232,6 +1225,7 @@
 				F03CEF6C1F05962E00FCC4F3 /* Snapshot.swift */,
 				F04B437D1F058F4100946C82 /* BarProfile.swift */,
 				F04B437F1F058F8800946C82 /* Special.swift */,
+				F0CA18B61EE6101200428318 /* TopBar.swift */,
 				F04B43811F058FA000946C82 /* UserSettings.swift */,
 				F0CA18B21EE5AE7500428318 /* Enums.swift */,
 				F0CF7F241EF3850F005C068C /* CountryCode.swift */,
@@ -1580,7 +1574,6 @@
 				F04A4B271EEC595700DBA9A6 /* UserCollectionView.swift in Sources */,
 				F04B43801F058F8800946C82 /* Special.swift in Sources */,
 				F04B43821F058FA000946C82 /* UserSettings.swift in Sources */,
-				F03C78C31EE9EA2D002AEDAD /* NameSettingsViewModel.swift in Sources */,
 				F07F694D1EFAEFC5000F854D /* ShowEventDeepLink.swift in Sources */,
 				F0EF693A1EF08BCB0028A32B /* UsersTableViewModel.swift in Sources */,
 				F0A52CC41EEDE3D60067E8DD /* SearchResultsViewController.swift in Sources */,
@@ -1619,7 +1612,6 @@
 				F0EF693C1EF0949C0028A32B /* UsersTableViewCell.swift in Sources */,
 				F04283B11EC4A96200CCB5F3 /* MoonsViewViewController.swift in Sources */,
 				F0F4CDFB1F0DA04C00AE69C1 /* Transforms.swift in Sources */,
-				F03C78BA1EE9E973002AEDAD /* NameSettingsViewController.swift in Sources */,
 				C0DAD32E1EEA1263008BAF05 /* ADVSegmentedControl.swift in Sources */,
 				F044CD551ECE030C00E47138 /* FakeTopBarData.swift in Sources */,
 				F06B56FF1EFAAFD50028552A /* FriendRequestTableViewCell.swift in Sources */,

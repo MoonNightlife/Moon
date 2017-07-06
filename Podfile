@@ -27,9 +27,11 @@ target 'Moon' do
   pod "MIBadgeButton-Swift", :git => 'https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git', :branch => 'master'
   pod 'RxAlamofire'
   pod 'ObjectMapper'
+  pod 'AlamofireObjectMapper', '~> 4.0'
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'Firebase/Storage'
+  pod 'Firebase/Database'
   pod 'EZLoadingActivity'
 
   target 'MoonTests' do

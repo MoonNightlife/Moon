@@ -43,7 +43,7 @@ extension BarProfileViewController {
             downloader.execute()
         } else {
             eventView.imageView.image = nil
-            eventView.backgroundColor = UIColor.moonGrey
+            eventView.imageView.backgroundColor = UIColor.moonGrey
         }
         
     }
@@ -77,10 +77,10 @@ extension BarProfileViewController {
         let activity = viewModel.displayedUsers.value[index]
         
         // Bind actions
-        if let activityID = activity.id, let userID = activity.userID {
+        if let userID = activity.userID {
             
-            peopleGoingView.likeButton.rx.action = viewModel.onLikeActivity(activityID: activityID)
-            peopleGoingView.numberOfLikesButton.rx.action = viewModel.onViewLikers(activityID: activityID)
+            peopleGoingView.likeButton.rx.action = viewModel.onLikeActivity(userID: userID)
+            peopleGoingView.numberOfLikesButton.rx.action = viewModel.onViewLikers(userID: userID)
             
             //TODO: test once andrew updates the swagger
             // When the user taps the photo of a user the are directed to the user's profile
@@ -92,6 +92,7 @@ extension BarProfileViewController {
         
         // Bind labels
         peopleGoingView.numberOfLikesButton.title = "\(activity.numLikes ?? 0)"
+        peopleGoingView.bottomToolbar.title = activity.userName
         
         // Bind Image
         if let urlString = activity.pic, let url = URL(string: urlString) {

@@ -22,11 +22,7 @@ struct CityOverviewViewModel: NetworkingInjected {
     
     // Outputs
     var bars: Observable<[TopBar]> {
-        return barAPI.getTopBarsIn(region: "Dallas").map({
-            return $0.map({ bar in
-                return TopBar(from: bar)
-            })
-        })
+        return barAPI.getTopBarsIn(region: "Dallas")
     }
     
     init(coordinator: SceneCoordinatorType) {

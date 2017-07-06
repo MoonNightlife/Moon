@@ -12,7 +12,7 @@ import RxCocoa
 import Action
 import RxOptional
 
-struct ProfileViewModel: ImageNetworkingInjected {
+struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, AuthNetworkingInjected {
     
     // Local
     private let bag = DisposeBag()
@@ -24,6 +24,7 @@ struct ProfileViewModel: ImageNetworkingInjected {
     var userAPI: UserAPIType
     
     // Inputs
+    var reload: Action<Void, UserProfile>
     
     // Outputs
     var username: Observable<String>
@@ -34,13 +35,13 @@ struct ProfileViewModel: ImageNetworkingInjected {
     var numFriendRequests = Variable<String?>(nil) 
     var profilePictures = Variable<[UIImage]>([])
     
-    init(coordinator: SceneCoordinatorType, userID: String, userAPI: UserAPIType = FirebaseUserAPI(), photoService: PhotoService = KingFisherPhotoService()) {
+    init(coordinator: SceneCoordinatorType, userID: String, userAPI: UserAPIType = FirebaseUserAPI(), photoService: PhotoService = KingFisherPhotoService(), authAPI: AuthAPIType = FirebaseAuthAPI()) {
         self.scenceCoordinator = coordinator
         
         self.userID = userID
         self.userAPI = userAPI
         
-        if SignedInUser.userID == userID {
+        if authAPI.SignedInUserID == userID {
             isSignedInUserProfile.value = true
             userAPI.getFriendRequest(userID: userID)
                 .catchErrorJustReturn([])
@@ -48,7 +49,7 @@ struct ProfileViewModel: ImageNetworkingInjected {
                     return $0.count
                 })
                 .map({
-                    return $0 == 0 ? "\($0)" : nil
+                    return $0 > 0 ? "\($0)" : nil
                 })
                 .bind(to: numFriendRequests)
                 .addDisposableTo(bag)
@@ -56,10 +57,14 @@ struct ProfileViewModel: ImageNetworkingInjected {
             isSignedInUserProfile.value = false
         }
         
-        let user = userAPI.getUserProfile(userID: userID)
+        reload = Action(workFactory: {
+            return userAPI.getUserProfile(userID: userID).catchErrorJustReturn(UserProfile()).shareReplay(1)
+        })
+        
+        let user = reload.elements
         
         user.map({ user in
-            return user.activity?.barID
+            return user.barId
         }).bind(to: barID).addDisposableTo(bag)
         
         username = user.map({ $0.username }).replaceNilWith("No Username")
@@ -67,21 +72,20 @@ struct ProfileViewModel: ImageNetworkingInjected {
             let firstName = $0.firstName ?? "No First Name"
             let lastName = $0.lastName ?? "No Last Name"
             return firstName + " " + lastName
-        }).catchErrorJustReturn("No Name")
-        //TODO: Add bio when api adds property to model
-        bio = user.map({ _ in "No Bio" })
-        activityBarName = user.map({ $0.activity }).filterNil().map({ $0.barName }).replaceNilWith("No Plans")
+        })
+    
+        bio = user.map({ $0.bio }).replaceNilWith("No Bio")
+        activityBarName = user.map({ $0.barName }).replaceNilWith("No Plans")
 
-        user.map({ $0.profilePics }).filterNil()
-            .flatMap({ pictureURLs in
-                return Observable.from(pictureURLs).flatMap({
-                    return photoService.getImageFor(url: URL(string: $0)!)
-                }).toArray()
+        storageAPI.getProfilePictureDownloadUrlForUser(id: userID).filterNil()
+            .flatMap({
+                return photoService.getImageFor(url: $0)
             })
-            .catchErrorJustReturn([])
+            .toArray()
+            .catchErrorJustReturn([#imageLiteral(resourceName: "DefaultProfilePic")])
             .startWith([#imageLiteral(resourceName: "DefaultProfilePic")])
             .bind(to: profilePictures).addDisposableTo(bag)
-    
+        
     }
     
     func onDismiss() -> CocoaAction {
@@ -99,7 +103,7 @@ struct ProfileViewModel: ImageNetworkingInjected {
     
     func onEdit() -> CocoaAction {
         return CocoaAction {
-            let vm = EditProfileViewModel(coordinator: self.scenceCoordinator)
+            let vm = EditProfileViewModel(coordinator: self.scenceCoordinator, userID: self.userID)
             return self.scenceCoordinator.transition(to: Scene.User.edit(vm), type: .modal)
         }
     }
@@ -117,7 +121,7 @@ struct ProfileViewModel: ImageNetworkingInjected {
     
     func onAddFriend() -> CocoaAction {
         return CocoaAction { _ in
-            return self.userAPI.requestFriend(userID: SignedInUser.userID, friendID: self.userID)
+            return self.userAPI.requestFriend(userID: self.authAPI.SignedInUserID, friendID: self.userID)
         }
     }
     

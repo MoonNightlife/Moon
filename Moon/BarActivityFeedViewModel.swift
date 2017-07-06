@@ -11,13 +11,9 @@ import RxSwift
 import RxDataSources
 import Action
 
-struct SignedInUser {
-    static let userID = "594c2532fc13ae6572000001"
-}
-
 typealias ActivitySection = AnimatableSectionModel<String, Activity>
 
-struct BarActivityFeedViewModel: ImageNetworkingInjected, NetworkingInjected {
+struct BarActivityFeedViewModel: ImageNetworkingInjected, NetworkingInjected, AuthNetworkingInjected {
     
     // Private
     private let disposeBag = DisposeBag()
@@ -30,7 +26,7 @@ struct BarActivityFeedViewModel: ImageNetworkingInjected, NetworkingInjected {
     // Outputs
     lazy var refreshAction: Action<Void, [ActivitySection]> = { this in
        return  Action { _ in
-            return this.userAPI.getActivityFeed(userID: SignedInUser.userID)
+            return this.userAPI.getActivityFeed(userID: this.authAPI.SignedInUserID)
                 .retryWhen(RxErrorHandlers.retryHandler)
                 .map({
                     [ActivitySection.init(model: "Activities", items: $0)]
@@ -50,9 +46,9 @@ struct BarActivityFeedViewModel: ImageNetworkingInjected, NetworkingInjected {
         
     }
     
-    func onLike(activtyID: String) -> CocoaAction {
-        return CocoaAction {
-            return self.userAPI.likeActivity(userID: SignedInUser.userID, activityID: activtyID)
+    func onLike(userID: String) -> CocoaAction {
+        return CocoaAction {_ in 
+            return self.userAPI.likeActivity(userID: self.authAPI.SignedInUserID, activityUserID: userID)
         }
     }
     
@@ -70,9 +66,9 @@ struct BarActivityFeedViewModel: ImageNetworkingInjected, NetworkingInjected {
         }
     }
     
-    func onViewLikers(activityID: String) -> CocoaAction {
+    func onViewLikers(userID: String) -> CocoaAction {
         return CocoaAction {
-            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .activity(id: activityID))
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .activity(id: userID))
             return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
     }

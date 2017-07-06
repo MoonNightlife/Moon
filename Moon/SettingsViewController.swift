@@ -27,6 +27,15 @@ class SettingsViewController: UITableViewController, BindableType {
     func bindViewModel() {
         navBackButton.rx.action = viewModel.onBack()
         
+        if let usernameLabel = tableView.cellForRow(at: IndexPath(row: SettingSections.MyAccount.username.rawValue, section: 0))?.detailTextLabel,
+            let emailLabel = tableView.cellForRow(at: IndexPath(row: SettingSections.MyAccount.changeEmail.rawValue, section: 0))?.detailTextLabel,
+            let phoneNumberLabel = tableView.cellForRow(at: IndexPath(row: SettingSections.MyAccount.changePhoneNumber.rawValue, section: 0))?.detailTextLabel {
+            
+            viewModel.username.bind(to: usernameLabel.rx.text).addDisposableTo(disposeBag)
+            viewModel.email.bind(to: emailLabel.rx.text).addDisposableTo(disposeBag)
+            viewModel.phoneNumber.bind(to: phoneNumberLabel.rx.text).addDisposableTo(disposeBag)
+        }
+        
         self.tableView.rx.itemSelected
             .map(settingFrom)
             .filter({ $0 != nil })

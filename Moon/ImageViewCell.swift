@@ -20,20 +20,18 @@ class ImageViewCell: UIView {
     fileprivate var imageView: BottomGradientImageView!
     
     /// Toolbar views.
-    fileprivate var toolbar: Toolbar!
+    var toolbar: Toolbar!
     var moreButton: IconButton!
-    fileprivate var goButton: IconButton!
+    var goButton: IconButton!
     
-    func initializeImageCardViewWith(data: TopBar, downloadAction: Action<Void, UIImage>) {
+    func initializeImageCardView() {
         
         prepareImageView()
         prepareMoreButton()
         prepareGoButton()
-        prepareToolbarWith(title: data.barName, subtitle: data.usersGoing)
+        prepareToolbarWith()
         preparePresenterCard()
-        
-        downloadAction.elements.bind(to: imageView.rx.image).addDisposableTo(bag)
-        downloadAction.execute()
+    
     }
 
 }
@@ -52,30 +50,18 @@ extension ImageViewCell {
         goButton = IconButton(image: #imageLiteral(resourceName: "goButton"))
     }
     
-    fileprivate func prepareToolbarWith(title: String, subtitle: String) {
+    fileprivate func prepareToolbarWith() {
         toolbar = Toolbar(leftViews: [moreButton])
         toolbar.rightViews = [goButton]
         toolbar.backgroundColor = nil
         
-        toolbar.title = title
+        
         toolbar.titleLabel.textColor = .white
         toolbar.titleLabel.textAlignment = .center
         
         toolbar.detailLabel.textColor = .white
         toolbar.detailLabel.textAlignment = .center
      
-        let fullString = NSMutableAttributedString(string: " ")
-        
-        let attachment = NSTextAttachment()
-        attachment.image = #imageLiteral(resourceName: "goingIcon")
-        attachment.bounds = CGRect(x: 0, y: -5, width: 16, height: 16)
-        
-        let attachmentString = NSAttributedString(attachment: attachment)
-        
-        fullString.append(attachmentString)
-        fullString.append(NSAttributedString(string: " " + subtitle))
-        
-        toolbar.detailLabel.attributedText = fullString
     }
     
     fileprivate func preparePresenterCard() {

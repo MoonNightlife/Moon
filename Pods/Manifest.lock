@@ -4,6 +4,9 @@ PODS:
     - RxSwift (~> 3.4)
   - ActionButton (0.1.5)
   - Alamofire (4.4.0)
+  - AlamofireObjectMapper (4.1.0):
+    - Alamofire (~> 4.1)
+    - ObjectMapper (~> 2.0)
   - EZLoadingActivity (1.01)
   - EZSwipeController (0.6.1)
   - Firebase/Auth (4.0.0):
@@ -12,6 +15,9 @@ PODS:
   - Firebase/Core (4.0.0):
     - FirebaseAnalytics (= 4.0.0)
     - FirebaseCore (= 4.0.0)
+  - Firebase/Database (4.0.0):
+    - Firebase/Core
+    - FirebaseDatabase (= 4.0.0)
   - Firebase/DynamicLinks (4.0.0):
     - Firebase/Core
     - FirebaseDynamicLinks (= 2.0.0)
@@ -28,6 +34,8 @@ PODS:
     - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseCore (4.0.0):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseDatabase (4.0.0):
+    - FirebaseAnalytics (~> 4.0)
   - FirebaseDynamicLinks (2.0.0):
     - FirebaseAnalytics (~> 4.0)
   - FirebaseInstanceID (2.0.0):
@@ -239,10 +247,12 @@ PODS:
 DEPENDENCIES:
   - Action (~> 3.0)
   - ActionButton
+  - AlamofireObjectMapper (~> 4.0)
   - EZLoadingActivity
   - EZSwipeController
   - Firebase/Auth
   - Firebase/Core
+  - Firebase/Database
   - Firebase/DynamicLinks
   - Firebase/Storage
   - Fusuma
@@ -282,12 +292,14 @@ SPEC CHECKSUMS:
   Action: e224bd151fe2e057f4189b4a9df0dc5d21264a9e
   ActionButton: a71147de5a83b6d8d8e18464b216904ba7821677
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  AlamofireObjectMapper: 435adc82f5b367679bd9e71c4974a54efd0b2521
   EZLoadingActivity: edd7e387e5197b116ce2cccb3fd747ababc2a510
   EZSwipeController: 255b0f8aed31963b0236802c926e27dd006a2532
   Firebase: 284eea779b73fdff309791817da7c68bff8dd572
   FirebaseAnalytics: 6f08e746f7d66f5452931bc2e822b5df9c66b64a
   FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
   FirebaseCore: 85ad466044c2f013cdb167f85d426d15b128114a
+  FirebaseDatabase: d829b3a8c3e2ac7a16773c5df226966b0805dfc2
   FirebaseDynamicLinks: ad3bef2e8addfa1490af9db02201429c5c9447dd
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
   FirebaseStorage: 8110a1ed2034c8fbfd83890d2acc9cdbbd99afec
@@ -312,6 +324,6 @@ SPEC CHECKSUMS:
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
   Whisper: 051f25e704bf8992641ffd28b20d5682ddc5f5d3
 
-PODFILE CHECKSUM: 9578adca7660394d0a5cc8d43c395adf74d32170
+PODFILE CHECKSUM: 44d1419c7d6073fb9576001729b0cdfecb4ba6e8
 
 COCOAPODS: 1.2.1

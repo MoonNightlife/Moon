@@ -84,12 +84,15 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
                     //swiftlint:disable force_cast
                     let cell = tableView.dequeueReusableCell(withIdentifier: "UsersTableCell", for: indexPath) as! UsersTableViewCell
                     
-                    let downloadAction = strongSelf.viewModel.downloadImage(url: URL(string: snap.pic ?? "")!)
-                    downloadAction
-                        .elements
-                        .bind(to: cell.profilePicture.rx.image)
-                        .addDisposableTo(cell.bag)
-                    downloadAction.execute()
+                    if let urlString = snap.pic, let url = URL(string: urlString) {
+                        let downloadAction = strongSelf.viewModel.downloadImage(url: url)
+                        downloadAction
+                            .elements
+                            .bind(to: cell.profilePicture.rx.image)
+                            .addDisposableTo(cell.bag)
+                        downloadAction.execute()
+
+                    }
                     
                     cell.profilePicture.cornerRadius = cell.profilePicture.frame.size.width / 2
                     cell.profilePicture.clipsToBounds = true
@@ -103,12 +106,14 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
                     //swiftlint:disable force_cast
                     let cell = tableView.dequeueReusableCell(withIdentifier: "FriendRequest", for: indexPath) as! FriendRequestTableViewCell
                     
-                    let downloadAction = strongSelf.viewModel.downloadImage(url: URL(string: snap.pic ?? "")!)
-                    downloadAction
-                        .elements
-                        .bind(to: cell.profilePicture.rx.image)
-                        .addDisposableTo(cell.bag)
-                    downloadAction.execute()
+                    if let urlString = snap.pic, let url = URL(string: urlString) {
+                        let downloadAction = strongSelf.viewModel.downloadImage(url: url)
+                        downloadAction
+                            .elements
+                            .bind(to: cell.profilePicture.rx.image)
+                            .addDisposableTo(cell.bag)
+                        downloadAction.execute()
+                    }
                     
                     cell.profilePicture.cornerRadius = cell.profilePicture.frame.size.width / 2
                     cell.profilePicture.clipsToBounds = true

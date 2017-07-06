@@ -12,9 +12,9 @@ import RxSwift
 import RxDataSources
 import FirebaseAuth
 
-struct SettingsViewModel: AuthNetworkingInjected {
+struct SettingsViewModel: AuthNetworkingInjected, NetworkingInjected {
     
-    // Outputs
+    // Input
     lazy var showNextScreen: Action<Setting, Void> = { this in
         return Action(workFactory: {
             guard let scene = this.getSceneFor(section: $0) else {
@@ -30,12 +30,22 @@ struct SettingsViewModel: AuthNetworkingInjected {
         })
     }(self)
     
+    // Output
+    var email: Observable<String>!
+    var phoneNumber: Observable<String>!
+    var username: Observable<String>!
+    
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
     
     init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator
      
+        let user = userAPI.getUserProfile(userID: authAPI.SignedInUserID).shareReplay(1)
+        
+        phoneNumber = user.map { $0.phoneNumber ?? ""}
+        username = user.map({ $0.username ?? "" })
+        email = Observable.just(authAPI.SignedInUserEmail)
     }
     
     func onBack() -> CocoaAction {
@@ -68,12 +78,11 @@ struct SettingsViewModel: AuthNetworkingInjected {
     
     fileprivate func getSceneFor(myAccount: SettingSections.MyAccount) -> SceneType? {
         switch myAccount {
+        case .username:
+            return nil
         case .changeEmail:
             let vm = EmailSettingsViewModel(coordinator: self.sceneCoordinator)
             return Scene.User.email(vm)
-        case .changeName:
-            let vm = NameSettingsViewModel(coordinator: self.sceneCoordinator)
-            return Scene.User.name(vm)
         case .changePhoneNumber:
             let vm = EnterPhoneNumberViewModel(coordinator: self.sceneCoordinator)
             return Scene.UserDiscovery.enterPhoneNumber(vm)

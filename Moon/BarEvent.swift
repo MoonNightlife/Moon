@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import ObjectMapper
 
-open class BarEvent {
+class BarEvent: Mappable {
     public var id: String?
     public var barID: String?
     public var title: String?
@@ -16,5 +17,20 @@ open class BarEvent {
     public var pic: String?
     public var date: String?
     public var description: String?
-    public var numLikes: Int32?
+    public var numLikes: Int?
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        barID <- map["barId"]
+        title <- map["title"]
+        name <- map["barName"]
+        pic <- map["photoUrl"]
+        date <- map["date"]
+        description <- map["desciption"]
+        numLikes <- map["numberOfLikes"]
+    }
 }

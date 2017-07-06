@@ -28,11 +28,7 @@ struct ExploreViewModel: ImageNetworkingInjected, NetworkingInjected {
     // Outputs
     lazy var topBars: Action<Void, [TopBar]> = { this in
         return Action(workFactory: {_ in
-            return this.barAPI.getTopBarsIn(region: "Dallas").map({
-                return $0.map({ bar in
-                    return TopBar(from: bar)
-                })
-            })
+            return this.barAPI.getTopBarsIn(region: "Dallas")
         })
     }(self)
     
@@ -57,6 +53,7 @@ struct ExploreViewModel: ImageNetworkingInjected, NetworkingInjected {
     
     func specialSectionObservable(type: AlcoholType) -> Observable<[SpecialSection]> {
         return self.barAPI.getSpecialsIn(region: "Dallas", type: type.rawValue)
+            .catchErrorJustReturn([])
             .map({
                 return [SpecialSection(model: "Specials", items: $0)]
             })
@@ -88,6 +85,12 @@ struct ExploreViewModel: ImageNetworkingInjected, NetworkingInjected {
         return CocoaAction {_ in
             let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .special(id: specialID))
             return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
+        }
+    }
+    
+    func onChangeAttendence(barID: String) -> CocoaAction {
+        return CocoaAction {_ in
+            return Observable.empty()
         }
     }
 }

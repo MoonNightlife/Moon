@@ -16,15 +16,13 @@ import Fusuma
 class EditProfileViewController: UIViewController, BindableType, RAReorderableLayoutDelegate, RAReorderableLayoutDataSource, UIScrollViewDelegate, UITextFieldDelegate, FusumaDelegate {
 
     var viewModel: EditProfileViewModel!
+    var bag = DisposeBag()
     var cancelButton: UIBarButtonItem!
     var saveButton: UIBarButtonItem!
     var offSet: CGFloat!
     var keyboardHeight: CGFloat!
     let fusuma = FusumaViewController()
     fileprivate var index: NSIndexPath!
-    
-    //fake data
-    var fakeImages = [#imageLiteral(resourceName: "pp2.jpg"), #imageLiteral(resourceName: "AddMorePicsIcon"), #imageLiteral(resourceName: "AddMorePicsIcon"), #imageLiteral(resourceName: "AddMorePicsIcon"), #imageLiteral(resourceName: "AddMorePicsIcon"), #imageLiteral(resourceName: "AddMorePicsIcon")]
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var bioTextField: TextField!
@@ -47,6 +45,15 @@ class EditProfileViewController: UIViewController, BindableType, RAReorderableLa
     func bindViewModel() {
         cancelButton.rx.action = viewModel.onBack()
         saveButton.rx.action = viewModel.onSave()
+        
+        firstNameTextField.rx.textInput.text.bind(to: viewModel.firstName).addDisposableTo(bag)
+        lastNameTextField.rx.textInput.text.bind(to: viewModel.lastName).addDisposableTo(bag)
+        bioTextField.rx.textInput.text.bind(to: viewModel.bio).addDisposableTo(bag)
+        
+        viewModel.profilePictures.asObservable().do(onNext: { [weak self] _ in
+            self?.collectionView.reloadData()
+        }).subscribe().addDisposableTo(bag)
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -175,7 +182,7 @@ class EditProfileViewController: UIViewController, BindableType, RAReorderableLa
     // Return the image which is selected from camera roll or is taken via the camera.
     func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
         //let i  = image.crop(toWidth: 200, toHeight: 200) // circle image
-        fakeImages[index.item] = image
+        viewModel.profilePictures.value[index.item] = image
         collectionView.reloadData()
         
     }
@@ -253,7 +260,7 @@ extension EditProfileViewController {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as? RACollectionViewCell)!
-        cell.imageView.image = fakeImages[(indexPath as NSIndexPath).item]
+        cell.imageView.image = viewModel.profilePictures.value[(indexPath as NSIndexPath).item]
 
         return cell
     }
@@ -280,8 +287,8 @@ extension EditProfileViewController {
     func collectionView(_ collectionView: UICollectionView, at atIndexPath: IndexPath, didMoveTo toIndexPath: IndexPath) {
         var photo: UIImage
 
-        photo = fakeImages.remove(at: (atIndexPath as NSIndexPath).item)
-        fakeImages.insert(photo, at: (toIndexPath as NSIndexPath).item)
+        photo = viewModel.profilePictures.value.remove(at: (atIndexPath as NSIndexPath).item)
+        viewModel.profilePictures.value.insert(photo, at: (toIndexPath as NSIndexPath).item)
     }
     
     func scrollTrigerEdgeInsetsInCollectionView(_ collectionView: UICollectionView) -> UIEdgeInsets {

@@ -13,6 +13,13 @@ import Alamofire
 
 struct FirebaseAuthAPI: AuthAPIType {
     
+    var SignedInUserID: String {
+        return (Auth.auth().currentUser?.uid)!
+    }
+    
+    var SignedInUserEmail: String {
+        return (Auth.auth().currentUser?.email)!
+    }
     struct AuthFunction {
         private static let authBaseURL = "https://us-central1-moon-4409e.cloudfunctions.net/"
         

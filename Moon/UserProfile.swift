@@ -15,10 +15,14 @@ class UserProfile: Mappable {
     var firstName: String?
     var lastName: String?
     var phoneNumber: String?
-    var birthday: String?
-    var sex: String?
     var profilePics: [String]?
-    var activity: Activity?
+    var barName: String?
+    var barId: String?
+    var bio: String?
+    
+    init() {
+
+    }
     
     required init?(map: Map) {
         
@@ -30,10 +34,10 @@ class UserProfile: Mappable {
         firstName <- map["firstName"]
         lastName <- map["lastName"]
         phoneNumber <- map["phoneNumber"]
-        birthday <- map["birthday"]
-        sex <- map["sex"]
-        profilePics <- map["id"]
-        activity <- map["activity"]
+        profilePics <- map["photoUrls"]
+        barName <- map["barName"]
+        barId <- map["barId"]
+        bio <- map["bio"]
     }
 
 }

@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import Action
+import FirebaseAuth
 
 struct SearchBarViewModel {
     
@@ -29,8 +30,12 @@ struct SearchBarViewModel {
     
     func onShowProfile() -> CocoaAction {
         return CocoaAction {
-            let vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: SignedInUser.userID)
-            return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
+            if let id = Auth.auth().currentUser?.uid {
+                let vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: id)
+                return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
+            } else {
+                return Observable.empty()
+            }
         }
     }
     

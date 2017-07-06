@@ -16,7 +16,7 @@ enum UsersGoingType: Int {
     case friends = 1
 }
 
-struct BarProfileViewModel: ImageNetworkingInjected, NetworkingInjected, BackType {
+struct BarProfileViewModel: ImageNetworkingInjected, NetworkingInjected, BackType, AuthNetworkingInjected {
     
     // Local
     private let bag = DisposeBag()
@@ -44,8 +44,8 @@ struct BarProfileViewModel: ImageNetworkingInjected, NetworkingInjected, BackTyp
         
         barName = bar.map({ $0.name ?? "No Name" })
         
-        bar.map({ $0.specials }).filterNil().catchErrorJustReturn([]).bind(to: specials).addDisposableTo(bag)
-        bar.map({ $0.events }).filterNil().catchErrorJustReturn([]).bind(to: events).addDisposableTo(bag)
+        barAPI.getBarEvents(barID: barID).catchErrorJustReturn([]).bind(to: events).addDisposableTo(bag)
+        barAPI.getBarSpecials(barID: barID).catchErrorJustReturn([]).bind(to: specials).addDisposableTo(bag)
 
         //TODO: fix
 //        bar.map({ $0.barPics }).filter({ $0 != nil }).flatMap({ pictureURLs in
@@ -59,8 +59,8 @@ struct BarProfileViewModel: ImageNetworkingInjected, NetworkingInjected, BackTyp
             return BarInfo(website: bar.website, address: bar.address, phoneNumber: bar.phoneNumber)
         })
         
-        let peopleGoing = barAPI.getBarPeople(barID: barID)
-        let friendsGoing = barAPI.getBarFriends(barID: barID, userID: SignedInUser.userID)
+        let peopleGoing = barAPI.getBarPeople(barID: barID).catchErrorJustReturn([])
+        let friendsGoing = barAPI.getBarFriends(barID: barID, userID: authAPI.SignedInUserID).catchErrorJustReturn([])
         
          Observable.combineLatest(peopleGoing, friendsGoing, reloadDisplayUsers, selectedUserIndex)
             .map({ (people, friends, _, userType) -> [Activity] in
@@ -111,16 +111,16 @@ struct BarProfileViewModel: ImageNetworkingInjected, NetworkingInjected, BackTyp
         }
     }
     
-    func onViewLikers(activityID: String) -> CocoaAction {
+    func onViewLikers(userID: String) -> CocoaAction {
         return CocoaAction {_ in
-            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .activity(id: activityID))
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .activity(id: userID))
             return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
     }
     
-    func onLikeActivity(activityID: String) -> CocoaAction {
+    func onLikeActivity(userID: String) -> CocoaAction {
         return CocoaAction {_ in
-            return self.userAPI.likeActivity(userID: SignedInUser.userID, activityID: activityID)
+            return self.userAPI.likeActivity(userID: self.authAPI.SignedInUserID, activityUserID: userID)
         }
     }
     

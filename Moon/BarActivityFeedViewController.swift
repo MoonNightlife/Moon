@@ -86,11 +86,11 @@ class BarActivityFeedViewController: UIViewController, BindableType, DisplayErro
     
     func populate(activityCell view: BarActivityTableViewCell, activity: Activity) {
         // Bind actions
-        if let activityID = activity.id, let userID = activity.userID, let barID = activity.barID {
-            view.likeButton.rx.action = viewModel.onLike(activtyID: activityID)
+        if let userID = activity.userID, let barID = activity.barID {
+            view.likeButton.rx.action = viewModel.onLike(userID: userID)
             view.user.rx.action = viewModel.onView(userID: userID)
             view.bar.rx.action = viewModel.onView(barID: barID)
-            view.numLikeButton.rx.action = viewModel.onViewLikers(activityID: activityID)
+            view.numLikeButton.rx.action = viewModel.onViewLikers(userID: userID)
         }
         
         // Bind labels

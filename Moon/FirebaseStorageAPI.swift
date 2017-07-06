@@ -9,6 +9,7 @@
 import RxSwift
 import Foundation
 import FirebaseStorage
+import FirebaseDatabase
 
 struct FirebaseStorageAPI: StorageAPIType {
     func uploadProfilePictureFrom(data: Data, forUser id: String) -> Observable<Void> {
@@ -26,6 +27,22 @@ struct FirebaseStorageAPI: StorageAPIType {
             return Disposables.create {
                 task.cancel()
             }
+        })
+    }
+    
+    func getProfilePictureDownloadUrlForUser(id: String) -> Observable<URL?> {
+        return Observable.create({ (observer) -> Disposable in
+            let ref = Storage.storage().reference().child(id).child("profilePictures").child("fullSize")
+            ref.downloadURL(completion: { (url, error) in
+                if let e = error {
+                    observer.onError(e)
+                }
+                observer.onNext(url)
+                observer.onCompleted()
+            })
+            
+            return Disposables.create()
+
         })
     }
 }

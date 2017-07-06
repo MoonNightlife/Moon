@@ -12,7 +12,11 @@ import RxDataSources
 
 class Snapshot: Mappable {
     var id: String?
-    var name: String?
+    var firstName: String?
+    var lastName: String?
+    var name: String {
+        return (firstName ?? "") + (lastName ?? "")
+    }
     var pic: String?
     
     required init?(map: Map) {
@@ -21,8 +25,8 @@ class Snapshot: Mappable {
     
     func mapping(map: Map) {
         id <- map["id"]
-        name <- map["name"]
-        pic <- map["pic"]
+        firstName <- map["firstName"]
+        lastName <- map["lastName"]
     }
 }
 

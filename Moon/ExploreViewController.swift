@@ -137,9 +137,34 @@ extension ExploreViewController: iCarouselDataSource, iCarouselDelegate {
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         let topBarView = ImageViewCell(frame: carousel.frame)
-        topBarView.initializeImageCardViewWith(data: topBars[index], downloadAction: viewModel.downloadImage(url: topBars[index].imageURL))
-        //TODO: enter real bar id once api returns bar snapshot and i can get rid of the top bar model
-        topBarView.moreButton.rx.action = viewModel.showBar(barID: "123123")
+        topBarView.initializeImageCardView()
+        populate(view: topBarView, bar: topBars[index])
         return topBarView
+    }
+    
+    func populate(view: ImageViewCell, bar: TopBar) {
+        
+        // Bind Action
+        if let id = bar.id {
+            view.moreButton.rx.action = viewModel.showBar(barID: id)
+            view.goButton.rx.action = viewModel.onChangeAttendence(barID: id)
+        }
+        
+        
+        view.toolbar.title = bar.name
+        
+        let fullString = NSMutableAttributedString(string: " ")
+        
+        let attachment = NSTextAttachment()
+        attachment.image = #imageLiteral(resourceName: "goingIcon")
+        attachment.bounds = CGRect(x: 0, y: -5, width: 16, height: 16)
+        
+        let attachmentString = NSAttributedString(attachment: attachment)
+        
+        fullString.append(attachmentString)
+        fullString.append(NSAttributedString(string: " " + (bar.usersGoing ?? "")))
+        
+        view.toolbar.detailLabel.attributedText = fullString
+
     }
 }

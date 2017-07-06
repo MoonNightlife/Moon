@@ -44,6 +44,12 @@ class ProfileViewController: UIViewController, BindableType {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.reload.execute()
+    }
+    
     @IBOutlet weak var exitButton: UIButton!
 
     func bindViewModel() {

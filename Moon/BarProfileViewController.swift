@@ -63,6 +63,7 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
 //        self.navigationController?.navigationBar.barTintColor = .moonGrey
         self.navigationController?.navigationBar.barStyle = UIBarStyle.default
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.lightGray]
+        viewModel.reloadDisplayUsers.onNext()
     }
 
     override func didReceiveMemoryWarning() {

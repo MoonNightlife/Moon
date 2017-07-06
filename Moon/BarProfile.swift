@@ -6,18 +6,29 @@
 //  Copyright © 2017 Evan Noble. All rights reserved.
 //
 
+import ObjectMapper
 import Foundation
 
-class BarProfile {
+class BarProfile: Mappable {
     var id: String?
     var name: String?
     var phoneNumber: String?
-    var location: String?
     var website: String?
     var address: String?
     var numPeopleAttending: Int32?
-    var peopleAttending: [Activity]?
-    var specials: [Special]?
     var barPics: [String]?
-    var events: [BarEvent]?
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        name <- map["name"]
+        phoneNumber <- map["phoneNumber"]
+        website <- map["website"]
+        address <- map["address"]
+        numPeopleAttending <- map["numberOfAttendees"]
+        barPics <- map["photoUrls"]
+    }
 }

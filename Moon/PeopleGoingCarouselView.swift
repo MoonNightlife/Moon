@@ -49,6 +49,5 @@ extension PeopleGoingCarouselView {
     
     fileprivate func prepareToolBar() {
         self.bottomToolbar.addRightViews(view1: numberOfLikesButton, view2: likeButton)
-       
     }
 }

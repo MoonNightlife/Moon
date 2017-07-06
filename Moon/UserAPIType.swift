@@ -25,7 +25,7 @@ protocol UserAPIType {
     func getActivityFeed(userID: String) -> Observable<[Activity]>
     
     func goToBar(userID: String, barID: String) -> Observable<Void>
-    func likeActivity(userID: String, activityID: String) -> Observable<Void>
+    func likeActivity(userID: String, activityUserID: String) -> Observable<Void>
     func likeSpecial(userID: String, specialID: String) -> Observable<Void>
     func likeEvent(userID: String, eventID: String) -> Observable<Void>
     func update(profile: UserProfile) -> Observable<Void>
