@@ -74,7 +74,15 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     func bindViewModel() {
         backButton.rx.action = viewModel.onBack()
         moreInfoButton.rx.action = viewModel.onShowInfo()
-        goButton.rx.action = viewModel.onAttendBar()
+        
+        let attendAction = viewModel.onAttendBar()
+        goButton.rx.action = attendAction
+        attendAction.elements.do(onNext: { [weak self] _ in
+            //TODO: Change the button
+        }).subscribe(onNext: { [weak self] _ in
+            self?.viewModel.reloadDisplayUsers.onNext()
+        })
+        attendAction.elements.bind(to: viewModel.reloadDisplayUsers).addDisposableTo(bag)
         
         segmentControl.rx.controlEvent(UIControlEvents.valueChanged)
             .map({ [weak self] in

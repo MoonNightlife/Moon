@@ -17,7 +17,10 @@ class SettingsViewController: UITableViewController, BindableType {
     private let disposeBag = DisposeBag()
     var navBackButton: UIBarButtonItem!
 
-    @IBOutlet weak var settingsTableView: UITableView!
+    @IBOutlet weak var usernameCell: UITableViewCell!
+    @IBOutlet weak var phoneNumberCell: UITableViewCell!
+    @IBOutlet weak var emailCell: UITableViewCell!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,9 +30,9 @@ class SettingsViewController: UITableViewController, BindableType {
     func bindViewModel() {
         navBackButton.rx.action = viewModel.onBack()
         
-        if let usernameLabel = tableView.cellForRow(at: IndexPath(row: SettingSections.MyAccount.username.rawValue, section: 0))?.detailTextLabel,
-            let emailLabel = tableView.cellForRow(at: IndexPath(row: SettingSections.MyAccount.changeEmail.rawValue, section: 0))?.detailTextLabel,
-            let phoneNumberLabel = tableView.cellForRow(at: IndexPath(row: SettingSections.MyAccount.changePhoneNumber.rawValue, section: 0))?.detailTextLabel {
+        if let usernameLabel = usernameCell.detailTextLabel,
+            let emailLabel = emailCell.detailTextLabel,
+            let phoneNumberLabel = phoneNumberCell.detailTextLabel {
             
             viewModel.username.bind(to: usernameLabel.rx.text).addDisposableTo(disposeBag)
             viewModel.email.bind(to: emailLabel.rx.text).addDisposableTo(disposeBag)

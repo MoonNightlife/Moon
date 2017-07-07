@@ -22,7 +22,21 @@ extension BarProfileViewController {
         
         // Bind actions
         if let id = event.id, let barID = event.barID {
-            eventView.favoriteButton.rx.action = viewModel.onLikeEvent(eventID: id)
+            
+            let likeAction = viewModel.onLikeEvent(eventID: id)
+            eventView.favoriteButton.rx.action = likeAction
+            likeAction.elements.do(onNext: {
+                eventView.toggleColorAndNumber()
+            }).subscribe().addDisposableTo(eventView.bag)
+            
+            let hasLiked = viewModel.hasLikedEvent(eventID: id)
+            hasLiked.elements.do(onNext: { hasLiked in
+                if hasLiked {
+                    eventView.favoriteButton.tintColor = .red
+                }
+            }).subscribe().addDisposableTo(eventView.bag)
+            hasLiked.execute()
+            
             eventView.numberOfLikesButton.rx.action = viewModel.onViewLikers(eventID: id)
             eventView.shareButton.rx.action = viewModel.onShareEvent(eventID: id, barID: barID)
             // No action for this button on the bar profile, so hide it
@@ -53,12 +67,25 @@ extension BarProfileViewController {
         
         // Bind actions
         if let specialID = special.id {
-            view.likeButton.rx.action = viewModel.onLikeSpecial(specialID: specialID)
+            let likeAction = viewModel.onLikeSpecial(specialID: specialID)
+            view.likeButton.rx.action = likeAction
+            likeAction.elements.do(onNext: {
+                view.toggleColorAndNumber()
+            }).subscribe().addDisposableTo(view.bag)
+            
+            let hasLikedSpecial = viewModel.hasLikedSpecial(specialID: specialID)
+            hasLikedSpecial.elements.do(onNext: { hasLiked in
+                if hasLiked {
+                    view.likeButton.tintColor = .red
+                }
+            }).subscribe().addDisposableTo(view.bag)
+            hasLikedSpecial.execute()
+        
             view.numberOfLikesButton.rx.action = viewModel.onViewLikers(specialID: specialID)
         }
         
         // Bind labels
-        view.numberOfLikesButton.setTitle("\(special.numLikes ?? 0)", for: .normal)
+        view.numberOfLikesButton.title = "\(special.numLikes ?? 0)"
         view.content.text = special.description
         
         // Bind Image
@@ -79,7 +106,20 @@ extension BarProfileViewController {
         // Bind actions
         if let userID = activity.userID {
             
-            peopleGoingView.likeButton.rx.action = viewModel.onLikeActivity(userID: userID)
+            let likeAction = viewModel.onLikeActivity(userID: userID)
+            peopleGoingView.likeButton.rx.action = likeAction
+            likeAction.elements.do(onNext: {
+                peopleGoingView.toggleColorAndNumber()
+            }).subscribe().addDisposableTo(peopleGoingView.bag)
+            
+            let hasLiked = viewModel.hasLikedActivity(activityID: userID)
+            hasLiked.elements.do(onNext: { hasLiked in
+                if hasLiked {
+                    peopleGoingView.likeButton.tintColor = .red
+                }
+            }).subscribe().addDisposableTo(peopleGoingView.bag)
+            hasLiked.execute()
+            
             peopleGoingView.numberOfLikesButton.rx.action = viewModel.onViewLikers(userID: userID)
             
             //TODO: test once andrew updates the swagger

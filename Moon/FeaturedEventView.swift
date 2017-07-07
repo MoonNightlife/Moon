@@ -39,6 +39,13 @@ class FeaturedEventView: ImageCardView {
         prepareToolbar()
         prepareBottomBar()
     }
+    
+    func toggleColorAndNumber() {
+        favoriteButton.tintColor = favoriteButton.tintColor == .lightGray ? .red : .lightGray
+        if let numString = numberOfLikesButton.title, let num = Int(numString) {
+            numberOfLikesButton.title = "\(favoriteButton.tintColor == .lightGray ? num - 1 : num + 1)"
+        }
+    }
 
 }
 

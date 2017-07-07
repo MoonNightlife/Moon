@@ -41,10 +41,12 @@ struct SettingsViewModel: AuthNetworkingInjected, NetworkingInjected {
     init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator
      
-        let user = userAPI.getUserProfile(userID: authAPI.SignedInUserID).shareReplay(1)
+        let user = userAPI.getUserProfile(userID: authAPI.SignedInUserID)
         
         phoneNumber = user.map { $0.phoneNumber ?? ""}
-        username = user.map({ $0.username ?? "" })
+        username = user.map({
+            $0.username ?? ""
+        })
         email = Observable.just(authAPI.SignedInUserEmail)
     }
     

@@ -15,5 +15,6 @@ enum StorageError: Error {
 
 protocol StorageAPIType {
     func uploadProfilePictureFrom(data: Data, forUser id: String) -> Observable<Void>
+    func getBarPictureDownloadUrlForBar(id: String, picName: String) -> Observable<URL?>
     func getProfilePictureDownloadUrlForUser(id: String) -> Observable<URL?>
 }

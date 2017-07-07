@@ -24,6 +24,13 @@ class SpecialCarouselView: ImageCardView {
         prepareNumberOfLikesButton()
         prepareToolBar()
     }
+    
+    func toggleColorAndNumber() {
+        likeButton.tintColor = likeButton.tintColor == .lightGray ? .red : .lightGray
+        if let numString = numberOfLikesButton.title, let num = Int(numString) {
+            numberOfLikesButton.title = "\(likeButton.tintColor == .lightGray ? num - 1 : num + 1)"
+        }
+    }
 }
 
 extension SpecialCarouselView {
