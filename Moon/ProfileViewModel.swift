@@ -25,6 +25,7 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
     
     // Inputs
     var reload: Action<Void, UserProfile>
+    var reloadActionButton = PublishSubject<Void>()
     
     // Outputs
     var username: Observable<String>
@@ -34,6 +35,7 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
     var isSignedInUserProfile = Variable(false)
     var numFriendRequests = Variable<String?>(nil) 
     var profilePictures = Variable<[UIImage]>([])
+    var actionButton: Observable<ProfileActionButton>
     
     init(coordinator: SceneCoordinatorType, userID: String, userAPI: UserAPIType = FirebaseUserAPI(), photoService: PhotoService = KingFisherPhotoService(), authAPI: AuthAPIType = FirebaseAuthAPI()) {
         self.scenceCoordinator = coordinator
@@ -53,8 +55,32 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
                 })
                 .bind(to: numFriendRequests)
                 .addDisposableTo(bag)
+            
+            actionButton = Observable.just(.edit)
         } else {
             isSignedInUserProfile.value = false
+            
+            let areFriends = reloadActionButton.flatMap({
+                return userAPI.areFriends(userID1: authAPI.SignedInUserID, userID2: userID)
+            })
+            let sentRequest = reloadActionButton.flatMap({
+                return userAPI.sentFriendRequest(userID1: authAPI.SignedInUserID, userID2: userID)
+            })
+            let pendingRequest = reloadActionButton.flatMap({
+                return userAPI.pendingFriendRequest(userID1: authAPI.SignedInUserID, userID2: userID)
+            })
+            
+            actionButton = Observable.zip(areFriends, sentRequest, pendingRequest).map({ areFriends, sentRequest, pendingRequest in
+                if areFriends {
+                    return .removeFriend
+                } else if sentRequest {
+                    return .cancelRequest
+                } else if pendingRequest {
+                    return .acceptRequest
+                } else {
+                    return .addFriend
+                }
+            })
         }
         
         reload = Action(workFactory: {
@@ -119,9 +145,48 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
         }
     }
     
+    
     func onAddFriend() -> CocoaAction {
         return CocoaAction { _ in
-            return self.userAPI.requestFriend(userID: self.authAPI.SignedInUserID, friendID: self.userID)
+            return self.userAPI.requestFriend(userID: self.authAPI.SignedInUserID, friendID: self.userID).do(onNext: {
+                self.reloadActionButton.onNext()
+            })
+        }
+    }
+    
+    func onRemoveFriend() -> CocoaAction {
+        return CocoaAction { _ in
+            return self.userAPI.removeFriend(userID: self.authAPI.SignedInUserID, friendID: self.userID).do(onNext: {
+                self.reloadActionButton.onNext()
+            })
+
+        }
+    }
+    
+    func onAcceptRequest() -> CocoaAction {
+        return CocoaAction { _ in
+            return self.userAPI.acceptFriend(userID: self.authAPI.SignedInUserID, friendID: self.userID).do(onNext: {
+                self.reloadActionButton.onNext()
+            })
+
+        }
+    }
+    
+    func onDeclineRequest() -> CocoaAction {
+        return CocoaAction { _ in
+            return self.userAPI.declineFriend(userID: self.authAPI.SignedInUserID, friendID: self.userID).do(onNext: {
+                self.reloadActionButton.onNext()
+            })
+
+        }
+    }
+    
+    func onCancelRequest() -> CocoaAction {
+        return CocoaAction { _ in
+            return self.userAPI.cancelFriend(userID: self.authAPI.SignedInUserID, friendID: self.userID).do(onNext: {
+                self.reloadActionButton.onNext()
+            })
+
         }
     }
     

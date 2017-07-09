@@ -30,7 +30,7 @@ class BarEvent: Mappable {
         name <- map["barName"]
         pic <- map["photoUrl"]
         date <- map["date"]
-        description <- map["desciption"]
+        description <- map["description"]
         numLikes <- map["numberOfLikes"]
     }
 }

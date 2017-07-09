@@ -58,9 +58,9 @@ struct PasswordsViewModel: NetworkingInjected, AuthNetworkingInjected, StorageNe
                         return Observable.just()
                     }
                 })
-                .flatMap({
-                    return self.loginAction()
-                })
+//                .flatMap({
+//                    return self.loginAction()
+//                })
         })
     }
 

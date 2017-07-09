@@ -15,37 +15,37 @@ enum UserSectionModel {
     case friendRequestsSection(title: String, items: [UserSectionItem])
 }
 
-enum UserSectionItem: IdentifiableType, Equatable {
+enum UserSectionItem {
 
-    static func == (lhs: UserSectionItem, rhs: UserSectionItem) -> Bool {
-        return lhs.identity == rhs.identity
-    }
-
-    var identity: String {
-        switch self {
-        case let .friend(snapshot):
-            return snapshot.id ?? "0"
-        case let .friendRequest(snapshot):
-            return snapshot.id ?? "0"
-        }
-    }
+//    static func == (lhs: UserSectionItem, rhs: UserSectionItem) -> Bool {
+//        return lhs.identity == rhs.identity
+//    }
+//
+//    var identity: String {
+//        switch self {
+//        case let .friend(snapshot):
+//            return snapshot.id ?? "0"
+//        case let .friendRequest(snapshot):
+//            return snapshot.id ?? "0"
+//        }
+//    }
 
     case friend(snapshot: Snapshot)
     case friendRequest(snapshot: Snapshot)
         
 }
 
-extension UserSectionModel: AnimatableSectionModelType {
+extension UserSectionModel: SectionModelType {
     typealias Item = UserSectionItem
     
-    var identity: String {
-        switch self {
-        case let .friendsSection(title, _):
-            return title
-        case let .friendRequestsSection(title, _):
-            return title
-        }
-    }
+//    var identity: String {
+//        switch self {
+//        case let .friendsSection(title, _):
+//            return title
+//        case let .friendRequestsSection(title, _):
+//            return title
+//        }
+//    }
     
     var items: [UserSectionItem] {
         switch self {

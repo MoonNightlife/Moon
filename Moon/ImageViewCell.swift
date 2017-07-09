@@ -13,11 +13,11 @@ import RxCocoa
 import RxSwift
 
 class ImageViewCell: UIView {
-    fileprivate var bag = DisposeBag()
+    var bag = DisposeBag()
     fileprivate var card: ImageCard!
     
     /// Content area.
-    fileprivate var imageView: BottomGradientImageView!
+    var imageView: BottomGradientImageView!
     
     /// Toolbar views.
     var toolbar: Toolbar!

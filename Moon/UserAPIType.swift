@@ -18,6 +18,8 @@ protocol UserAPIType {
     func acceptFriend(userID: String, friendID: String) -> Observable<Void>
     func declineFriend(userID: String, friendID: String) -> Observable<Void>
     func requestFriend(userID: String, friendID: String) -> Observable<Void>
+    func removeFriend(userID: String, friendID: String) -> Observable<Void>
+    func cancelFriend(userID: String, friendID: String) -> Observable<Void>
     
     // Blocking
     func blockUser(userID: String, blockID: String) -> Observable<Void>
@@ -28,7 +30,7 @@ protocol UserAPIType {
     func getFriends(userID: String) -> Observable<[Snapshot]>
     func getUserProfile(userID: String) -> Observable<UserProfile>
     func update(profile: UserProfile) -> Observable<Void>
-    func getActivityLikes(activityID: String) -> Observable<[Snapshot]>
+    func getActivityLikers(activityID: String) -> Observable<[Snapshot]>
     func getActivityFeed(userID: String) -> Observable<[Activity]>
     
     // Actions

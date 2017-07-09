@@ -11,7 +11,11 @@ import RxSwift
 import Action
 import RxCocoa
 
-struct EmailUsernameViewModel {
+enum SignUpError: Error {
+    case usernameTaken(message: String)
+}
+
+struct EmailUsernameViewModel: AuthNetworkingInjected {
     
     // Dependencies
     private let newUser: NewUser
@@ -44,12 +48,13 @@ struct EmailUsernameViewModel {
                     return false
                 }
                 
-                // return true if string is not blank and email is not valid
+                // return true if string is not blank and username is not valid
                 return (un != "") && !validUsername
             })
     }
     
     var allFieldsValid: Observable<Bool> {
+
         return Observable.combineLatest(username.map(ValidationUtility.validUsername), email.map(ValidationUtility.validEmail)).map({$0 && $1})
     }
     
@@ -74,9 +79,17 @@ struct EmailUsernameViewModel {
     }
     
     func nextSignUpScreen() -> CocoaAction {
-        return CocoaAction(enabledIf: allFieldsValid, workFactory: {
-            let viewModel = PasswordsViewModel(coordinator: self.sceneCoordinator, user: self.newUser)
-            return self.sceneCoordinator.transition(to: Scene.SignUp.passwords(viewModel), type: .push)
+        return CocoaAction(enabledIf: allFieldsValid, workFactory: {_ in 
+            return self.authAPI.checkUsername(username: self.newUser.username!)
+                .flatMap({ isTaken -> Observable<Void> in
+                    if isTaken {
+                        return Observable.error(SignUpError.usernameTaken(message: "This username is already taken. Please choose a different one."))
+                    } else {
+                        let viewModel = PasswordsViewModel(coordinator: self.sceneCoordinator, user: self.newUser)
+                        return self.sceneCoordinator.transition(to: Scene.SignUp.passwords(viewModel), type: .push)
+                    }
+                })
+            
         })
     }
     
@@ -85,4 +98,5 @@ struct EmailUsernameViewModel {
             self.sceneCoordinator.pop()
         }
     }
+
 }

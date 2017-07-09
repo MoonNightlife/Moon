@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import Action
 
-struct FeaturedViewModel: ImageNetworkingInjected, NetworkingInjected {
+struct FeaturedViewModel: ImageNetworkingInjected, NetworkingInjected, StorageNetworkingInjected, AuthNetworkingInjected {
     
     // Local
     private let disposeBag = DisposeBag()
@@ -35,8 +35,13 @@ struct FeaturedViewModel: ImageNetworkingInjected, NetworkingInjected {
     
     func onLikeEvent(eventID: String) -> CocoaAction {
         return CocoaAction { _ in
-            print("Like Event")
-            return self.userAPI.likeEvent(userID: "123123", eventID: eventID)
+            return self.userAPI.likeEvent(userID: self.authAPI.SignedInUserID, eventID: eventID)
+        }
+    }
+    
+    func hasLiked(eventID: String) -> Action<Void, Bool> {
+        return Action<Void, Bool> { _ in
+            return self.userAPI.hasLikedEvent(userID: self.authAPI.SignedInUserID, EventID: eventID)
         }
     }
     
@@ -60,5 +65,15 @@ struct FeaturedViewModel: ImageNetworkingInjected, NetworkingInjected {
             let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .event(id: eventID))
             return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
+    }
+    
+    func getEventImage(id: String) -> Action<Void, UIImage> {
+        return Action(workFactory: {_ in
+            return self.storageAPI.getEventPictureDownloadUrlForEvent(id: id)
+                .filterNil()
+                .flatMap({
+                    self.photoService.getImageFor(url: $0)
+                })
+        })
     }
 }

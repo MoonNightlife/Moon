@@ -53,7 +53,18 @@ class EmailUsernameViewController: UIViewController, BindableType {
         viewModel.showEmailError.drive(emailTextField.rx.isErrorRevealed).addDisposableTo(disposeBag)
 
         navBackButton.rx.action = viewModel.onBack()
-        nextButton.rx.action = viewModel.nextSignUpScreen()
+        
+        let nextAction = viewModel.nextSignUpScreen()
+        nextButton.rx.action = nextAction
+        nextAction.errors.subscribe(onNext: { [weak self] actionError in
+            if case let .underlyingError(error) = actionError,
+                let casted =  (error as? SignUpError),
+                case let SignUpError.usernameTaken(message) = casted {
+                let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self?.present(alert, animated: true, completion: nil)
+            }
+        }).addDisposableTo(disposeBag)
     }
     
 }

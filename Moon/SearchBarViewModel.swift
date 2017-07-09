@@ -11,7 +11,7 @@ import RxSwift
 import Action
 import FirebaseAuth
 
-struct SearchBarViewModel {
+struct SearchBarViewModel: NetworkingInjected, AuthNetworkingInjected {
     
     // Private
     private let disposeBag = DisposeBag()
@@ -23,6 +23,12 @@ struct SearchBarViewModel {
     var searchText = BehaviorSubject<String>(value: "")
     
     // Outputs
+    var numberOfFriendRequest: Observable<String?> {
+        return self.userAPI.getFriendRequest(userID: self.authAPI.SignedInUserID)
+            .map({
+                return $0.isEmpty ? nil : "\($0.count)"
+            })
+    }
     
     init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator

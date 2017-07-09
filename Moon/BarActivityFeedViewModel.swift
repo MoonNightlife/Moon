@@ -13,7 +13,7 @@ import Action
 
 typealias ActivitySection = AnimatableSectionModel<String, Activity>
 
-struct BarActivityFeedViewModel: ImageNetworkingInjected, NetworkingInjected, AuthNetworkingInjected {
+struct BarActivityFeedViewModel: ImageNetworkingInjected, NetworkingInjected, AuthNetworkingInjected, StorageNetworkingInjected {
     
     // Private
     private let disposeBag = DisposeBag()
@@ -27,7 +27,7 @@ struct BarActivityFeedViewModel: ImageNetworkingInjected, NetworkingInjected, Au
     lazy var refreshAction: Action<Void, [ActivitySection]> = { this in
        return  Action { _ in
             return this.userAPI.getActivityFeed(userID: this.authAPI.SignedInUserID)
-                .retryWhen(RxErrorHandlers.retryHandler)
+                
                 .map({
                     [ActivitySection.init(model: "Activities", items: $0)]
                 })
@@ -52,6 +52,12 @@ struct BarActivityFeedViewModel: ImageNetworkingInjected, NetworkingInjected, Au
         }
     }
     
+    func hasLikedActivity(activityID: String) -> Action<Void, Bool> {
+        return Action<Void, Bool> { _ in
+            return self.userAPI.hasLikedActivity(userID: self.authAPI.SignedInUserID, ActivityID: activityID)
+        }
+    }
+    
     func onView(userID: String) -> CocoaAction {
         return CocoaAction {
             let vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: userID)
@@ -71,5 +77,15 @@ struct BarActivityFeedViewModel: ImageNetworkingInjected, NetworkingInjected, Au
             let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .activity(id: userID))
             return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
+    }
+    
+    func getProfileImage(id: String) -> Action<Void, UIImage> {
+        return Action(workFactory: {_ in
+            return self.storageAPI.getProfilePictureDownloadUrlForUser(id: id)
+                .filterNil()
+                .flatMap({
+                    self.photoService.getImageFor(url: $0)
+                })
+        })
     }
 }

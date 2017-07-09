@@ -21,9 +21,10 @@ struct SettingsViewModel: AuthNetworkingInjected, NetworkingInjected {
                 return Observable.empty()
             }
             if case Scene.Login.login(_) = scene {
-                return this.authAPI.signOut().flatMap({
-                    return this.sceneCoordinator.transition(to: scene, type: .root)
-                })
+                return this.authAPI.signOut()
+//                    .flatMap({
+//                        return this.sceneCoordinator.transition(to: scene, type: .root)
+//                    })
             } else {
                 return this.sceneCoordinator.transition(to: scene, type: .push)
             }

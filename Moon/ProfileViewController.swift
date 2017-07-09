@@ -10,6 +10,7 @@ import UIKit
 import iCarousel
 import Material
 import RxCocoa
+import Action
 import RxSwift
 import MIBadgeButton_Swift
 
@@ -26,6 +27,7 @@ class ProfileViewController: UIViewController, BindableType {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var pageController: UIPageControl!
     @IBOutlet weak var planButton: UIButton!
+    @IBOutlet weak var acceptButton: UIButton!
     
     var friendsButton: MIBadgeButton!
     
@@ -41,6 +43,7 @@ class ProfileViewController: UIViewController, BindableType {
         setUpPlanButton()
         setUpToolBar()
         setUpUsernameLabel()
+        setupAcceptButton()
         
     }
     
@@ -56,19 +59,42 @@ class ProfileViewController: UIViewController, BindableType {
         friendsButton.rx.action = viewModel.onShowFriends()
         dismissButton.rx.action = viewModel.onDismiss()
         planButton.rx.action = viewModel.onViewBar()
+        acceptButton.rx.action = viewModel.onAcceptRequest()
         
-        viewModel.isSignedInUserProfile.asObservable().subscribe(onNext: { [weak self] in
-            
+        viewModel.actionButton.subscribe(onNext: { [weak self] in
             guard let strongSelf = self else {
                 return
             }
             
-            strongSelf.editProfileButton.rx.action = $0 ? strongSelf.viewModel.onEdit() : strongSelf.viewModel.onAddFriend()
+            strongSelf.acceptButton.isHidden = true
             
-            let image = $0 ? Icon.cm.edit : #imageLiteral(resourceName: "AddFriendIcon").withRenderingMode(.alwaysTemplate)
-            strongSelf.editProfileButton.setBackgroundImage(image, for: .normal)
+            var action: CocoaAction!
+            var imageIcon: UIImage!
+            
+            switch $0 {
+            case .removeFriend:
+                action = strongSelf.viewModel.onRemoveFriend()
+                imageIcon = #imageLiteral(resourceName: "RemoveFriend").withRenderingMode(.alwaysTemplate).tint(with: .moonRed)
+            case .addFriend:
+                action = strongSelf.viewModel.onAddFriend()
+                imageIcon = #imageLiteral(resourceName: "AddFriend").withRenderingMode(.alwaysTemplate).tint(with: .moonGreen)
+            case .acceptRequest:
+                action = strongSelf.viewModel.onDeclineRequest()
+                imageIcon = #imageLiteral(resourceName: "CancelFriendRequest").withRenderingMode(.alwaysTemplate).tint(with: .moonRed)
+                strongSelf.acceptButton.isHidden = false
+            case .cancelRequest:
+                action = strongSelf.viewModel.onCancelRequest()
+                imageIcon = #imageLiteral(resourceName: "CancelFriendRequest").withRenderingMode(.alwaysTemplate).tint(with: .moonRed)
+            case .edit:
+                action = strongSelf.viewModel.onEdit()
+                imageIcon = Icon.cm.edit
+            }
+            
+            strongSelf.editProfileButton.setBackgroundImage(imageIcon, for: .normal)
+            strongSelf.editProfileButton.rx.action = action
             
         }).addDisposableTo(bag)
+        viewModel.reloadActionButton.onNext()
         
         viewModel.profilePictures.asObservable().subscribe(onNext: { [weak self] images in
             self?.pageController.numberOfPages = images.count
@@ -80,6 +106,10 @@ class ProfileViewController: UIViewController, BindableType {
         viewModel.username.bind(to: usernameLabel.rx.text).addDisposableTo(bag)
         viewModel.fullName.subscribe(onNext: { [weak self] name in
             self?.toolBar.title = name
+        }).addDisposableTo(bag)
+        
+        viewModel.numFriendRequests.asObservable().subscribe(onNext: { [weak self] num in
+            //self?.friendsButton.badgeString = num
         }).addDisposableTo(bag)
     }
     
@@ -106,11 +136,15 @@ class ProfileViewController: UIViewController, BindableType {
         exitButton.tintColor = .moonRed
     }
     
+    private func setupAcceptButton() {
+        acceptButton.setBackgroundImage(#imageLiteral(resourceName: "AcceptFriendRequest").withRenderingMode(.alwaysTemplate).tint(with: .moonGreen), for: .normal)
+        acceptButton.isHidden = true
+    }
+    
     private func setUpFriendsButton() {
         friendsButton = MIBadgeButton()
         friendsButton.badgeEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 0)
         friendsButton.setImage(#imageLiteral(resourceName: "friendsIcon"), for: .normal)
-        friendsButton.badgeString = "12"
     }
     
     private func setUpBioLabel() {

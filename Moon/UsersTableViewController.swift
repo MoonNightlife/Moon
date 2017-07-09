@@ -20,7 +20,7 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
     @IBOutlet weak var userTableView: UITableView!
     @IBOutlet weak var showContactsButton: UIButton!
     var backButton: UIBarButtonItem!
-    let dataSource = RxTableViewSectionedAnimatedDataSource<UserSectionModel>()
+    let dataSource = RxTableViewSectionedReloadDataSource<UserSectionModel>()
     var refreshControl: UIRefreshControl = UIRefreshControl()
     
     @IBOutlet weak var contactsViewHeightConstraint: NSLayoutConstraint!
@@ -54,12 +54,9 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
         viewModel.users.do(onNext: { [weak self] _ in
             self?.refreshControl.endRefreshing()
         }).bind(to: userTableView.rx.items(dataSource: dataSource)).addDisposableTo(bag)
+        viewModel.reload.onNext()
         
-        let selectedItem = userTableView.rx.itemSelected
-        selectedItem.subscribe(onNext: { [weak self] indexPath in
-            self?.viewModel.onShowUser(indexPath: indexPath).execute()
-        })
-        .disposed(by: bag)
+        userTableView.rx.modelSelected(UserSectionModel.Item.self).bind(to: viewModel.onShowUser.inputs).addDisposableTo(bag)
         
         backButton.rx.action = viewModel.onBack()
         showContactsButton.rx.action = viewModel.onShowContacts()
@@ -84,14 +81,13 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
                     //swiftlint:disable force_cast
                     let cell = tableView.dequeueReusableCell(withIdentifier: "UsersTableCell", for: indexPath) as! UsersTableViewCell
                     
-                    if let urlString = snap.pic, let url = URL(string: urlString) {
-                        let downloadAction = strongSelf.viewModel.downloadImage(url: url)
+                    if let id = snap.id {
+                        let downloadAction = strongSelf.viewModel.getProfileImage(id: id)
                         downloadAction
                             .elements
                             .bind(to: cell.profilePicture.rx.image)
                             .addDisposableTo(cell.bag)
                         downloadAction.execute()
-
                     }
                     
                     cell.profilePicture.cornerRadius = cell.profilePicture.frame.size.width / 2
@@ -106,8 +102,8 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
                     //swiftlint:disable force_cast
                     let cell = tableView.dequeueReusableCell(withIdentifier: "FriendRequest", for: indexPath) as! FriendRequestTableViewCell
                     
-                    if let urlString = snap.pic, let url = URL(string: urlString) {
-                        let downloadAction = strongSelf.viewModel.downloadImage(url: url)
+                    if let id = snap.id {
+                        let downloadAction = strongSelf.viewModel.getProfileImage(id: id)
                         downloadAction
                             .elements
                             .bind(to: cell.profilePicture.rx.image)

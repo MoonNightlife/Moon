@@ -10,8 +10,9 @@ import Foundation
 import RxSwift
 import RxCocoa
 import Action
+import RxOptional
 
-struct UsersTableViewModel: BackType, ImageNetworkingInjected, NetworkingInjected, AuthNetworkingInjected {
+class UsersTableViewModel: BackType, ImageNetworkingInjected, NetworkingInjected, AuthNetworkingInjected, StorageNetworkingInjected {
 
     // Local
     let sourceID: UserTableSource
@@ -43,7 +44,7 @@ struct UsersTableViewModel: BackType, ImageNetworkingInjected, NetworkingInjecte
             userSource = this.getSpecialLikers(specialID: id)
         }
         
-        return Observable.of(Observable<Void>.just(()), this.reload).flatMap({_ in
+        return this.reload.flatMap({_ in
             return userSource
         })
 
@@ -82,7 +83,7 @@ struct UsersTableViewModel: BackType, ImageNetworkingInjected, NetworkingInjecte
     }
     
     func getActivityLikers(activityID: String) -> Observable<[UserSectionModel]> {
-        return userAPI.getActivityLikes(activityID: activityID)
+        return userAPI.getActivityLikers(activityID: activityID)
             .map({
                 return $0.map(UserSectionItem.friend)
             }).map({
@@ -92,12 +93,16 @@ struct UsersTableViewModel: BackType, ImageNetworkingInjected, NetworkingInjecte
     }
     
     func getSpecialLikers(specialID: String) -> Observable<[UserSectionModel]> {
-        //TODO: implement once api returns snapshot instead of profile
-        return Observable.empty()
+        return barAPI.getSpecialLikers(specialID: specialID)
+            .map({
+                return $0.map(UserSectionItem.friend)
+            }).map({
+                return UserSectionModel.friendsSection(title: "Special Likes", items: $0)
+            }).toArray()
     }
     
     func getEventLikers(eventID: String) -> Observable<[UserSectionModel]> {
-        return barAPI.getEventLikes(eventID: eventID)
+        return barAPI.getEventLikers(eventID: eventID)
             .map({
                 return $0.map(UserSectionItem.friend)
             }).map({
@@ -105,24 +110,28 @@ struct UsersTableViewModel: BackType, ImageNetworkingInjected, NetworkingInjecte
             }).toArray()
     }
     
-    func onShowUser(indexPath: IndexPath) -> CocoaAction {
-        return CocoaAction {_ in
-            return Observable.empty()
-            //TODO: fix
-//            return Observable.just().withLatestFrom(self.users).map({ sectionModel in
-//                var vm: ProfileViewModel!
-//                if case let .friend(snapshot) = sectionModel[indexPath.section].items[indexPath.row] {
-//                    vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: snapshot.id ??
-//                "0")
-//                } else if case let .friendRequest(snapshot) = sectionModel[indexPath.section].items[indexPath.row] {
-//                    vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: snapshot.id ?? "0")
-//                }
-//                return vm
-//            }).flatMap({
-//                self.sceneCoordinator.transition(to: Scene.User.profile($0), type: .popover)
-//            })
+    lazy var onShowUser: Action<UserSectionModel.Item, Void> = {
+        return Action { model in
+        
+            return Observable.just()
+                .map({ _ -> String? in
+                    if case let .friend(snapshot) = model {
+                        return snapshot.id
+                    } else if case let .friendRequest(snapshot) = model {
+                        return snapshot.id
+                    } else {
+                        return nil
+                    }
+                })
+                .filterNil()
+                .map({ id -> ProfileViewModel in
+                    return ProfileViewModel(coordinator: self.sceneCoordinator, userID: id)
+                })
+                .flatMap({
+                    return self.sceneCoordinator.transition(to: Scene.User.profile($0), type: .popover)
+                })
         }
-    }
+    }()
     
     func onShowContacts() -> CocoaAction {
         return CocoaAction {
@@ -133,13 +142,27 @@ struct UsersTableViewModel: BackType, ImageNetworkingInjected, NetworkingInjecte
     
     func onAcceptFriendRequest(userID: String) -> CocoaAction {
         return CocoaAction {_ in 
-            return self.userAPI.declineFriend(userID: self.authAPI.SignedInUserID, friendID: userID)
+            return self.userAPI.acceptFriend(userID: self.authAPI.SignedInUserID, friendID: userID).do(onNext: {
+                self.reload.onNext()
+            })
         }
     }
     
     func onDeclineFriendRequest(userID: String) -> CocoaAction {
         return CocoaAction {
-            return self.userAPI.acceptFriend(userID: self.authAPI.SignedInUserID, friendID: userID)
+            return self.userAPI.declineFriend(userID: self.authAPI.SignedInUserID, friendID: userID).do(onNext: {
+                self.reload.onNext()
+            })
         }
+    }
+    
+    func getProfileImage(id: String) -> Action<Void, UIImage> {
+        return Action(workFactory: {_ in
+            return self.storageAPI.getProfilePictureDownloadUrlForUser(id: id)
+                .filterNil()
+                .flatMap({
+                    self.photoService.getImageFor(url: $0)
+                })
+        })
     }
 }

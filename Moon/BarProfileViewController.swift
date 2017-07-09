@@ -82,7 +82,6 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         }).subscribe(onNext: { [weak self] _ in
             self?.viewModel.reloadDisplayUsers.onNext()
         })
-        attendAction.elements.bind(to: viewModel.reloadDisplayUsers).addDisposableTo(bag)
         
         segmentControl.rx.controlEvent(UIControlEvents.valueChanged)
             .map({ [weak self] in

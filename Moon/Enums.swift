@@ -30,7 +30,7 @@ enum AlcoholType: String {
     case liquor = "Liquor"
     case wine = "Wine"
     
-    static func from(int: Int) -> AlcoholType {
+    static func from(int: Int) -> AlcoholType? {
         switch int {
         case 0:
             return self.beer
@@ -39,8 +39,20 @@ enum AlcoholType: String {
         case 2:
             return self.wine
         default:
-            return self.beer
+            return nil
         }
+    }
+    
+    func toInt() -> Int {
+        switch self {
+        case .beer: return 0
+        case .liquor: return 1
+        case .wine: return 2
+        }
+    }
+    
+    func lowerCaseName() -> String {
+        return self.rawValue.lowercased()
     }
 }
 
@@ -95,4 +107,12 @@ enum UserTableSource {
     case special(id: String)
     case event(id: String)
     case activity(id: String)
+}
+
+enum ProfileActionButton {
+    case edit
+    case addFriend
+    case removeFriend
+    case cancelRequest
+    case acceptRequest
 }

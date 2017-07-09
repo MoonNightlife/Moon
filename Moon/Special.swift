@@ -11,12 +11,13 @@ import ObjectMapper
 import RxDataSources
 
 class Special: Mappable {
-    public var id: String?
-    public var numLikes: Int?
-    public var pic: String?
-    public var name: String?
-    public var description: String?
-    public var barID: String?
+    var id: String?
+    var numLikes: Int?
+    var pic: String?
+    var name: String?
+    var description: String?
+    var barID: String?
+    var type: AlcoholType?
     
     required init?(map: Map) {
         
@@ -26,9 +27,10 @@ class Special: Mappable {
         id <- map["id"]
         barID <- map["barId"]
         name <- map["barName"]
-        pic <- map["photoUrl"]
+        pic <- map["photoName"]
         description <- map["description"]
         numLikes <- map["numberOfLikes"]
+        type <- (map["type"], SpecialTypeTransform)
     }
 }
 

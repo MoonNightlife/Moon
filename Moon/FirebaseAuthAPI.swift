@@ -24,6 +24,7 @@ struct FirebaseAuthAPI: AuthAPIType {
         private static let authBaseURL = "https://us-central1-moon-4409e.cloudfunctions.net/"
         
         static let createAccount = authBaseURL + "createNewUser"
+        static let checkUsername = authBaseURL + "checkUsername"
     }
     
     func login(credentials: LoginCredentials) -> Observable<UserID> {
@@ -73,6 +74,34 @@ struct FirebaseAuthAPI: AuthAPIType {
                     } else {
                         observer.onNext()
                         observer.onCompleted()
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    
+    func checkUsername(username: String) -> Observable<Bool> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "username": username
+            ]
+            let request = Alamofire.request(AuthFunction.checkUsername, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseJSON(completionHandler: { (response) in
+                    switch response.result {
+                    case .success(let value):
+                        if let isTaken = value as? Bool {
+                            observer.onNext(isTaken)
+                            observer.onCompleted()
+                            
+                        } else {
+                            observer.onError(UserAPIError.jsonCastingFailure)
+                        }
+                    case .failure(let error):
+                        observer.onError(error)
                     }
                 })
             

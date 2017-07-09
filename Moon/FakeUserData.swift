@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-//let profilePics = ["p1.jpg", "p2.jpg", "p3.jpg", "p4.jpg", "p5.jpg", "p6.jpg", "p8.jpg", "p7.jpg"]
-//let names = ["Collin Duzyk", "Camden Moore", "Mony Gonzalez", "Molly Smith", "Marisol Leiva", "Sloan Stearman", "Andrea Adler", "Henry Berhle"]
-//
+let profilePics = ["p1.jpg", "p2.jpg", "p3.jpg", "p4.jpg", "p5.jpg", "p6.jpg", "p8.jpg", "p7.jpg"]
+let names = ["Collin Duzyk", "Camden Moore", "Mony Gonzalez", "Molly Smith", "Marisol Leiva", "Sloan Stearman", "Andrea Adler", "Henry Berhle"]
+
 //let fakeNames = ["Collin", "Camden", "Mony", "Marisol", "Molly", "Sloan", "Henry", "Andrea"]
 //let fakeLastNames = ["Duzyk", "Moore", "Gonzalez", "Leiva", "Smith", "Stearman", "Brlhe", "Adler"]
 //let fakeIDs = ["1", "2", "3", "4", "5", "6", "7", "8"]

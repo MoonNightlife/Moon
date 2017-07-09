@@ -44,10 +44,17 @@ class BarActivityFeedViewController: UIViewController, BindableType, DisplayErro
      
     func bindViewModel() {
         viewModel.refreshAction.elements.do(onNext: { [weak self] activities in
-            if let isEmpty = activities.first?.items.isEmpty, isEmpty, let strongSelf = self {
-                strongSelf.addEmpyDataView()
+            guard let strongSelf = self else {
+                return
             }
-            self?.refreshControl.endRefreshing()     
+            if let isEmpty = activities.first?.items.isEmpty, isEmpty {
+                strongSelf.tableView.separatorStyle  = .none
+                strongSelf.addEmpyDataView()
+            } else {
+                strongSelf.tableView.separatorStyle = .singleLine
+                strongSelf.tableView.backgroundView = nil
+            }
+            strongSelf.refreshControl.endRefreshing()
             }).bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
         
         refreshControl.rx.controlEvent(.valueChanged).subscribe(viewModel.refreshAction.inputs).addDisposableTo(disposeBag)
@@ -63,12 +70,9 @@ class BarActivityFeedViewController: UIViewController, BindableType, DisplayErro
     }
     
     fileprivate func addEmpyDataView() {
-        let noDataLabel: UILabel     = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-        noDataLabel.text          = "No data available"
-        noDataLabel.textColor     = UIColor.black
-        noDataLabel.textAlignment = .center
-        tableView.backgroundView  = noDataLabel
-        tableView.separatorStyle  = .none
+        let emptyImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+        emptyImageView.image = #imageLiteral(resourceName: "DefaultMoonsView")
+        tableView.backgroundView = emptyImageView
     }
     
     fileprivate func configureDataSource() {
@@ -87,10 +91,31 @@ class BarActivityFeedViewController: UIViewController, BindableType, DisplayErro
     func populate(activityCell view: BarActivityTableViewCell, activity: Activity) {
         // Bind actions
         if let userID = activity.userID, let barID = activity.barID {
-            view.likeButton.rx.action = viewModel.onLike(userID: userID)
+            
+            let likeAction = viewModel.onLike(userID: userID)
+            view.likeButton.rx.action = likeAction
+            likeAction.elements.do(onNext: {
+                view.toggleColorAndNumber()
+            }).subscribe().addDisposableTo(view.bag)
+            
+            let hasLiked = viewModel.hasLikedActivity(activityID: userID)
+            hasLiked.elements.do(onNext: { hasLiked in
+                if hasLiked {
+                    view.likeButton.tintColor = .red
+                    view.heartColor = .red
+                }
+            }).subscribe().addDisposableTo(view.bag)
+            hasLiked.execute()
+            
+            
             view.user.rx.action = viewModel.onView(userID: userID)
             view.bar.rx.action = viewModel.onView(barID: barID)
             view.numLikeButton.rx.action = viewModel.onViewLikers(userID: userID)
+            
+            let downloader = viewModel.getProfileImage(id: userID)
+            downloader.elements.bind(to: view.profilePicture.rx.image).addDisposableTo(view.bag)
+            downloader.execute()
+            
         }
         
         // Bind labels
@@ -102,14 +127,7 @@ class BarActivityFeedViewController: UIViewController, BindableType, DisplayErro
             let date = Date.init(timeIntervalSince1970: time)
             view.timeLabel.text = date.getElaspedTimefromDate()
         }
-        
-        if let urlString = activity.pic, let url = URL(string: urlString) {
-            let downloader = viewModel.downloadImage(url: url)
-                downloader.elements.bind(to: view.profilePicture.rx.image).addDisposableTo(view.bag)
-                downloader.execute()
-        } else {
-            view.profilePicture.image = #imageLiteral(resourceName: "DefaultProfilePic")
-        }
+
     }
 
 }

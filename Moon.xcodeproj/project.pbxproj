@@ -966,7 +966,6 @@
 				C08AFB271EECB9E8007D33D6 /* Moon Specific */,
 				F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */,
 				F09C09211ECC7D3B003076CC /* FloatingBottomTabBar.swift */,
-				F06B56FE1EFAAFD50028552A /* FriendRequestTableViewCell.swift */,
 				F0043A041EF45D8C0047E94A /* ContactTableViewCell.swift */,
 				F044CD521ECDE28A00E47138 /* BottomGradientImageView.swift */,
 				F09DF08B1EEAF0610092BFA5 /* NotificationTableViewCell.swift */,
@@ -1095,6 +1094,7 @@
 				F0CA18921EE585D700428318 /* ProfileViewController.swift */,
 				F0E8627E1EF6B8DB00BEF5E9 /* EditProfileViewController.swift */,
 				F0EF69371EF08BAE0028A32B /* UsersTableViewController.swift */,
+				F06B56FE1EFAAFD50028552A /* FriendRequestTableViewCell.swift */,
 				F03C78B81EE9E931002AEDAD /* Settings */,
 			);
 			name = User;

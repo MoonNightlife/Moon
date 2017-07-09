@@ -23,22 +23,22 @@ let DateTransfromDouble = TransformOf<NSDate, Double>(fromJSON: { (value: Double
         return nil
 })
 
-//let BarSpecialTransform = TransformOf<BarSpecial, String>(fromJSON: { (value: String?) -> BarSpecial? in
-//
-//        switch value! {
-//            case "Beer": return BarSpecial.Beer
-//            case "Wine": return BarSpecial.Wine
-//            case "Spirits": return BarSpecial.Spirits
-//            default: return nil
-//        }
-//
-//    }, toJSON: { (value: BarSpecial?) -> String? in
-//        // transform value from Int? to String?
-//        if let value = value {
-//            return value.rawValue
-//        }
-//        return nil
-//})
+let SpecialTypeTransform = TransformOf<AlcoholType, Int>(fromJSON: { (value: Int?) -> AlcoholType? in
+
+        if let int = value {
+            return AlcoholType.from(int: int)
+        } else {
+            return nil
+        }
+    
+    }, toJSON: { (value: AlcoholType?) -> Int? in
+        
+        if let value = value {
+            return value.toInt()
+        } else {
+            return nil
+        }
+})
 
 //let DayTransform = TransformOf<Day, String>(fromJSON: { (value: String?) -> Day? in
 //    

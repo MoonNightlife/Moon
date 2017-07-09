@@ -20,7 +20,7 @@ class Activity: Mappable {
     var numLikes: Int?
     var pic: String?
     var userName: String {
-        return (firstName ?? "") + (lastName ?? "")
+        return (firstName ?? "") + " " + (lastName ?? "")
     }
     
     required init?(map: Map) {
@@ -48,6 +48,6 @@ extension Activity: IdentifiableType {
 
 extension Activity: Equatable {
     static func == (lhs: Activity, rhs: Activity) -> Bool {
-        return lhs.userID == rhs.userID
+        return lhs.userID == rhs.userID && lhs.numLikes == rhs.numLikes
     }
 }

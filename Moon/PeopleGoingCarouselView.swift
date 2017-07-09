@@ -42,6 +42,7 @@ extension PeopleGoingCarouselView {
     
     fileprivate func prepareImageViewTapReconizer() {
         tapReconizer = UITapGestureRecognizer()
+        imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tapReconizer)
     }
     

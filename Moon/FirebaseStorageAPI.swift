@@ -32,7 +32,7 @@ struct FirebaseStorageAPI: StorageAPIType {
     
     func getProfilePictureDownloadUrlForUser(id: String) -> Observable<URL?> {
         return Observable.create({ (observer) -> Disposable in
-            let ref = Storage.storage().reference().child(id).child("profilePictures").child("fullSize")
+            let ref = Storage.storage().reference().child("user").child(id).child("profilePictures").child("pic1")
             ref.downloadURL(completion: { (url, error) in
                 if let e = error {
                     observer.onError(e)
@@ -49,6 +49,38 @@ struct FirebaseStorageAPI: StorageAPIType {
     func getBarPictureDownloadUrlForBar(id: String, picName: String) -> Observable<URL?> {
         return Observable.create({ (observer) -> Disposable in
             let ref = Storage.storage().reference().child("bar").child(id).child(picName)
+            ref.downloadURL(completion: { (url, error) in
+                if let e = error {
+                    observer.onError(e)
+                }
+                observer.onNext(url)
+                observer.onCompleted()
+            })
+            
+            return Disposables.create()
+            
+        })
+    }
+    
+    func getSpecialPictureDownloadUrlForSpecial(name: String, type: AlcoholType) -> Observable<URL?> {
+        return Observable.create({ (observer) -> Disposable in
+            let ref = Storage.storage().reference().child("special").child(type.lowerCaseName()).child(name)
+            ref.downloadURL(completion: { (url, error) in
+                if let e = error {
+                    observer.onError(e)
+                }
+                observer.onNext(url)
+                observer.onCompleted()
+            })
+            
+            return Disposables.create()
+            
+        })
+    }
+    
+    func getEventPictureDownloadUrlForEvent(id: String) -> Observable<URL?> {
+        return Observable.create({ (observer) -> Disposable in
+            let ref = Storage.storage().reference().child("event").child(id).child("pic1.jpg")
             ref.downloadURL(completion: { (url, error) in
                 if let e = error {
                     observer.onError(e)

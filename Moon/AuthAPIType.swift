@@ -28,4 +28,6 @@ protocol AuthAPIType {
     func login(credentials: LoginCredentials) -> Observable<UserID>
     func signOut() -> Observable<Void>
     func createAccount(newUser: NewUser) -> Observable<Void>
+    
+    func checkUsername(username: String) -> Observable<Bool>
 }

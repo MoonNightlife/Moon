@@ -53,7 +53,6 @@ class BarProfileViewModel: ImageNetworkingInjected, NetworkingInjected, BackType
         self.barAPI.getBarEvents(barID: barID).catchErrorJustReturn([]).bind(to: events).addDisposableTo(bag)
         self.barAPI.getBarSpecials(barID: barID).catchErrorJustReturn([]).bind(to: specials).addDisposableTo(bag)
     
-        
         Observable.of(["pic1.jpg", "pic2.jpg", "pic3.jpg", "pic4.jpg"]).flatMap({ [unowned self] picNames in
             return Observable.from(picNames).flatMap({
                 return self.storageAPI.getBarPictureDownloadUrlForBar(id: self.barID, picName: $0).filterNil().flatMap({ [unowned self] url in
@@ -166,6 +165,37 @@ class BarProfileViewModel: ImageNetworkingInjected, NetworkingInjected, BackType
         return Action<Void, Bool> { [unowned self] _ in
             return self.userAPI.hasLikedActivity(userID: self.authAPI.SignedInUserID, ActivityID: activityID)
         }
+    }
+    
+    func getSpecialImage(imageName: String, type: AlcoholType) -> Action<Void, UIImage> {
+        return Action(workFactory: { [unowned self] _ in
+                return self.storageAPI.getSpecialPictureDownloadUrlForSpecial(name: imageName, type: type)
+                .debug()
+                .filterNil()
+                .flatMap({
+                    self.photoService.getImageFor(url: $0)
+                })
+        })
+    }
+    
+    func getEventImage(id: String) -> Action<Void, UIImage> {
+        return Action(workFactory: { [unowned self] _ in
+            return self.storageAPI.getEventPictureDownloadUrlForEvent(id: id)
+                .filterNil()
+                .flatMap({
+                    self.photoService.getImageFor(url: $0)
+                })
+        })
+    }
+    
+    func getProfileImage(id: String) -> Action<Void, UIImage> {
+        return Action(workFactory: { [unowned self] _ in
+            return self.storageAPI.getProfilePictureDownloadUrlForUser(id: id)
+                .filterNil()
+                .flatMap({
+                    self.photoService.getImageFor(url: $0)
+                })
+        })
     }
 
 }

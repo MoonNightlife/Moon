@@ -41,6 +41,11 @@ extension BarProfileViewController {
             eventView.shareButton.rx.action = viewModel.onShareEvent(eventID: id, barID: barID)
             // No action for this button on the bar profile, so hide it
             eventView.moreButton.isHidden = true
+            
+            // Bind Image
+            let downloader = viewModel.getEventImage(id: id)
+            downloader.elements.bind(to: eventView.imageView.rx.image).addDisposableTo(eventView.bag)
+            downloader.execute()
         }
         
         // Bind labels
@@ -49,16 +54,6 @@ extension BarProfileViewController {
         eventView.toolbar.title = event.title
         eventView.content.text = event.description
         eventView.numberOfLikesButton.title = "\(event.numLikes ?? 0)"
-        
-        // Bind image
-        if let urlString = event.pic, let url = URL(string: urlString) {
-            let downloader = viewModel.downloadImage(url: url)
-            downloader.elements.bind(to: eventView.imageView.rx.image).addDisposableTo(eventView.bag)
-            downloader.execute()
-        } else {
-            eventView.imageView.image = nil
-            eventView.imageView.backgroundColor = UIColor.moonGrey
-        }
         
     }
     
@@ -89,8 +84,8 @@ extension BarProfileViewController {
         view.content.text = special.description
         
         // Bind Image
-        if let urlString = special.pic, let url = URL(string: urlString) {
-            let downloader = viewModel.downloadImage(url: url)
+        if let imageName = special.pic, let type = special.type {
+            let downloader = viewModel.getSpecialImage(imageName: imageName, type: type)
             downloader.elements.bind(to: view.imageView.rx.image).addDisposableTo(view.bag)
             downloader.execute()
         } else {
@@ -124,24 +119,20 @@ extension BarProfileViewController {
             
             //TODO: test once andrew updates the swagger
             // When the user taps the photo of a user the are directed to the user's profile
+        
             peopleGoingView.imageView.gestureRecognizers?.first?.rx.event.subscribe(onNext: { [weak self] in
                 print($0)
                 self?.viewModel.onShowProfile(userID: userID).execute()
             }).addDisposableTo(peopleGoingView.bag)
+            
+            let downloader = viewModel.getProfileImage(id: userID)
+            downloader.elements.bind(to: peopleGoingView.imageView.rx.image).addDisposableTo(peopleGoingView.bag)
+            downloader.execute()
         }
         
         // Bind labels
         peopleGoingView.numberOfLikesButton.title = "\(activity.numLikes ?? 0)"
         peopleGoingView.bottomToolbar.title = activity.userName
-        
-        // Bind Image
-        if let urlString = activity.pic, let url = URL(string: urlString) {
-            let downloader = viewModel.downloadImage(url: url)
-            downloader.elements.bind(to: peopleGoingView.imageView.rx.image).addDisposableTo(peopleGoingView.bag)
-            downloader.execute()
-        } else {
-            peopleGoingView.imageView.image = nil
-            peopleGoingView.imageView.backgroundColor = UIColor.moonGrey
-        }
+    
     }
 }

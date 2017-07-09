@@ -18,6 +18,10 @@ class FriendRequestTableViewCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var declineButton: UIButton!
+    
+    override func awakeFromNib() {
+        name.font = UIFont.moonFont(size: 17)
+    }
 
     override func prepareForReuse() {
         bag = DisposeBag()

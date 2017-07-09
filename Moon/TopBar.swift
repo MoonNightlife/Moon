@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-class TopBar: Mappable {
+class TopBar: Mappable, Equatable {
 
     var name: String?
     var usersGoing: String?
@@ -23,5 +23,9 @@ class TopBar: Mappable {
         id <- map["id"]
         name <- map["name"]
         usersGoing <- map["numberOfAttendees"]
+    }
+    
+    static func ==(lhs: TopBar, rhs: TopBar) -> Bool {
+        return lhs.id == rhs.id && lhs.usersGoing == rhs.usersGoing
     }
 }

@@ -25,15 +25,17 @@ struct FirebaseUserAPI: UserAPIType {
         static let updatePhotoUrls = userBaseURL + "updatePhotoUrls"
         
         static let requestFriend = userBaseURL + "requestFriend"
-        static let getFriendRequest = userBaseURL + "getFriendRequest"
+        static let getFriendRequest = userBaseURL + "getFriendRequests"
         static let declineFriendRequest = userBaseURL + "declineFriendRequest"
         static let acceptFriendRequest = userBaseURL + "acceptFriendRequest"
+        static let removeFriend = userBaseURL + "endFriendship"
+        static let cancelFriend = userBaseURL + "cancelFriendRequest"
         
         static let likeSpecial = userBaseURL + "likeSpecial"
         static let likeActivity = userBaseURL + "likeActivity"
         static let likeEvent = userBaseURL + "likeEvent"
         
-        static let getActivityLikes = userBaseURL + "getActivityLikes"
+        static let getActivityLikers = userBaseURL + "getActivityLikers"
         static let getActivityFeed = userBaseURL + "getActivityFeed"
         
         static let goToBar = userBaseURL + "goToBar"
@@ -43,8 +45,8 @@ struct FirebaseUserAPI: UserAPIType {
         static let hasLikedActivity = userBaseURL + "hasLikedActivity"
         
         static let pendingFriendRequest = userBaseURL + "pendingFriendRequest"
-        static let areFriends = userBaseURL + "areFriends"
-        static let sentFriendRequest = userBaseURL + "sentFriendRequest"
+        static let areFriends = userBaseURL + "getFriendStatus"
+        static let sentFriendRequest = userBaseURL + "didSendFriendRequest"
     }
     
 }
@@ -55,7 +57,7 @@ extension FirebaseUserAPI {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
                 "userId": "\(userID)",
-                "friendID": "\(friendID)"
+                "friendId": "\(friendID)"
             ]
             let request = Alamofire.request(UserFunction.acceptFriendRequest, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()
@@ -78,7 +80,7 @@ extension FirebaseUserAPI {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
                 "userId": "\(userID)",
-                "friendID": "\(friendID)"
+                "friendId": "\(friendID)"
             ]
             let request = Alamofire.request(UserFunction.declineFriendRequest, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()
@@ -101,7 +103,7 @@ extension FirebaseUserAPI {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
                 "userId": "\(userID)",
-                "friendID": "\(friendID)"
+                "friendId": "\(friendID)"
             ]
             let request = Alamofire.request(UserFunction.requestFriend, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()
@@ -119,7 +121,55 @@ extension FirebaseUserAPI {
             }
         })
     }
+
+    func removeFriend(userID: String, friendID: String) -> Observable<Void> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": "\(userID)",
+                "userId": "\(friendID)"
+            ]
+            let request = Alamofire.request(UserFunction.removeFriend, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .response(completionHandler: {
+                    if let e = $0.error {
+                        observer.onError(e)
+                    } else {
+                        observer.onNext()
+                        observer.onCompleted()
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    
+    func cancelFriend(userID: String, friendID: String) -> Observable<Void> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": "\(userID)",
+                "userId": "\(friendID)"
+            ]
+            let request = Alamofire.request(UserFunction.cancelFriend, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .response(completionHandler: {
+                    if let e = $0.error {
+                        observer.onError(e)
+                    } else {
+                        observer.onNext()
+                        observer.onCompleted()
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
 }
+
+
 // MARK: - Blocking
 extension FirebaseUserAPI {
     func blockUser(userID: String, blockID: String) -> Observable<Void> {
@@ -201,8 +251,27 @@ extension FirebaseUserAPI {
         })
     }
     
-    func getActivityLikes(activityID: String) -> Observable<[Snapshot]> {
-        return Observable.empty()
+    func getActivityLikers(activityID: String) -> Observable<[Snapshot]> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": activityID
+            ]
+            let request = Alamofire.request(UserFunction.getActivityLikers, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseArray(completionHandler: { (response: DataResponse<[Snapshot]>) in
+                    switch response.result {
+                    case .success(let snapshots):
+                        observer.onNext(snapshots)
+                        observer.onCompleted()
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
     }
     func getActivityFeed(userID: String) -> Observable<[Activity]> {
         return Observable.create({ (observer) -> Disposable in
@@ -412,8 +481,8 @@ extension FirebaseUserAPI {
     func pendingFriendRequest(userID1: String, userID2: String) -> Observable<Bool> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
-                "userId1": userID1,
-                "userId2": userID2
+                "id": userID1,
+                "userId": userID2
             ]
             let request = Alamofire.request(UserFunction.pendingFriendRequest, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()
@@ -440,8 +509,8 @@ extension FirebaseUserAPI {
     func areFriends(userID1: String, userID2: String) -> Observable<Bool> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
-                "userId1": userID1,
-                "userId2": userID2
+                "id": userID1,
+                "userId": userID2
             ]
             let request = Alamofire.request(UserFunction.areFriends, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()
@@ -468,8 +537,8 @@ extension FirebaseUserAPI {
     func sentFriendRequest(userID1: String, userID2: String) -> Observable<Bool> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
-                "userId1": userID1,
-                "userId2": userID2
+                "id": userID1,
+                "userId": userID2
             ]
             let request = Alamofire.request(UserFunction.sentFriendRequest, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()

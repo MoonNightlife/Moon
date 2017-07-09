@@ -29,6 +29,9 @@ struct FirebaseBarAPI: BarAPIType {
         
         static let getBarFriends = barBaseURL + "getBarFriends"
         static let getBarPeople = barBaseURL + "getBarPeople"
+        
+        static let getEventLikers = barBaseURL + "getEventLikers"
+        static let getSpecialLikers = barBaseURL + "getSpecialLikers"
     }
     
     func getBarFriends(barID: String, userID: String) -> Observable<[Activity]> {
@@ -190,11 +193,11 @@ struct FirebaseBarAPI: BarAPIType {
         })
 
     }
-    func getSpecialsIn(region: String, type: String) -> Observable<[Special]> {
+    func getSpecialsIn(region: String, type: AlcoholType) -> Observable<[Special]> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
                 "region": "\(region)",
-                "type": "\(type)"
+                "type": type.toInt()
             ]
             let request = Alamofire.request(BarFunction.getSpecialsInRegionByType, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()
@@ -237,7 +240,48 @@ struct FirebaseBarAPI: BarAPIType {
         })
     }
     
-    func getEventLikes(eventID: String) -> Observable<[Snapshot]> {
-        return Observable.empty()
+    func getEventLikers(eventID: String) -> Observable<[Snapshot]> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": eventID
+            ]
+            let request = Alamofire.request(BarFunction.getEventLikers, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseArray(completionHandler: { (response: DataResponse<[Snapshot]>) in
+                    switch response.result {
+                    case .success(let snapshots):
+                        observer.onNext(snapshots)
+                        observer.onCompleted()
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    func getSpecialLikers(specialID: String) -> Observable<[Snapshot]> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": specialID
+            ]
+            let request = Alamofire.request(BarFunction.getSpecialLikers, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseArray(completionHandler: { (response: DataResponse<[Snapshot]>) in
+                    switch response.result {
+                    case .success(let snapshots):
+                        observer.onNext(snapshots)
+                        observer.onCompleted()
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
     }
 }

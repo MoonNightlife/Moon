@@ -15,7 +15,7 @@ class Snapshot: Mappable {
     var firstName: String?
     var lastName: String?
     var name: String {
-        return (firstName ?? "") + (lastName ?? "")
+        return (firstName ?? "") + " " + (lastName ?? "")
     }
     var pic: String?
     

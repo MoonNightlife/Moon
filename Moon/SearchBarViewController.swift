@@ -84,6 +84,10 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
         textedEnteredInSearchBar.map({ $0.characters.count == 0 }).subscribe(onNext: { [weak self] noTextEntered in
             self?.searchBar.clearButton.isHidden = noTextEntered
         }).addDisposableTo(bag)
+        
+        viewModel.numberOfFriendRequest.subscribe(onNext: { [weak self] num in
+            //self?.profileButton.badgeString = num
+        }).addDisposableTo(bag)
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
@@ -108,7 +112,6 @@ extension SearchBarViewController {
         profileButton = MIBadgeButton()
         profileButton.badgeEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 0, right: 0)
         profileButton.setImage(profileIconImage, for: .normal)
-        profileButton.badgeString = "12"
         
     }
     
