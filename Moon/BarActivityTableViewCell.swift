@@ -9,7 +9,7 @@
 import UIKit
 import Action
 import RxSwift
-import SwaggerClient
+import Material
 
 class BarActivityTableViewCell: UITableViewCell {
     
@@ -24,6 +24,7 @@ class BarActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var timeImageView: UIImageView!
     
     var bag = DisposeBag()
+    var heartColor: HeartColor = .gray
     
     func initializeCell() {
     
@@ -39,6 +40,17 @@ class BarActivityTableViewCell: UITableViewCell {
         setupLocationImage()
         setupIsGoingToLabel()
         setupTimeImageView()
+    }
+    
+    func toggleColorAndNumber() {
+        
+        likeButton.setImage(Icon.favorite?.tint(with: heartColor == .gray ? .red : .lightGray), for: .normal)
+        if let numString = numLikeButton.titleLabel?.text, let num = Int(numString) {
+            print(numString)
+            numLikeButton.setTitle("\(heartColor == .gray ? num + 1 : num - 1)", for: .normal)
+        }
+        
+        heartColor = heartColor == .gray ? .red : .gray
     }
     
     override func prepareForReuse() {

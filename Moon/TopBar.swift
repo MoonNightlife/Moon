@@ -7,19 +7,25 @@
 //
 
 import Foundation
-import CoreLocation
-import SwaggerClient
+import ObjectMapper
 
-struct TopBar {
-    let imageURL: URL
-    let barName: String
-    let usersGoing: String
-    let coordinates: CLLocationCoordinate2D?
+class TopBar: Mappable, Equatable {
+
+    var name: String?
+    var usersGoing: String?
+    var id: String?
     
-    init(from profile: BarProfile) {
-        self.imageURL = URL(string: profile.barPics!.first!)!
-        self.barName = profile.name ?? "No Name"
-        self.usersGoing = "\(profile.numPeopleAttending ?? 0)"
-        self.coordinates = fakeCoordinates[0]
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        name <- map["name"]
+        usersGoing <- map["numberOfAttendees"]
+    }
+    
+    static func ==(lhs: TopBar, rhs: TopBar) -> Bool {
+        return lhs.id == rhs.id && lhs.usersGoing == rhs.usersGoing
     }
 }

@@ -11,36 +11,39 @@ import RxSwift
 import RxCocoa
 import Action
 import RxOptional
-import SwaggerClient
 
-struct ProfileViewModel {
+struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, AuthNetworkingInjected {
     
     // Local
     private let bag = DisposeBag()
     private let barID = Variable<String?>(nil)
-
+    private let userID: String
+    
     // Dependecies
     private let scenceCoordinator: SceneCoordinatorType
-    private let userID: String
-    private let userAPI: UserAPIType
+    var userAPI: UserAPIType
     
     // Inputs
+    var reload: Action<Void, UserProfile>
+    var reloadActionButton = PublishSubject<Void>()
     
     // Outputs
     var username: Observable<String>
     var fullName: Observable<String>
     var bio: Observable<String>
     var activityBarName: Observable<String>
-    var profilePictures = Variable<[UIImage]>([])
     var isSignedInUserProfile = Variable(false)
-    var numFriendRequests = Variable<String?>(nil)
+    var numFriendRequests = Variable<String?>(nil) 
+    var profilePictures = Variable<[UIImage]>([])
+    var actionButton: Observable<ProfileActionButton>
     
-    init(coordinator: SceneCoordinatorType, userAPI: UserAPIType = UserAPIController(), photoService: PhotoService = KingFisherPhotoService(), userID: String) {
+    init(coordinator: SceneCoordinatorType, userID: String, userAPI: UserAPIType = FirebaseUserAPI(), photoService: PhotoService = KingFisherPhotoService(), authAPI: AuthAPIType = FirebaseAuthAPI()) {
         self.scenceCoordinator = coordinator
+        
         self.userID = userID
         self.userAPI = userAPI
         
-        if SignedInUser.userID == userID {
+        if authAPI.SignedInUserID == userID {
             isSignedInUserProfile.value = true
             userAPI.getFriendRequest(userID: userID)
                 .catchErrorJustReturn([])
@@ -48,18 +51,46 @@ struct ProfileViewModel {
                     return $0.count
                 })
                 .map({
-                    return $0 == 0 ? "\($0)" : nil
+                    return $0 > 0 ? "\($0)" : nil
                 })
                 .bind(to: numFriendRequests)
                 .addDisposableTo(bag)
+            
+            actionButton = Observable.just(.edit)
         } else {
             isSignedInUserProfile.value = false
+            
+            let areFriends = reloadActionButton.flatMap({
+                return userAPI.areFriends(userID1: authAPI.SignedInUserID, userID2: userID)
+            })
+            let sentRequest = reloadActionButton.flatMap({
+                return userAPI.sentFriendRequest(userID1: authAPI.SignedInUserID, userID2: userID)
+            })
+            let pendingRequest = reloadActionButton.flatMap({
+                return userAPI.pendingFriendRequest(userID1: authAPI.SignedInUserID, userID2: userID)
+            })
+            
+            actionButton = Observable.zip(areFriends, sentRequest, pendingRequest).map({ areFriends, sentRequest, pendingRequest in
+                if areFriends {
+                    return .removeFriend
+                } else if sentRequest {
+                    return .cancelRequest
+                } else if pendingRequest {
+                    return .acceptRequest
+                } else {
+                    return .addFriend
+                }
+            })
         }
         
-        let user = userAPI.getUserProfile(userID: userID).catchErrorJustReturn(UserProfile())
+        reload = Action(workFactory: {
+            return userAPI.getUserProfile(userID: userID).catchErrorJustReturn(UserProfile()).shareReplay(1)
+        })
+        
+        let user = reload.elements
         
         user.map({ user in
-            return user.activity?.barID
+            return user.barId
         }).bind(to: barID).addDisposableTo(bag)
         
         username = user.map({ $0.username }).replaceNilWith("No Username")
@@ -67,21 +98,20 @@ struct ProfileViewModel {
             let firstName = $0.firstName ?? "No First Name"
             let lastName = $0.lastName ?? "No Last Name"
             return firstName + " " + lastName
-        }).catchErrorJustReturn("No Name")
-        //TODO: Add bio when api adds property to model
-        bio = user.map({ _ in "No Bio" })
-        activityBarName = user.map({ $0.activity }).filterNil().map({ $0.barName }).replaceNilWith("No Plans")
-        
-        user.map({ $0.profilePics }).filterNil()
-            .flatMap({ pictureURLs in
-                return Observable.from(pictureURLs).flatMap({
-                    return photoService.getImageFor(url: URL(string: $0)!)
-                }).toArray()
+        })
+    
+        bio = user.map({ $0.bio }).replaceNilWith("No Bio")
+        activityBarName = user.map({ $0.barName }).replaceNilWith("No Plans")
+
+        storageAPI.getProfilePictureDownloadUrlForUser(id: userID).filterNil()
+            .flatMap({
+                return photoService.getImageFor(url: $0)
             })
-            .catchErrorJustReturn([])
+            .toArray()
+            .catchErrorJustReturn([#imageLiteral(resourceName: "DefaultProfilePic")])
             .startWith([#imageLiteral(resourceName: "DefaultProfilePic")])
             .bind(to: profilePictures).addDisposableTo(bag)
-    
+        
     }
     
     func onDismiss() -> CocoaAction {
@@ -99,7 +129,7 @@ struct ProfileViewModel {
     
     func onEdit() -> CocoaAction {
         return CocoaAction {
-            let vm = EditProfileViewModel(coordinator: self.scenceCoordinator)
+            let vm = EditProfileViewModel(coordinator: self.scenceCoordinator, userID: self.userID)
             return self.scenceCoordinator.transition(to: Scene.User.edit(vm), type: .modal)
         }
     }
@@ -115,9 +145,48 @@ struct ProfileViewModel {
         }
     }
     
+    
     func onAddFriend() -> CocoaAction {
         return CocoaAction { _ in
-            return self.userAPI.requestFriend(userID: SignedInUser.userID, friendID: self.userID)
+            return self.userAPI.requestFriend(userID: self.authAPI.SignedInUserID, friendID: self.userID).do(onNext: {
+                self.reloadActionButton.onNext()
+            })
+        }
+    }
+    
+    func onRemoveFriend() -> CocoaAction {
+        return CocoaAction { _ in
+            return self.userAPI.removeFriend(userID: self.authAPI.SignedInUserID, friendID: self.userID).do(onNext: {
+                self.reloadActionButton.onNext()
+            })
+
+        }
+    }
+    
+    func onAcceptRequest() -> CocoaAction {
+        return CocoaAction { _ in
+            return self.userAPI.acceptFriend(userID: self.authAPI.SignedInUserID, friendID: self.userID).do(onNext: {
+                self.reloadActionButton.onNext()
+            })
+
+        }
+    }
+    
+    func onDeclineRequest() -> CocoaAction {
+        return CocoaAction { _ in
+            return self.userAPI.declineFriend(userID: self.authAPI.SignedInUserID, friendID: self.userID).do(onNext: {
+                self.reloadActionButton.onNext()
+            })
+
+        }
+    }
+    
+    func onCancelRequest() -> CocoaAction {
+        return CocoaAction { _ in
+            return self.userAPI.cancelFriend(userID: self.authAPI.SignedInUserID, friendID: self.userID).do(onNext: {
+                self.reloadActionButton.onNext()
+            })
+
         }
     }
     

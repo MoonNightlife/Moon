@@ -63,6 +63,7 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
 //        self.navigationController?.navigationBar.barTintColor = .moonGrey
         self.navigationController?.navigationBar.barStyle = UIBarStyle.default
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.lightGray]
+        viewModel.reloadDisplayUsers.onNext()
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,7 +74,14 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     func bindViewModel() {
         backButton.rx.action = viewModel.onBack()
         moreInfoButton.rx.action = viewModel.onShowInfo()
-        goButton.rx.action = viewModel.onAttendBar()
+        
+        let attendAction = viewModel.onAttendBar()
+        goButton.rx.action = attendAction
+        attendAction.elements.do(onNext: { [weak self] _ in
+            //TODO: Change the button
+        }).subscribe(onNext: { [weak self] _ in
+            self?.viewModel.reloadDisplayUsers.onNext()
+        })
         
         segmentControl.rx.controlEvent(UIControlEvents.valueChanged)
             .map({ [weak self] in

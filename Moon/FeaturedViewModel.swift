@@ -9,41 +9,39 @@
 import Foundation
 import RxSwift
 import Action
-import SwaggerClient
 
-struct FeaturedViewModel: ImageDownloadType {
+struct FeaturedViewModel: ImageNetworkingInjected, NetworkingInjected, StorageNetworkingInjected, AuthNetworkingInjected {
     
     // Local
     private let disposeBag = DisposeBag()
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
-    private let barAPI: BarAPIType
-    private let userAPI: UserAPIType
-    var photoService: PhotoService
     
     // Inputs
-    var loadEvents: Action<Void, [BarEvent]>
+    lazy var loadEvents: Action<Void, [BarEvent]> = { this in
+        return Action(workFactory: { _ in
+            return this.barAPI.getEventsIn(region: "Dallas")
+        })
+    }(self)
     // Outputs
     var featuredEvents = Variable<[BarEvent]>([])
     
-    init(coordinator: SceneCoordinatorType, barAPI: BarAPIType = BarAPIController(), userAPI: UserAPIType = UserAPIController(), photoService: PhotoService = KingFisherPhotoService()) {
+    init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator
-        self.barAPI = barAPI
-        self.userAPI = userAPI
-        self.photoService = photoService
-        
-        loadEvents = Action(workFactory: { _ in
-            return barAPI.getEventsIn(region: "Dallas")
-        })
         
         loadEvents.elements.bind(to: featuredEvents).addDisposableTo(disposeBag)
     }
     
     func onLikeEvent(eventID: String) -> CocoaAction {
         return CocoaAction { _ in
-            print("Like Event")
-            return self.userAPI.likeEvent(userID: "123123", eventID: eventID)
+            return self.userAPI.likeEvent(userID: self.authAPI.SignedInUserID, eventID: eventID)
+        }
+    }
+    
+    func hasLiked(eventID: String) -> Action<Void, Bool> {
+        return Action<Void, Bool> { _ in
+            return self.userAPI.hasLikedEvent(userID: self.authAPI.SignedInUserID, EventID: eventID)
         }
     }
     
@@ -67,5 +65,15 @@ struct FeaturedViewModel: ImageDownloadType {
             let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .event(id: eventID))
             return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
+    }
+    
+    func getEventImage(id: String) -> Action<Void, UIImage> {
+        return Action(workFactory: {_ in
+            return self.storageAPI.getEventPictureDownloadUrlForEvent(id: id)
+                .filterNil()
+                .flatMap({
+                    self.photoService.getImageFor(url: $0)
+                })
+        })
     }
 }

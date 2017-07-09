@@ -9,9 +9,10 @@
 import Foundation
 import RxSwift
 import Action
-import SwaggerClient
+import FirebaseAuth
+import FirebaseStorage
 
-struct PasswordsViewModel {
+struct PasswordsViewModel: NetworkingInjected, AuthNetworkingInjected, StorageNetworkingInjected {
     
     // Dependencies
     private let newUser: NewUser
@@ -42,20 +43,32 @@ struct PasswordsViewModel {
             })
     }
     
-    lazy var createUser: CocoaAction = { this in
-        return CocoaAction(enabledIf: this.allValid, workFactory: {_ in
-            print("Create User")
-            return Observable.empty()
-        })
-    }(self)
+    var showLoadingIndicator = Variable(false)
     
-    lazy var loginAction: CocoaAction = { this in
-        return CocoaAction(workFactory: { _ in
-            let mainVM = MainViewModel(coordinator: this.sceneCoordinator)
-            let searchVM = SearchBarViewModel(coordinator: this.sceneCoordinator)
-            return this.sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
+    func createUser() -> CocoaAction {
+        return CocoaAction(enabledIf: self.allValid, workFactory: {_ in
+            return self.authAPI.createAccount(newUser: self.newUser)
+                .flatMap({
+                    return self.authAPI.login(credentials: .email(email: self.newUser.email!, password: self.newUser.password!))
+                })
+                .flatMap({ id -> Observable<Void> in
+                    if let photoData = self.newUser.image {
+                        return self.storageAPI.uploadProfilePictureFrom(data: photoData, forUser: id)
+                    } else {
+                        return Observable.just()
+                    }
+                })
+//                .flatMap({
+//                    return self.loginAction()
+//                })
         })
-    }(self)
+    }
+
+    func loginAction() -> Observable<Void> {
+        let mainVM = MainViewModel(coordinator: self.sceneCoordinator)
+        let searchVM = SearchBarViewModel(coordinator: self.sceneCoordinator)
+        return self.sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
+    }
     
     init(coordinator: SceneCoordinatorType, user: NewUser) {
         self.sceneCoordinator = coordinator

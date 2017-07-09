@@ -9,7 +9,6 @@
 import Foundation
 import Whisper
 import Action
-import SwaggerClient
 
 protocol DisplayErrorType {
     func dispayErrorMessage(error: ActionError)
@@ -20,12 +19,11 @@ extension DisplayErrorType {
         
         var message = Murmur(title: "Couldn't load data", backgroundColor: .white, titleColor: .darkGray, font: UIFont.moonFont(size: 12), action: nil)
         
-        guard case let ActionError.underlyingError(e) = error,
-            case let SwaggerClient.ErrorResponse.Error(_, _, nsError) = e else {
+        guard case let ActionError.underlyingError(e) = error else {
             return
         }
         
-        switch (nsError as NSError).code {
+        switch (e as NSError).code {
         case -1009:
             message.title = "No internet connection"
         default:

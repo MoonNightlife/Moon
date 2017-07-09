@@ -91,10 +91,29 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
         
         // Bind actions
         if let id = event.id {
-            view.favoriteButton.rx.action = viewModel.onLikeEvent(eventID: id)
+            
+            let likeAction = viewModel.onLikeEvent(eventID: id)
+            view.favoriteButton.rx.action = likeAction
+            likeAction.elements.do(onNext: {
+                view.toggleColorAndNumber()
+            }).subscribe().addDisposableTo(view.bag)
+            
+            let hasLiked = viewModel.hasLiked(eventID: id)
+            hasLiked.elements.do(onNext: { hasLiked in
+                if hasLiked {
+                    view.favoriteButton.tintColor = .red
+                }
+            }).subscribe().addDisposableTo(view.bag)
+            hasLiked.execute()
+            
             view.numberOfLikesButton.rx.action = viewModel.onViewLikers(eventID: id)
             view.shareButton.rx.action = viewModel.onShareEvent(eventID: id)
             view.moreButton.rx.action = viewModel.onMoreInfo(barID: id)
+            
+            // Bind Image
+            let downloader = viewModel.getEventImage(id: id)
+            downloader.elements.bind(to: view.imageView.rx.image).addDisposableTo(view.bag)
+            downloader.execute()
         }
         
         // Bind labels
@@ -103,16 +122,5 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
         view.toolbar.title = event.title
         view.content.text = event.description
         view.numberOfLikesButton.title = "\(event.numLikes ?? 0)"
-        
-        // Bind image
-        if let urlString = event.pic, let url = URL(string: urlString) {
-            let downloader = viewModel.downloadImage(url: url)
-            downloader.elements.bind(to: view.imageView.rx.image).addDisposableTo(view.bag)
-            downloader.execute()
-        } else {
-            view.imageView.image = nil
-            view.imageView.backgroundColor = UIColor.moonGrey
-        }
-        
     }
 }

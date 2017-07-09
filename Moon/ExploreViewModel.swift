@@ -8,54 +8,33 @@
 
 import Foundation
 import RxSwift
-import SwaggerClient
 import Action
 import RxDataSources
 
 typealias SpecialSection = AnimatableSectionModel<String, Special>
 
-struct ExploreViewModel: ImageDownloadType {
+struct ExploreViewModel: ImageNetworkingInjected, NetworkingInjected, AuthNetworkingInjected, StorageNetworkingInjected {
     
     // Local
     private let disposeBag = DisposeBag()
-    let beerSpecials: Observable<[SpecialSection]>
-    let wineSpecials: Observable<[SpecialSection]>
-    let liquorSpecials: Observable<[SpecialSection]>
 
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
-    private let barAPI: BarAPIType
-    private let userAPI: UserAPIType
-    var photoService: PhotoService
     
     // Inputs
     var selectedSpecialIndex = BehaviorSubject<AlcoholType>(value: .beer)
     var reloadSpecial = PublishSubject<Void>()
     
     // Outputs
-    var topBars: Action<Void, [TopBar]>
-    var specials: Observable<[SpecialSection]>
-    
-    init(coordinator: SceneCoordinatorType, barAPI: BarAPIType = BarAPIController(), photoService: PhotoService = KingFisherPhotoService(), userAPI: UserAPIType = UserAPIController()) {
-        self.sceneCoordinator = coordinator
-        self.photoService = photoService
-        self.barAPI = barAPI
-        self.userAPI = userAPI
-        
-        topBars = Action(workFactory: {_ in 
-            return barAPI.getTopBarsIn(region: "Dallas").map({
-                return $0.map({ bar in
-                    return TopBar(from: bar)
-                })
-            })
+    lazy var topBars: Action<Void, [TopBar]> = { this in
+        return Action(workFactory: {_ in
+            return this.barAPI.getTopBarsIn(region: "Dallas")
         })
-        
-        beerSpecials = ExploreViewModel.specialSectionObservable(type: .beer, barAPI: barAPI)
-        wineSpecials = ExploreViewModel.specialSectionObservable(type: .wine, barAPI: barAPI)
-        liquorSpecials = ExploreViewModel.specialSectionObservable(type: .liquor, barAPI: barAPI)
-        
-        specials = Observable.combineLatest(beerSpecials, wineSpecials, liquorSpecials, reloadSpecial, selectedSpecialIndex)
-            .map({ (beer, wine, liquor, _, index) -> [SpecialSection] in
+    }(self)
+    
+    lazy var specials: Observable<[SpecialSection]> = { this in
+        return Observable.combineLatest(this.specialSectionObservable(type: .beer), this.specialSectionObservable(type: .wine), this.specialSectionObservable(type: .liquor), this.selectedSpecialIndex)
+            .map({ (beer, wine, liquor, index) -> [SpecialSection] in
                 switch index {
                 case .beer:
                     return beer
@@ -65,13 +44,21 @@ struct ExploreViewModel: ImageDownloadType {
                     return wine
                 }
             })
+    }(self)
+    
+    init(coordinator: SceneCoordinatorType) {
+        self.sceneCoordinator = coordinator
+        
     }
     
-    static func specialSectionObservable(type: AlcoholType, barAPI: BarAPIType) -> Observable<[SpecialSection]> {
-        return barAPI.getSpecialsIn(region: "Dallas", type: type.rawValue)
-            .map({
-                return [SpecialSection(model: "Specials", items: $0)]
-            })
+    func specialSectionObservable(type: AlcoholType) -> Observable<[SpecialSection]> {
+        return self.reloadSpecial.flatMap({
+            return self.barAPI.getSpecialsIn(region: "Dallas", type: type)
+                .catchErrorJustReturn([])
+                .map({
+                    return [SpecialSection(model: "Specials", items: $0)]
+                })
+        })
     }
     
     func showBar(barID: String) -> CocoaAction {
@@ -84,7 +71,13 @@ struct ExploreViewModel: ImageDownloadType {
     func onLike(specialID: String) -> CocoaAction {
         return CocoaAction {
             print("Liked Special")
-            return self.userAPI.likeSpecial(userID: "123", specialID: specialID)
+            return self.userAPI.likeSpecial(userID: self.authAPI.SignedInUserID, specialID: specialID)
+        }
+    }
+    
+    func hasLikedSpecial(specialID: String) -> Action<Void, Bool> {
+        return Action<Void, Bool> { _ in
+            return self.userAPI.hasLikedSpecial(userID: self.authAPI.SignedInUserID, SpecialID: specialID)
         }
     }
     
@@ -101,5 +94,33 @@ struct ExploreViewModel: ImageDownloadType {
             let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .special(id: specialID))
             return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
+    }
+    
+    func onChangeAttendence(barID: String) -> CocoaAction {
+        return CocoaAction {_ in
+            return self.userAPI.goToBar(userID: self.authAPI.SignedInUserID, barID: barID, timeStamp: Date().timeIntervalSince1970)
+        }
+    }
+    
+    func getSpecialImage(imageName: String) -> Action<Void, UIImage> {
+        return Action(workFactory: {_ in
+            return Observable.just().withLatestFrom(self.selectedSpecialIndex).flatMap({
+                return self.storageAPI.getSpecialPictureDownloadUrlForSpecial(name: imageName, type: $0)
+            })
+            .filterNil()
+            .flatMap({
+                self.photoService.getImageFor(url: $0)
+            })
+        })
+    }
+    
+    func getFirstBarImage(id: String) -> Action<Void, UIImage> {
+        return Action(workFactory: {_ in
+                return self.storageAPI.getBarPictureDownloadUrlForBar(id: id, picName: "pic1.jpg")
+                .filterNil()
+                .flatMap({
+                    self.photoService.getImageFor(url: $0)
+                })
+        })
     }
 }

@@ -9,36 +9,33 @@
 import Foundation
 import RxSwift
 import RxDataSources
-import SwaggerClient
 import Action
-
-struct SignedInUser {
-    static let userID = "594c2532fc13ae6572000001"
-}
 
 typealias ActivitySection = AnimatableSectionModel<String, Activity>
 
-struct BarActivityFeedViewModel: ImageDownloadType {
+struct BarActivityFeedViewModel: ImageNetworkingInjected, NetworkingInjected, AuthNetworkingInjected, StorageNetworkingInjected {
     
     // Private
     private let disposeBag = DisposeBag()
-    var photoService: PhotoService
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
-    let userAPI: UserAPIType
-    let barAPI: BarAPIType
     
     // Inputs
     
     // Outputs
-    var refreshAction: Action<Void, [ActivitySection]>
+    lazy var refreshAction: Action<Void, [ActivitySection]> = { this in
+       return  Action { _ in
+            return this.userAPI.getActivityFeed(userID: this.authAPI.SignedInUserID)
+                
+                .map({
+                    [ActivitySection.init(model: "Activities", items: $0)]
+                })
+        }
+    }(self)
     
-    init(coordinator: SceneCoordinatorType, userAPI: UserAPIType = UserAPIController(), photoService: PhotoService = KingFisherPhotoService(), barAPI: BarAPIType = BarAPIController()) {
+    init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator
-        self.userAPI = userAPI
-        self.photoService = photoService
-        self.barAPI = barAPI
 
 //        let numOfBlanks = (0..<7)
 //        let blankActivities = numOfBlanks.map { index -> Activity in
@@ -47,20 +44,17 @@ struct BarActivityFeedViewModel: ImageDownloadType {
 //            return activity
 //        }
         
-        refreshAction = Action { _ in
-            return userAPI.getActivityFeed(userID: SignedInUser.userID)
-                .retryWhen(RxErrorHandlers.retryHandler)
-                .map({
-                    [ActivitySection.init(model: "Activities", items: $0)]
-                })
-                //.startWith([ActivitySection.init(model: "Blank Activities", items: blankActivities)])
-        }
-
     }
     
-    func onLike(activtyID: String) -> CocoaAction {
-        return CocoaAction {
-            return self.userAPI.likeActivity(userID: SignedInUser.userID, activityID: activtyID)
+    func onLike(userID: String) -> CocoaAction {
+        return CocoaAction {_ in 
+            return self.userAPI.likeActivity(userID: self.authAPI.SignedInUserID, activityUserID: userID)
+        }
+    }
+    
+    func hasLikedActivity(activityID: String) -> Action<Void, Bool> {
+        return Action<Void, Bool> { _ in
+            return self.userAPI.hasLikedActivity(userID: self.authAPI.SignedInUserID, ActivityID: activityID)
         }
     }
     
@@ -78,10 +72,20 @@ struct BarActivityFeedViewModel: ImageDownloadType {
         }
     }
     
-    func onViewLikers(activityID: String) -> CocoaAction {
+    func onViewLikers(userID: String) -> CocoaAction {
         return CocoaAction {
-            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .activity(id: activityID))
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .activity(id: userID))
             return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
+    }
+    
+    func getProfileImage(id: String) -> Action<Void, UIImage> {
+        return Action(workFactory: {_ in
+            return self.storageAPI.getProfilePictureDownloadUrlForUser(id: id)
+                .filterNil()
+                .flatMap({
+                    self.photoService.getImageFor(url: $0)
+                })
+        })
     }
 }

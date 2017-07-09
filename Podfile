@@ -16,7 +16,6 @@ target 'Moon' do
   pod 'EZSwipeController'
   pod 'Action', '~> 3.0'
   pod 'RxDataSources', '~> 1.0'
-  pod 'SwaggerClient', :path => '../moon_mock_api/frontend'
   pod 'SinchVerification'
   pod 'NVActivityIndicatorView'
   pod 'Kingfisher', '~> 3.0'
@@ -26,6 +25,14 @@ target 'Moon' do
   pod 'Fusuma'
   pod 'Whisper'
   pod "MIBadgeButton-Swift", :git => 'https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git', :branch => 'master'
+  pod 'RxAlamofire'
+  pod 'ObjectMapper'
+  pod 'AlamofireObjectMapper', '~> 4.0'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Core'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Database'
+  pod 'EZLoadingActivity'
 
   target 'MoonTests' do
     inherit! :search_paths

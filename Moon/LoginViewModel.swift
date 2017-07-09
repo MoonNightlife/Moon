@@ -9,21 +9,21 @@
 import Foundation
 import RxSwift
 import Action
-import SwaggerClient
+import FirebaseAuth
 
-struct LoginViewModel {
+struct LoginViewModel: AuthNetworkingInjected {
     
     // Dependencies
     let sceneCoordinator: SceneCoordinatorType
     
     // Inputs
-    var email = BehaviorSubject<String?>(value: nil)
-    var password = BehaviorSubject<String?>(value: nil)
+    var email = Variable<String?>(nil)
+    var password = Variable<String?>(nil)
     
     // Ouputs
     var showLoadingIndicator = Variable(false)
     
-    init(coordinator: SceneCoordinator) {
+    init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator
         
     }
@@ -44,11 +44,23 @@ struct LoginViewModel {
     }
     
     func onSignIn() -> CocoaAction {
-        return CocoaAction {
-            let mainVM = MainViewModel(coordinator: self.sceneCoordinator)
-            let searchVM = SearchBarViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
+        return CocoaAction {_ in
+            if let email = self.email.value, let password = self.password.value {
+                return self.authAPI.login(credentials: .email(email: email, password: password))
+                    .flatMap({_ in 
+                        return self.loginAction()
+                    })
+
+            } else {
+                return Observable.empty()
+            }
         }
+    }
+    
+    func loginAction() -> Observable<Void> {
+        let mainVM = MainViewModel(coordinator: self.sceneCoordinator)
+        let searchVM = SearchBarViewModel(coordinator: self.sceneCoordinator)
+        return self.sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
     }
 
 }

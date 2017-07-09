@@ -84,10 +84,6 @@ extension Scene.User {
             var vc = storyboard.instantiateViewController(withIdentifier: "EmailSettings") as! EmailSettingsViewController
             vc.bindViewModel(to: viewModel)
             return vc
-        case .name(let viewModel):
-            var vc = storyboard.instantiateViewController(withIdentifier: "NameSettings") as! NameSettingsViewController
-            vc.bindViewModel(to: viewModel)
-            return vc
         case .notification(let viewModel):
             var vc = storyboard.instantiateViewController(withIdentifier: "NotificationSettings") as! NotificationSettingsViewController
             vc.bindViewModel(to: viewModel)

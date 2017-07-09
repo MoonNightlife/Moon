@@ -7,27 +7,35 @@
 //
 
 import Foundation
+import ObjectMapper
 
-class NewUser {
+class NewUser: Mappable {
     var firstName: String?
     var lastName: String?
     var birthday: String?
-    var sex: String?
+    var sex: Sex?
     var password: String?
     var email: String?
     var username: String?
+    var image: Data?
     
-    func listPropertiesWithValues(reflect: Mirror? = nil) {
-        let mirror = reflect ?? Mirror(reflecting: self)
-        if mirror.superclassMirror != nil {
-            self.listPropertiesWithValues(reflect: mirror.superclassMirror)
-        }
-        
-        for (index, attr) in mirror.children.enumerated() {
-            if let property_name = attr.label as String! {
-                //You can represent the results however you want here!!!
-                print("\(mirror.description) \(index): \(property_name) = \(attr.value)")
-            }
-        }
+    init() {
+
     }
+    
+    required init?(map: Map) {
+
+    }
+    
+    func mapping(map: Map) {
+        firstName <- map["firstName"]
+        lastName <- map["lastName"]
+        birthday <- map["birthday"]
+        sex <- (map["sex"], SexTransform)
+        password <- map["password"]
+        email <- map["email"]
+        username <- map["username"]
+    }
+    
 }
+

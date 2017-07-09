@@ -2,26 +2,46 @@
 //  Special.swift
 //  Moon
 //
-//  Created by Evan Noble on 6/24/17.
+//  Created by Evan Noble on 6/29/17.
 //  Copyright © 2017 Evan Noble. All rights reserved.
 //
 
 import Foundation
+import ObjectMapper
 import RxDataSources
-import SwaggerClient
+
+class Special: Mappable {
+    var id: String?
+    var numLikes: Int?
+    var pic: String?
+    var name: String?
+    var description: String?
+    var barID: String?
+    var type: AlcoholType?
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        barID <- map["barId"]
+        name <- map["barName"]
+        pic <- map["photoName"]
+        description <- map["description"]
+        numLikes <- map["numberOfLikes"]
+        type <- (map["type"], SpecialTypeTransform)
+    }
+}
 
 extension Special: IdentifiableType {
-    public var identity: String {
-        guard let id = id else {
-            return "0"
-        }
-        
-        return id
+    var identity: String {
+        return id!
     }
 }
 
 extension Special: Equatable {
-    public static func == (lhs: Special, rhs: Special) -> Bool {
-        return lhs.id == rhs.id && lhs.numLikes == rhs.numLikes
+    static func == (lhs: Special, rhs: Special) -> Bool {
+        return lhs.id == rhs.id
     }
 }

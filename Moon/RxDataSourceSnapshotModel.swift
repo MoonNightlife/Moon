@@ -24,7 +24,7 @@ enum SnapshotSectionItem: IdentifiableType, Equatable {
     var identity: String {
         switch self {
         case let .searchResult(snapshot):
-            return snapshot._id!
+            return snapshot.id!
         case .loadMore:
             return "0"
         }

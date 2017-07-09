@@ -9,7 +9,6 @@
 import Foundation
 import RxSwift
 import Action
-import SwaggerClient
 
 struct BirthdaySexViewModel {
     
@@ -65,9 +64,9 @@ struct BirthdaySexViewModel {
             })
             .addDisposableTo(disposeBag)
         
-        sexString
+            sex
             .subscribe(onNext: {
-                self.newUser.sex = $0
+                self.newUser.sex = Sex(rawValue: $0.0 - 1) ?? Sex.none
             })
             .addDisposableTo(disposeBag)
     }

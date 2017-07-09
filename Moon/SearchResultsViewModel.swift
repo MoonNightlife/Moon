@@ -12,13 +12,12 @@ import RxCocoa
 import RxDataSources
 import Action
 
-struct SearchResultsViewModel: ImageDownloadType {
+struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected {
     
     private let bag = DisposeBag()
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
-    var photoService: PhotoService
     
     // Actions
     lazy var onShowResult: Action<Int, Void> = { this in
@@ -40,9 +39,8 @@ struct SearchResultsViewModel: ImageDownloadType {
     // Outputs
     let searchResults: Observable<[SnapshotSectionModel]>
     
-    init(coordinator: SceneCoordinatorType, searchText: BehaviorSubject<String>, photoService: PhotoService = KingFisherPhotoService()) {
+    init(coordinator: SceneCoordinatorType, searchText: BehaviorSubject<String>) {
         sceneCoordinator = coordinator
-        self.photoService = photoService
         
         searchText.subscribe(onNext: {
             print($0)
@@ -72,10 +70,10 @@ struct SearchResultsViewModel: ImageDownloadType {
             if case let .searchResult(snapshot) = results[0].items[index] {
                 switch type {
                 case .users:
-                    let vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: snapshot._id ?? "0")
+                    let vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: snapshot.id ?? "0")
                     return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
                 case .bars:
-                    let vm = BarProfileViewModel(coordinator: self.sceneCoordinator, barID: snapshot._id ?? "0")
+                    let vm = BarProfileViewModel(coordinator: self.sceneCoordinator, barID: snapshot.id ?? "0")
                     return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
                 }
             } else {

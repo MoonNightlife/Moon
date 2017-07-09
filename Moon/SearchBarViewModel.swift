@@ -9,8 +9,9 @@
 import Foundation
 import RxSwift
 import Action
+import FirebaseAuth
 
-struct SearchBarViewModel {
+struct SearchBarViewModel: NetworkingInjected, AuthNetworkingInjected {
     
     // Private
     private let disposeBag = DisposeBag()
@@ -22,6 +23,12 @@ struct SearchBarViewModel {
     var searchText = BehaviorSubject<String>(value: "")
     
     // Outputs
+    var numberOfFriendRequest: Observable<String?> {
+        return self.userAPI.getFriendRequest(userID: self.authAPI.SignedInUserID)
+            .map({
+                return $0.isEmpty ? nil : "\($0.count)"
+            })
+    }
     
     init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator
@@ -29,8 +36,12 @@ struct SearchBarViewModel {
     
     func onShowProfile() -> CocoaAction {
         return CocoaAction {
-            let vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: SignedInUser.userID)
-            return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
+            if let id = Auth.auth().currentUser?.uid {
+                let vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: id)
+                return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
+            } else {
+                return Observable.empty()
+            }
         }
     }
     

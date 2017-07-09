@@ -9,14 +9,3 @@
 import Foundation
 import Action
 
-protocol ImageDownloadType {
-    var photoService: PhotoService { get }
-}
-
-extension ImageDownloadType {
-    func downloadImage(url: URL) -> Action<Void, UIImage> {
-        return Action(workFactory: {
-            return self.photoService.getImageFor(url: url)
-        })
-    }
-}

@@ -26,7 +26,6 @@ enum Scene {
         case edit(EditProfileViewModel)
         case usersTable(UsersTableViewModel)
         case settings(SettingsViewModel)
-        case name(NameSettingsViewModel)
         case email(EmailSettingsViewModel)
         case notification(NotificationSettingsViewModel)
         case deleteAccount(DeleteAccountViewModel)

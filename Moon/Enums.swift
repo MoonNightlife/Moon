@@ -8,10 +8,15 @@
 
 import Foundation
 
+enum MyError: Error {
+    case SignUpError
+}
+
 enum Sex: Int {
     case male
     case female
     case none
+    
 }
 
 enum MainView: Int {
@@ -25,7 +30,7 @@ enum AlcoholType: String {
     case liquor = "Liquor"
     case wine = "Wine"
     
-    static func from(int: Int) -> AlcoholType {
+    static func from(int: Int) -> AlcoholType? {
         switch int {
         case 0:
             return self.beer
@@ -34,8 +39,20 @@ enum AlcoholType: String {
         case 2:
             return self.wine
         default:
-            return self.beer
+            return nil
         }
+    }
+    
+    func toInt() -> Int {
+        switch self {
+        case .beer: return 0
+        case .liquor: return 1
+        case .wine: return 2
+        }
+    }
+    
+    func lowerCaseName() -> String {
+        return self.rawValue.lowercased()
     }
 }
 
@@ -62,10 +79,10 @@ enum Setting {
 
 enum SettingSections {
     enum MyAccount: Int {
-        case changeName = 0
-        case changePhoneNumber = 2
-        case changeEmail = 3
-        case notifications = 4
+        case username = 0
+        case changePhoneNumber = 1
+        case changeEmail = 2
+        case notifications = 3
     }
     
     enum AccountActions: Int {
@@ -90,4 +107,12 @@ enum UserTableSource {
     case special(id: String)
     case event(id: String)
     case activity(id: String)
+}
+
+enum ProfileActionButton {
+    case edit
+    case addFriend
+    case removeFriend
+    case cancelRequest
+    case acceptRequest
 }

@@ -12,7 +12,6 @@ import RxCocoa
 import Action
 import Material
 import RxDataSources
-import SwaggerClient
 
 class UsersTableViewController: UIViewController, BindableType, UIPopoverPresentationControllerDelegate {
 
@@ -21,7 +20,7 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
     @IBOutlet weak var userTableView: UITableView!
     @IBOutlet weak var showContactsButton: UIButton!
     var backButton: UIBarButtonItem!
-    let dataSource = RxTableViewSectionedAnimatedDataSource<UserSectionModel>()
+    let dataSource = RxTableViewSectionedReloadDataSource<UserSectionModel>()
     var refreshControl: UIRefreshControl = UIRefreshControl()
     
     @IBOutlet weak var contactsViewHeightConstraint: NSLayoutConstraint!
@@ -55,12 +54,9 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
         viewModel.users.do(onNext: { [weak self] _ in
             self?.refreshControl.endRefreshing()
         }).bind(to: userTableView.rx.items(dataSource: dataSource)).addDisposableTo(bag)
+        viewModel.reload.onNext()
         
-        let selectedItem = userTableView.rx.itemSelected
-        selectedItem.subscribe(onNext: { [weak self] indexPath in
-            self?.viewModel.onShowUser(indexPath: indexPath).execute()
-        })
-        .disposed(by: bag)
+        userTableView.rx.modelSelected(UserSectionModel.Item.self).bind(to: viewModel.onShowUser.inputs).addDisposableTo(bag)
         
         backButton.rx.action = viewModel.onBack()
         showContactsButton.rx.action = viewModel.onShowContacts()
@@ -85,17 +81,19 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
                     //swiftlint:disable force_cast
                     let cell = tableView.dequeueReusableCell(withIdentifier: "UsersTableCell", for: indexPath) as! UsersTableViewCell
                     
-                    let downloadAction = strongSelf.viewModel.downloadImage(url: URL(string: snap.pic ?? "")!)
-                    downloadAction
-                        .elements
-                        .bind(to: cell.profilePicture.rx.image)
-                        .addDisposableTo(cell.bag)
-                    downloadAction.execute()
+                    if let id = snap.id {
+                        let downloadAction = strongSelf.viewModel.getProfileImage(id: id)
+                        downloadAction
+                            .elements
+                            .bind(to: cell.profilePicture.rx.image)
+                            .addDisposableTo(cell.bag)
+                        downloadAction.execute()
+                    }
                     
                     cell.profilePicture.cornerRadius = cell.profilePicture.frame.size.width / 2
                     cell.profilePicture.clipsToBounds = true
                     
-                    cell.name.text = snap.userName
+                    cell.name.text = snap.name
                     cell.name.textColor = .lightGray
                     
                     return cell
@@ -104,17 +102,19 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
                     //swiftlint:disable force_cast
                     let cell = tableView.dequeueReusableCell(withIdentifier: "FriendRequest", for: indexPath) as! FriendRequestTableViewCell
                     
-                    let downloadAction = strongSelf.viewModel.downloadImage(url: URL(string: snap.pic ?? "")!)
-                    downloadAction
-                        .elements
-                        .bind(to: cell.profilePicture.rx.image)
-                        .addDisposableTo(cell.bag)
-                    downloadAction.execute()
+                    if let id = snap.id {
+                        let downloadAction = strongSelf.viewModel.getProfileImage(id: id)
+                        downloadAction
+                            .elements
+                            .bind(to: cell.profilePicture.rx.image)
+                            .addDisposableTo(cell.bag)
+                        downloadAction.execute()
+                    }
                     
                     cell.profilePicture.cornerRadius = cell.profilePicture.frame.size.width / 2
                     cell.profilePicture.clipsToBounds = true
                     
-                    cell.name.text = snap.userName
+                    cell.name.text = snap.name
                     cell.name.textColor = .lightGray
                     
                     cell.acceptButton.titleLabel?.text = nil
@@ -125,7 +125,7 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
                     cell.declineButton.setImage(Icon.cm.close, for: .normal)
                     cell.declineButton.tintColor = UIColor.moonRed
                     
-                    if let userID = snap.userID {
+                    if let userID = snap.id {
                         cell.acceptButton.rx.action = self?.viewModel.onAcceptFriendRequest(userID:userID)
                         cell.declineButton.rx.action = self?.viewModel.onDeclineFriendRequest(userID:userID)
                     }

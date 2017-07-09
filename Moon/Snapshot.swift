@@ -1,31 +1,43 @@
 //
 //  Snapshot.swift
-//  Moon
+//  
 //
-//  Created by Evan Noble on 6/24/17.
-//  Copyright © 2017 Evan Noble. All rights reserved.
+//  Created by Evan Noble on 6/29/17.
+//
 //
 
 import Foundation
+import ObjectMapper
 import RxDataSources
 
-struct Snapshot {
-    let _id: String?
-    let name: String?
-    let pic: String?
+class Snapshot: Mappable {
+    var id: String?
+    var firstName: String?
+    var lastName: String?
+    var name: String {
+        return (firstName ?? "") + " " + (lastName ?? "")
+    }
+    var pic: String?
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        firstName <- map["firstName"]
+        lastName <- map["lastName"]
+    }
 }
+
 extension Snapshot: IdentifiableType {
-    public var identity: String {
-        if let id = _id {
-            return id
-        } else {
-            return "0"
-        }
+    var identity: String {
+        return id!
     }
 }
 
 extension Snapshot: Equatable {
-    public static func == (lhs: Snapshot, rhs: Snapshot) -> Bool {
-        return lhs._id == rhs._id
+    static func == (lhs: Snapshot, rhs: Snapshot) -> Bool {
+        return lhs.id == rhs.id
     }
 }

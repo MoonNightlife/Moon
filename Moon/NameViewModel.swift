@@ -10,7 +10,6 @@ import Foundation
 import RxSwift
 import Action
 import RxCocoa
-import SwaggerClient
 
 struct NameViewModel {
     
@@ -24,6 +23,7 @@ struct NameViewModel {
     // Inputs
     var firstName = BehaviorSubject<String?>(value: nil)
     var lastName = BehaviorSubject<String?>(value: nil)
+    var imageData = Variable<Data?>(nil)
     
     // Outputs
     var dataValid: Driver<Bool>
@@ -49,6 +49,10 @@ struct NameViewModel {
                 self.newUser.lastName = $0?.trimmed
             })
             .addDisposableTo(disposeBag)
+        
+        imageData.asObservable().subscribe(onNext: {
+            self.newUser.image = $0
+        }).addDisposableTo(disposeBag)
     }
 
     func nextSignUpScreen() -> CocoaAction {
