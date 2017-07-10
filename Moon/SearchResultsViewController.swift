@@ -73,7 +73,7 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as! SearchTableViewCell
                 cell.initCellWith()
                 cell.nameLabel.text = snapshot.name
-                self?.viewModel.downloadImage(url: URL(string: snapshot.pic!)!).elements.bind(to: cell.mainImageView.rx.image).addDisposableTo(cell.bag)
+           // TODO: download image
                 return cell
             case .loadMore(let action):
                 //swiftlint:disable:next force_cast

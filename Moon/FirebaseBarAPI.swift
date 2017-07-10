@@ -32,6 +32,8 @@ struct FirebaseBarAPI: BarAPIType {
         
         static let getEventLikers = barBaseURL + "getEventLikers"
         static let getSpecialLikers = barBaseURL + "getSpecialLikers"
+        
+        static let searchForBar = barBaseURL + "searchBar"
     }
     
     func getBarFriends(barID: String, userID: String) -> Observable<[Activity]> {
@@ -240,14 +242,14 @@ struct FirebaseBarAPI: BarAPIType {
         })
     }
     
-    func getEventLikers(eventID: String) -> Observable<[Snapshot]> {
+    func getEventLikers(eventID: String) -> Observable<[UserSnapshot]> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
                 "id": eventID
             ]
             let request = Alamofire.request(BarFunction.getEventLikers, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()
-                .responseArray(completionHandler: { (response: DataResponse<[Snapshot]>) in
+                .responseArray(completionHandler: { (response: DataResponse<[UserSnapshot]>) in
                     switch response.result {
                     case .success(let snapshots):
                         observer.onNext(snapshots)
@@ -262,14 +264,36 @@ struct FirebaseBarAPI: BarAPIType {
             }
         })
     }
-    func getSpecialLikers(specialID: String) -> Observable<[Snapshot]> {
+    func getSpecialLikers(specialID: String) -> Observable<[UserSnapshot]> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
                 "id": specialID
             ]
             let request = Alamofire.request(BarFunction.getSpecialLikers, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()
-                .responseArray(completionHandler: { (response: DataResponse<[Snapshot]>) in
+                .responseArray(completionHandler: { (response: DataResponse<[UserSnapshot]>) in
+                    switch response.result {
+                    case .success(let snapshots):
+                        observer.onNext(snapshots)
+                        observer.onCompleted()
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    func searchForBar(searchText: String) -> Observable<[BarSnapshot]> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "searchText": searchText
+            ]
+            let request = Alamofire.request(BarFunction.searchForBar, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseArray(completionHandler: { (response: DataResponse<[BarSnapshot]>) in
                     switch response.result {
                     case .success(let snapshots):
                         observer.onNext(snapshots)

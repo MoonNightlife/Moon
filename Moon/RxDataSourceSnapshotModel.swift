@@ -85,6 +85,6 @@ extension SnapshotSectionModel: AnimatableSectionModelType {
     
     static func snapshotsToSnapshotSectionModel(withTitle: String, snapshots: [Snapshot]) -> SnapshotSectionModel {
         let items = snapshotsToSnapshotSectionItem(snapshots: snapshots)
-        return SnapshotSectionModel.searchResults(title: "Results", items: items)
+        return SnapshotSectionModel.searchResults(title: withTitle, items: items)
     }
 }

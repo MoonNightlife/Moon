@@ -17,6 +17,11 @@ class SearchTableViewCell: UITableViewCell {
     
     var bag = DisposeBag()
     
+    override func awakeFromNib() {
+        nameLabel.font = UIFont.moonFont(size: 16)
+        nameLabel.textColor = .darkGray
+    }
+    
     func initCellWith() {
         prepareImageView()
         prepareLabel()
@@ -28,7 +33,7 @@ class SearchTableViewCell: UITableViewCell {
     }
     
     fileprivate func prepareLabel() {
-        nameLabel.textColor = .lightGray
+        
     }
     
     override func prepareForReuse() {

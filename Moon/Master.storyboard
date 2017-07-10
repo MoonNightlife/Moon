@@ -226,36 +226,42 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchTableViewCell" rowHeight="150" id="LZ2-Rt-lqT" customClass="SearchTableViewCell" customModule="Moon" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="78" width="375" height="150"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchTableViewCell" rowHeight="75" id="LZ2-Rt-lqT" customClass="SearchTableViewCell" customModule="Moon" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="78" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LZ2-Rt-lqT" id="xFs-aq-JM1">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="74.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPu-YW-BRK">
-                                                    <rect key="frame" x="76" y="65" width="291" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="tb1-f3-zwm"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="66" y="8" width="301" height="20"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="m9c-eV-ZFa">
-                                                    <rect key="frame" x="8" y="50" width="50" height="50"/>
+                                                    <rect key="frame" x="8" y="8" width="50" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="Lx7-uW-U4Z"/>
-                                                        <constraint firstAttribute="height" constant="50" id="rKT-9l-X37"/>
+                                                        <constraint firstAttribute="width" constant="50" id="04U-ka-Z32"/>
+                                                        <constraint firstAttribute="height" constant="50" id="r0T-lZ-evr"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Dn-vr-Rue">
+                                                    <rect key="frame" x="66" y="36" width="301" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="vPu-YW-BRK" firstAttribute="centerY" secondItem="xFs-aq-JM1" secondAttribute="centerY" id="2Ga-wZ-nK8"/>
-                                                <constraint firstItem="vPu-YW-BRK" firstAttribute="leading" secondItem="m9c-eV-ZFa" secondAttribute="trailing" constant="18" id="D25-y4-Bhd"/>
-                                                <constraint firstItem="m9c-eV-ZFa" firstAttribute="centerY" secondItem="xFs-aq-JM1" secondAttribute="centerY" id="NR0-Ph-zuS"/>
-                                                <constraint firstItem="vPu-YW-BRK" firstAttribute="trailing" secondItem="xFs-aq-JM1" secondAttribute="trailingMargin" id="pLi-vb-lxB"/>
-                                                <constraint firstItem="m9c-eV-ZFa" firstAttribute="leading" secondItem="xFs-aq-JM1" secondAttribute="leadingMargin" id="wIj-Vt-oSo"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="3Dn-vr-Rue" secondAttribute="trailing" id="3yt-cO-kb3"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="vPu-YW-BRK" secondAttribute="trailing" id="PCc-i6-JyS"/>
+                                                <constraint firstAttribute="topMargin" secondItem="m9c-eV-ZFa" secondAttribute="top" id="PYX-e2-nd7"/>
+                                                <constraint firstItem="vPu-YW-BRK" firstAttribute="top" secondItem="m9c-eV-ZFa" secondAttribute="top" id="RgE-S2-ceZ"/>
+                                                <constraint firstItem="3Dn-vr-Rue" firstAttribute="top" secondItem="vPu-YW-BRK" secondAttribute="bottom" constant="8" id="Umj-9T-Lym"/>
+                                                <constraint firstItem="3Dn-vr-Rue" firstAttribute="leading" secondItem="m9c-eV-ZFa" secondAttribute="trailing" constant="8" id="brh-ap-2V1"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="m9c-eV-ZFa" secondAttribute="leading" id="zCB-Mo-FL5"/>
+                                                <constraint firstItem="vPu-YW-BRK" firstAttribute="leading" secondItem="m9c-eV-ZFa" secondAttribute="trailing" constant="8" id="zVg-jR-hUq"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -264,7 +270,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadMore" id="aZD-nc-ars" customClass="LoadMoreTableViewCell" customModule="Moon" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="228" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="153" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aZD-nc-ars" id="YaF-zL-2LA">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>

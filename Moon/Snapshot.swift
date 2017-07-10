@@ -10,14 +10,24 @@ import Foundation
 import ObjectMapper
 import RxDataSources
 
-class Snapshot: Mappable {
+class Snapshot: IdentifiableType, Equatable {
     var id: String?
+    var name: String?
+    var pic: String?
+    var username: String?
+    
+    var identity: String {
+        return id!
+    }
+    
+    static func == (lhs: Snapshot, rhs: Snapshot) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+class UserSnapshot: Snapshot, Mappable {
     var firstName: String?
     var lastName: String?
-    var name: String {
-        return (firstName ?? "") + " " + (lastName ?? "")
-    }
-    var pic: String?
     
     required init?(map: Map) {
         
@@ -27,17 +37,8 @@ class Snapshot: Mappable {
         id <- map["id"]
         firstName <- map["firstName"]
         lastName <- map["lastName"]
-    }
-}
-
-extension Snapshot: IdentifiableType {
-    var identity: String {
-        return id!
-    }
-}
-
-extension Snapshot: Equatable {
-    static func == (lhs: Snapshot, rhs: Snapshot) -> Bool {
-        return lhs.id == rhs.id
+        username <- map["username"]
+        
+        name = (firstName ?? "") + " " + (lastName ?? "")
     }
 }

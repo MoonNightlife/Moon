@@ -15,6 +15,7 @@ import Action
 struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected {
     
     private let bag = DisposeBag()
+    var searchText: Observable<String>
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
@@ -37,29 +38,36 @@ struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected {
     var selectedSearchType = BehaviorSubject<SearchType>(value: .users)
     
     // Outputs
-    let searchResults: Observable<[SnapshotSectionModel]>
+    var searchResults: Observable<[SnapshotSectionModel]> {
+        return Observable.combineLatest(searchText, selectedSearchType)
+            .flatMapLatest({ (searchText, type) -> Observable<[SnapshotSectionModel]> in
+                switch type {
+                case .users:
+                    return self.userAPI.searchForUser(searchText: searchText).map({
+                        return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users", snapshots: $0)]
+                    })
+                case .bars:
+                    return self.barAPI.searchForBar(searchText: searchText).map({
+                        return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Bars", snapshots: $0)]
+                    })
+                    
+                }
+            })
+    }
     
     init(coordinator: SceneCoordinatorType, searchText: BehaviorSubject<String>) {
         sceneCoordinator = coordinator
+        
+        self.searchText = searchText
+            .throttle(0.3, scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .filter { query in return query.characters.count > 2 }
         
         searchText.subscribe(onNext: {
             print($0)
         })
         .addDisposableTo(bag)
         
-        searchResults = Observable.empty()
-        _ = Observable.combineLatest(searchText, selectedSearchType)
-                .flatMapLatest({ (searchText, type) -> Observable<Void> in
-                    switch type {
-                    case .users: return Observable.empty()
-                        //TODO: add user search api call
-                        
-                    case .bars: return Observable.empty()
-                        //TODO: add bar search api call
-                    
-                    }
-                })
-    
     }
     
     func performTransition(index: Int) -> Observable<Void> {

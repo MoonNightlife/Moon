@@ -140,6 +140,7 @@
 		F06B42321EFDAE9900BE7626 /* DynamicLinkingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B42311EFDAE9900BE7626 /* DynamicLinkingAPI.swift */; };
 		F06B56FD1EFAA8750028552A /* RxDataSourceUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B56FC1EFAA8750028552A /* RxDataSourceUserModel.swift */; };
 		F06B56FF1EFAAFD50028552A /* FriendRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B56FE1EFAAFD50028552A /* FriendRequestTableViewCell.swift */; };
+		F07757B01F13FD9800B659D9 /* BarSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07757AF1F13FD9800B659D9 /* BarSnapshot.swift */; };
 		F07C06221EF1958F00B78865 /* BarAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06211EF1958F00B78865 /* BarAPIController.swift */; };
 		F07C06241EF195A500B78865 /* UserAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06231EF195A500B78865 /* UserAPIController.swift */; };
 		F07C06261EF19D7400B78865 /* RxErrorHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06251EF19D7400B78865 /* RxErrorHandlers.swift */; };
@@ -400,6 +401,7 @@
 		F06B42311EFDAE9900BE7626 /* DynamicLinkingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicLinkingAPI.swift; sourceTree = "<group>"; };
 		F06B56FC1EFAA8750028552A /* RxDataSourceUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxDataSourceUserModel.swift; sourceTree = "<group>"; };
 		F06B56FE1EFAAFD50028552A /* FriendRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestTableViewCell.swift; sourceTree = "<group>"; };
+		F07757AF1F13FD9800B659D9 /* BarSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarSnapshot.swift; sourceTree = "<group>"; };
 		F07C06211EF1958F00B78865 /* BarAPIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAPIController.swift; sourceTree = "<group>"; };
 		F07C06231EF195A500B78865 /* UserAPIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPIController.swift; sourceTree = "<group>"; };
 		F07C06251EF19D7400B78865 /* RxErrorHandlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxErrorHandlers.swift; sourceTree = "<group>"; };
@@ -1223,6 +1225,7 @@
 				F04B43771F0582A100946C82 /* Activity.swift */,
 				F04B437B1F058F2800946C82 /* BarEvent.swift */,
 				F03CEF6C1F05962E00FCC4F3 /* Snapshot.swift */,
+				F07757AF1F13FD9800B659D9 /* BarSnapshot.swift */,
 				F04B437D1F058F4100946C82 /* BarProfile.swift */,
 				F04B437F1F058F8800946C82 /* Special.swift */,
 				F0CA18B61EE6101200428318 /* TopBar.swift */,
@@ -1588,6 +1591,7 @@
 				F0F210591ECA1C160027B50B /* SearchBarViewController.swift in Sources */,
 				F0CA18AB1EE5AA4C00428318 /* FeaturedViewModel.swift in Sources */,
 				F04283AD1EC49DB600CCB5F3 /* MainViewController.swift in Sources */,
+				F07757B01F13FD9800B659D9 /* BarSnapshot.swift in Sources */,
 				F0CF7F1D1EF37D80005C068C /* CountryCodeViewModel.swift in Sources */,
 				F0A52CCA1EEDE7A80067E8DD /* SearchViewModel.swift in Sources */,
 				F0CA18971EE58BBD00428318 /* MainViewModel.swift in Sources */,

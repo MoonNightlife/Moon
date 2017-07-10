@@ -37,6 +37,7 @@ struct FirebaseUserAPI: UserAPIType {
         
         static let getActivityLikers = userBaseURL + "getActivityLikers"
         static let getActivityFeed = userBaseURL + "getActivityFeed"
+        static let searchForUser = userBaseURL + "searchUser"
         
         static let goToBar = userBaseURL + "goToBar"
         
@@ -178,20 +179,20 @@ extension FirebaseUserAPI {
     func unblockUser(userID: String, blockID: String) -> Observable<Void> {
         return Observable.empty()
     }
-    func getBlockedUserList(userID: String) -> Observable<[Snapshot]> {
+    func getBlockedUserList(userID: String) -> Observable<[UserSnapshot]> {
         return Observable.empty()
     }
 }
 // MARK: - User Info
 extension FirebaseUserAPI {
-    func getFriends(userID: String) -> Observable<[Snapshot]> {
+    func getFriends(userID: String) -> Observable<[UserSnapshot]> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
                 "userId": "\(userID)"
             ]
             let request = Alamofire.request(UserFunction.getFriends, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()
-                .responseArray(completionHandler: { (response: DataResponse<[Snapshot]>) in
+                .responseArray(completionHandler: { (response: DataResponse<[UserSnapshot]>) in
                     switch response.result {
                     case .success(let snapshots):
                         observer.onNext(snapshots)
@@ -251,14 +252,14 @@ extension FirebaseUserAPI {
         })
     }
     
-    func getActivityLikers(activityID: String) -> Observable<[Snapshot]> {
+    func getActivityLikers(activityID: String) -> Observable<[UserSnapshot]> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
                 "id": activityID
             ]
             let request = Alamofire.request(UserFunction.getActivityLikers, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()
-                .responseArray(completionHandler: { (response: DataResponse<[Snapshot]>) in
+                .responseArray(completionHandler: { (response: DataResponse<[UserSnapshot]>) in
                     switch response.result {
                     case .success(let snapshots):
                         observer.onNext(snapshots)
@@ -284,6 +285,28 @@ extension FirebaseUserAPI {
                     switch response.result {
                     case .success(let activities):
                         observer.onNext(activities)
+                        observer.onCompleted()
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    func searchForUser(searchText: String) -> Observable<[UserSnapshot]> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "searchText": searchText
+            ]
+            let request = Alamofire.request(UserFunction.searchForUser, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseArray(completionHandler: { (response: DataResponse<[UserSnapshot]>) in
+                    switch response.result {
+                    case .success(let snapshots):
+                        observer.onNext(snapshots)
                         observer.onCompleted()
                     case .failure(let error):
                         observer.onError(error)
@@ -562,14 +585,14 @@ extension FirebaseUserAPI {
             }
         })
     }
-    func getFriendRequest(userID: String) -> Observable<[Snapshot]> {
+    func getFriendRequest(userID: String) -> Observable<[UserSnapshot]> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
                 "userId": "\(userID)"
             ]
             let request = Alamofire.request(UserFunction.getFriendRequest, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()
-                .responseArray(completionHandler: { (response: DataResponse<[Snapshot]>) in
+                .responseArray(completionHandler: { (response: DataResponse<[UserSnapshot]>) in
                     switch response.result {
                     case .success(let snapshots):
                         observer.onNext(snapshots)
@@ -584,4 +607,5 @@ extension FirebaseUserAPI {
             }
         })
     }
+
 }
