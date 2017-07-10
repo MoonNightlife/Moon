@@ -57,7 +57,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Buy One Get One Free Millers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7p2-jw-KfB">
-                                                    <rect key="frame" x="66" y="8" width="206.5" height="21.5"/>
+                                                    <rect key="frame" x="66" y="8" width="213.5" height="19"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -70,14 +70,14 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUc-RI-mXu">
-                                                    <rect key="frame" x="66" y="37" width="20" height="20"/>
+                                                    <rect key="frame" x="66" y="34.5" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="BC2-XQ-aeF"/>
                                                         <constraint firstAttribute="height" constant="20" id="O4f-J5-vsL"/>
                                                     </constraints>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1FS-ap-G5b">
-                                                    <rect key="frame" x="94" y="37" width="30" height="20"/>
+                                                    <rect key="frame" x="94" y="34.5" width="30" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="H35-IT-sBu"/>
                                                         <constraint firstAttribute="width" constant="30" id="k1L-EN-aSY"/>
@@ -87,7 +87,7 @@
                                                     </state>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvs-2v-uH4">
-                                                    <rect key="frame" x="323" y="36.5" width="43" height="20"/>
+                                                    <rect key="frame" x="323" y="34" width="43" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="wLQ-AO-0Ig"/>
                                                     </constraints>
@@ -96,7 +96,7 @@
                                                     </state>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LocationIcon" translatesAutoresizingMaskIntoConstraints="NO" id="6Xm-4O-dbU">
-                                                    <rect key="frame" x="295" y="37" width="20" height="20"/>
+                                                    <rect key="frame" x="295" y="34.5" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="3t5-oa-pl5"/>
                                                         <constraint firstAttribute="height" constant="20" id="sm6-Z9-cnj"/>

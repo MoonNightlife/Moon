@@ -27,12 +27,12 @@
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="0.0" id="9iK-Ph-jjh">
                                     <size key="itemSize" width="344" height="332"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="15" maxX="0.0" maxY="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="250"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="featuredEventCell" id="42f-qj-df2" customClass="FeaturedEventCollectionViewCell" customModule="Moon" customModuleProvider="target">
-                                        <rect key="frame" x="15.5" y="15" width="344" height="332"/>
+                                        <rect key="frame" x="15.5" y="0.0" width="344" height="332"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="344" height="332"/>
@@ -40,6 +40,10 @@
                                         </view>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="mbx-TT-OO4">
+                                    <rect key="frame" x="0.0" y="332" width="375" height="250"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="Ef2-gS-UXE" id="lJi-pw-byx"/>
                                     <outlet property="delegate" destination="Ef2-gS-UXE" id="xRa-i3-hxe"/>
@@ -59,7 +63,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bAX-BA-8Kv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-199.19999999999999" y="-113.79310344827587"/>
+            <point key="canvasLocation" x="-215.19999999999999" y="-124.58770614692655"/>
         </scene>
     </scenes>
 </document>

@@ -33,6 +33,9 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
         super.viewDidLoad()
         
         eventCollectionView.backgroundColor = Color.grey.lighten4
+        eventCollectionView.isUserInteractionEnabled = true
+        eventCollectionView.isScrollEnabled = true
+        eventCollectionView.alwaysBounceVertical = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,7 +60,7 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
         let spaceBetweenCells: CGFloat = 0.8
         let dim = (collectionView.bounds.width - (cellsAcross - 1) * spaceBetweenCells) / cellsAcross
         
-        return CGSize(width: dim, height: dim)
+        return CGSize(width: self.view.frame.width, height: dim)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -65,7 +68,9 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredCellIdenifier, for: indexPath)
         cell.clearsContextBeforeDrawing = true
         
-        let height = CGFloat(250)
+        cell.frame = CGRect(x: cell.frame.origin.x, y: cell.frame.origin.y, width: cell.frame.size.width, height: cell.frame.size.height)
+        
+        let height = CGFloat(350)
         let width = self.view.frame.size.width - 40
         
         let view = FeaturedEventView()

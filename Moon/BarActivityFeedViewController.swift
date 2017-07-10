@@ -70,9 +70,11 @@ class BarActivityFeedViewController: UIViewController, BindableType, DisplayErro
     }
     
     fileprivate func addEmpyDataView() {
-        let emptyImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+        let emptyImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: tableView.frame.size.height))
         emptyImageView.image = #imageLiteral(resourceName: "DefaultMoonsView")
         tableView.backgroundView = emptyImageView
+        print("Height:", tableView.frame.size.height)
+        print("width:", tableView.frame.size.width)
     }
     
     fileprivate func configureDataSource() {

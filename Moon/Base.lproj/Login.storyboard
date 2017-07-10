@@ -59,7 +59,7 @@
                                         <rect key="frame" x="59" y="8" width="224" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T7l-tW-Wyc" userLabel="LoginButtonView">
                                         <rect key="frame" x="59" y="115" width="224" height="40"/>
