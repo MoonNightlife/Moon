@@ -49,12 +49,14 @@ class EmailUsernameViewController: UIViewController, BindableType {
         usernameTextField.rx.textInput.text.bind(to: viewModel.username).addDisposableTo(disposeBag)
         emailTextField.rx.textInput.text.bind(to: viewModel.email).addDisposableTo(disposeBag)
         
+        viewModel.emailText.bind(to: emailTextField.rx.textInput.text).addDisposableTo(disposeBag)
+        
         viewModel.showUsernameError.bind(to: usernameTextField.rx.isErrorRevealed).addDisposableTo(disposeBag)
         viewModel.showEmailError.drive(emailTextField.rx.isErrorRevealed).addDisposableTo(disposeBag)
 
         navBackButton.rx.action = viewModel.onBack()
         
-        let nextAction = viewModel.nextSignUpScreen()
+        let nextAction = viewModel.nextScreen()
         nextButton.rx.action = nextAction
         nextAction.errors.subscribe(onNext: { [weak self] actionError in
             if case let .underlyingError(error) = actionError,

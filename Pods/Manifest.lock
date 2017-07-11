@@ -7,8 +7,18 @@ PODS:
   - AlamofireObjectMapper (4.1.0):
     - Alamofire (~> 4.1)
     - ObjectMapper (~> 2.0)
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.8.4)
   - EZLoadingActivity (1.01)
   - EZSwipeController (0.6.1)
+  - FBSDKCoreKit (4.23.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.23.0):
+    - FBSDKCoreKit
   - Firebase/Auth (4.0.0):
     - Firebase/Core
     - FirebaseAuth (= 4.0.0)
@@ -250,6 +260,7 @@ DEPENDENCIES:
   - AlamofireObjectMapper (~> 4.0)
   - EZLoadingActivity
   - EZSwipeController
+  - FBSDKLoginKit
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -293,8 +304,11 @@ SPEC CHECKSUMS:
   ActionButton: a71147de5a83b6d8d8e18464b216904ba7821677
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   AlamofireObjectMapper: 435adc82f5b367679bd9e71c4974a54efd0b2521
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   EZLoadingActivity: edd7e387e5197b116ce2cccb3fd747ababc2a510
   EZSwipeController: 255b0f8aed31963b0236802c926e27dd006a2532
+  FBSDKCoreKit: d7829f5a69901cd7296105328e4c3c3fc7da6518
+  FBSDKLoginKit: 6b92bd65f319d669d2b0730e49db495ef1660566
   Firebase: 284eea779b73fdff309791817da7c68bff8dd572
   FirebaseAnalytics: 6f08e746f7d66f5452931bc2e822b5df9c66b64a
   FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
@@ -324,6 +338,6 @@ SPEC CHECKSUMS:
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
   Whisper: 051f25e704bf8992641ffd28b20d5682ddc5f5d3
 
-PODFILE CHECKSUM: 44d1419c7d6073fb9576001729b0cdfecb4ba6e8
+PODFILE CHECKSUM: c8c3e6f998dc7a59553534c2528f82d9d42ff303
 
 COCOAPODS: 1.2.1

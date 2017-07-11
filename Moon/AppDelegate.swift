@@ -9,9 +9,11 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FBSDKLoginKit
+import RxSwift
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
     
     enum LaunchScreen {
         case login
@@ -20,11 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     var window: UIWindow?
+    var bag = DisposeBag()
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         DynamicLinkingAPI.createDynamicLink()
         FirebaseApp.configure()
@@ -36,12 +41,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let url = launchOptions?[.url] as? URL {
             return executeDeepLink(with: url)
         } else {
-            Auth.auth().addStateDidChangeListener {  [weak self] _, user in
-                if user != nil {
-                    self?.prepareEntryViewController(vc: .main)
-                } else {
-                    self?.prepareEntryViewController(vc: .login)
-                }
+            if let userID = Auth.auth().currentUser?.uid {
+                
+                authAPI.checkForFirstTimeLogin(userId: userID).subscribe(onNext: { [unowned self] firstTime in
+                    if firstTime {
+                        self.prepareEntryViewController(vc: .login)
+                    } else {
+                        self.prepareEntryViewController(vc: .main)
+                    }
+                }).addDisposableTo(bag)
+                
+            } else {
+                prepareEntryViewController(vc: .login)
             }
             
             return true
@@ -53,6 +64,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let dynamicLink = dynamicLink, let url = dynamicLink.url {
             return executeDeepLink(with: url)
         }
+        
+        FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
         
         return false
     }

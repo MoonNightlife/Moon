@@ -19,9 +19,17 @@ struct BirthdaySexViewModel {
     private let newUser: NewUser
     
     // Private
-    private let validInfo: Observable<Bool>
+    private var validInfo: Observable<Bool> {
+        let validBirthday = birthdayString
+            .map {
+                self.dateFormatter.date(from: $0)
+            }
+            .map(ValidationUtility.validBirthday)
+        let validSex = sexString.map({ $0 != "" })
+        return Observable.combineLatest(validBirthday, validSex).map({ $0 && $1 })
+    }
     private let disposeBag = DisposeBag()
-    private var dateFormatter: DateFormatter {
+    private var dateFormatter: DateFormatter! {
         let df = DateFormatter()
         df.dateStyle = .short
         return df
@@ -29,7 +37,7 @@ struct BirthdaySexViewModel {
     
     // Inputs
     var birthday = BehaviorSubject<Date>(value: Date())
-    var sex = BehaviorSubject<(Int, Int)>(value: (0, 0))
+    var sexPicker = BehaviorSubject<(Int, Int)>(value: (0, 0))
     
     // Outputs
     var birthdayString: Observable<String>!
@@ -39,36 +47,27 @@ struct BirthdaySexViewModel {
         self.sceneCoordinator = coordinator
         self.newUser = user
         
-        let validBirthday = birthday.map(ValidationUtility.validBirthday)
-        let validSex = sex.map({ $0.0 != 0 })
-        validInfo = Observable.combineLatest(validBirthday, validSex).map({ $0 && $1 })
-        
         birthdayString = birthday.skip(1).map(dateFormatter.string)
-        sexString = sex.map({
-            switch $0.0 {
-            case 0: return ""
-            case 1: return "Male"
-            case 2: return "Female"
-            case 3: return "Other"
-            default: return ""
-            }
-        })
-        
-        subscribeToInputs()
-    }
-    
-    fileprivate func subscribeToInputs() {
-        birthdayString
-            .subscribe(onNext: {
-                self.newUser.birthday = $0
+            .do(onNext: {
+                user.birthday = $0
             })
-            .addDisposableTo(disposeBag)
+            .startWith(user.birthday)
+            .filterNil()
         
-            sex
-            .subscribe(onNext: {
-                self.newUser.sex = Sex(rawValue: $0.0 - 1) ?? Sex.none
+        let sex = sexPicker.skip(1)
+            .map({
+                return Sex(rawValue: $0.0 - 1) ?? Sex.none
             })
-            .addDisposableTo(disposeBag)
+            .startWith(user.sex)
+            .filterNil()
+        
+        sexString = sex
+            .do(onNext: {
+                user.sex = $0
+            })
+            .map({
+                $0.toString()
+            })
     }
     
     func nextSignUpScreen() -> CocoaAction {

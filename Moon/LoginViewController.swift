@@ -26,6 +26,8 @@ class LoginViewController: UIViewController, BindableType {
     @IBOutlet weak var orIcon: UIImageView!
     @IBOutlet weak var recoverButton: UIButton!
     
+    @IBOutlet weak var googleSignInButton: UIButton!
+    @IBOutlet weak var facebookSignInButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,6 +39,7 @@ class LoginViewController: UIViewController, BindableType {
         super.viewDidAppear(animated)
           navigationController?.navigationBar.isHidden = true
          UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+        googleSignInButton.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -96,6 +99,7 @@ class LoginViewController: UIViewController, BindableType {
     func bindViewModel() {
         signUpButton.rx.action = viewModel.onSignUp()
         recoverButton.rx.action = viewModel.onForgotPassword()
+        facebookSignInButton.rx.action = viewModel.onFacebookSignIn()
         
         let signInAction = viewModel.onSignIn()
         loginButton.rx.action = signInAction

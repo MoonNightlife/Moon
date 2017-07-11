@@ -653,18 +653,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dgv-bB-g4E" customClass="TextField" customModule="Material">
-                                <rect key="frame" x="16" y="259" width="343" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1xV-q5-oqz" customClass="TextField" customModule="Material">
-                                <rect key="frame" x="16" y="189" width="343" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Po-0a-lu5">
                                 <rect key="frame" x="137" y="313" width="100" height="40"/>
                                 <constraints>
@@ -674,23 +662,25 @@
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                 <state key="normal" title="Delete"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you sure you want to delete your Moon Account? All profile information will be lost." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4qQ-FF-wu9">
+                                <rect key="frame" x="16" y="28" width="342" height="278"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="2Po-0a-lu5" firstAttribute="centerY" secondItem="p3x-do-Phb" secondAttribute="centerY" id="7XM-1F-tCj"/>
+                            <constraint firstItem="2Po-0a-lu5" firstAttribute="top" secondItem="4qQ-FF-wu9" secondAttribute="bottom" constant="7" id="8BA-EF-ydo"/>
                             <constraint firstItem="2Po-0a-lu5" firstAttribute="centerX" secondItem="p3x-do-Phb" secondAttribute="centerX" id="BKt-B6-tZW"/>
-                            <constraint firstItem="2Po-0a-lu5" firstAttribute="top" secondItem="dgv-bB-g4E" secondAttribute="bottom" constant="24" id="OUP-Y7-ieL"/>
-                            <constraint firstItem="1xV-q5-oqz" firstAttribute="leading" secondItem="p3x-do-Phb" secondAttribute="leadingMargin" id="bXO-UU-NGa"/>
-                            <constraint firstItem="1xV-q5-oqz" firstAttribute="trailing" secondItem="p3x-do-Phb" secondAttribute="trailingMargin" id="d7E-Z6-zFV"/>
-                            <constraint firstItem="dgv-bB-g4E" firstAttribute="leading" secondItem="p3x-do-Phb" secondAttribute="leadingMargin" id="mlF-qa-fgN"/>
-                            <constraint firstItem="dgv-bB-g4E" firstAttribute="trailing" secondItem="p3x-do-Phb" secondAttribute="trailingMargin" id="t9c-Xl-Wtu"/>
-                            <constraint firstItem="dgv-bB-g4E" firstAttribute="top" secondItem="1xV-q5-oqz" secondAttribute="bottom" constant="40" id="tCh-mH-Fgv"/>
+                            <constraint firstItem="4qQ-FF-wu9" firstAttribute="centerX" secondItem="2Po-0a-lu5" secondAttribute="centerX" id="Iui-jy-Dm9"/>
+                            <constraint firstItem="4qQ-FF-wu9" firstAttribute="leading" secondItem="p3x-do-Phb" secondAttribute="leadingMargin" id="TkU-Jq-tt3"/>
+                            <constraint firstItem="4qQ-FF-wu9" firstAttribute="top" secondItem="u7L-hq-7Ri" secondAttribute="bottom" constant="8" id="VhO-xE-Brh"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="emailField" destination="1xV-q5-oqz" id="aC8-cC-NKj"/>
-                        <outlet property="passwordField" destination="dgv-bB-g4E" id="sOS-01-qjW"/>
-                        <outlet property="saveButton" destination="2Po-0a-lu5" id="gpK-Zr-v2g"/>
+                        <outlet property="deleteButton" destination="2Po-0a-lu5" id="B4K-74-Z5d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MtW-If-L69" userLabel="First Responder" sceneMemberID="firstResponder"/>

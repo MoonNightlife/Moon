@@ -13,9 +13,7 @@ import Material
 
 class DeleteAccountViewController: UIViewController, BindableType {
     
-    @IBOutlet weak var passwordField: TextField!
-    @IBOutlet weak var emailField: TextField!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
     
     var viewModel: DeleteAccountViewModel!
     var navBackButton: UIBarButtonItem!
@@ -24,13 +22,12 @@ class DeleteAccountViewController: UIViewController, BindableType {
         super.viewDidLoad()
 
         prepareNavigationBackButton()
-        prepareEmailTextField()
-        preparePasswordTextField()
         prepareDeleteButton()
     }
 
     func bindViewModel() {
         navBackButton.rx.action = viewModel.onBack()
+        deleteButton.rx.action = viewModel.onDelete()
     }
 
     fileprivate func prepareNavigationBackButton() {
@@ -40,43 +37,9 @@ class DeleteAccountViewController: UIViewController, BindableType {
         self.navigationItem.leftBarButtonItem = navBackButton
     }
     
-    fileprivate func prepareEmailTextField() {
-        emailField.placeholder = "Email"
-        emailField.isClearIconButtonEnabled = true
-        emailField.placeholderActiveColor = .moonRed
-        emailField.dividerActiveColor = .moonRed
-        emailField.dividerNormalColor = .moonRed
-        
-        let leftView = UIImageView()
-        leftView.image = #imageLiteral(resourceName: "emailIcon")
-        leftView.image = leftView.image?.withRenderingMode(.alwaysTemplate)
-        leftView.tintColor = .lightGray
-        
-        emailField.leftView = leftView
-        emailField.leftViewActiveColor = .moonRed
-        
-    }
-    
-    fileprivate func preparePasswordTextField() {
-        passwordField.placeholder = "Password"
-        passwordField.isClearIconButtonEnabled = true
-        passwordField.isSecureTextEntry = true
-        passwordField.placeholderActiveColor = .moonRed
-        passwordField.dividerActiveColor = .moonRed
-        passwordField.dividerNormalColor = .moonRed
-        
-        let leftView = UIImageView()
-        leftView.image = #imageLiteral(resourceName: "passwordIcon")
-        leftView.image = leftView.image?.withRenderingMode(.alwaysTemplate)
-        leftView.tintColor = .lightGray
-        
-        passwordField.leftView = leftView
-        passwordField.leftViewActiveColor = .moonRed
-    }
-    
     fileprivate func prepareDeleteButton() {
-        saveButton.backgroundColor = .moonRed
-        saveButton.tintColor = .white
-        saveButton.layer.cornerRadius = 5
+        deleteButton.backgroundColor = .moonRed
+        deleteButton.tintColor = .white
+        deleteButton.layer.cornerRadius = 5
     }
 }

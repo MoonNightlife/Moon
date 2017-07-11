@@ -33,6 +33,7 @@ target 'Moon' do
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
   pod 'EZLoadingActivity'
+  pod 'FBSDKLoginKit'
 
   target 'MoonTests' do
     inherit! :search_paths

@@ -430,7 +430,7 @@ extension FirebaseUserAPI {
                             observer.onCompleted()
                             
                         } else {
-                            observer.onError(UserAPIError.jsonCastingFailure)
+                            observer.onError(APIError.jsonCastingFailure)
                         }
                     case .failure(let error):
                         observer.onError(error)
@@ -458,7 +458,7 @@ extension FirebaseUserAPI {
                             observer.onCompleted()
                             
                         } else {
-                            observer.onError(UserAPIError.jsonCastingFailure)
+                            observer.onError(APIError.jsonCastingFailure)
                         }
                     case .failure(let error):
                         observer.onError(error)
@@ -486,7 +486,7 @@ extension FirebaseUserAPI {
                             observer.onCompleted()
                             
                         } else {
-                            observer.onError(UserAPIError.jsonCastingFailure)
+                            observer.onError(APIError.jsonCastingFailure)
                         }
                     case .failure(let error):
                         observer.onError(error)
@@ -517,7 +517,7 @@ extension FirebaseUserAPI {
                             observer.onCompleted()
                             
                         } else {
-                            observer.onError(UserAPIError.jsonCastingFailure)
+                            observer.onError(APIError.jsonCastingFailure)
                         }
                     case .failure(let error):
                         observer.onError(error)
@@ -545,7 +545,7 @@ extension FirebaseUserAPI {
                             observer.onCompleted()
                             
                         } else {
-                            observer.onError(UserAPIError.jsonCastingFailure)
+                            observer.onError(APIError.jsonCastingFailure)
                         }
                     case .failure(let error):
                         observer.onError(error)
@@ -573,7 +573,7 @@ extension FirebaseUserAPI {
                             observer.onCompleted()
                             
                         } else {
-                            observer.onError(UserAPIError.jsonCastingFailure)
+                            observer.onError(APIError.jsonCastingFailure)
                         }
                     case .failure(let error):
                         observer.onError(error)

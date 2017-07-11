@@ -11,7 +11,7 @@ import RxSwift
 import Action
 import FirebaseAuth
 
-struct LoginViewModel: AuthNetworkingInjected {
+struct LoginViewModel: AuthNetworkingInjected, FacebookNetworkingInjected {
     
     // Dependencies
     let sceneCoordinator: SceneCoordinatorType
@@ -30,9 +30,7 @@ struct LoginViewModel: AuthNetworkingInjected {
     
     func onSignUp() -> CocoaAction {
         return CocoaAction {
-            let newUser = NewUser()
-            let viewModel = NameViewModel(coordinator: self.sceneCoordinator, user: newUser)
-            return self.sceneCoordinator.transition(to: Scene.SignUp.name(viewModel), type: .push)
+            return self.signUpAction(facebookProfile: nil)
         }
     }
     
@@ -46,7 +44,7 @@ struct LoginViewModel: AuthNetworkingInjected {
     func onSignIn() -> CocoaAction {
         return CocoaAction {_ in
             if let email = self.email.value, let password = self.password.value {
-                return self.authAPI.login(credentials: .email(email: email, password: password))
+                return self.authAPI.login(credentials: .email(credentials: EmailCredentials(email: email, password: password)))
                     .flatMap({_ in 
                         return self.loginAction()
                     })
@@ -55,6 +53,46 @@ struct LoginViewModel: AuthNetworkingInjected {
                 return Observable.empty()
             }
         }
+    }
+    
+    func onFacebookSignIn() -> CocoaAction {
+        return CocoaAction { _ in
+            if self.facebookAPI.isUserAlreadyLoggedIn() {
+                return self.continueLogin()
+            } else {
+                return self.facebookAPI.login().flatMap({
+                    return self.continueLogin()
+                })
+            }
+        }
+    }
+    
+    func continueLogin() -> Observable<Void> {
+        return self.authAPI.login(credentials: self.facebookAPI.getProviderCredentials())
+            .flatMap({
+                return self.authAPI.checkForFirstTimeLogin(userId: $0)
+            }).flatMap({ isFirstTime -> Observable<Void> in
+                if isFirstTime {
+                    return self.facebookAPI.getBasicProfileForSignedInUser().flatMap({
+                        self.signUpAction(facebookProfile: $0)
+                    })
+                } else {
+                    return self.loginAction()
+                }
+            })
+    }
+    
+    func signUpAction(facebookProfile: FacebookUserInfo?) -> Observable<Void> {
+        
+        var newUser: NewUser!
+        if let profile = facebookProfile {
+             newUser = NewUser(facebookInfo: profile)
+        } else {
+            newUser = NewUser()
+        }
+        
+        let viewModel = NameViewModel(coordinator: self.sceneCoordinator, user: newUser)
+        return self.sceneCoordinator.transition(to: Scene.SignUp.name(viewModel), type: .push)
     }
     
     func loginAction() -> Observable<Void> {

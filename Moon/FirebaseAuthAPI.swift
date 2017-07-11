@@ -23,16 +23,35 @@ struct FirebaseAuthAPI: AuthAPIType {
     struct AuthFunction {
         private static let authBaseURL = "https://us-central1-moon-4409e.cloudfunctions.net/"
         
+        // Create account will create the firebase user and upload the profile information
         static let createAccount = authBaseURL + "createNewUser"
+        // Create profile adds the profile informatin to a firebase account
+        // This is used when a user authenticates with facebook and still to upload a profile
+        static let createProfile = authBaseURL + "createProfile"
+        
         static let checkUsername = authBaseURL + "checkUsername"
+        static let deleteAccount = authBaseURL + "deleteAccount"
+        static let checkFirstTimeLogin = authBaseURL + "checkFirstTimeLogin"
     }
     
     func login(credentials: LoginCredentials) -> Observable<UserID> {
         return Observable.create({ (observer) -> Disposable in
             
             switch credentials {
-            case let .email(email, password):
-                Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
+            case let .email(credential):
+                Auth.auth().signIn(withEmail: credential.email, password: credential.password, completion: { (user, error) in
+                    if let id = user?.uid {
+                        observer.onNext(id)
+                        observer.onCompleted()
+                    } else if let e = error {
+                        observer.onError(e)
+                    } else {
+                        observer.onError(MyError.SignUpError)
+                    }
+                })
+            case let .facebook(credentials):
+                let facebookCredentials = FacebookAuthProvider.credential(withAccessToken: credentials.accessToken)
+                Auth.auth().signIn(with: facebookCredentials, completion: { (user, error) in
                     if let id = user?.uid {
                         observer.onNext(id)
                         observer.onCompleted()
@@ -98,10 +117,119 @@ struct FirebaseAuthAPI: AuthAPIType {
                             observer.onCompleted()
                             
                         } else {
-                            observer.onError(UserAPIError.jsonCastingFailure)
+                            observer.onError(APIError.jsonCastingFailure)
                         }
                     case .failure(let error):
                         observer.onError(error)
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    
+    func resetPassword(email: String) -> Observable<Void> {
+        return Observable.create({ (observer) -> Disposable in
+            Auth.auth().sendPasswordReset(withEmail: email) { error in
+                if let error = error {
+                    observer.onError(error)
+                } else {
+                    observer.onNext()
+                }
+                observer.onCompleted()
+            }
+            
+            return Disposables.create()
+        })
+    }
+    
+    func updateEmail(email: String) -> Observable<Void> {
+        return Observable.create({ (observer) -> Disposable in
+            if let user = Auth.auth().currentUser {
+                user.updateEmail(to: email, completion: { (error) in
+                    if let error = error {
+                        observer.onError(error)
+                    } else {
+                        observer.onNext()
+                    }
+                    observer.onCompleted()
+                })
+            } else {
+                observer.onError(APIError.noSignedInUser)
+            }
+            
+            return Disposables.create()
+        })
+    }
+    
+    func deleteAccountForSignedInUser() -> Observable<Void> {
+        return Observable.create({(observer) -> Disposable in
+            let body: Parameters = [
+                "id": self.SignedInUserID
+            ]
+            let request = Alamofire.request(AuthFunction.deleteAccount, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .response(completionHandler: {
+                    if let e = $0.error {
+                        observer.onError(e)
+                    } else {
+                        observer.onNext()
+                        observer.onCompleted()
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    
+    func changePasswordForSignedInUser(newPassword: String) -> Observable<Void> {
+        return Observable.empty()
+    }
+    
+    func checkForFirstTimeLogin(userId: String) -> Observable<Bool> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": userId
+            ]
+            let request = Alamofire.request(AuthFunction.checkFirstTimeLogin, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseJSON(completionHandler: { (response) in
+                    switch response.result {
+                    case .success(let value):
+                        if let firstTime = value as? Bool {
+                            observer.onNext(firstTime)
+                            observer.onCompleted()
+                            
+                        } else {
+                            observer.onError(APIError.jsonCastingFailure)
+                        }
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    
+    func createProfile(newUser: NewUser) -> Observable<Void> {
+        return Observable.create({ (observer) -> Disposable in
+            var body: Parameters = newUser.toJSON()
+            body["id"] = self.SignedInUserID
+            let request = Alamofire.request(AuthFunction.createProfile, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .response(completionHandler: {
+                    if let e = $0.error {
+                        observer.onError(e)
+                    } else {
+                        observer.onNext()
+                        observer.onCompleted()
                     }
                 })
             

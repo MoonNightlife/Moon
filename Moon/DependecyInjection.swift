@@ -15,6 +15,7 @@ struct InjectionMap {
     static var storageAPI: StorageAPIType = FirebaseStorageAPI()
     static var authAPI: AuthAPIType = FirebaseAuthAPI()
     static var photoService: PhotoService = KingFisherPhotoService()
+    static var facebookAPI: FacebookLoginProviderType = FacebookService()
 }
 
 protocol NetworkingInjected { }
@@ -46,4 +47,10 @@ protocol AuthNetworkingInjected { }
 
 extension AuthNetworkingInjected {
     var authAPI: AuthAPIType { return InjectionMap.authAPI }
+}
+
+protocol FacebookNetworkingInjected { }
+
+extension FacebookNetworkingInjected {
+    var facebookAPI: FacebookLoginProviderType { return InjectionMap.facebookAPI }
 }

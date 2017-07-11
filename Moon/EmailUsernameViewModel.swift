@@ -15,7 +15,7 @@ enum SignUpError: Error {
     case usernameTaken(message: String)
 }
 
-struct EmailUsernameViewModel: AuthNetworkingInjected {
+struct EmailUsernameViewModel: AuthNetworkingInjected, StorageNetworkingInjected {
     
     // Dependencies
     private let newUser: NewUser
@@ -23,10 +23,12 @@ struct EmailUsernameViewModel: AuthNetworkingInjected {
     private let disposeBag = DisposeBag()
     
     // Inputs
-    var username = BehaviorSubject<String?>(value: nil)
-    var email = BehaviorSubject<String?>(value: nil)
+    var username = PublishSubject<String?>()
+    var email = PublishSubject<String?>()
     
     // Outputs
+    var emailText: Observable<String?>!
+    
     var showEmailError: Driver<Bool> {
         let validEmail = email.map(ValidationUtility.validEmail)
         return Observable.combineLatest(email, validEmail)
@@ -55,13 +57,19 @@ struct EmailUsernameViewModel: AuthNetworkingInjected {
     
     var allFieldsValid: Observable<Bool> {
 
-        return Observable.combineLatest(username.map(ValidationUtility.validUsername), email.map(ValidationUtility.validEmail)).map({$0 && $1})
+        return Observable.combineLatest(username.map(ValidationUtility.validUsername), emailText.map(ValidationUtility.validEmail)).map({$0 && $1})
     }
     
     init(coordinator: SceneCoordinatorType, user: NewUser) {
         self.sceneCoordinator = coordinator
         self.newUser = user
         subscribeToInputs()
+        
+        emailText = email
+            .do(onNext: {
+                user.email = $0?.trimmed
+            })
+            .startWith(user.email)
     }
     
     private func subscribeToInputs() {
@@ -70,27 +78,50 @@ struct EmailUsernameViewModel: AuthNetworkingInjected {
                 self.newUser.username = $0
             })
             .addDisposableTo(disposeBag)
-        
-        email
-            .subscribe(onNext: {
-                self.newUser.email = $0
-            })
-            .addDisposableTo(disposeBag)
     }
     
-    func nextSignUpScreen() -> CocoaAction {
-        return CocoaAction(enabledIf: allFieldsValid, workFactory: {_ in 
+    func nextScreen() -> CocoaAction {
+        return CocoaAction(enabledIf: allFieldsValid, workFactory: {_ in
             return self.authAPI.checkUsername(username: self.newUser.username!)
                 .flatMap({ isTaken -> Observable<Void> in
                     if isTaken {
                         return Observable.error(SignUpError.usernameTaken(message: "This username is already taken. Please choose a different one."))
                     } else {
-                        let viewModel = PasswordsViewModel(coordinator: self.sceneCoordinator, user: self.newUser)
-                        return self.sceneCoordinator.transition(to: Scene.SignUp.passwords(viewModel), type: .push)
+                        switch self.newUser.type! {
+                        case .firebase: return self.nextSignUpScreen()
+                        case .facebook: return self.createProfile()
+                        }
+                        
                     }
                 })
             
         })
+
+    }
+    
+    func nextSignUpScreen() -> Observable<Void> {
+        let viewModel = PasswordsViewModel(coordinator: self.sceneCoordinator, user: self.newUser)
+        return self.sceneCoordinator.transition(to: Scene.SignUp.passwords(viewModel), type: .push)
+    }
+    
+    func createProfile() -> Observable<Void> {
+        return self.authAPI.createProfile(newUser: self.newUser)
+            .flatMap({ _ -> Observable<Void> in
+                if let photoData = self.newUser.image {
+                    return self.storageAPI.uploadProfilePictureFrom(data: photoData, forUser: self.authAPI.SignedInUserID)
+                } else {
+                    return Observable.just()
+                }
+            })
+            .flatMap({
+                return self.loginAction()
+            })
+    }
+    
+    func loginAction() -> Observable<Void> {
+        let mainVM = MainViewModel(coordinator: self.sceneCoordinator)
+        let searchVM = SearchBarViewModel(coordinator: self.sceneCoordinator)
+        return self.sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
     }
     
     func onBack() -> CocoaAction {

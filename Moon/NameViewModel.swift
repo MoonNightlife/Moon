@@ -11,7 +11,7 @@ import RxSwift
 import Action
 import RxCocoa
 
-struct NameViewModel {
+struct NameViewModel: ImageNetworkingInjected {
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
@@ -21,16 +21,46 @@ struct NameViewModel {
     private let disposeBag = DisposeBag()
     
     // Inputs
-    var firstName = BehaviorSubject<String?>(value: nil)
-    var lastName = BehaviorSubject<String?>(value: nil)
-    var imageData = Variable<Data?>(nil)
+    var firstName = PublishSubject<String?>()
+    var lastName = PublishSubject<String?>()
+    var selectedImage = Variable<UIImage?>(nil)
     
     // Outputs
-    var dataValid: Driver<Bool>
+    var dataValid: Driver<Bool>!
+    var firstNameText: Observable<String?>!
+    var lastNameText: Observable<String?>!
+    var image = Variable<UIImage?>(nil)
     
     init(coordinator: SceneCoordinatorType, user: NewUser) {
         self.sceneCoordinator = coordinator
         self.newUser = user
+        
+        if let url = user.profileURL {
+            self.photoService.getImageFor(url: url).bind(to: image).addDisposableTo(disposeBag)
+    
+            image.asObservable()
+                .filterNil()
+                .map({
+                    UIImageJPEGRepresentation($0, 1.0)
+                })
+                .do(onNext: {
+                    user.image = $0
+                })
+                .subscribe()
+                .addDisposableTo(disposeBag)
+        }
+        
+        firstNameText = firstName
+            .do(onNext: {
+                user.firstName = $0?.trimmed
+            })
+            .startWith(user.firstName)
+        
+        lastNameText = lastName
+            .do(onNext: {
+                user.lastName = $0?.trimmed
+            })
+            .startWith(user.lastName)
         
         dataValid = Observable.combineLatest(firstName, lastName).map(ValidationUtility.validName).asDriver(onErrorJustReturn: false)
         
@@ -38,21 +68,17 @@ struct NameViewModel {
     }
     
     private func subscribeToInputs() {
-        firstName
-            .subscribe(onNext: {
-                self.newUser.firstName = $0?.trimmed
-            })
-            .addDisposableTo(disposeBag)
         
-        lastName
-            .subscribe(onNext: {
-                self.newUser.lastName = $0?.trimmed
+        selectedImage.asObservable()
+            .filterNil()
+            .map({
+                UIImageJPEGRepresentation($0, 1.0)
             })
+            .do(onNext: {
+                self.newUser.image = $0
+            })
+            .subscribe()
             .addDisposableTo(disposeBag)
-        
-        imageData.asObservable().subscribe(onNext: {
-            self.newUser.image = $0
-        }).addDisposableTo(disposeBag)
     }
 
     func nextSignUpScreen() -> CocoaAction {

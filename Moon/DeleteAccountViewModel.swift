@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import Action
 
-struct DeleteAccountViewModel {
+struct DeleteAccountViewModel: AuthNetworkingInjected {
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
     
@@ -28,10 +28,18 @@ struct DeleteAccountViewModel {
         }
     }
     
-    func onSave() -> CocoaAction {
-        return CocoaAction {
-            
-            return Observable.empty()
+    func onDelete() -> CocoaAction {
+        return CocoaAction { _ in
+            return self.authAPI.deleteAccountForSignedInUser().flatMap({
+                return self.showLogin()
+            })
         }
     }
+    
+    func showLogin() -> Observable<Void> {
+        let viewModel = LoginViewModel(coordinator: sceneCoordinator)
+        let firstScene = Scene.Login.login(viewModel)
+        return sceneCoordinator.transition(to: firstScene, type: .root)
+    }
+    
 }

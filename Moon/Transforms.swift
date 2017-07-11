@@ -87,5 +87,27 @@ let SexTransform = TransformOf<Sex, Int>(fromJSON: { (value: Int?) -> Sex? in
         return nil
 })
 
+// User for facebook object mapping
+let GenderTransform = TransformOf<Sex, String>(fromJSON: { (value: String?) -> Sex? in
+    
+    switch value! {
+    case "male" : return Sex.male
+    case "female" : return Sex.female
+    default: return Sex.none
+    }
+    
+    
+}, toJSON: { (value: Sex?) -> String? in
+    // transform value from Int? to String?
+    if let value = value {
+        switch value {
+        case .male : return "male"
+        case .female : return "female"
+        case .none : return "none"
+        }
+    }
+    return nil
+})
+
 
 

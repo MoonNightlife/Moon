@@ -9,8 +9,10 @@
 import Foundation
 import RxSwift
 
-enum UserAPIError: Error {
+enum APIError: Error {
     case jsonCastingFailure
+    case noSignedInUser
+    case noUserInfo
 }
 
 protocol UserAPIType {

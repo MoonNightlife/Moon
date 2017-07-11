@@ -17,6 +17,14 @@ enum Sex: Int {
     case female
     case none
     
+    func toString() -> String {
+        switch self {
+        case .male: return "Male"
+        case .female: return "Female"
+        case .none: return "Rather Not Say"
+        }
+    }
+    
 }
 
 enum MainView: Int {
@@ -115,4 +123,9 @@ enum ProfileActionButton {
     case removeFriend
     case cancelRequest
     case acceptRequest
+}
+
+enum NewUserType {
+    case firebase
+    case facebook
 }

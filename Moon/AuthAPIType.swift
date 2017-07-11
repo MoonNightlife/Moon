@@ -9,8 +9,18 @@
 import Foundation
 import RxSwift
 
+struct FacebookCredentials {
+    let accessToken: String
+}
+
+struct EmailCredentials {
+    let email: String
+    let password: String
+}
+
 enum LoginCredentials {
-    case email(email: String, password: String)
+    case facebook(credentials: FacebookCredentials)
+    case email(credentials: EmailCredentials)
 }
 
 typealias UserID = String
@@ -28,6 +38,17 @@ protocol AuthAPIType {
     func login(credentials: LoginCredentials) -> Observable<UserID>
     func signOut() -> Observable<Void>
     func createAccount(newUser: NewUser) -> Observable<Void>
+    func createProfile(newUser: NewUser) -> Observable<Void>
     
     func checkUsername(username: String) -> Observable<Bool>
+    
+    func resetPassword(email: String) -> Observable<Void>
+    func updateEmail(email: String) -> Observable<Void>
+    func deleteAccountForSignedInUser() -> Observable<Void>
+    func changePasswordForSignedInUser(newPassword: String) -> Observable<Void>
+    
+    func checkForFirstTimeLogin(userId: String) -> Observable<Bool>
 }
+
+
+

@@ -18,9 +18,25 @@ class NewUser: Mappable {
     var email: String?
     var username: String?
     var image: Data?
+    var profileURL: URL?
+    var type: NewUserType?
     
     init() {
-
+        self.type = .firebase
+    }
+    
+    init(facebookInfo: FacebookUserInfo) {
+        
+        self.type = .facebook
+        
+        if let urlString = facebookInfo.profilePicutreURL {
+            self.profileURL = URL(string: urlString)
+        }
+        self.firstName = facebookInfo.firstName
+        self.lastName = facebookInfo.lastName
+        self.sex = facebookInfo.sex
+        self.email = facebookInfo.email
+        self.birthday = facebookInfo.birthday
     }
     
     required init?(map: Map) {

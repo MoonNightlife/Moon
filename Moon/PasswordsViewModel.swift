@@ -49,7 +49,7 @@ struct PasswordsViewModel: NetworkingInjected, AuthNetworkingInjected, StorageNe
         return CocoaAction(enabledIf: self.allValid, workFactory: {_ in
             return self.authAPI.createAccount(newUser: self.newUser)
                 .flatMap({
-                    return self.authAPI.login(credentials: .email(email: self.newUser.email!, password: self.newUser.password!))
+                    return self.authAPI.login(credentials: .email(credentials: EmailCredentials(email:self.newUser.email!, password: self.newUser.password!)))
                 })
                 .flatMap({ id -> Observable<Void> in
                     if let photoData = self.newUser.image {
@@ -58,9 +58,9 @@ struct PasswordsViewModel: NetworkingInjected, AuthNetworkingInjected, StorageNe
                         return Observable.just()
                     }
                 })
-//                .flatMap({
-//                    return self.loginAction()
-//                })
+                .flatMap({
+                    return self.loginAction()
+                })
         })
     }
 

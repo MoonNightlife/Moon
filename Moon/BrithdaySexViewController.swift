@@ -49,7 +49,7 @@ class BirthdaySexViewController: UIViewController, BindableType {
     
     func bindViewModel() {
         
-        sexPickerView.rx.itemSelected.bind(to: viewModel.sex).addDisposableTo(disposeBag)
+        sexPickerView.rx.itemSelected.bind(to: viewModel.sexPicker).addDisposableTo(disposeBag)
         datePickerView.rx.date.bind(to: viewModel.birthday).addDisposableTo(disposeBag)
         
         viewModel.birthdayString.bind(to: birthdayTextField.rx.text).addDisposableTo(disposeBag)

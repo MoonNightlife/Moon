@@ -228,6 +228,8 @@
                     <connections>
                         <outlet property="emailIcon" destination="yPW-46-a3M" id="awm-ev-uBj"/>
                         <outlet property="emailTextField" destination="F4W-Pl-0Z1" id="RYS-vC-xUw"/>
+                        <outlet property="facebookSignInButton" destination="RpT-45-SWW" id="Y0r-H8-Jw0"/>
+                        <outlet property="googleSignInButton" destination="6AZ-AV-FgK" id="Afi-el-9lT"/>
                         <outlet property="keyIcon" destination="OQZ-Ut-ORy" id="Fca-ez-Cbe"/>
                         <outlet property="loginButton" destination="Y23-Qp-ruw" id="rnF-rY-zMr"/>
                         <outlet property="orIcon" destination="zXx-Re-54a" id="AHa-I9-pYb"/>
@@ -305,7 +307,7 @@
             <objects>
                 <navigationController storyboardIdentifier="Login" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ccw-F9-fGg" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hw5-Vu-eYV">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Hw5-Vu-eYV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

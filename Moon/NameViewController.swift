@@ -48,10 +48,16 @@ class NameViewController: UIViewController, BindableType, FusumaDelegate {
     }
     
     func bindViewModel() {
-        firstNameTextField.rx.textInput.text.orEmpty.bind(to: viewModel.firstName).addDisposableTo(disposeBag)
-        lastNameTextField.rx.textInput.text.orEmpty.bind(to: viewModel.lastName).addDisposableTo(disposeBag)
+        
+        firstNameTextField.rx.textInput.text.bind(to: viewModel.firstName).addDisposableTo(disposeBag)
+        lastNameTextField.rx.textInput.text.bind(to: viewModel.lastName).addDisposableTo(disposeBag)
+        
+        viewModel.firstNameText.bind(to: firstNameTextField.rx.text).addDisposableTo(disposeBag)
+        viewModel.lastNameText.bind(to: lastNameTextField.rx.text).addDisposableTo(disposeBag)
         
         viewModel.dataValid.drive(nextScreenButton.rx.isEnabled).addDisposableTo(disposeBag)
+        
+        viewModel.image.asObservable().bind(to: profilePic.rx.image).addDisposableTo(disposeBag)
 
         nextScreenButton.rx
             .controlEvent(.touchUpInside)
@@ -86,7 +92,7 @@ class NameViewController: UIViewController, BindableType, FusumaDelegate {
     func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
         //let i  = image.crop(toWidth: 200, toHeight: 200) // circle image
         profilePic.image = image
-        viewModel.imageData.value = UIImageJPEGRepresentation(image, 1.0)
+        viewModel.selectedImage.value = image
     }
     
     func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {
