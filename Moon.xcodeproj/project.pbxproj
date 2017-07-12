@@ -81,6 +81,7 @@
 		F01CE3E11EFEDE1000EE9535 /* SelectRegionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01CE3E01EFEDE1000EE9535 /* SelectRegionViewModel.swift */; };
 		F01CE3E31EFEDE9500EE9535 /* SelectRegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01CE3E21EFEDE9500EE9535 /* SelectRegionViewController.swift */; };
 		F03322441F16565800FD72CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03322431F16565800FD72CD /* ViewController.swift */; };
+		F03322461F16A77900FD72CD /* EditProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03322451F16A77900FD72CD /* EditProfileInfo.swift */; };
 		F0335A761EF1F7DD005118B4 /* RxDataSourceSnapshotModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0335A751EF1F7DD005118B4 /* RxDataSourceSnapshotModel.swift */; };
 		F03404481F0D5F6D00475FDF /* FirebaseAuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03404471F0D5F6D00475FDF /* FirebaseAuthAPI.swift */; };
 		F034044A1F0D621700475FDF /* FirebaseStorageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03404491F0D621700475FDF /* FirebaseStorageAPI.swift */; };
@@ -341,6 +342,7 @@
 		F01CE3E01EFEDE1000EE9535 /* SelectRegionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectRegionViewModel.swift; sourceTree = "<group>"; };
 		F01CE3E21EFEDE9500EE9535 /* SelectRegionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectRegionViewController.swift; sourceTree = "<group>"; };
 		F03322431F16565800FD72CD /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F03322451F16A77900FD72CD /* EditProfileInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileInfo.swift; sourceTree = "<group>"; };
 		F0335A751EF1F7DD005118B4 /* RxDataSourceSnapshotModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxDataSourceSnapshotModel.swift; sourceTree = "<group>"; };
 		F03404471F0D5F6D00475FDF /* FirebaseAuthAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAuthAPI.swift; sourceTree = "<group>"; };
 		F03404491F0D621700475FDF /* FirebaseStorageAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageAPI.swift; sourceTree = "<group>"; };
@@ -1246,6 +1248,7 @@
 				F098FF9A1EDF1DEA00A59594 /* NewUser.swift */,
 				F0F4CDFA1F0DA04C00AE69C1 /* Transforms.swift */,
 				F0E1F5251F151E5900BC0785 /* FacebookUserInfo.swift */,
+				F03322451F16A77900FD72CD /* EditProfileInfo.swift */,
 			);
 			name = "NewModels ";
 			sourceTree = "<group>";
@@ -1679,6 +1682,7 @@
 				C0949D981EF0286C00C6F72C /* BarCollectionView.swift in Sources */,
 				C08AFB291EECBA4F007D33D6 /* ImageCardView.swift in Sources */,
 				F04283AF1EC4A92700CCB5F3 /* FeaturedViewController.swift in Sources */,
+				F03322461F16A77900FD72CD /* EditProfileInfo.swift in Sources */,
 				F044CD531ECDE28A00E47138 /* BottomGradientImageView.swift in Sources */,
 				F0CA18911EE584AF00428318 /* ProfileViewModel.swift in Sources */,
 				F07F694B1EFAED22000F854D /* DeepLinking.swift in Sources */,

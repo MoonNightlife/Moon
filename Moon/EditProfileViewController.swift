@@ -12,6 +12,7 @@ import RxSwift
 import Action
 import RAReorderableLayout
 import Fusuma
+import SwiftOverlays
 
 class EditProfileViewController: UIViewController, BindableType, RAReorderableLayoutDelegate, RAReorderableLayoutDataSource, UIScrollViewDelegate, UITextFieldDelegate, FusumaDelegate {
 
@@ -44,10 +45,25 @@ class EditProfileViewController: UIViewController, BindableType, RAReorderableLa
     
     func bindViewModel() {
         cancelButton.rx.action = viewModel.onBack()
-        saveButton.rx.action = viewModel.onSave()
         
-        firstNameTextField.rx.textInput.text.bind(to: viewModel.firstName).addDisposableTo(bag)
-        lastNameTextField.rx.textInput.text.bind(to: viewModel.lastName).addDisposableTo(bag)
+        let saveAction = viewModel.onSave()
+        saveButton.rx.action = saveAction
+        saveAction.executing.do(onNext: {
+            if $0 {
+                SwiftOverlays.showBlockingWaitOverlayWithText("Updating Profile")
+            } else {
+                SwiftOverlays.removeAllBlockingOverlays()
+            }
+        })
+        .subscribe()
+        .addDisposableTo(bag)
+        
+        viewModel.firstNameText.asObservable().bind(to: firstNameTextField.rx.text).addDisposableTo(bag)
+        viewModel.lastNameText.asObservable().bind(to: lastNameTextField.rx.text).addDisposableTo(bag)
+        viewModel.bioText.asObservable().bind(to: bioTextField.rx.text).addDisposableTo(bag)
+        
+        firstNameTextField.rx.text.bind(to: viewModel.firstName).addDisposableTo(bag)
+        lastNameTextField.rx.text.bind(to: viewModel.lastName).addDisposableTo(bag)
         bioTextField.rx.textInput.text.bind(to: viewModel.bio).addDisposableTo(bag)
         
         viewModel.profilePictures.asObservable().do(onNext: { [weak self] _ in

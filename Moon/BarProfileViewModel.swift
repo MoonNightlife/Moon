@@ -193,7 +193,7 @@ class BarProfileViewModel: ImageNetworkingInjected, NetworkingInjected, BackType
     
     func getProfileImage(id: String) -> Action<Void, UIImage> {
         return Action(workFactory: { [unowned self] _ in
-            return self.storageAPI.getProfilePictureDownloadUrlForUser(id: id)
+            return self.storageAPI.getProfilePictureDownloadUrlForUser(id: id, picName: "pic1.jpg")
                 .filterNil()
                 .flatMap({
                     self.photoService.getImageFor(url: $0)
