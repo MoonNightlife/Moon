@@ -18,17 +18,26 @@ class UserCollectionView: ImageCardView {
     var nameLabel: UILabel!
     let bag = DisposeBag()
     
+    var tapReconizer: UITapGestureRecognizer!
+    
     func initViewWith() {
         
         self.initializeImageCardViewWith(type: .small)
         prepareAddFriendButton()
         prepareNameLabel()
         prepareToolbar()
+        prepareImageViewTapReconizer()
     }
 
 }
 
 extension UserCollectionView {
+    
+    fileprivate func prepareImageViewTapReconizer() {
+        tapReconizer = UITapGestureRecognizer()
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(tapReconizer)
+    }
     
     fileprivate func prepareNameLabel() {
         nameLabel = UILabel()
@@ -38,7 +47,7 @@ extension UserCollectionView {
     }
     
     fileprivate func prepareAddFriendButton() {
-        var image = #imageLiteral(resourceName: "AddFriendIcon")
+        var image = #imageLiteral(resourceName: "AddFriend")
         image = image.withRenderingMode(.alwaysTemplate)
         addFriendButton = IconButton(image: image, tintColor: .lightGray)
     }

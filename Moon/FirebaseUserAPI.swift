@@ -38,6 +38,7 @@ struct FirebaseUserAPI: UserAPIType {
         static let getActivityLikers = userBaseURL + "getActivityLikers"
         static let getActivityFeed = userBaseURL + "getActivityFeed"
         static let searchForUser = userBaseURL + "searchUser"
+        static let getSuggestedFriends = userBaseURL + "getSuggestedFriends"
         
         static let goToBar = userBaseURL + "goToBar"
         
@@ -402,6 +403,29 @@ extension FirebaseUserAPI {
                     } else {
                         observer.onNext()
                         observer.onCompleted()
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    
+    func getSuggestedFriends(userID: String) -> Observable<[UserSnapshot]> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": userID
+            ]
+            let request = Alamofire.request(UserFunction.getSuggestedFriends, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseArray(completionHandler: { (response: DataResponse<[UserSnapshot]>) in
+                    switch response.result {
+                    case .success(let snapshots):
+                        observer.onNext(snapshots)
+                        observer.onCompleted()
+                    case .failure(let error):
+                        observer.onError(error)
                     }
                 })
             

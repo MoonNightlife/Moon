@@ -117,11 +117,7 @@ extension BarProfileViewController {
             
             peopleGoingView.numberOfLikesButton.rx.action = viewModel.onViewLikers(userID: userID)
             
-            //TODO: test once andrew updates the swagger
-            // When the user taps the photo of a user the are directed to the user's profile
-        
-            peopleGoingView.imageView.gestureRecognizers?.first?.rx.event.subscribe(onNext: { [weak self] in
-                print($0)
+            peopleGoingView.imageView.gestureRecognizers?.first?.rx.event.subscribe(onNext: { [weak self] _ in
                 self?.viewModel.onShowProfile(userID: userID).execute()
             }).addDisposableTo(peopleGoingView.bag)
             

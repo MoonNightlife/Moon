@@ -44,13 +44,16 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
         
         suggestedBarCollectionView.delegate = self
         
+        suggestedUserColletionView.showsHorizontalScrollIndicator = false
+        
         configureDataSource()
         prepareLabels()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        searchBarController?.searchBar.textField.becomeFirstResponder()
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -68,15 +71,12 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
     }
     
     func bindViewModel() {
-        //TODO: Uncommented onces swagger is updated
-//        viewModel.suggestedBars.drive(suggestedBarCollectionView.rx.items(dataSource: barDataSource)).disposed(by: bag)
-//        viewModel.suggestedFriends.drive(suggestedUserColletionView.rx.items(dataSource: userDataSource)).disposed(by: bag)
+        viewModel.suggestedBars.drive(suggestedBarCollectionView.rx.items(dataSource: barDataSource)).disposed(by: bag)
+        viewModel.suggestedFriends.drive(suggestedUserColletionView.rx.items(dataSource: userDataSource)).disposed(by: bag)
         
-        let barSelected = suggestedBarCollectionView.rx.itemSelected
-        let userSelected = suggestedUserColletionView.rx.itemSelected
-        
-        barSelected.map({ $0.row }).subscribe(viewModel.onShowBar.inputs).addDisposableTo(bag)
-        userSelected.map({ $0.row }).subscribe(viewModel.onShowUser.inputs).addDisposableTo(bag)
+        viewModel.reload.onNext()
+        suggestedBarCollectionView.rx.modelSelected(SearchSection.Item.self).subscribe(viewModel.onShowBar.inputs).addDisposableTo(bag)
+
     }
     
     fileprivate func cellsPerRowVertical(cells: Int, collectionView: UICollectionView) -> UICollectionViewFlowLayout {
@@ -131,6 +131,13 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
                view.initViewWith()
                 strongSelf.populate(barCollectionView: view, snapshot: item)
             }
+            
+            // Remove the last view from the cell if there is one
+            for view in cell.subviews {
+                if let subview = view as? BarCollectionView {
+                    subview.removeFromSuperview()
+                }
+            }
 
             cell.addSubview(view)
             return cell
@@ -159,6 +166,13 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
                 strongSelf.populate(userCollectionView: view, snapshot: item)
             }
             
+            // Remove the last view from the cell if there is one
+            for view in cell.subviews {
+                if let subview = view as? UserCollectionView {
+                    subview.removeFromSuperview()
+                }
+            }
+            
             cell.addSubview(view)
             return cell
         }
@@ -168,33 +182,42 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
 extension ContentSuggestionsViewController {
     func populate(barCollectionView view: BarCollectionView, snapshot: Snapshot) {
         
+        view.imageView.backgroundColor = .lightGray
         // Bind actions
         if let id = snapshot.id {
             view.goButton.rx.action = viewModel.onChangeAttendance(barID: id)
+            
+            let downloader = viewModel.getFirstBarImage(id: id)
+            downloader.elements.bind(to: view.imageView.rx.image).addDisposableTo(view.bag)
+            downloader.execute()
         }
         
         // Bind labels
         view.nameLabel.text = snapshot.name
-        
-        if let urlString = snapshot.pic, let url = URL(string: urlString) {
-            let downloader = viewModel.downloadImage(url: url)
-            downloader.elements.bind(to: view.imageView.rx.image).addDisposableTo(view.bag)
-            downloader.execute()
-        }
+    
     }
     
     func populate(userCollectionView view: UserCollectionView, snapshot: Snapshot) {
+        
+        view.imageView.backgroundColor = .lightGray
+        
         if let id = snapshot.id {
             view.addFriendButton.rx.action = viewModel.onAddFriend(userID: id)
+            
+            let downloader = viewModel.getProfileImage(id: id)
+            downloader.elements.bind(to: view.imageView.rx.image).addDisposableTo(view.bag)
+            downloader.execute()
+            
+            view.imageView.gestureRecognizers?.first?.rx.event.subscribe(onNext: { [weak self] _ in
+                self?.viewModel.onShowProfile(userID: id).execute()
+            }).addDisposableTo(view.bag)
+
+        } else {
+            view.imageView.image = #imageLiteral(resourceName: "DefaultProfilePic")
         }
     
         // Bind labels
         view.nameLabel.text = snapshot.name
-        
-        if let urlString = snapshot.pic, let url = URL(string: urlString) {
-            let downloader = viewModel.downloadImage(url: url)
-            downloader.elements.bind(to: view.imageView.rx.image).addDisposableTo(view.bag)
-            downloader.execute()
-        }
+
     }
 }

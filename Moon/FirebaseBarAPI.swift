@@ -22,6 +22,7 @@ struct FirebaseBarAPI: BarAPIType {
         static let getSpecialsInRegionByType = barBaseURL + "getSpecialsInRegionByType"
         static let getEventsInRegion = barBaseURL + "getEventsInRegion"
         static let getBarsInRegion =  barBaseURL + "getBarsInRegion"
+        static let getSuggestedBars = barBaseURL + "getSuggestedBars"
         
         static let getBarProfile = barBaseURL + "getBarProfile"
         static let getBarEvents = barBaseURL + "getBarEvents"
@@ -297,6 +298,29 @@ struct FirebaseBarAPI: BarAPIType {
                     switch response.result {
                     case .success(let snapshots):
                         observer.onNext(snapshots)
+                        observer.onCompleted()
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    
+    func getSuggestedBars(region: String) -> Observable<[BarSnapshot]> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "region": region
+            ]
+            let request = Alamofire.request(BarFunction.getSuggestedBars, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseArray(completionHandler: { (response: DataResponse<[BarSnapshot]>) in
+                    switch response.result {
+                    case .success(let profiles):
+                        observer.onNext(profiles)
                         observer.onCompleted()
                     case .failure(let error):
                         observer.onError(error)

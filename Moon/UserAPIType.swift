@@ -41,6 +41,7 @@ protocol UserAPIType {
     func likeActivity(userID: String, activityUserID: String) -> Observable<Void>
     func likeSpecial(userID: String, specialID: String) -> Observable<Void>
     func likeEvent(userID: String, eventID: String) -> Observable<Void>
+    func getSuggestedFriends(userID: String) -> Observable<[UserSnapshot]>
     
     // Liked Info
     func hasLikedSpecial(userID: String, SpecialID: String) -> Observable<Bool>
