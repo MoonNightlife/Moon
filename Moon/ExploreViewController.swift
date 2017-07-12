@@ -13,7 +13,7 @@ import RxCocoa
 import iCarousel
 import RxDataSources
 
-class ExploreViewController: UIViewController, BindableType {
+class ExploreViewController: UIViewController, BindableType, UITableViewDelegate {
     
     var viewModel: ExploreViewModel!
     
@@ -37,6 +37,10 @@ class ExploreViewController: UIViewController, BindableType {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.specialsTableView.autoresizingMask = .flexibleHeight
+        self.specialsTableView.contentInset = EdgeInsets(top: 0, left: 0, bottom: (self.view.frame.size.height * 0.37), right: 0)
+        specialsTableView.rx.setDelegate(self).addDisposableTo(bag)
         
         view.backgroundColor = .white
         prepareSegmentControl()
@@ -214,5 +218,11 @@ extension ExploreViewController: iCarouselDataSource, iCarouselDelegate {
         
         view.toolbar.detailLabel.attributedText = fullString
 
+    }
+}
+
+extension ExploreViewController {
+    func tableView( _ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.0
     }
 }

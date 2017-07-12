@@ -154,7 +154,7 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
             cell.frame.size.height = cellSize
             cell.frame.size.width = cellSize
             
-            let height = cell.frame.height - 20
+            let height = cell.frame.height - 5
             let width = cell.frame.size.width
             
             let view = UserCollectionView()

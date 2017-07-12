@@ -34,6 +34,7 @@ extension BarCollectionView {
         nameLabel.textColor = .lightGray
         nameLabel.numberOfLines = 1
         nameLabel.font = UIFont(name: "Roboto", size: 10)
+        nameLabel.textAlignment = .center
     }
     
     fileprivate func prepareAddFriendButton() {
@@ -41,8 +42,8 @@ extension BarCollectionView {
     }
     
     fileprivate func prepareToolbar() {
-        self.bottomToolbar.rightViews = [goButton]
-        self.bottomToolbar.addLeftView(view: nameLabel)
+        //self.bottomToolbar.rightViews = [goButton]
+        self.bottomToolbar.centerViews = [nameLabel]
         
     }
 }
