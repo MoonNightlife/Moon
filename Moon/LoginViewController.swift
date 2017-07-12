@@ -10,7 +10,7 @@ import UIKit
 import Material
 import RxCocoa
 import RxSwift
-import EZLoadingActivity
+import SwiftOverlays
 
 class LoginViewController: UIViewController, BindableType {
     
@@ -105,9 +105,9 @@ class LoginViewController: UIViewController, BindableType {
         loginButton.rx.action = signInAction
         signInAction.executing.do(onNext: {
             if $0 {
-                EZLoadingActivity.show("Signing In", disableUI: true)
+                SwiftOverlays.showBlockingTextOverlay("Signing In")
             } else {
-                EZLoadingActivity.hide()
+                SwiftOverlays.removeAllBlockingOverlays()
             }
         }).subscribe().addDisposableTo(disposeBag)
         

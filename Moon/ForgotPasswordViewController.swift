@@ -11,6 +11,7 @@ import Material
 import RxSwift
 import RxCocoa
 
+
 class ForgotPasswordViewController: UIViewController, BindableType {
     
     var viewModel: ForgotPasswordViewModel!

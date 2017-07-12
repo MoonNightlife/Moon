@@ -11,7 +11,7 @@ import Material
 import RxSwift
 import RxCocoa
 import MaterialComponents.MDCProgressView
-import EZLoadingActivity
+import SwiftOverlays
 
 class PasswordsViewController: UIViewController, BindableType {
 
@@ -58,14 +58,13 @@ class PasswordsViewController: UIViewController, BindableType {
         
         let createUserAction = viewModel.createUser()
         doneButton.rx.action = createUserAction
+        
         createUserAction.executing.do(onNext: {
             if $0 {
-                EZLoadingActivity.show("Creating Account", disableUI: true)
+                SwiftOverlays.showBlockingTextOverlay("Creating Account")
             } else {
-                EZLoadingActivity.hide()
+                SwiftOverlays.removeAllBlockingOverlays()
             }
-        }, onError: { _ in
-            EZLoadingActivity.hide()
         }).subscribe().addDisposableTo(disposeBag)
 
         navBackButton.rx.action = viewModel.onBack()
