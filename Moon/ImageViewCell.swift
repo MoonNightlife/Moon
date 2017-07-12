@@ -39,7 +39,9 @@ class ImageViewCell: UIView {
 extension ImageViewCell {
     fileprivate func prepareImageView() {
         imageView = BottomGradientImageView(frame: self.frame)
+        imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         imageView.contentMode = UIViewContentMode.scaleAspectFill
+        imageView.clipsToBounds = true
     }
     
     fileprivate func prepareMoreButton() {
@@ -54,7 +56,6 @@ extension ImageViewCell {
         toolbar = Toolbar(leftViews: [moreButton])
         toolbar.rightViews = [goButton]
         toolbar.backgroundColor = nil
-        
         
         toolbar.titleLabel.textColor = .white
         toolbar.titleLabel.textAlignment = .center
