@@ -11,6 +11,7 @@ import Material
 import RxSwift
 import RxCocoa
 import MaterialComponents.MDCProgressView
+import SwiftOverlays
 
 class EmailUsernameViewController: UIViewController, BindableType {
     
@@ -58,13 +59,20 @@ class EmailUsernameViewController: UIViewController, BindableType {
         
         let nextAction = viewModel.nextScreen()
         nextButton.rx.action = nextAction
+        
+        nextAction.executing.do(onNext: {
+            if $0 {
+                SwiftOverlays.showBlockingWaitOverlay()
+            } else {
+                SwiftOverlays.removeAllBlockingOverlays()
+            }
+        }).subscribe().addDisposableTo(disposeBag)
+        
         nextAction.errors.subscribe(onNext: { [weak self] actionError in
             if case let .underlyingError(error) = actionError,
                 let casted =  (error as? SignUpError),
                 case let SignUpError.usernameTaken(message) = casted {
-                let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                self?.present(alert, animated: true, completion: nil)
+                self?.showErrorAlert(message: message)
             }
         }).addDisposableTo(disposeBag)
     }
