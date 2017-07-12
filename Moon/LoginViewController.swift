@@ -98,18 +98,40 @@ class LoginViewController: UIViewController, BindableType {
     
     func bindViewModel() {
         signUpButton.rx.action = viewModel.onSignUp()
+        
         recoverButton.rx.action = viewModel.onForgotPassword()
-        facebookSignInButton.rx.action = viewModel.onFacebookSignIn()
+        
+        let fbSignInAction = viewModel.onFacebookSignIn()
+        facebookSignInButton.rx.action = fbSignInAction
+        fbSignInAction.executing.do(onNext: {
+            if $0 {
+                SwiftOverlays.showBlockingWaitOverlayWithText("Signing In")
+            } else {
+                SwiftOverlays.removeAllBlockingOverlays()
+            }
+        }).subscribe().addDisposableTo(disposeBag)
+        
+        fbSignInAction.errors.subscribe(onNext: { [weak self] actionError in
+                if case let .underlyingError(error) = actionError {
+                    self?.showErrorAlert(message: (error as NSError).localizedDescription)
+                }
+            }).addDisposableTo(disposeBag)
         
         let signInAction = viewModel.onSignIn()
         loginButton.rx.action = signInAction
         signInAction.executing.do(onNext: {
             if $0 {
-                SwiftOverlays.showBlockingTextOverlay("Signing In")
+                SwiftOverlays.showBlockingWaitOverlayWithText("Signing In")
             } else {
                 SwiftOverlays.removeAllBlockingOverlays()
             }
         }).subscribe().addDisposableTo(disposeBag)
+        
+        signInAction.errors.subscribe(onNext: { [weak self] actionError in
+            if case let .underlyingError(error) = actionError {
+                self?.showErrorAlert(message: (error as NSError).localizedDescription)
+            }
+        }).addDisposableTo(disposeBag)
         
         emailTextField.rx.textInput.text.bind(to: viewModel.email).addDisposableTo(disposeBag)
         passwordTextField.rx.textInput.text.bind(to: viewModel.password).addDisposableTo(disposeBag)

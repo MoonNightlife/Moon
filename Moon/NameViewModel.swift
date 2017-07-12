@@ -29,7 +29,7 @@ struct NameViewModel: ImageNetworkingInjected {
     var dataValid: Driver<Bool>!
     var firstNameText: Observable<String?>!
     var lastNameText: Observable<String?>!
-    var image = Variable<UIImage?>(nil)
+    var image = Variable<UIImage>(#imageLiteral(resourceName: "DefaultProfilePic"))
     
     init(coordinator: SceneCoordinatorType, user: NewUser) {
         self.sceneCoordinator = coordinator
@@ -39,7 +39,7 @@ struct NameViewModel: ImageNetworkingInjected {
             self.photoService.getImageFor(url: url).bind(to: image).addDisposableTo(disposeBag)
     
             image.asObservable()
-                .filterNil()
+                .skip(1)
                 .map({
                     UIImageJPEGRepresentation($0, 1.0)
                 })

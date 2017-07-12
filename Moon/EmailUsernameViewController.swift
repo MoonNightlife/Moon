@@ -70,10 +70,13 @@ class EmailUsernameViewController: UIViewController, BindableType {
         
         nextAction.errors.subscribe(onNext: { [weak self] actionError in
             if case let .underlyingError(error) = actionError,
-                let casted =  (error as? SignUpError),
-                case let SignUpError.usernameTaken(message) = casted {
-                self?.showErrorAlert(message: message)
-            }
+                let casted =  (error as? SignUpError) {
+                    if case let SignUpError.usernameTaken(message) = casted {
+                        self?.showErrorAlert(message: message)
+                    } else {
+                        self?.showErrorAlert(message: (error as NSError).localizedDescription)
+                    }
+                }
         }).addDisposableTo(disposeBag)
     }
     

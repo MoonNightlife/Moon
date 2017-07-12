@@ -61,11 +61,17 @@ class PasswordsViewController: UIViewController, BindableType {
         
         createUserAction.executing.do(onNext: {
             if $0 {
-                SwiftOverlays.showBlockingTextOverlay("Creating Account")
+                SwiftOverlays.showBlockingWaitOverlayWithText("Creating Account")
             } else {
                 SwiftOverlays.removeAllBlockingOverlays()
             }
         }).subscribe().addDisposableTo(disposeBag)
+        
+        createUserAction.errors.subscribe(onNext: { [weak self] actionError in
+            if case let .underlyingError(error) = actionError {
+                self?.showErrorAlert(message: (error as NSError).localizedDescription)
+            }
+        }).addDisposableTo(disposeBag)
 
         navBackButton.rx.action = viewModel.onBack()
     }

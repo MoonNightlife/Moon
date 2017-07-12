@@ -10,7 +10,7 @@ import UIKit
 import Material
 import RxSwift
 import RxCocoa
-
+import SwiftOverlays
 
 class ForgotPasswordViewController: UIViewController, BindableType {
     
@@ -37,8 +37,25 @@ class ForgotPasswordViewController: UIViewController, BindableType {
     
     func bindViewModel() {
         navBackButton.rx.action = viewModel.onBack()
-        sendEmailButton.rx.action = viewModel.onSendPasswordReset()
+        
         emailTextField.rx.textInput.text.bind(to: viewModel.email).addDisposableTo(bag)
+        
+        let sendReset = viewModel.onSendPasswordReset()
+        sendEmailButton.rx.action = sendReset
+        sendReset.executing.do(onNext: {
+            if $0 {
+                SwiftOverlays.showBlockingWaitOverlayWithText("Sending Email")
+            } else {
+                SwiftOverlays.removeAllBlockingOverlays()
+            }
+        }).subscribe().addDisposableTo(bag)
+        
+        sendReset.errors.subscribe(onNext: { [weak self] actionError in
+            if case let .underlyingError(error) = actionError {
+                self?.showErrorAlert(message: (error as NSError).localizedDescription)
+            }
+        }).addDisposableTo(bag)
+ 
     }
     
     fileprivate func prepareSendEmailButton() {
