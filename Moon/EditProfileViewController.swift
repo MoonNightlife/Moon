@@ -266,6 +266,10 @@ extension EditProfileViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, allowMoveAt indexPath: IndexPath) -> Bool {
+        let cell = collectionView.cellForItem(at: indexPath) as? RACollectionViewCell
+        if cell?.imageView.image == #imageLiteral(resourceName: "AddMorePicsIcon") {
+            return false
+        }
         if collectionView.numberOfItems(inSection: (indexPath as NSIndexPath).section) <= 1 {
             return false
         }
@@ -273,7 +277,7 @@ extension EditProfileViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, at: IndexPath, willMoveTo toIndexPath: IndexPath) {
-        
+
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -286,7 +290,7 @@ extension EditProfileViewController {
     
     func collectionView(_ collectionView: UICollectionView, at atIndexPath: IndexPath, didMoveTo toIndexPath: IndexPath) {
         var photo: UIImage
-
+ 
         photo = viewModel.profilePictures.value.remove(at: (atIndexPath as NSIndexPath).item)
         viewModel.profilePictures.value.insert(photo, at: (toIndexPath as NSIndexPath).item)
     }
@@ -295,6 +299,14 @@ extension EditProfileViewController {
         return UIEdgeInsets(top: 100.0, left: 100.0, bottom: 100.0, right: 100.0)
     }
     
+    func collectionView(_ collectionView: UICollectionView, at: IndexPath, canMoveTo: IndexPath) -> Bool {
+        let cell = collectionView.cellForItem(at: canMoveTo) as? RACollectionViewCell
+        if cell?.imageView.image == #imageLiteral(resourceName: "AddMorePicsIcon") {
+            return false
+        }
+        
+        return true
+    }
     func collectionView(_ collectionView: UICollectionView, reorderingItemAlphaInSection section: Int) -> CGFloat {
             return 0.3
     }

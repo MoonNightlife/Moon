@@ -98,13 +98,13 @@ struct SettingsViewModel: AuthNetworkingInjected, NetworkingInjected {
     fileprivate func getSceneFor(moreInformation: SettingSections.MoreInformation) -> SceneType? {
         switch moreInformation {
         case .privacyPolicy:
-            let vm = WebViewViewModel(coordinator: self.sceneCoordinator, url: URL(string: "http://apple.com")!)
+            let vm = WebViewViewModel(coordinator: self.sceneCoordinator, url: URL(string: "https://www.iubenda.com/privacy-policy/7891983")!)
             return Scene.User.webView(vm)
         case .support:
-            let vm = WebViewViewModel(coordinator: self.sceneCoordinator, url: URL(string: "https://www.google.com")!)
+            let vm = WebViewViewModel(coordinator: self.sceneCoordinator, url: URL(string: "http://www.moonnightlifeapp.com/home")!)
             return Scene.User.webView(vm)
         case .termsAndConditions:
-            let vm = WebViewViewModel(coordinator: self.sceneCoordinator, url: URL(string: "http://www.yahoo.com")!)
+            let vm = WebViewViewModel(coordinator: self.sceneCoordinator, url: URL(string: "https://www.iubenda.com/privacy-policy/7891983")!)
             return Scene.User.webView(vm)
         }
     }

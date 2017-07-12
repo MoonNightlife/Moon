@@ -158,7 +158,6 @@ class ProfileViewController: UIViewController, BindableType {
     private func setUpPlanButton() {
         planButton.tintColor = .lightGray
         planButton.titleLabel?.font = UIFont(name: "Roboto", size: 15)
-        planButton.setTitle("The Standard Pour", for: .normal)
     }
     
     private func setUpToolBar() {

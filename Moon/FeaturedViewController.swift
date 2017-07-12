@@ -67,9 +67,7 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
         //swiftlint:disable:next force_cast
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredCellIdenifier, for: indexPath)
         cell.clearsContextBeforeDrawing = true
-        
-        cell.frame = CGRect(x: cell.frame.origin.x, y: cell.frame.origin.y, width: cell.frame.size.width, height: cell.frame.size.height)
-        
+                
         let height = CGFloat(350)
         let width = self.view.frame.size.width - 40
         
