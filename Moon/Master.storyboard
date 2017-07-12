@@ -234,7 +234,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPu-YW-BRK">
-                                                    <rect key="frame" x="66" y="8" width="301" height="20"/>
+                                                    <rect key="frame" x="66" y="23" width="36.5" height="20"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -246,20 +246,18 @@
                                                         <constraint firstAttribute="height" constant="50" id="r0T-lZ-evr"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Dn-vr-Rue">
-                                                    <rect key="frame" x="66" y="36" width="301" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRD-67-XP0">
+                                                    <rect key="frame" x="325" y="23" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="3Dn-vr-Rue" secondAttribute="trailing" id="3yt-cO-kb3"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="vPu-YW-BRK" secondAttribute="trailing" id="PCc-i6-JyS"/>
+                                                <constraint firstItem="rRD-67-XP0" firstAttribute="centerY" secondItem="vPu-YW-BRK" secondAttribute="centerY" id="KOM-oo-JHc"/>
                                                 <constraint firstAttribute="topMargin" secondItem="m9c-eV-ZFa" secondAttribute="top" id="PYX-e2-nd7"/>
-                                                <constraint firstItem="vPu-YW-BRK" firstAttribute="top" secondItem="m9c-eV-ZFa" secondAttribute="top" id="RgE-S2-ceZ"/>
-                                                <constraint firstItem="3Dn-vr-Rue" firstAttribute="top" secondItem="vPu-YW-BRK" secondAttribute="bottom" constant="8" id="Umj-9T-Lym"/>
-                                                <constraint firstItem="3Dn-vr-Rue" firstAttribute="leading" secondItem="m9c-eV-ZFa" secondAttribute="trailing" constant="8" id="brh-ap-2V1"/>
+                                                <constraint firstItem="vPu-YW-BRK" firstAttribute="centerY" secondItem="m9c-eV-ZFa" secondAttribute="centerY" id="fAI-xT-jjU"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="rRD-67-XP0" secondAttribute="trailing" id="ns2-9y-kvo"/>
                                                 <constraint firstAttribute="leadingMargin" secondItem="m9c-eV-ZFa" secondAttribute="leading" id="zCB-Mo-FL5"/>
                                                 <constraint firstItem="vPu-YW-BRK" firstAttribute="leading" secondItem="m9c-eV-ZFa" secondAttribute="trailing" constant="8" id="zVg-jR-hUq"/>
                                             </constraints>
@@ -267,6 +265,7 @@
                                         <connections>
                                             <outlet property="mainImageView" destination="m9c-eV-ZFa" id="7Fv-mh-LLR"/>
                                             <outlet property="nameLabel" destination="vPu-YW-BRK" id="JlJ-xQ-Taz"/>
+                                            <outlet property="usernameLabel" destination="rRD-67-XP0" id="e0g-ZZ-Mxr"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadMore" id="aZD-nc-ars" customClass="LoadMoreTableViewCell" customModule="Moon" customModuleProvider="target">
@@ -277,8 +276,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ylq-98-bs6">
-                                                    <rect key="frame" x="128" y="6" width="118" height="30"/>
-                                                    <state key="normal" title="Load More Pussy"/>
+                                                    <rect key="frame" x="151" y="6" width="73" height="30"/>
+                                                    <state key="normal" title="Load More"/>
                                                 </button>
                                             </subviews>
                                             <constraints>

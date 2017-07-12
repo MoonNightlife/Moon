@@ -15,25 +15,25 @@ class SearchTableViewCell: UITableViewCell {
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
+    @IBOutlet weak var usernameLabel: UILabel!
+    
     var bag = DisposeBag()
     
     override func awakeFromNib() {
         nameLabel.font = UIFont.moonFont(size: 16)
         nameLabel.textColor = .darkGray
+        
+        usernameLabel.font = UIFont.moonFont(size: 14)
+        usernameLabel.textColor = .lightGray
     }
     
     func initCellWith() {
         prepareImageView()
-        prepareLabel()
     }
     
     fileprivate func prepareImageView() {
         mainImageView.cornerRadius = mainImageView.frame.size.width / 2
         mainImageView.clipsToBounds = true
-    }
-    
-    fileprivate func prepareLabel() {
-        
     }
     
     override func prepareForReuse() {

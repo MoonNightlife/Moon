@@ -53,11 +53,14 @@ class BarProfileViewModel: ImageNetworkingInjected, NetworkingInjected, BackType
         self.barAPI.getBarEvents(barID: barID).catchErrorJustReturn([]).bind(to: events).addDisposableTo(bag)
         self.barAPI.getBarSpecials(barID: barID).catchErrorJustReturn([]).bind(to: specials).addDisposableTo(bag)
     
-        Observable.of(["pic1.jpg", "pic2.jpg", "pic3.jpg", "pic4.jpg"]).flatMap({ [unowned self] picNames in
+        Observable.of(["pic1.jpg", "pic2.jpg", "pic3.jpg", "pic4.jpg", "pic5.jpg", "pic6.jpg"]).flatMap({ [unowned self] picNames in
             return Observable.from(picNames).flatMap({
-                return self.storageAPI.getBarPictureDownloadUrlForBar(id: self.barID, picName: $0).filterNil().flatMap({ [unowned self] url in
-                    return self.photoService.getImageFor(url: url)
-                })
+                return self.storageAPI.getBarPictureDownloadUrlForBar(id: self.barID, picName: $0)
+                    .catchErrorJustReturn(nil)
+                    .filterNil()
+                    .flatMap({ [unowned self] url in
+                        return self.photoService.getImageFor(url: url)
+                    })
             }).toArray()
         }).catchErrorJustReturn([]).bind(to: barPics).addDisposableTo(bag)
 

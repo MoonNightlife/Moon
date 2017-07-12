@@ -21,7 +21,7 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
 
     @IBOutlet weak var searchResultsTableView: UITableView!
     
-    let resultsDataSource = RxTableViewSectionedReloadDataSource<SnapshotSectionModel>()
+    let resultsDataSource = RxTableViewSectionedAnimatedDataSource<SnapshotSectionModel>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +73,24 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as! SearchTableViewCell
                 cell.initCellWith()
                 cell.nameLabel.text = snapshot.name
-           // TODO: download image
+                cell.usernameLabel.text = snapshot.username ?? ""
+                
+                let isBarSnap = snapshot.username  == nil ? true : false
+                
+                if isBarSnap {
+                    cell.mainImageView.backgroundColor = .clear
+                    cell.mainImageView.image = #imageLiteral(resourceName: "LocationIcon")
+                } else {
+                    cell.mainImageView.backgroundColor = .lightGray
+                    cell.mainImageView.image = nil
+                }
+                
+                if !isBarSnap, let id = snapshot.id, let strongSelf = self {
+                    let downloader = strongSelf.viewModel.getProfileImage(id: id)
+                    downloader.elements.bind(to: cell.mainImageView.rx.image).disposed(by: cell.bag)
+                    downloader.execute()
+                }
+                
                 return cell
             case .loadMore(let action):
                 //swiftlint:disable:next force_cast

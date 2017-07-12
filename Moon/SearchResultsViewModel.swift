@@ -12,7 +12,7 @@ import RxCocoa
 import RxDataSources
 import Action
 
-struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected {
+struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected, StorageNetworkingInjected {
     
     private let bag = DisposeBag()
     var searchText: Observable<String>
@@ -41,15 +41,23 @@ struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected {
     var searchResults: Observable<[SnapshotSectionModel]> {
         return Observable.combineLatest(searchText, selectedSearchType)
             .flatMapLatest({ (searchText, type) -> Observable<[SnapshotSectionModel]> in
+                guard !searchText.isEmpty else {
+                    return Observable.just([SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users", snapshots: [])])
+                }
+                
                 switch type {
                 case .users:
-                    return self.userAPI.searchForUser(searchText: searchText).map({
-                        return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users", snapshots: $0)]
-                    })
+                    return self.userAPI.searchForUser(searchText: searchText)
+                        .startWith([])
+                        .map({
+                            return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users", snapshots: $0)]
+                        })
                 case .bars:
-                    return self.barAPI.searchForBar(searchText: searchText).map({
-                        return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Bars", snapshots: $0)]
-                    })
+                    return self.barAPI.searchForBar(searchText: searchText)
+                        .startWith([])
+                        .map({
+                            return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Bars", snapshots: $0)]
+                        })
                     
                 }
             })
@@ -59,15 +67,8 @@ struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected {
         sceneCoordinator = coordinator
         
         self.searchText = searchText
-            .throttle(0.3, scheduler: MainScheduler.instance)
+            .throttle(0.5, scheduler: MainScheduler.instance)
             .distinctUntilChanged()
-            .filter { query in return query.characters.count > 2 }
-        
-        searchText.subscribe(onNext: {
-            print($0)
-        })
-        .addDisposableTo(bag)
-        
     }
     
     func performTransition(index: Int) -> Observable<Void> {
@@ -87,6 +88,17 @@ struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected {
             } else {
                 return Observable.empty()
             }
+        })
+    }
+    
+    func getProfileImage(id: String) -> Action<Void, UIImage> {
+        return Action(workFactory: {_ in
+            return self.storageAPI.getProfilePictureDownloadUrlForUser(id: id)
+                .errorOnNil()
+                .flatMap({
+                    self.photoService.getImageFor(url: $0)
+                })
+                .catchErrorJustReturn(#imageLiteral(resourceName: "DefaultProfilePic"))
         })
     }
     
