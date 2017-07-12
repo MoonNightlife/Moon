@@ -54,7 +54,7 @@ struct FacebookService: FacebookLoginProviderType {
         return Observable.create({ (observer) -> Disposable in
             
             if FBSDKAccessToken.current() != nil {
-                FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "first_name, last_name, gender, picture.type(large), birthday, email"]).start(completionHandler: { (_, result, error) in
+                FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "first_name, last_name, gender, picture.height(961), birthday, email"]).start(completionHandler: { (_, result, error) in
                     if let e = error {
                         observer.onError(e)
                     } else {

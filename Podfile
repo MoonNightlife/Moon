@@ -32,7 +32,7 @@ target 'Moon' do
   pod 'Firebase/Core'
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
-  pod 'EZLoadingActivity'
+  pod 'SwiftOverlays', '~> 3.0.0'
   pod 'FBSDKLoginKit'
 
   target 'MoonTests' do

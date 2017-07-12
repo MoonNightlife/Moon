@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import Action
 
-struct ForgotPasswordViewModel {
+struct ForgotPasswordViewModel: AuthNetworkingInjected {
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
@@ -31,9 +31,10 @@ struct ForgotPasswordViewModel {
     }
     
     func onSendPasswordReset() -> CocoaAction {
-        return CocoaAction {
-            print("Send Reset")
-            return .just()
+        return CocoaAction { _ in
+            return Observable.just().withLatestFrom(self.email).filterNil().flatMap({
+                return self.authAPI.resetPassword(email: $0)
+            })
         }
     }
 }
