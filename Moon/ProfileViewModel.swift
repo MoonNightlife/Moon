@@ -18,6 +18,7 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
     private let bag = DisposeBag()
     private let barID = Variable<String?>(nil)
     private let userID: String
+    private let editProfileInfo = Variable<EditProfileInfo>(EditProfileInfo())
     
     // Dependecies
     private let scenceCoordinator: SceneCoordinatorType
@@ -26,6 +27,7 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
     // Inputs
     var reload: Action<Void, UserProfile>
     var reloadActionButton = PublishSubject<Void>()
+    var reloadPhotos = PublishSubject<Void>()
     
     // Outputs
     var username: Observable<String>
@@ -37,7 +39,7 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
     var profilePictures = Variable<[UIImage]>([])
     var actionButton: Observable<ProfileActionButton>
     
-    init(coordinator: SceneCoordinatorType, userID: String, userAPI: UserAPIType = FirebaseUserAPI(), photoService: PhotoService = KingFisherPhotoService(), authAPI: AuthAPIType = FirebaseAuthAPI()) {
+    init(coordinator: SceneCoordinatorType, userID: String, userAPI: UserAPIType = FirebaseUserAPI(), photoService: PhotoService = KingFisherPhotoService(), authAPI: AuthAPIType = FirebaseAuthAPI(), storageAPI: StorageAPIType = FirebaseStorageAPI()) {
         self.scenceCoordinator = coordinator
         
         self.userID = userID
@@ -89,6 +91,12 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
         
         let user = reload.elements
         
+        user.map({
+            EditProfileInfo(firstName: $0.firstName, lastName: $0.lastName, bio: $0.bio)
+        })
+        .bind(to: editProfileInfo)
+        .addDisposableTo(bag)
+        
         user.map({ user in
             return user.barId
         }).bind(to: barID).addDisposableTo(bag)
@@ -103,15 +111,23 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
         bio = user.map({ $0.bio }).replaceNilWith("No Bio")
         activityBarName = user.map({ $0.barName }).replaceNilWith("No Plans")
 
-        storageAPI.getProfilePictureDownloadUrlForUser(id: userID).filterNil()
-            .flatMap({
-                return photoService.getImageFor(url: $0)
+        let newPhotos = reloadPhotos.flatMap({ () -> Observable<[UIImage]> in
+            return Observable.of(["pic1.jpg", "pic2.jpg", "pic3.jpg", "pic4.jpg", "pic5.jpg", "pic6.jpg"])
+                .flatMap({ picNames in
+                    return Observable.from(picNames).flatMap({
+                        return storageAPI.getProfilePictureDownloadUrlForUser(id: authAPI.SignedInUserID, picName: $0)
+                            .catchErrorJustReturn(nil)
+                            .filterNil()
+                            .flatMap({ url in
+                                return photoService.getImageFor(url: url)
+                            })
+                    })
+                }).toArray()
+                .catchErrorJustReturn([#imageLiteral(resourceName: "DefaultProfilePic")])
+                .startWith([#imageLiteral(resourceName: "DefaultProfilePic")])
             })
-            .toArray()
-            .catchErrorJustReturn([#imageLiteral(resourceName: "DefaultProfilePic")])
-            .startWith([#imageLiteral(resourceName: "DefaultProfilePic")])
-            .bind(to: profilePictures).addDisposableTo(bag)
         
+        newPhotos.bind(to: profilePictures).addDisposableTo(bag)
     }
     
     func onDismiss() -> CocoaAction {
@@ -129,7 +145,7 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
     
     func onEdit() -> CocoaAction {
         return CocoaAction {
-            let vm = EditProfileViewModel(coordinator: self.scenceCoordinator, userID: self.userID)
+            let vm = EditProfileViewModel(coordinator: self.scenceCoordinator, userID: self.userID, editInfo: self.editProfileInfo.value)
             return self.scenceCoordinator.transition(to: Scene.User.edit(vm), type: .modal)
         }
     }

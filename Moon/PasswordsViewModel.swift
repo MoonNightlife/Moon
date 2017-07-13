@@ -53,7 +53,7 @@ struct PasswordsViewModel: NetworkingInjected, AuthNetworkingInjected, StorageNe
                 })
                 .flatMap({ id -> Observable<Void> in
                     if let photoData = self.newUser.image {
-                        return self.storageAPI.uploadProfilePictureFrom(data: photoData, forUser: id)
+                        return self.storageAPI.uploadProfilePictureFrom(data: photoData, forUser: id, imageName: "pic1.jpg")
                     } else {
                         return Observable.just()
                     }

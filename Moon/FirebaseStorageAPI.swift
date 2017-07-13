@@ -12,9 +12,9 @@ import FirebaseStorage
 import FirebaseDatabase
 
 struct FirebaseStorageAPI: StorageAPIType {
-    func uploadProfilePictureFrom(data: Data, forUser id: String) -> Observable<Void> {
+    func uploadProfilePictureFrom(data: Data, forUser id: String, imageName: String) -> Observable<Void> {
         return Observable.create({ (observer) -> Disposable in
-            let ref = Storage.storage().reference().child("user").child(id).child("profilePictures").child("pic1")
+            let ref = Storage.storage().reference().child("user").child(id).child("profilePictures").child(imageName)
             let task = ref.putData(data, metadata: nil, completion: { (_, error) in
                 if let e = error {
                     observer.onError(e)
@@ -30,9 +30,9 @@ struct FirebaseStorageAPI: StorageAPIType {
         })
     }
     
-    func getProfilePictureDownloadUrlForUser(id: String) -> Observable<URL?> {
+    func getProfilePictureDownloadUrlForUser(id: String, picName: String) -> Observable<URL?> {
         return Observable.create({ (observer) -> Disposable in
-            let ref = Storage.storage().reference().child("user").child(id).child("profilePictures").child("pic1")
+            let ref = Storage.storage().reference().child("user").child(id).child("profilePictures").child(picName)
             ref.downloadURL(completion: { (url, error) in
                 if let e = error {
                     observer.onError(e)

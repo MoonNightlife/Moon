@@ -51,6 +51,7 @@ class ProfileViewController: UIViewController, BindableType {
         super.viewWillAppear(animated)
         
         viewModel.reload.execute()
+        viewModel.reloadPhotos.onNext()
     }
     
     @IBOutlet weak var exitButton: UIButton!

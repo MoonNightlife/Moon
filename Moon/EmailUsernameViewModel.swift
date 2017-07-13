@@ -108,7 +108,7 @@ struct EmailUsernameViewModel: AuthNetworkingInjected, StorageNetworkingInjected
         return self.authAPI.createProfile(newUser: self.newUser)
             .flatMap({ _ -> Observable<Void> in
                 if let photoData = self.newUser.image {
-                    return self.storageAPI.uploadProfilePictureFrom(data: photoData, forUser: self.authAPI.SignedInUserID)
+                    return self.storageAPI.uploadProfilePictureFrom(data: photoData, forUser: self.authAPI.SignedInUserID, imageName: "pic1.jpg")
                 } else {
                     return Observable.just()
                 }

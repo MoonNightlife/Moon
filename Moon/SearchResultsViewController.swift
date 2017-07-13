@@ -81,7 +81,7 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
                     cell.mainImageView.backgroundColor = .clear
                     cell.mainImageView.image = #imageLiteral(resourceName: "LocationIcon")
                 } else {
-                    cell.mainImageView.backgroundColor = .lightGray
+                    cell.mainImageView.backgroundColor = .moonGrey
                     cell.mainImageView.image = nil
                 }
                 

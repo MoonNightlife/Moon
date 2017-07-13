@@ -182,7 +182,7 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
 extension ContentSuggestionsViewController {
     func populate(barCollectionView view: BarCollectionView, snapshot: Snapshot) {
         
-        view.imageView.backgroundColor = .lightGray
+        view.imageView.backgroundColor = .moonGrey
         // Bind actions
         if let id = snapshot.id {
             view.goButton.rx.action = viewModel.onChangeAttendance(barID: id)
@@ -199,7 +199,7 @@ extension ContentSuggestionsViewController {
     
     func populate(userCollectionView view: UserCollectionView, snapshot: Snapshot) {
         
-        view.imageView.backgroundColor = .lightGray
+        view.imageView.backgroundColor = .moonGrey
         
         if let id = snapshot.id {
             view.addFriendButton.rx.action = viewModel.onAddFriend(userID: id)
@@ -209,6 +209,7 @@ extension ContentSuggestionsViewController {
             downloader.execute()
             
             view.imageView.gestureRecognizers?.first?.rx.event.subscribe(onNext: { [weak self] _ in
+                self?.searchBarController?.searchBar.textField.resignFirstResponder()
                 self?.viewModel.onShowProfile(userID: id).execute()
             }).addDisposableTo(view.bag)
 

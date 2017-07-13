@@ -81,7 +81,7 @@ struct ContentSuggestionsViewModel: ImageNetworkingInjected, NetworkingInjected,
     
     func getProfileImage(id: String) -> Action<Void, UIImage> {
         return Action(workFactory: {_ in
-            return self.storageAPI.getProfilePictureDownloadUrlForUser(id: id)
+            return self.storageAPI.getProfilePictureDownloadUrlForUser(id: id, picName: "pic1.jpg")
                 .errorOnNil()
                 .flatMap({
                     self.photoService.getImageFor(url: $0)
