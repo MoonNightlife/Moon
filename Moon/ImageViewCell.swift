@@ -33,6 +33,14 @@ class ImageViewCell: UIView {
         preparePresenterCard()
     
     }
+    
+    func toggleGoButton() {
+        if goButton.image == #imageLiteral(resourceName: "goButton") {
+            goButton.image = #imageLiteral(resourceName: "thereIcon")
+        } else if goButton.image == #imageLiteral(resourceName: "thereIcon") {
+            goButton.image = #imageLiteral(resourceName: "goButton")
+        }
+    }
 
 }
 

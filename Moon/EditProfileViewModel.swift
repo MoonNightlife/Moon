@@ -77,7 +77,7 @@ class EditProfileViewModel: BackType, StorageNetworkingInjected, ImageNetworking
         })
         
         let uploadData = uploadImages.map({
-            return UIImageJPEGRepresentation($0, 1.0)
+            return UIImageJPEGRepresentation($0, 0.25)
         }).filter({ $0 != nil })
         
         for (index, element) in uploadData.enumerated() {

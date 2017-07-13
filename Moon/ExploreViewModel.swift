@@ -81,11 +81,9 @@ struct ExploreViewModel: ImageNetworkingInjected, NetworkingInjected, AuthNetwor
         }
     }
     
-    func onViewBar(barID: String) -> CocoaAction {
-        return CocoaAction {
-            print("View Bar Profile")
-            let vm = BarProfileViewModel(coordinator: self.sceneCoordinator, barID: barID)
-            return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
+    func isAttendingBar(barID: String) -> Action<Void, Bool> {
+        return Action {
+            return self.barAPI.isAttending(userID: self.authAPI.SignedInUserID, barID: barID)
         }
     }
     

@@ -71,6 +71,14 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         // Dispose of any resources that can be recreated.
     }
     
+    private func toggleGoButton() {
+        if goButton.image == #imageLiteral(resourceName: "goButton") {
+            goButton.image = #imageLiteral(resourceName: "thereIcon")
+        } else if goButton.image == #imageLiteral(resourceName: "thereIcon") {
+            goButton.image = #imageLiteral(resourceName: "goButton")
+        }
+    }
+    
     func bindViewModel() {
         backButton.rx.action = viewModel.onBack()
         moreInfoButton.rx.action = viewModel.onShowInfo()
@@ -78,10 +86,18 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         let attendAction = viewModel.onAttendBar()
         goButton.rx.action = attendAction
         attendAction.elements.do(onNext: { [weak self] _ in
-            //TODO: Change the button
+            self?.toggleGoButton()
         }).subscribe(onNext: { [weak self] _ in
             self?.viewModel.reloadDisplayUsers.onNext()
-        })
+        }).addDisposableTo(bag)
+        
+        viewModel.isAttending.subscribe(onNext: { [weak self] isAttending in
+            if isAttending {
+                self?.goButton.image = #imageLiteral(resourceName: "thereIcon")
+            } else {
+                self?.goButton.image = #imageLiteral(resourceName: "goButton")
+            }
+        }).addDisposableTo(bag)
         
         segmentControl.rx.controlEvent(UIControlEvents.valueChanged)
             .map({ [weak self] in

@@ -45,10 +45,13 @@ class BarProfileViewModel: ImageNetworkingInjected, NetworkingInjected, BackType
     var displayedUsers = Variable<[Activity]>([])
     var specials = Variable<[Special]>([])
     var events = Variable<[BarEvent]>([])
+    var isAttending: Observable<Bool>!
     
     init(coordinator: SceneCoordinatorType, barID: String) {
         self.sceneCoordinator = coordinator
         self.barID = barID
+        
+        self.isAttending = self.barAPI.isAttending(userID: authAPI.SignedInUserID, barID: barID)
         
         self.barAPI.getBarEvents(barID: barID).catchErrorJustReturn([]).bind(to: events).addDisposableTo(bag)
         self.barAPI.getBarSpecials(barID: barID).catchErrorJustReturn([]).bind(to: specials).addDisposableTo(bag)

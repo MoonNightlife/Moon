@@ -138,7 +138,7 @@ class ExploreViewController: UIViewController, BindableType, UITableViewDelegate
             hasLikedSpecial.execute()
             
             cell.numLikesButton.rx.action = viewModel.onViewLikers(specialID: specialID)
-            cell.barNameButton.rx.action = viewModel.onViewBar(barID: barID)
+            cell.barNameButton.rx.action = viewModel.showBar(barID: barID)
         }
         
         // Bind labels
@@ -194,8 +194,18 @@ extension ExploreViewController: iCarouselDataSource, iCarouselDelegate {
             let attendAction = viewModel.onChangeAttendence(barID: id)
             view.goButton.rx.action = attendAction
             attendAction.elements.do(onNext: {
-                //TODO: Change button icon
+                view.toggleGoButton()
             }).subscribe().disposed(by: view.bag)
+            
+            let isAttending = viewModel.isAttendingBar(barID: id)
+            isAttending.elements.do(onNext: {
+                if $0 {
+                    view.goButton.image = #imageLiteral(resourceName: "thereIcon")
+                } else {
+                    view.goButton.image = #imageLiteral(resourceName: "goButton")
+                }
+            }).subscribe().disposed(by: view.bag)
+            isAttending.execute()
             
             // Download Image
             let downloader = viewModel.getFirstBarImage(id: id)

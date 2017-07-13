@@ -26,4 +26,5 @@ protocol BarAPIType {
     func getEventLikers(eventID: String) -> Observable<[UserSnapshot]>
     func getSpecialLikers(specialID: String) -> Observable<[UserSnapshot]>
     func searchForBar(searchText: String) -> Observable<[BarSnapshot]>
+    func isAttending(userID: String, barID: String) -> Observable<Bool>
 }

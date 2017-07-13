@@ -23,12 +23,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moon's View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gcz-QG-15e">
-                                <rect key="frame" x="138" y="323" width="98" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q4i-HI-WAN" userLabel="Friend Feed">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </containerView>
@@ -40,13 +34,11 @@
                         <constraints>
                             <constraint firstItem="q4i-HI-WAN" firstAttribute="top" secondItem="ypm-Sp-ffg" secondAttribute="top" id="1xY-gU-p1I"/>
                             <constraint firstItem="q4i-HI-WAN" firstAttribute="leading" secondItem="ypm-Sp-ffg" secondAttribute="leading" id="BfO-3n-TSB"/>
-                            <constraint firstItem="q4i-HI-WAN" firstAttribute="centerY" secondItem="Gcz-QG-15e" secondAttribute="centerY" id="Nwr-44-e0S"/>
                             <constraint firstItem="WRW-9V-aeh" firstAttribute="bottom" secondItem="3MV-0G-p0b" secondAttribute="top" id="cea-NS-SOI"/>
                             <constraint firstItem="q4i-HI-WAN" firstAttribute="bottom" secondItem="3MV-0G-p0b" secondAttribute="top" id="iym-FF-ocv"/>
                             <constraint firstItem="WRW-9V-aeh" firstAttribute="trailing" secondItem="q4i-HI-WAN" secondAttribute="trailing" id="jhs-8d-49b"/>
                             <constraint firstItem="WRW-9V-aeh" firstAttribute="leading" secondItem="q4i-HI-WAN" secondAttribute="leading" id="sOR-Lz-SJ9"/>
                             <constraint firstItem="WRW-9V-aeh" firstAttribute="top" secondItem="q4i-HI-WAN" secondAttribute="top" id="thQ-bg-6aR"/>
-                            <constraint firstItem="q4i-HI-WAN" firstAttribute="centerX" secondItem="Gcz-QG-15e" secondAttribute="centerX" id="wg1-Bd-eWt"/>
                             <constraint firstAttribute="trailing" secondItem="q4i-HI-WAN" secondAttribute="trailing" id="z81-o0-MH6"/>
                         </constraints>
                     </view>

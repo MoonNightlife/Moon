@@ -124,7 +124,7 @@ class MainViewController: EZSwipeController, BindableType {
             color = .moonBlue
         }
         
-        controller .statusBar.backgroundColor = color
+        controller.statusBar.backgroundColor = color
         controller.searchBar.backgroundColor = color
         tabBar.backgroundColor = color
     }

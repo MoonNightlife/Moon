@@ -35,6 +35,7 @@ struct FirebaseBarAPI: BarAPIType {
         static let getSpecialLikers = barBaseURL + "getSpecialLikers"
         
         static let searchForBar = barBaseURL + "searchBar"
+        static let isAttending = barBaseURL + "isAttending"
     }
     
     func getBarFriends(barID: String, userID: String) -> Observable<[Activity]> {
@@ -322,6 +323,35 @@ struct FirebaseBarAPI: BarAPIType {
                     case .success(let profiles):
                         observer.onNext(profiles)
                         observer.onCompleted()
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    
+    func isAttending(userID: String, barID: String) -> Observable<Bool> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": userID,
+                "barId": barID
+            ]
+            let request = Alamofire.request(BarFunction.isAttending, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseJSON(completionHandler: { (response) in
+                    switch response.result {
+                    case .success(let value):
+                        if let isAttending = value as? Bool {
+                            observer.onNext(isAttending)
+                            observer.onCompleted()
+                            
+                        } else {
+                            observer.onError(APIError.jsonCastingFailure)
+                        }
                     case .failure(let error):
                         observer.onError(error)
                     }

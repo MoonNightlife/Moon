@@ -41,7 +41,7 @@ struct NameViewModel: ImageNetworkingInjected {
             image.asObservable()
                 .skip(1)
                 .map({
-                    UIImageJPEGRepresentation($0, 1.0)
+                    UIImageJPEGRepresentation($0, 0.25)
                 })
                 .do(onNext: {
                     user.image = $0
@@ -72,7 +72,7 @@ struct NameViewModel: ImageNetworkingInjected {
         selectedImage.asObservable()
             .filterNil()
             .map({
-                UIImageJPEGRepresentation($0, 1.0)
+                UIImageJPEGRepresentation($0, 0.25)
             })
             .do(onNext: {
                 self.newUser.image = $0
