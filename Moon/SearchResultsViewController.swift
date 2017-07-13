@@ -43,9 +43,9 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
             .subscribe(viewModel.selectedSearchType)
             .addDisposableTo(bag)
         
-        searchResultsTableView.rx.itemSelected.map({
-            return $0.row
-        }).subscribe(viewModel.onShowResult.inputs).addDisposableTo(bag)
+        searchResultsTableView.rx.modelSelected(SnapshotSectionModel.Item.self).do(onNext: { [weak self] _ in
+            self?.searchBarController?.searchBar.textField.resignFirstResponder()
+        }).bind(to: viewModel.onShowResult.inputs).addDisposableTo(bag)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

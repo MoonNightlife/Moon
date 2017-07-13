@@ -131,10 +131,11 @@ class SceneCoordinator: SceneCoordinatorType {
     @discardableResult
     func changeChild(To view: ChildViewType) -> Observable<Void> {
         let subject = PublishSubject<Void>()
-        guard let presenter = (currentViewController as? SearchBarViewController)?.rootViewController as? SearchViewController else {
-            fatalError("Presenting controller must conform to ParentType")
+        if let presenter = (currentViewController as? SearchBarViewController)?.rootViewController as? SearchViewController {
+            presenter.showView(view: view.getViewID())
+        } else {
+            print("Presenting controller must conform to ParentType")
         }
-        presenter.showView(view: view.getViewID())
         
         return subject.asObserver().take(1).ignoreElements()
     }

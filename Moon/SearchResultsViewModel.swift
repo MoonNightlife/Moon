@@ -21,9 +21,9 @@ struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected, Stor
     private let sceneCoordinator: SceneCoordinatorType
     
     // Actions
-    lazy var onShowResult: Action<Int, Void> = { this in
-        return Action(workFactory: { index in
-            return this.performTransition(index: index)
+    lazy var onShowResult: Action<SnapshotSectionModel.Item, Void> = { this in
+        return Action(workFactory: { snap in
+            return this.performTransition(snapshotSection: snap)
         })
     }(self)
     
@@ -71,24 +71,21 @@ struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected, Stor
             .distinctUntilChanged()
     }
     
-    func performTransition(index: Int) -> Observable<Void> {
-        let selectedSearchResult = Observable.combineLatest(searchResults.asObservable(), selectedSearchType)
-        return Observable.just().withLatestFrom(selectedSearchResult).flatMapLatest({ (results, type) -> Observable<Void> in
-            // The first section contains the search results
-            // That is why we can use results[0], results[1] is reserved for the load more section
-            if case let .searchResult(snapshot) = results[0].items[index] {
-                switch type {
-                case .users:
-                    let vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: snapshot.id ?? "0")
-                    return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
-                case .bars:
-                    let vm = BarProfileViewModel(coordinator: self.sceneCoordinator, barID: snapshot.id ?? "0")
-                    return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
-                }
-            } else {
-                return Observable.empty()
-            }
-        })
+    func performTransition(snapshotSection: SnapshotSectionModel.Item) -> Observable<Void> {
+        
+        guard case let .searchResult(snap) = snapshotSection, let id = snap.id else {
+            return Observable.empty()
+        }
+        
+        let isBar = snap.username == nil ? true : false
+        
+        if isBar {
+            let vm = BarProfileViewModel(coordinator: self.sceneCoordinator, barID: id)
+            return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
+        } else {
+            let vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: id)
+            return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
+        }
     }
     
     func getProfileImage(id: String) -> Action<Void, UIImage> {
@@ -101,12 +98,4 @@ struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected, Stor
                 .catchErrorJustReturn(#imageLiteral(resourceName: "DefaultProfilePic"))
         })
     }
-    
-//    func onShowProfile() -> Action<String, Void> {
-//        return Action(workFactory: { _ in
-//            let vm = ProfileViewModel(coordinator: self.sceneCoordinator)
-//            return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
-//        })
-//    }
-
 }
