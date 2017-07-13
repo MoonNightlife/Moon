@@ -39,7 +39,7 @@ class ExploreViewController: UIViewController, BindableType, UITableViewDelegate
         super.viewDidLoad()
         
         self.specialsTableView.autoresizingMask = .flexibleHeight
-        self.specialsTableView.contentInset = EdgeInsets(top: 0, left: 0, bottom: (self.view.frame.size.height * 0.37), right: 0)
+        self.specialsTableView.contentInset = EdgeInsets(top: 0, left: 0, bottom: (self.view.frame.size.height * 0.37 ), right: 0)
         specialsTableView.rx.setDelegate(self).addDisposableTo(bag)
         
         view.backgroundColor = .white
