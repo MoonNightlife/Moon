@@ -15,7 +15,7 @@ class BarProfile: Mappable {
     var phoneNumber: String?
     var website: String?
     var address: String?
-    var numPeopleAttending: Int32?
+    var numPeopleAttending: Int?
     var barPics: [String]?
     
     required init?(map: Map) {

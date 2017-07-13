@@ -125,6 +125,22 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
             self?.eventsCarousel.reloadData()
         }).addDisposableTo(bag)
         
+        viewModel.numPeopleAttending.map({
+            //Adding going icon to the right of the title label
+            let fullString = NSMutableAttributedString(string: " ")
+            
+            let attachment = NSTextAttachment()
+            attachment.image = #imageLiteral(resourceName: "goingIcon")
+            attachment.bounds = CGRect(x: 0, y: -5, width: 16, height: 16)
+            
+            let attachmentString = NSAttributedString(attachment: attachment)
+            
+            fullString.append(attachmentString)
+            fullString.append(NSAttributedString(string: " " + $0)) //people going
+            
+            return fullString
+        }).bind(to: toolBar.titleLabel.rx.attributedText).addDisposableTo(bag)
+        
     }
     
     func prepareScrollView() {
@@ -188,19 +204,6 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     
     func prepareToolBar() {
         
-        //Adding going icon to the right of the title label
-        let fullString = NSMutableAttributedString(string: " ")
-        
-        let attachment = NSTextAttachment()
-        attachment.image = #imageLiteral(resourceName: "goingIcon")
-        attachment.bounds = CGRect(x: 0, y: -5, width: 16, height: 16)
-        
-        let attachmentString = NSAttributedString(attachment: attachment)
-        
-        fullString.append(attachmentString)
-        fullString.append(NSAttributedString(string: " " + "20")) //people going
-        
-        toolBar.titleLabel.attributedText = fullString
         toolBar.titleLabel.textColor = .white
         toolBar.backgroundColor = .clear
         
