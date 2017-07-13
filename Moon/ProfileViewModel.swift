@@ -115,7 +115,7 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
             return Observable.of(["pic1.jpg", "pic2.jpg", "pic3.jpg", "pic4.jpg", "pic5.jpg", "pic6.jpg"])
                 .flatMap({ picNames in
                     return Observable.from(picNames).flatMap({
-                        return storageAPI.getProfilePictureDownloadUrlForUser(id: authAPI.SignedInUserID, picName: $0)
+                        return storageAPI.getProfilePictureDownloadUrlForUser(id: userID, picName: $0)
                             .catchErrorJustReturn(nil)
                             .filterNil()
                             .flatMap({ url in
