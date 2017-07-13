@@ -26,12 +26,6 @@ struct MainViewModel {
         self.sceneCoordinator = coordinator
     }
     
-    func onChangeView() -> Action<MainView, Void> {
-        return Action(workFactory: {
-            return self.sceneCoordinator.tab(to: $0)
-        })
-    }
-    
     func viewModelForExplore() -> ExploreViewModel {
         return ExploreViewModel(coordinator: sceneCoordinator)
     }

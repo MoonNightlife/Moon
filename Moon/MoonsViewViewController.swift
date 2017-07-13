@@ -37,6 +37,7 @@ class MoonsViewViewController: UIViewController, BindableType {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        print(changeViewActionButton.floatButton.frame)
         //changeViewActionButton.fadeIn()
     }
     

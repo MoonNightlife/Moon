@@ -28,8 +28,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UrQ-fp-6qA">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MjA-Pm-icc">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iRh-hq-aSy">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fw2-l8-sXr" customClass="FloatingBottomTabBar" customModule="Moon" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="599" width="200" height="60"/>
+                                <rect key="frame" x="87" y="599" width="200" height="60"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="E4P-9d-MEJ"/>
@@ -44,12 +53,27 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="iRh-hq-aSy" firstAttribute="top" secondItem="62j-IE-10U" secondAttribute="top" id="0qv-Q9-Idi"/>
+                            <constraint firstAttribute="trailing" secondItem="iRh-hq-aSy" secondAttribute="trailing" id="1kb-mM-pn1"/>
+                            <constraint firstItem="UrQ-fp-6qA" firstAttribute="top" secondItem="62j-IE-10U" secondAttribute="top" id="5QZ-gG-mMs"/>
+                            <constraint firstItem="UHK-hl-0Cb" firstAttribute="top" secondItem="iRh-hq-aSy" secondAttribute="bottom" id="FlU-x3-T77"/>
+                            <constraint firstItem="MjA-Pm-icc" firstAttribute="top" secondItem="62j-IE-10U" secondAttribute="top" id="HUt-07-WRT"/>
                             <constraint firstItem="fw2-l8-sXr" firstAttribute="centerX" secondItem="62j-IE-10U" secondAttribute="centerX" id="IA5-OU-BSG"/>
+                            <constraint firstItem="iRh-hq-aSy" firstAttribute="leading" secondItem="62j-IE-10U" secondAttribute="leading" id="NRg-Bn-X0j"/>
+                            <constraint firstItem="UHK-hl-0Cb" firstAttribute="top" secondItem="MjA-Pm-icc" secondAttribute="bottom" id="OF8-OM-cjV"/>
+                            <constraint firstAttribute="trailing" secondItem="MjA-Pm-icc" secondAttribute="trailing" id="cgh-XS-8s3"/>
+                            <constraint firstItem="UrQ-fp-6qA" firstAttribute="leading" secondItem="62j-IE-10U" secondAttribute="leading" id="fY7-wf-4GB"/>
+                            <constraint firstItem="UHK-hl-0Cb" firstAttribute="top" secondItem="UrQ-fp-6qA" secondAttribute="bottom" id="hSG-hD-hqc"/>
+                            <constraint firstItem="MjA-Pm-icc" firstAttribute="leading" secondItem="62j-IE-10U" secondAttribute="leading" id="kKU-GX-aLP"/>
                             <constraint firstItem="UHK-hl-0Cb" firstAttribute="top" secondItem="fw2-l8-sXr" secondAttribute="bottom" constant="8" symbolic="YES" id="tcR-sF-n9G"/>
+                            <constraint firstAttribute="trailing" secondItem="UrQ-fp-6qA" secondAttribute="trailing" id="uE4-nz-5c5"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Xq1-Vq-rCJ"/>
                     <connections>
+                        <outlet property="exploreView" destination="iRh-hq-aSy" id="dMj-Y6-Jxr"/>
+                        <outlet property="featuredView" destination="UrQ-fp-6qA" id="U75-A6-Fdd"/>
+                        <outlet property="moonsView" destination="MjA-Pm-icc" id="Osx-c6-939"/>
                         <outlet property="tabBar" destination="fw2-l8-sXr" id="iYB-Jx-MKZ"/>
                         <outlet property="tabBarHeightConstraint" destination="OIY-jN-IMf" id="qBX-Hf-hnj"/>
                         <outlet property="tabBarWidthConstraint" destination="E4P-9d-MEJ" id="HoD-gX-M7l"/>
@@ -57,7 +81,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iPa-mt-ZcO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1944.8" y="116.49175412293854"/>
+            <point key="canvasLocation" x="1868" y="114.69265367316342"/>
         </scene>
         <!--Content Suggestions View Controller-->
         <scene sceneID="plB-38-Wd4">
@@ -247,7 +271,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRD-67-XP0">
-                                                    <rect key="frame" x="325" y="23" width="42" height="21"/>
+                                                    <rect key="frame" x="325" y="22" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>

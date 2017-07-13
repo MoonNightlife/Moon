@@ -21,9 +21,6 @@ protocol SceneCoordinatorType {
     func pop(animated: Bool) -> Observable<Void>
     
     @discardableResult
-    func tab(to scene: MainView) -> Observable<Void>
-    
-    @discardableResult
     func changeChild(To view: ChildViewType) -> Observable<Void>
 }
 
