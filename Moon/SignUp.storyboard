@@ -42,7 +42,7 @@
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="97X-F5-zmf">
-                                <rect key="frame" x="137" y="361" width="100" height="40"/>
+                                <rect key="frame" x="137" y="368" width="100" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="dOV-In-sUv"/>
                                     <constraint firstAttribute="height" constant="40" id="gug-bL-3Oh"/>
@@ -63,7 +63,7 @@
                             <constraint firstItem="bG2-7p-UaO" firstAttribute="top" secondItem="vKg-V1-7Ym" secondAttribute="bottom" constant="42" id="UWs-wO-lMO"/>
                             <constraint firstItem="vKg-V1-7Ym" firstAttribute="trailing" secondItem="bG2-7p-UaO" secondAttribute="trailing" id="VOn-aa-RMG"/>
                             <constraint firstItem="GhD-4U-ps3" firstAttribute="height" secondItem="wcY-Zz-cIz" secondAttribute="height" multiplier="0.1874" id="dxV-T5-Aiu"/>
-                            <constraint firstItem="97X-F5-zmf" firstAttribute="top" secondItem="bG2-7p-UaO" secondAttribute="bottom" constant="13" id="hM9-VU-yeX"/>
+                            <constraint firstItem="97X-F5-zmf" firstAttribute="top" secondItem="bG2-7p-UaO" secondAttribute="bottom" constant="20" id="hM9-VU-yeX"/>
                             <constraint firstItem="GhD-4U-ps3" firstAttribute="centerX" secondItem="vKg-V1-7Ym" secondAttribute="centerX" id="jkR-Rf-5AC"/>
                             <constraint firstItem="vKg-V1-7Ym" firstAttribute="trailing" secondItem="wcY-Zz-cIz" secondAttribute="trailingMargin" id="l4n-XE-B4o"/>
                             <constraint firstItem="vKg-V1-7Ym" firstAttribute="leading" secondItem="bG2-7p-UaO" secondAttribute="leading" id="rqP-df-wdb"/>
@@ -95,13 +95,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pQs-RS-rla" customClass="TextField" customModule="Material">
-                                <rect key="frame" x="16" y="275" width="343" height="30"/>
+                                <rect key="frame" x="16" y="261" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ig9-sN-5gk" customClass="TextField" customModule="Material">
-                                <rect key="frame" x="16" y="203" width="343" height="30"/>
+                                <rect key="frame" x="16" y="189" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -119,7 +119,7 @@
                             <constraint firstItem="mLo-qh-l7U" firstAttribute="centerY" secondItem="9r8-MB-LhK" secondAttribute="centerY" id="8E0-Zx-TRg"/>
                             <constraint firstItem="Ig9-sN-5gk" firstAttribute="trailing" secondItem="pQs-RS-rla" secondAttribute="trailing" id="Diu-oL-vRA"/>
                             <constraint firstItem="Ig9-sN-5gk" firstAttribute="trailing" secondItem="9r8-MB-LhK" secondAttribute="trailingMargin" id="XMo-EM-Ckg"/>
-                            <constraint firstItem="mLo-qh-l7U" firstAttribute="top" secondItem="pQs-RS-rla" secondAttribute="bottom" constant="8" symbolic="YES" id="a9t-ki-Rx6"/>
+                            <constraint firstItem="mLo-qh-l7U" firstAttribute="top" secondItem="pQs-RS-rla" secondAttribute="bottom" constant="22" id="a9t-ki-Rx6"/>
                             <constraint firstItem="pQs-RS-rla" firstAttribute="top" secondItem="Ig9-sN-5gk" secondAttribute="bottom" constant="42" id="aDU-UT-v9Y"/>
                             <constraint firstItem="Ig9-sN-5gk" firstAttribute="leading" secondItem="9r8-MB-LhK" secondAttribute="leadingMargin" id="ep6-9C-Khy"/>
                             <constraint firstItem="mLo-qh-l7U" firstAttribute="centerX" secondItem="pQs-RS-rla" secondAttribute="centerX" id="f40-kE-rDB"/>
@@ -152,7 +152,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yq7-yl-fUr" customClass="ErrorTextField" customModule="Material">
-                                <rect key="frame" x="16" y="198" width="343" height="30"/>
+                                <rect key="frame" x="16" y="189" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
@@ -167,7 +167,7 @@
                                 <state key="normal" title="Finish"/>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p6c-yY-Aqo" customClass="ErrorTextField" customModule="Material">
-                                <rect key="frame" x="16" y="270" width="343" height="30"/>
+                                <rect key="frame" x="16" y="261" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
@@ -178,7 +178,7 @@
                             <constraint firstItem="Yq7-yl-fUr" firstAttribute="trailing" secondItem="p6c-yY-Aqo" secondAttribute="trailing" id="3uV-uB-fTd"/>
                             <constraint firstItem="p6c-yY-Aqo" firstAttribute="centerX" secondItem="sme-c7-mHj" secondAttribute="centerX" id="9Xg-eQ-yal"/>
                             <constraint firstItem="p6c-yY-Aqo" firstAttribute="top" secondItem="Yq7-yl-fUr" secondAttribute="bottom" constant="42" id="Gpe-s1-3Eh"/>
-                            <constraint firstItem="sme-c7-mHj" firstAttribute="top" secondItem="p6c-yY-Aqo" secondAttribute="bottom" constant="13" id="KLw-is-beo"/>
+                            <constraint firstItem="sme-c7-mHj" firstAttribute="top" secondItem="p6c-yY-Aqo" secondAttribute="bottom" constant="22" id="KLw-is-beo"/>
                             <constraint firstItem="Yq7-yl-fUr" firstAttribute="leading" secondItem="o8x-12-1U0" secondAttribute="leadingMargin" id="RfR-Kk-1w2"/>
                             <constraint firstItem="Yq7-yl-fUr" firstAttribute="leading" secondItem="p6c-yY-Aqo" secondAttribute="leading" id="S6K-nJ-2AN"/>
                             <constraint firstItem="sme-c7-mHj" firstAttribute="centerY" secondItem="o8x-12-1U0" secondAttribute="centerY" constant="-0.5" id="ZWx-fr-UuC"/>
@@ -211,13 +211,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SbJ-XF-fHT" customClass="ErrorTextField" customModule="Material">
-                                <rect key="frame" x="16" y="270" width="343" height="30"/>
+                                <rect key="frame" x="16" y="261" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fUG-7G-TAN" customClass="ErrorTextField" customModule="Material">
-                                <rect key="frame" x="16" y="198" width="343" height="30"/>
+                                <rect key="frame" x="16" y="189" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done"/>
@@ -238,7 +238,7 @@
                             <constraint firstItem="rBJ-ab-sXi" firstAttribute="centerY" secondItem="sge-6D-FF1" secondAttribute="centerY" constant="-0.5" id="PT2-Ve-k6t"/>
                             <constraint firstItem="fUG-7G-TAN" firstAttribute="trailing" secondItem="SbJ-XF-fHT" secondAttribute="trailing" id="cLJ-l4-l5o"/>
                             <constraint firstItem="fUG-7G-TAN" firstAttribute="leading" secondItem="sge-6D-FF1" secondAttribute="leadingMargin" id="lah-ma-orW"/>
-                            <constraint firstItem="rBJ-ab-sXi" firstAttribute="top" secondItem="SbJ-XF-fHT" secondAttribute="bottom" constant="13" id="nXt-C8-OPF"/>
+                            <constraint firstItem="rBJ-ab-sXi" firstAttribute="top" secondItem="SbJ-XF-fHT" secondAttribute="bottom" constant="22" id="nXt-C8-OPF"/>
                             <constraint firstItem="SbJ-XF-fHT" firstAttribute="top" secondItem="fUG-7G-TAN" secondAttribute="bottom" constant="42" id="x8c-cw-eZH"/>
                             <constraint firstItem="fUG-7G-TAN" firstAttribute="leading" secondItem="SbJ-XF-fHT" secondAttribute="leading" id="y0W-0s-ja0"/>
                         </constraints>
@@ -258,6 +258,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="DefaultProfilePic" width="62" height="62"/>
+        <image name="DefaultProfilePic" width="260" height="260"/>
     </resources>
 </document>
