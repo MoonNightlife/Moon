@@ -125,7 +125,7 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
             self?.eventsCarousel.reloadData()
         }).addDisposableTo(bag)
         
-        viewModel.numPeopleAttending.map({
+        viewModel.numPeopleAttending.map({ (numGoing) -> NSMutableAttributedString in
             //Adding going icon to the right of the title label
             let fullString = NSMutableAttributedString(string: " ")
             
@@ -136,10 +136,13 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
             let attachmentString = NSAttributedString(attachment: attachment)
             
             fullString.append(attachmentString)
-            fullString.append(NSAttributedString(string: " " + $0)) //people going
+            fullString.append(NSAttributedString(string: " " + numGoing)) //people going
             
             return fullString
-        }).bind(to: toolBar.titleLabel.rx.attributedText).addDisposableTo(bag)
+        }).subscribe(onNext: { [weak self] numGoing in
+            print(numGoing)
+            self?.toolBar.titleLabel.attributedText = numGoing
+        }).addDisposableTo(bag)
         
     }
     
@@ -206,7 +209,10 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         
         toolBar.titleLabel.textColor = .white
         toolBar.backgroundColor = .clear
-        
+    
+        // It the attributed isn't set to something here, then it doesn't show up when you
+        // set it with the real value after the bar profile is loaded
+        toolBar.titleLabel.attributedText = NSAttributedString(string: "0")
         moreInfoButton = IconButton(image: Icon.cm.moreHorizontal, tintColor: .white)
         goButton = IconButton(image: #imageLiteral(resourceName: "goButton"))
         toolBar.leftViews = [moreInfoButton]

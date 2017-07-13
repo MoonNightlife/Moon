@@ -195,10 +195,11 @@ class BarProfileViewModel: ImageNetworkingInjected, NetworkingInjected, BackType
     func getProfileImage(id: String) -> Action<Void, UIImage> {
         return Action(workFactory: { [unowned self] _ in
             return self.storageAPI.getProfilePictureDownloadUrlForUser(id: id, picName: "pic1.jpg")
-                .filterNil()
+                .errorOnNil()
                 .flatMap({
                     self.photoService.getImageFor(url: $0)
                 })
+                .catchErrorJustReturn(#imageLiteral(resourceName: "DefaultProfilePic"))
         })
     }
 

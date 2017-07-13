@@ -40,6 +40,8 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
         userTableView.refreshControl = refreshControl
     }
     
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     

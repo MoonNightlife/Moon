@@ -27,7 +27,8 @@ class PeopleGoingCarouselView: ImageCardView {
         prepareNumberOfLikes()
         prepareToolBar()
         prepareImageViewTapReconizer()
-       
+        
+        imageView.backgroundColor = .moonGrey
     }
     
     func toggleColorAndNumber() {

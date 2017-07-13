@@ -48,13 +48,11 @@ struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected, Stor
                 switch type {
                 case .users:
                     return self.userAPI.searchForUser(searchText: searchText)
-                        .startWith([])
                         .map({
                             return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users", snapshots: $0)]
                         })
                 case .bars:
                     return self.barAPI.searchForBar(searchText: searchText)
-                        .startWith([])
                         .map({
                             return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Bars", snapshots: $0)]
                         })

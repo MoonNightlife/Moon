@@ -143,6 +143,7 @@ extension SearchBarViewController {
     }
     
     fileprivate func prepareSearchBar() {
+        searchBar.clearButton.tintColor = .white
         searchBar.leftViews = [searchIcon]
         searchBar.placeholderColor = .white
         searchBar.textColor = .white

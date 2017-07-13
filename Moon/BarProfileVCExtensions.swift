@@ -124,6 +124,8 @@ extension BarProfileViewController {
             let downloader = viewModel.getProfileImage(id: userID)
             downloader.elements.bind(to: peopleGoingView.imageView.rx.image).addDisposableTo(peopleGoingView.bag)
             downloader.execute()
+        } else {
+            peopleGoingView.imageView.image = #imageLiteral(resourceName: "DefaultProfilePic")
         }
         
         // Bind labels

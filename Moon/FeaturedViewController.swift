@@ -93,7 +93,7 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
         let event = viewModel.featuredEvents.value[indexPath.row]
         
         // Bind actions
-        if let id = event.id {
+        if let id = event.id, let barID = event.barID {
             
             let likeAction = viewModel.onLikeEvent(eventID: id)
             view.favoriteButton.rx.action = likeAction
@@ -111,7 +111,7 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
             
             view.numberOfLikesButton.rx.action = viewModel.onViewLikers(eventID: id)
             view.shareButton.rx.action = viewModel.onShareEvent(eventID: id)
-            view.moreButton.rx.action = viewModel.onMoreInfo(barID: id)
+            view.moreButton.rx.action = viewModel.onMoreInfo(barID: barID)
             
             // Bind Image
             let downloader = viewModel.getEventImage(id: id)
