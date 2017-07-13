@@ -17,7 +17,7 @@ protocol BarAPIType {
     func getBarEvents(barID: String) -> Observable<[BarEvent]>
     func getBarSpecials(barID: String) -> Observable<[Special]>
     
-    func getBarsIn(region: String) -> Observable<[BarProfile]>
+    func getBarsIn(region: String) -> Observable<[TopBar]>
     func getEventsIn(region: String) -> Observable<[BarEvent]>
     func getSpecialsIn(region: String, type: AlcoholType) -> Observable<[Special]>
     func getTopBarsIn(region: String) -> Observable<[TopBar]>

@@ -224,7 +224,7 @@ extension ExploreViewController: iCarouselDataSource, iCarouselDelegate {
         let attachmentString = NSAttributedString(attachment: attachment)
         
         fullString.append(attachmentString)
-        fullString.append(NSAttributedString(string: " " + (bar.usersGoing ?? "")))
+        fullString.append(NSAttributedString(string: " " + "\(bar.usersGoing ?? 0)"))
         
         view.toolbar.detailLabel.attributedText = fullString
 

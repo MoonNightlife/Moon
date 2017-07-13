@@ -21,7 +21,7 @@ struct FirebaseBarAPI: BarAPIType {
         static let getTopBarsInRegion = barBaseURL + "getTopBarsInRegion"
         static let getSpecialsInRegionByType = barBaseURL + "getSpecialsInRegionByType"
         static let getEventsInRegion = barBaseURL + "getEventsInRegion"
-        static let getBarsInRegion =  barBaseURL + "getBarsInRegion"
+        static let getBarsInRegion =  barBaseURL + "getBarsForRegion"
         static let getSuggestedBars = barBaseURL + "getSuggestedBars"
         
         static let getBarProfile = barBaseURL + "getBarProfile"
@@ -151,17 +151,17 @@ struct FirebaseBarAPI: BarAPIType {
             }
         })
     }
-    func getBarsIn(region: String) -> Observable<[BarProfile]> {
+    func getBarsIn(region: String) -> Observable<[TopBar]> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
                 "region": "\(region)"
             ]
             let request = Alamofire.request(BarFunction.getBarsInRegion, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()
-                .responseArray(completionHandler: { (response: DataResponse<[BarProfile]>) in
+                .responseArray(completionHandler: { (response: DataResponse<[TopBar]>) in
                     switch response.result {
-                    case .success(let profiles):
-                        observer.onNext(profiles)
+                    case .success(let topBars):
+                        observer.onNext(topBars)
                         observer.onCompleted()
                     case .failure(let error):
                         observer.onError(error)

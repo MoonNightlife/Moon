@@ -12,6 +12,8 @@ import MaterialComponents
 import Material
 import iCarousel
 import NVActivityIndicatorView
+import RxSwift
+import RxCocoa
 
 class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, BindableType {
 
@@ -24,6 +26,8 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
     var viewModel: CityOverviewViewModel!
     var screenHeight: CGFloat!
     var pinAnimation: NVActivityIndicatorView!
+    var bag = DisposeBag()
+    var bars = [TopBar]()
     
     @IBOutlet weak var goingCarouselHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var segmentControl: ADVSegmentedControl!
@@ -33,11 +37,9 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
     var locationManager: CLLocationManager?
     
     @IBAction func zoomToLocation(_ sender: Any) {
+        dismissCarouselView()
         locationManager?.startUpdatingLocation()
     }
-    
-    //data 
-    var usersGoing = [FakeUser]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +64,12 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
         
         prepareSegmentControl()
         prepareCarousel()
-
+        addGestureReconizerToMap()
+    }
+    
+    func addGestureReconizerToMap() {
+        let tapRec = UITapGestureRecognizer(target: self, action: #selector(self.dismissCarouselView))
+        cityMapView.addGestureRecognizer(tapRec)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,17 +77,41 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
         for a in cityMapView.annotations {
             cityMapView.removeAnnotation(a)
         }
-        addAnnotations()
+        viewModel.reloadBars.execute()
     }
     
     func bindViewModel() {
+        viewModel.reloadBars.elements.subscribe(onNext: { [weak self] bars in
+            self?.bars = bars
+            self?.addAnnotations()
+        })
+        .addDisposableTo(bag)
         
+        viewModel.displayedUsers.asObservable()
+            .do(onNext: { [weak self] _ in
+                self?.goingCarousel.reloadData()
+            })
+            .subscribe()
+            .addDisposableTo(bag)
+        
+        segmentControl.rx.controlEvent(UIControlEvents.valueChanged)
+            .map({ [unowned self] _ in
+                return UsersGoingType(rawValue: self.segmentControl.selectedIndex)
+            })
+            .filterNil()
+            .bind(to: viewModel.selectedUserIndex)
+            .addDisposableTo(bag)
+        
+    }
+    
+    deinit {
+        print("deinit")
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined:
-            print("NotDetermined")
+            locationManager?.requestWhenInUseAuthorization()
         case .restricted:
             print("Restricted")
         case .denied:
@@ -144,7 +175,7 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
         locationManager?.stopUpdatingLocation()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    func dismissCarouselView() {
         animateViewDown()
         
         if pinAnimation != nil {
@@ -153,6 +184,12 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let id = (view.annotation as? BarAnnotation)?.placeID else {
+            return
+        }
+        viewModel.getPeopleForBar.execute(id)
+        viewModel.getFriendsForBar.execute(id)
+
         animateViewUp()
         
         let tempAnimation = animatePinWith(frame: view.frame, color: .moonPurple)
@@ -206,30 +243,33 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
     }
     
     func addAnnotations() {
-//        for data in fakeTopBars {
-//            let pointAnnotation = BarAnnotation()
-//            var image = UIImage()
-//           
-//            switch arc4random_uniform(3) {
-//            case 0:
-//                image = #imageLiteral(resourceName: "RedPin")
-//            case 1:
-//                image = #imageLiteral(resourceName: "YellowPin")
-//            default:
-//                image = #imageLiteral(resourceName: "GreenPin")
-//            }
-//            
-//            pointAnnotation.coordinate = data.coordinates!
-//            pointAnnotation.title = data.barName
-//            pointAnnotation.placeID = "123123"
-//            pointAnnotation.image = image
-//            pointAnnotation.subtitle = "People Going: \(data.usersGoing)"
-//            
-//            let annotationView = MKAnnotationView(annotation: pointAnnotation, reuseIdentifier: "pin")
-//            
-//            //swiftlint:disable:next force_cast
-//            self.cityMapView.addAnnotation(annotationView.annotation!)
-//        }
+        for bar in bars {
+            if let lat = bar.lat, let long = bar.long {
+                
+                let pointAnnotation = BarAnnotation()
+                var image = UIImage()
+               
+                switch arc4random_uniform(3) {
+                case 0:
+                    image = #imageLiteral(resourceName: "RedPin")
+                case 1:
+                    image = #imageLiteral(resourceName: "YellowPin")
+                default:
+                    image = #imageLiteral(resourceName: "GreenPin")
+                }
+                
+                pointAnnotation.coordinate = CLLocationCoordinate2DMake(lat, long)
+                pointAnnotation.title = bar.name
+                pointAnnotation.placeID = bar.id
+                pointAnnotation.image = image
+                pointAnnotation.subtitle = "People Going: \(bar.usersGoing ?? 0)"
+                
+                let annotationView = MKAnnotationView(annotation: pointAnnotation, reuseIdentifier: "pin")
+                
+                //swiftlint:disable:next force_cast
+                self.cityMapView.addAnnotation(annotationView.annotation!)
+            }
+        }
     }
 
 }
@@ -244,7 +284,7 @@ extension CityOverviewViewController: iCarouselDelegate, iCarouselDataSource {
     }
     
     func numberOfItems(in carousel: iCarousel) -> Int {
-        return usersGoing.count
+        return viewModel.displayedUsers.value.count
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
@@ -256,13 +296,50 @@ extension CityOverviewViewController: iCarouselDelegate, iCarouselDataSource {
     
     func setUpGoingView(index: Int) -> UIView {
         let size = screenHeight * 0.22
-        //let size = self.view.frame.size.height * 0.22
         let frame = CGRect(x: self.view.frame.size.width / 2, y: 0, width: size + 20, height: size)
         let view = PeopleGoingCarouselView()
         view.frame = frame
-        //view.initializeViewWith(user: usersGoing.value[index], index: index, viewProfile: viewModel.onShowProfile, likeActivity: viewModel.onLikeActivity, viewLikers: viewModel.onViewLikers)
+        view.initializeView()
+        populateGoing(peopleGoingView: view, index: index)
         
         return view
+    }
+    
+    func populateGoing(peopleGoingView: PeopleGoingCarouselView, index: Int) {
+        let activity = viewModel.displayedUsers.value[index]
+        
+        // Bind actions
+        if let userID = activity.userID {
+            
+            let likeAction = viewModel.onLikeActivity(userID: userID)
+            peopleGoingView.likeButton.rx.action = likeAction
+            likeAction.elements.do(onNext: {
+                peopleGoingView.toggleColorAndNumber()
+            }).subscribe().addDisposableTo(peopleGoingView.bag)
+            
+            let hasLiked = viewModel.hasLikedActivity(activityID: userID)
+            hasLiked.elements.do(onNext: { hasLiked in
+                if hasLiked {
+                    peopleGoingView.likeButton.tintColor = .red
+                }
+            }).subscribe().addDisposableTo(peopleGoingView.bag)
+            hasLiked.execute()
+            
+            peopleGoingView.numberOfLikesButton.rx.action = viewModel.onViewLikers(userID: userID)
+            
+            peopleGoingView.imageView.gestureRecognizers?.first?.rx.event.subscribe(onNext: { [weak self] _ in
+                self?.viewModel.onShowProfile(userID: userID).execute()
+            }).addDisposableTo(peopleGoingView.bag)
+            
+            let downloader = viewModel.getProfileImage(id: userID)
+            downloader.elements.bind(to: peopleGoingView.imageView.rx.image).addDisposableTo(peopleGoingView.bag)
+            downloader.execute()
+        }
+        
+        // Bind labels
+        peopleGoingView.numberOfLikesButton.title = "\(activity.numLikes ?? 0)"
+        peopleGoingView.bottomToolbar.title = activity.userName
+        
     }
 
 }

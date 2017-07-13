@@ -12,8 +12,10 @@ import ObjectMapper
 class TopBar: Mappable, Equatable {
 
     var name: String?
-    var usersGoing: String?
+    var usersGoing: Int?
     var id: String?
+    var lat: Double?
+    var long: Double?
     
     required init?(map: Map) {
         
@@ -23,6 +25,8 @@ class TopBar: Mappable, Equatable {
         id <- map["id"]
         name <- map["name"]
         usersGoing <- map["numberOfAttendees"]
+        lat <- map["coordinates/lat"]
+        long <- map["coordinates/long"]
     }
     
     static func ==(lhs: TopBar, rhs: TopBar) -> Bool {

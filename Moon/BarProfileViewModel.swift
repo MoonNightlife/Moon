@@ -11,11 +11,6 @@ import Action
 import RxSwift
 import RxCocoa
 
-enum UsersGoingType: Int {
-    case everyone = 0
-    case friends = 1
-}
-
 class BarProfileViewModel: ImageNetworkingInjected, NetworkingInjected, BackType, AuthNetworkingInjected, StorageNetworkingInjected {
     
     // Local

@@ -129,3 +129,9 @@ enum NewUserType {
     case firebase
     case facebook
 }
+
+enum UsersGoingType: Int {
+    case everyone = 0
+    case friends = 1
+}
+

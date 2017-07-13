@@ -109,7 +109,6 @@ extension Scene.Master {
             vc.bindViewModel(to: mainVM)
             var searchController = SearchBarViewController(rootViewController: vc)
             searchController.bindViewModel(to: searchBarVM)
-            //searchController.layoutSubviews()
             let nc = UINavigationController(rootViewController: searchController)
             return nc
         case .main(let viewModel):
