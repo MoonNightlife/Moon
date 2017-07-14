@@ -17,6 +17,7 @@ struct CityOverviewViewModel: NetworkingInjected, AuthNetworkingInjected, Storag
     
     // Inputs
     var selectedUserIndex = BehaviorSubject<UsersGoingType>(value: .everyone)
+    var reloadUsers = PublishSubject<Void>()
     
     // Outputs
     var displayedUsers = Variable<[Activity]>([])
@@ -87,6 +88,13 @@ struct CityOverviewViewModel: NetworkingInjected, AuthNetworkingInjected, Storag
         return CocoaAction {  _ in
             let vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: userID)
             return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
+        }
+    }
+    
+    func onView(barID: String) -> CocoaAction {
+        return CocoaAction {
+            let vm = BarProfileViewModel(coordinator: self.sceneCoordinator, barID: barID)
+            return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
         }
     }
     

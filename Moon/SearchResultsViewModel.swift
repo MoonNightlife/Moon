@@ -38,6 +38,8 @@ struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected, Stor
     var selectedSearchType = BehaviorSubject<SearchType>(value: .users)
     
     // Outputs
+    var showLoadingIndicator = Variable<Bool>(false)
+    
     var searchResults: Observable<[SnapshotSectionModel]> {
         return Observable.combineLatest(searchText, selectedSearchType)
             .flatMapLatest({ (searchText, type) -> Observable<[SnapshotSectionModel]> in
@@ -48,11 +50,21 @@ struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected, Stor
                 switch type {
                 case .users:
                     return self.userAPI.searchForUser(searchText: searchText)
+                        .do(onSubscribed: { 
+                            self.showLoadingIndicator.value = true
+                        }, onDispose: { 
+                            self.showLoadingIndicator.value = false
+                        })
                         .map({
                             return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users", snapshots: $0)]
                         })
                 case .bars:
                     return self.barAPI.searchForBar(searchText: searchText)
+                        .do(onSubscribed: {
+                            self.showLoadingIndicator.value = true
+                        }, onDispose: {
+                            self.showLoadingIndicator.value = false
+                        })
                         .map({
                             return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Bars", snapshots: $0)]
                         })

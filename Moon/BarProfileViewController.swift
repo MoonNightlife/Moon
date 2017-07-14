@@ -154,7 +154,7 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     
     func prepareNavigationBackButton() {
         backButton = UIBarButtonItem()
-        backButton.image = Icon.cm.arrowBack
+        backButton.image = Icon.cm.arrowDownward
         backButton.tintColor = .lightGray
         self.navigationItem.leftBarButtonItem = backButton
     }

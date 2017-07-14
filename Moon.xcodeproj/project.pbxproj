@@ -228,6 +228,7 @@
 		F0CF7F251EF3850F005C068C /* CountryCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF7F241EF3850F005C068C /* CountryCode.swift */; };
 		F0D168531ECA62940064F642 /* MoonColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D168521ECA62940064F642 /* MoonColor.swift */; };
 		F0D797B71ECF837A007BDB9C /* Dallas.gpx in Resources */ = {isa = PBXBuildFile; fileRef = F0D797B61ECF837A007BDB9C /* Dallas.gpx */; };
+		F0DAA0BE1F193D360039DA07 /* PopoverPresenterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DAA0BD1F193D360039DA07 /* PopoverPresenterType.swift */; };
 		F0DCCAE91EF18E7900C9F5A9 /* RxReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DCCAE81EF18E7900C9F5A9 /* RxReachability.swift */; };
 		F0E1F5261F151E5900BC0785 /* FacebookUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E1F5251F151E5900BC0785 /* FacebookUserInfo.swift */; };
 		F0E1F5281F152C2800BC0785 /* FacebookLoginProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E1F5271F152C2800BC0785 /* FacebookLoginProviderType.swift */; };
@@ -494,6 +495,7 @@
 		F0CF7F241EF3850F005C068C /* CountryCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCode.swift; sourceTree = "<group>"; };
 		F0D168521ECA62940064F642 /* MoonColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonColor.swift; sourceTree = "<group>"; };
 		F0D797B61ECF837A007BDB9C /* Dallas.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Dallas.gpx; sourceTree = "<group>"; };
+		F0DAA0BD1F193D360039DA07 /* PopoverPresenterType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverPresenterType.swift; sourceTree = "<group>"; };
 		F0DCCAE81EF18E7900C9F5A9 /* RxReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxReachability.swift; sourceTree = "<group>"; };
 		F0DE764B1EFB295E0099989C /* Moon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Moon.entitlements; sourceTree = "<group>"; };
 		F0E1F5251F151E5900BC0785 /* FacebookUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookUserInfo.swift; sourceTree = "<group>"; };
@@ -1249,6 +1251,7 @@
 				F0F4CDFA1F0DA04C00AE69C1 /* Transforms.swift */,
 				F0E1F5251F151E5900BC0785 /* FacebookUserInfo.swift */,
 				F03322451F16A77900FD72CD /* EditProfileInfo.swift */,
+				F0DAA0BD1F193D360039DA07 /* PopoverPresenterType.swift */,
 			);
 			name = "NewModels ";
 			sourceTree = "<group>";
@@ -1653,6 +1656,7 @@
 				F001BAC11EC50E9700CDF9BC /* BarActivityFeedViewController.swift in Sources */,
 				F04F445C1ECF840700D5FC62 /* BarAnnotation.swift in Sources */,
 				F04989701EE0746400064F58 /* UINavigationController+Rx.swift in Sources */,
+				F0DAA0BE1F193D360039DA07 /* PopoverPresenterType.swift in Sources */,
 				F001BAC31EC50F7500CDF9BC /* BarActivityTableViewCell.swift in Sources */,
 				F04B43761F0581E300946C82 /* UserProfile.swift in Sources */,
 				C034E2C71ECCF09D008EA4BA /* FakeUserData.swift in Sources */,

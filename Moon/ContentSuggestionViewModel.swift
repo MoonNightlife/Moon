@@ -21,7 +21,8 @@ struct ContentSuggestionsViewModel: ImageNetworkingInjected, NetworkingInjected,
     let sceneCoordinator: SceneCoordinatorType
     
     // Actions
-    var reload = PublishSubject<Void>()
+    var reloadSuggestedBars = PublishSubject<Void>()
+    var reloadSuggestedFriends = PublishSubject<Void>()
     
     lazy var onShowBar: Action<Snapshot, Void> = { this in
         return Action(workFactory: { snap in
@@ -41,7 +42,7 @@ struct ContentSuggestionsViewModel: ImageNetworkingInjected, NetworkingInjected,
     
     // Outputs
     var suggestedFriends: Driver<[SearchSection]> {
-        return reload.flatMap({ _ in
+        return reloadSuggestedFriends.flatMap({ _ in
             return self.userAPI.getSuggestedFriends(userID: self.authAPI.SignedInUserID)
         })
         .map({
@@ -51,7 +52,7 @@ struct ContentSuggestionsViewModel: ImageNetworkingInjected, NetworkingInjected,
     }
     
     var suggestedBars: Driver<[SearchSection]> {
-        return reload.flatMap({ _ in
+        return reloadSuggestedBars.flatMap({ _ in
             return self.barAPI.getSuggestedBars(region: "Dallas")
         })
             .map({
@@ -67,8 +68,10 @@ struct ContentSuggestionsViewModel: ImageNetworkingInjected, NetworkingInjected,
     
     func onAddFriend(userID: String) -> CocoaAction {
         return CocoaAction {
-            print("Add Friend \(userID)")
-            return Observable.empty()
+            return self.userAPI.requestFriend(userID: self.authAPI.SignedInUserID, friendID: userID)
+                .do(onNext: {
+                    self.reloadSuggestedFriends.onNext()
+                })
         }
     }
     

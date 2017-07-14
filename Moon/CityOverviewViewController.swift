@@ -14,6 +14,7 @@ import iCarousel
 import NVActivityIndicatorView
 import RxSwift
 import RxCocoa
+import Action
 
 class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, BindableType {
 
@@ -227,10 +228,17 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
             v = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
             v!.canShowCallout = true
             
-            let btn = UIButton(type: .detailDisclosure)
+            var btn = UIButton(type: .detailDisclosure)
+            btn.tintColor = .moonPurple
+            if let id = (annotation as? BarAnnotation)?.placeID {
+                btn.rx.action = viewModel.onView(barID: id)
+            }
             v?.rightCalloutAccessoryView = btn
         } else {
             v!.annotation = annotation
+            if let id = (annotation as? BarAnnotation)?.placeID, var btn = v?.rightCalloutAccessoryView as? UIButton {
+                btn.rx.action = viewModel.onView(barID: id)
+            }
         }
         
         //swiftlint:disable:next force_cast

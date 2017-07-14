@@ -32,6 +32,10 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
+        
+        if viewModel != nil {
+            viewModel.reloadSuggestedFriends.onNext()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -74,9 +78,9 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
         viewModel.suggestedBars.drive(suggestedBarCollectionView.rx.items(dataSource: barDataSource)).disposed(by: bag)
         viewModel.suggestedFriends.drive(suggestedUserColletionView.rx.items(dataSource: userDataSource)).disposed(by: bag)
         
-        viewModel.reload.onNext()
         suggestedBarCollectionView.rx.modelSelected(SearchSection.Item.self).subscribe(viewModel.onShowBar.inputs).addDisposableTo(bag)
-
+        
+        viewModel.reloadSuggestedBars.onNext()
     }
     
     fileprivate func cellsPerRowVertical(cells: Int, collectionView: UICollectionView) -> UICollectionViewFlowLayout {
