@@ -126,6 +126,8 @@ class ProfileViewController: UIViewController, BindableType {
         carousel.bounces = false
         carousel.bringSubview(toFront: toolBar)
         carousel.reloadData()
+        carousel.backgroundColor = .moonGrey
+        carousel.clipsToBounds = true
     }
     
     private func setUpEditProfileButton() {

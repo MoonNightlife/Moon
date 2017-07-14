@@ -11,6 +11,7 @@ import RxDataSources
 import RxCocoa
 import Action
 import RxSwift
+import SwiftOverlays
 
 class SearchResultsViewController: UIViewController, BindableType, UITableViewDelegate {
     
@@ -18,6 +19,7 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
 
     private let bag = DisposeBag()
     var viewModel: SearchResultsViewModel!
+    var indicator = UIActivityIndicatorView()
 
     @IBOutlet weak var searchResultsTableView: UITableView!
     
@@ -28,13 +30,22 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
         
         configureDataSource()
         prepareSegmentControl()
+        setupActivityIndicator()
         
         searchResultsTableView.rx.setDelegate(self).disposed(by: bag)
     }
 
     func bindViewModel() {
         
-        viewModel.searchResults.bind(to: searchResultsTableView.rx.items(dataSource: resultsDataSource)).addDisposableTo(bag)
+        viewModel.searchResults.debug().bind(to: searchResultsTableView.rx.items(dataSource: resultsDataSource)).addDisposableTo(bag)
+
+        viewModel.showLoadingIndicator.asObservable().subscribe(onNext: { [weak self] in
+            if $0 {
+                self?.indicator.startAnimating()
+            } else {
+                self?.indicator.stopAnimating()
+            }
+        }).addDisposableTo(bag)
     
         segmentControl.rx.controlEvent(UIControlEvents.valueChanged)
             .map({ [weak self] in
@@ -46,6 +57,14 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
         searchResultsTableView.rx.modelSelected(SnapshotSectionModel.Item.self).do(onNext: { [weak self] _ in
             self?.searchBarController?.searchBar.textField.resignFirstResponder()
         }).bind(to: viewModel.onShowResult.inputs).addDisposableTo(bag)
+    }
+    
+    func setupActivityIndicator() {
+        indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        indicator.center = self.view.center
+        indicator.hidesWhenStopped = true
+        self.view.addSubview(indicator)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

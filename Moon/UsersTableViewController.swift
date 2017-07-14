@@ -13,7 +13,7 @@ import Action
 import Material
 import RxDataSources
 
-class UsersTableViewController: UIViewController, BindableType, UIPopoverPresentationControllerDelegate {
+class UsersTableViewController: UIViewController, BindableType, UIPopoverPresentationControllerDelegate, PopoverPresenterType {
 
     var viewModel: UsersTableViewModel!
     private let bag = DisposeBag()
@@ -40,7 +40,11 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
         userTableView.refreshControl = refreshControl
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.reload.onNext()
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -56,7 +60,6 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
         viewModel.users.do(onNext: { [weak self] _ in
             self?.refreshControl.endRefreshing()
         }).bind(to: userTableView.rx.items(dataSource: dataSource)).addDisposableTo(bag)
-        viewModel.reload.onNext()
         
         userTableView.rx.modelSelected(UserSectionModel.Item.self).bind(to: viewModel.onShowUser.inputs).addDisposableTo(bag)
         
@@ -170,4 +173,9 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
         viewModel.onBack().execute()
         return false
     }
+    
+    func didDismissPopover() {
+        viewModel.reload.onNext()
+    }
+
 }

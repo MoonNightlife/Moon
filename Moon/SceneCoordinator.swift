@@ -93,11 +93,21 @@ class SceneCoordinator: SceneCoordinatorType {
     func pop(animated: Bool) -> Observable<Void> {
         let subject = PublishSubject<Void>()
         if let presenter = currentViewController.presentingViewController {
-            // dismiss a modal controller
-            currentViewController.dismiss(animated: animated) {
-                print(presenter)
-                self.currentViewController = SceneCoordinator.actualViewController(for: presenter)
-                subject.onCompleted()
+            if currentViewController.modalPresentationStyle == .popover, let popoverPresenter = SceneCoordinator.actualViewController(for: presenter) as? PopoverPresenterType {
+                // dismiss a popover controller
+                presenter.dismiss(animated: true, completion: {
+                    popoverPresenter.didDismissPopover()
+                    self.currentViewController = SceneCoordinator.actualViewController(for: presenter)
+                    subject.onCompleted()
+                })
+            } else {
+                // dismiss a modal controller
+                currentViewController.dismiss(animated: animated) {
+                    print(presenter)
+                    self.currentViewController = SceneCoordinator.actualViewController(for: presenter)
+                    subject.onCompleted()
+                }
+
             }
         } else if let navigationController = currentViewController.navigationController {
             // navigate up the stack

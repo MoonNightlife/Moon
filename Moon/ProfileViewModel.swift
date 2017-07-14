@@ -120,11 +120,13 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
                             .filterNil()
                             .flatMap({ url in
                                 return photoService.getImageFor(url: url)
+                                    .catchErrorJustReturn(#imageLiteral(resourceName: "DefaultProfilePic"))
                             })
                     })
                 }).toArray()
-                .catchErrorJustReturn([#imageLiteral(resourceName: "DefaultProfilePic")])
-                .startWith([#imageLiteral(resourceName: "DefaultProfilePic")])
+                .map ({
+                    return $0.isNotEmpty ? $0 : [#imageLiteral(resourceName: "DefaultProfilePic")]
+                })
             })
         
         newPhotos.bind(to: profilePictures).addDisposableTo(bag)
