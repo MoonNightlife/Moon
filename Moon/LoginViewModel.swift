@@ -58,10 +58,18 @@ struct LoginViewModel: AuthNetworkingInjected, FacebookNetworkingInjected {
     func onFacebookSignIn() -> CocoaAction {
         return CocoaAction { _ in
             if self.facebookAPI.isUserAlreadyLoggedIn() {
-                return self.continueLogin()
+                return self.continueLogin().do(onSubscribed: { 
+                    self.showLoadingIndicator.value = true
+                }, onDispose: {
+                    self.showLoadingIndicator.value = false
+                })
             } else {
                 return self.facebookAPI.login().flatMap({
-                    return self.continueLogin()
+                    return self.continueLogin().do(onSubscribed: {
+                        self.showLoadingIndicator.value = true
+                    }, onDispose: {
+                        self.showLoadingIndicator.value = false
+                    })
                 })
             }
         }

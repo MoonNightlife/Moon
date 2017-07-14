@@ -80,7 +80,7 @@ class MainViewController: UIViewController, BindableType {
         moonsViewVC.bindViewModel(to: viewModel.viewModelForMoonsView())
         
         addChildViewController(moonsViewVC)
-        exploreVC.view.frame = CGRect(x: 0, y: 0, width: moonsView.frame.width, height: moonsView.frame.height)
+        moonsViewVC.view.frame = CGRect(x: 0, y: 0, width: moonsView.frame.width, height: moonsView.frame.height)
         moonsView.addSubview(moonsViewVC.view)
         moonsViewVC.didMove(toParentViewController: self)
     }

@@ -103,13 +103,13 @@ class LoginViewController: UIViewController, BindableType {
         
         let fbSignInAction = viewModel.onFacebookSignIn()
         facebookSignInButton.rx.action = fbSignInAction
-        fbSignInAction.executing.do(onNext: {
+        viewModel.showLoadingIndicator.asObservable().subscribe(onNext: {
             if $0 {
                 SwiftOverlays.showBlockingWaitOverlayWithText("Signing In")
             } else {
                 SwiftOverlays.removeAllBlockingOverlays()
             }
-        }).subscribe().addDisposableTo(disposeBag)
+        }).addDisposableTo(disposeBag)
         
         fbSignInAction.errors.subscribe(onNext: { [weak self] actionError in
                 if case let .underlyingError(error) = actionError {

@@ -63,9 +63,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="101" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KVI-uv-5rN">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="101" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KVI-uv-5rN">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="barActivityCell" rowHeight="101" id="DwM-ac-KVq" customClass="BarActivityTableViewCell" customModule="Moon" customModuleProvider="target">
@@ -181,6 +180,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KVI-uv-5rN" firstAttribute="top" secondItem="gmO-jk-jBD" secondAttribute="top" id="JPc-ep-a7l"/>
+                            <constraint firstItem="U9l-HR-uNn" firstAttribute="top" secondItem="KVI-uv-5rN" secondAttribute="bottom" id="Uu0-Mn-qnr"/>
+                            <constraint firstAttribute="trailing" secondItem="KVI-uv-5rN" secondAttribute="trailing" id="jk8-xh-6po"/>
+                            <constraint firstItem="KVI-uv-5rN" firstAttribute="leading" secondItem="gmO-jk-jBD" secondAttribute="leading" id="q5E-OC-6B0"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="KVI-uv-5rN" id="xoi-z2-D9W"/>
