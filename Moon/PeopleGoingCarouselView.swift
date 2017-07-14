@@ -17,6 +17,8 @@ class PeopleGoingCarouselView: ImageCardView {
     var likeButton: IconButton!
     var numberOfLikesButton: IconButton!
     var bag = DisposeBag()
+    var nameLabel: UILabel!
+    var customView: UIView!
     
     var tapReconizer: UITapGestureRecognizer!
     
@@ -25,6 +27,8 @@ class PeopleGoingCarouselView: ImageCardView {
         self.initializeImageCardViewWith(type: .small)
         prepareLikeButton()
         prepareNumberOfLikes()
+        prepareNameLabel()
+        prepareCustomView()
         prepareToolBar()
         prepareImageViewTapReconizer()
         
@@ -47,6 +51,13 @@ extension PeopleGoingCarouselView {
         imageView.addGestureRecognizer(tapReconizer)
     }
     
+    fileprivate func prepareNameLabel() {
+        nameLabel = UILabel()
+        nameLabel.text = ""
+        nameLabel.font = UIFont(name: "Roboto", size: 10)
+        nameLabel.textColor = .lightGray
+    }
+    
     fileprivate func prepareLikeButton() {
         likeButton = IconButton(image: Icon.favorite, tintColor: .lightGray)
     }
@@ -56,7 +67,25 @@ extension PeopleGoingCarouselView {
         numberOfLikesButton.titleLabel?.font = UIFont(name: "Roboto", size: 10)
     }
     
+    fileprivate func prepareCustomView() {
+        customView = UIView()
+        customView.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+    
+        let size = CGFloat(20)
+        print(self.frame.size.width)
+        let contentFrame = customView.frame.size
+    
+        numberOfLikesButton.frame = CGRect(x: contentFrame.width - size, y: (contentFrame.height / 2) - (size / 2), width: size, height: size)
+        customView.addSubview(numberOfLikesButton)
+        customView.bringSubview(toFront: numberOfLikesButton)
+    
+        likeButton.frame = CGRect(x: contentFrame.width - (numberOfLikesButton.frame.size.width + size), y:  (contentFrame.height / 2) - (size / 2), width: size, height: size)
+        customView.addSubview(likeButton)
+        customView.bringSubview(toFront: likeButton)
+    }
+    
     fileprivate func prepareToolBar() {
-        self.bottomToolbar.addRightViews(view1: numberOfLikesButton, view2: likeButton)
+        self.bottomToolbar.leftViews = [nameLabel]
+        self.bottomToolbar.rightViews = [customView]
     }
 }

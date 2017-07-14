@@ -79,6 +79,7 @@ extension BarActivityTableViewCell {
     fileprivate func setupUsername() {
         self.user.setTitleColor(.darkGray, for: .normal)
         self.user.titleLabel?.font = UIFont.moonFont(size: 16)
+        self.user.titleLabel?.lineBreakMode = .byTruncatingTail
     }
     
     fileprivate func setupBarName() {

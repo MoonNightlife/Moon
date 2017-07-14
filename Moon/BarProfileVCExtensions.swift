@@ -130,7 +130,8 @@ extension BarProfileViewController {
         
         // Bind labels
         peopleGoingView.numberOfLikesButton.title = "\(activity.numLikes ?? 0)"
-        peopleGoingView.bottomToolbar.title = activity.userName
+        let nameLabel = peopleGoingView.bottomToolbar.leftViews[0] as? UILabel
+        nameLabel?.text = activity.userName
     
     }
 }
