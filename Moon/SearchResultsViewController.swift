@@ -64,7 +64,6 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
         indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
         indicator.center = self.view.center
         indicator.hidesWhenStopped = true
-        self.view.addSubview(indicator)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -115,6 +114,19 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
                 //swiftlint:disable:next force_cast
                 let cell = tableView.dequeueReusableCell(withIdentifier: "LoadMore", for: indexPath) as! LoadMoreTableViewCell
                 cell.initCell(loadAction: action)
+                return cell
+            case .loading:
+                //swiftlint:disable:next force_cast
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as! SearchTableViewCell
+                cell.initCellWith()
+                cell.nameLabel.text = nil
+                cell.usernameLabel.text = nil
+                cell.mainImageView.image = nil
+                cell.backgroundView = nil
+                self?.indicator.center = cell.contentView.center
+                if let strongSelf = self {
+                    cell.contentView.addSubview(strongSelf.indicator)
+                }
                 return cell
             }
             

@@ -13,7 +13,7 @@ import RxSwift
 import RxCocoa
 import MIBadgeButton_Swift
 
-class SearchBarViewController: SearchBarController, BindableType, UIPopoverPresentationControllerDelegate {
+class SearchBarViewController: SearchBarController, BindableType, UIPopoverPresentationControllerDelegate, PopoverPresenterType {
     
     var viewModel: SearchBarViewModel!
     
@@ -35,6 +35,10 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
         prepareSearchBar()
         prepareSearchBarButtonOverlay()
         
+    }
+    
+    func didDismissPopover() {
+        viewModel.numberOfFriendRequest.execute()
     }
     
     open func prepareSearchBarForSearch() {
@@ -85,9 +89,10 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
             self?.searchBar.clearButton.isHidden = noTextEntered
         }).addDisposableTo(bag)
         
-        viewModel.numberOfFriendRequest.subscribe(onNext: { [weak self] num in
-            //self?.profileButton.badgeString = num
+        viewModel.numberOfFriendRequest.elements.subscribe(onNext: { [weak self] num in
+            self?.profileButton.badgeString = num
         }).addDisposableTo(bag)
+        viewModel.numberOfFriendRequest.execute()
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
@@ -110,7 +115,7 @@ extension SearchBarViewController {
         let profileIconImage = #imageLiteral(resourceName: "ProfileIcon").resize(toWidth: (sizeReference?.width)!)?.resize(toHeight: (sizeReference?.height)!)
         
         profileButton = MIBadgeButton()
-        profileButton.badgeEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 0, right: 0)
+        profileButton.badgeEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 10)
         profileButton.setImage(profileIconImage, for: .normal)
         
     }

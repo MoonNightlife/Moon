@@ -24,6 +24,16 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
     private let scenceCoordinator: SceneCoordinatorType
     var userAPI: UserAPIType
     
+    // Action
+    lazy var numberOfFriendRequest: Action<Void, String?> = { this in
+        return Action(enabledIf: this.isSignedInUserProfile.asObservable(), workFactory: {
+            return this.userAPI.getFriendRequest(userID: this.authAPI.SignedInUserID)
+                .map({
+                    return $0.isEmpty ? nil : "\($0.count)"
+                })
+        })
+    }(self)
+    
     // Inputs
     var reload: Action<Void, UserProfile>
     var reloadActionButton = PublishSubject<Void>()
@@ -35,7 +45,6 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
     var bio: Observable<String>
     var activityBarName: Observable<String>
     var isSignedInUserProfile = Variable(false)
-    var numFriendRequests = Variable<String?>(nil) 
     var profilePictures = Variable<[UIImage]>([])
     var actionButton: Observable<ProfileActionButton>
     
@@ -47,17 +56,6 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
         
         if authAPI.SignedInUserID == userID {
             isSignedInUserProfile.value = true
-            userAPI.getFriendRequest(userID: userID)
-                .catchErrorJustReturn([])
-                .map({
-                    return $0.count
-                })
-                .map({
-                    return $0 > 0 ? "\($0)" : nil
-                })
-                .bind(to: numFriendRequests)
-                .addDisposableTo(bag)
-            
             actionButton = Observable.just(.edit)
         } else {
             isSignedInUserProfile.value = false

@@ -13,6 +13,7 @@ import Action
 enum SnapshotSectionModel {
     case searchResults(title: String, items: [SnapshotSectionItem])
     case loadMore(title: String, items: [SnapshotSectionItem])
+    case loading(title: String, items: [SnapshotSectionItem])
 }
 
 enum SnapshotSectionItem: IdentifiableType, Equatable {
@@ -27,11 +28,14 @@ enum SnapshotSectionItem: IdentifiableType, Equatable {
             return snapshot.id!
         case .loadMore:
             return "0"
+        case .loading:
+            return "0"
         }
     }
     
     case searchResult(snapshot: Snapshot)
     case loadMore(loadAction: CocoaAction)
+    case loading
 }
 
 extension SnapshotSectionModel: AnimatableSectionModelType {
@@ -43,6 +47,8 @@ extension SnapshotSectionModel: AnimatableSectionModelType {
             return title
         case let .loadMore(title, _):
             return title
+        case let .loading(title, _):
+            return title
         }
     }
     
@@ -51,6 +57,8 @@ extension SnapshotSectionModel: AnimatableSectionModelType {
         case let .searchResults(_, items):
             return items.map {$0}
         case let .loadMore(_, items):
+            return items.map {$0}
+        case let .loading(_, items):
             return items.map {$0}
         }
     }
@@ -61,6 +69,8 @@ extension SnapshotSectionModel: AnimatableSectionModelType {
             return title
         case let .loadMore(title, _):
             return title
+        case let .loading(title, _):
+            return title
         }
     }
     
@@ -70,7 +80,10 @@ extension SnapshotSectionModel: AnimatableSectionModelType {
             self = .searchResults(title: t, items: items)
         case let .loadMore(t, _):
             self = .loadMore(title: t, items: items)
+        case let .loading(t, _):
+            self = .loading(title: t, items: items)
         }
+        
     }
     
     private static func snapshotsToSnapshotSectionItem(snapshots: [Snapshot]) -> [SnapshotSectionItem] {
@@ -81,6 +94,10 @@ extension SnapshotSectionModel: AnimatableSectionModelType {
     
     static func loadMoreSectionModel(withAction: CocoaAction) -> SnapshotSectionModel {
         return SnapshotSectionModel.loadMore(title: "Load More", items: [.loadMore(loadAction: withAction)])
+    }
+    
+    static func loadingSectionModel() -> SnapshotSectionModel {
+        return SnapshotSectionModel.loading(title: "Loading", items: [.loading])
     }
     
     static func snapshotsToSnapshotSectionModel(withTitle: String, snapshots: [Snapshot]) -> SnapshotSectionModel {

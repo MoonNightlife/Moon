@@ -44,7 +44,7 @@ struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected, Stor
         return Observable.combineLatest(searchText, selectedSearchType)
             .flatMapLatest({ (searchText, type) -> Observable<[SnapshotSectionModel]> in
                 guard !searchText.isEmpty else {
-                    return Observable.just([SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users", snapshots: [])])
+                    return Observable.just([SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users", snapshots: []), SnapshotSectionModel.loadingSectionModel()])
                 }
                 
                 switch type {
@@ -56,7 +56,7 @@ struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected, Stor
                             self.showLoadingIndicator.value = false
                         })
                         .map({
-                            return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users", snapshots: $0)]
+                            return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users", snapshots: $0),SnapshotSectionModel.loadingSectionModel()]
                         })
                 case .bars:
                     return self.barAPI.searchForBar(searchText: searchText)
@@ -66,7 +66,7 @@ struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected, Stor
                             self.showLoadingIndicator.value = false
                         })
                         .map({
-                            return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Bars", snapshots: $0)]
+                            return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Bars", snapshots: $0),SnapshotSectionModel.loadingSectionModel()]
                         })
                     
                 }
