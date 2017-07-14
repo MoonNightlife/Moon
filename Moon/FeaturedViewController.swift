@@ -72,7 +72,7 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
         let width = self.view.frame.size.width - 40
         
         let view = FeaturedEventView()
-        view.frame = CGRect(x: (cell.frame.size.width / 2) - (width / 2), y: (cell.frame.size.height / 2) - (height / 2), width: width, height: height)
+        view.frame = CGRect(x: (cell.frame.size.width / 2) - (width / 2), y: 0, width: width, height: height)
         view.backgroundColor = .clear
         view.initializeCell()
         populate(view: view, indexPath: indexPath)
