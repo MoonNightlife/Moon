@@ -47,8 +47,9 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
         super.viewDidLoad()
         
         suggestedBarCollectionView.delegate = self
-        
         suggestedUserColletionView.showsHorizontalScrollIndicator = false
+        
+        suggestedUserColletionView.delegate = self
         
         configureDataSource()
         prepareLabels()
@@ -112,6 +113,18 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
         return flowLayout!
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var cellSize = CGFloat(0.0)
+        
+        if collectionView == suggestedUserColletionView {
+            cellSize = collectionView.frame.size.height * 0.90
+        } else if collectionView == suggestedBarCollectionView {
+            cellSize = collectionView.frame.size.height * 0.526
+        }
+        
+        return CGSize(width: cellSize, height: cellSize)
+    }
+    
     fileprivate func configureDataSource() {
         barDataSource.configureCell = {
             [weak self] dataSource, collectionView, indexPath, item in
@@ -120,15 +133,11 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
             
             collectionView.collectionViewLayout = (self?.cellsPerRowVertical(cells: 2, collectionView: collectionView))!
             
-            let cellSize = (collectionView.frame.size.height * 0.526)
-            cell.frame.size.height = cellSize
-            cell.frame.size.width = cellSize
-            
-            let width = cellSize - 20
-            let height = width - 10
+            let width = cell.frame.size.width - 20
+            let height = width - 15
             
             let view = BarCollectionView()
-            view.frame = CGRect(x: (cellSize / 2) - (width / 2), y: (cellSize / 2) - (height / 2), width: width, height: height)
+            view.frame = CGRect(x: (cell.frame.size.width / 2) - (width / 2), y: (cell.frame.size.width / 2) - (height / 2), width: width, height: height)
             view.backgroundColor = .clear
             
             if let strongSelf = self {
@@ -154,14 +163,11 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
             
             collectionView.collectionViewLayout = (self?.cellsPerRowHorizontal(cells: 1, collectionView: collectionView))!
             
-            let cellSize = collectionView.frame.size.height * 0.96
-            cell.frame.size.height = cellSize
-            cell.frame.size.width = cellSize
-            
-            let height = cell.frame.height - 5
-            let width = cell.frame.size.width
+            let width = cell.frame.width - 5
+            let height = cell.frame.size.height - 20
             
             let view = UserCollectionView()
+        
             view.frame = CGRect(x: 0, y: 0, width: width, height: height)
             view.backgroundColor = .clear
             
@@ -178,6 +184,7 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
             }
             
             cell.addSubview(view)
+            cell.layoutIfNeeded()
             return cell
         }
     }
@@ -218,7 +225,8 @@ extension ContentSuggestionsViewController {
             }).addDisposableTo(view.bag)
 
         } else {
-            view.imageView.image = #imageLiteral(resourceName: "DefaultProfilePic")
+            let image = view.imageView.resizeImage(image: #imageLiteral(resourceName: "DefaultProfilePic"), targetSize: CGSize(width: 5, height: 5))
+            view.imageView.image = image
         }
     
         // Bind labels

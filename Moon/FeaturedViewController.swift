@@ -15,7 +15,7 @@ import iCarousel
 import RxCocoa
 import RxSwift
 
-class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, BindableType {
+class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, BindableType {
     
     var viewModel: FeaturedViewModel!
     let featuredCellIdenifier = "featuredEventCell"
@@ -36,6 +36,7 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
         eventCollectionView.isUserInteractionEnabled = true
         eventCollectionView.isScrollEnabled = true
         eventCollectionView.alwaysBounceVertical = true
+        eventCollectionView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,21 +55,45 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
         return viewModel.featuredEvents.value.count
     }
     
+    fileprivate func cellsPerRowVertical(cells: Int, collectionView: UICollectionView) -> UICollectionViewFlowLayout {
+        let numberOfCellsPerRow: CGFloat = CGFloat(cells)
+        
+        let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
+        
+        let horizontalSpacing = flowLayout?.scrollDirection == .vertical ? flowLayout?.minimumInteritemSpacing: flowLayout?.minimumLineSpacing
+        
+        let cellWidth = ((self.view.frame.width) - max(0, numberOfCellsPerRow - 1) * horizontalSpacing!)/numberOfCellsPerRow
+        
+        flowLayout?.itemSize = CGSize(width: cellWidth, height: cellWidth)
+        
+        return flowLayout!
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let cellsAcross: CGFloat = CGFloat(viewModel.featuredEvents.value.count)
-        let spaceBetweenCells: CGFloat = 0.8
-        let dim = (collectionView.bounds.width - (cellsAcross - 1) * spaceBetweenCells) / cellsAcross
+        //let cellsAcross: CGFloat = CGFloat(viewModel.featuredEvents.value.count)
+        //let spaceBetweenCells: CGFloat = 0.8
+        //let dim = (collectionView.bounds.height - (cellsAcross - 1) * spaceBetweenCells) / cellsAcross
         
-        return CGSize(width: self.view.frame.width, height: dim)
+        return CGSize(width: self.view.frame.width, height: 300)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         //swiftlint:disable:next force_cast
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredCellIdenifier, for: indexPath)
         cell.clearsContextBeforeDrawing = true
+        
+        collectionView.collectionViewLayout = (self.cellsPerRowVertical(cells: 1, collectionView: collectionView))
                 
-        let height = CGFloat(350)
+        let height = cell.frame.size.height
         let width = self.view.frame.size.width - 40
         
         let view = FeaturedEventView()
@@ -84,6 +109,7 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
             }
         }
         
+        cell.layoutIfNeeded()
         cell.addSubview(view)
         
         return cell

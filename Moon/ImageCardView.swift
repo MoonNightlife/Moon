@@ -85,12 +85,13 @@ extension ImageCardView {
     fileprivate func prepareImageView() {
         imageView = UIImageView(frame:  CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height / 1.2))
         imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        imageView.contentMode = UIViewContentMode.scaleAspectFill
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
     }
     
     fileprivate func prepareGradiendImage() {
         imageView = BottomGradientImageView(frame:  CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height / 1.2)) as BottomGradientImageView!
+        imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
     }

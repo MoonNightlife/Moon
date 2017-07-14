@@ -43,7 +43,9 @@ extension UserCollectionView {
         nameLabel = UILabel()
         nameLabel.textColor = .lightGray
         nameLabel.font = UIFont(name: "Roboto", size: 10)
+        nameLabel.text = ""
         nameLabel.sizeToFit()
+        nameLabel.lineBreakMode = .byTruncatingTail
     }
     
     fileprivate func prepareAddFriendButton() {

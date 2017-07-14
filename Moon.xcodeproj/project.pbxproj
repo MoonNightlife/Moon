@@ -25,6 +25,7 @@
 		C0552C5C1EE0922A007B84F6 /* Moon_Title2.png in Resources */ = {isa = PBXBuildFile; fileRef = C0552C5B1EE0922A007B84F6 /* Moon_Title2.png */; };
 		C0552C661EE0A1FB007B84F6 /* facebookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C0552C651EE0A1FB007B84F6 /* facebookButton.png */; };
 		C0552C681EE0A200007B84F6 /* googleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C0552C671EE0A200007B84F6 /* googleButton.png */; };
+		C08197281F1969F4008267A8 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08197271F1969F4008267A8 /* Images.swift */; };
 		C08AFB291EECBA4F007D33D6 /* ImageCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08AFB281EECBA4F007D33D6 /* ImageCardView.swift */; };
 		C0949D951EEDD1F500C6F72C /* MoonToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0949D941EEDD1F500C6F72C /* MoonToolbar.swift */; };
 		C0949D981EF0286C00C6F72C /* BarCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0949D971EF0286C00C6F72C /* BarCollectionView.swift */; };
@@ -286,6 +287,7 @@
 		C0552C5B1EE0922A007B84F6 /* Moon_Title2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Moon_Title2.png; sourceTree = "<group>"; };
 		C0552C651EE0A1FB007B84F6 /* facebookButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebookButton.png; sourceTree = "<group>"; };
 		C0552C671EE0A200007B84F6 /* googleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = googleButton.png; sourceTree = "<group>"; };
+		C08197271F1969F4008267A8 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		C08AFB281EECBA4F007D33D6 /* ImageCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCardView.swift; sourceTree = "<group>"; };
 		C0949D941EEDD1F500C6F72C /* MoonToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonToolbar.swift; sourceTree = "<group>"; };
 		C0949D971EF0286C00C6F72C /* BarCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarCollectionView.swift; sourceTree = "<group>"; };
@@ -1228,6 +1230,7 @@
 				F0A2251E1ECB9F2600170927 /* MoonFont.swift */,
 				F0A8FE171F01857F003044B1 /* Array.swift */,
 				F03322431F16565800FD72CD /* ViewController.swift */,
+				C08197271F1969F4008267A8 /* Images.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1711,6 +1714,7 @@
 				F04A6D561EEEF931000D898B /* SearchTableViewCell.swift in Sources */,
 				F0CA18AF1EE5AA6C00428318 /* BarActivityFeedViewModel.swift in Sources */,
 				F0CF158E1EDEED8600531DCF /* NameViewModel.swift in Sources */,
+				C08197281F1969F4008267A8 /* Images.swift in Sources */,
 				F0EF693E1EF09AD90028A32B /* BackType.swift in Sources */,
 				F0CA18B31EE5AE7500428318 /* Enums.swift in Sources */,
 				C0F45BA61EEB19D8008ED6A7 /* PeopleGoingCarouselView.swift in Sources */,

@@ -53,6 +53,9 @@ extension PeopleGoingCarouselView {
     
     fileprivate func prepareNameLabel() {
         nameLabel = UILabel()
+        nameLabel.sizeToFit()
+        nameLabel.lineBreakMode = .byTruncatingTail
+        nameLabel.numberOfLines = 0
         nameLabel.text = ""
         nameLabel.font = UIFont(name: "Roboto", size: 10)
         nameLabel.textColor = .lightGray
@@ -87,5 +90,6 @@ extension PeopleGoingCarouselView {
     fileprivate func prepareToolBar() {
         self.bottomToolbar.leftViews = [nameLabel]
         self.bottomToolbar.rightViews = [customView]
+        
     }
 }
