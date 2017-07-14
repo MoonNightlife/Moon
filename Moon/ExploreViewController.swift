@@ -109,12 +109,14 @@ class ExploreViewController: UIViewController, BindableType, UITableViewDelegate
     func configureDataSource() {
         dataSource.configureCell = { [weak self] dataSource, tableView, indexPath, item in
             //swiftlint:disable force_cast
-            let cell = tableView.dequeueReusableCell(withIdentifier: self!.specialCellIdenifier, for: indexPath) as! SpecialTableViewCell
+            
             if let strongSelf = self {
+                let cell = tableView.dequeueReusableCell(withIdentifier: strongSelf.specialCellIdenifier, for: indexPath) as! SpecialTableViewCell
                 cell.initilizeSpecialCell()
                 strongSelf.populate(specialCell: cell, special: item)
+                return cell
             }
-            return cell
+            return UITableViewCell()
         }
     }
     

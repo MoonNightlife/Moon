@@ -38,24 +38,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
             print("Reachability failed!")
         }
         
+//        Auth.auth().addStateDidChangeListener { [unowned self] (_, user) in
+//            if user != nil {
+//                self.prepareEntryViewController(vc: .main)
+//            } else {
+//                self.prepareEntryViewController(vc: .login)
+//            }
+//        }
+        
         if let url = launchOptions?[.url] as? URL {
             return executeDeepLink(with: url)
         } else {
             if let userID = Auth.auth().currentUser?.uid {
+                prepareEntryViewController(vc: .main)
+                return true
                 
                 authAPI.checkForFirstTimeLogin(userId: userID).subscribe(onNext: { [unowned self] firstTime in
                     if firstTime {
                         self.prepareEntryViewController(vc: .login)
-                    } else {
-                        self.prepareEntryViewController(vc: .main)
                     }
                 }).addDisposableTo(bag)
                 
             } else {
                 prepareEntryViewController(vc: .login)
+                return true
             }
-            
-            return true
         }
     }
 
@@ -87,6 +94,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
     }
     
     fileprivate func prepareEntryViewController(vc: LaunchScreen) {
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
         let sceneCoordinator = SceneCoordinator(window: window!)
         
         switch vc {
