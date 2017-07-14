@@ -79,4 +79,11 @@ class MoonToolbar: Toolbar {
         self.contentView.bringSubview(toFront: leftView )
     }
     
+    func getLeftView() -> UIView {
+        return leftView
+    }
+    
+    func getRightView() -> UIView {
+        return rightView
+    }
 }

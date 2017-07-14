@@ -98,8 +98,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4w3-oI-4UM">
-                                                    <rect key="frame" x="120" y="13" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="is going to" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4w3-oI-4UM">
+                                                    <rect key="frame" x="120" y="13" width="79.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -162,6 +162,8 @@
                                                 <constraint firstItem="R1G-Hi-E9a" firstAttribute="leading" secondItem="LgK-2g-9Qc" secondAttribute="trailing" constant="8" id="gX6-fJ-N8b"/>
                                                 <constraint firstItem="R1G-Hi-E9a" firstAttribute="top" secondItem="XSm-rD-Yoo" secondAttribute="bottom" constant="4" id="mlA-yE-SNc"/>
                                                 <constraint firstItem="YOu-Sq-Oca" firstAttribute="centerY" secondItem="4w3-oI-4UM" secondAttribute="centerY" id="pKp-7O-wXR"/>
+                                                <constraint firstItem="YOu-Sq-Oca" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4w3-oI-4UM" secondAttribute="trailing" constant="8" id="umi-gT-3Gw"/>
+                                                <constraint firstItem="yxX-Gr-7RY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="J4E-6C-Uc2" secondAttribute="trailing" constant="8" id="zHe-9F-7Jw"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -193,7 +195,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZZV-ek-MvI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1097" y="-257"/>
+            <point key="canvasLocation" x="1096.8" y="-257.72113943028489"/>
         </scene>
         <!--Delegate-->
         <scene sceneID="r75-hC-0xS">
