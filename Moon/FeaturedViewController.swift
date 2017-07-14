@@ -69,14 +69,14 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
         return flowLayout!
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        //let cellsAcross: CGFloat = CGFloat(viewModel.featuredEvents.value.count)
-        //let spaceBetweenCells: CGFloat = 0.8
-        //let dim = (collectionView.bounds.height - (cellsAcross - 1) * spaceBetweenCells) / cellsAcross
-        
-        return CGSize(width: self.view.frame.width, height: 300)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        
+//        //let cellsAcross: CGFloat = CGFloat(viewModel.featuredEvents.value.count)
+//        //let spaceBetweenCells: CGFloat = 0.8
+//        //let dim = (collectionView.bounds.height - (cellsAcross - 1) * spaceBetweenCells) / cellsAcross
+//        
+//        return CGSize(width: self.view.frame.width, height: 300)
+//    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
@@ -91,9 +91,9 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredCellIdenifier, for: indexPath)
         cell.clearsContextBeforeDrawing = true
         
-        collectionView.collectionViewLayout = (self.cellsPerRowVertical(cells: 1, collectionView: collectionView))
+        //collectionView.collectionViewLayout = (self.cellsPerRowVertical(cells: 1, collectionView: collectionView))
                 
-        let height = cell.frame.size.height
+        let height = CGFloat(330)
         let width = self.view.frame.size.width - 40
         
         let view = FeaturedEventView()
@@ -109,7 +109,7 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
             }
         }
         
-        cell.layoutIfNeeded()
+        //cell.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 250)
         cell.addSubview(view)
         
         return cell
