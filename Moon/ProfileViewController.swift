@@ -52,6 +52,7 @@ class ProfileViewController: UIViewController, BindableType {
         
         viewModel.reload.execute()
         viewModel.reloadPhotos.onNext()
+        viewModel.numberOfFriendRequest.execute()
     }
     
     @IBOutlet weak var exitButton: UIButton!
@@ -109,8 +110,8 @@ class ProfileViewController: UIViewController, BindableType {
             self?.toolBar.title = name
         }).addDisposableTo(bag)
         
-        viewModel.numFriendRequests.asObservable().subscribe(onNext: { [weak self] num in
-            //self?.friendsButton.badgeString = num
+        viewModel.numberOfFriendRequest.elements.subscribe(onNext: { [weak self] num in
+            self?.friendsButton.badgeString = num
         }).addDisposableTo(bag)
     }
     
@@ -146,7 +147,7 @@ class ProfileViewController: UIViewController, BindableType {
     
     private func setUpFriendsButton() {
         friendsButton = MIBadgeButton()
-        friendsButton.badgeEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 0)
+        friendsButton.badgeEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 10)
         friendsButton.setImage(#imageLiteral(resourceName: "friendsIcon"), for: .normal)
     }
     

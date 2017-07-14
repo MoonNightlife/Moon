@@ -63,6 +63,8 @@ class ContactsViewController: UIViewController, BindableType {
                 cell.addFriendButton.rx.action = self?.viewModel.onAddFriend(userID: snapshot.id!)
                 self?.viewModel.downloadImage(url: URL(string: snapshot.pic!)!).elements.bind(to: cell.profilePicture.rx.image).addDisposableTo(cell.bag)
                 return cell
+            case .loading:
+                return UITableViewCell()
             }
 
         }

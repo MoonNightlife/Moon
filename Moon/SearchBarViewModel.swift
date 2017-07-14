@@ -23,12 +23,14 @@ struct SearchBarViewModel: NetworkingInjected, AuthNetworkingInjected {
     var searchText = BehaviorSubject<String>(value: "")
     
     // Outputs
-    var numberOfFriendRequest: Observable<String?> {
-        return self.userAPI.getFriendRequest(userID: self.authAPI.SignedInUserID)
-            .map({
-                return $0.isEmpty ? nil : "\($0.count)"
-            })
-    }
+    lazy var numberOfFriendRequest: Action<Void, String?> = { this in
+        return Action(workFactory: {
+            return this.userAPI.getFriendRequest(userID: this.authAPI.SignedInUserID)
+                .map({
+                    return $0.isEmpty ? nil : "\($0.count)"
+                })
+        })
+    }(self)
     
     init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator
