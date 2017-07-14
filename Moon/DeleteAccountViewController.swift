@@ -10,6 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 import Material
+import SwiftOverlays
 
 class DeleteAccountViewController: UIViewController, BindableType {
     
@@ -27,7 +28,16 @@ class DeleteAccountViewController: UIViewController, BindableType {
 
     func bindViewModel() {
         navBackButton.rx.action = viewModel.onBack()
-        deleteButton.rx.action = viewModel.onDelete()
+        
+        let deleteAction = viewModel.onDelete()
+        deleteButton.rx.action = deleteAction
+        deleteAction.executing.subscribe(onNext: {
+            if $0 {
+                SwiftOverlays.showBlockingWaitOverlayWithText("Deleting Account")
+            } else {
+                SwiftOverlays.removeAllBlockingOverlays()
+            }
+        })
     }
 
     fileprivate func prepareNavigationBackButton() {
