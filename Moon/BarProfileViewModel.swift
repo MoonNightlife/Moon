@@ -96,6 +96,7 @@ class BarProfileViewModel: ImageNetworkingInjected, NetworkingInjected, BackType
     func onAttendBar() -> CocoaAction {
         return CocoaAction { [unowned self] _ in
             return self.userAPI.goToBar(userID: self.authAPI.SignedInUserID, barID: self.barID, timeStamp: Date().timeIntervalSince1970)
+                .retryWhen(RxErrorHandlers.retryHandler)
         }
     }
     

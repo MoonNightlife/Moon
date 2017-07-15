@@ -204,9 +204,19 @@ extension ExploreViewController: iCarouselDataSource, iCarouselDelegate {
             view.moreButton.rx.action = viewModel.showBar(barID: id)
             
             let attendAction = viewModel.onChangeAttendence(barID: id)
+            
+            attendAction.executionObservables.flatMap({
+                return $0.do(onError: { _ in
+                    view.toggleGoButtonAndCount()
+                }, onSubscribe: { _ in
+                    view.toggleGoButtonAndCount()
+                }).catchErrorJustReturn()
+            })
+            .subscribe()
+            .disposed(by: view.bag)
+            
             view.goButton.rx.action = attendAction
             attendAction.elements.do(onNext: { [weak self] _ in
-                view.toggleGoButtonAndCount()
                 self?.changeTopBarsGoingButtons()
             }).subscribe().disposed(by: view.bag)
             

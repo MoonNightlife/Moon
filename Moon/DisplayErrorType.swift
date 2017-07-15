@@ -30,6 +30,6 @@ extension DisplayErrorType {
             message.title = "Couldn't load data"
         }
         
-        Whisper.show(whistle: message, action: .show(3))
+        Whisper.show(whistle: message)
     }
 }

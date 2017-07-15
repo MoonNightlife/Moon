@@ -13,7 +13,7 @@ import iCarousel
 import Material
 import MaterialComponents.MaterialCollections
 
-class BarProfileViewController: UIViewController, UIScrollViewDelegate, BindableType {
+class BarProfileViewController: UIViewController, UIScrollViewDelegate, BindableType, DisplayErrorType {
     @IBOutlet weak var segmentControl: ADVSegmentedControl!
 
     @IBOutlet weak var toolBar: Toolbar!
@@ -91,11 +91,21 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         let attendAction = viewModel.onAttendBar()
         goButton.rx.action = attendAction
         
-        attendAction.elements.do(onNext: { [weak self] numGoing in
-            self?.toggleGoButtonAndNumGoing()
-        }).subscribe(onNext: { [weak self] _ in
-            self?.viewModel.reloadDisplayUsers.onNext()
-        }).addDisposableTo(bag)
+        attendAction.executionObservables.flatMap({
+            return $0
+                .do(onError: { [weak self] _ in
+                    self?.toggleGoButtonAndNumGoing()
+                }, onSubscribe: { [weak self] _ in
+                    self?.toggleGoButtonAndNumGoing()
+                }).catchErrorJustReturn()
+        })
+        .subscribe()
+        .addDisposableTo(bag)
+
+        attendAction.elements
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.reloadDisplayUsers.onNext()
+            }).addDisposableTo(bag)
         
         viewModel.isAttending.subscribe(onNext: { [weak self] isAttending in
             if isAttending {
