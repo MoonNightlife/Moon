@@ -31,6 +31,7 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
     var backButton: UIBarButtonItem!
     var moreInfoButton: IconButton!
     var goButton: IconButton!
+    var usersGoing: Int = 0
     
     //Constraints outlets
     @IBOutlet weak var pictureCarouselConstraint: NSLayoutConstraint!
@@ -71,12 +72,16 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         // Dispose of any resources that can be recreated.
     }
     
-    private func toggleGoButton() {
+    private func toggleGoButtonAndNumGoing() {
         if goButton.image == #imageLiteral(resourceName: "goButton") {
             goButton.image = #imageLiteral(resourceName: "thereIcon")
+            usersGoing += 1
         } else if goButton.image == #imageLiteral(resourceName: "thereIcon") {
             goButton.image = #imageLiteral(resourceName: "goButton")
+            usersGoing -= 1
         }
+        
+        toolBar.titleLabel.attributedText = createUsersGoingString(usersGoing: usersGoing)
     }
     
     func bindViewModel() {
@@ -85,8 +90,9 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
         
         let attendAction = viewModel.onAttendBar()
         goButton.rx.action = attendAction
-        attendAction.elements.do(onNext: { [weak self] _ in
-            self?.toggleGoButton()
+        
+        attendAction.elements.do(onNext: { [weak self] numGoing in
+            self?.toggleGoButtonAndNumGoing()
         }).subscribe(onNext: { [weak self] _ in
             self?.viewModel.reloadDisplayUsers.onNext()
         }).addDisposableTo(bag)
@@ -125,7 +131,9 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
             self?.eventsCarousel.reloadData()
         }).addDisposableTo(bag)
         
-        viewModel.numPeopleAttending.map({ (numGoing) -> NSMutableAttributedString in
+        viewModel.numPeopleAttending.do(onNext: { [weak self] numGoing in
+            self?.usersGoing = Int(numGoing) ?? 0
+        }).map({ (numGoing) -> NSMutableAttributedString in
             //Adding going icon to the right of the title label
             let fullString = NSMutableAttributedString(string: " ")
             
@@ -140,10 +148,24 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
             
             return fullString
         }).subscribe(onNext: { [weak self] numGoing in
-            print(numGoing)
             self?.toolBar.titleLabel.attributedText = numGoing
         }).addDisposableTo(bag)
         
+    }
+    
+    func createUsersGoingString(usersGoing: Int) -> NSAttributedString {
+        let fullString = NSMutableAttributedString(string: " ")
+        
+        let attachment = NSTextAttachment()
+        attachment.image = #imageLiteral(resourceName: "goingIcon")
+        attachment.bounds = CGRect(x: 0, y: -5, width: 16, height: 16)
+        
+        let attachmentString = NSAttributedString(attachment: attachment)
+        
+        fullString.append(attachmentString)
+        fullString.append(NSAttributedString(string: " " + "\(usersGoing)"))
+        
+        return fullString
     }
     
     func prepareScrollView() {

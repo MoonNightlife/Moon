@@ -159,6 +159,16 @@ class ExploreViewController: UIViewController, BindableType, UITableViewDelegate
             cell.mainImage.backgroundColor = UIColor.moonGrey
         }
     }
+    
+    func changeTopBarsGoingButtons() {
+        for i in 0..<topBarCarousel.numberOfItems {
+            if let view = topBarCarousel.itemView(at: i) as? ImageViewCell {
+                if view.goButton.image == #imageLiteral(resourceName: "thereIcon"), view != topBarCarousel.currentItemView {
+                    view.toggleGoButtonAndCount()
+                }
+            }
+        }
+    }
 
 }
 
@@ -195,8 +205,9 @@ extension ExploreViewController: iCarouselDataSource, iCarouselDelegate {
             
             let attendAction = viewModel.onChangeAttendence(barID: id)
             view.goButton.rx.action = attendAction
-            attendAction.elements.do(onNext: {
-                view.toggleGoButton()
+            attendAction.elements.do(onNext: { [weak self] _ in
+                view.toggleGoButtonAndCount()
+                self?.changeTopBarsGoingButtons()
             }).subscribe().disposed(by: view.bag)
             
             let isAttending = viewModel.isAttendingBar(barID: id)
@@ -217,19 +228,8 @@ extension ExploreViewController: iCarouselDataSource, iCarouselDelegate {
         
         view.toolbar.title = bar.name
         
-        let fullString = NSMutableAttributedString(string: " ")
-        
-        let attachment = NSTextAttachment()
-        attachment.image = #imageLiteral(resourceName: "goingIcon")
-        attachment.bounds = CGRect(x: 0, y: -5, width: 16, height: 16)
-        
-        let attachmentString = NSAttributedString(attachment: attachment)
-        
-        fullString.append(attachmentString)
-        fullString.append(NSAttributedString(string: " " + "\(bar.usersGoing ?? 0)"))
-        
-        view.toolbar.detailLabel.attributedText = fullString
-
+        view.usersGoingCount = bar.usersGoing ?? 0
+        view.toolbar.detailLabel.attributedText = view.createUsersGoingString(usersGoing: bar.usersGoing ?? 0)
     }
 }
 
