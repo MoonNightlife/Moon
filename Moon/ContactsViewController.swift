@@ -13,8 +13,9 @@ import RxSwift
 import Material
 import RxDataSources
 import SwiftOverlays
+import MessageUI
 
-class ContactsViewController: UIViewController, BindableType {
+class ContactsViewController: UIViewController, BindableType, MFMessageComposeViewControllerDelegate {
 
     var viewModel: ContactsViewModel!
     var navBackButton: UIBarButtonItem!
@@ -92,16 +93,40 @@ class ContactsViewController: UIViewController, BindableType {
                 cell.detailTextLabel?.text = phoneNumber
                 cell.detailTextLabel?.font = UIFont.moonFont(size: 14)
                 
-                let inviteButton = UIButton(type: UIButtonType.roundedRect)
+                var inviteButton = UIButton(type: UIButtonType.roundedRect)
                 inviteButton.setTitle("Invite", for: .normal)
                 inviteButton.tintColor = .lightGray
                 cell.accessoryView = inviteButton
                 inviteButton.sizeToFit()
+                inviteButton.rx.action = self?.onSendInviteMessage(phoneNumber: phoneNumber)
                 
                 return cell
             }
 
         }
+    }
+    
+    func onSendInviteMessage(phoneNumber: String) -> CocoaAction {
+        return CocoaAction {
+            return Observable.create({ [weak self] observer in
+                let messageVC = MFMessageComposeViewController()
+                
+                messageVC.body = "Come try out moon https://tinyurl.com/moonnightlife"
+                messageVC.recipients = [phoneNumber]
+                messageVC.messageComposeDelegate = self
+                
+                self?.present(messageVC, animated: false, completion: {
+                    observer.onCompleted()
+                })
+        
+                return Disposables.create()
+            })
+        }
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        //... handle sms screen actions
+        self.dismiss(animated: true, completion: nil)
     }
 
     func showMessage(message: String) {
