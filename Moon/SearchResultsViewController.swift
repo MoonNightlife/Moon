@@ -128,6 +128,8 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
                     cell.contentView.addSubview(strongSelf.indicator)
                 }
                 return cell
+            case .contact(name: _, phoneNumber: _):
+                return UITableViewCell()
             }
             
         }

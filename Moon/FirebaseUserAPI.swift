@@ -370,10 +370,11 @@ extension FirebaseUserAPI {
         })
     }
     
-    func getUserBy(phoneNumbers: [String]) -> Observable<[UserSnapshot]> {
+    func getUserBy(phoneNumbers: [String], userID: String) -> Observable<[UserSnapshot]> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
-                "phoneNumbers": phoneNumbers
+                "phoneNumbers": phoneNumbers,
+                "id": userID
             ]
             let request = Alamofire.request(UserFunction.getUsersByPhoneNumbers, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()

@@ -55,7 +55,7 @@ struct SettingsViewModel: AuthNetworkingInjected, NetworkingInjected {
         username = user.map({
             $0.username ?? ""
         })
-        email = Observable.just(authAPI.SignedInUserEmail)
+        email = user.map { $0.email ?? ""}
     }
     
     func onBack() -> CocoaAction {

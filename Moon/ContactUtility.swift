@@ -13,14 +13,14 @@ import RxSwift
 class ContactUtility {
     
     let contactStore = CNContactStore()
-    let keysToFetch = [CNContactPhoneNumbersKey] as [CNKeyDescriptor]
+    let keysToFetch = [CNContactPhoneNumbersKey, CNContactGivenNameKey, CNContactFamilyNameKey] as [CNKeyDescriptor]
     
-    func getContacts() -> Observable<[String]> {
+    func getContacts() -> Observable<[(name: String, phoneNumber: String)]> {
         return Observable.create({ (observer) -> Disposable in
             let fetchRequest = CNContactFetchRequest(keysToFetch: self.keysToFetch)
             fetchRequest.unifyResults = true
             
-            var phoneNumbers = [String]()
+            var phoneNumbers = [(name: String, phoneNumber: String)]()
             do {
                 try self.contactStore.enumerateContacts(with: fetchRequest, usingBlock: { (contact, _) in
                     let numbers = self.phoneNumbersFrom(contact: contact)
@@ -36,11 +36,15 @@ class ContactUtility {
         })
     }
     
-    private func phoneNumbersFrom(contact: CNContact) -> [String] {
-        var phoneNumbers = [String]()
+    private func phoneNumbersFrom(contact: CNContact) -> [(name: String, phoneNumber: String)] {
+        var phoneNumbers = [(name: String, phoneNumber: String)]()
         
-        contact.phoneNumbers.forEach { (labeledNumbers) in
-            phoneNumbers.append(labeledNumbers.value.stringValue)
+        contact.phoneNumbers.forEach { (labeledNumber) in
+            if labeledNumber.label == CNLabelPhoneNumberiPhone {
+                phoneNumbers.append((contact.givenName + " " + contact.familyName, labeledNumber.value.stringValue))
+            } else if labeledNumber.label == CNLabelPhoneNumberMobile {
+                phoneNumbers.append((contact.givenName + " " + contact.familyName, labeledNumber.value.stringValue))
+            }
         }
         
         return phoneNumbers

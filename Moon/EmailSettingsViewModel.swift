@@ -42,6 +42,9 @@ struct EmailSettingsViewModel: AuthNetworkingInjected, NetworkingInjected {
             return Observable.just().withLatestFrom(self.newEmailAddress).filterNil().flatMap({
                 return self.userAPI.update(email: $0, for: self.authAPI.SignedInUserID)
             })
+            .flatMap({
+                return self.sceneCoordinator.pop()
+            })
         })
     }
 }

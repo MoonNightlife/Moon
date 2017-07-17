@@ -121,14 +121,13 @@
                                                         <constraint firstAttribute="height" constant="30" id="1vq-bS-aMm"/>
                                                         <constraint firstAttribute="width" constant="30" id="chn-lb-qbo"/>
                                                     </constraints>
-                                                    <state key="normal" title="Add"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="VKv-mp-loA" firstAttribute="centerY" secondItem="uJp-Ew-ENv" secondAttribute="centerY" id="8wH-fe-8bl"/>
                                                 <constraint firstItem="Z6g-B9-c6k" firstAttribute="centerY" secondItem="uJp-Ew-ENv" secondAttribute="centerY" id="K5s-fD-91e"/>
                                                 <constraint firstItem="VKv-mp-loA" firstAttribute="leading" secondItem="Z6g-B9-c6k" secondAttribute="trailing" constant="8" symbolic="YES" id="X5x-7w-DJa"/>
-                                                <constraint firstItem="VKv-mp-loA" firstAttribute="baseline" secondItem="nsO-y2-lrD" secondAttribute="baseline" id="d8Q-Wk-51w"/>
+                                                <constraint firstItem="nsO-y2-lrD" firstAttribute="centerY" secondItem="VKv-mp-loA" secondAttribute="centerY" id="cSW-36-xpo"/>
                                                 <constraint firstItem="Z6g-B9-c6k" firstAttribute="leading" secondItem="uJp-Ew-ENv" secondAttribute="leadingMargin" id="kRZ-AL-cpT"/>
                                                 <constraint firstItem="nsO-y2-lrD" firstAttribute="leading" secondItem="VKv-mp-loA" secondAttribute="trailing" constant="8" symbolic="YES" id="upc-u7-jv5"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="nsO-y2-lrD" secondAttribute="trailing" id="vRL-iI-4rb"/>
@@ -269,7 +268,7 @@
             <objects>
                 <navigationController storyboardIdentifier="CountryCodeNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gcj-bz-Nj7" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="bfb-kP-X7a">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bfb-kP-X7a">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -287,7 +286,7 @@
             <objects>
                 <navigationController storyboardIdentifier="EnterPhoneNumberNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="B6l-EZ-kKi" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="4eO-Vb-HMK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4eO-Vb-HMK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

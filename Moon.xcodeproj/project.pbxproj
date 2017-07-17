@@ -144,8 +144,6 @@
 		F06B56FD1EFAA8750028552A /* RxDataSourceUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B56FC1EFAA8750028552A /* RxDataSourceUserModel.swift */; };
 		F06B56FF1EFAAFD50028552A /* FriendRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B56FE1EFAAFD50028552A /* FriendRequestTableViewCell.swift */; };
 		F07757B01F13FD9800B659D9 /* BarSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07757AF1F13FD9800B659D9 /* BarSnapshot.swift */; };
-		F07C06221EF1958F00B78865 /* BarAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06211EF1958F00B78865 /* BarAPIController.swift */; };
-		F07C06241EF195A500B78865 /* UserAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06231EF195A500B78865 /* UserAPIController.swift */; };
 		F07C06261EF19D7400B78865 /* RxErrorHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06251EF19D7400B78865 /* RxErrorHandlers.swift */; };
 		F07C31BB1F05B65C00EB5793 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F07C31BA1F05B65C00EB5793 /* GoogleService-Info.plist */; };
 		F07F694B1EFAED22000F854D /* DeepLinking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07F694A1EFAED22000F854D /* DeepLinking.swift */; };
@@ -411,8 +409,6 @@
 		F06B56FC1EFAA8750028552A /* RxDataSourceUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxDataSourceUserModel.swift; sourceTree = "<group>"; };
 		F06B56FE1EFAAFD50028552A /* FriendRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestTableViewCell.swift; sourceTree = "<group>"; };
 		F07757AF1F13FD9800B659D9 /* BarSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarSnapshot.swift; sourceTree = "<group>"; };
-		F07C06211EF1958F00B78865 /* BarAPIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAPIController.swift; sourceTree = "<group>"; };
-		F07C06231EF195A500B78865 /* UserAPIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPIController.swift; sourceTree = "<group>"; };
 		F07C06251EF19D7400B78865 /* RxErrorHandlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxErrorHandlers.swift; sourceTree = "<group>"; };
 		F07C31BA1F05B65C00EB5793 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F07F694A1EFAED22000F854D /* DeepLinking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepLinking.swift; sourceTree = "<group>"; };
@@ -1013,8 +1009,6 @@
 			isa = PBXGroup;
 			children = (
 				F034044B1F0D6C1800475FDF /* Service Protocols */,
-				F07C06211EF1958F00B78865 /* BarAPIController.swift */,
-				F07C06231EF195A500B78865 /* UserAPIController.swift */,
 				F0C72F431EF81D7700B25C52 /* KingFisherPhotoService.swift */,
 				F0C66BDE1EF41C9400B22811 /* SinchService.swift */,
 				F0ED6B3C1F057909005D04D6 /* FirebaseUserAPI.swift */,
@@ -1663,7 +1657,6 @@
 				F03C78BC1EE9E97E002AEDAD /* EmailSettingsViewController.swift in Sources */,
 				F049896C1EE068BE00064F58 /* SceneTransitionType.swift in Sources */,
 				F04B437C1F058F2800946C82 /* BarEvent.swift in Sources */,
-				F07C06241EF195A500B78865 /* UserAPIController.swift in Sources */,
 				F03C78C01EE9E99D002AEDAD /* DeleteAccountViewController.swift in Sources */,
 				F0E8627F1EF6B8DB00BEF5E9 /* EditProfileViewController.swift in Sources */,
 				C0949D981EF0286C00C6F72C /* BarCollectionView.swift in Sources */,
@@ -1701,7 +1694,6 @@
 				F049896E1EE068E000064F58 /* SceneCoordinator.swift in Sources */,
 				F0055D691EC5E64B005544B4 /* CityOverviewViewController.swift in Sources */,
 				F04989641EE0641300064F58 /* Scene.swift in Sources */,
-				F07C06221EF1958F00B78865 /* BarAPIController.swift in Sources */,
 				F06B42321EFDAE9900BE7626 /* DynamicLinkingAPI.swift in Sources */,
 				F0388CFB1EE9D40B00E8ED48 /* BarProfileViewController.swift in Sources */,
 				F0CF159C1EDEEEA100531DCF /* PasswordsViewController.swift in Sources */,
