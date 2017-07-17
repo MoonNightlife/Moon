@@ -10,19 +10,15 @@ import Foundation
 
 enum CountryCode: Int {
     case US = 1
-    case BZ = 55
-    case UK = 44
 }
 
 extension CountryCode {
     
     static let countryNames = [
-        US: "United States",
-        BZ: "Brazil",
-        UK: "United Kingdom"
+        US: "United States"
     ]
     
-    static let index = [US, BZ, UK]
+    static let index = [US]
     
     static func getCodeFor(index: Int) -> CountryCode {
         return CountryCode.index[index] 
@@ -32,7 +28,7 @@ extension CountryCode {
         if let codeName = CountryCode.countryNames[self] {
             return codeName + " +(\(self.rawValue))"
         } else {
-            fatalError("No name for country")
+            fatalError("No name for country, must add name to countryNames dictionary")
         }
     }
     

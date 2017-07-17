@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 import RxDataSources
 
-struct ContactsViewModel: BackType, ImageNetworkingInjected, NetworkingInjected {
+struct ContactsViewModel: BackType, ImageNetworkingInjected, NetworkingInjected, PhoneNumberValidationInjected {
     // Private
     let bag = DisposeBag()
     
@@ -24,7 +24,18 @@ struct ContactsViewModel: BackType, ImageNetworkingInjected, NetworkingInjected 
     var checkContactAccess: Action<Void, Bool>
     
     // Outputs
-    var UserInContacts: Observable<[SnapshotSectionModel]>
+    var UserInContacts: Observable<[SnapshotSectionModel]> {
+        return checkContactAccess.elements.filter({ $0 }).flatMap({ _ -> Observable<[String]> in
+            return self.getPhoneNumbers(service: self.contactService)
+            })
+            .flatMap({_ in
+                //TODO: get users with phonenumbers
+                return Observable.empty()
+            })
+            .map({
+                return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users", snapshots: $0)]
+            })
+    }
     
     init(coordinator: SceneCoordinatorType, contactService: ContactUtility = ContactUtility()) {
         self.sceneCoordinator = coordinator
@@ -34,23 +45,13 @@ struct ContactsViewModel: BackType, ImageNetworkingInjected, NetworkingInjected 
             return contactService.requestForAccess()
         })
         
-        UserInContacts = checkContactAccess.elements.filter({ $0 }).flatMap({ _ -> Observable<[String]> in
-                return ContactsViewModel.getPhoneNumbers(service: contactService)
-            })
-            .flatMap({_ in 
-                //TODO: get users with phonenumbers
-                return Observable.empty()
-            })
-            .map({
-                return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users", snapshots: $0)]
-            })
         
     }
     
-    static func getPhoneNumbers(service: ContactUtility) -> Observable<[String]> {
+    func getPhoneNumbers(service: ContactUtility) -> Observable<[String]> {
         return service.getContacts().map({
             return $0.flatMap({
-                SinchService.formatPhoneNumberForStorageFrom(string: $0, countryCode: CountryCode.US)
+                self.phoneNumberService.formatPhoneNumberForStorageFrom(string: $0, countryCode: CountryCode.US)
             })
         })
     }

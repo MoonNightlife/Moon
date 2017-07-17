@@ -43,7 +43,6 @@ protocol AuthAPIType {
     func checkUsername(username: String) -> Observable<Bool>
     
     func resetPassword(email: String) -> Observable<Void>
-    func updateEmail(email: String) -> Observable<Void>
     func deleteAccountForSignedInUser() -> Observable<Void>
     func changePasswordForSignedInUser(newPassword: String) -> Observable<Void>
     

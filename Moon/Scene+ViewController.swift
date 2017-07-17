@@ -188,9 +188,10 @@ extension Scene.UserDiscovery {
         let storyBoard = UIStoryboard(name: "UserDiscovery", bundle: nil)
         switch self {
         case .enterPhoneNumber(let viewModel):
-            var vc = storyBoard.instantiateViewController(withIdentifier: "EnterPhoneNumber") as! EnterPhoneNumberViewController
+            let nc = storyBoard.instantiateViewController(withIdentifier: "EnterPhoneNumberNavigationController") as! UINavigationController
+            var vc = nc.viewControllers.first as! EnterPhoneNumberViewController
             vc.bindViewModel(to: viewModel)
-            return vc
+            return nc
         case .enterCode(let viewModel):
             var vc = storyBoard.instantiateViewController(withIdentifier: "EnterCode") as! EnterCodeViewController
             vc.bindViewModel(to: viewModel)

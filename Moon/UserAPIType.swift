@@ -35,6 +35,9 @@ protocol UserAPIType {
     func getActivityLikers(activityID: String) -> Observable<[UserSnapshot]>
     func getActivityFeed(userID: String) -> Observable<[Activity]>
     func searchForUser(searchText: String) -> Observable<[UserSnapshot]>
+    func update(email: String, for userID: String) -> Observable<Void>
+    func add(phoneNumber: String, for userID: String) -> Observable<Void>
+    func getUserBy(phoneNumbers: [String]) -> Observable<[UserSnapshot]>
     
     // Actions
     func goToBar(userID: String, barID: String, timeStamp: Double) -> Observable<Void>

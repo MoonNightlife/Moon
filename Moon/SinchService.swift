@@ -10,16 +10,17 @@ import Foundation
 import SinchVerification
 import RxSwift
 
-class SinchService: NSObject, SMSValidationService {
+class SinchService: SMSValidationService {
     
     enum SinchError: Error {
-        case formattingError
+        case formattingFailed
+        case verificationFailed
     }
     
     private let sinchAPIKey = "1c4d1e22-0863-479a-8d15-4ecc6d2f6807"
     private var verification: SINVerificationProtocol?
     
-    static func formatPhoneNumberForGuiFrom(string: String, countryCode: CountryCode) -> String? {
+    func formatPhoneNumberForGuiFrom(string: String, countryCode: CountryCode) -> String? {
         do {
             let phoneNumber = try SINPhoneNumberUtil().parse(string, defaultRegion: countryCode.isoAlpha2)
             return SINPhoneNumberUtil().formatNumber(phoneNumber, format: .national)
@@ -28,7 +29,7 @@ class SinchService: NSObject, SMSValidationService {
         }
     }
     
-    static func formatPhoneNumberForStorageFrom(string: String, countryCode: CountryCode) -> String? {
+    func formatPhoneNumberForStorageFrom(string: String, countryCode: CountryCode) -> String? {
         do {
             let phoneNumber = try SINPhoneNumberUtil().parse(string, defaultRegion: countryCode.isoAlpha2)
             return SINPhoneNumberUtil().formatNumber(phoneNumber, format: .E164)
@@ -42,51 +43,46 @@ class SinchService: NSObject, SMSValidationService {
         return SINDeviceRegion.currentCountryCode()
     }
     
-//    func sendVerificationCodeTo(PhoneNumber phoneNumber: String) -> Observable<Void> {
-//        
-//        return Observable.create({ (observer) -> Disposable in
-//            let defaultRegion = self.getDevicesCountryCode()
-//            do {
-//                let phoneNumber = try SINPhoneNumberUtil().parse(phoneNumber, defaultRegion: defaultRegion)
-//                let phoneNumberInE164 = SINPhoneNumberUtil().formatNumber(phoneNumber, format: .E164)
-//                let verification = SINVerification.smsVerification(withApplicationKey: self.sinchAPIKey, phoneNumber: phoneNumberInE164)
-//                // retain the verification instance
-//                self.verification = verification
-//                verification.initiate(completionHandler: {(success, error) -> Void in
-//                    if success {
-//                        observer.onNext(.Success)
-//                    } else if let e = error {
-//                        observer.onError(e)
-//                    }
-//                    observer.onCompleted()
-//                })
-//            } catch {
-//                observer.onError(SinchError.formattingError)
-//                observer.onCompleted()
-//            }
-//            return AnonymousDisposable {
-//                
-//            }
-//        })
-//    }
-//    
-//    func verifyNumberWith(Code code: String) -> Observable<Void> {
-//        return Observable.create({ (observer) -> Disposable in
-//            self.verification!.verifyCode(code, completionHandler: {(success: Bool, error: NSError?) -> Void in
-//                if success {
-//                    observer.onNext(.Success)
-//                } else {
-//                    if let error = error {
-//                        observer.onNext(SMSValidationResponse.Error(error: error))
-//                    } else {
-//                        observer.onNext(.Error(error: SMSValidationError.ValidationError))
-//                    }
-//                }
-//                observer.onCompleted()
-//            })
-//            return AnonymousDisposable {
-//                
-//            }
-//        })
-//    }
+    func sendVerificationCodeTo(phoneNumber: String, countryCode: String) -> Observable<Void> {
+        
+        return Observable.create({ (observer) -> Disposable in
+            do {
+                let phoneNumber = try SINPhoneNumberUtil().parse(phoneNumber, defaultRegion: countryCode)
+                let phoneNumberInE164 = SINPhoneNumberUtil().formatNumber(phoneNumber, format: .E164)
+                let verification = SINVerification.smsVerification(withApplicationKey: self.sinchAPIKey, phoneNumber: phoneNumberInE164)
+                // retain the verification instance
+                self.verification = verification
+                verification.initiate(completionHandler: {(result, error) -> Void in
+                    if result.success {
+                        observer.onNext()
+                    } else if let e = error {
+                        observer.onError(e)
+                    }
+                    observer.onCompleted()
+                })
+            } catch {
+                observer.onError(SinchError.formattingFailed)
+                observer.onCompleted()
+            }
+           return Disposables.create()
+        })
+    }
+    
+    func verifyNumberWith(Code code: String) -> Observable<Void> {
+        return Observable.create({ (observer) -> Disposable in
+            self.verification!.verifyCode(code, completionHandler: {(success: Bool, error: Error?) -> Void in
+                if success {
+                    observer.onNext()
+                } else {
+                    if let error = error {
+                        observer.onError(error)
+                    } else {
+                        observer.onError(SinchError.verificationFailed)
+                    }
+                }
+                observer.onCompleted()
+            })
+            return Disposables.create()
+        })
+    }
 }

@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import Action
 
-struct EmailSettingsViewModel: AuthNetworkingInjected {
+struct EmailSettingsViewModel: AuthNetworkingInjected, NetworkingInjected {
     
     var validEmail: Observable<Bool> {
         return newEmailAddress.map(ValidationUtility.validEmail)
@@ -38,9 +38,9 @@ struct EmailSettingsViewModel: AuthNetworkingInjected {
     }
     
     func onUpdateEmail() -> CocoaAction {
-        return CocoaAction(enabledIf: validEmail, workFactory: {
+        return CocoaAction(enabledIf: validEmail, workFactory: {_ in 
             return Observable.just().withLatestFrom(self.newEmailAddress).filterNil().flatMap({
-                return self.authAPI.updateEmail(email: $0)
+                return self.userAPI.update(email: $0, for: self.authAPI.SignedInUserID)
             })
         })
     }
