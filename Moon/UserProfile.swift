@@ -11,6 +11,7 @@ import ObjectMapper
 
 class UserProfile: Mappable {
     var id: String?
+    var email: String?
     var username: String?
     var firstName: String?
     var lastName: String?
@@ -30,6 +31,7 @@ class UserProfile: Mappable {
     
     func mapping(map: Map) {
         id <- map["id"]
+        email <- map["email"]
         username <- map["username"]
         firstName <- map["firstName"]
         lastName <- map["lastName"]

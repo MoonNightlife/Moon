@@ -10,8 +10,8 @@ import Foundation
 import RxSwift
 
 protocol SMSValidationService {
-    //    func sendVerificationCodeTo(PhoneNumber phoneNumber: String) -> Observable<Void>
-    //    func verifyNumberWith(Code code: String) -> Observable<Void>
-    static func formatPhoneNumberForGuiFrom(string: String, countryCode: CountryCode) -> String?
-    static func formatPhoneNumberForStorageFrom(string: String, countryCode: CountryCode) -> String?
+    func sendVerificationCodeTo(phoneNumber: String, countryCode: String) -> Observable<Void>
+    func verifyNumberWith(Code code: String) -> Observable<Void>
+    func formatPhoneNumberForGuiFrom(string: String, countryCode: CountryCode) -> String?
+    func formatPhoneNumberForStorageFrom(string: String, countryCode: CountryCode) -> String?
 }

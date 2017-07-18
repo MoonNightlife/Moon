@@ -39,6 +39,9 @@ struct FirebaseUserAPI: UserAPIType {
         static let getActivityFeed = userBaseURL + "getActivityFeed"
         static let searchForUser = userBaseURL + "searchUser"
         static let getSuggestedFriends = userBaseURL + "getSuggestedFriends"
+        static let updateEmail = userBaseURL + "updateEmail"
+        static let addPhoneNumber = userBaseURL + "addPhoneNumber"
+        static let getUsersByPhoneNumbers = userBaseURL + "getUsersByPhoneNumber"
         
         static let goToBar = userBaseURL + "goToBar"
         
@@ -319,7 +322,80 @@ extension FirebaseUserAPI {
             }
         })
     }
+    
+    func update(email: String, for userID: String) -> Observable<Void> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": userID,
+                "email": email
+            ]
+
+            let request = Alamofire.request(UserFunction.updateEmail, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .response(completionHandler: {
+                    if let e = $0.error {
+                        observer.onError(e)
+                    } else {
+                        observer.onNext()
+                        observer.onCompleted()
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    
+    func add(phoneNumber: String, for userID: String) -> Observable<Void> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": userID,
+                "phoneNumber": phoneNumber
+            ]
+            let request = Alamofire.request(UserFunction.addPhoneNumber, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .response(completionHandler: {
+                    if let e = $0.error {
+                        observer.onError(e)
+                    } else {
+                        observer.onNext()
+                        observer.onCompleted()
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    
+    func getUserBy(phoneNumbers: [String], userID: String) -> Observable<[UserSnapshot]> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "phoneNumbers": phoneNumbers,
+                "id": userID
+            ]
+            let request = Alamofire.request(UserFunction.getUsersByPhoneNumbers, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseArray(completionHandler: { (response: DataResponse<[UserSnapshot]>) in
+                    switch response.result {
+                    case .success(let snapshots):
+                        observer.onNext(snapshots)
+                        observer.onCompleted()
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+
+    }
 }
+
 // MARK: - Actions
 extension FirebaseUserAPI {
     func goToBar(userID: String, barID: String, timeStamp: Double) -> Observable<Void> {

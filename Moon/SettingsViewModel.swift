@@ -14,7 +14,7 @@ import FirebaseAuth
 
 struct SettingsViewModel: AuthNetworkingInjected, NetworkingInjected {
     
-    // Input
+    // Action
     lazy var showNextScreen: Action<Setting, Void> = { this in
         return Action(workFactory: {
             guard let scene = this.getSceneFor(section: $0) else {
@@ -25,10 +25,18 @@ struct SettingsViewModel: AuthNetworkingInjected, NetworkingInjected {
                     .flatMap({
                         return this.sceneCoordinator.transition(to: scene, type: .root)
                     })
+            } else if case Scene.UserDiscovery.enterPhoneNumber(_) = scene {
+                return this.sceneCoordinator.transition(to: scene, type: .modal)
             } else {
                 return this.sceneCoordinator.transition(to: scene, type: .push)
             }
         })
+    }(self)
+    
+    lazy var loadUserInfo: Action<Void, UserProfile> = { this in
+        return Action {
+            return this.userAPI.getUserProfile(userID: this.authAPI.SignedInUserID)
+        }
     }(self)
     
     // Output
@@ -41,14 +49,13 @@ struct SettingsViewModel: AuthNetworkingInjected, NetworkingInjected {
     
     init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator
-     
-        let user = userAPI.getUserProfile(userID: authAPI.SignedInUserID)
         
+        let user = loadUserInfo.elements
         phoneNumber = user.map { $0.phoneNumber ?? ""}
         username = user.map({
             $0.username ?? ""
         })
-        email = Observable.just(authAPI.SignedInUserEmail)
+        email = user.map { $0.email ?? ""}
     }
     
     func onBack() -> CocoaAction {

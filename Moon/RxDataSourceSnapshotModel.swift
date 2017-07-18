@@ -30,10 +30,13 @@ enum SnapshotSectionItem: IdentifiableType, Equatable {
             return "0"
         case .loading:
             return "0"
+        case let .contact(name, phoneNumber):
+            return name + phoneNumber
         }
     }
     
     case searchResult(snapshot: Snapshot)
+    case contact(name: String, phoneNumber: String)
     case loadMore(loadAction: CocoaAction)
     case loading
 }
@@ -49,6 +52,7 @@ extension SnapshotSectionModel: AnimatableSectionModelType {
             return title
         case let .loading(title, _):
             return title
+            
         }
     }
     
@@ -103,5 +107,12 @@ extension SnapshotSectionModel: AnimatableSectionModelType {
     static func snapshotsToSnapshotSectionModel(withTitle: String, snapshots: [Snapshot]) -> SnapshotSectionModel {
         let items = snapshotsToSnapshotSectionItem(snapshots: snapshots)
         return SnapshotSectionModel.searchResults(title: withTitle, items: items)
+    }
+    
+    static func contactsToSearchResultsSectionModel(title: String, contacts: [(name: String, phoneNumber: String)]) -> SnapshotSectionModel {
+        let items = contacts.map({
+            return SnapshotSectionItem.contact(name: $0.0, phoneNumber: $0.1)
+        })
+        return SnapshotSectionModel.searchResults(title: title, items: items)
     }
 }

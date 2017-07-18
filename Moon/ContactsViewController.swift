@@ -12,8 +12,10 @@ import RxCocoa
 import RxSwift
 import Material
 import RxDataSources
+import SwiftOverlays
+import MessageUI
 
-class ContactsViewController: UIViewController, BindableType {
+class ContactsViewController: UIViewController, BindableType, MFMessageComposeViewControllerDelegate {
 
     var viewModel: ContactsViewModel!
     var navBackButton: UIBarButtonItem!
@@ -37,9 +39,19 @@ class ContactsViewController: UIViewController, BindableType {
     
     func bindViewModel() {
         
+        viewModel.showLoadingIndicator.asObservable()
+            .subscribe(onNext: { [weak self] isLoading in
+                if isLoading {
+                    self?.showWaitOverlayWithText("Fetching Users In Contacts")
+                } else {
+                    self?.removeAllOverlays()
+                }
+            })
+            .addDisposableTo(bag)
+        
         navBackButton.rx.action = viewModel.onBack()
         
-        viewModel.UserInContacts.bind(to: contactsTableView.rx.items(dataSource: dataSource)).addDisposableTo(bag)
+        viewModel.usersInContacts.bind(to: contactsTableView.rx.items(dataSource: dataSource)).addDisposableTo(bag)
         
         viewModel.checkContactAccess.elements.subscribe(onNext: { [weak self] accessGranted in
             if !accessGranted {
@@ -60,14 +72,61 @@ class ContactsViewController: UIViewController, BindableType {
             case let .searchResult(snapshot):
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactTableViewCell
                 cell.name.text = snapshot.name
-                cell.addFriendButton.rx.action = self?.viewModel.onAddFriend(userID: snapshot.id!)
-                self?.viewModel.downloadImage(url: URL(string: snapshot.pic!)!).elements.bind(to: cell.profilePicture.rx.image).addDisposableTo(cell.bag)
+                cell.selectionStyle = .none
+                if let id = snapshot.id {
+                    cell.addFriendButton.rx.action = self?.viewModel.onAddFriend(userID: id)
+                    let downloader = self?.viewModel.getProfileImage(id: id)
+                    downloader?.elements.bind(to: cell.profilePicture.rx.image).addDisposableTo(cell.bag)
+                    downloader?.execute()
+                }
                 return cell
             case .loading:
                 return UITableViewCell()
+            case let .contact(name, phoneNumber):
+                let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "InviteContactCell")
+                
+                cell.selectionStyle = .none
+                
+                cell.textLabel?.text = name
+                cell.textLabel?.font = UIFont.moonFont(size: 16)
+                
+                cell.detailTextLabel?.text = phoneNumber
+                cell.detailTextLabel?.font = UIFont.moonFont(size: 14)
+                
+                var inviteButton = UIButton(type: UIButtonType.roundedRect)
+                inviteButton.setTitle("Invite", for: .normal)
+                inviteButton.tintColor = .lightGray
+                cell.accessoryView = inviteButton
+                inviteButton.sizeToFit()
+                inviteButton.rx.action = self?.onSendInviteMessage(phoneNumber: phoneNumber)
+                
+                return cell
             }
 
         }
+    }
+    
+    func onSendInviteMessage(phoneNumber: String) -> CocoaAction {
+        return CocoaAction {
+            return Observable.create({ [weak self] observer in
+                let messageVC = MFMessageComposeViewController()
+                
+                messageVC.body = "Come try out moon https://tinyurl.com/moonnightlife"
+                messageVC.recipients = [phoneNumber]
+                messageVC.messageComposeDelegate = self
+                
+                self?.present(messageVC, animated: false, completion: {
+                    observer.onCompleted()
+                })
+        
+                return Disposables.create()
+            })
+        }
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        //... handle sms screen actions
+        self.dismiss(animated: true, completion: nil)
     }
 
     func showMessage(message: String) {
@@ -91,7 +150,7 @@ class ContactsViewController: UIViewController, BindableType {
     fileprivate func prepareNavigationBackButton() {
         navBackButton = UIBarButtonItem()
         navBackButton.image = Icon.cm.arrowDownward
-        navBackButton.tintColor = .white
+        navBackButton.tintColor = .lightGray
         self.navigationItem.leftBarButtonItem = navBackButton
     }
 

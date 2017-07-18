@@ -84,7 +84,7 @@ class ValidationUtility: ValidationUtilityType {
 
 extension ValidationUtility {
     // Returns true if there are numbers or special characters
-    static func specialCharactersAndNumbersIn(string: String) -> Bool {
+    fileprivate static func specialCharactersAndNumbersIn(string: String) -> Bool {
         
         let characterset = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ ")
     
@@ -96,7 +96,7 @@ extension ValidationUtility {
     }
     
     // Checks for special characters and uppercase letters and will return true if any are found
-    static func speceialsCharactersAndUpperCaseLettersIn(string: String) -> Bool {
+    fileprivate static func speceialsCharactersAndUpperCaseLettersIn(string: String) -> Bool {
         let characterset = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyz0123456789")
         if string.rangeOfCharacter(from: characterset.inverted) != nil {
             return true
@@ -106,7 +106,7 @@ extension ValidationUtility {
     }
     
     // Returns true if there are white spaces in the string
-    static func whiteSpacesIn(string: String) -> Bool {
+    fileprivate static func whiteSpacesIn(string: String) -> Bool {
         let whitespace = CharacterSet.whitespaces
         
         let range = string.rangeOfCharacter(from: whitespace)
@@ -120,7 +120,7 @@ extension ValidationUtility {
     }
     
     // Returns true if email is in right format
-    static func correctEmailFormat(email: String) -> Bool {
+    fileprivate static func correctEmailFormat(email: String) -> Bool {
         
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         
@@ -128,7 +128,7 @@ extension ValidationUtility {
         return emailTest.evaluate(with: email)
     }
     
-    static func stringHasNonWhiteChars(string: String) -> Bool {
+    fileprivate static func stringHasNonWhiteChars(string: String) -> Bool {
         if !string.trimmingCharacters(in: .whitespaces).isEmpty {
             return true
         } else {

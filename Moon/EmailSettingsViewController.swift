@@ -10,6 +10,8 @@ import UIKit
 import RxCocoa
 import RxSwift
 import Material
+import Action
+import SwiftOverlays
 
 class EmailSettingsViewController: UIViewController, BindableType {
     
@@ -17,6 +19,7 @@ class EmailSettingsViewController: UIViewController, BindableType {
     @IBOutlet weak var emailField: ErrorTextField!
     var viewModel: EmailSettingsViewModel!
     var navBackButton: UIBarButtonItem!
+    var bag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +31,24 @@ class EmailSettingsViewController: UIViewController, BindableType {
 
     func bindViewModel() {
         navBackButton.rx.action = viewModel.onBack()
+        
+        let saveAction = viewModel.onUpdateEmail()
+        saveButton.rx.action = saveAction
+        
+        saveAction.executing
+            .do(onNext: { [weak self] inProgress in
+                if inProgress {
+                    self?.showWaitOverlay()
+                } else {
+                    self?.removeAllOverlays()
+                }
+            })
+            .subscribe()
+            .addDisposableTo(bag)
+        
+        emailField.rx.textInput.text.bind(to: viewModel.newEmailAddress).addDisposableTo(bag)
+        
+        viewModel.showEmailError.bind(to: emailField.rx.isErrorRevealed).addDisposableTo(bag)
     }
 
     fileprivate func prepareNavigationBackButton() {

@@ -144,8 +144,6 @@
 		F06B56FD1EFAA8750028552A /* RxDataSourceUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B56FC1EFAA8750028552A /* RxDataSourceUserModel.swift */; };
 		F06B56FF1EFAAFD50028552A /* FriendRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B56FE1EFAAFD50028552A /* FriendRequestTableViewCell.swift */; };
 		F07757B01F13FD9800B659D9 /* BarSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07757AF1F13FD9800B659D9 /* BarSnapshot.swift */; };
-		F07C06221EF1958F00B78865 /* BarAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06211EF1958F00B78865 /* BarAPIController.swift */; };
-		F07C06241EF195A500B78865 /* UserAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06231EF195A500B78865 /* UserAPIController.swift */; };
 		F07C06261EF19D7400B78865 /* RxErrorHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06251EF19D7400B78865 /* RxErrorHandlers.swift */; };
 		F07C31BB1F05B65C00EB5793 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F07C31BA1F05B65C00EB5793 /* GoogleService-Info.plist */; };
 		F07F694B1EFAED22000F854D /* DeepLinking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07F694A1EFAED22000F854D /* DeepLinking.swift */; };
@@ -158,7 +156,6 @@
 		F09B9D081EC3571800B2385A /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09B9D071EC3571800B2385A /* ExploreViewController.swift */; };
 		F09C09221ECC7D3B003076CC /* FloatingBottomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C09211ECC7D3B003076CC /* FloatingBottomTabBar.swift */; };
 		F09DF08C1EEAF0610092BFA5 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF08B1EEAF0610092BFA5 /* NotificationTableViewCell.swift */; };
-		F09DF08E1EEAF1240092BFA5 /* NotificationSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF08D1EEAF1240092BFA5 /* NotificationSetting.swift */; };
 		F09DF0901EEAFAF90092BFA5 /* WebViewUIViViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF08F1EEAFAF90092BFA5 /* WebViewUIViViewController.swift */; };
 		F09DF0921EEAFB670092BFA5 /* WebViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF0911EEAFB670092BFA5 /* WebViewViewModel.swift */; };
 		F09DF0961EEB85140092BFA5 /* ContentSuggestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF0951EEB85140092BFA5 /* ContentSuggestionsViewController.swift */; };
@@ -412,8 +409,6 @@
 		F06B56FC1EFAA8750028552A /* RxDataSourceUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxDataSourceUserModel.swift; sourceTree = "<group>"; };
 		F06B56FE1EFAAFD50028552A /* FriendRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestTableViewCell.swift; sourceTree = "<group>"; };
 		F07757AF1F13FD9800B659D9 /* BarSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarSnapshot.swift; sourceTree = "<group>"; };
-		F07C06211EF1958F00B78865 /* BarAPIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAPIController.swift; sourceTree = "<group>"; };
-		F07C06231EF195A500B78865 /* UserAPIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPIController.swift; sourceTree = "<group>"; };
 		F07C06251EF19D7400B78865 /* RxErrorHandlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxErrorHandlers.swift; sourceTree = "<group>"; };
 		F07C31BA1F05B65C00EB5793 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F07F694A1EFAED22000F854D /* DeepLinking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepLinking.swift; sourceTree = "<group>"; };
@@ -426,7 +421,6 @@
 		F09B9D071EC3571800B2385A /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		F09C09211ECC7D3B003076CC /* FloatingBottomTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingBottomTabBar.swift; sourceTree = "<group>"; };
 		F09DF08B1EEAF0610092BFA5 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
-		F09DF08D1EEAF1240092BFA5 /* NotificationSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSetting.swift; sourceTree = "<group>"; };
 		F09DF08F1EEAFAF90092BFA5 /* WebViewUIViViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewUIViViewController.swift; sourceTree = "<group>"; };
 		F09DF0911EEAFB670092BFA5 /* WebViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewViewModel.swift; sourceTree = "<group>"; };
 		F09DF0951EEB85140092BFA5 /* ContentSuggestionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentSuggestionsViewController.swift; sourceTree = "<group>"; };
@@ -727,13 +721,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		F0017AC41EF8905200C56039 /* Display Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Display Models";
-			sourceTree = "<group>";
-		};
 		F001BAB21EC50CDB00CDF9BC /* Designs */ = {
 			isa = PBXGroup;
 			children = (
@@ -844,8 +831,7 @@
 				F04989621EE063F400064F58 /* Scenes */,
 				F098FF9C1EDF46EF00A59594 /* Utilities */,
 				F0F017F91EF9A96D0086447E /* RxDataSources Model/Extensions */,
-				F0ED6B401F0579D8005D04D6 /* NewModels  */,
-				F098FF991EDF1DDA00A59594 /* Models */,
+				F0ED6B401F0579D8005D04D6 /* Models  */,
 				C0465DB01EDF20820065FD7C /* Login Images */,
 				F09B9D031EC3552F00B2385A /* View Models */,
 				F09B9D021EC3552D00B2385A /* View Controllers */,
@@ -871,8 +857,8 @@
 		F04989621EE063F400064F58 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				F04989631EE0641300064F58 /* Scene.swift */,
 				F04A6D531EEEDBBF000D898B /* Views.swift */,
+				F04989631EE0641300064F58 /* Scene.swift */,
 				F04989671EE0653D00064F58 /* Scene+ViewController.swift */,
 				F04989651EE0651800064F58 /* SceneCoordinatorType.swift */,
 				F049896D1EE068E000064F58 /* SceneCoordinator.swift */,
@@ -889,17 +875,6 @@
 				F07F694C1EFAEFC5000F854D /* ShowEventDeepLink.swift */,
 			);
 			name = DynamicLinking;
-			sourceTree = "<group>";
-		};
-		F098FF991EDF1DDA00A59594 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				F0017AC41EF8905200C56039 /* Display Models */,
-				F0B5F93E1EEF790A0095F12E /* BarInfo.swift */,
-				F09DF08D1EEAF1240092BFA5 /* NotificationSetting.swift */,
-				F0C72F471EF835B800B25C52 /* VC and VM Types */,
-			);
-			name = Models;
 			sourceTree = "<group>";
 		};
 		F098FF9C1EDF46EF00A59594 /* Utilities */ = {
@@ -1034,8 +1009,6 @@
 			isa = PBXGroup;
 			children = (
 				F034044B1F0D6C1800475FDF /* Service Protocols */,
-				F07C06211EF1958F00B78865 /* BarAPIController.swift */,
-				F07C06231EF195A500B78865 /* UserAPIController.swift */,
 				F0C72F431EF81D7700B25C52 /* KingFisherPhotoService.swift */,
 				F0C66BDE1EF41C9400B22811 /* SinchService.swift */,
 				F0ED6B3C1F057909005D04D6 /* FirebaseUserAPI.swift */,
@@ -1235,9 +1208,10 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
-		F0ED6B401F0579D8005D04D6 /* NewModels  */ = {
+		F0ED6B401F0579D8005D04D6 /* Models  */ = {
 			isa = PBXGroup;
 			children = (
+				F0C72F471EF835B800B25C52 /* VC and VM Types */,
 				F03CEF6E1F059BAC00FCC4F3 /* DependecyInjection.swift */,
 				F04B43751F0581E300946C82 /* UserProfile.swift */,
 				F04B43771F0582A100946C82 /* Activity.swift */,
@@ -1255,8 +1229,9 @@
 				F0E1F5251F151E5900BC0785 /* FacebookUserInfo.swift */,
 				F03322451F16A77900FD72CD /* EditProfileInfo.swift */,
 				F0DAA0BD1F193D360039DA07 /* PopoverPresenterType.swift */,
+				F0B5F93E1EEF790A0095F12E /* BarInfo.swift */,
 			);
-			name = "NewModels ";
+			name = "Models ";
 			sourceTree = "<group>";
 		};
 		F0F017F91EF9A96D0086447E /* RxDataSources Model/Extensions */ = {
@@ -1605,7 +1580,6 @@
 				F0E59F281EEF735A007A3323 /* BarInfoViewController.swift in Sources */,
 				F0A52CC81EEDE7740067E8DD /* SearchViewController.swift in Sources */,
 				F03C78C91EE9EA5C002AEDAD /* DeleteAccountViewModel.swift in Sources */,
-				F09DF08E1EEAF1240092BFA5 /* NotificationSetting.swift in Sources */,
 				F0E59F2A1EEF73B4007A3323 /* BarInfoViewModel.swift in Sources */,
 				F0CF7F1B1EF37D5E005C068C /* EnterCodeViewModel.swift in Sources */,
 				F0ED6B3D1F057909005D04D6 /* FirebaseUserAPI.swift in Sources */,
@@ -1683,7 +1657,6 @@
 				F03C78BC1EE9E97E002AEDAD /* EmailSettingsViewController.swift in Sources */,
 				F049896C1EE068BE00064F58 /* SceneTransitionType.swift in Sources */,
 				F04B437C1F058F2800946C82 /* BarEvent.swift in Sources */,
-				F07C06241EF195A500B78865 /* UserAPIController.swift in Sources */,
 				F03C78C01EE9E99D002AEDAD /* DeleteAccountViewController.swift in Sources */,
 				F0E8627F1EF6B8DB00BEF5E9 /* EditProfileViewController.swift in Sources */,
 				C0949D981EF0286C00C6F72C /* BarCollectionView.swift in Sources */,
@@ -1721,7 +1694,6 @@
 				F049896E1EE068E000064F58 /* SceneCoordinator.swift in Sources */,
 				F0055D691EC5E64B005544B4 /* CityOverviewViewController.swift in Sources */,
 				F04989641EE0641300064F58 /* Scene.swift in Sources */,
-				F07C06221EF1958F00B78865 /* BarAPIController.swift in Sources */,
 				F06B42321EFDAE9900BE7626 /* DynamicLinkingAPI.swift in Sources */,
 				F0388CFB1EE9D40B00E8ED48 /* BarProfileViewController.swift in Sources */,
 				F0CF159C1EDEEEA100531DCF /* PasswordsViewController.swift in Sources */,

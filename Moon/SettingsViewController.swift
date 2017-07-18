@@ -26,6 +26,12 @@ class SettingsViewController: UITableViewController, BindableType {
 
         prepareNavigationBackButton()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.loadUserInfo.execute()
+    }
 
     func bindViewModel() {
         navBackButton.rx.action = viewModel.onBack()

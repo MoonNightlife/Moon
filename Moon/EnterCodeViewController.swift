@@ -10,41 +10,58 @@ import UIKit
 import Material
 import RxCocoa
 import RxSwift
+import SwiftOverlays
 
 class EnterCodeViewController: UIViewController, BindableType {
 
+    @IBOutlet weak var cancelButton: UIButton!
     var viewModel: EnterCodeViewModel!
-    var navBackButton: UIBarButtonItem!
     private let bag = DisposeBag()
     
     @IBOutlet weak var codeTextField: TextField!
     @IBOutlet weak var enterCodeButton: UIButton!
     @IBOutlet weak var infoLabel: UILabel!
-    @IBOutlet weak var reSendButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        prepareNavigationBackButton()
+        prepareCancelButton()
         prepareInfoLabel()
-        prepareReSendButton()
         prepareEnterCodeButton()
         prepareCodeTextField()
     }
 
     func bindViewModel() {
-        navBackButton.rx.action = viewModel.onBack()
+        cancelButton.rx.action = viewModel.onBack()
+        
+        let checkCodeAction = viewModel.onCheckCode()
+        enterCodeButton.rx.action = checkCodeAction
+        
+        checkCodeAction.executing
+            .subscribe(onNext: {
+                if $0 {
+                    SwiftOverlays.showBlockingWaitOverlay()
+                } else {
+                    SwiftOverlays.removeAllBlockingOverlays()
+                }
+            })
+            .addDisposableTo(bag)
+        
+        checkCodeAction.errors
+            .subscribe(onNext: { [weak self] error in
+                if case let .underlyingError(error) = error {
+                    self?.showErrorAlert(message: error.localizedDescription)
+                }
+            })
+            .addDisposableTo(bag)
         
         codeTextField.rx.textInput.text.orEmpty.bind(to: viewModel.code).addDisposableTo(bag)
         viewModel.enableCheckCodeButton.bind(to: enterCodeButton.rx.isEnabled).addDisposableTo(bag)
         viewModel.codeText.bind(to: codeTextField.rx.text).addDisposableTo(bag)
     }
     
-    fileprivate func prepareNavigationBackButton() {
-        navBackButton = UIBarButtonItem()
-        navBackButton.image = Icon.cm.arrowBack
-        navBackButton.tintColor = .lightGray
-        self.navigationItem.leftBarButtonItem = navBackButton
+    fileprivate func prepareCancelButton() {
+        cancelButton.setImage(Icon.cm.close?.tint(with: .moonRed), for: .normal)
     }
     
     fileprivate func prepareEnterCodeButton() {
@@ -55,20 +72,16 @@ class EnterCodeViewController: UIViewController, BindableType {
     
     fileprivate func prepareCodeTextField() {
         codeTextField.placeholder = "Code"
+        codeTextField.keyboardType = UIKeyboardType.numberPad
         codeTextField.isClearIconButtonEnabled = true
         codeTextField.placeholderActiveColor = .moonGreen
         codeTextField.dividerActiveColor = .moonGreen
         codeTextField.dividerNormalColor = .moonGreen
-        codeTextField.placeholderNormalColor = .lightGray    }
+        codeTextField.placeholderNormalColor = .lightGray
+    }
     
     fileprivate func prepareInfoLabel() {
         infoLabel.textColor = .lightGray
-    }
-    
-    fileprivate func prepareReSendButton() {
-        reSendButton.backgroundColor = .moonBlue
-        reSendButton.tintColor = .white
-        reSendButton.layer.cornerRadius = 5
     }
 
 }
