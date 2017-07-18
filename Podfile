@@ -32,6 +32,7 @@ target 'Moon' do
   pod 'Firebase/Core'
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
+  pod 'Firebase/Messaging'
   pod 'SwiftOverlays', '~> 3.0.0'
   pod 'FBSDKLoginKit'
 
