@@ -53,14 +53,27 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Atv-bk-45f">
                                 <rect key="frame" x="329" y="72" width="30" height="30"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="me8-Wb-vlp">
+                                <rect key="frame" x="16" y="89" width="343" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="UPr-Vc-4wm"/>
+                                </constraints>
+                                <string key="text">Enter and verify your number in order to find your friends through your contacts. Your number will not be displayed anywhere in the app.</string>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="me8-Wb-vlp" firstAttribute="leading" secondItem="Q6C-Il-oP4" secondAttribute="leadingMargin" id="9Hd-ok-8pa"/>
                             <constraint firstItem="ww2-qJ-bBR" firstAttribute="trailing" secondItem="Q6C-Il-oP4" secondAttribute="trailingMargin" id="9UY-VA-hDB"/>
                             <constraint firstItem="bBM-Iw-gcC" firstAttribute="centerY" secondItem="Q6C-Il-oP4" secondAttribute="centerY" constant="5.5" id="9mA-dU-NgC"/>
                             <constraint firstItem="bBM-Iw-gcC" firstAttribute="centerX" secondItem="Q6C-Il-oP4" secondAttribute="centerX" id="Phh-VM-4XX"/>
+                            <constraint firstItem="me8-Wb-vlp" firstAttribute="top" secondItem="nRD-8G-odC" secondAttribute="bottom" constant="25" id="RQK-Wh-5Ax"/>
                             <constraint firstItem="bBM-Iw-gcC" firstAttribute="top" secondItem="ww2-qJ-bBR" secondAttribute="bottom" constant="24" id="ZMK-h8-nvP"/>
                             <constraint firstItem="Atv-bk-45f" firstAttribute="top" secondItem="nRD-8G-odC" secondAttribute="bottom" constant="8" id="i0X-Sp-PXG"/>
+                            <constraint firstItem="me8-Wb-vlp" firstAttribute="trailing" secondItem="Q6C-Il-oP4" secondAttribute="trailingMargin" id="qQb-yN-LUo"/>
                             <constraint firstItem="k9O-r3-koQ" firstAttribute="top" secondItem="ww2-qJ-bBR" secondAttribute="top" id="rmQ-OJ-4eq"/>
                             <constraint firstItem="k9O-r3-koQ" firstAttribute="leading" secondItem="Q6C-Il-oP4" secondAttribute="leadingMargin" id="t2l-j6-LlY"/>
                             <constraint firstItem="ww2-qJ-bBR" firstAttribute="leading" secondItem="k9O-r3-koQ" secondAttribute="trailing" constant="8" symbolic="YES" id="wnJ-PQ-a3k"/>
@@ -274,7 +287,7 @@
             <objects>
                 <navigationController storyboardIdentifier="CountryCodeNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gcj-bz-Nj7" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="bfb-kP-X7a">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bfb-kP-X7a">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -292,7 +305,7 @@
             <objects>
                 <navigationController storyboardIdentifier="EnterPhoneNumberNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="B6l-EZ-kKi" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="4eO-Vb-HMK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4eO-Vb-HMK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -65,6 +65,26 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
         searchBarController?.searchBar.textField.resignFirstResponder()
     }
     
+    func displayEmptyViewText(text: String, view: UICollectionView) {
+        print("WORKING")
+        let frame = CGRect(x: 0, y: view.frame.size.height / 2, width: view.frame.size.width, height: 30)
+        let label = UILabel(frame: frame)
+        label.textAlignment = .center
+        label.textColor = .lightGray
+        label.font = UIFont(name: "Roboto", size: 16)
+        label.text = text
+        label.tag = 5
+        
+        view.addSubview(label)
+        view.bringSubview(toFront: label)
+    }
+    
+    func removeEmptyViewText(view: UICollectionView) {
+        if let viewWithTag = view.viewWithTag(5) {
+            viewWithTag.removeFromSuperview()
+        }
+    }
+    
     func prepareLabels() {
         suggestedUsersLabel.textColor = .lightGray
         suggestedUsersLabel.dividerThickness = 1.8
@@ -76,8 +96,21 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
     }
     
     func bindViewModel() {
-        viewModel.suggestedBars.drive(suggestedBarCollectionView.rx.items(dataSource: barDataSource)).disposed(by: bag)
-        viewModel.suggestedFriends.drive(suggestedUserColletionView.rx.items(dataSource: userDataSource)).disposed(by: bag)
+        viewModel.suggestedBars.do(onNext: { [weak self] bars in
+            if let snapshots = bars.first?.items, snapshots.isEmpty {
+                self?.displayEmptyViewText(text: "No Suggested Venues Found", view: (self?.suggestedBarCollectionView)!)
+            } else {
+                self?.removeEmptyViewText(view: (self?.suggestedBarCollectionView)!)
+            }
+            }).drive(suggestedBarCollectionView.rx.items(dataSource: barDataSource)).disposed(by: bag)
+        
+        viewModel.suggestedFriends.do(onNext: { [weak self] users in
+            if let snapshots = users.first?.items, snapshots.isEmpty {
+                self?.displayEmptyViewText(text: "No Suggested Users Found", view: self!.suggestedUserColletionView)
+            } else {
+                self?.removeEmptyViewText(view: (self?.suggestedUserColletionView)!)
+            }
+        }).drive(suggestedUserColletionView.rx.items(dataSource: userDataSource)).disposed(by: bag)
         
         suggestedBarCollectionView.rx.modelSelected(SearchSection.Item.self).subscribe(viewModel.onShowBar.inputs).addDisposableTo(bag)
         

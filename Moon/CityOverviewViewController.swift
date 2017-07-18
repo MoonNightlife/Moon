@@ -89,10 +89,23 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
         .addDisposableTo(bag)
         
         viewModel.displayedUsers.asObservable()
-            .do(onNext: { [weak self] _ in
+            .do(onNext: { [weak self] users in
+                if users.isEmpty {
+                    if self?.segmentControl.selectedIndex == 0 {
+                        self?.removeEmptyViewText(carousel: self!.goingCarousel)
+                        self?.displayEmptyViewText(text: "Looks Like No People Are Going Tonight", carousel: self!.goingCarousel)
+                    } else {
+                        self?.removeEmptyViewText(carousel: self!.goingCarousel)
+                        self?.displayEmptyViewText(text: "Looks Like No Friends Are Going Tonight", carousel: self!.goingCarousel)
+                    }
+                } else {
+                     self?.removeEmptyViewText(carousel: self!.goingCarousel)
+                }
+            })
+            .subscribe(onNext: { [weak self] _ in
+                self?.removeEmptyViewText(carousel: self!.goingCarousel)
                 self?.goingCarousel.reloadData()
             })
-            .subscribe()
             .addDisposableTo(bag)
         
         segmentControl.rx.controlEvent(UIControlEvents.valueChanged)
@@ -125,6 +138,25 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
         }
     }
     
+    func displayEmptyViewText(text: String, carousel: iCarousel) {
+        let frame = CGRect(x: 0, y: carousel.frame.size.height / 2, width: carousel.frame.size.width, height: 30)
+        let label = UILabel(frame: frame)
+        label.textAlignment = .center
+        label.textColor = .lightGray
+        label.font = UIFont(name: "Roboto", size: 16)
+        label.text = text
+        label.tag = 5
+        
+        carousel.addSubview(label)
+        carousel.bringSubview(toFront: label)
+    }
+    
+    func removeEmptyViewText(carousel: iCarousel) {
+        if let viewWithTag = carousel.viewWithTag(5) {
+            viewWithTag.removeFromSuperview()
+        }
+    }
+    
     func prepareSegmentControl() {
         //segment set up
         segmentControl.items = ["People Going", "Friends Going"]
@@ -154,6 +186,7 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
         UIView.animate(withDuration: Double(0.3), animations: {
             self.goingCarouselHeightConstraint.constant = self.view.frame.height * 0.55
             self.view.layoutIfNeeded()
+            self.displayEmptyViewText(text: "", carousel: self.goingCarousel)
         })
         
         goingCarousel.contentView.isHidden = false
