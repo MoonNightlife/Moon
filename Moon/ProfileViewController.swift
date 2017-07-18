@@ -176,16 +176,15 @@ class ProfileViewController: UIViewController, BindableType {
         toolBar.rightViews = [friendsButton]
     }
     
-    fileprivate func firstLaunch() -> Bool {
-        if UserDefaults.standard.bool(forKey: "HasLaunchedOnce") {
-            // App already launched
-            return false
-        } else {
-            // This is the first launch ever
-            UserDefaults.standard.set(true, forKey: "HasLaunchedOnce")
-            UserDefaults.standard.synchronize()
-            return true
-        }
+    private func setUpLikeButtons() {
+        likesButton.titleLabel?.font = UIFont(name: "Roboto", size: 14)
+        likesButton.tintColor = .lightGray
+        likesButton.setTitle("0", for: .normal)
+        
+        let image =  Icon.favorite
+        likeButton.setBackgroundImage(image, for: .normal)
+        likeButton.tintColor = .lightGray
+        
     }
 
 }

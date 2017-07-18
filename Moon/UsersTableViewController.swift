@@ -146,6 +146,13 @@ class UsersTableViewController: UIViewController, BindableType {
         backButton.tintColor = .lightGray
         self.navigationItem.leftBarButtonItem = backButton
     }
+    
+    func prepareContactsButton() {
+        contactsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "contactsIcon"), style: .plain, target: nil, action: nil)
+        contactsButton.tintColor = .moonBlue
+        self.navigationItem.rightBarButtonItem = contactsButton
+    }
+    
 
 }
 
