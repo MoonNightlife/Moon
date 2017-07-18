@@ -11,6 +11,7 @@ import Firebase
 import FirebaseAuth
 import FBSDKLoginKit
 import RxSwift
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
@@ -23,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
 
     var window: UIWindow?
     var bag = DisposeBag()
+    let gcmMessageIDKey = "gcm.message_id"
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -31,14 +33,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        DynamicLinkingAPI.createDynamicLink()
+        setupPushNotifications(application: application)
+        
         FirebaseApp.configure()
         
         if RxReachability.shared.startMonitor("apple.com") == false {
             print("Reachability failed!")
         }
-        
-
         
         if let url = launchOptions?[.url] as? URL {
             return executeDeepLink(with: url)
@@ -90,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
 }
 
 // MARK: - Helper Fuctions
-extension AppDelegate {
+extension AppDelegate: UNUserNotificationCenterDelegate {
     fileprivate func prepareEntryViewController(vc: LaunchScreen) {
         
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -114,6 +115,68 @@ extension AppDelegate {
         }
     }
     
+    fileprivate func setupPushNotifications(application: UIApplication) {
+        // Register for remote notifications. This shows a permission dialog on first run, to
+        // show the dialog at a more appropriate time move this registration accordingly.
+        
+        // For iOS 10 display notification (sent via APNS)
+        UNUserNotificationCenter.current().delegate = self
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: authOptions,
+            completionHandler: {_, _ in })
+        // For iOS 10 data message (sent via FCM
+        Messaging.messaging().delegate = self
+        
+        application.registerForRemoteNotifications()
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        // If you are receiving a notification message while your app is in the background,
+        // this callback will not be fired till the user taps on the notification launching the application.
+        // TODO: Handle data of notification
+        
+        // Print message ID.
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        // Print full message.
+        print(userInfo)
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        // If you are receiving a notification message while your app is in the background,
+        // this callback will not be fired till the user taps on the notification launching the application.
+        // TODO: Handle data of notification
+        
+        // Print message ID.
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        // Print full message.
+        print(userInfo)
+        
+        completionHandler(UIBackgroundFetchResult.newData)
+    }
+
+}
+
+extension AppDelegate : MessagingDelegate {
+    // [START refresh_token]
+    func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+        print("Firebase registration token: \(fcmToken)")
+    }
+    // [END refresh_token]
+    // [START ios_10_data_message]
+    // Receive data messages on iOS 10+ directly from FCM (bypassing APNs) when the app is in the foreground.
+    // To enable direct data messages, you can set Messaging.messaging().shouldEstablishDirectChannel to true.
+    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+        print("Received data message: \(remoteMessage.appData)")
+    }
+    // [END ios_10_data_message]
 }
 
 // MARK: - Deep Link
