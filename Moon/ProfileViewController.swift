@@ -28,6 +28,9 @@ class ProfileViewController: UIViewController, BindableType {
     @IBOutlet weak var pageController: UIPageControl!
     @IBOutlet weak var planButton: UIButton!
     @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var likesButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton!
+
     
     var friendsButton: MIBadgeButton!
     
@@ -44,6 +47,7 @@ class ProfileViewController: UIViewController, BindableType {
         setUpToolBar()
         setUpUsernameLabel()
         setupAcceptButton()
+        setUpLikeButtons()
         
     }
     
@@ -171,6 +175,17 @@ class ProfileViewController: UIViewController, BindableType {
         toolBar.titleLabel.textColor = .white
         toolBar.detailLabel.textColor = .moonGrey
         toolBar.rightViews = [friendsButton]
+    }
+    
+    private func setUpLikeButtons() {
+        likesButton.titleLabel?.font = UIFont(name: "Roboto", size: 14)
+        likesButton.tintColor = .lightGray
+        likesButton.setTitle("0", for: .normal)
+        
+        let image =  Icon.favorite
+        likeButton.setBackgroundImage(image, for: .normal)
+        likeButton.tintColor = .lightGray
+        
     }
 
 }

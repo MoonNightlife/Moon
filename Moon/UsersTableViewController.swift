@@ -18,24 +18,19 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
     var viewModel: UsersTableViewModel!
     private let bag = DisposeBag()
     @IBOutlet weak var userTableView: UITableView!
-    @IBOutlet weak var showContactsButton: UIButton!
+   // @IBOutlet weak var showContactsButton: UIButton!
     var backButton: UIBarButtonItem!
     let dataSource = RxTableViewSectionedReloadDataSource<UserSectionModel>()
     var refreshControl: UIRefreshControl = UIRefreshControl()
+    var contactsButton = UIBarButtonItem()
     
-    @IBOutlet weak var contactsViewHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         prepareNavigationBackButton()
-        prepareContactButton()
-        
         self.view.backgroundColor = UIColor.lightGray
-        contactsViewHeightConstraint.constant = 0
-        
         configureDataSource()
-        
         // Add the refresh control
         userTableView.refreshControl = refreshControl
     }
@@ -50,11 +45,11 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
         super.viewDidAppear(animated)
     
     }
-
+    
     func bindViewModel() {
         
         viewModel.currentSignedInUser.asObservable().filter { $0 == true }.do(onNext: { [weak self] _ in
-            self?.animateView()
+            self?.prepareContactsButton()
         }).subscribe().addDisposableTo(bag)
         
         viewModel.users.do(onNext: { [weak self] _ in
@@ -64,7 +59,7 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
         userTableView.rx.modelSelected(UserSectionModel.Item.self).bind(to: viewModel.onShowUser.inputs).addDisposableTo(bag)
         
         backButton.rx.action = viewModel.onBack()
-        showContactsButton.rx.action = viewModel.onShowContacts()
+        contactsButton.rx.action = viewModel.onShowContacts()
         
         refreshControl.rx.controlEvent(.valueChanged).bind(to: viewModel.reload).addDisposableTo(bag)
         viewModel.users.map {_ in return false}.bind(to: refreshControl.rx.isRefreshing).addDisposableTo(bag)
@@ -145,23 +140,17 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
         }
     }
     
-    func prepareContactButton() {
-        showContactsButton.tintColor = .moonBlue
-        showContactsButton.titleLabel?.font = UIFont(name: "Roboto", size: 14)
-    }
-    
-    func animateView() {
-        UIView.animate(withDuration: Double(0.5), animations: {
-            self.contactsViewHeightConstraint.constant = 75
-            self.view.layoutIfNeeded()
-        })
-    }
-    
     func prepareNavigationBackButton() {
         backButton = UIBarButtonItem()
         backButton.image = Icon.cm.arrowDownward
         backButton.tintColor = .lightGray
         self.navigationItem.leftBarButtonItem = backButton
+    }
+    
+    func prepareContactsButton() {
+        contactsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "contactsIcon"), style: .plain, target: nil, action: nil)
+        contactsButton.tintColor = .moonBlue
+        self.navigationItem.rightBarButtonItem = contactsButton
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
