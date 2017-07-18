@@ -28,6 +28,9 @@ class ProfileViewController: UIViewController, BindableType {
     @IBOutlet weak var pageController: UIPageControl!
     @IBOutlet weak var planButton: UIButton!
     @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var likesButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton!
+
     
     var friendsButton: MIBadgeButton!
     
@@ -44,6 +47,7 @@ class ProfileViewController: UIViewController, BindableType {
         setUpToolBar()
         setUpUsernameLabel()
         setupAcceptButton()
+        setUpLikeButtons()
         
     }
     
