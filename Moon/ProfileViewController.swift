@@ -31,7 +31,6 @@ class ProfileViewController: UIViewController, BindableType {
     @IBOutlet weak var likesButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
 
-    
     var friendsButton: MIBadgeButton!
     
     override func viewDidLoad() {

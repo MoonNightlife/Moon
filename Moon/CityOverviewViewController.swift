@@ -255,16 +255,16 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
             if let lat = bar.lat, let long = bar.long {
                 
                 let pointAnnotation = BarAnnotation()
-                var image = UIImage()
+                let image = #imageLiteral(resourceName: "LocationIcon")
                
-                switch arc4random_uniform(3) {
-                case 0:
-                    image = #imageLiteral(resourceName: "RedPin")
-                case 1:
-                    image = #imageLiteral(resourceName: "YellowPin")
-                default:
-                    image = #imageLiteral(resourceName: "GreenPin")
-                }
+//                switch arc4random_uniform(3) {
+//                case 0:
+//                    image = #imageLiteral(resourceName: "RedPin")
+//                case 1:
+//                    image = #imageLiteral(resourceName: "YellowPin")
+//                default:
+//                    image = #imageLiteral(resourceName: "GreenPin")
+//                }
                 
                 pointAnnotation.coordinate = CLLocationCoordinate2DMake(lat, long)
                 pointAnnotation.title = bar.name

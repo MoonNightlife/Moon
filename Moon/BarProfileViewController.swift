@@ -120,9 +120,25 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
                 return UsersGoingType(rawValue: self?.segmentControl.selectedIndex ?? 0) ?? .everyone
             }).bind(to: viewModel.selectedUserIndex).addDisposableTo(bag)
         
-        viewModel.displayedUsers.asObservable().subscribe(onNext: { [weak self] _ in
-            self?.goingCarousel.reloadData()
-        }).addDisposableTo(bag)
+        viewModel.displayedUsers.asObservable()
+            .do(onNext: { [weak self] users in
+                if users.isEmpty {
+                    var text = ""
+                    if self?.segmentControl.selectedIndex == 0 {
+                        self?.removeEmptyViewText(carousel: (self?.goingCarousel)!)
+                        text = "Looks Like No People Are Going Tonight"
+                    } else {
+                        self?.removeEmptyViewText(carousel: (self?.goingCarousel)!)
+                        text = "Looks Like No Friends Are Going Tonight"
+                    }
+                    self?.displayEmptyViewText(text: text, carousel: (self?.goingCarousel)!)
+                } else {
+                    self?.removeEmptyViewText(carousel: (self?.goingCarousel)!)
+                }
+            })
+            .subscribe(onNext: { [weak self] _ in
+                self?.goingCarousel.reloadData()
+            }).addDisposableTo(bag)
         
         viewModel.barName.subscribe(onNext: { [weak self] in
             self?.title = $0
@@ -133,12 +149,25 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
             self?.pictureCarousel.reloadData()
         }).addDisposableTo(bag)
         
-        viewModel.specials.asObservable().subscribe(onNext: { [weak self] _ in
+        viewModel.specials.asObservable().do(onNext: { [weak self] specials in
+            if specials.isEmpty {
+                self?.displayEmptyViewText(text: "Looks Like There Are No Specials", carousel: (self?.specialsCarousel)!)
+            } else {
+                self?.removeEmptyViewText(carousel: (self?.specialsCarousel)!)
+            }
+        }).subscribe(onNext: { [weak self] _ in
             self?.specialsCarousel.reloadData()
         }).addDisposableTo(bag)
         
-        viewModel.events.asObservable().subscribe(onNext: { [weak self] _ in
+        viewModel.events.asObservable().do(onNext: { [weak self] events in
+            if events.isEmpty {
+                self?.displayEmptyViewText(text: "Looks Like There Are No Events", carousel: (self?.eventsCarousel)!)
+            } else {
+                self?.removeEmptyViewText(carousel: (self?.eventsCarousel)!)
+            }
+        }).subscribe(onNext: { [weak self] _ in
             self?.eventsCarousel.reloadData()
+            print("Loading Events Is Being Called")
         }).addDisposableTo(bag)
         
         viewModel.numPeopleAttending.do(onNext: { [weak self] numGoing in
@@ -354,6 +383,25 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
         barPic.image = viewModel.barPics.value[index]
         
         return barPic
+    }
+    
+    func displayEmptyViewText(text: String, carousel: iCarousel) {
+        let frame = CGRect(x: 0, y: carousel.frame.size.height / 2, width: carousel.frame.size.width, height: 30)
+        let label = UILabel(frame: frame)
+        label.textAlignment = .center
+        label.textColor = .lightGray
+        label.font = UIFont(name: "Roboto", size: 16)
+        label.text = text
+        label.tag = 5
+        
+        carousel.addSubview(label)
+        carousel.bringSubview(toFront: label)
+    }
+    
+    func removeEmptyViewText(carousel: iCarousel) {
+        if let viewWithTag = carousel.viewWithTag(5) {
+            viewWithTag.removeFromSuperview()
+        }
     }
 
 }
