@@ -91,6 +91,7 @@ class MainViewController: UIViewController, BindableType {
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         
         tabBar.superview?.bringSubview(toFront: tabBar)
+    
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -98,6 +99,7 @@ class MainViewController: UIViewController, BindableType {
         navigationController?.navigationBar.isHidden = false
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
     }
+    
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent

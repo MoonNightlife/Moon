@@ -125,6 +125,10 @@ extension Scene.Master {
             vc.generateChildern(child1: vcSC, child2: vcSR)
         
             return vc
+        case .tutorial(let viewModel):
+            var vc = storyBoard.instantiateViewController(withIdentifier: "Tutorial") as! TutorialViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
         }
 
     }

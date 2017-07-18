@@ -38,13 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
             print("Reachability failed!")
         }
         
-//        Auth.auth().addStateDidChangeListener { [unowned self] (_, user) in
-//            if user != nil {
-//                self.prepareEntryViewController(vc: .main)
-//            } else {
-//                self.prepareEntryViewController(vc: .login)
-//            }
-//        }
+
         
         if let url = launchOptions?[.url] as? URL {
             return executeDeepLink(with: url)
@@ -93,6 +87,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
         return handled
     }
     
+}
+
+// MARK: - Helper Fuctions
+extension AppDelegate {
     fileprivate func prepareEntryViewController(vc: LaunchScreen) {
         
         window = UIWindow(frame: UIScreen.main.bounds)

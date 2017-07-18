@@ -37,4 +37,5 @@ struct MainViewModel {
     func viewModelForMoonsView() -> MoonsViewViewModel {
         return MoonsViewViewModel(coordinator: sceneCoordinator)
     }
+    
 }

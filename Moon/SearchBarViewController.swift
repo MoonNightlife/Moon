@@ -25,6 +25,14 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
     fileprivate var cancelButton: IconButton!
     fileprivate var searchBarButton: UIButton!
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        //if firstLaunch() {
+            viewModel.onShowTutorial().execute()
+        //}
+    }
+    
     open override func prepare() {
         super.prepare()
         prepareProfileButton()
@@ -101,8 +109,20 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
     }
     
     func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
-        viewModel.onPopProfile().execute()
+        viewModel.onPopPopover().execute()
         return false
+    }
+    
+    fileprivate func firstLaunch() -> Bool {
+        if (UserDefaults.standard.bool(forKey: "HasLaunchedOnce")) {
+            // App already launched
+            return false
+        } else {
+            // This is the first launch ever
+            UserDefaults.standard.set(true, forKey: "HasLaunchedOnce")
+            UserDefaults.standard.synchronize()
+            return true
+        }
     }
 
 }

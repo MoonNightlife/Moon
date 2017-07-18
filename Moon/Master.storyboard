@@ -83,6 +83,55 @@
             </objects>
             <point key="canvasLocation" x="1868" y="114.69265367316342"/>
         </scene>
+        <!--Tutorial View Controller-->
+        <scene sceneID="oS7-pP-MyJ">
+            <objects>
+                <viewController storyboardIdentifier="Tutorial" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wem-NL-aD0" customClass="TutorialViewController" customModule="Moon" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="x10-83-ihM"/>
+                        <viewControllerLayoutGuide type="bottom" id="YVh-AH-2o3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="g1N-4H-xEC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mOL-Na-90w" customClass="iCarousel">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="VKS-vp-Sel">
+                                <rect key="frame" x="168" y="622" width="39" height="37"/>
+                            </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvZ-ew-Sd8">
+                                <rect key="frame" x="329" y="28" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="1af-ZN-9d0"/>
+                                    <constraint firstAttribute="height" constant="30" id="gGF-Tj-yK2"/>
+                                </constraints>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="VKS-vp-Sel" firstAttribute="centerX" secondItem="g1N-4H-xEC" secondAttribute="centerX" id="23M-38-jhV"/>
+                            <constraint firstItem="wvZ-ew-Sd8" firstAttribute="top" secondItem="x10-83-ihM" secondAttribute="bottom" constant="8" symbolic="YES" id="6tW-OZ-z2M"/>
+                            <constraint firstAttribute="trailing" secondItem="mOL-Na-90w" secondAttribute="trailing" id="8NQ-sP-o2d"/>
+                            <constraint firstItem="YVh-AH-2o3" firstAttribute="top" secondItem="mOL-Na-90w" secondAttribute="bottom" id="F9b-We-AbL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="wvZ-ew-Sd8" secondAttribute="trailing" id="Hw2-Nn-yP3"/>
+                            <constraint firstItem="mOL-Na-90w" firstAttribute="top" secondItem="g1N-4H-xEC" secondAttribute="top" id="IKR-YW-o7h"/>
+                            <constraint firstItem="mOL-Na-90w" firstAttribute="leading" secondItem="g1N-4H-xEC" secondAttribute="leading" id="gF5-Dv-Rvx"/>
+                            <constraint firstItem="YVh-AH-2o3" firstAttribute="top" secondItem="VKS-vp-Sel" secondAttribute="bottom" constant="8" symbolic="YES" id="tit-kN-NQr"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="wvZ-ew-Sd8" id="07r-gR-CTi"/>
+                        <outlet property="pageController" destination="VKS-vp-Sel" id="NPw-Ck-ykD"/>
+                        <outlet property="tutorialCarousel" destination="mOL-Na-90w" id="eGM-PU-SQa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XHd-lk-kGa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1605.5999999999999" y="844.22788605697156"/>
+        </scene>
         <!--Content Suggestions View Controller-->
         <scene sceneID="plB-38-Wd4">
             <objects>
@@ -258,7 +307,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPu-YW-BRK">
-                                                    <rect key="frame" x="66" y="24" width="37" height="20"/>
+                                                    <rect key="frame" x="66" y="23.5" width="37" height="20"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>

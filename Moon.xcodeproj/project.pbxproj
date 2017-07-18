@@ -250,6 +250,8 @@
 		F0FD8F321EE19D4E0020D131 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F311EE19D4E0020D131 /* ForgotPasswordViewController.swift */; };
 		F0FD8F341EE19D9F0020D131 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F331EE19D9F0020D131 /* ForgotPasswordViewModel.swift */; };
 		F0FD8F371EE1DC950020D131 /* ErrorTextField+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F361EE1DC950020D131 /* ErrorTextField+Rx.swift */; };
+		F0FEAFEB1F1E2FC500E1C1A6 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FEAFEA1F1E2FC500E1C1A6 /* TutorialViewController.swift */; };
+		F0FEAFED1F1E2FE700E1C1A6 /* TutorialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FEAFEC1F1E2FE700E1C1A6 /* TutorialViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -516,6 +518,8 @@
 		F0FD8F311EE19D4E0020D131 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		F0FD8F331EE19D9F0020D131 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		F0FD8F361EE1DC950020D131 /* ErrorTextField+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ErrorTextField+Rx.swift"; sourceTree = "<group>"; };
+		F0FEAFEA1F1E2FC500E1C1A6 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		F0FEAFEC1F1E2FE700E1C1A6 /* TutorialViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1049,6 +1053,7 @@
 				F0A52CC71EEDE7740067E8DD /* SearchViewController.swift */,
 				F09DF0951EEB85140092BFA5 /* ContentSuggestionsViewController.swift */,
 				F0A52CC31EEDE3D60067E8DD /* SearchResultsViewController.swift */,
+				F0FEAFEA1F1E2FC500E1C1A6 /* TutorialViewController.swift */,
 			);
 			name = Master;
 			sourceTree = "<group>";
@@ -1119,6 +1124,7 @@
 				F0A52CC91EEDE7A80067E8DD /* SearchViewModel.swift */,
 				F09DF0971EEB854D0092BFA5 /* ContentSuggestionViewModel.swift */,
 				F0A52CC51EEDE3EB0067E8DD /* SearchResultsViewModel.swift */,
+				F0FEAFEC1F1E2FE700E1C1A6 /* TutorialViewModel.swift */,
 			);
 			name = Master;
 			sourceTree = "<group>";
@@ -1589,6 +1595,7 @@
 				F04283AD1EC49DB600CCB5F3 /* MainViewController.swift in Sources */,
 				F07757B01F13FD9800B659D9 /* BarSnapshot.swift in Sources */,
 				F0CF7F1D1EF37D80005C068C /* CountryCodeViewModel.swift in Sources */,
+				F0FEAFEB1F1E2FC500E1C1A6 /* TutorialViewController.swift in Sources */,
 				F0A52CCA1EEDE7A80067E8DD /* SearchViewModel.swift in Sources */,
 				F0CA18971EE58BBD00428318 /* MainViewModel.swift in Sources */,
 				F0CA18B71EE6101200428318 /* TopBar.swift in Sources */,
@@ -1643,6 +1650,7 @@
 				F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */,
 				F0CA18B51EE5AEEC00428318 /* FloatingBottomTabBar+Rx.swift in Sources */,
 				F04989661EE0651800064F58 /* SceneCoordinatorType.swift in Sources */,
+				F0FEAFED1F1E2FE700E1C1A6 /* TutorialViewModel.swift in Sources */,
 				F0CF7F231EF37E83005C068C /* CountryCodeViewController.swift in Sources */,
 				C0E8BE901EF965D6007E9B52 /* RACollectionViewCell.swift in Sources */,
 				F0D168531ECA62940064F642 /* MoonColor.swift in Sources */,

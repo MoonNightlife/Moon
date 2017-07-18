@@ -17,7 +17,14 @@ struct InjectionMap {
     static var photoService: PhotoService = KingFisherPhotoService()
     static var facebookAPI: FacebookLoginProviderType = FacebookService()
     static var phoneNumberService: SMSValidationService = SinchService()
+    //static var sceneCoordinator: SceneCoordinatorType =  SceneCoordinator()
 }
+
+//protocol NavigationInjected { }
+//
+//extension NavigationInjected {
+//    var sceneCoordinator: SceneCoordinatorType { return InjectionMap.sceneCoordinator }
+//}
 
 protocol NetworkingInjected { }
 

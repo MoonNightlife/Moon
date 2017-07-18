@@ -38,12 +38,8 @@ struct SearchBarViewModel: NetworkingInjected, AuthNetworkingInjected {
     
     func onShowProfile() -> CocoaAction {
         return CocoaAction {
-            if let id = Auth.auth().currentUser?.uid {
-                let vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: id)
-                return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
-            } else {
-                return Observable.empty()
-            }
+            let vm = ProfileViewModel(coordinator: self.sceneCoordinator, userID: self.authAPI.SignedInUserID)
+            return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
         }
     }
     
@@ -76,35 +72,16 @@ struct SearchBarViewModel: NetworkingInjected, AuthNetworkingInjected {
         }
     }
     
-    func onPopProfile() -> CocoaAction {
+    func onPopPopover() -> CocoaAction {
         return CocoaAction {
             return self.sceneCoordinator.pop()
         }
     }
-
-//    let searchInput = searchText
-//        .filter { ($0 ?? "").characters.count > 0 }
-//    
-//    
-//    let textSearch = searchInput.flatMap { text in
-//        return ApiController.shared.currentWeather(city: text ?? "Error")
-//            .do(onNext: { data in
-//                if let text = text {
-//                    self.cache[text] = data
-//                }
-//            }, onError: { [weak self] e in
-//                guard let strongSelf = self else { return }
-//                DispatchQueue.main.async {
-//                    strongSelf.showError(error: e)
-//                }
-//            })
-//            .retryWhen(retryHandler)
-//            .catchError({ error in
-//                if let text = text, let cachedData = self.cache[text] {
-//                    return Observable.just(cachedData)
-//                } else {
-//                    return Observable.just(ApiController.Weather.empty)
-//                }
-//            })
-//    }
+    
+    func onShowTutorial() -> CocoaAction {
+        return CocoaAction { _ in
+            let vm = TutorialViewModel(sceneCoordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.Master.tutorial(vm), type: .popover)
+        }
+    }
 }
