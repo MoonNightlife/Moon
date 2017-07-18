@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
     var window: UIWindow?
     var bag = DisposeBag()
     let gcmMessageIDKey = "gcm.message_id"
+    
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
