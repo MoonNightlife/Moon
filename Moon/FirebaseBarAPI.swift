@@ -197,11 +197,12 @@ struct FirebaseBarAPI: BarAPIType {
         })
 
     }
-    func getSpecialsIn(region: String, type: AlcoholType) -> Observable<[Special]> {
+    func getSpecialsIn(region: String, type: AlcoholType, dayOfWeek: DayOfWeek) -> Observable<[Special]> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
                 "region": "\(region)",
-                "type": type.toInt()
+                "type": type.toInt(),
+                "day": dayOfWeek.rawValue
             ]
             let request = Alamofire.request(BarFunction.getSpecialsInRegionByType, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()

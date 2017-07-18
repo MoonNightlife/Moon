@@ -53,8 +53,7 @@ class ProfileViewController: UIViewController, BindableType {
         viewModel.reload.execute()
         viewModel.reloadPhotos.onNext()
         viewModel.numberOfFriendRequest.execute()
-        print("Hieght: ", self.view.frame.size.height)
-        print("Width: ", self.view.frame.size.width)
+    
     }
     
     @IBOutlet weak var exitButton: UIButton!
@@ -171,6 +170,18 @@ class ProfileViewController: UIViewController, BindableType {
         toolBar.titleLabel.textColor = .white
         toolBar.detailLabel.textColor = .moonGrey
         toolBar.rightViews = [friendsButton]
+    }
+    
+    fileprivate func firstLaunch() -> Bool {
+        if UserDefaults.standard.bool(forKey: "HasLaunchedOnce") {
+            // App already launched
+            return false
+        } else {
+            // This is the first launch ever
+            UserDefaults.standard.set(true, forKey: "HasLaunchedOnce")
+            UserDefaults.standard.synchronize()
+            return true
+        }
     }
 
 }

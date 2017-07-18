@@ -51,10 +51,14 @@ class EditProfileViewModel: BackType, StorageNetworkingInjected, ImageNetworking
                         .catchErrorJustReturn(nil)
                         .filterNil()
                         .flatMap({ [unowned self] url in
-                            return self.photoService.getImageFor(url: url)
+                            return self.photoService.getImageAndNameFor(url: url)
                         })
                 })
             }).toArray()
+            .map({ imagesWithNames -> [UIImage] in
+                let imageOrder = ["pic1.jpg", "pic2.jpg", "pic3.jpg", "pic4.jpg", "pic5.jpg", "pic6.jpg"].slice(start: 0, end: imagesWithNames.count)
+                return imagesWithNames.sorted { imageOrder.index(of: $0.imageName)! < imageOrder.index(of: $1.imageName)! }.map({ $0.image })
+            })
             .map({
                 var temp = $0
                 for _ in ($0.count..<6) {

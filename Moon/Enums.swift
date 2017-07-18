@@ -64,7 +64,7 @@ enum AlcoholType: String {
     }
 }
 
-enum DayOfWeek {
+enum DayOfWeek: Int {
     case monday
     case tuesday
     case wednesday

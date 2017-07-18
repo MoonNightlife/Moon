@@ -100,7 +100,6 @@ class MainViewController: UIViewController, BindableType {
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
     }
     
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

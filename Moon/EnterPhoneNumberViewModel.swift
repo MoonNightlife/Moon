@@ -19,6 +19,8 @@ struct EnterPhoneNumberViewModel: BackType, PhoneNumberValidationInjected {
                 self.phoneNumberService.formatPhoneNumberForGuiFrom(string: $0, countryCode: $1)
             })
     }
+    private let partOfSignupFlow: Bool
+    
     // Dependencies
     let sceneCoordinator: SceneCoordinatorType
     
@@ -39,8 +41,9 @@ struct EnterPhoneNumberViewModel: BackType, PhoneNumberValidationInjected {
     
     var countryCode = Variable<CountryCode>(.US)
     
-    init(coordinator: SceneCoordinatorType) {
+    init(coordinator: SceneCoordinatorType, partOfSignupFlow: Bool) {
         self.sceneCoordinator = coordinator
+        self.partOfSignupFlow = partOfSignupFlow
     
     }
     
@@ -65,7 +68,7 @@ struct EnterPhoneNumberViewModel: BackType, PhoneNumberValidationInjected {
             })
             .errorOnNil()
             .map({
-                return EnterCodeViewModel(coordinator: self.sceneCoordinator, phoneNumber: $0)
+                return EnterCodeViewModel(coordinator: self.sceneCoordinator, phoneNumber: $0, partOfSignupFlow: self.partOfSignupFlow)
             })
             .flatMap({
                 return self.sceneCoordinator.transition(to: Scene.UserDiscovery.enterCode($0), type: .push)
@@ -85,5 +88,20 @@ struct EnterPhoneNumberViewModel: BackType, PhoneNumberValidationInjected {
             return self.sceneCoordinator.transition(to: Scene.UserDiscovery.countryCode(vm), type: .modal)
         }
     }
-
+    
+    func onBack() -> CocoaAction {
+        return CocoaAction {
+            if self.partOfSignupFlow {
+                return self.showMainView()
+            } else {
+                return self.sceneCoordinator.pop()
+            }
+        }
+    }
+    
+    func showMainView() -> Observable<Void> {
+        let mainVM = MainViewModel(coordinator: self.sceneCoordinator)
+        let searchVM = SearchBarViewModel(coordinator: self.sceneCoordinator)
+        return self.sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
+    }
 }

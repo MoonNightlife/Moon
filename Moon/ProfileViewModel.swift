@@ -117,11 +117,15 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
                             .catchErrorJustReturn(nil)
                             .filterNil()
                             .flatMap({ url in
-                                return photoService.getImageFor(url: url)
-                                    .catchErrorJustReturn(#imageLiteral(resourceName: "DefaultProfilePic"))
+                                return photoService.getImageAndNameFor(url: url)
+                                    .catchErrorJustReturn((#imageLiteral(resourceName: "DefaultProfilePic"), "default"))
                             })
                     })
                 }).toArray()
+                .map({
+                    let imageOrder = ["pic1.jpg", "pic2.jpg", "pic3.jpg", "pic4.jpg", "pic5.jpg", "pic6.jpg"].slice(start: 0, end: $0.count)
+                    return $0.sorted { imageOrder.index(of: $0.imageName)! < imageOrder.index(of: $1.imageName)! }.map({ $0.image })
+                })
                 .map ({
                     return $0.isNotEmpty ? $0 : [#imageLiteral(resourceName: "DefaultProfilePic")]
                 })

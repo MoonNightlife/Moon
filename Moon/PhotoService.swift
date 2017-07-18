@@ -15,4 +15,5 @@ enum PhotoServiceError: Error {
 
 protocol PhotoService {
     func getImageFor(url: URL) -> Observable<UIImage>
+    func getImageAndNameFor(url: URL) -> Observable<(image: UIImage, imageName: String)>
 }

@@ -52,13 +52,18 @@ struct ExploreViewModel: ImageNetworkingInjected, NetworkingInjected, AuthNetwor
     }
     
     func specialSectionObservable(type: AlcoholType) -> Observable<[SpecialSection]> {
-        return self.reloadSpecial.flatMap({
-            return self.barAPI.getSpecialsIn(region: "Dallas", type: type)
-                .catchErrorJustReturn([])
-                .map({
-                    return [SpecialSection(model: "Specials", items: $0)]
-                })
-        })
+        return self.reloadSpecial
+            .map({
+                return Date.getCurrentDay()
+            })
+            .filterNil()
+            .flatMap({ 
+                return self.barAPI.getSpecialsIn(region: "Dallas", type: type, dayOfWeek: $0)
+                    .catchErrorJustReturn([])
+                    .map({
+                        return [SpecialSection(model: "Specials", items: $0)]
+                    })
+            })
     }
     
     func showBar(barID: String) -> CocoaAction {

@@ -206,9 +206,11 @@ extension Scene.UserDiscovery {
             vc.bindViewModel(to: viewModel)
             return nc
         case .contacts(let viewModel):
-            var vc = storyBoard.instantiateViewController(withIdentifier: "Contacts") as! ContactsViewController
+            let nc = storyBoard.instantiateViewController(withIdentifier: "ContactNavigationController") as! UINavigationController
+            var vc = nc.viewControllers.first as! ContactsViewController
             vc.bindViewModel(to: viewModel)
-            return vc
+            
+            return nc
         }
     }
 }

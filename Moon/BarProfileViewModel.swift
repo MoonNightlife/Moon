@@ -60,9 +60,13 @@ class BarProfileViewModel: ImageNetworkingInjected, NetworkingInjected, BackType
                     .catchErrorJustReturn(nil)
                     .filterNil()
                     .flatMap({ [unowned self] url in
-                        return self.photoService.getImageFor(url: url)
+                        return self.photoService.getImageAndNameFor(url: url)
                     })
             }).toArray()
+            .map({
+                let imageOrder = ["pic1.jpg", "pic2.jpg", "pic3.jpg", "pic4.jpg", "pic5.jpg", "pic6.jpg"].slice(start: 0, end: $0.count)
+                return $0.sorted { imageOrder.index(of: $0.imageName)! < imageOrder.index(of: $1.imageName)! }.map({ $0.image })
+            })
         }).catchErrorJustReturn([]).bind(to: barPics).addDisposableTo(bag)
 
         let peopleGoing = reloadDisplayUsers.flatMap({ [unowned self] _ in

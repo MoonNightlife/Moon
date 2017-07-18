@@ -39,6 +39,8 @@ class ContactsViewController: UIViewController, BindableType, MFMessageComposeVi
     
     func bindViewModel() {
         
+        contactsTableView.rx.modelSelected(SnapshotSectionModel.Item.self).bind(to: viewModel.onShowUser.inputs).addDisposableTo(bag)
+        
         viewModel.showLoadingIndicator.asObservable()
             .subscribe(onNext: { [weak self] isLoading in
                 if isLoading {
@@ -154,4 +156,20 @@ class ContactsViewController: UIViewController, BindableType, MFMessageComposeVi
         self.navigationItem.leftBarButtonItem = navBackButton
     }
 
+}
+
+extension ContactsViewController: UIPopoverPresentationControllerDelegate, PopoverPresenterType {
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        
+        return UIModalPresentationStyle.none
+    }
+    
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        viewModel.onBack().execute()
+        return false
+    }
+    
+    func didDismissPopover() {
+        
+    }
 }

@@ -13,7 +13,7 @@ import Action
 import Material
 import RxDataSources
 
-class UsersTableViewController: UIViewController, BindableType, UIPopoverPresentationControllerDelegate, PopoverPresenterType {
+class UsersTableViewController: UIViewController, BindableType {
 
     var viewModel: UsersTableViewModel!
     private let bag = DisposeBag()
@@ -163,7 +163,10 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
         backButton.tintColor = .lightGray
         self.navigationItem.leftBarButtonItem = backButton
     }
-    
+
+}
+
+extension UsersTableViewController: UIPopoverPresentationControllerDelegate, PopoverPresenterType  {
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         
         return UIModalPresentationStyle.none
@@ -177,5 +180,4 @@ class UsersTableViewController: UIViewController, BindableType, UIPopoverPresent
     func didDismissPopover() {
         viewModel.reload.onNext()
     }
-
 }

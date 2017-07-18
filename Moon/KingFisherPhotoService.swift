@@ -12,18 +12,16 @@ import RxSwift
 
 struct KingFisherPhotoService: PhotoService {
     
-    private func downloadImageFor(url: URL) -> Observable<UIImage> {
+    private func downloadImageFor(url: URL) -> Observable<(image: UIImage, imageName: String)> {
         
         let resouce = ImageResource(downloadURL: url)
         
         return Observable.create({ (observer) -> Disposable in
             let imageTask = KingfisherManager.shared.retrieveImage(with: resouce, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
+            
                 
-                print(cacheType)
-                print(url ?? "King fisher photo service returned no url")
-                
-                if let i = image {
-                    observer.onNext(i)
+                if let i = image, let imageName = url?.lastPathComponent {
+                    observer.onNext((i, imageName))
                 } else if let e = error {
                     observer.onError(e)
                 } else {
@@ -39,6 +37,14 @@ struct KingFisherPhotoService: PhotoService {
     }
     
     func getImageFor(url: URL) -> Observable<UIImage> {
+        return downloadImageFor(url: url)
+            .map({
+                return $0.image
+            })
+            .retryWhen(RxErrorHandlers.imageRetryHandler)
+    }
+    
+    func getImageAndNameFor(url: URL) -> Observable<(image: UIImage, imageName: String)> {
         return downloadImageFor(url: url)
             .retryWhen(RxErrorHandlers.imageRetryHandler)
     }

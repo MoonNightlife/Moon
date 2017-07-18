@@ -14,6 +14,7 @@ import RxCocoa
 struct EnterCodeViewModel: BackType, PhoneNumberValidationInjected, NetworkingInjected, AuthNetworkingInjected {
     // Private
     private let phoneNumber: String
+    private let partOfSignupFlow: Bool
     
     // Dependencies
     let sceneCoordinator: SceneCoordinatorType
@@ -27,9 +28,10 @@ struct EnterCodeViewModel: BackType, PhoneNumberValidationInjected, NetworkingIn
     var enableCheckCodeButton: Observable<Bool>
     var codeText: Observable<String>
     
-    init(coordinator: SceneCoordinatorType, phoneNumber: String) {
+    init(coordinator: SceneCoordinatorType, phoneNumber: String, partOfSignupFlow: Bool) {
         self.sceneCoordinator = coordinator
         self.phoneNumber = phoneNumber
+        self.partOfSignupFlow = partOfSignupFlow
         
         let formattedText = code.map({ code -> String in
             if code.characters.count > 4 {
@@ -48,11 +50,15 @@ struct EnterCodeViewModel: BackType, PhoneNumberValidationInjected, NetworkingIn
     }
     
     func onCheckCode() -> CocoaAction {
-        return CocoaAction {
+        return CocoaAction {_ in 
             return self.checkCode().flatMap({
                 return self.savePhoneNumber()
-            }).flatMap({
-                return self.onFinish()
+            }).flatMap({ _ -> Observable<Void> in
+                if self.partOfSignupFlow {
+                    return self.showMainView()
+                } else {
+                    return self.sceneCoordinator.pop()
+                }
             })
         }
     }
@@ -67,7 +73,19 @@ struct EnterCodeViewModel: BackType, PhoneNumberValidationInjected, NetworkingIn
         return self.userAPI.add(phoneNumber: self.phoneNumber, for: self.authAPI.SignedInUserID)
     }
     
-    private func onFinish() -> Observable<Void> {
-        return self.sceneCoordinator.pop()
+    func onBack() -> CocoaAction {
+        return CocoaAction {
+            if self.partOfSignupFlow {
+                return self.showMainView()
+            } else {
+                return self.sceneCoordinator.pop()
+            }
+        }
+    }
+    
+    func showMainView() -> Observable<Void> {
+        let mainVM = MainViewModel(coordinator: self.sceneCoordinator)
+        let searchVM = SearchBarViewModel(coordinator: self.sceneCoordinator)
+        return self.sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
     }
 }

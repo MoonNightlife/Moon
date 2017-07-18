@@ -38,6 +38,11 @@ class EnterCodeViewController: UIViewController, BindableType {
         enterCodeButton.rx.action = checkCodeAction
         
         checkCodeAction.executing
+            .do(onNext: { [weak self] executing in
+                if executing {
+                    self?.view.endEditing(true)
+                }
+            })
             .subscribe(onNext: {
                 if $0 {
                     SwiftOverlays.showBlockingWaitOverlay()
@@ -58,6 +63,10 @@ class EnterCodeViewController: UIViewController, BindableType {
         codeTextField.rx.textInput.text.orEmpty.bind(to: viewModel.code).addDisposableTo(bag)
         viewModel.enableCheckCodeButton.bind(to: enterCodeButton.rx.isEnabled).addDisposableTo(bag)
         viewModel.codeText.bind(to: codeTextField.rx.text).addDisposableTo(bag)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     fileprivate func prepareCancelButton() {

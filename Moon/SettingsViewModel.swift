@@ -94,7 +94,7 @@ struct SettingsViewModel: AuthNetworkingInjected, NetworkingInjected {
             let vm = EmailSettingsViewModel(coordinator: self.sceneCoordinator)
             return Scene.User.email(vm)
         case .changePhoneNumber:
-            let vm = EnterPhoneNumberViewModel(coordinator: self.sceneCoordinator)
+            let vm = EnterPhoneNumberViewModel(coordinator: self.sceneCoordinator, partOfSignupFlow: false)
             return Scene.UserDiscovery.enterPhoneNumber(vm)
         case .notifications:
             let vm = NotificationSettingsViewModel(coordinator: self.sceneCoordinator)

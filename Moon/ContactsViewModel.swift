@@ -24,6 +24,27 @@ class ContactsViewModel: BackType, ImageNetworkingInjected, NetworkingInjected, 
     // Actions
     var checkContactAccess: Action<Void, Bool>
     
+    lazy var onShowUser: Action<SnapshotSectionModel.Item, Void> = {
+        return Action { model in
+            
+            return Observable.just()
+                .map({ _ -> String? in
+                    if case let .searchResult(snapshot) = model {
+                        return snapshot.id
+                    } else {
+                        return nil
+                    }
+                })
+                .filterNil()
+                .map({ id -> ProfileViewModel in
+                    return ProfileViewModel(coordinator: self.sceneCoordinator, userID: id)
+                })
+                .flatMap({
+                    return self.sceneCoordinator.transition(to: Scene.User.profile($0), type: .popover)
+                })
+        }
+    }()
+    
     // Outputs
     var usersInContacts: Observable<[SnapshotSectionModel]>!
     var showLoadingIndicator = Variable(false)

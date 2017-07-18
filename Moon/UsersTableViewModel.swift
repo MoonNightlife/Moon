@@ -136,7 +136,7 @@ class UsersTableViewModel: BackType, ImageNetworkingInjected, NetworkingInjected
     func onShowContacts() -> CocoaAction {
         return CocoaAction {
             let vm = ContactsViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: Scene.UserDiscovery.contacts(vm), type: .push)
+            return self.sceneCoordinator.transition(to: Scene.UserDiscovery.contacts(vm), type: .modal)
         }
     }
     

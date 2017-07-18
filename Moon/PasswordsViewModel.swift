@@ -59,15 +59,9 @@ struct PasswordsViewModel: NetworkingInjected, AuthNetworkingInjected, StorageNe
                     }
                 })
                 .flatMap({
-                    return self.loginAction()
+                    return self.showEnterPhoneNumber()
                 })
         })
-    }
-
-    func loginAction() -> Observable<Void> {
-        let mainVM = MainViewModel(coordinator: self.sceneCoordinator)
-        let searchVM = SearchBarViewModel(coordinator: self.sceneCoordinator)
-        return self.sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
     }
     
     init(coordinator: SceneCoordinatorType, user: NewUser) {
@@ -88,5 +82,10 @@ struct PasswordsViewModel: NetworkingInjected, AuthNetworkingInjected, StorageNe
         return CocoaAction {
             self.sceneCoordinator.pop()
         }
+    }
+    
+    func showEnterPhoneNumber() -> Observable<Void> {
+        let vm = EnterPhoneNumberViewModel(coordinator: self.sceneCoordinator, partOfSignupFlow: true)
+        return self.sceneCoordinator.transition(to: Scene.UserDiscovery.enterPhoneNumber(vm), type: .modal)
     }
 }

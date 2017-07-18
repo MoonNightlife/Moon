@@ -44,7 +44,13 @@ class EnterPhoneNumberViewController: UIViewController, BindableType {
         
         sendCodeButton.rx.action = sendCodeAction
         
-        sendCodeAction.executing.subscribe(onNext: {
+        sendCodeAction.executing
+            .do(onNext: { [weak self] executing in
+                if executing {
+                    self?.view.endEditing(true)
+                }
+            })
+            .subscribe(onNext: {
             if $0 {
                 SwiftOverlays.showBlockingWaitOverlay()
             } else {
