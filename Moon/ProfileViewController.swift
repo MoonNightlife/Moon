@@ -53,6 +53,8 @@ class ProfileViewController: UIViewController, BindableType {
         viewModel.reload.execute()
         viewModel.reloadPhotos.onNext()
         viewModel.numberOfFriendRequest.execute()
+        print("Hieght: ", self.view.frame.size.height)
+        print("Width: ", self.view.frame.size.width)
     }
     
     @IBOutlet weak var exitButton: UIButton!
