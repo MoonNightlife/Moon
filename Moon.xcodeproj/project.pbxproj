@@ -140,6 +140,7 @@
 		F04B43801F058F8800946C82 /* Special.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B437F1F058F8800946C82 /* Special.swift */; };
 		F04B43821F058FA000946C82 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B43811F058FA000946C82 /* UserSettings.swift */; };
 		F04F445C1ECF840700D5FC62 /* BarAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */; };
+		F05491241F1FBB63008568E5 /* NotificationSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05491231F1FBB63008568E5 /* NotificationSetting.swift */; };
 		F06209731F1E933600AF529A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F06209721F1E933600AF529A /* GoogleService-Info.plist */; };
 		F06B42321EFDAE9900BE7626 /* DynamicLinkingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B42311EFDAE9900BE7626 /* DynamicLinkingAPI.swift */; };
 		F06B56FD1EFAA8750028552A /* RxDataSourceUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B56FC1EFAA8750028552A /* RxDataSourceUserModel.swift */; };
@@ -407,6 +408,7 @@
 		F04B437F1F058F8800946C82 /* Special.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Special.swift; sourceTree = "<group>"; };
 		F04B43811F058FA000946C82 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAnnotation.swift; sourceTree = "<group>"; };
+		F05491231F1FBB63008568E5 /* NotificationSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSetting.swift; sourceTree = "<group>"; };
 		F06209721F1E933600AF529A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F06B42311EFDAE9900BE7626 /* DynamicLinkingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicLinkingAPI.swift; sourceTree = "<group>"; };
 		F06B56FC1EFAA8750028552A /* RxDataSourceUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxDataSourceUserModel.swift; sourceTree = "<group>"; };
@@ -1236,6 +1238,7 @@
 				F03322451F16A77900FD72CD /* EditProfileInfo.swift */,
 				F0DAA0BD1F193D360039DA07 /* PopoverPresenterType.swift */,
 				F0B5F93E1EEF790A0095F12E /* BarInfo.swift */,
+				F05491231F1FBB63008568E5 /* NotificationSetting.swift */,
 			);
 			name = "Models ";
 			sourceTree = "<group>";
@@ -1711,6 +1714,7 @@
 				F03C78B51EE9DB3C002AEDAD /* SettingsViewModel.swift in Sources */,
 				F0C66BDF1EF41C9400B22811 /* SinchService.swift in Sources */,
 				F048F11B1EA3B7A5000F0161 /* AppDelegate.swift in Sources */,
+				F05491241F1FBB63008568E5 /* NotificationSetting.swift in Sources */,
 				F0EBA0BF1ECCAE9F00056EF9 /* ActionButton.swift in Sources */,
 				C0DAD30B1EE5EBC4008BAF05 /* ProfileFakeData.swift in Sources */,
 				F034044A1F0D621700475FDF /* FirebaseStorageAPI.swift in Sources */,

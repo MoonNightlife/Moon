@@ -7,9 +7,18 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class NotificationTableViewCell: UITableViewCell {
+    var bag = DisposeBag()
+    
     @IBOutlet weak var enableSwitch: UISwitch!
     @IBOutlet weak var title: UILabel!
+    
+    override func awakeFromNib() {
+        title.font = UIFont.moonFont(size: 16)
+        selectionStyle = .none
+    }
     
 }

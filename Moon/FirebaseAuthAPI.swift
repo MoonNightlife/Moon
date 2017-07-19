@@ -29,6 +29,9 @@ struct FirebaseAuthAPI: AuthAPIType {
         static let checkUsername = authBaseURL + "checkUsername"
         static let deleteAccount = authBaseURL + "deleteAccount"
         static let checkFirstTimeLogin = authBaseURL + "checkFirstTimeLogin"
+        
+        static let saveFCMToken = authBaseURL + "saveFCMDeviceToken"
+        static let removeFCMToken = authBaseURL + "removeFCMDeviceToken"
     }
     
     func login(credentials: LoginCredentials) -> Observable<UserID> {
@@ -220,6 +223,52 @@ struct FirebaseAuthAPI: AuthAPIType {
             var body: Parameters = newUser.toJSON()
             body["id"] = self.SignedInUserID
             let request = Alamofire.request(AuthFunction.createProfile, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .response(completionHandler: {
+                    if let e = $0.error {
+                        observer.onError(e)
+                    } else {
+                        observer.onNext()
+                        observer.onCompleted()
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    
+    func saveFCMToken(token: String) -> Observable<Void> {
+        return Observable.create({(observer) -> Disposable in
+            let body: Parameters = [
+                "id": self.SignedInUserID,
+                "token": token
+            ]
+            let request = Alamofire.request(AuthFunction.saveFCMToken, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .response(completionHandler: {
+                    if let e = $0.error {
+                        observer.onError(e)
+                    } else {
+                        observer.onNext()
+                        observer.onCompleted()
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    
+    func removeFCMToken(token: String) -> Observable<Void> {
+        return Observable.create({(observer) -> Disposable in
+            let body: Parameters = [
+                "id": self.SignedInUserID,
+                "token": token
+            ]
+            let request = Alamofire.request(AuthFunction.removeFCMToken, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()
                 .response(completionHandler: {
                     if let e = $0.error {

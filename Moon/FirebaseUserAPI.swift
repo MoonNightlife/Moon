@@ -52,6 +52,9 @@ struct FirebaseUserAPI: UserAPIType {
         static let pendingFriendRequest = userBaseURL + "pendingFriendRequest"
         static let areFriends = userBaseURL + "getFriendStatus"
         static let sentFriendRequest = userBaseURL + "didSendFriendRequest"
+        
+        static let getNoticationSettings = userBaseURL + "getNotificationSettings"
+        static let updateNotifcationSettings = userBaseURL + "updateNotificationSettings"
     }
     
 }
@@ -708,4 +711,52 @@ extension FirebaseUserAPI {
         })
     }
 
+}
+
+// MARK: - Settings
+extension FirebaseUserAPI {
+    func getNotificationSettings(userID: String) -> Observable<[NotificationSetting]> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": userID
+            ]
+            let request = Alamofire.request(UserFunction.getNoticationSettings, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseArray(completionHandler: { (response: DataResponse<[NotificationSetting]>) in
+                    switch response.result {
+                    case .success(let settings):
+                        observer.onNext(settings)
+                        observer.onCompleted()
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    func updateNotificationSettings(userID: String, settings: [NotificationSetting]) -> Observable<Void> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": userID,
+                "settings": settings.toJSON()
+            ]
+            let request = Alamofire.request(UserFunction.updateNotifcationSettings, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .response(completionHandler: {
+                    if let e = $0.error {
+                        observer.onError(e)
+                    } else {
+                        observer.onNext()
+                        observer.onCompleted()
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
 }
