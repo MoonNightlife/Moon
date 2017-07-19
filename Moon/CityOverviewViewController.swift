@@ -29,7 +29,7 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
     var pinAnimation: NVActivityIndicatorView!
     var bag = DisposeBag()
     var bars = [TopBar]()
-    
+ 
     @IBOutlet weak var goingCarouselHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var segmentControl: ADVSegmentedControl!
     @IBOutlet weak var goingCarousel: iCarousel!
@@ -66,6 +66,7 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
         prepareSegmentControl()
         prepareCarousel()
         addGestureReconizerToMap()
+        displayEmptyViewText(text: "", carousel: goingCarousel)
     }
     
     func addGestureReconizerToMap() {
@@ -88,9 +89,9 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
         })
         .addDisposableTo(bag)
         
-        viewModel.displayedUsers.asObservable()
-            .do(onNext: { [weak self] users in
-                if users.isEmpty {
+        Observable.combineLatest(viewModel.getPeopleForBar.executing, viewModel.displayedUsers.asObservable())
+            .subscribe(onNext: { [weak self] isExecuting, users in
+                if !isExecuting && users.isEmpty {
                     if self?.segmentControl.selectedIndex == 0 {
                         self?.removeEmptyViewText(carousel: self!.goingCarousel)
                         self?.displayEmptyViewText(text: "Looks Like No People Are Going Tonight", carousel: self!.goingCarousel)
@@ -98,12 +99,18 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
                         self?.removeEmptyViewText(carousel: self!.goingCarousel)
                         self?.displayEmptyViewText(text: "Looks Like No Friends Are Going Tonight", carousel: self!.goingCarousel)
                     }
-                } else {
+                }
+            })
+            .addDisposableTo(bag)
+        
+        viewModel.displayedUsers.asObservable()
+            .do(onNext: { [weak self] users in
+                if users.isNotEmpty {
                      self?.removeEmptyViewText(carousel: self!.goingCarousel)
                 }
             })
             .subscribe(onNext: { [weak self] _ in
-                self?.removeEmptyViewText(carousel: self!.goingCarousel)
+                //self?.removeEmptyViewText(carousel: self!.goingCarousel)
                 self?.goingCarousel.reloadData()
             })
             .addDisposableTo(bag)
@@ -186,7 +193,6 @@ class CityOverviewViewController: UIViewController, CLLocationManagerDelegate, M
         UIView.animate(withDuration: Double(0.3), animations: {
             self.goingCarouselHeightConstraint.constant = self.view.frame.height * 0.55
             self.view.layoutIfNeeded()
-            self.displayEmptyViewText(text: "", carousel: self.goingCarousel)
         })
         
         goingCarousel.contentView.isHidden = false

@@ -145,20 +145,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FSx-v7-Dv8">
-                                <rect key="frame" x="0.0" y="41" width="375" height="193.5"/>
+                                <rect key="frame" x="0.0" y="41" width="375" height="226"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cJv-8q-9Ot">
-                                    <size key="itemSize" width="191" height="191"/>
+                                    <size key="itemSize" width="208" height="208"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserSearchCollectionViewCell" id="JYQ-eU-ata">
-                                        <rect key="frame" x="0.0" y="1.5" width="191" height="191"/>
+                                        <rect key="frame" x="0.0" y="9" width="208" height="208"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="191" height="191"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="208" height="208"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
                                     </collectionViewCell>
@@ -175,7 +175,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nhT-Zx-dc0">
-                                <rect key="frame" x="0.0" y="275.5" width="375" height="391.5"/>
+                                <rect key="frame" x="0.0" y="308" width="375" height="359"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Lkf-dK-vcw">
                                     <size key="itemSize" width="180" height="180"/>
@@ -195,7 +195,7 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suggested Venues" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3oj-kZ-9OS">
-                                <rect key="frame" x="16" y="242.5" width="154" height="25"/>
+                                <rect key="frame" x="16" y="275" width="154" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="154" id="VYN-yA-cNF"/>
                                     <constraint firstAttribute="height" constant="25" id="wUj-bd-xkG"/>
@@ -208,7 +208,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="FSx-v7-Dv8" firstAttribute="top" secondItem="FgH-F7-WUW" secondAttribute="bottom" constant="8" id="03i-RI-ow6"/>
-                            <constraint firstItem="FSx-v7-Dv8" firstAttribute="height" secondItem="vf4-5z-r6F" secondAttribute="height" multiplier="0.29" id="6mG-5N-xtk"/>
+                            <constraint firstItem="FSx-v7-Dv8" firstAttribute="height" secondItem="vf4-5z-r6F" secondAttribute="height" multiplier="0.29" constant="32.570000000000022" id="6mG-5N-xtk"/>
                             <constraint firstItem="3oj-kZ-9OS" firstAttribute="top" secondItem="FSx-v7-Dv8" secondAttribute="bottom" constant="8" id="7EN-RP-mbr"/>
                             <constraint firstAttribute="trailing" secondItem="FSx-v7-Dv8" secondAttribute="trailing" id="Cw2-fT-Jt9"/>
                             <constraint firstItem="FSx-v7-Dv8" firstAttribute="leading" secondItem="vf4-5z-r6F" secondAttribute="leading" id="FNE-OQ-uPx"/>
@@ -307,7 +307,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPu-YW-BRK">
-                                                    <rect key="frame" x="66" y="24" width="37" height="20"/>
+                                                    <rect key="frame" x="66" y="23.5" width="37" height="20"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -320,7 +320,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRD-67-XP0">
-                                                    <rect key="frame" x="325" y="23" width="42" height="21"/>
+                                                    <rect key="frame" x="325" y="22" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>

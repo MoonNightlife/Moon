@@ -150,12 +150,12 @@ class ContentSuggestionsViewController: UIViewController, BindableType, UICollec
         var cellSize = CGFloat(0.0)
         
         if collectionView == suggestedUserColletionView {
-            cellSize = collectionView.frame.size.height * 0.90
+            cellSize = collectionView.frame.size.height * 0.95
         } else if collectionView == suggestedBarCollectionView {
             cellSize = collectionView.frame.size.height * 0.526
         }
         
-        return CGSize(width: cellSize, height: cellSize)
+        return CGSize(width: cellSize, height: cellSize + 20)
     }
     
     fileprivate func configureDataSource() {
