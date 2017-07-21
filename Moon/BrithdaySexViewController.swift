@@ -20,7 +20,7 @@ class BirthdaySexViewController: UIViewController, BindableType {
     var viewModel: BirthdaySexViewModel!
     var progressView: MDCProgressView!
 
-    @IBOutlet weak var birthdayTextField: TextField!
+    @IBOutlet weak var birthdayTextField: ErrorTextField!
     @IBOutlet weak var sexTextField: TextField!
     @IBOutlet weak var nextScreenButton: UIButton!
     var navBackButton: UIBarButtonItem!
@@ -53,6 +53,7 @@ class BirthdaySexViewController: UIViewController, BindableType {
         datePickerView.rx.date.bind(to: viewModel.birthday).addDisposableTo(disposeBag)
         
         viewModel.birthdayString.bind(to: birthdayTextField.rx.text).addDisposableTo(disposeBag)
+        viewModel.showBirthdayError.bind(to: birthdayTextField.rx.isErrorRevealed).addDisposableTo(disposeBag)
         viewModel.sexString.bind(to: sexTextField.rx.text).addDisposableTo(disposeBag)
         
         nextScreenButton.rx.action = viewModel.nextSignUpScreen()

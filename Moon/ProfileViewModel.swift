@@ -167,8 +167,7 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
             }           
         }
     }
-    
-    
+        
     func onAddFriend() -> CocoaAction {
         return CocoaAction { _ in
             return self.userAPI.requestFriend(userID: self.authAPI.SignedInUserID, friendID: self.userID).do(onNext: {
