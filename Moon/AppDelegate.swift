@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
     var bag = DisposeBag()
     let gcmMessageIDKey = "gcm.message_id"
     
-
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -41,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
         if RxReachability.shared.startMonitor("apple.com") == false {
             print("Reachability failed!")
         }
+    
         
         if let url = launchOptions?[.url] as? URL {
             return executeDeepLink(with: url)
@@ -88,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
         
         return handled
     }
-    
+
 }
 
 // MARK: - Helper Fuctions

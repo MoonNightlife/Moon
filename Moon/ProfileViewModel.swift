@@ -48,6 +48,9 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
     var profilePictures = Variable<[UIImage]>([])
     var actionButton: Observable<ProfileActionButton>
     var numberOfLikes: Observable<String>
+    var hasLiked: Observable<Bool> {
+        return self.userAPI.hasLikedActivity(userID: self.authAPI.SignedInUserID, ActivityID: self.userID)
+    }
     
     init(coordinator: SceneCoordinatorType, userID: String, userAPI: UserAPIType = FirebaseUserAPI(), photoService: PhotoService = KingFisherPhotoService(), authAPI: AuthAPIType = FirebaseAuthAPI(), storageAPI: StorageAPIType = FirebaseStorageAPI()) {
         self.sceneCoordinator = coordinator
