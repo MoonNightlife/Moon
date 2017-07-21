@@ -19,6 +19,7 @@ class UserProfile: Mappable {
     var profilePics: [String]?
     var barName: String?
     var barId: String?
+    var numberOfLikes: Int?
     var bio: String?
     
     init() {
@@ -40,6 +41,7 @@ class UserProfile: Mappable {
         barName <- map["barName"]
         barId <- map["barId"]
         bio <- map["bio"]
+        numberOfLikes <- map["numberOfLikes"]
     }
 
 }

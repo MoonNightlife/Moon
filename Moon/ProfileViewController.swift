@@ -60,8 +60,39 @@ class ProfileViewController: UIViewController, BindableType {
     }
     
     @IBOutlet weak var exitButton: UIButton!
+    
+    private func toggleLikeButtonAndNumber() {
+        guard let numLikesString = likesButton.titleLabel?.text,
+            let numLikes = Int(numLikesString) else {
+                return
+        }
+        
+        if likeButton.tintColor == UIColor.lightGray {
+            likeButton.tintColor = .red
+            likesButton.setTitle("\(numLikes + 1)", for: .normal)
+        } else {
+            likeButton.tintColor = .lightGray
+            likesButton.setTitle("\(numLikes - 1)", for: .normal)
+        }
+    }
 
     func bindViewModel() {
+        let likeAction =  viewModel.onLikeActivity()
+        likeButton.rx.action = likeAction
+        likeAction.executionObservables.flatMap({
+            return $0
+                .do(onError: { [weak self] _ in
+                    self?.toggleLikeButtonAndNumber()
+                    }, onSubscribe: { [weak self] _ in
+                        self?.toggleLikeButtonAndNumber()
+                }).catchErrorJustReturn()
+        })
+        .subscribe()
+        .addDisposableTo(bag)
+        
+        viewModel.numberOfLikes.bind(to: likesButton.rx.title()).addDisposableTo(bag)
+        
+        likesButton.rx.action = viewModel.onViewLikers()
         friendsButton.rx.action = viewModel.onShowFriends()
         dismissButton.rx.action = viewModel.onDismiss()
         planButton.rx.action = viewModel.onViewBar()
