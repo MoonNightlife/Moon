@@ -167,7 +167,6 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
             }
         }).subscribe(onNext: { [weak self] _ in
             self?.eventsCarousel.reloadData()
-            print("Loading Events Is Being Called")
         }).addDisposableTo(bag)
         
         viewModel.numPeopleAttending.do(onNext: { [weak self] numGoing in
@@ -386,6 +385,9 @@ extension BarProfileViewController: iCarouselDataSource, iCarouselDelegate {
     }
     
     func displayEmptyViewText(text: String, carousel: iCarousel) {
+        // Remove label before adding a new one
+        removeEmptyViewText(carousel: carousel)
+        
         let frame = CGRect(x: 0, y: carousel.frame.size.height / 2, width: carousel.frame.size.width, height: 30)
         let label = UILabel(frame: frame)
         label.textAlignment = .center
