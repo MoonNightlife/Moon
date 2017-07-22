@@ -41,9 +41,7 @@ class BarProfileViewModel: ImageNetworkingInjected, NetworkingInjected, BackType
     var specials = Variable<[Special]>([])
     var events = Variable<[BarEvent]>([])
     var isAttending: Observable<Bool>!
-    var numPeopleAttending: Observable<String> {
-        return bar.map({ "\($0.numPeopleAttending ?? 0)" })
-    }
+    var numPeopleAttending: Observable<Int>!
     
     init(coordinator: SceneCoordinatorType, barID: String) {
         self.sceneCoordinator = coordinator
@@ -141,14 +139,6 @@ class BarProfileViewModel: ImageNetworkingInjected, NetworkingInjected, BackType
     func onLikeEvent(eventID: String) -> CocoaAction {
         return CocoaAction { [unowned self] _ in
             return self.userAPI.likeEvent(userID: self.authAPI.SignedInUserID, eventID: eventID)
-        }
-    }
-    
-    func onShareEvent(eventID: String, barID: String) -> CocoaAction {
-        return CocoaAction { [unowned self] _ in
-            //TODO: add api call
-            print("Share event needs implementation")
-            return Observable.empty()
         }
     }
     

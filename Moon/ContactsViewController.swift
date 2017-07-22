@@ -69,7 +69,6 @@ class ContactsViewController: UIViewController, BindableType, MFMessageComposeVi
             //swiftlint:disable force_cast
             switch item {
             case .loadMore(_):
-                //TODO: turn the load more cell into a XIB and use it here
                 return UITableViewCell()
             case let .searchResult(snapshot):
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactTableViewCell

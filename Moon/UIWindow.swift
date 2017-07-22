@@ -25,20 +25,18 @@ extension UIWindow {
             if animated {
                 UIView.animate(withDuration: 0.4, animations: { () -> Void in
                     snapshotImageView.alpha = 0
-                }, completion: { (success) -> Void in
+                }, completion: { (_) -> Void in
                     snapshotImageView.removeFromSuperview()
                     completion?()
                 })
-            }
-            else {
+            } else {
                 snapshotImageView.removeFromSuperview()
                 completion?()
             }
         }
         if self.rootViewController?.presentedViewController != nil {
             self.rootViewController!.dismiss(animated: false, completion: dismissCompletion)
-        }
-        else {
+        } else {
             dismissCompletion()
         }
     }

@@ -24,7 +24,6 @@ class UsersTableViewController: UIViewController, BindableType {
     var refreshControl: UIRefreshControl = UIRefreshControl()
     var contactsButton = UIBarButtonItem()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -153,10 +152,9 @@ class UsersTableViewController: UIViewController, BindableType {
         self.navigationItem.rightBarButtonItem = contactsButton
     }
     
-
 }
 
-extension UsersTableViewController: UIPopoverPresentationControllerDelegate, PopoverPresenterType  {
+extension UsersTableViewController: UIPopoverPresentationControllerDelegate, PopoverPresenterType {
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         
         return UIModalPresentationStyle.none

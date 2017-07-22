@@ -56,7 +56,7 @@ struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected, Stor
                             self.showLoadingIndicator.value = false
                         })
                         .map({
-                            return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users", snapshots: $0),SnapshotSectionModel.loadingSectionModel()]
+                            return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users", snapshots: $0), SnapshotSectionModel.loadingSectionModel()]
                         })
                 case .bars:
                     return self.barAPI.searchForBar(searchText: searchText)
@@ -66,7 +66,7 @@ struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected, Stor
                             self.showLoadingIndicator.value = false
                         })
                         .map({
-                            return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Bars", snapshots: $0),SnapshotSectionModel.loadingSectionModel()]
+                            return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Bars", snapshots: $0), SnapshotSectionModel.loadingSectionModel()]
                         })
                     
                 }

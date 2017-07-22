@@ -177,7 +177,6 @@ extension FirebaseUserAPI {
     }
 }
 
-
 // MARK: - Blocking
 extension FirebaseUserAPI {
     func blockUser(userID: String, blockID: String) -> Observable<Void> {

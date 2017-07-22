@@ -195,7 +195,6 @@
 		F0B5F93F1EEF790A0095F12E /* BarInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B5F93E1EEF790A0095F12E /* BarInfo.swift */; };
 		F0C66BDF1EF41C9400B22811 /* SinchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C66BDE1EF41C9400B22811 /* SinchService.swift */; };
 		F0C72F441EF81D7700B25C52 /* KingFisherPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C72F431EF81D7700B25C52 /* KingFisherPhotoService.swift */; };
-		F0C72F461EF835B200B25C52 /* ImageDownloadType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C72F451EF835B200B25C52 /* ImageDownloadType.swift */; };
 		F0CA18911EE584AF00428318 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18901EE584AF00428318 /* ProfileViewModel.swift */; };
 		F0CA18931EE585D700428318 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18921EE585D700428318 /* ProfileViewController.swift */; };
 		F0CA18951EE5867700428318 /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0CA18941EE5867700428318 /* User.storyboard */; };
@@ -465,7 +464,6 @@
 		F0B5F93E1EEF790A0095F12E /* BarInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarInfo.swift; sourceTree = "<group>"; };
 		F0C66BDE1EF41C9400B22811 /* SinchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinchService.swift; sourceTree = "<group>"; };
 		F0C72F431EF81D7700B25C52 /* KingFisherPhotoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KingFisherPhotoService.swift; sourceTree = "<group>"; };
-		F0C72F451EF835B200B25C52 /* ImageDownloadType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloadType.swift; sourceTree = "<group>"; };
 		F0CA18901EE584AF00428318 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		F0CA18921EE585D700428318 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F0CA18941EE5867700428318 /* User.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = User.storyboard; sourceTree = "<group>"; };
@@ -1034,7 +1032,6 @@
 			isa = PBXGroup;
 			children = (
 				F04989691EE0661E00064F58 /* BindableType.swift */,
-				F0C72F451EF835B200B25C52 /* ImageDownloadType.swift */,
 				F04A6D511EEECA95000D898B /* ParentType.swift */,
 				F0EF693D1EF09AD90028A32B /* BackType.swift */,
 				F0F6B5111F019FF1000C4489 /* DisplayErrorType.swift */,
@@ -1659,7 +1656,6 @@
 				C034E2C71ECCF09D008EA4BA /* FakeUserData.swift in Sources */,
 				F0E8627D1EF6B85400BEF5E9 /* EditProfileViewModel.swift in Sources */,
 				F04989681EE0653D00064F58 /* Scene+ViewController.swift in Sources */,
-				F0C72F461EF835B200B25C52 /* ImageDownloadType.swift in Sources */,
 				F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */,
 				F0CA18B51EE5AEEC00428318 /* FloatingBottomTabBar+Rx.swift in Sources */,
 				F04989661EE0651800064F58 /* SceneCoordinatorType.swift in Sources */,

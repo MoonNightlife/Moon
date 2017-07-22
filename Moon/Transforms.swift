@@ -63,8 +63,6 @@ let SpecialTypeTransform = TransformOf<AlcoholType, Int>(fromJSON: { (value: Int
 //        return nil
 //})
 
-
-
 let SexTransform = TransformOf<Sex, Int>(fromJSON: { (value: Int?) -> Sex? in
     
     switch value! {
@@ -73,7 +71,6 @@ let SexTransform = TransformOf<Sex, Int>(fromJSON: { (value: Int?) -> Sex? in
         case 2 : return Sex.none
         default: return Sex.none
     }
-    
     
     }, toJSON: { (value: Sex?) -> Int? in
         
@@ -96,7 +93,6 @@ let GenderTransform = TransformOf<Sex, String>(fromJSON: { (value: String?) -> S
     default: return Sex.none
     }
     
-    
 }, toJSON: { (value: Sex?) -> String? in
     // transform value from Int? to String?
     if let value = value {
@@ -108,6 +104,3 @@ let GenderTransform = TransformOf<Sex, String>(fromJSON: { (value: String?) -> S
     }
     return nil
 })
-
-
-

@@ -18,7 +18,8 @@ struct FacebookUserInfo: Mappable {
     var birthday: String?
     var email: String?
     
-    init?(map: Map){
+    init?(map: Map) {
+        
     }
     
     mutating func mapping(map: Map) {

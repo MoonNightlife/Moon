@@ -136,7 +136,6 @@ class FeaturedViewController: UIViewController, UICollectionViewDataSource, UICo
             hasLiked.execute()
             
             view.numberOfLikesButton.rx.action = viewModel.onViewLikers(eventID: id)
-            view.shareButton.rx.action = viewModel.onShareEvent(eventID: id)
             view.moreButton.rx.action = viewModel.onMoreInfo(barID: barID)
             
             // Bind Image

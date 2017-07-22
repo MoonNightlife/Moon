@@ -59,13 +59,6 @@ class BarActivityFeedViewController: UIViewController, BindableType, DisplayErro
         
         refreshControl.rx.controlEvent(.valueChanged).subscribe(viewModel.refreshAction.inputs).addDisposableTo(disposeBag)
         
-//        viewModel.refreshAction.errors.subscribe(onNext: { [weak self] in
-//            self?.refreshControl.endRefreshing()
-//            if let strongSelf = self {
-//                //TODO: show error
-//            }
-//        }).addDisposableTo(disposeBag)
-        
         viewModel.refreshAction.execute()
     }
     
