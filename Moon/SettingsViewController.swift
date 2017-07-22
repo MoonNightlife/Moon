@@ -9,6 +9,7 @@
 import UIKit
 import RxCocoa
 import Material
+import SwiftOverlays
 import RxSwift
 
 class SettingsViewController: UITableViewController, BindableType {
@@ -44,6 +45,16 @@ class SettingsViewController: UITableViewController, BindableType {
             viewModel.email.bind(to: emailLabel.rx.text).addDisposableTo(disposeBag)
             viewModel.phoneNumber.bind(to: phoneNumberLabel.rx.text).addDisposableTo(disposeBag)
         }
+        
+        viewModel.loadingIndicator.asObservable()
+            .subscribe(onNext: { [weak self] show in
+                if show {
+                    self?.showWaitOverlay()
+                } else {
+                    self?.removeAllOverlays()
+                }
+            })
+            .addDisposableTo(disposeBag)
         
         self.tableView.rx.itemSelected
             .map(settingFrom)

@@ -22,20 +22,19 @@ struct SettingsViewModel: AuthNetworkingInjected, NetworkingInjected {
                 return Observable.empty()
             }
             if case Scene.Login.login(_) = scene {
-                
-                var temp: Observable<Void>!
-                
+                this.loadingIndicator.value = true
                 if let token = Messaging.messaging().fcmToken {
-                    temp = this.authAPI.removeFCMToken(token: token).flatMap({
-                        return this.authAPI.signOut()
+                    return this.authAPI.removeFCMToken(token: token).flatMap({
+                        return this.authAPI.signOut().do(onNext: {
+                            this.loadingIndicator.value = false
+                        })
                     })
                 } else {
-                    temp = this.authAPI.signOut()
+                    return this.authAPI.signOut().do(onNext: {
+                        this.loadingIndicator.value = false
+                    })
+
                 }
-                
-                return temp.flatMap({
-                    return this.sceneCoordinator.transition(to: scene, type: .root)
-                })
         
             } else if case Scene.UserDiscovery.enterPhoneNumber(_) = scene {
                 return this.sceneCoordinator.transition(to: scene, type: .modal)
@@ -55,6 +54,7 @@ struct SettingsViewModel: AuthNetworkingInjected, NetworkingInjected {
     var email: Observable<String>!
     var phoneNumber: Observable<String>!
     var username: Observable<String>!
+    var loadingIndicator = Variable<Bool>(false)
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType

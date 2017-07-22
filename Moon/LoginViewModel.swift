@@ -86,20 +86,20 @@ struct LoginViewModel: AuthNetworkingInjected, FacebookNetworkingInjected {
     func continueLogin() -> Observable<Void> {
         return self.authAPI.login(credentials: self.facebookAPI.getProviderCredentials())
             .flatMap({ id -> Observable<Bool> in
-                if let token = Messaging.messaging().fcmToken {
-                    return self.authAPI.saveFCMToken(token: token).flatMap({
-                            self.authAPI.checkForFirstTimeLogin(userId: id)
-                        })
-                } else {
-                    return self.authAPI.checkForFirstTimeLogin(userId: id)
-                }
+                return self.authAPI.checkForFirstTimeLogin(userId: id)
             }).flatMap({ isFirstTime -> Observable<Void> in
                 if isFirstTime {
                     return self.facebookAPI.getBasicProfileForSignedInUser().flatMap({
                         self.signUpAction(facebookProfile: $0)
                     })
                 } else {
-                    return self.loginAction()
+                    if let token = Messaging.messaging().fcmToken {
+                        return self.authAPI.saveFCMToken(token: token).flatMap({
+                            self.loginAction()
+                        })
+                    } else {
+                        return self.loginAction()
+                    }
                 }
             })
     }

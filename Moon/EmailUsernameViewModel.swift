@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 import Action
 import RxCocoa
+import FirebaseMessaging
 
 enum SignUpError: Error {
     case usernameTaken(message: String)
@@ -109,6 +110,12 @@ struct EmailUsernameViewModel: AuthNetworkingInjected, StorageNetworkingInjected
             .flatMap({ _ -> Observable<Void> in
                 if let photoData = self.newUser.image {
                     return self.storageAPI.uploadProfilePictureFrom(data: photoData, forUser: self.authAPI.SignedInUserID, imageName: "pic1.jpg")
+                } else {
+                    return Observable.just()
+                }
+            }).flatMap({ _ -> Observable<Void> in
+                if let token = Messaging.messaging().fcmToken {
+                    return self.authAPI.saveFCMToken(token: token)
                 } else {
                     return Observable.just()
                 }
