@@ -46,7 +46,7 @@ protocol AuthAPIType {
     func changePasswordForSignedInUser(newPassword: String) -> Observable<Void>
     
     func checkForFirstTimeLogin(userId: String) -> Observable<Bool>
+    
+    func saveFCMToken(token: String) -> Observable<Void>
+    func removeFCMToken(token: String) -> Observable<Void>
 }
-
-
-

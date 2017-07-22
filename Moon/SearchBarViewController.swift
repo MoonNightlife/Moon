@@ -33,9 +33,9 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //if firstLaunch() {
-            //viewModel.onShowTutorial().execute()
-        //}
+        if firstLaunch() {
+            viewModel.onShowTutorial().execute()
+        }
     }
     
     open override func prepare() {

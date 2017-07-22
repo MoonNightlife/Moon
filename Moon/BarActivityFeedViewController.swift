@@ -59,12 +59,12 @@ class BarActivityFeedViewController: UIViewController, BindableType, DisplayErro
         
         refreshControl.rx.controlEvent(.valueChanged).subscribe(viewModel.refreshAction.inputs).addDisposableTo(disposeBag)
         
-        viewModel.refreshAction.errors.subscribe(onNext: { [weak self] in
-            self?.refreshControl.endRefreshing()
-            if let strongSelf = self {
-                strongSelf.dispayErrorMessage(error: $0)
-            }
-        }).addDisposableTo(disposeBag)
+//        viewModel.refreshAction.errors.subscribe(onNext: { [weak self] in
+//            self?.refreshControl.endRefreshing()
+//            if let strongSelf = self {
+//                //TODO: show error
+//            }
+//        }).addDisposableTo(disposeBag)
         
         viewModel.refreshAction.execute()
     }
@@ -73,8 +73,6 @@ class BarActivityFeedViewController: UIViewController, BindableType, DisplayErro
         let emptyImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: tableView.frame.size.height))
         emptyImageView.image = #imageLiteral(resourceName: "DefaultMoonsView")
         tableView.backgroundView = emptyImageView
-        print("Height:", tableView.frame.size.height)
-        print("width:", tableView.frame.size.width)
     }
     
     fileprivate func configureDataSource() {
@@ -108,7 +106,6 @@ class BarActivityFeedViewController: UIViewController, BindableType, DisplayErro
                 }
             }).subscribe().addDisposableTo(view.bag)
             hasLiked.execute()
-            
             
             view.user.rx.action = viewModel.onView(userID: userID)
             view.bar.rx.action = viewModel.onView(barID: barID)

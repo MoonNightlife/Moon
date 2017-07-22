@@ -21,7 +21,7 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
     private let editProfileInfo = Variable<EditProfileInfo>(EditProfileInfo())
     
     // Dependecies
-    private let scenceCoordinator: SceneCoordinatorType
+    private let sceneCoordinator: SceneCoordinatorType
     var userAPI: UserAPIType
     
     // Action
@@ -47,9 +47,13 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
     var isSignedInUserProfile = Variable(false)
     var profilePictures = Variable<[UIImage]>([])
     var actionButton: Observable<ProfileActionButton>
+    var numberOfLikes: Observable<String>
+    var hasLiked: Observable<Bool> {
+        return self.userAPI.hasLikedActivity(userID: self.authAPI.SignedInUserID, ActivityID: self.userID)
+    }
     
     init(coordinator: SceneCoordinatorType, userID: String, userAPI: UserAPIType = FirebaseUserAPI(), photoService: PhotoService = KingFisherPhotoService(), authAPI: AuthAPIType = FirebaseAuthAPI(), storageAPI: StorageAPIType = FirebaseStorageAPI()) {
-        self.scenceCoordinator = coordinator
+        self.sceneCoordinator = coordinator
         
         self.userID = userID
         self.userAPI = userAPI
@@ -88,6 +92,8 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
         })
         
         let user = reload.elements
+        
+        numberOfLikes = user.map { $0.numberOfLikes }.filterNil().map { "\($0)" }
         
         user.map({
             EditProfileInfo(firstName: $0.firstName, lastName: $0.lastName, bio: $0.bio)
@@ -136,36 +142,35 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
     
     func onDismiss() -> CocoaAction {
         return CocoaAction {
-            return self.scenceCoordinator.pop()
+            return self.sceneCoordinator.pop()
         }
     }
     
     func onShowFriends() -> CocoaAction {
         return CocoaAction {
-            let vm = UsersTableViewModel(coordinator: self.scenceCoordinator, sourceID: .user(id: self.userID))
-            return self.scenceCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .user(id: self.userID))
+            return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
     }
     
     func onEdit() -> CocoaAction {
         return CocoaAction {
-            let vm = EditProfileViewModel(coordinator: self.scenceCoordinator, userID: self.userID, editInfo: self.editProfileInfo.value)
-            return self.scenceCoordinator.transition(to: Scene.User.edit(vm), type: .modal)
+            let vm = EditProfileViewModel(coordinator: self.sceneCoordinator, userID: self.userID, editInfo: self.editProfileInfo.value)
+            return self.sceneCoordinator.transition(to: Scene.User.edit(vm), type: .modal)
         }
     }
     
     func onViewBar() -> CocoaAction {
         return CocoaAction {_ in
             if let id = self.barID.value {
-                let vm = BarProfileViewModel(coordinator: self.scenceCoordinator, barID: id)
-                return self.scenceCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
+                let vm = BarProfileViewModel(coordinator: self.sceneCoordinator, barID: id)
+                return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
             } else {
                 return Observable.empty()
             }           
         }
     }
-    
-    
+        
     func onAddFriend() -> CocoaAction {
         return CocoaAction { _ in
             return self.userAPI.requestFriend(userID: self.authAPI.SignedInUserID, friendID: self.userID).do(onNext: {
@@ -209,5 +214,18 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
 
         }
     }
+
+    func onLikeActivity() -> CocoaAction {
+        return CocoaAction {_ in 
+            return self.userAPI.likeActivity(userID: self.authAPI.SignedInUserID, activityUserID: self.userID)
+        }
+    }
     
+    func onViewLikers() -> CocoaAction {
+        return CocoaAction { _ in
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .activity(id: self.userID))
+            return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
+        }
+    }
+
 }

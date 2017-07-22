@@ -42,6 +42,14 @@ struct BirthdaySexViewModel {
     // Outputs
     var birthdayString: Observable<String>!
     var sexString: Observable<String>!
+    var showBirthdayError: Observable<Bool>! {
+        return birthdayString
+            .map({
+                self.dateFormatter.date(from: $0)
+            })
+            .map(ValidationUtility.validBirthday)
+            .map(!)
+    }
     
     init(coordinator: SceneCoordinatorType, user: NewUser) {
         self.sceneCoordinator = coordinator

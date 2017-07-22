@@ -56,4 +56,8 @@ protocol UserAPIType {
     func areFriends(userID1: String, userID2: String) -> Observable<Bool>
     func sentFriendRequest(userID1: String, userID2: String) -> Observable<Bool>
     func getFriendRequest(userID: String) -> Observable<[UserSnapshot]>
+    
+    // Settings
+    func getNotificationSettings(userID: String) -> Observable<[NotificationSetting]>
+    func updateNotificationSettings(userID: String, settings: [NotificationSetting]) -> Observable<Void>
 }

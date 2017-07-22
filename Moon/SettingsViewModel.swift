@@ -11,6 +11,7 @@ import Action
 import RxSwift
 import RxDataSources
 import FirebaseAuth
+import FirebaseMessaging
 
 struct SettingsViewModel: AuthNetworkingInjected, NetworkingInjected {
     
@@ -21,10 +22,21 @@ struct SettingsViewModel: AuthNetworkingInjected, NetworkingInjected {
                 return Observable.empty()
             }
             if case Scene.Login.login(_) = scene {
-                return this.authAPI.signOut()
-                    .flatMap({
-                        return this.sceneCoordinator.transition(to: scene, type: .root)
+                
+                var temp: Observable<Void>!
+                
+                if let token = Messaging.messaging().fcmToken {
+                    temp = this.authAPI.removeFCMToken(token: token).flatMap({
+                        return this.authAPI.signOut()
                     })
+                } else {
+                    temp = this.authAPI.signOut()
+                }
+                
+                return temp.flatMap({
+                    return this.sceneCoordinator.transition(to: scene, type: .root)
+                })
+        
             } else if case Scene.UserDiscovery.enterPhoneNumber(_) = scene {
                 return this.sceneCoordinator.transition(to: scene, type: .modal)
             } else {

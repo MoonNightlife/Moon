@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
     var bag = DisposeBag()
     let gcmMessageIDKey = "gcm.message_id"
     
-
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -41,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
         if RxReachability.shared.startMonitor("apple.com") == false {
             print("Reachability failed!")
         }
+    
         
         if let url = launchOptions?[.url] as? URL {
             return executeDeepLink(with: url)
@@ -88,11 +88,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
         
         return handled
     }
-    
+
 }
 
 // MARK: - Helper Fuctions
-extension AppDelegate: UNUserNotificationCenterDelegate {
+extension AppDelegate {
     fileprivate func prepareEntryViewController(vc: LaunchScreen) {
         
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -115,28 +115,40 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             sceneCoordinator.transition(to: Scene.Bar.profile(barVM), type: .modal)
         }
     }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
     
     fileprivate func setupPushNotifications(application: UIApplication) {
-        // Register for remote notifications. This shows a permission dialog on first run, to
-        // show the dialog at a more appropriate time move this registration accordingly.
         
-        // For iOS 10 display notification (sent via APNS)
-        UNUserNotificationCenter.current().delegate = self
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(
-            options: authOptions,
-            completionHandler: {_, _ in })
-        // For iOS 10 data message (sent via FCM
         Messaging.messaging().delegate = self
+        //Messaging.messaging().shouldEstablishDirectChannel = true
+        
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
         
         application.registerForRemoteNotifications()
     }
     
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        // If you are receiving a notification message while your app is in the background,
-        // this callback will not be fired till the user taps on the notification launching the application.
-        // TODO: Handle data of notification
+    // This is called when the application receievs a notification in the foregruond
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
         
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
@@ -144,14 +156,17 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         // Print full message.
         print(userInfo)
+        
+        // Change this to your preferred presentation option
+        completionHandler([])
     }
     
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        // If you are receiving a notification message while your app is in the background,
-        // this callback will not be fired till the user taps on the notification launching the application.
-        // TODO: Handle data of notification
-        
+    // This is called when the application receives a notification in the background and the user
+    // opens the app
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
@@ -160,9 +175,15 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // Print full message.
         print(userInfo)
         
-        completionHandler(UIBackgroundFetchResult.newData)
+        // Reset the badge icon when the user views the notifcations from the background
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        
+        completionHandler()
     }
-
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Unable to register for remote notifications: \(error.localizedDescription)")
+    }
 }
 
 extension AppDelegate : MessagingDelegate {

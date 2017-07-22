@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 import Action
 import FirebaseAuth
+import FirebaseMessaging
 
 struct LoginViewModel: AuthNetworkingInjected, FacebookNetworkingInjected {
     
@@ -45,7 +46,14 @@ struct LoginViewModel: AuthNetworkingInjected, FacebookNetworkingInjected {
         return CocoaAction {_ in
             if let email = self.email.value, let password = self.password.value {
                 return self.authAPI.login(credentials: .email(credentials: EmailCredentials(email: email, password: password)))
-                    .flatMap({_ in 
+                    .flatMap({_ -> Observable<Void> in
+                        if let token = Messaging.messaging().fcmToken {
+                            return self.authAPI.saveFCMToken(token: token)
+                        } else {
+                            return Observable.just()
+                        }
+                    })
+                    .flatMap({_ -> Observable<Void> in
                         return self.loginAction()
                     })
 
@@ -77,8 +85,14 @@ struct LoginViewModel: AuthNetworkingInjected, FacebookNetworkingInjected {
     
     func continueLogin() -> Observable<Void> {
         return self.authAPI.login(credentials: self.facebookAPI.getProviderCredentials())
-            .flatMap({
-                return self.authAPI.checkForFirstTimeLogin(userId: $0)
+            .flatMap({ id -> Observable<Bool> in
+                if let token = Messaging.messaging().fcmToken {
+                    return self.authAPI.saveFCMToken(token: token).flatMap({
+                            self.authAPI.checkForFirstTimeLogin(userId: id)
+                        })
+                } else {
+                    return self.authAPI.checkForFirstTimeLogin(userId: id)
+                }
             }).flatMap({ isFirstTime -> Observable<Void> in
                 if isFirstTime {
                     return self.facebookAPI.getBasicProfileForSignedInUser().flatMap({

@@ -30,26 +30,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bG2-7p-UaO" customClass="TextField" customModule="Material">
-                                <rect key="frame" x="16" y="318" width="343" height="30"/>
+                                <rect key="frame" x="16" y="318.5" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vKg-V1-7Ym" customClass="TextField" customModule="Material">
-                                <rect key="frame" x="16" y="246" width="343" height="30"/>
+                                <rect key="frame" x="16" y="246.5" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="97X-F5-zmf">
-                                <rect key="frame" x="137" y="368" width="100" height="40"/>
+                                <rect key="frame" x="137" y="368.5" width="100" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="dOV-In-sUv"/>
                                     <constraint firstAttribute="height" constant="40" id="gug-bL-3Oh"/>
                                 </constraints>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultProfilePic" translatesAutoresizingMaskIntoConstraints="NO" id="GhD-4U-ps3">
-                                <rect key="frame" x="125" y="101" width="125" height="125"/>
+                                <rect key="frame" x="125" y="101.5" width="125" height="125"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="GhD-4U-ps3" secondAttribute="height" multiplier="1:1" id="bQ5-pE-6zW"/>
                                 </constraints>
@@ -95,19 +95,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pQs-RS-rla" customClass="TextField" customModule="Material">
-                                <rect key="frame" x="16" y="261" width="343" height="30"/>
+                                <rect key="frame" x="16" y="261.5" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ig9-sN-5gk" customClass="TextField" customModule="Material">
-                                <rect key="frame" x="16" y="189" width="343" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ig9-sN-5gk" customClass="ErrorTextField" customModule="Material">
+                                <rect key="frame" x="16" y="189.5" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLo-qh-l7U">
-                                <rect key="frame" x="137" y="313" width="100" height="40"/>
+                                <rect key="frame" x="137" y="313.5" width="100" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="uzN-bN-Bdn"/>
                                     <constraint firstAttribute="height" constant="40" id="ybH-ex-7X3"/>

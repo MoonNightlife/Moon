@@ -11,6 +11,7 @@ import RxSwift
 import Action
 import FirebaseAuth
 import FirebaseStorage
+import FirebaseMessaging
 
 struct PasswordsViewModel: NetworkingInjected, AuthNetworkingInjected, StorageNetworkingInjected {
     
@@ -57,8 +58,14 @@ struct PasswordsViewModel: NetworkingInjected, AuthNetworkingInjected, StorageNe
                     } else {
                         return Observable.just()
                     }
+                }).flatMap({ _ -> Observable<Void> in
+                    if let token = Messaging.messaging().fcmToken {
+                        return self.authAPI.saveFCMToken(token: token)
+                    } else {
+                        return Observable.just()
+                    }
                 })
-                .flatMap({
+                .flatMap({ _ -> Observable<Void> in
                     return self.showEnterPhoneNumber()
                 })
         })
