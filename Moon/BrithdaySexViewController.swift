@@ -121,6 +121,7 @@ extension BirthdaySexViewController {
     }
     
     fileprivate func prepareNavigationBackButton() {
+        self.navigationItem.hidesBackButton = true
         navBackButton = UIBarButtonItem()
         navBackButton.image = Icon.cm.arrowBack
         navBackButton.tintColor = .white

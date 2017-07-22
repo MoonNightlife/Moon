@@ -287,7 +287,7 @@
             <objects>
                 <navigationController storyboardIdentifier="CountryCodeNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gcj-bz-Nj7" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bfb-kP-X7a">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="bfb-kP-X7a">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -305,7 +305,7 @@
             <objects>
                 <navigationController storyboardIdentifier="EnterPhoneNumberNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="B6l-EZ-kKi" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4eO-Vb-HMK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="4eO-Vb-HMK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -323,7 +323,7 @@
             <objects>
                 <navigationController storyboardIdentifier="ContactNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="a3P-6Z-SKK" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6as-1b-ze2">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6as-1b-ze2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

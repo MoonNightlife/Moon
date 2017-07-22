@@ -30,6 +30,11 @@ class EnterCodeViewController: UIViewController, BindableType {
         prepareEnterCodeButton()
         prepareCodeTextField()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        view.endEditing(true)
+    }
 
     func bindViewModel() {
         cancelButton.rx.action = viewModel.onBack()
@@ -38,11 +43,6 @@ class EnterCodeViewController: UIViewController, BindableType {
         enterCodeButton.rx.action = checkCodeAction
         
         checkCodeAction.executing
-            .do(onNext: { [weak self] executing in
-                if executing {
-                    self?.view.endEditing(true)
-                }
-            })
             .subscribe(onNext: {
                 if $0 {
                     SwiftOverlays.showBlockingWaitOverlay()

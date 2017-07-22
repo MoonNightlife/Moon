@@ -18,7 +18,6 @@ class SceneCoordinator: SceneCoordinatorType {
     
     required init(window: UIWindow) {
         self.window = window
-        //currentViewController = window.rootViewController!
     }
     
     static func actualViewController(for viewController: UIViewController) -> UIViewController {
@@ -36,7 +35,7 @@ class SceneCoordinator: SceneCoordinatorType {
         switch type {
         case .root:
             currentViewController = SceneCoordinator.actualViewController(for: viewController)
-            window.rootViewController = viewController
+            window.replaceRootViewControllerWith(viewController, animated: true, completion: nil)
             subject.onCompleted()
             
         case .push:

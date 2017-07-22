@@ -139,6 +139,8 @@
 		F04B437E1F058F4100946C82 /* BarProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B437D1F058F4100946C82 /* BarProfile.swift */; };
 		F04B43801F058F8800946C82 /* Special.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B437F1F058F8800946C82 /* Special.swift */; };
 		F04B43821F058FA000946C82 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B43811F058FA000946C82 /* UserSettings.swift */; };
+		F04D670D1F236F600031CAA4 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04D670C1F236F600031CAA4 /* UIView.swift */; };
+		F04D670F1F236F860031CAA4 /* UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04D670E1F236F860031CAA4 /* UIWindow.swift */; };
 		F04F445C1ECF840700D5FC62 /* BarAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */; };
 		F05491241F1FBB63008568E5 /* NotificationSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05491231F1FBB63008568E5 /* NotificationSetting.swift */; };
 		F06209731F1E933600AF529A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F06209721F1E933600AF529A /* GoogleService-Info.plist */; };
@@ -407,6 +409,8 @@
 		F04B437D1F058F4100946C82 /* BarProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarProfile.swift; sourceTree = "<group>"; };
 		F04B437F1F058F8800946C82 /* Special.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Special.swift; sourceTree = "<group>"; };
 		F04B43811F058FA000946C82 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		F04D670C1F236F600031CAA4 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		F04D670E1F236F860031CAA4 /* UIWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWindow.swift; sourceTree = "<group>"; };
 		F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAnnotation.swift; sourceTree = "<group>"; };
 		F05491231F1FBB63008568E5 /* NotificationSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSetting.swift; sourceTree = "<group>"; };
 		F06209721F1E933600AF529A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1212,6 +1216,8 @@
 				F0A8FE171F01857F003044B1 /* Array.swift */,
 				F03322431F16565800FD72CD /* ViewController.swift */,
 				C08197271F1969F4008267A8 /* Images.swift */,
+				F04D670C1F236F600031CAA4 /* UIView.swift */,
+				F04D670E1F236F860031CAA4 /* UIWindow.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1577,6 +1583,7 @@
 				F034044D1F0D6C3500475FDF /* UserAPIType.swift in Sources */,
 				F049896A1EE0661E00064F58 /* BindableType.swift in Sources */,
 				F019A5861F0318EF00FF7A27 /* BarProfileVCExtensions.swift in Sources */,
+				F04D670F1F236F860031CAA4 /* UIWindow.swift in Sources */,
 				F0CF15981EDEEE8900531DCF /* BrithdaySexViewController.swift in Sources */,
 				F03322441F16565800FD72CD /* ViewController.swift in Sources */,
 				F0CF7F1F1EF37E71005C068C /* EnterPhoneNumberViewController.swift in Sources */,
@@ -1710,6 +1717,7 @@
 				F04989641EE0641300064F58 /* Scene.swift in Sources */,
 				F06B42321EFDAE9900BE7626 /* DynamicLinkingAPI.swift in Sources */,
 				F0388CFB1EE9D40B00E8ED48 /* BarProfileViewController.swift in Sources */,
+				F04D670D1F236F600031CAA4 /* UIView.swift in Sources */,
 				F0CF159C1EDEEEA100531DCF /* PasswordsViewController.swift in Sources */,
 				F03C78B51EE9DB3C002AEDAD /* SettingsViewModel.swift in Sources */,
 				F0C66BDF1EF41C9400B22811 /* SinchService.swift in Sources */,
