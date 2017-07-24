@@ -29,7 +29,7 @@ class TopBar: Mappable, Equatable {
         long <- map["coordinates/long"]
     }
     
-    static func ==(lhs: TopBar, rhs: TopBar) -> Bool {
+    static func == (lhs: TopBar, rhs: TopBar) -> Bool {
         return lhs.id == rhs.id && lhs.usersGoing == rhs.usersGoing
     }
 }

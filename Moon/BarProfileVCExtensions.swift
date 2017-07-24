@@ -21,7 +21,7 @@ extension BarProfileViewController {
         let event = viewModel.events.value[index]
         
         // Bind actions
-        if let id = event.id, let barID = event.barID {
+        if let id = event.id {
             
             let likeAction = viewModel.onLikeEvent(eventID: id)
             eventView.favoriteButton.rx.action = likeAction
@@ -38,8 +38,8 @@ extension BarProfileViewController {
             hasLiked.execute()
             
             eventView.numberOfLikesButton.rx.action = viewModel.onViewLikers(eventID: id)
-            eventView.shareButton.rx.action = viewModel.onShareEvent(eventID: id, barID: barID)
-            // No action for this button on the bar profile, so hide it
+            
+            // No action for these buttons on the bar profile, so hide it
             eventView.moreButton.isHidden = true
             
             // Bind Image

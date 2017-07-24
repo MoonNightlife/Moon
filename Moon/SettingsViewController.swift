@@ -9,6 +9,7 @@
 import UIKit
 import RxCocoa
 import Material
+import SwiftOverlays
 import RxSwift
 
 class SettingsViewController: UITableViewController, BindableType {
@@ -45,6 +46,16 @@ class SettingsViewController: UITableViewController, BindableType {
             viewModel.phoneNumber.bind(to: phoneNumberLabel.rx.text).addDisposableTo(disposeBag)
         }
         
+        viewModel.loadingIndicator.asObservable()
+            .subscribe(onNext: { [weak self] show in
+                if show {
+                    self?.showWaitOverlay()
+                } else {
+                    self?.removeAllOverlays()
+                }
+            })
+            .addDisposableTo(disposeBag)
+        
         self.tableView.rx.itemSelected
             .map(settingFrom)
             .filter({ $0 != nil })
@@ -54,6 +65,7 @@ class SettingsViewController: UITableViewController, BindableType {
     }
     
     fileprivate func prepareNavigationBackButton() {
+        self.navigationItem.hidesBackButton = true
         navBackButton = UIBarButtonItem()
         navBackButton.image = Icon.cm.arrowBack
         navBackButton.tintColor = .lightGray

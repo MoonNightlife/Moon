@@ -12,6 +12,7 @@ import UIKit
 protocol ParentType {
     var view1: UIView! {get set}
     var view2: UIView! {get set}
+    func showView(view: Int)
 }
 
 extension ParentType where Self: UIViewController {

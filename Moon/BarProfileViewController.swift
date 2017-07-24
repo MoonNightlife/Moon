@@ -169,25 +169,15 @@ class BarProfileViewController: UIViewController, UIScrollViewDelegate, Bindable
             self?.eventsCarousel.reloadData()
         }).addDisposableTo(bag)
         
-        viewModel.numPeopleAttending.do(onNext: { [weak self] numGoing in
-            self?.usersGoing = Int(numGoing) ?? 0
-        }).map({ (numGoing) -> NSMutableAttributedString in
-            //Adding going icon to the right of the title label
-            let fullString = NSMutableAttributedString(string: " ")
-            
-            let attachment = NSTextAttachment()
-            attachment.image = #imageLiteral(resourceName: "goingIcon")
-            attachment.bounds = CGRect(x: 0, y: -5, width: 16, height: 16)
-            
-            let attachmentString = NSAttributedString(attachment: attachment)
-            
-            fullString.append(attachmentString)
-            fullString.append(NSAttributedString(string: " " + numGoing)) //people going
-            
-            return fullString
-        }).subscribe(onNext: { [weak self] numGoing in
-            self?.toolBar.titleLabel.attributedText = numGoing
-        }).addDisposableTo(bag)
+        viewModel.numPeopleAttending
+            .do(onNext: { [weak self] numGoing in
+                self?.usersGoing = numGoing
+            })
+            .map(createUsersGoingString)
+            .subscribe(onNext: { [weak self] numGoing in
+                self?.toolBar.titleLabel.attributedText = numGoing
+            })
+            .addDisposableTo(bag)
         
     }
     

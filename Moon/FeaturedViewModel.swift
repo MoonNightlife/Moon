@@ -45,14 +45,6 @@ struct FeaturedViewModel: ImageNetworkingInjected, NetworkingInjected, StorageNe
         }
     }
     
-    func onShareEvent(eventID: String) -> CocoaAction {
-        return CocoaAction { _ in
-            //TODO: add share event code
-            print("Share Event")
-            return Observable.empty()
-        }
-    }
-    
     func onMoreInfo(barID: String) -> CocoaAction {
         return CocoaAction {
             let vm = BarProfileViewModel(coordinator: self.sceneCoordinator, barID: barID)

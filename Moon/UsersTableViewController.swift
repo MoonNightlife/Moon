@@ -22,8 +22,6 @@ class UsersTableViewController: UIViewController, BindableType {
     var backButton: UIBarButtonItem!
     let dataSource = RxTableViewSectionedReloadDataSource<UserSectionModel>()
     var refreshControl: UIRefreshControl = UIRefreshControl()
-    var contactsButton = UIBarButtonItem()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,10 +46,6 @@ class UsersTableViewController: UIViewController, BindableType {
     
     func bindViewModel() {
         
-        viewModel.currentSignedInUser.asObservable().filter { $0 == true }.do(onNext: { [weak self] _ in
-            self?.prepareContactsButton()
-        }).subscribe().addDisposableTo(bag)
-        
         viewModel.users.do(onNext: { [weak self] _ in
             self?.refreshControl.endRefreshing()
         }).bind(to: userTableView.rx.items(dataSource: dataSource)).addDisposableTo(bag)
@@ -59,7 +53,6 @@ class UsersTableViewController: UIViewController, BindableType {
         userTableView.rx.modelSelected(UserSectionModel.Item.self).bind(to: viewModel.onShowUser.inputs).addDisposableTo(bag)
         
         backButton.rx.action = viewModel.onBack()
-        contactsButton.rx.action = viewModel.onShowContacts()
         
         refreshControl.rx.controlEvent(.valueChanged).bind(to: viewModel.reload).addDisposableTo(bag)
         viewModel.users.map {_ in return false}.bind(to: refreshControl.rx.isRefreshing).addDisposableTo(bag)
@@ -147,16 +140,9 @@ class UsersTableViewController: UIViewController, BindableType {
         self.navigationItem.leftBarButtonItem = backButton
     }
     
-    func prepareContactsButton() {
-        contactsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "contactsIcon"), style: .plain, target: nil, action: nil)
-        contactsButton.tintColor = .moonBlue
-        self.navigationItem.rightBarButtonItem = contactsButton
-    }
-    
-
 }
 
-extension UsersTableViewController: UIPopoverPresentationControllerDelegate, PopoverPresenterType  {
+extension UsersTableViewController: UIPopoverPresentationControllerDelegate, PopoverPresenterType {
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         
         return UIModalPresentationStyle.none

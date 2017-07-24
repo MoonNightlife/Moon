@@ -57,6 +57,9 @@ extension FeaturedEventView {
     
     fileprivate func prepareShareButton() {
         shareButton = IconButton(image: Icon.cm.share, tintColor: Color.blueGrey.base)
+        
+        // Not using this button yet
+        shareButton.isHidden = true
     }
     
     fileprivate func prepareMoreButton() {

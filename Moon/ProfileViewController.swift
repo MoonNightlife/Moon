@@ -91,7 +91,7 @@ class ProfileViewController: UIViewController, BindableType {
         .addDisposableTo(bag)
         
         viewModel.hasLiked.subscribe(onNext: { [weak self] hasLiked in
-            self?.likesButton.tintColor = hasLiked ? .red : .lightGray
+            self?.likeButton.tintColor = hasLiked ? .red : .lightGray
         }).addDisposableTo(bag)
         
         viewModel.numberOfLikes.bind(to: likesButton.rx.title()).addDisposableTo(bag)

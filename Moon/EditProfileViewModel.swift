@@ -69,8 +69,6 @@ class EditProfileViewModel: BackType, StorageNetworkingInjected, ImageNetworking
             .catchErrorJustReturn(defaultImageArray)
             .startWith(defaultImageArray)
             .bind(to: profilePictures).addDisposableTo(bag)
-    
-        //TODO: Validate the bio text length
     }
     
     private func prepareArrayForUpload(photoArray: [UIImage]) -> [String: Data] {

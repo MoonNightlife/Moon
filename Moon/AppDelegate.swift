@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
     }
 
     var window: UIWindow?
+    var sceneCoordinator: SceneCoordinatorType!
     var bag = DisposeBag()
     let gcmMessageIDKey = "gcm.message_id"
     
@@ -30,6 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        sceneCoordinator = SceneCoordinator(window: window!)
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
@@ -40,26 +44,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
         if RxReachability.shared.startMonitor("apple.com") == false {
             print("Reachability failed!")
         }
-    
         
+        Auth.auth().addStateDidChangeListener { _, user in
+            if user == nil {
+                self.prepareEntryViewController(vc: .login, sceneCoordinator: self.sceneCoordinator)
+            }
+        }
+    
         if let url = launchOptions?[.url] as? URL {
             return executeDeepLink(with: url)
         } else {
-            if let userID = Auth.auth().currentUser?.uid {
-                prepareEntryViewController(vc: .main)
-                return true
-                
-                authAPI.checkForFirstTimeLogin(userId: userID).subscribe(onNext: { [unowned self] firstTime in
-                    if firstTime {
-                        self.prepareEntryViewController(vc: .login)
-                    }
-                }).addDisposableTo(bag)
-                
+            if Auth.auth().currentUser != nil {
+                prepareEntryViewController(vc: .main, sceneCoordinator: sceneCoordinator)
             } else {
-                prepareEntryViewController(vc: .login)
-                return true
+                prepareEntryViewController(vc: .login, sceneCoordinator: sceneCoordinator)
             }
         }
+        
+        return true
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
@@ -88,15 +90,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
         
         return handled
     }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        if let userID = Auth.auth().currentUser?.uid {
+            
+            authAPI.checkForFirstTimeLogin(userId: userID).subscribe(onNext: { [unowned self] firstTime in
+                if firstTime {
+                    self.prepareEntryViewController(vc: .login, sceneCoordinator: self.sceneCoordinator)
+                }
+            }).addDisposableTo(bag)
+            
+        } else {
+            prepareEntryViewController(vc: .login, sceneCoordinator: self.sceneCoordinator)
+        }
+    }
 
 }
 
 // MARK: - Helper Fuctions
 extension AppDelegate {
-    fileprivate func prepareEntryViewController(vc: LaunchScreen) {
-        
-        window = UIWindow(frame: UIScreen.main.bounds)
-        let sceneCoordinator = SceneCoordinator(window: window!)
+    fileprivate func prepareEntryViewController(vc: LaunchScreen, sceneCoordinator: SceneCoordinatorType) {
         
         switch vc {
         case .login:
@@ -221,7 +234,7 @@ extension AppDelegate {
     }
     
     fileprivate func showEvent(with deepLink: ShowEventDeepLink) -> Bool {
-        prepareEntryViewController(vc: .barProfile(id: deepLink.barID))
+        //prepareEntryViewController(vc: .barProfile(id: deepLink.barID), sceneCoordinator: <#SceneCoordinatorType#>)
         print("Show Event")
         return true
     }

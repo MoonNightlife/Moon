@@ -214,3 +214,54 @@ extension Scene.UserDiscovery {
         }
     }
 }
+
+extension Scene.Group {
+    func viewController() -> UIViewController {
+        let storyBoard = UIStoryboard(name: "Group", bundle: nil)
+        let userStoryboard = UIStoryboard(name: "User", bundle: nil)
+        switch self {
+        case .relationship(let viewModel, let friendsVM, let groupVM):
+            
+            let ncFriends = userStoryboard.instantiateViewController(withIdentifier: "UsersTableNavigation") as! UINavigationController
+            var vcFriends = ncFriends.viewControllers.first as! UsersTableViewController
+            
+            let ncGroups = storyBoard.instantiateViewController(withIdentifier: "ViewGroupNavigation") as! UINavigationController
+            var vcGroups = ncGroups.viewControllers.first as! ViewGroupsViewController
+     
+            let nc = storyBoard.instantiateViewController(withIdentifier: "RelationNavigation") as! UINavigationController
+            var vc = nc.viewControllers.first as! RelationshipViewController
+     
+            vc.bindViewModel(to: viewModel)
+            vcFriends.bindViewModel(to: friendsVM)
+            vcGroups.bindViewModel(to: groupVM)
+            
+            vc.generateChildern(child1: vcFriends, child2: vcGroups)
+            
+            return nc
+            
+        case .createGroup(let viewModel):
+            let nc = storyBoard.instantiateViewController(withIdentifier: "CreateEditGroupNavigation") as! UINavigationController
+            var vc = nc.viewControllers.first as! CreateEditGroupViewController
+            vc.bindViewModel(to: viewModel)
+            return nc
+        case .editGroup(let viewModel):
+            var vc = storyBoard.instantiateViewController(withIdentifier: "CreateEditGroup") as! CreateEditGroupViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        case .groupActivity(let viewModel):
+            let nc = storyBoard.instantiateViewController(withIdentifier: "GroupActivityNavigation") as! UINavigationController
+            var vc = nc.viewControllers.first as! GroupActivityViewController
+            vc.bindViewModel(to: viewModel)
+            return nc
+        case .manageGroup(let viewModel):
+            let nc = storyBoard.instantiateViewController(withIdentifier: "ManageGroupNavigation") as! UINavigationController
+            var vc = nc.viewControllers.first as! ManageGroupViewController
+            vc.bindViewModel(to: viewModel)
+            return nc
+        case .viewGroups(let viewModel):
+            var vc = storyBoard.instantiateViewController(withIdentifier: "ViewGroups") as! ViewGroupsViewController
+            vc.bindViewModel(to: viewModel)
+            return vc
+        }
+    }
+}

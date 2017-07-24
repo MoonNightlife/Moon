@@ -10,8 +10,6 @@ import Foundation
 import RxSwift
 import Action
 
-
-
 class NotificationSettingsViewModel: NetworkingInjected, AuthNetworkingInjected {
     // Global
     var bag = DisposeBag()

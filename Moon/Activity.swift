@@ -48,6 +48,6 @@ extension Activity: IdentifiableType {
 
 extension Activity: Equatable {
     static func == (lhs: Activity, rhs: Activity) -> Bool {
-        return lhs.userID == rhs.userID && lhs.numLikes == rhs.numLikes
+        return lhs.userID == rhs.userID && lhs.numLikes == rhs.numLikes && lhs.barID == rhs.barID
     }
 }

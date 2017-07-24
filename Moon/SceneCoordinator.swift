@@ -18,7 +18,6 @@ class SceneCoordinator: SceneCoordinatorType {
     
     required init(window: UIWindow) {
         self.window = window
-        //currentViewController = window.rootViewController!
     }
     
     static func actualViewController(for viewController: UIViewController) -> UIViewController {
@@ -36,7 +35,7 @@ class SceneCoordinator: SceneCoordinatorType {
         switch type {
         case .root:
             currentViewController = SceneCoordinator.actualViewController(for: viewController)
-            window.rootViewController = viewController
+            window.replaceRootViewControllerWith(viewController, animated: true, completion: nil)
             subject.onCompleted()
             
         case .push:
@@ -92,6 +91,7 @@ class SceneCoordinator: SceneCoordinatorType {
     @discardableResult
     func pop(animated: Bool) -> Observable<Void> {
         let subject = PublishSubject<Void>()
+        
         if let presenter = currentViewController.presentingViewController {
             if currentViewController.modalPresentationStyle == .popover, let popoverPresenter = SceneCoordinator.actualViewController(for: presenter) as? PopoverPresenterType {
                 // dismiss a popover controller
@@ -127,14 +127,37 @@ class SceneCoordinator: SceneCoordinatorType {
     }
     
     @discardableResult
+    func popVCOffNavStack(animated: Bool) -> Observable<Void> {
+        let subject = PublishSubject<Void>()
+        
+        if let navigationController = currentViewController.navigationController {
+            // navigate up the stack
+            // one-off subscription to be notified when pop complete
+            _ = navigationController.rx.delegate
+                .sentMessage(#selector(UINavigationControllerDelegate.navigationController(_:didShow:animated:)))
+                .map { _ in }
+                .bind(to: subject)
+            guard navigationController.popViewController(animated: animated) != nil else {
+                fatalError("can't navigate back from \(currentViewController)")
+            }
+            currentViewController = SceneCoordinator.actualViewController(for: navigationController.viewControllers.last!)
+        } else {
+            fatalError("No navigation controller: can't navigate back from \(currentViewController)")
+        }
+        return subject.asObservable().take(1).ignoreElements()
+    }
+    
+    @discardableResult
     func changeChild(To view: ChildViewType) -> Observable<Void> {
         let subject = PublishSubject<Void>()
         if let presenter = (currentViewController as? SearchBarViewController)?.rootViewController as? SearchViewController {
             presenter.showView(view: view.getViewID())
+        } else if let presenter = currentViewController as? ParentType {
+            presenter.showView(view: view.getViewID())
         } else {
             print("Presenting controller must conform to ParentType")
         }
-        
+        subject.onCompleted()
         return subject.asObserver().take(1).ignoreElements()
     }
 

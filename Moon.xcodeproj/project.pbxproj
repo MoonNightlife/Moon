@@ -92,6 +92,17 @@
 		F03404531F0D6C6D00475FDF /* AuthAPIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03404521F0D6C6D00475FDF /* AuthAPIType.swift */; };
 		F03404551F0D6CFF00475FDF /* StorageAPIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03404541F0D6CFF00475FDF /* StorageAPIType.swift */; };
 		F03404571F0D6E2600475FDF /* SMSValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03404561F0D6E2600475FDF /* SMSValidationService.swift */; };
+		F03765BE1F25109500BE173D /* CreateEditGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03765BD1F25109500BE173D /* CreateEditGroupViewController.swift */; };
+		F03765C01F2510B300BE173D /* ViewGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03765BF1F2510B300BE173D /* ViewGroupsViewController.swift */; };
+		F03765C21F2510CB00BE173D /* GroupActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03765C11F2510CB00BE173D /* GroupActivityViewController.swift */; };
+		F03765C41F2510DA00BE173D /* ManageGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03765C31F2510DA00BE173D /* ManageGroupViewController.swift */; };
+		F03765C71F25110400BE173D /* CreateEditGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03765C61F25110400BE173D /* CreateEditGroupViewModel.swift */; };
+		F03765C91F25111600BE173D /* ViewGroupsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03765C81F25111600BE173D /* ViewGroupsViewModel.swift */; };
+		F03765CB1F25112800BE173D /* GroupActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03765CA1F25112800BE173D /* GroupActivityViewModel.swift */; };
+		F03765CD1F25113900BE173D /* ManageGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03765CC1F25113900BE173D /* ManageGroupViewModel.swift */; };
+		F03765CF1F25164700BE173D /* Group.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F03765CE1F25164700BE173D /* Group.storyboard */; };
+		F03765D11F25196800BE173D /* RelationshipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03765D01F25196800BE173D /* RelationshipViewController.swift */; };
+		F03765D31F25197C00BE173D /* RelationshipViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03765D21F25197C00BE173D /* RelationshipViewModel.swift */; };
 		F03776A21EC3A44100B92E6B /* FakeSpecialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03776A11EC3A44100B92E6B /* FakeSpecialData.swift */; };
 		F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */; };
 		F03830601EC63C7300A0FF5D /* Master.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F038305F1EC63C7300A0FF5D /* Master.storyboard */; };
@@ -139,6 +150,8 @@
 		F04B437E1F058F4100946C82 /* BarProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B437D1F058F4100946C82 /* BarProfile.swift */; };
 		F04B43801F058F8800946C82 /* Special.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B437F1F058F8800946C82 /* Special.swift */; };
 		F04B43821F058FA000946C82 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B43811F058FA000946C82 /* UserSettings.swift */; };
+		F04D670D1F236F600031CAA4 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04D670C1F236F600031CAA4 /* UIView.swift */; };
+		F04D670F1F236F860031CAA4 /* UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04D670E1F236F860031CAA4 /* UIWindow.swift */; };
 		F04F445C1ECF840700D5FC62 /* BarAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */; };
 		F05491241F1FBB63008568E5 /* NotificationSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05491231F1FBB63008568E5 /* NotificationSetting.swift */; };
 		F06209731F1E933600AF529A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F06209721F1E933600AF529A /* GoogleService-Info.plist */; };
@@ -193,7 +206,6 @@
 		F0B5F93F1EEF790A0095F12E /* BarInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B5F93E1EEF790A0095F12E /* BarInfo.swift */; };
 		F0C66BDF1EF41C9400B22811 /* SinchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C66BDE1EF41C9400B22811 /* SinchService.swift */; };
 		F0C72F441EF81D7700B25C52 /* KingFisherPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C72F431EF81D7700B25C52 /* KingFisherPhotoService.swift */; };
-		F0C72F461EF835B200B25C52 /* ImageDownloadType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C72F451EF835B200B25C52 /* ImageDownloadType.swift */; };
 		F0CA18911EE584AF00428318 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18901EE584AF00428318 /* ProfileViewModel.swift */; };
 		F0CA18931EE585D700428318 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18921EE585D700428318 /* ProfileViewController.swift */; };
 		F0CA18951EE5867700428318 /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0CA18941EE5867700428318 /* User.storyboard */; };
@@ -355,6 +367,17 @@
 		F03404521F0D6C6D00475FDF /* AuthAPIType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthAPIType.swift; sourceTree = "<group>"; };
 		F03404541F0D6CFF00475FDF /* StorageAPIType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageAPIType.swift; sourceTree = "<group>"; };
 		F03404561F0D6E2600475FDF /* SMSValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSValidationService.swift; sourceTree = "<group>"; };
+		F03765BD1F25109500BE173D /* CreateEditGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEditGroupViewController.swift; sourceTree = "<group>"; };
+		F03765BF1F2510B300BE173D /* ViewGroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewGroupsViewController.swift; sourceTree = "<group>"; };
+		F03765C11F2510CB00BE173D /* GroupActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupActivityViewController.swift; sourceTree = "<group>"; };
+		F03765C31F2510DA00BE173D /* ManageGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageGroupViewController.swift; sourceTree = "<group>"; };
+		F03765C61F25110400BE173D /* CreateEditGroupViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEditGroupViewModel.swift; sourceTree = "<group>"; };
+		F03765C81F25111600BE173D /* ViewGroupsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewGroupsViewModel.swift; sourceTree = "<group>"; };
+		F03765CA1F25112800BE173D /* GroupActivityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupActivityViewModel.swift; sourceTree = "<group>"; };
+		F03765CC1F25113900BE173D /* ManageGroupViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageGroupViewModel.swift; sourceTree = "<group>"; };
+		F03765CE1F25164700BE173D /* Group.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Group.storyboard; sourceTree = "<group>"; };
+		F03765D01F25196800BE173D /* RelationshipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipViewController.swift; sourceTree = "<group>"; };
+		F03765D21F25197C00BE173D /* RelationshipViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipViewModel.swift; sourceTree = "<group>"; };
 		F03776A11EC3A44100B92E6B /* FakeSpecialData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeSpecialData.swift; sourceTree = "<group>"; };
 		F03776A31EC3A91200B92E6B /* SpecialTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialTableViewCell.swift; sourceTree = "<group>"; };
 		F038305F1EC63C7300A0FF5D /* Master.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Master.storyboard; sourceTree = "<group>"; };
@@ -407,6 +430,8 @@
 		F04B437D1F058F4100946C82 /* BarProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarProfile.swift; sourceTree = "<group>"; };
 		F04B437F1F058F8800946C82 /* Special.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Special.swift; sourceTree = "<group>"; };
 		F04B43811F058FA000946C82 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		F04D670C1F236F600031CAA4 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		F04D670E1F236F860031CAA4 /* UIWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWindow.swift; sourceTree = "<group>"; };
 		F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAnnotation.swift; sourceTree = "<group>"; };
 		F05491231F1FBB63008568E5 /* NotificationSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSetting.swift; sourceTree = "<group>"; };
 		F06209721F1E933600AF529A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -461,7 +486,6 @@
 		F0B5F93E1EEF790A0095F12E /* BarInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarInfo.swift; sourceTree = "<group>"; };
 		F0C66BDE1EF41C9400B22811 /* SinchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinchService.swift; sourceTree = "<group>"; };
 		F0C72F431EF81D7700B25C52 /* KingFisherPhotoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KingFisherPhotoService.swift; sourceTree = "<group>"; };
-		F0C72F451EF835B200B25C52 /* ImageDownloadType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloadType.swift; sourceTree = "<group>"; };
 		F0CA18901EE584AF00428318 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		F0CA18921EE585D700428318 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F0CA18941EE5867700428318 /* User.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = User.storyboard; sourceTree = "<group>"; };
@@ -764,6 +788,30 @@
 			name = "Service Protocols";
 			sourceTree = "<group>";
 		};
+		F03765BC1F250FDA00BE173D /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				F03765BD1F25109500BE173D /* CreateEditGroupViewController.swift */,
+				F03765BF1F2510B300BE173D /* ViewGroupsViewController.swift */,
+				F03765C11F2510CB00BE173D /* GroupActivityViewController.swift */,
+				F03765C31F2510DA00BE173D /* ManageGroupViewController.swift */,
+				F03765D01F25196800BE173D /* RelationshipViewController.swift */,
+			);
+			name = Group;
+			sourceTree = "<group>";
+		};
+		F03765C51F2510EA00BE173D /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				F03765C61F25110400BE173D /* CreateEditGroupViewModel.swift */,
+				F03765C81F25111600BE173D /* ViewGroupsViewModel.swift */,
+				F03765CA1F25112800BE173D /* GroupActivityViewModel.swift */,
+				F03765CC1F25113900BE173D /* ManageGroupViewModel.swift */,
+				F03765D21F25197C00BE173D /* RelationshipViewModel.swift */,
+			);
+			name = Group;
+			sourceTree = "<group>";
+		};
 		F0388CF61EE9D32600E8ED48 /* Bar */ = {
 			isa = PBXGroup;
 			children = (
@@ -906,6 +954,7 @@
 				F09B9D051EC356BA00B2385A /* Explore.storyboard */,
 				F04283B41EC4A9F600CCB5F3 /* MoonsView.storyboard */,
 				F0CF7F141EF37B97005C068C /* UserDiscovery.storyboard */,
+				F03765CE1F25164700BE173D /* Group.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -913,6 +962,7 @@
 		F09B9D021EC3552D00B2385A /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F03765BC1F250FDA00BE173D /* Group */,
 				F0CF158B1EDEED0F00531DCF /* SignUp */,
 				F0CA18981EE58BEC00428318 /* Login */,
 				F0388CF71EE9D33500E8ED48 /* Bar */,
@@ -929,6 +979,7 @@
 		F09B9D031EC3552F00B2385A /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				F03765C51F2510EA00BE173D /* Group */,
 				F0CF158C1EDEED1E00531DCF /* SignUp */,
 				F0CA189E1EE58CC400428318 /* Login */,
 				F0388CF61EE9D32600E8ED48 /* Bar */,
@@ -1030,7 +1081,6 @@
 			isa = PBXGroup;
 			children = (
 				F04989691EE0661E00064F58 /* BindableType.swift */,
-				F0C72F451EF835B200B25C52 /* ImageDownloadType.swift */,
 				F04A6D511EEECA95000D898B /* ParentType.swift */,
 				F0EF693D1EF09AD90028A32B /* BackType.swift */,
 				F0F6B5111F019FF1000C4489 /* DisplayErrorType.swift */,
@@ -1212,6 +1262,8 @@
 				F0A8FE171F01857F003044B1 /* Array.swift */,
 				F03322431F16565800FD72CD /* ViewController.swift */,
 				C08197271F1969F4008267A8 /* Images.swift */,
+				F04D670C1F236F600031CAA4 /* UIView.swift */,
+				F04D670E1F236F860031CAA4 /* UIWindow.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1397,6 +1449,7 @@
 				F048F1221EA3B7A5000F0161 /* Assets.xcassets in Resources */,
 				C0DAD32A1EEA04C7008BAF05 /* b4.jpg in Resources */,
 				F001BABE1EC50D2600CDF9BC /* Profile_base.png in Resources */,
+				F03765CF1F25164700BE173D /* Group.storyboard in Resources */,
 				C0FC627F1ECF53560087FA3B /* s8.jpg in Resources */,
 				C0FC628A1ECF69730087FA3B /* e2.jpg in Resources */,
 				C0DAD3181EE5EDEF008BAF05 /* pp5.jpg in Resources */,
@@ -1577,6 +1630,7 @@
 				F034044D1F0D6C3500475FDF /* UserAPIType.swift in Sources */,
 				F049896A1EE0661E00064F58 /* BindableType.swift in Sources */,
 				F019A5861F0318EF00FF7A27 /* BarProfileVCExtensions.swift in Sources */,
+				F04D670F1F236F860031CAA4 /* UIWindow.swift in Sources */,
 				F0CF15981EDEEE8900531DCF /* BrithdaySexViewController.swift in Sources */,
 				F03322441F16565800FD72CD /* ViewController.swift in Sources */,
 				F0CF7F1F1EF37E71005C068C /* EnterPhoneNumberViewController.swift in Sources */,
@@ -1600,6 +1654,7 @@
 				F0CA18AB1EE5AA4C00428318 /* FeaturedViewModel.swift in Sources */,
 				F04283AD1EC49DB600CCB5F3 /* MainViewController.swift in Sources */,
 				F07757B01F13FD9800B659D9 /* BarSnapshot.swift in Sources */,
+				F03765C91F25111600BE173D /* ViewGroupsViewModel.swift in Sources */,
 				F0CF7F1D1EF37D80005C068C /* CountryCodeViewModel.swift in Sources */,
 				F0FEAFEB1F1E2FC500E1C1A6 /* TutorialViewController.swift in Sources */,
 				F0A52CCA1EEDE7A80067E8DD /* SearchViewModel.swift in Sources */,
@@ -1615,6 +1670,7 @@
 				F0ED6B3F1F057916005D04D6 /* FirebaseBarAPI.swift in Sources */,
 				F0CA18A71EE5AA2A00428318 /* ExploreViewModel.swift in Sources */,
 				F0CA18AD1EE5AA5D00428318 /* MoonsViewViewModel.swift in Sources */,
+				F03765BE1F25109500BE173D /* CreateEditGroupViewController.swift in Sources */,
 				F06B56FD1EFAA8750028552A /* RxDataSourceUserModel.swift in Sources */,
 				F0CA18B11EE5AA7900428318 /* CityOverviewViewModel.swift in Sources */,
 				F03404571F0D6E2600475FDF /* SMSValidationService.swift in Sources */,
@@ -1623,6 +1679,7 @@
 				F0EF69381EF08BAE0028A32B /* UsersTableViewController.swift in Sources */,
 				F0CA18BF1EE611C100428318 /* Date.swift in Sources */,
 				F0EF693C1EF0949C0028A32B /* UsersTableViewCell.swift in Sources */,
+				F03765D11F25196800BE173D /* RelationshipViewController.swift in Sources */,
 				F04283B11EC4A96200CCB5F3 /* MoonsViewViewController.swift in Sources */,
 				F0F4CDFB1F0DA04C00AE69C1 /* Transforms.swift in Sources */,
 				C0DAD32E1EEA1263008BAF05 /* ADVSegmentedControl.swift in Sources */,
@@ -1630,6 +1687,7 @@
 				F0A0F4A51F14FE4B0034EC64 /* FacebookService.swift in Sources */,
 				F06B56FF1EFAAFD50028552A /* FriendRequestTableViewCell.swift in Sources */,
 				F03C78B31EE9DB2C002AEDAD /* SettingsViewController.swift in Sources */,
+				F03765D31F25197C00BE173D /* RelationshipViewModel.swift in Sources */,
 				F0CF15961EDEEE7B00531DCF /* NameViewController.swift in Sources */,
 				F0CF15921EDEEDA500531DCF /* EmailUsernameViewModel.swift in Sources */,
 				F0A52CC61EEDE3EB0067E8DD /* SearchResultsViewModel.swift in Sources */,
@@ -1650,9 +1708,10 @@
 				F001BAC31EC50F7500CDF9BC /* BarActivityTableViewCell.swift in Sources */,
 				F04B43761F0581E300946C82 /* UserProfile.swift in Sources */,
 				C034E2C71ECCF09D008EA4BA /* FakeUserData.swift in Sources */,
+				F03765CB1F25112800BE173D /* GroupActivityViewModel.swift in Sources */,
 				F0E8627D1EF6B85400BEF5E9 /* EditProfileViewModel.swift in Sources */,
+				F03765C41F2510DA00BE173D /* ManageGroupViewController.swift in Sources */,
 				F04989681EE0653D00064F58 /* Scene+ViewController.swift in Sources */,
-				F0C72F461EF835B200B25C52 /* ImageDownloadType.swift in Sources */,
 				F03776A41EC3A91200B92E6B /* SpecialTableViewCell.swift in Sources */,
 				F0CA18B51EE5AEEC00428318 /* FloatingBottomTabBar+Rx.swift in Sources */,
 				F04989661EE0651800064F58 /* SceneCoordinatorType.swift in Sources */,
@@ -1710,8 +1769,10 @@
 				F04989641EE0641300064F58 /* Scene.swift in Sources */,
 				F06B42321EFDAE9900BE7626 /* DynamicLinkingAPI.swift in Sources */,
 				F0388CFB1EE9D40B00E8ED48 /* BarProfileViewController.swift in Sources */,
+				F04D670D1F236F600031CAA4 /* UIView.swift in Sources */,
 				F0CF159C1EDEEEA100531DCF /* PasswordsViewController.swift in Sources */,
 				F03C78B51EE9DB3C002AEDAD /* SettingsViewModel.swift in Sources */,
+				F03765CD1F25113900BE173D /* ManageGroupViewModel.swift in Sources */,
 				F0C66BDF1EF41C9400B22811 /* SinchService.swift in Sources */,
 				F048F11B1EA3B7A5000F0161 /* AppDelegate.swift in Sources */,
 				F05491241F1FBB63008568E5 /* NotificationSetting.swift in Sources */,
@@ -1719,13 +1780,16 @@
 				C0DAD30B1EE5EBC4008BAF05 /* ProfileFakeData.swift in Sources */,
 				F034044A1F0D621700475FDF /* FirebaseStorageAPI.swift in Sources */,
 				F01CE3E31EFEDE9500EE9535 /* SelectRegionViewController.swift in Sources */,
+				F03765C01F2510B300BE173D /* ViewGroupsViewController.swift in Sources */,
 				C0E8BE921EF978F3007E9B52 /* RAReorderableLayout.swift in Sources */,
 				F04A6D521EEECA95000D898B /* ParentType.swift in Sources */,
+				F03765C21F2510CB00BE173D /* GroupActivityViewController.swift in Sources */,
 				F03CEF6D1F05962E00FCC4F3 /* Snapshot.swift in Sources */,
 				F0FD8F321EE19D4E0020D131 /* ForgotPasswordViewController.swift in Sources */,
 				F0B5F93F1EEF790A0095F12E /* BarInfo.swift in Sources */,
 				F0FD8F341EE19D9F0020D131 /* ForgotPasswordViewModel.swift in Sources */,
 				F098FF9E1EDF47D400A59594 /* ValidationUtility.swift in Sources */,
+				F03765C71F25110400BE173D /* CreateEditGroupViewModel.swift in Sources */,
 				F0CF159A1EDEEE9000531DCF /* EmailUsernameViewController.swift in Sources */,
 				F09DF0961EEB85140092BFA5 /* ContentSuggestionsViewController.swift in Sources */,
 				C0949D951EEDD1F500C6F72C /* MoonToolbar.swift in Sources */,

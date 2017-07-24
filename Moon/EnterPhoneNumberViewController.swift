@@ -37,6 +37,11 @@ class EnterPhoneNumberViewController: UIViewController, BindableType {
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        view.endEditing(true)
+    }
+    
     func bindViewModel() {
         cancelButton.rx.action = viewModel.onBack()
         
@@ -45,11 +50,6 @@ class EnterPhoneNumberViewController: UIViewController, BindableType {
         sendCodeButton.rx.action = sendCodeAction
         
         sendCodeAction.executing
-            .do(onNext: { [weak self] executing in
-                if executing {
-                    self?.view.endEditing(true)
-                }
-            })
             .subscribe(onNext: {
             if $0 {
                 SwiftOverlays.showBlockingWaitOverlay()
@@ -100,8 +100,5 @@ class EnterPhoneNumberViewController: UIViewController, BindableType {
     fileprivate func prepareCountryCodeButton() {
         changeCountryCodeButton.tintColor = .moonBlue
     }
-}
 
-extension Reactive where Base: UIButton {
-    
 }

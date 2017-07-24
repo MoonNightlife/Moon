@@ -18,6 +18,7 @@ class DeleteAccountViewController: UIViewController, BindableType {
     
     var viewModel: DeleteAccountViewModel!
     var navBackButton: UIBarButtonItem!
+    var bag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +39,7 @@ class DeleteAccountViewController: UIViewController, BindableType {
                 SwiftOverlays.removeAllBlockingOverlays()
             }
         })
+        .addDisposableTo(bag)
     }
 
     fileprivate func prepareNavigationBackButton() {

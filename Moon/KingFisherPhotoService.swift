@@ -17,9 +17,8 @@ struct KingFisherPhotoService: PhotoService {
         let resouce = ImageResource(downloadURL: url)
         
         return Observable.create({ (observer) -> Disposable in
-            let imageTask = KingfisherManager.shared.retrieveImage(with: resouce, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
+            let imageTask = KingfisherManager.shared.retrieveImage(with: resouce, options: nil, progressBlock: nil, completionHandler: { (image, error, _, url) in
             
-                
                 if let i = image, let imageName = url?.lastPathComponent {
                     observer.onNext((i, imageName))
                 } else if let e = error {
