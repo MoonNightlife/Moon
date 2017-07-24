@@ -63,4 +63,13 @@ enum Scene {
         case countryCode(CountryCodeViewModel)
         case contacts(ContactsViewModel)
     }
+    
+    enum Group: SceneType {
+        case relationship(RelationshipViewModel, UsersTableViewModel, ViewGroupsViewModel)
+        case createGroup(CreateEditGroupViewModel)
+        case editGroup(CreateEditGroupViewModel)
+        case viewGroups(ViewGroupsViewModel)
+        case groupActivity(GroupActivityViewModel)
+        case manageGroup(ManageGroupViewModel)
+    }
 }

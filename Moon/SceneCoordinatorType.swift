@@ -20,6 +20,13 @@ protocol SceneCoordinatorType {
     @discardableResult
     func pop(animated: Bool) -> Observable<Void>
     
+    // pop scene from navigation stack
+    // this method should be used if the navigation controller is presented modally
+    // and you just want to pop a view controller off the stack instead of removeing the
+    // whole navigation stack
+    @discardableResult
+    func popVCOffNavStack(animated: Bool) -> Observable<Void>
+    
     @discardableResult
     func changeChild(To view: ChildViewType) -> Observable<Void>
 }

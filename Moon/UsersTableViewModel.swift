@@ -133,13 +133,6 @@ class UsersTableViewModel: BackType, ImageNetworkingInjected, NetworkingInjected
         }
     }()
     
-    func onShowContacts() -> CocoaAction {
-        return CocoaAction {
-            let vm = ContactsViewModel(coordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: Scene.UserDiscovery.contacts(vm), type: .modal)
-        }
-    }
-    
     func onAcceptFriendRequest(userID: String) -> CocoaAction {
         return CocoaAction {_ in 
             return self.userAPI.acceptFriend(userID: self.authAPI.SignedInUserID, friendID: userID).do(onNext: {

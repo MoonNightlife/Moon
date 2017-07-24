@@ -41,7 +41,9 @@ class BarProfileViewModel: ImageNetworkingInjected, NetworkingInjected, BackType
     var specials = Variable<[Special]>([])
     var events = Variable<[BarEvent]>([])
     var isAttending: Observable<Bool>!
-    var numPeopleAttending: Observable<Int>!
+    var numPeopleAttending: Observable<Int> {
+        return bar.map({ $0.numPeopleAttending ?? 0 })
+    }
     
     init(coordinator: SceneCoordinatorType, barID: String) {
         self.sceneCoordinator = coordinator

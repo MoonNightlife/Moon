@@ -148,8 +148,16 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
     
     func onShowFriends() -> CocoaAction {
         return CocoaAction {
-            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .user(id: self.userID))
-            return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
+            if self.authAPI.SignedInUserID == self.userID {
+                let friendVM = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .user(id: self.userID))
+                let groupVM = ViewGroupsViewModel(sceneCoordinator: self.sceneCoordinator)
+                let vm = RelationshipViewModel(sceneCoordinator: self.sceneCoordinator)
+                
+                return self.sceneCoordinator.transition(to: Scene.Group.relationship(vm, friendVM, groupVM), type: .modal)
+            } else {
+                let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .user(id: self.userID))
+                return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
+            }
         }
     }
     
