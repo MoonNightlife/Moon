@@ -77,7 +77,7 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
         segmentControl.borderColor = .clear
         segmentControl.backgroundColor = .clear
         segmentControl.selectedIndex = 0
-        segmentControl.unselectedLabelColor = .moonGrey
+        segmentControl.unselectedLabelColor = .lightGray
         segmentControl.thumbColor = .moonGrey
     }
     
