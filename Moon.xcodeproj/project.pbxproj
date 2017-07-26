@@ -95,6 +95,11 @@
 		F03474391F28A36A00E6BA07 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03474381F28A36A00E6BA07 /* Group.swift */; };
 		F034743B1F28A37300E6BA07 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = F034743A1F28A37300E6BA07 /* Plan.swift */; };
 		F034743D1F28A38500E6BA07 /* ActivityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F034743C1F28A38500E6BA07 /* ActivityInfo.swift */; };
+		F034743F1F28B20800E6BA07 /* RxDataSourceGroupMemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F034743E1F28B20800E6BA07 /* RxDataSourceGroupMemberModel.swift */; };
+		F03474421F28B5C200E6BA07 /* GroupMemberSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03474411F28B5C200E6BA07 /* GroupMemberSnapshot.swift */; };
+		F03474441F28B64C00E6BA07 /* UserSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03474431F28B64C00E6BA07 /* UserSnapshot.swift */; };
+		F03474461F28BCB900E6BA07 /* FirebaseGroupAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03474451F28BCB900E6BA07 /* FirebaseGroupAPI.swift */; };
+		F03474481F28BCC800E6BA07 /* GroupAPIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03474471F28BCC800E6BA07 /* GroupAPIType.swift */; };
 		F03765BE1F25109500BE173D /* CreateEditGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03765BD1F25109500BE173D /* CreateEditGroupViewController.swift */; };
 		F03765C01F2510B300BE173D /* ViewGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03765BF1F2510B300BE173D /* ViewGroupsViewController.swift */; };
 		F03765C21F2510CB00BE173D /* GroupActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03765C11F2510CB00BE173D /* GroupActivityViewController.swift */; };
@@ -373,6 +378,11 @@
 		F03474381F28A36A00E6BA07 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		F034743A1F28A37300E6BA07 /* Plan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
 		F034743C1F28A38500E6BA07 /* ActivityInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityInfo.swift; sourceTree = "<group>"; };
+		F034743E1F28B20800E6BA07 /* RxDataSourceGroupMemberModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxDataSourceGroupMemberModel.swift; sourceTree = "<group>"; };
+		F03474411F28B5C200E6BA07 /* GroupMemberSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMemberSnapshot.swift; sourceTree = "<group>"; };
+		F03474431F28B64C00E6BA07 /* UserSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSnapshot.swift; sourceTree = "<group>"; };
+		F03474451F28BCB900E6BA07 /* FirebaseGroupAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseGroupAPI.swift; sourceTree = "<group>"; };
+		F03474471F28BCC800E6BA07 /* GroupAPIType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupAPIType.swift; sourceTree = "<group>"; };
 		F03765BD1F25109500BE173D /* CreateEditGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEditGroupViewController.swift; sourceTree = "<group>"; };
 		F03765BF1F2510B300BE173D /* ViewGroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewGroupsViewController.swift; sourceTree = "<group>"; };
 		F03765C11F2510CB00BE173D /* GroupActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupActivityViewController.swift; sourceTree = "<group>"; };
@@ -790,8 +800,20 @@
 				F03404541F0D6CFF00475FDF /* StorageAPIType.swift */,
 				F03404561F0D6E2600475FDF /* SMSValidationService.swift */,
 				F0E1F5271F152C2800BC0785 /* FacebookLoginProviderType.swift */,
+				F03474471F28BCC800E6BA07 /* GroupAPIType.swift */,
 			);
 			name = "Service Protocols";
+			sourceTree = "<group>";
+		};
+		F03474401F28B59B00E6BA07 /* Snapshots */ = {
+			isa = PBXGroup;
+			children = (
+				F03CEF6C1F05962E00FCC4F3 /* Snapshot.swift */,
+				F03474431F28B64C00E6BA07 /* UserSnapshot.swift */,
+				F07757AF1F13FD9800B659D9 /* BarSnapshot.swift */,
+				F03474411F28B5C200E6BA07 /* GroupMemberSnapshot.swift */,
+			);
+			name = Snapshots;
 			sourceTree = "<group>";
 		};
 		F03765BC1F250FDA00BE173D /* Group */ = {
@@ -1074,6 +1096,7 @@
 				F034044B1F0D6C1800475FDF /* Service Protocols */,
 				F0C72F431EF81D7700B25C52 /* KingFisherPhotoService.swift */,
 				F0C66BDE1EF41C9400B22811 /* SinchService.swift */,
+				F03474451F28BCB900E6BA07 /* FirebaseGroupAPI.swift */,
 				F0ED6B3C1F057909005D04D6 /* FirebaseUserAPI.swift */,
 				F0ED6B3E1F057916005D04D6 /* FirebaseBarAPI.swift */,
 				F03404471F0D5F6D00475FDF /* FirebaseAuthAPI.swift */,
@@ -1282,8 +1305,7 @@
 				F04B43751F0581E300946C82 /* UserProfile.swift */,
 				F04B43771F0582A100946C82 /* Activity.swift */,
 				F04B437B1F058F2800946C82 /* BarEvent.swift */,
-				F03CEF6C1F05962E00FCC4F3 /* Snapshot.swift */,
-				F07757AF1F13FD9800B659D9 /* BarSnapshot.swift */,
+				F03474401F28B59B00E6BA07 /* Snapshots */,
 				F04B437D1F058F4100946C82 /* BarProfile.swift */,
 				F04B437F1F058F8800946C82 /* Special.swift */,
 				F0CA18B61EE6101200428318 /* TopBar.swift */,
@@ -1309,6 +1331,7 @@
 			children = (
 				F06B56FC1EFAA8750028552A /* RxDataSourceUserModel.swift */,
 				F0335A751EF1F7DD005118B4 /* RxDataSourceSnapshotModel.swift */,
+				F034743E1F28B20800E6BA07 /* RxDataSourceGroupMemberModel.swift */,
 			);
 			name = "RxDataSources Model/Extensions";
 			sourceTree = "<group>";
@@ -1674,6 +1697,7 @@
 				F04B437E1F058F4100946C82 /* BarProfile.swift in Sources */,
 				F01CE3E11EFEDE1000EE9535 /* SelectRegionViewModel.swift in Sources */,
 				F0043A031EF44F090047E94A /* ContactsViewModel.swift in Sources */,
+				F03474481F28BCC800E6BA07 /* GroupAPIType.swift in Sources */,
 				F04B43781F0582A100946C82 /* Activity.swift in Sources */,
 				F09B9D081EC3571800B2385A /* ExploreViewController.swift in Sources */,
 				F0942F0D1ECCEC550038E389 /* FeaturedEventView.swift in Sources */,
@@ -1701,6 +1725,7 @@
 				F03765D31F25197C00BE173D /* RelationshipViewModel.swift in Sources */,
 				F0CF15961EDEEE7B00531DCF /* NameViewController.swift in Sources */,
 				F0CF15921EDEEDA500531DCF /* EmailUsernameViewModel.swift in Sources */,
+				F03474421F28B5C200E6BA07 /* GroupMemberSnapshot.swift in Sources */,
 				F0A52CC61EEDE3EB0067E8DD /* SearchResultsViewModel.swift in Sources */,
 				F0388CF91EE9D35C00E8ED48 /* BarProfileViewModel.swift in Sources */,
 				F0C72F441EF81D7700B25C52 /* KingFisherPhotoService.swift in Sources */,
@@ -1737,9 +1762,11 @@
 				F0043A051EF45D8C0047E94A /* ContactTableViewCell.swift in Sources */,
 				F048F11D1EA3B7A5000F0161 /* LoginViewController.swift in Sources */,
 				F034743D1F28A38500E6BA07 /* ActivityInfo.swift in Sources */,
+				F03474461F28BCB900E6BA07 /* FirebaseGroupAPI.swift in Sources */,
 				F0A2251F1ECB9F2600170927 /* MoonFont.swift in Sources */,
 				F04A6D5A1EEF2B8C000D898B /* LoadMoreTableViewCell.swift in Sources */,
 				F03C78BC1EE9E97E002AEDAD /* EmailSettingsViewController.swift in Sources */,
+				F034743F1F28B20800E6BA07 /* RxDataSourceGroupMemberModel.swift in Sources */,
 				F049896C1EE068BE00064F58 /* SceneTransitionType.swift in Sources */,
 				F04B437C1F058F2800946C82 /* BarEvent.swift in Sources */,
 				F03C78C01EE9E99D002AEDAD /* DeleteAccountViewController.swift in Sources */,
@@ -1758,6 +1785,7 @@
 				F0CF7F251EF3850F005C068C /* CountryCode.swift in Sources */,
 				F0CA18931EE585D700428318 /* ProfileViewController.swift in Sources */,
 				F09DF08C1EEAF0610092BFA5 /* NotificationTableViewCell.swift in Sources */,
+				F03474441F28B64C00E6BA07 /* UserSnapshot.swift in Sources */,
 				F03776A21EC3A44100B92E6B /* FakeSpecialData.swift in Sources */,
 				F03404481F0D5F6D00475FDF /* FirebaseAuthAPI.swift in Sources */,
 				F03404551F0D6CFF00475FDF /* StorageAPIType.swift in Sources */,

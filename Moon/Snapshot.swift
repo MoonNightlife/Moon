@@ -24,21 +24,3 @@ class Snapshot: IdentifiableType, Equatable {
         return lhs.id == rhs.id
     }
 }
-
-class UserSnapshot: Snapshot, Mappable {
-    var firstName: String?
-    var lastName: String?
-    
-    required init?(map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        id <- map["id"]
-        firstName <- map["firstName"]
-        lastName <- map["lastName"]
-        username <- map["username"]
-        
-        name = (firstName ?? "") + " " + (lastName ?? "")
-    }
-}

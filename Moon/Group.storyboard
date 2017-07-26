@@ -445,10 +445,12 @@
                         <outlet property="addMemberTextField" destination="LOL-IS-nUQ" id="TQc-E9-L7m"/>
                         <outlet property="groupNameTextField" destination="VtJ-Uc-3NZ" id="kHq-7j-Ujg"/>
                         <outlet property="groupPicture" destination="oAu-ye-g53" id="QmV-HL-8jH"/>
+                        <outlet property="membersTableView" destination="lVv-NN-THt" id="n3d-6I-sr8"/>
                         <outlet property="saveButton" destination="xth-oD-6Sd" id="NlO-c2-CFM"/>
                         <outlet property="scrollView" destination="egk-Oi-Hje" id="44y-jY-GIH"/>
                         <outlet property="suggestedMemberViewHeightConstraint" destination="UrM-1T-L9r" id="dNq-Nx-Qbh"/>
                         <outlet property="suggestedMembersView" destination="KnK-ju-1Vu" id="7qI-Y9-bjb"/>
+                        <outlet property="userSearchResultsTablView" destination="AOm-DU-Nwg" id="zRv-ng-UCJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hBR-ht-KkX" userLabel="First Responder" sceneMemberID="firstResponder"/>

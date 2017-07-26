@@ -10,6 +10,9 @@ import UIKit
 import Material
 import Action
 import Fusuma
+import RxDataSources
+import RxSwift
+import RxCocoa
 
 class CreateEditGroupViewController: UIViewController, BindableType, FusumaDelegate, UITextFieldDelegate, UIScrollViewDelegate {
     
@@ -22,6 +25,8 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
     var offSet: CGFloat!
     var keyboardHeight: CGFloat!
     var addMemberTextFieldIsActive = false
+    var membersDataSource = RxTableViewSectionedReloadDataSource<GroupMemberSectionModel>()
+    var bag = DisposeBag()
 
     @IBOutlet weak var suggestedMembersView: UIView!
     @IBOutlet weak var groupPicture: UIImageView!
@@ -30,6 +35,8 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var membersTableView: UITableView!
+    @IBOutlet weak var userSearchResultsTablView: UITableView!
     
     @IBOutlet weak var suggestedMemberViewHeightConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
@@ -43,6 +50,7 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
         prepareSaveButton()
         prepareScrollView()
         prepareSuggestedMemberView()
+        configureDataSource()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,8 +82,11 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
     }
     
     func bindViewModel() {
+        viewModel.displayUsers.bind(to: membersTableView.rx.items(dataSource: membersDataSource)).addDisposableTo(bag)
+        
         backButton.rx.action = viewModel.onBack()
         backButton.image = viewModel.showBackArrow ? Icon.cm.arrowBack : Icon.cm.arrowDownward
+        
     }
     
     func prepareNavigationBackButton() {
@@ -250,6 +261,18 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         addMemberTextField.resignFirstResponder()
         groupNameTextField.resignFirstResponder()
+    }
+    
+    fileprivate func configureDataSource() {
+        membersDataSource.configureCell = {
+            [weak self] dataSource, collectionView, indexPath, item in
+            
+            let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "memberCell")
+            
+            cell.textLabel?.text = item.name
+            
+            return cell
+        }
     }
     
 }

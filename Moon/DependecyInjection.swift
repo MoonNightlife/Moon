@@ -12,6 +12,7 @@ import Action
 struct InjectionMap {
     static var barAPI: BarAPIType = FirebaseBarAPI()
     static var userAPI: UserAPIType = FirebaseUserAPI()
+    static var groupAPI: GroupAPIType = FirebaseGroupAPI()
     static var storageAPI: StorageAPIType = FirebaseStorageAPI()
     static var authAPI: AuthAPIType = FirebaseAuthAPI()
     static var photoService: PhotoService = KingFisherPhotoService()
@@ -31,6 +32,7 @@ protocol NetworkingInjected { }
 extension NetworkingInjected {
     var userAPI: UserAPIType { return InjectionMap.userAPI }
     var barAPI: BarAPIType { return InjectionMap.barAPI }
+    var groupAPI: GroupAPIType { return InjectionMap.groupAPI }
 }
 
 protocol ImageNetworkingInjected { }
