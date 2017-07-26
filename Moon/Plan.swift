@@ -19,7 +19,7 @@ struct Plan: Mappable {
     
     mutating func mapping(map: Map) {
         closingTime <- map["closingTime"]
-        options <- map["optionsList"]
+        options <- map["options"]
     }
 }
 
@@ -33,7 +33,7 @@ struct PlanOption: Mappable {
     }
     
     mutating func mapping(map: Map) {
-        barID <- map["barID"]
+        barID <- map["barId"]
         barName <- map["barName"]
         voteCount <- map["voteCount"]
     }

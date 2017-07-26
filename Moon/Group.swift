@@ -10,6 +10,7 @@ import Foundation
 import ObjectMapper
 
 struct Group: Mappable {
+    var id: String?
     var name: String?
     var plan: Plan?
     var activityInfo: ActivityInfo?
@@ -19,6 +20,7 @@ struct Group: Mappable {
     }
     
     mutating func mapping(map: Map) {
+        id <- map["id"]
         name <- map["name"]
         plan <- map["plan"]
         activityInfo <- map["activityInfo"]
