@@ -11,7 +11,7 @@ import Material
 import Action
 import Fusuma
 
-class CreateEditGroupViewController: UIViewController, BindableType, FusumaDelegate, UITextFieldDelegate {
+class CreateEditGroupViewController: UIViewController, BindableType, FusumaDelegate, UITextFieldDelegate, UIScrollViewDelegate {
     
     // MARK: - Global
     var viewModel: CreateEditGroupViewModel!
@@ -19,12 +19,17 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
     let imagePicker = UIImagePickerController()
     let fusuma = FusumaViewController()
     let tap = UITapGestureRecognizer()
+    var offSet: CGFloat!
+    var keyboardHeight: CGFloat!
+    var addMemberTextFieldIsActive = false
 
+    @IBOutlet weak var suggestedMembersView: UIView!
     @IBOutlet weak var groupPicture: UIImageView!
     @IBOutlet weak var groupNameTextField: TextField!
     @IBOutlet weak var addMemberTextField: TextField!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var suggestedMemberViewHeightConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
@@ -36,11 +41,36 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
         prepareGroupPicture()
         prepareAddButton()
         prepareSaveButton()
+        prepareScrollView()
+        prepareSuggestedMemberView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
         
+        if addMemberTextFieldIsActive {
+            animateViewUp()
+            let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+            let keyboardFrame: NSValue = (userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as? NSValue)!
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRectangle.height
+            calculateOffset()
+            moveScrollViewUP()
+        }
+        
+    }
+    
+    func calculateOffset() {
+        let screenHeight = self.view.frame.size.height
+        let bioY = screenHeight - suggestedMembersView.y
+        let keyboardShift = keyboardHeight - bioY
+        let extraShift = CGFloat(10) + suggestedMembersView.frame.size.height
+        
+        offSet = extraShift + keyboardShift
     }
     
     func bindViewModel() {
@@ -53,6 +83,12 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
         backButton = UIBarButtonItem()
         backButton.tintColor = .lightGray
         self.navigationItem.leftBarButtonItem = backButton
+    }
+    
+    func prepareSuggestedMemberView() {
+        suggestedMembersView.layer.borderWidth = 1
+        suggestedMembersView.layer.cornerRadius = 5
+        suggestedMembersView.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     func prepareGroupNameTextField() {
@@ -93,6 +129,15 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
         saveButton.backgroundColor = .moonGreen
         saveButton.tintColor = .white
         saveButton.layer.cornerRadius = 5
+    }
+    
+    func prepareScrollView() {
+        scrollView.delegate = self
+        scrollView.isUserInteractionEnabled = true
+        scrollView.isScrollEnabled = false
+        scrollView.bounces = false
+        scrollView.keyboardDismissMode = .interactive
+        scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: 700)
     }
     
     func prepareFusuma() {
@@ -151,7 +196,7 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
     
     func animateViewUp() {
         UIView.animate(withDuration: Double(0.3), animations: {
-            self.suggestedMemberViewHeightConstraint.constant = 100
+            self.suggestedMemberViewHeightConstraint.constant = 150
             self.view.layoutIfNeeded()
         })
         
@@ -165,16 +210,41 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
         
     }
     
+    func moveScrollViewUP() {
+        UIView.animate(withDuration: Double(0.3), animations: {
+            self.scrollView.contentOffset.y = self.offSet
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    func moveScrollViewDown() {
+        UIView.animate(withDuration: Double(0.3), animations: {
+            self.scrollView.contentOffset.y = 0 //self.scrollView.y
+            self.scrollView.layoutIfNeeded()
+        })
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == addMemberTextField {
-            animateViewUp()
+             addMemberTextFieldIsActive = true
         }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         if textField == addMemberTextField {
+             addMemberTextFieldIsActive = false
             animateViewDown()
+            moveScrollViewDown()
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        addMemberTextField.resignFirstResponder()
+        groupNameTextField.resignFirstResponder()
+        self.moveScrollViewDown()
+        self.animateViewDown()
+        
+        return true
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
