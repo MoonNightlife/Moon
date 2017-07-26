@@ -11,14 +11,14 @@ import ObjectMapper
 
 let dateFormatter = DateFormatter()
 
-let DateTransfromDouble = TransformOf<NSDate, Double>(fromJSON: { (value: Double?) -> NSDate? in
+let DateTransfromDouble = TransformOf<Date, Double>(fromJSON: { (value: Double?) -> Date? in
     
-    return NSDate(timeIntervalSince1970: value!)
+    return Date(timeIntervalSince1970: value!)
     
-    }, toJSON: { (value: NSDate?) -> Double? in
+    }, toJSON: { (value: Date?) -> Double? in
         // transform value from Int? to String?
         if let value = value {
-            return  NSDate().timeIntervalSince1970
+            return  Date().timeIntervalSince1970
         }
         return nil
 })

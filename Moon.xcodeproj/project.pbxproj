@@ -92,6 +92,9 @@
 		F03404531F0D6C6D00475FDF /* AuthAPIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03404521F0D6C6D00475FDF /* AuthAPIType.swift */; };
 		F03404551F0D6CFF00475FDF /* StorageAPIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03404541F0D6CFF00475FDF /* StorageAPIType.swift */; };
 		F03404571F0D6E2600475FDF /* SMSValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03404561F0D6E2600475FDF /* SMSValidationService.swift */; };
+		F03474391F28A36A00E6BA07 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03474381F28A36A00E6BA07 /* Group.swift */; };
+		F034743B1F28A37300E6BA07 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = F034743A1F28A37300E6BA07 /* Plan.swift */; };
+		F034743D1F28A38500E6BA07 /* ActivityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F034743C1F28A38500E6BA07 /* ActivityInfo.swift */; };
 		F03765BE1F25109500BE173D /* CreateEditGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03765BD1F25109500BE173D /* CreateEditGroupViewController.swift */; };
 		F03765C01F2510B300BE173D /* ViewGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03765BF1F2510B300BE173D /* ViewGroupsViewController.swift */; };
 		F03765C21F2510CB00BE173D /* GroupActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03765C11F2510CB00BE173D /* GroupActivityViewController.swift */; };
@@ -367,6 +370,9 @@
 		F03404521F0D6C6D00475FDF /* AuthAPIType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthAPIType.swift; sourceTree = "<group>"; };
 		F03404541F0D6CFF00475FDF /* StorageAPIType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageAPIType.swift; sourceTree = "<group>"; };
 		F03404561F0D6E2600475FDF /* SMSValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSValidationService.swift; sourceTree = "<group>"; };
+		F03474381F28A36A00E6BA07 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		F034743A1F28A37300E6BA07 /* Plan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
+		F034743C1F28A38500E6BA07 /* ActivityInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityInfo.swift; sourceTree = "<group>"; };
 		F03765BD1F25109500BE173D /* CreateEditGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEditGroupViewController.swift; sourceTree = "<group>"; };
 		F03765BF1F2510B300BE173D /* ViewGroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewGroupsViewController.swift; sourceTree = "<group>"; };
 		F03765C11F2510CB00BE173D /* GroupActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupActivityViewController.swift; sourceTree = "<group>"; };
@@ -1291,6 +1297,9 @@
 				F0DAA0BD1F193D360039DA07 /* PopoverPresenterType.swift */,
 				F0B5F93E1EEF790A0095F12E /* BarInfo.swift */,
 				F05491231F1FBB63008568E5 /* NotificationSetting.swift */,
+				F03474381F28A36A00E6BA07 /* Group.swift */,
+				F034743A1F28A37300E6BA07 /* Plan.swift */,
+				F034743C1F28A38500E6BA07 /* ActivityInfo.swift */,
 			);
 			name = "Models ";
 			sourceTree = "<group>";
@@ -1631,6 +1640,7 @@
 				F049896A1EE0661E00064F58 /* BindableType.swift in Sources */,
 				F019A5861F0318EF00FF7A27 /* BarProfileVCExtensions.swift in Sources */,
 				F04D670F1F236F860031CAA4 /* UIWindow.swift in Sources */,
+				F034743B1F28A37300E6BA07 /* Plan.swift in Sources */,
 				F0CF15981EDEEE8900531DCF /* BrithdaySexViewController.swift in Sources */,
 				F03322441F16565800FD72CD /* ViewController.swift in Sources */,
 				F0CF7F1F1EF37E71005C068C /* EnterPhoneNumberViewController.swift in Sources */,
@@ -1646,6 +1656,7 @@
 				F0E59F281EEF735A007A3323 /* BarInfoViewController.swift in Sources */,
 				F0A52CC81EEDE7740067E8DD /* SearchViewController.swift in Sources */,
 				F03C78C91EE9EA5C002AEDAD /* DeleteAccountViewModel.swift in Sources */,
+				F03474391F28A36A00E6BA07 /* Group.swift in Sources */,
 				F0E59F2A1EEF73B4007A3323 /* BarInfoViewModel.swift in Sources */,
 				F0CF7F1B1EF37D5E005C068C /* EnterCodeViewModel.swift in Sources */,
 				F0ED6B3D1F057909005D04D6 /* FirebaseUserAPI.swift in Sources */,
@@ -1725,6 +1736,7 @@
 				F03CEF6F1F059BAC00FCC4F3 /* DependecyInjection.swift in Sources */,
 				F0043A051EF45D8C0047E94A /* ContactTableViewCell.swift in Sources */,
 				F048F11D1EA3B7A5000F0161 /* LoginViewController.swift in Sources */,
+				F034743D1F28A38500E6BA07 /* ActivityInfo.swift in Sources */,
 				F0A2251F1ECB9F2600170927 /* MoonFont.swift in Sources */,
 				F04A6D5A1EEF2B8C000D898B /* LoadMoreTableViewCell.swift in Sources */,
 				F03C78BC1EE9E97E002AEDAD /* EmailSettingsViewController.swift in Sources */,
