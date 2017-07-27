@@ -18,7 +18,8 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     var editButton: UIBarButtonItem!
     
     @IBOutlet weak var groupPicture: UIImageView!
-    @IBOutlet var groupNameLabel: UIView!
+    @IBOutlet weak var groupNameLabel: UILabel!
+    
     @IBOutlet weak var groupPlan: UIButton!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var likersButton: UIButton!
@@ -26,6 +27,9 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     @IBOutlet weak var startPlanButton: UIButton!
     @IBOutlet weak var addVenueTextField: TextField!
     @IBOutlet weak var addVenueButton: UIButton!
+    @IBOutlet weak var membersTableView: UITableView!
+    @IBOutlet weak var suggestedVenuesTableView: UITableView!
+    @IBOutlet weak var venuesTableView: UITableView!
     
     @IBOutlet weak var planViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var suggestedVenuesHeightConstraint: NSLayoutConstraint!
@@ -42,6 +46,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         prepareAddVenueTextField()
         prepareStartPlanButton()
         prepareEndTimeTextField()
+        prepareGroupNameLabel()
     }
 
     func bindViewModel() {
@@ -54,6 +59,10 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         backButton.image = Icon.cm.arrowDownward
         backButton.tintColor = .lightGray
         self.navigationItem.leftBarButtonItem = backButton
+    }
+    
+    func prepareGroupNameLabel() {
+        groupNameLabel.textColor = .lightGray
     }
     
     func prepareEditButton() {

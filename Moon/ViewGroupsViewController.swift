@@ -42,5 +42,4 @@ class ViewGroupsViewController: UIViewController, BindableType {
         create.tintColor = .moonGreen
         
     }
-
 }
