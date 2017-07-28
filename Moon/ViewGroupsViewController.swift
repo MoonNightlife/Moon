@@ -12,6 +12,7 @@ import RxCocoa
 import Action
 import MaterialComponents
 import Material
+import RxDataSources
 
 class ViewGroupsViewController: UIViewController, BindableType {
     
@@ -21,6 +22,7 @@ class ViewGroupsViewController: UIViewController, BindableType {
     @IBOutlet weak var viewButton: UIButton!
     @IBOutlet weak var viewActivity: UIButton!
     @IBOutlet weak var create: MDCFloatingButton!
+    var groupsDataSource = RxTableViewSectionedReloadDataSource<GroupMemberSectionModel>()
  
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,5 +43,16 @@ class ViewGroupsViewController: UIViewController, BindableType {
         create.setImage(Icon.add, for: .normal)
         create.tintColor = .moonGreen
         
+    }
+    
+    func configureDataSource() {
+        groupsDataSource.configureCell = { dataSource, collectionView, indexPath, item in
+            
+            let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "groupCell")
+            
+            cell.textLabel?.text = item.name
+            
+            return cell
+        }
     }
 }

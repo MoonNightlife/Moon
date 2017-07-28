@@ -11,29 +11,73 @@ import RxCocoa
 import RxSwift
 import Action
 
-struct CreateEditGroupViewModel: BackType, NetworkingInjected {
+class CreateEditGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected {
     // MARK: - Global
-    var groupID: String?
-    var members = Variable<[GroupMemberSnapshot]>([])
+    private var groupID: String?
+    private var members = Variable<[GroupMemberSnapshot]>([])
+    private var friends = Variable<[UserSnapshot]>([])
+    private var selectedGroupMemberSnapshot = Variable<GroupMemberSnapshot?>(nil)
+    private var validGroupName: Observable<Bool> {
+        return self.groupName.asObservable().map(ValidationUtility.validGroupName)
+    }
     var bag = DisposeBag()
+    enum GroupError: Error {
+        case noGroupName
+    }
     
     // MARK: - Dependencies
     var sceneCoordinator: SceneCoordinatorType
     
     // MARK: - Actions
-    lazy var onAddUser: Action<String, Void> = {
-        return Action {
-            print("Add user \($0)")
-            return Observable.just()
+    lazy var onAddUser: Action<Void, Void> = { this in
+        return Action {_ in
+            guard let groupMember = this.selectedGroupMemberSnapshot.value else {
+                return Observable.just()
+            }
+            
+            this.members.value += [groupMember]
+            
+            if let groupID = this.groupID {
+                return this.groupAPI.addUserToGroup(groupID: groupID, userID: this.authAPI.SignedInUserID)
+                    .do(onNext: {
+                        this.selectedGroupMemberSnapshot.value = nil
+                    })
+            } else {
+                return Observable.just()
+                    .do(onNext: {
+                        this.selectedGroupMemberSnapshot.value = nil
+                    })
+            }
         }
-    }()
+    }(self)
     
-    lazy var onRemoveUser: Action<String, Void> = {
-        return Action {
-            print("Remove user \($0)")
-            return Observable.just()
+    lazy var onSave: Action<Void, Void> = { this in
+        return Action(enabledIf: this.validGroupName) {_ in
+            guard let groupName = this.groupName.value else {
+                return Observable.error(GroupError.noGroupName)
+            }
+            let memberIDStrings = this.members.value.flatMap({
+                $0.id
+            })
+            return this.groupAPI.createGroup(groupName: groupName, memebers: memberIDStrings)
+                .flatMap({
+                    return this.preformBackTransition()
+                })
         }
-    }()
+    }(self)
+    
+    lazy var onRemoveUser: Action<String, Void> = { this in
+        return Action {userID in
+            this.members.value = this.members.value.filter({
+                $0.id != userID
+            })
+            if let groupID = this.groupID {
+                return this.groupAPI.removeUserFromGroup(groupID: groupID, userID: userID)
+            } else {
+                return Observable.just()
+            }
+        }
+    }(self)
     
     lazy var onLeaveGroup: CocoaAction = {
         return CocoaAction {
@@ -44,8 +88,9 @@ struct CreateEditGroupViewModel: BackType, NetworkingInjected {
     
     // MARK: - Inputs
     var groupImage = PublishSubject<UIImage>()
-    var groupName = PublishSubject<String>()
-    var friendSearchText = PublishSubject<String>()
+    var groupName = Variable<String?>(nil)
+    var friendSearchText = PublishSubject<String?>()
+    var selectedFriend = PublishSubject<SearchSnapshotSectionModel.Item>()
     
     // MARK: - Outputs
     var showBackArrow: Bool {
@@ -60,26 +105,64 @@ struct CreateEditGroupViewModel: BackType, NetworkingInjected {
             return [GroupMemberSectionModel(header: "Members", items: $0)]
         })
     }
+    
+    var friendSearchResults: Observable<[SearchSnapshotSectionModel]> {
+        return Observable.combineLatest(friends.asObservable(), friendSearchText.filterNil())
+            .map { (friends: [UserSnapshot], searchText: String) -> [UserSnapshot] in
+                return friends.filter({ friend -> Bool in
+                    return friend.name?.lowercased().contains(searchText.lowercased()) ?? false
+                })
+            }
+            .map({ (snapshots: [UserSnapshot]) -> [SearchSnapshotSectionModel] in
+                return [SearchSnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users", snapshots: snapshots)]
+            })
+    }
+    
+    var selectedFriendText: Observable<String?> {
+        return selectedGroupMemberSnapshot.asObservable().map({
+            $0?.name
+        })
+    }
 
     init(sceneCoordinator: SceneCoordinatorType, groupID: String?) {
         self.sceneCoordinator = sceneCoordinator
         self.groupID = groupID
         
-        self.groupAPI.getGroupMembers(groupID: "-KptJGIkA3_u5IASSFmn").bind(to: members).addDisposableTo(bag)
+        if let groupID = groupID {
+            self.groupAPI.getGroupMembers(groupID: groupID).bind(to: members).addDisposableTo(bag)
+        } else {
+            
+        }
+        selectedFriend
+            .map { searchResult -> GroupMemberSnapshot? in
+                if case let .searchResult(snapshot) = searchResult {
+                    return GroupMemberSnapshot(snapshot: snapshot)
+                } else {
+                    return nil
+                }
+            }
+            .bind(to: selectedGroupMemberSnapshot)
+            .addDisposableTo(bag)
+        
+        self.userAPI.getFriends(userID: self.authAPI.SignedInUserID).bind(to: friends).addDisposableTo(bag)
     }
     
     func onBack() -> CocoaAction {
         return CocoaAction {
-            if self.groupID == nil {
-                // If we are creating a group then the view was presented modally
-                // and can be dismissed noramlly
-                return self.sceneCoordinator.pop()
-            } else {
-                // If we are editing a scene then it was presenting by a navigation controller.
-                // To only pop off the edit scene and not dismiss the whole nav view controller
-                // we must use this other method, because the navigation controller was presented modally
-                return self.sceneCoordinator.popVCOffNavStack(animated: true)
-            }
+          return self.preformBackTransition()
+        }
+    }
+    
+    func preformBackTransition() -> Observable<Void> {
+        if self.groupID == nil {
+        // If we are creating a group then the view was presented modally
+        // and can be dismissed noramlly
+        return self.sceneCoordinator.pop()
+        } else {
+        // If we are editing a scene then it was presenting by a navigation controller.
+        // To only pop off the edit scene and not dismiss the whole nav view controller
+        // we must use this other method, because the navigation controller was presented modally
+        return self.sceneCoordinator.popVCOffNavStack(animated: true)
         }
     }
     

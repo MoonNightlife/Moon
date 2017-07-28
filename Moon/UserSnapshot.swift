@@ -13,6 +13,10 @@ class UserSnapshot: Snapshot, Mappable {
     var firstName: String?
     var lastName: String?
     
+    override init() {
+
+    }
+    
     required init?(map: Map) {
         
     }

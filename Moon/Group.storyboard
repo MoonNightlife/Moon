@@ -217,7 +217,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lrs-Lz-Sra">
-                                        <rect key="frame" x="266" y="0.0" width="75" height="28"/>
+                                        <rect key="frame" x="266" y="0.0" width="75" height="26"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="75" id="YWS-aI-TaH"/>
                                         </constraints>
@@ -255,7 +255,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="20f-gq-MLu">
-                                        <rect key="frame" x="168" y="0.0" width="90" height="28"/>
+                                        <rect key="frame" x="168" y="0.0" width="90" height="26"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="90" id="RCA-Ok-ler"/>
                                         </constraints>
@@ -453,7 +453,7 @@
                         <outlet property="scrollView" destination="egk-Oi-Hje" id="44y-jY-GIH"/>
                         <outlet property="suggestedMemberViewHeightConstraint" destination="UrM-1T-L9r" id="dNq-Nx-Qbh"/>
                         <outlet property="suggestedMembersView" destination="KnK-ju-1Vu" id="7qI-Y9-bjb"/>
-                        <outlet property="userSearchResultsTablView" destination="AOm-DU-Nwg" id="zRv-ng-UCJ"/>
+                        <outlet property="userSearchResultsTableView" destination="AOm-DU-Nwg" id="8LO-Uv-l3W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hBR-ht-KkX" userLabel="First Responder" sceneMemberID="firstResponder"/>

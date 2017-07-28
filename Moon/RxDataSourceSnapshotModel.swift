@@ -10,15 +10,15 @@ import Foundation
 import RxDataSources
 import Action
 
-enum SnapshotSectionModel {
-    case searchResults(title: String, items: [SnapshotSectionItem])
-    case loadMore(title: String, items: [SnapshotSectionItem])
-    case loading(title: String, items: [SnapshotSectionItem])
+enum SearchSnapshotSectionModel {
+    case searchResults(title: String, items: [SearchSnapshotSectionItem])
+    case loadMore(title: String, items: [SearchSnapshotSectionItem])
+    case loading(title: String, items: [SearchSnapshotSectionItem])
 }
 
-enum SnapshotSectionItem: IdentifiableType, Equatable {
+enum SearchSnapshotSectionItem: IdentifiableType, Equatable {
     
-    static func == (lhs: SnapshotSectionItem, rhs: SnapshotSectionItem) -> Bool {
+    static func == (lhs: SearchSnapshotSectionItem, rhs: SearchSnapshotSectionItem) -> Bool {
         return lhs.identity == rhs.identity
     }
     
@@ -41,8 +41,8 @@ enum SnapshotSectionItem: IdentifiableType, Equatable {
     case loading
 }
 
-extension SnapshotSectionModel: AnimatableSectionModelType {
-    typealias Item = SnapshotSectionItem
+extension SearchSnapshotSectionModel: AnimatableSectionModelType {
+    typealias Item = SearchSnapshotSectionItem
     
     var identity: String {
         switch self {
@@ -56,7 +56,7 @@ extension SnapshotSectionModel: AnimatableSectionModelType {
         }
     }
     
-    var items: [SnapshotSectionItem] {
+    var items: [SearchSnapshotSectionItem] {
         switch self {
         case let .searchResults(_, items):
             return items.map {$0}
@@ -78,7 +78,7 @@ extension SnapshotSectionModel: AnimatableSectionModelType {
         }
     }
     
-    init(original: SnapshotSectionModel, items: [Item]) {
+    init(original: SearchSnapshotSectionModel, items: [Item]) {
         switch original {
         case let .searchResults(t, _):
             self = .searchResults(title: t, items: items)
@@ -90,29 +90,29 @@ extension SnapshotSectionModel: AnimatableSectionModelType {
         
     }
     
-    private static func snapshotsToSnapshotSectionItem(snapshots: [Snapshot]) -> [SnapshotSectionItem] {
+    private static func snapshotsToSnapshotSectionItem(snapshots: [Snapshot]) -> [SearchSnapshotSectionItem] {
         return snapshots.map({
-            return SnapshotSectionItem.searchResult(snapshot: $0)
+            return SearchSnapshotSectionItem.searchResult(snapshot: $0)
         })
     }
     
-    static func loadMoreSectionModel(withAction: CocoaAction) -> SnapshotSectionModel {
-        return SnapshotSectionModel.loadMore(title: "Load More", items: [.loadMore(loadAction: withAction)])
+    static func loadMoreSectionModel(withAction: CocoaAction) -> SearchSnapshotSectionModel {
+        return SearchSnapshotSectionModel.loadMore(title: "Load More", items: [.loadMore(loadAction: withAction)])
     }
     
-    static func loadingSectionModel() -> SnapshotSectionModel {
-        return SnapshotSectionModel.loading(title: "Loading", items: [.loading])
+    static func loadingSectionModel() -> SearchSnapshotSectionModel {
+        return SearchSnapshotSectionModel.loading(title: "Loading", items: [.loading])
     }
     
-    static func snapshotsToSnapshotSectionModel(withTitle: String, snapshots: [Snapshot]) -> SnapshotSectionModel {
+    static func snapshotsToSnapshotSectionModel(withTitle: String, snapshots: [Snapshot]) -> SearchSnapshotSectionModel {
         let items = snapshotsToSnapshotSectionItem(snapshots: snapshots)
-        return SnapshotSectionModel.searchResults(title: withTitle, items: items)
+        return SearchSnapshotSectionModel.searchResults(title: withTitle, items: items)
     }
     
-    static func contactsToSearchResultsSectionModel(title: String, contacts: [(name: String, phoneNumber: String)]) -> SnapshotSectionModel {
+    static func contactsToSearchResultsSectionModel(title: String, contacts: [(name: String, phoneNumber: String)]) -> SearchSnapshotSectionModel {
         let items = contacts.map({
-            return SnapshotSectionItem.contact(name: $0.0, phoneNumber: $0.1)
+            return SearchSnapshotSectionItem.contact(name: $0.0, phoneNumber: $0.1)
         })
-        return SnapshotSectionModel.searchResults(title: title, items: items)
+        return SearchSnapshotSectionModel.searchResults(title: title, items: items)
     }
 }

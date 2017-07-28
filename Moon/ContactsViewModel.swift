@@ -24,7 +24,7 @@ class ContactsViewModel: BackType, ImageNetworkingInjected, NetworkingInjected, 
     // Actions
     var checkContactAccess: Action<Void, Bool>
     
-    lazy var onShowUser: Action<SnapshotSectionModel.Item, Void> = {
+    lazy var onShowUser: Action<SearchSnapshotSectionModel.Item, Void> = {
         return Action { model in
             
             return Observable.just()
@@ -46,7 +46,7 @@ class ContactsViewModel: BackType, ImageNetworkingInjected, NetworkingInjected, 
     }()
     
     // Outputs
-    var usersInContacts: Observable<[SnapshotSectionModel]>!
+    var usersInContacts: Observable<[SearchSnapshotSectionModel]>!
     var showLoadingIndicator = Variable(false)
     
     init(coordinator: SceneCoordinatorType, contactService: ContactUtility = ContactUtility()) {
@@ -87,7 +87,7 @@ class ContactsViewModel: BackType, ImageNetworkingInjected, NetworkingInjected, 
         
         let usersInContactsSectionModel = usersInContactsVariable.asObservable()
             .map({
-                SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users In Contacts", snapshots: $0)
+                SearchSnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users In Contacts", snapshots: $0)
             })
         
         let contactsSectionModel = contacts
@@ -101,7 +101,7 @@ class ContactsViewModel: BackType, ImageNetworkingInjected, NetworkingInjected, 
                 })
             })
             .map({
-                SnapshotSectionModel.contactsToSearchResultsSectionModel(title: "Invite By Phone Number", contacts: $0)
+                SearchSnapshotSectionModel.contactsToSearchResultsSectionModel(title: "Invite By Phone Number", contacts: $0)
             })
         
         usersInContacts = Observable.combineLatest([usersInContactsSectionModel, contactsSectionModel])
@@ -119,14 +119,14 @@ class ContactsViewModel: BackType, ImageNetworkingInjected, NetworkingInjected, 
         })
     }
 
-    static func snapshotsToSnapshotSectionItem(snapshots: [Snapshot]) -> [SnapshotSectionItem] {
+    static func snapshotsToSnapshotSectionItem(snapshots: [Snapshot]) -> [SearchSnapshotSectionItem] {
         return snapshots.map({
-            return SnapshotSectionItem.searchResult(snapshot: $0)
+            return SearchSnapshotSectionItem.searchResult(snapshot: $0)
         })
     }
     
-    static func snapshotsToSnapshotSectionModel(sectionItems: [SnapshotSectionItem]) -> SnapshotSectionModel {
-        return SnapshotSectionModel.searchResults(title: "Results", items: sectionItems)
+    static func snapshotsToSnapshotSectionModel(sectionItems: [SearchSnapshotSectionItem]) -> SearchSnapshotSectionModel {
+        return SearchSnapshotSectionModel.searchResults(title: "Results", items: sectionItems)
     }
     
     func onAddFriend(userID: String) -> CocoaAction {

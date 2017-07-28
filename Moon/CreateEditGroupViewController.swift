@@ -26,6 +26,7 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
     var keyboardHeight: CGFloat!
     var addMemberTextFieldIsActive = false
     var membersDataSource = RxTableViewSectionedReloadDataSource<GroupMemberSectionModel>()
+    var friendSearchResultsDataSource = RxTableViewSectionedReloadDataSource<SearchSnapshotSectionModel>()
     var bag = DisposeBag()
 
     @IBOutlet weak var suggestedMembersView: UIView!
@@ -36,7 +37,7 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var membersTableView: UITableView!
-    @IBOutlet weak var userSearchResultsTablView: UITableView!
+    @IBOutlet weak var userSearchResultsTableView: UITableView!
     
     @IBOutlet weak var suggestedMemberViewHeightConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
@@ -83,9 +84,36 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
     
     func bindViewModel() {
         viewModel.displayUsers.bind(to: membersTableView.rx.items(dataSource: membersDataSource)).addDisposableTo(bag)
+        viewModel.friendSearchResults.bind(to: userSearchResultsTableView.rx.items(dataSource: friendSearchResultsDataSource)).addDisposableTo(bag)
         
+        membersTableView.rx.itemDeleted
+            .map({ [unowned self] indexPath -> GroupMemberSnapshot? in
+                try? self.membersTableView.rx.model(at: indexPath)
+            })
+            .filterNil()
+            .map { $0.id }
+            .filterNil()
+            .bind(to: viewModel.onRemoveUser.inputs)
+            .addDisposableTo(bag)
+        
+        userSearchResultsTableView.rx.modelSelected(SearchSnapshotSectionModel.Item.self).bind(to: viewModel.selectedFriend).addDisposableTo(bag)
+        
+        saveButton.rx.action = viewModel.onSave
+        viewModel.onSave.errors
+            .subscribe(onNext: {
+                if case let .underlyingError(error) = $0 {
+                    print(error)
+                }
+            })
+            .addDisposableTo(bag)
+        
+        addButton.rx.action = viewModel.onAddUser
         backButton.rx.action = viewModel.onBack()
         backButton.image = viewModel.showBackArrow ? Icon.cm.arrowBack : Icon.cm.arrowDownward
+        
+        viewModel.selectedFriendText.bind(to: addMemberTextField.rx.text).addDisposableTo(bag)
+        addMemberTextField.rx.textInput.text.bind(to: viewModel.friendSearchText).addDisposableTo(bag)
+        groupNameTextField.rx.textInput.text.bind(to: viewModel.groupName).addDisposableTo(bag)
         
     }
     
@@ -264,6 +292,10 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
     }
     
     fileprivate func configureDataSource() {
+        
+        membersTableView.rx.setDelegate(self).addDisposableTo(bag)
+        membersTableView.setEditing(true, animated: false)
+        
         membersDataSource.configureCell = {
             [weak self] dataSource, collectionView, indexPath, item in
             
@@ -273,6 +305,30 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
             
             return cell
         }
+        
+        membersDataSource.canEditRowAtIndexPath = { _, _ in
+            return true
+        }
+        
+        friendSearchResultsDataSource.configureCell = {
+            [weak self] dataSource, collectionView, indexPath, item in
+            
+            let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "friendResultCell")
+            
+            switch item {
+            case let .searchResult(snapshot):
+                cell.textLabel?.text = snapshot.name
+                return cell
+            default:
+                return cell
+            }
+        }
     }
     
+}
+
+extension CreateEditGroupViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return UITableViewCellEditingStyle.delete
+    }
 }

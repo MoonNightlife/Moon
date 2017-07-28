@@ -12,6 +12,18 @@ import ObjectMapper
 class GroupMemberSnapshot: UserSnapshot {
     var isGoing: Bool?
     
+    init(snapshot: Snapshot) {
+        super.init()
+        self.name = snapshot.name
+        self.id = snapshot.id
+        self.username = snapshot.username
+        self.isGoing = false
+    }
+    
+    required init?(map: Map) {
+        super.init(map: map)
+    }
+    
     override func mapping(map: Map) {
         isGoing <- map["isGoing"]
         name <- map["groupName"]

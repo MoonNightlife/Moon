@@ -21,7 +21,7 @@ struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected, Stor
     private let sceneCoordinator: SceneCoordinatorType
     
     // Actions
-    lazy var onShowResult: Action<SnapshotSectionModel.Item, Void> = { this in
+    lazy var onShowResult: Action<SearchSnapshotSectionModel.Item, Void> = { this in
         return Action(workFactory: { snap in
             return this.performTransition(snapshotSection: snap)
         })
@@ -40,11 +40,11 @@ struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected, Stor
     // Outputs
     var showLoadingIndicator = Variable<Bool>(false)
     
-    var searchResults: Observable<[SnapshotSectionModel]> {
+    var searchResults: Observable<[SearchSnapshotSectionModel]> {
         return Observable.combineLatest(searchText, selectedSearchType)
-            .flatMapLatest({ (searchText, type) -> Observable<[SnapshotSectionModel]> in
+            .flatMapLatest({ (searchText, type) -> Observable<[SearchSnapshotSectionModel]> in
                 guard !searchText.isEmpty else {
-                    return Observable.just([SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users", snapshots: []), SnapshotSectionModel.loadingSectionModel()])
+                    return Observable.just([SearchSnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users", snapshots: []), SearchSnapshotSectionModel.loadingSectionModel()])
                 }
                 
                 switch type {
@@ -56,7 +56,7 @@ struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected, Stor
                             self.showLoadingIndicator.value = false
                         })
                         .map({
-                            return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users", snapshots: $0), SnapshotSectionModel.loadingSectionModel()]
+                            return [SearchSnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Users", snapshots: $0), SearchSnapshotSectionModel.loadingSectionModel()]
                         })
                 case .bars:
                     return self.barAPI.searchForBar(searchText: searchText)
@@ -66,7 +66,7 @@ struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected, Stor
                             self.showLoadingIndicator.value = false
                         })
                         .map({
-                            return [SnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Bars", snapshots: $0), SnapshotSectionModel.loadingSectionModel()]
+                            return [SearchSnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Bars", snapshots: $0), SearchSnapshotSectionModel.loadingSectionModel()]
                         })
                     
                 }
@@ -81,7 +81,7 @@ struct SearchResultsViewModel: ImageNetworkingInjected, NetworkingInjected, Stor
             .distinctUntilChanged()
     }
     
-    func performTransition(snapshotSection: SnapshotSectionModel.Item) -> Observable<Void> {
+    func performTransition(snapshotSection: SearchSnapshotSectionModel.Item) -> Observable<Void> {
         
         guard case let .searchResult(snap) = snapshotSection, let id = snap.id else {
             return Observable.empty()

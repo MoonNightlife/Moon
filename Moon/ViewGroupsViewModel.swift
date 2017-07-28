@@ -8,8 +8,9 @@
 
 import Foundation
 import Action
+import RxSwift
 
-struct ViewGroupsViewModel {
+struct ViewGroupsViewModel: NetworkingInjected {
     // MARK: - Global
     
     // MARK: - Dependencies
@@ -20,6 +21,10 @@ struct ViewGroupsViewModel {
     // MARK: - Inputs
     
     // MARK: - Outputs
+//    var groupsToDisplay: Observable<[GroupMemberSnapshot]> {
+//        //TODO: Add api call to get groups for user
+//        return Observable.just()
+//    }
     
     init(sceneCoordinator: SceneCoordinatorType) {
         self.sceneCoordinator = sceneCoordinator

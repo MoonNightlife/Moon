@@ -10,6 +10,7 @@ import Foundation
 
 protocol ValidationUtilityType {
     static func validName(firstName: String?, lastName: String?) -> Bool
+    static func validGroupName(name: String?) -> Bool
     static func validUsername(username: String?) -> Bool
     static func validEmail(email: String?) -> Bool
     static func validBirthday(birthday: Date?) -> Bool
@@ -79,6 +80,17 @@ class ValidationUtility: ValidationUtilityType {
         let hasNonWhiteChars = stringHasNonWhiteChars(string: firstName) && stringHasNonWhiteChars(string: lastName)
 
         return fnIsValidLength && lnIsValidLength && !fnContainsSpecialCharsAndNums && !lnContainsSpecialCharsAndNums && hasNonWhiteChars
+    }
+    static func validGroupName(name: String?) -> Bool {
+        guard let name = name else {
+            return false
+        }
+        
+        let validLength = name.characters.count < ValidationConstants.maxNameCount && name.characters.count > ValidationConstants.minNameCount
+        let hasNonWhiteChars = stringHasNonWhiteChars(string: name)
+        let hasSpecialCharsAndNums = specialCharactersAndNumbersIn(string: name)
+        
+        return validLength && !hasSpecialCharsAndNums && hasNonWhiteChars
     }
 }
 

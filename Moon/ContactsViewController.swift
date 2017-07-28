@@ -21,7 +21,7 @@ class ContactsViewController: UIViewController, BindableType, MFMessageComposeVi
     var navBackButton: UIBarButtonItem!
     @IBOutlet var contactsTableView: UITableView!
     
-    let dataSource = RxTableViewSectionedAnimatedDataSource<SnapshotSectionModel>()
+    let dataSource = RxTableViewSectionedAnimatedDataSource<SearchSnapshotSectionModel>()
     private let bag = DisposeBag()
     
     override func viewDidLoad() {
@@ -39,7 +39,7 @@ class ContactsViewController: UIViewController, BindableType, MFMessageComposeVi
     
     func bindViewModel() {
         
-        contactsTableView.rx.modelSelected(SnapshotSectionModel.Item.self).bind(to: viewModel.onShowUser.inputs).addDisposableTo(bag)
+        contactsTableView.rx.modelSelected(SearchSnapshotSectionModel.Item.self).bind(to: viewModel.onShowUser.inputs).addDisposableTo(bag)
         
         viewModel.showLoadingIndicator.asObservable()
             .subscribe(onNext: { [weak self] isLoading in

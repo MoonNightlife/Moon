@@ -13,8 +13,10 @@ import RxDataSources
 class Snapshot: IdentifiableType, Equatable {
     var id: String?
     var name: String?
-    var pic: String?
     var username: String?
+    
+    init() {
+    }
     
     var identity: String {
         return id!
