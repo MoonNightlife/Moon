@@ -14,11 +14,19 @@ import Action
 class CreateEditGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected {
     // MARK: - Global
     private var groupID: String?
+    private let group = Variable<Group?>(nil)
     private var members = Variable<[GroupMemberSnapshot]>([])
     private var friends = Variable<[UserSnapshot]>([])
     private var selectedGroupMemberSnapshot = Variable<GroupMemberSnapshot?>(nil)
     private var validGroupName: Observable<Bool> {
-        return self.groupName.asObservable().map(ValidationUtility.validGroupName)
+        return self.groupName.asObservable()
+            .map({
+                if self.groupID == nil {
+                    return ValidationUtility.validGroupName(name: $0)
+                } else {
+                    return true
+                }
+            })
     }
     var bag = DisposeBag()
     enum GroupError: Error {
@@ -37,8 +45,8 @@ class CreateEditGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInje
             
             this.members.value += [groupMember]
             
-            if let groupID = this.groupID {
-                return this.groupAPI.addUserToGroup(groupID: groupID, userID: this.authAPI.SignedInUserID)
+            if let groupID = this.groupID, let userID = groupMember.id {
+                return this.groupAPI.addUserToGroup(groupID: groupID, userID: userID)
                     .do(onNext: {
                         this.selectedGroupMemberSnapshot.value = nil
                     })
@@ -56,9 +64,10 @@ class CreateEditGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInje
             guard let groupName = this.groupName.value else {
                 return Observable.error(GroupError.noGroupName)
             }
-            let memberIDStrings = this.members.value.flatMap({
+            var memberIDStrings = this.members.value.flatMap({
                 $0.id
             })
+            memberIDStrings.append(this.authAPI.SignedInUserID)
             return this.groupAPI.createGroup(groupName: groupName, memebers: memberIDStrings)
                 .flatMap({
                     return this.preformBackTransition()
@@ -67,7 +76,7 @@ class CreateEditGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInje
     }(self)
     
     lazy var onRemoveUser: Action<String, Void> = { this in
-        return Action {userID in
+        return Action { userID in
             this.members.value = this.members.value.filter({
                 $0.id != userID
             })
@@ -100,6 +109,14 @@ class CreateEditGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInje
         return groupID != nil
     }
     
+    var bottomButtonStyle: CreateEditGroupBottomButtonType {
+        if groupID == nil {
+            return .save
+        } else {
+            return .leave
+        }
+    }
+    
     var displayUsers: Observable<[GroupMemberSectionModel]> {
         return members.asObservable().map({
             return [GroupMemberSectionModel(header: "Members", items: $0)]
@@ -119,9 +136,17 @@ class CreateEditGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInje
     }
     
     var selectedFriendText: Observable<String?> {
-        return selectedGroupMemberSnapshot.asObservable().map({
-            $0?.name
-        })
+        return selectedGroupMemberSnapshot.asObservable()
+            .map({
+                $0?.name
+            })
+    }
+    
+    var groupNameText: Observable<String?> {
+        return group.asObservable().filterNil()
+            .map({
+                $0.name
+            })
     }
 
     init(sceneCoordinator: SceneCoordinatorType, groupID: String?) {
@@ -130,6 +155,7 @@ class CreateEditGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInje
         
         if let groupID = groupID {
             self.groupAPI.getGroupMembers(groupID: groupID).bind(to: members).addDisposableTo(bag)
+            self.groupAPI.getGroup(groupID: groupID).bind(to: group).addDisposableTo(bag)
         } else {
             
         }

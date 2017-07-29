@@ -217,7 +217,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lrs-Lz-Sra">
-                                        <rect key="frame" x="266" y="0.0" width="75" height="26"/>
+                                        <rect key="frame" x="266" y="0.0" width="75" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="75" id="YWS-aI-TaH"/>
                                         </constraints>
@@ -255,7 +255,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="20f-gq-MLu">
-                                        <rect key="frame" x="168" y="0.0" width="90" height="26"/>
+                                        <rect key="frame" x="168" y="0.0" width="90" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="90" id="RCA-Ok-ler"/>
                                         </constraints>
@@ -542,7 +542,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="qbo-NX-oXQ">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GroupMemeberCollectionViewCell" id="qbo-NX-oXQ">
                                         <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">

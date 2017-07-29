@@ -26,7 +26,7 @@ struct Plan: Mappable {
 struct PlanOption: Mappable {
     var barID: String?
     var barName: String?
-    var voteCount: String?
+    var voteCount: Int?
     
     init?(map: Map) {
         

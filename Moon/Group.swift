@@ -21,7 +21,7 @@ struct Group: Mappable {
     
     mutating func mapping(map: Map) {
         id <- map["id"]
-        name <- map["name"]
+        name <- map["groupName"]
         plan <- map["plan"]
         activityInfo <- map["activityInfo"]
     }

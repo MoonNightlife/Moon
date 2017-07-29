@@ -15,6 +15,8 @@ import Alamofire
 import AlamofireObjectMapper
 
 struct FirebaseGroupAPI: GroupAPIType {
+
+
     
     struct GroupFunction {
         private static let groupBaseURL = "https://us-central1-moon-4409e.cloudfunctions.net/"
@@ -25,8 +27,13 @@ struct FirebaseGroupAPI: GroupAPIType {
         static let addUserToGroup = groupBaseURL + "addUserToGroup"
         static let getGroup = groupBaseURL + "getGroup"
         static let getGroupMembers = groupBaseURL + "getGroupMembers"
+        //TODO: Check functions name once implemented
+        static let getGroupMembersWithStatus = groupBaseURL + "getGroupMemebersWithStatus"
         static let startPlan = groupBaseURL + "startPlan"
         static let addVenueToPlan = groupBaseURL + "addVenueToPlan"
+        //TODO: Check functions name once implemented
+        static let placeVote = groupBaseURL + "placeVote"
+        static let checkGroupStatus = groupBaseURL + "checkGroupStatus"
     }
     
     func createGroup(groupName: String, memebers: [String]) -> Observable<Void> {
@@ -170,6 +177,30 @@ struct FirebaseGroupAPI: GroupAPIType {
         })
     }
     
+    func getGroupMembersWithStatus(groupID: String) -> Observable<[GroupMemberSnapshot]> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": groupID
+            ]
+            let request = Alamofire.request(GroupFunction.getGroupMembersWithStatus, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseArray(completionHandler: { (response: DataResponse<[GroupMemberSnapshot]>) in
+                    switch response.result {
+                    case .success(let groupSnapshot):
+                        observer.onNext(groupSnapshot)
+                        observer.onCompleted()
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+
+    }
+    
     func startPlan(groupID: String, endTime: Double) -> Observable<Void> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
@@ -207,6 +238,59 @@ struct FirebaseGroupAPI: GroupAPIType {
                     } else {
                         observer.onNext()
                         observer.onCompleted()
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    
+    func placeVote(userID: String, groupID: String, barID: String) -> Observable<Void> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": groupID,
+                "barId": barID,
+                "userId": userID
+            ]
+            let request = Alamofire.request(GroupFunction.placeVote, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .response(completionHandler: {
+                    if let e = $0.error {
+                        observer.onError(e)
+                    } else {
+                        observer.onNext()
+                        observer.onCompleted()
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    
+    func checkGroupStatusEndpoint(userID: String, groupID: String) -> Observable<Bool> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": userID,
+                "groupId": groupID
+            ]
+            let request = Alamofire.request(GroupFunction.checkGroupStatus, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseJSON(completionHandler: { (response) in
+                    switch response.result {
+                    case .success(let value):
+                        if let isAttending = value as? Bool {
+                            observer.onNext(isAttending)
+                            observer.onCompleted()
+                            
+                        } else {
+                            observer.onError(APIError.jsonCastingFailure)
+                        }
+                    case .failure(let error):
+                        observer.onError(error)
                     }
                 })
             

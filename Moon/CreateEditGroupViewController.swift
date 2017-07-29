@@ -48,7 +48,6 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
         prepareAddMemberTextField()
         prepareGroupPicture()
         prepareAddButton()
-        prepareSaveButton()
         prepareScrollView()
         prepareSuggestedMemberView()
         configureDataSource()
@@ -109,12 +108,31 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
         
         addButton.rx.action = viewModel.onAddUser
         backButton.rx.action = viewModel.onBack()
+        
         backButton.image = viewModel.showBackArrow ? Icon.cm.arrowBack : Icon.cm.arrowDownward
+        changeBottonButton(type: viewModel.bottomButtonStyle)
         
         viewModel.selectedFriendText.bind(to: addMemberTextField.rx.text).addDisposableTo(bag)
+        viewModel.groupNameText.bind(to: groupNameTextField.rx.text).addDisposableTo(bag)
         addMemberTextField.rx.textInput.text.bind(to: viewModel.friendSearchText).addDisposableTo(bag)
         groupNameTextField.rx.textInput.text.bind(to: viewModel.groupName).addDisposableTo(bag)
         
+    }
+    
+    private func changeBottonButton(type: CreateEditGroupBottomButtonType) {
+        
+        saveButton.layer.cornerRadius = 5
+        
+        switch type {
+        case .leave:
+            saveButton.backgroundColor = .red
+            saveButton.setTitle("Leave", for: .normal)
+            saveButton.tintColor = .white
+        case .save:
+            saveButton.backgroundColor = .moonGreen
+            saveButton.setTitle("Create", for: .normal)
+            saveButton.tintColor = .white
+        }
     }
     
     func prepareNavigationBackButton() {
@@ -162,12 +180,6 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
         addButton.backgroundColor = .moonGreen
         addButton.tintColor = .white
         addButton.layer.cornerRadius = 5
-    }
-    
-    func prepareSaveButton() {
-        saveButton.backgroundColor = .moonGreen
-        saveButton.tintColor = .white
-        saveButton.layer.cornerRadius = 5
     }
     
     func prepareScrollView() {

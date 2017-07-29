@@ -34,6 +34,7 @@ struct FirebaseUserAPI: UserAPIType {
         static let likeSpecial = userBaseURL + "likeSpecial"
         static let likeActivity = userBaseURL + "likeActivity"
         static let likeEvent = userBaseURL + "likeEvent"
+        static let likeGroupActivity = userBaseURL + "likeGroupActivity"
         
         static let getActivityLikers = userBaseURL + "getActivityLikers"
         static let getActivityFeed = userBaseURL + "getActivityFeed"
@@ -44,6 +45,7 @@ struct FirebaseUserAPI: UserAPIType {
         static let getUsersByPhoneNumbers = userBaseURL + "getUsersByPhoneNumber"
         
         static let goToBar = userBaseURL + "goToBar"
+        static let goWithGroup = userBaseURL + "goWithGroup"
         
         static let hasLikedSpecial = userBaseURL + "hasLikedSpecial"
         static let hasLikedEvent = userBaseURL + "hasLikedEvent"
@@ -423,6 +425,29 @@ extension FirebaseUserAPI {
             }
         })
     }
+    func goWithGroup(userID: String, groupID: String, timeStamp: Double) -> Observable<Void> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": userID,
+                "groupId": groupID,
+                "timeStamp": timeStamp
+            ]
+            let request = Alamofire.request(UserFunction.goWithGroup, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .response(completionHandler: {
+                    if let e = $0.error {
+                        observer.onError(e)
+                    } else {
+                        observer.onNext()
+                        observer.onCompleted()
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
     func likeActivity(userID: String, activityUserID: String) -> Observable<Void> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
@@ -489,7 +514,28 @@ extension FirebaseUserAPI {
             }
         })
     }
-    
+    func likeGroupActivity(userID: String, groupID: String) -> Observable<Void> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "userId": userID,
+                "id": groupID
+            ]
+            let request = Alamofire.request(UserFunction.likeGroupActivity, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .response(completionHandler: {
+                    if let e = $0.error {
+                        observer.onError(e)
+                    } else {
+                        observer.onNext()
+                        observer.onCompleted()
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
     func getSuggestedFriends(userID: String) -> Observable<[UserSnapshot]> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [

@@ -9,13 +9,21 @@
 import UIKit
 import Material
 import Action
+import RxSwift
+import RxCocoa
+import RxDataSources
 
 class ManageGroupViewController: UIViewController, BindableType, UITextFieldDelegate {
 
     // MARK: - Global
     var viewModel: ManageGroupViewModel!
+    let bag = DisposeBag()
     var backButton: UIBarButtonItem!
     var editButton: UIBarButtonItem!
+    
+    let membersDataSource = RxTableViewSectionedReloadDataSource<GroupMemberSectionModel>()
+    let suggestedVenuesDataSource = RxTableViewSectionedAnimatedDataSource<SearchSnapshotSectionModel>()
+    let venuesDataSource = RxTableViewSectionedReloadDataSource<PlanOptionSectionModel>()
     
     @IBOutlet weak var groupPicture: UIImageView!
     @IBOutlet weak var groupNameLabel: UILabel!
@@ -27,6 +35,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     @IBOutlet weak var startPlanButton: UIButton!
     @IBOutlet weak var addVenueTextField: TextField!
     @IBOutlet weak var addVenueButton: UIButton!
+    
     @IBOutlet weak var membersTableView: UITableView!
     @IBOutlet weak var suggestedVenuesTableView: UITableView!
     @IBOutlet weak var venuesTableView: UITableView!
@@ -47,11 +56,79 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         prepareStartPlanButton()
         prepareEndTimeTextField()
         prepareGroupNameLabel()
+        configureDataSource()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.reloadMembers.onNext()
     }
 
     func bindViewModel() {
         backButton.rx.action = viewModel.onBack()
         editButton.rx.action = viewModel.onEdit()
+        likeButton.rx.action = viewModel.onLikePlan()
+        likersButton.rx.action = viewModel.onViewLikers()
+        startPlanButton.rx.action = viewModel.onStartPlan()
+        addVenueButton.rx.action = viewModel.onAddVenue()
+        
+        viewModel.groupImage.bind(to: groupPicture.rx.image).addDisposableTo(bag)
+        viewModel.groupName.bind(to: groupNameLabel.rx.text).addDisposableTo(bag)
+        viewModel.endTimeString.bind(to: planEndTime.rx.text).addDisposableTo(bag)
+        viewModel.currentPlanBarName.bind(to: groupPlan.rx.title()).addDisposableTo(bag)
+        viewModel.selectedVenueText.bind(to: addVenueTextField.rx.text).addDisposableTo(bag)
+        viewModel.planInProcess
+            .subscribe(onNext: { [weak self] inProgress in
+                if inProgress {
+                    self?.showPlan()
+                }
+            })
+            .addDisposableTo(bag)
+        
+        viewModel.displayMembers.bind(to: membersTableView.rx.items(dataSource: membersDataSource)).addDisposableTo(bag)
+        viewModel.displayOptions.bind(to: venuesTableView.rx.items(dataSource: venuesDataSource)).addDisposableTo(bag)
+        viewModel.venueSearchResults.bind(to: suggestedVenuesTableView.rx.items(dataSource: suggestedVenuesDataSource)).addDisposableTo(bag)
+        
+        suggestedVenuesTableView.rx.modelSelected(SearchSnapshotSectionModel.Item.self).bind(to: viewModel.selectedVenue).addDisposableTo(bag)
+        addVenueTextField.rx.textInput.text.orEmpty.bind(to: viewModel.venueSearchText).addDisposableTo(bag)
+    }
+    
+    func configureDataSource() {
+        membersDataSource.configureCell = { [weak self] dataSource, collectionView, indexPath, item in
+            let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "memberCell")
+            
+            cell.textLabel?.text = item.name
+            
+            return cell
+        }
+        
+        venuesDataSource.configureCell = { [weak self] dataSource, collectionView, indexPath, item in
+            let cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "venueCell")
+            
+            if let barID = item.barID, let strongSelf = self {
+                var voteButton = IconButton(image: Icon.cm.star, tintColor: .red)
+                voteButton.rx.action = strongSelf.viewModel.onVote(barID: barID)
+                cell.accessoryView = voteButton
+                voteButton.sizeToFit()
+            }
+            
+            cell.textLabel?.text = item.barName
+            cell.detailTextLabel?.text = "\(item.voteCount ?? 0)"
+            
+            return cell
+        }
+        
+        suggestedVenuesDataSource.configureCell = { [weak self] dataSource, collectionView, indexPath, item in
+            let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "venueResultCell")
+            
+            switch item {
+            case let .searchResult(snapshot):
+                cell.textLabel?.text = snapshot.name
+                return cell
+            default:
+                return cell
+            }
+        }
     }
     
     func prepareNavigationBackButton() {
@@ -187,6 +264,10 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     }
     
     @IBAction func startPlabButtonPressed(_ sender: Any) {
+        showPlan()
+    }
+    
+    private func showPlan() {
         startPlanButton.isHidden = true
         planEndTime.isHidden = true
         addVenueButton.isHidden = false

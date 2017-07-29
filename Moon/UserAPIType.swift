@@ -41,9 +41,11 @@ protocol UserAPIType {
     
     // Actions
     func goToBar(userID: String, barID: String, timeStamp: Double) -> Observable<Void>
+    func goWithGroup(userID: String, groupID: String, timeStamp: Double) -> Observable<Void>
     func likeActivity(userID: String, activityUserID: String) -> Observable<Void>
     func likeSpecial(userID: String, specialID: String) -> Observable<Void>
     func likeEvent(userID: String, eventID: String) -> Observable<Void>
+    func likeGroupActivity(userID: String, groupID: String) -> Observable<Void>
     func getSuggestedFriends(userID: String) -> Observable<[UserSnapshot]>
     
     // Liked Info
