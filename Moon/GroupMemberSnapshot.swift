@@ -26,7 +26,6 @@ class GroupMemberSnapshot: UserSnapshot {
     
     override func mapping(map: Map) {
         isGoing <- map["isGoing"]
-        name <- map["groupName"]
         id <- map["id"]
         firstName <- map["firstName"]
         lastName <- map["lastName"]

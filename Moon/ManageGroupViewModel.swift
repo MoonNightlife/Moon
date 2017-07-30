@@ -17,7 +17,7 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     private let bag = DisposeBag()
     private var dateFormatter: DateFormatter! {
         let df = DateFormatter()
-        df.dateStyle = .short
+        df.timeStyle = .short
         return df
     }
     private var members = Variable<[GroupMemberSnapshot]>([])
@@ -28,6 +28,19 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     var sceneCoordinator: SceneCoordinatorType
     
     // MARK: - Actions
+    lazy var onViewProfile: Action<String, Void> = { this in
+        return Action {
+            let vm = ProfileViewModel(coordinator: this.sceneCoordinator, userID: $0)
+            return self.sceneCoordinator.transition(to: Scene.User.profile(vm), type: .popover)
+        }
+    }(self)
+    
+    lazy var onViewVenue: Action<String, Void> = { this in
+        return Action {
+            let vm = BarProfileViewModel(coordinator: this.sceneCoordinator, barID: $0)
+            return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
+        }
+    }(self)
     
     // MARK: - Inputs
     var endTime = Variable<Date?>(nil)
@@ -50,7 +63,7 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     var planInProcess: Observable<Bool> {
         return group.asObservable()
             .map({
-                $0?.plan == nil ? false : true
+                return $0?.plan?.closingTime == nil ? false : true
             })
     }
     
@@ -113,11 +126,13 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
         self.groupAPI.getGroup(groupID: groupID).bind(to: group).addDisposableTo(bag)
         Observable.combineLatest(group.asObservable(), reloadMembers)
             .flatMap({ [unowned self] group, _ -> Observable<[GroupMemberSnapshot]> in
-                if group?.activityInfo == nil {
-                    return self.groupAPI.getGroupMembers(groupID: self.groupID)
-                } else {
-                    return self.groupAPI.getGroupMembersWithStatus(groupID: self.groupID)
-                }
+                //TODO: uncommit once gabo fixes endpoint
+//                if group?.activityInfo == nil {
+//                    return self.groupAPI.getGroupMembers(groupID: self.groupID)
+//                } else {
+//                    return self.groupAPI.getGroupMembersWithStatus(groupID: self.groupID)
+//                }
+                return self.groupAPI.getGroupMembers(groupID: self.groupID)
             })
             .bind(to: members)
             .addDisposableTo(bag)
@@ -159,25 +174,15 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     
     func onAddVenue() -> CocoaAction {
         return CocoaAction { [unowned self] in
-            guard let selectedBarID = self.selectedVenueSnapshot.value?.id else {
+            guard let snapshot = self.selectedVenueSnapshot.value, let selectedBarID = snapshot.id else {
                 return Observable.just()
             }
             
             return self.groupAPI.addVenueToPlan(groupID: self.groupID, barID: selectedBarID)
-        }
-    }
-    
-    func onViewProfile(userID: String) -> CocoaAction {
-        return CocoaAction {
-            //TODO: View profile
-            return Observable.just()
-        }
-    }
-    
-    func onViewVenue(barID: String) -> CocoaAction {
-        return CocoaAction {
-            //TODO: View venue
-            return Observable.just()
+                .do(onNext: {
+                    let newOption = PlanOption(snapshot: snapshot)
+                    self.group.value?.plan?.options?.append(newOption)
+                })
         }
     }
     
@@ -190,6 +195,16 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     func onLikePlan() -> CocoaAction {
         return CocoaAction { [unowned self] in
             return self.userAPI.likeGroupActivity(userID: self.authAPI.SignedInUserID, groupID: self.groupID)
+        }
+    }
+    
+    func onViewPlanBar() -> CocoaAction {
+        return CocoaAction { [unowned self] in
+            guard let barID = self.group.value?.activityInfo?.barID else {
+                return Observable.just()
+            }
+            let vm = BarProfileViewModel(coordinator: self.sceneCoordinator, barID: barID)
+            return self.sceneCoordinator.transition(to: Scene.Bar.profile(vm), type: .modal)
         }
     }
     

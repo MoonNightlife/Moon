@@ -10,20 +10,34 @@ import Foundation
 import Action
 import RxSwift
 
-struct ViewGroupsViewModel: NetworkingInjected {
+class ViewGroupsViewModel: NetworkingInjected, AuthNetworkingInjected {
     // MARK: - Global
     
     // MARK: - Dependencies
     var sceneCoordinator: SceneCoordinatorType
     
     // MARK: - Actions
+    lazy var getGroups: Action<Void, [GroupSnapshot]> = { this in
+        return Action {_ in 
+            return this.groupAPI.getGroupsForUser(userID: this.authAPI.SignedInUserID)
+        }
+    }(self)
+    
+    lazy var onManageGroup: Action<String, Void> = {
+        return Action { [unowned self] groupID in
+            let vm = ManageGroupViewModel(sceneCoordinator: self.sceneCoordinator, groupID: groupID)
+            return self.sceneCoordinator.transition(to: Scene.Group.manageGroup(vm), type: .modal)
+        }
+    }()
     
     // MARK: - Inputs
     
     // MARK: - Outputs
     var groupsToDisplay: Observable<[SnapshotSectionModel]> {
-        //TODO: Add api call to get groups for user
-        return Observable.just([SnapshotSectionModel(header: "Groups", items: [])])
+        return getGroups.elements
+            .map {
+                [SnapshotSectionModel(header: "Groups", items: $0)]
+            }
     }
     
     init(sceneCoordinator: SceneCoordinatorType) {
@@ -31,25 +45,17 @@ struct ViewGroupsViewModel: NetworkingInjected {
     }
     
     func onCreate() -> CocoaAction {
-        return CocoaAction {
+        return CocoaAction { [unowned self] in
             let vm = CreateEditGroupViewModel(sceneCoordinator: self.sceneCoordinator, groupID: nil)
             return self.sceneCoordinator.transition(to: Scene.Group.createGroup(vm), type: .modal)
         }
     }
     
     func onViewActivity() -> CocoaAction {
-        return CocoaAction {
+        return CocoaAction { [unowned self] in
             //TODO: remove hardcoded group number
             let vm = GroupActivityViewModel(sceneCoordinator: self.sceneCoordinator, groupID: "-KqCrziDBFbqWCkyM9eC")
             return self.sceneCoordinator.transition(to: Scene.Group.groupActivity(vm), type: .modal)
-        }
-    }
-    
-    func onManageGroup() -> CocoaAction {
-        return CocoaAction {
-            //TODO: remove hardcoded group number
-            let vm = ManageGroupViewModel(sceneCoordinator: self.sceneCoordinator, groupID: "-KqCrziDBFbqWCkyM9eC")
-            return self.sceneCoordinator.transition(to: Scene.Group.manageGroup(vm), type: .modal)
         }
     }
 }

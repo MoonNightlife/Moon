@@ -59,7 +59,7 @@ class CreateEditGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInje
         }
     }(self)
     
-    lazy var onSave: Action<Void, Void> = { this in
+    lazy var onSave: CocoaAction = { this in
         return Action(enabledIf: this.validGroupName) {_ in
             guard let groupName = this.groupName.value else {
                 return Observable.error(GroupError.noGroupName)
@@ -171,6 +171,17 @@ class CreateEditGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInje
             .addDisposableTo(bag)
         
         self.userAPI.getFriends(userID: self.authAPI.SignedInUserID).bind(to: friends).addDisposableTo(bag)
+    }
+    
+    func getActionForBottomButton() -> CocoaAction {
+        if let groupID = groupID {
+            return CocoaAction {
+                return self.groupAPI.removeUserFromGroup(groupID: groupID, userID: self.authAPI.SignedInUserID)
+            }
+        } else {
+            return self.onSave
+        }
+        
     }
     
     func onBack() -> CocoaAction {

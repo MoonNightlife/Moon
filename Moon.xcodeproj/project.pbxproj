@@ -171,6 +171,7 @@
 		F07C06261EF19D7400B78865 /* RxErrorHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C06251EF19D7400B78865 /* RxErrorHandlers.swift */; };
 		F07F694B1EFAED22000F854D /* DeepLinking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07F694A1EFAED22000F854D /* DeepLinking.swift */; };
 		F07F694D1EFAEFC5000F854D /* ShowEventDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07F694C1EFAEFC5000F854D /* ShowEventDeepLink.swift */; };
+		F087BA671F2E1FA700FBCD1B /* GroupSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F087BA661F2E1FA700FBCD1B /* GroupSnapshot.swift */; };
 		F0942F0B1ECCEBA40038E389 /* FakeEventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0942F0A1ECCEBA40038E389 /* FakeEventData.swift */; };
 		F0942F0D1ECCEC550038E389 /* FeaturedEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0942F0C1ECCEC550038E389 /* FeaturedEventView.swift */; };
 		F098FF9B1EDF1DEA00A59594 /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FF9A1EDF1DEA00A59594 /* NewUser.swift */; };
@@ -461,6 +462,7 @@
 		F07C06251EF19D7400B78865 /* RxErrorHandlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxErrorHandlers.swift; sourceTree = "<group>"; };
 		F07F694A1EFAED22000F854D /* DeepLinking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepLinking.swift; sourceTree = "<group>"; };
 		F07F694C1EFAEFC5000F854D /* ShowEventDeepLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowEventDeepLink.swift; sourceTree = "<group>"; };
+		F087BA661F2E1FA700FBCD1B /* GroupSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupSnapshot.swift; sourceTree = "<group>"; };
 		F0942F0A1ECCEBA40038E389 /* FakeEventData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeEventData.swift; sourceTree = "<group>"; };
 		F0942F0C1ECCEC550038E389 /* FeaturedEventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedEventView.swift; sourceTree = "<group>"; };
 		F098FF9A1EDF1DEA00A59594 /* NewUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
@@ -815,6 +817,7 @@
 				F03CEF6C1F05962E00FCC4F3 /* Snapshot.swift */,
 				F03474431F28B64C00E6BA07 /* UserSnapshot.swift */,
 				F07757AF1F13FD9800B659D9 /* BarSnapshot.swift */,
+				F087BA661F2E1FA700FBCD1B /* GroupSnapshot.swift */,
 				F03474411F28B5C200E6BA07 /* GroupMemberSnapshot.swift */,
 			);
 			name = Snapshots;
@@ -1779,6 +1782,7 @@
 				F04B437C1F058F2800946C82 /* BarEvent.swift in Sources */,
 				F03C78C01EE9E99D002AEDAD /* DeleteAccountViewController.swift in Sources */,
 				F0E8627F1EF6B8DB00BEF5E9 /* EditProfileViewController.swift in Sources */,
+				F087BA671F2E1FA700FBCD1B /* GroupSnapshot.swift in Sources */,
 				C0949D981EF0286C00C6F72C /* BarCollectionView.swift in Sources */,
 				C08AFB291EECBA4F007D33D6 /* ImageCardView.swift in Sources */,
 				F04283AF1EC4A92700CCB5F3 /* FeaturedViewController.swift in Sources */,

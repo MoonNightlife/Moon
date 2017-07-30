@@ -20,6 +20,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     let bag = DisposeBag()
     var backButton: UIBarButtonItem!
     var editButton: UIBarButtonItem!
+    var datePickerView: UIDatePicker!
     
     let membersDataSource = RxTableViewSectionedReloadDataSource<GroupMemberSectionModel>()
     let suggestedVenuesDataSource = RxTableViewSectionedAnimatedDataSource<SearchSnapshotSectionModel>()
@@ -55,6 +56,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         prepareAddVenueTextField()
         prepareStartPlanButton()
         prepareEndTimeTextField()
+        prepareDatePickerView()
         prepareGroupNameLabel()
         configureDataSource()
     }
@@ -71,6 +73,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         likersButton.rx.action = viewModel.onViewLikers()
         startPlanButton.rx.action = viewModel.onStartPlan()
         addVenueButton.rx.action = viewModel.onAddVenue()
+        groupPlan.rx.action = viewModel.onViewPlanBar()
         
         viewModel.groupImage.bind(to: groupPicture.rx.image).addDisposableTo(bag)
         viewModel.groupName.bind(to: groupNameLabel.rx.text).addDisposableTo(bag)
@@ -89,8 +92,22 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         viewModel.displayOptions.bind(to: venuesTableView.rx.items(dataSource: venuesDataSource)).addDisposableTo(bag)
         viewModel.venueSearchResults.bind(to: suggestedVenuesTableView.rx.items(dataSource: suggestedVenuesDataSource)).addDisposableTo(bag)
         
+        datePickerView.rx.date.bind(to: viewModel.endTime).addDisposableTo(bag)
         suggestedVenuesTableView.rx.modelSelected(SearchSnapshotSectionModel.Item.self).bind(to: viewModel.selectedVenue).addDisposableTo(bag)
         addVenueTextField.rx.textInput.text.orEmpty.bind(to: viewModel.venueSearchText).addDisposableTo(bag)
+        membersTableView.rx.modelSelected(GroupMemberSectionModel.Item.self).map({$0.id}).filterNil().bind(to: viewModel.onViewProfile.inputs).addDisposableTo(bag)
+        venuesTableView.rx.modelSelected(PlanOptionSectionModel.Item.self).map({$0.barID}).filterNil().bind(to: viewModel.onViewVenue.inputs).addDisposableTo(bag)
+    }
+    
+    fileprivate func prepareDatePickerView() {
+        datePickerView = UIDatePicker()
+        datePickerView.datePickerMode = .time
+        
+        planEndTime.rx.controlEvent(.editingDidBegin)
+            .subscribe(onNext: {
+                self.planEndTime.inputView = self.datePickerView
+            })
+            .addDisposableTo(bag)
     }
     
     func configureDataSource() {
@@ -273,5 +290,21 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         addVenueButton.isHidden = false
         addVenueTextField.isHidden = false
         animatePlanViewDown()
+    }
+}
+
+extension ManageGroupViewController: UIPopoverPresentationControllerDelegate, PopoverPresenterType {
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        
+        return UIModalPresentationStyle.none
+    }
+    
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        viewModel.onBack().execute()
+        return false
+    }
+    
+    func didDismissPopover() {
+        
     }
 }

@@ -80,11 +80,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xrm-b7-s4c">
-                                <rect key="frame" x="23" y="72" width="32" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="view"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGp-wX-Sht">
                                 <rect key="frame" x="145" y="71" width="85" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -128,8 +123,8 @@
                     <navigationItem key="navigationItem" id="hNb-k0-ex6"/>
                     <connections>
                         <outlet property="create" destination="CTh-GB-2UT" id="VjA-op-psS"/>
+                        <outlet property="groupsTableView" destination="W00-jG-5Np" id="9x7-cq-9mo"/>
                         <outlet property="viewActivity" destination="hGp-wX-Sht" id="fuc-f6-SU1"/>
-                        <outlet property="viewButton" destination="Xrm-b7-s4c" id="Bz2-2A-ytj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e34-EH-SQz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -217,7 +212,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lrs-Lz-Sra">
-                                        <rect key="frame" x="266" y="0.0" width="75" height="28"/>
+                                        <rect key="frame" x="266" y="0.0" width="75" height="26"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="75" id="YWS-aI-TaH"/>
                                         </constraints>
@@ -255,7 +250,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="20f-gq-MLu">
-                                        <rect key="frame" x="168" y="0.0" width="90" height="28"/>
+                                        <rect key="frame" x="168" y="0.0" width="90" height="26"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="90" id="RCA-Ok-ler"/>
                                         </constraints>
@@ -590,7 +585,7 @@
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="71t-Zk-c4u">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="71t-Zk-c4u">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -610,7 +605,7 @@
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AU9-lq-ihh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AU9-lq-ihh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -630,7 +625,7 @@
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="rFe-B9-nWK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rFe-B9-nWK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -650,7 +645,7 @@
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="olW-LU-o1h">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="olW-LU-o1h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -670,7 +665,7 @@
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="HjH-cj-RIp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HjH-cj-RIp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -699,6 +694,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rJh-Rw-5mu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-134" y="483"/>
         </scene>
     </scenes>
     <resources>

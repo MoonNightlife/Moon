@@ -97,7 +97,7 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
         
         userSearchResultsTableView.rx.modelSelected(SearchSnapshotSectionModel.Item.self).bind(to: viewModel.selectedFriend).addDisposableTo(bag)
         
-        saveButton.rx.action = viewModel.onSave
+        saveButton.rx.action = viewModel.getActionForBottomButton()
         viewModel.onSave.errors
             .subscribe(onNext: {
                 if case let .underlyingError(error) = $0 {

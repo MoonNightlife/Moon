@@ -18,7 +18,7 @@ struct Plan: Mappable {
     }
     
     mutating func mapping(map: Map) {
-        closingTime <- map["closingTime"]
+        closingTime <- (map["endTime"], DateTransfromDouble)
         options <- map["options"]
     }
 }
@@ -27,6 +27,12 @@ struct PlanOption: Mappable {
     var barID: String?
     var barName: String?
     var voteCount: Int?
+    
+    init(snapshot: Snapshot) {
+        self.barID = snapshot.id
+        self.barName = snapshot.name
+        self.voteCount = 0
+    }
     
     init?(map: Map) {
         

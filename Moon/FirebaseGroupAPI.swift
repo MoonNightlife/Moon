@@ -16,8 +16,6 @@ import AlamofireObjectMapper
 
 struct FirebaseGroupAPI: GroupAPIType {
 
-
-    
     struct GroupFunction {
         private static let groupBaseURL = "https://us-central1-moon-4409e.cloudfunctions.net/"
         
@@ -27,13 +25,13 @@ struct FirebaseGroupAPI: GroupAPIType {
         static let addUserToGroup = groupBaseURL + "addUserToGroup"
         static let getGroup = groupBaseURL + "getGroup"
         static let getGroupMembers = groupBaseURL + "getGroupMembers"
-        //TODO: Check functions name once implemented
-        static let getGroupMembersWithStatus = groupBaseURL + "getGroupMemebersWithStatus"
+        static let getGroupMembersWithStatus = groupBaseURL + "getMembersWithStatus"
         static let startPlan = groupBaseURL + "startPlan"
         static let addVenueToPlan = groupBaseURL + "addVenueToPlan"
         //TODO: Check functions name once implemented
         static let placeVote = groupBaseURL + "placeVote"
         static let checkGroupStatus = groupBaseURL + "checkGroupStatus"
+        static let getGroupsForUser = groupBaseURL + "getGroupsForUser"
     }
     
     func createGroup(groupName: String, memebers: [String]) -> Observable<Void> {
@@ -205,7 +203,7 @@ struct FirebaseGroupAPI: GroupAPIType {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
                 "id": groupID,
-                "closingTime": endTime
+                "endTime": endTime
             ]
             let request = Alamofire.request(GroupFunction.startPlan, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()
@@ -289,6 +287,29 @@ struct FirebaseGroupAPI: GroupAPIType {
                         } else {
                             observer.onError(APIError.jsonCastingFailure)
                         }
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    
+    func getGroupsForUser(userID: String) -> Observable<[GroupSnapshot]> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": userID
+            ]
+            let request = Alamofire.request(GroupFunction.getGroupsForUser, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseArray(completionHandler: { (response: DataResponse<[GroupSnapshot]>) in
+                    switch response.result {
+                    case .success(let groupSnapshot):
+                        observer.onNext(groupSnapshot)
+                        observer.onCompleted()
                     case .failure(let error):
                         observer.onError(error)
                     }

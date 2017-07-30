@@ -33,8 +33,12 @@ struct GroupActivityViewModel: BackType, NetworkingInjected {
     }
     
     var displayUsers: Observable<[SnapshotSectionModel]> {
-        //TODO: Change to only return members that are going
-        return self.groupAPI.getGroupMembers(groupID: groupID)
+        return self.groupAPI.getGroupMembersWithStatus(groupID: groupID)
+            .map({
+                $0.filter({
+                  $0.isGoing == true
+                })
+            })
             .map({
                 return [SnapshotSectionModel(header: "Users", items: $0)]
             })

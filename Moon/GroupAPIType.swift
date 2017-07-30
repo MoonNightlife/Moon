@@ -21,4 +21,5 @@ protocol GroupAPIType {
     func addVenueToPlan(groupID: String, barID: String) -> Observable<Void>
     func placeVote(userID: String, groupID: String, barID: String) -> Observable<Void>
     func checkGroupStatusEndpoint(userID: String, groupID: String) -> Observable<Bool>
+    func getGroupsForUser(userID: String) -> Observable<[GroupSnapshot]>
 }
