@@ -12,8 +12,11 @@ import ObjectMapper
 let dateFormatter = DateFormatter()
 
 let DateTransfromDouble = TransformOf<Date, Double>(fromJSON: { (value: Double?) -> Date? in
+    guard let value = value else {
+        return nil
+    }
     
-    return Date(timeIntervalSince1970: value!)
+    return Date(timeIntervalSince1970: value)
     
     }, toJSON: { (value: Date?) -> Double? in
         // transform value from Int? to String?
