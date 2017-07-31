@@ -30,7 +30,7 @@ struct FirebaseGroupAPI: GroupAPIType {
         static let addVenueToPlan = groupBaseURL + "addVenueToPlan"
         //TODO: Check functions name once implemented
         static let placeVote = groupBaseURL + "placeVote"
-        static let checkGroupStatus = groupBaseURL + "checkGroupStatus"
+        static let checkGroupStatus = groupBaseURL + "getGroupStatus"
         static let getGroupsForUser = groupBaseURL + "getGroupsForUser"
     }
     

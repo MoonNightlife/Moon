@@ -79,6 +79,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         viewModel.groupName.bind(to: groupNameLabel.rx.text).addDisposableTo(bag)
         viewModel.endTimeString.bind(to: planEndTime.rx.text).addDisposableTo(bag)
         viewModel.currentPlanBarName.bind(to: groupPlan.rx.title()).addDisposableTo(bag)
+        viewModel.currentPlanNumberOfLikes.bind(to: likersButton.rx.title()).addDisposableTo(bag)
         viewModel.selectedVenueText.bind(to: addVenueTextField.rx.text).addDisposableTo(bag)
         viewModel.planInProcess
             .subscribe(onNext: { [weak self] inProgress in
@@ -87,7 +88,11 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
                 }
             })
             .addDisposableTo(bag)
-        
+        viewModel.hasLikedGroupPlan
+            .subscribe(onNext: { [weak self] hasLiked in
+                self?.likeButton.imageView?.tintColor = hasLiked ? .red : .lightGray
+            })
+            .addDisposableTo(bag)
         viewModel.displayMembers.bind(to: membersTableView.rx.items(dataSource: membersDataSource)).addDisposableTo(bag)
         viewModel.displayOptions.bind(to: venuesTableView.rx.items(dataSource: venuesDataSource)).addDisposableTo(bag)
         viewModel.venueSearchResults.bind(to: suggestedVenuesTableView.rx.items(dataSource: suggestedVenuesDataSource)).addDisposableTo(bag)
@@ -115,6 +120,9 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
             let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "memberCell")
             
             cell.textLabel?.text = item.name
+            
+            let goignStatusIcon = item.isGoing ?? false ? Icon.cm.check?.tint(with: .moonGreen) : Icon.cm.close?.tint(with: .moonRed)
+            cell.accessoryView = UIImageView(image: goignStatusIcon)
             
             return cell
         }

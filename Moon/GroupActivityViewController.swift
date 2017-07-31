@@ -50,7 +50,12 @@ class GroupActivityViewController: UIViewController, BindableType, UICollectionV
         
         viewModel.groupName.bind(to: groupNameLabel.rx.text).addDisposableTo(bag)
         viewModel.barName.bind(to: planButton.rx.title()).addDisposableTo(bag)
-        
+        viewModel.numberOfLikes.bind(to: likersButton.rx.title()).addDisposableTo(bag)
+        viewModel.hasLikedGroupPlan
+            .subscribe(onNext: { [weak self] hasLiked in
+                self?.likeButton.tintColor = hasLiked ? .red : .lightGray
+            })
+            .addDisposableTo(bag)
         viewModel.displayUsers.bind(to: groupMembersCollectionView.rx.items(dataSource: groupMembersDataSource)).addDisposableTo(bag)
         
         viewModel.groupPicture.bind(to: groupPic.rx.image).addDisposableTo(bag)
@@ -76,11 +81,10 @@ class GroupActivityViewController: UIViewController, BindableType, UICollectionV
     func prepareLikesButton() {
         likersButton.titleLabel?.font = UIFont(name: "Roboto", size: 14)
         likersButton.tintColor = .lightGray
-        likersButton.setTitle("100", for: .normal)
+        likersButton.setTitle("0", for: .normal)
         
         let image =  Icon.favorite
         likeButton.setBackgroundImage(image, for: .normal)
-        likeButton.tintColor = .lightGray
     }
     
     func prepareGroupPicture() {
@@ -116,14 +120,15 @@ class GroupActivityViewController: UIViewController, BindableType, UICollectionV
             let width = cell.frame.width - 5
             let height = cell.frame.size.height - 20
             
-            let view = UserCollectionView()
+            let view = PeopleGoingCarouselView()
             
             view.frame = CGRect(x: 0, y: 0, width: width, height: height)
             view.backgroundColor = .clear
             
             if let strongSelf = self {
-                view.initViewWith()
-                strongSelf.populate(userCollectionView: view, snapshot: item)
+                view.initializeView()
+                //TODO: populate view wuth activity when api endpoint is created
+                //strongSelf.populate(userCollectionView: view, snapshot: item)
             }
             
             // Remove the last view from the cell if there is one
@@ -139,31 +144,59 @@ class GroupActivityViewController: UIViewController, BindableType, UICollectionV
         }
     }
     
-    func populate(userCollectionView view: UserCollectionView, snapshot: Snapshot) {
+    func populateGoing(peopleGoingView: PeopleGoingCarouselView, activity: Activity) {
         
-        view.imageView.backgroundColor = .moonGrey
-        
-        if let id = snapshot.id {
-            //TODO: Add information/actions to view
-//            view.addFriendButton.rx.action = viewModel.onAddFriend(userID: id)
-//            
-//            let downloader = viewModel.getProfileImage(id: id)
-//            downloader.elements.bind(to: view.imageView.rx.image).addDisposableTo(view.bag)
-//            downloader.execute()
-//            
-//            view.imageView.gestureRecognizers?.first?.rx.event.subscribe(onNext: { [weak self] _ in
-//                self?.searchBarController?.searchBar.textField.resignFirstResponder()
-//                self?.viewModel.onShowProfile(userID: id).execute()
-//            }).addDisposableTo(view.bag)
-//            
+        // Bind actions
+        if let userID = activity.userID {
+            
+            let likeAction = viewModel.onLikeUserActivity(userID: userID)
+            peopleGoingView.likeButton.rx.action = likeAction
+            likeAction.elements.do(onNext: {
+                peopleGoingView.toggleColorAndNumber()
+            }).subscribe().addDisposableTo(peopleGoingView.bag)
+            
+            let hasLiked = viewModel.hasLikedActivity(activityID: userID)
+            hasLiked.elements.do(onNext: { hasLiked in
+                if hasLiked {
+                    peopleGoingView.likeButton.tintColor = .red
+                }
+            }).subscribe().addDisposableTo(peopleGoingView.bag)
+            hasLiked.execute()
+            
+            peopleGoingView.numberOfLikesButton.rx.action = viewModel.onViewUserActivityLikes(userID: userID)
+            
+            peopleGoingView.imageView.gestureRecognizers?.first?.rx.event.subscribe(onNext: { [weak self] _ in
+                self?.viewModel.onShowProfile(userID: userID).execute()
+            }).addDisposableTo(peopleGoingView.bag)
+            
+            let downloader = viewModel.getProfileImage(id: userID)
+            downloader.elements.bind(to: peopleGoingView.imageView.rx.image).addDisposableTo(peopleGoingView.bag)
+            downloader.execute()
         } else {
-            let image = view.imageView.resizeImage(image: #imageLiteral(resourceName: "DefaultProfilePic"), targetSize: CGSize(width: 5, height: 5))
-            view.imageView.image = image
+            peopleGoingView.imageView.image = #imageLiteral(resourceName: "DefaultProfilePic")
         }
         
         // Bind labels
-        view.nameLabel.text = snapshot.name
+        peopleGoingView.numberOfLikesButton.title = "\(activity.numLikes ?? 0)"
+        let nameLabel = peopleGoingView.bottomToolbar.leftViews[0] as? UILabel
+        nameLabel?.text = activity.userName
         
     }
 
+}
+
+extension GroupActivityViewController: UIPopoverPresentationControllerDelegate, PopoverPresenterType {
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        
+        return UIModalPresentationStyle.none
+    }
+    
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        viewModel.onBack().execute()
+        return false
+    }
+    
+    func didDismissPopover() {
+        
+    }
 }

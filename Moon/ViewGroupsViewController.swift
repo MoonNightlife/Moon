@@ -35,6 +35,7 @@ class ViewGroupsViewController: UIViewController, BindableType {
 
     func bindViewModel() {
         create.rx.action = viewModel.onCreate()
+        viewActivity.rx.action = viewModel.onViewActivity()
         
         groupsTableView.rx.modelSelected(SnapshotSectionModel.Item.self).map {$0.id}.filterNil().bind(to: viewModel.onManageGroup.inputs).addDisposableTo(bag)
         

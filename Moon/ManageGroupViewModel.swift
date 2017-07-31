@@ -105,6 +105,18 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
             })
     }
     
+    var currentPlanNumberOfLikes: Observable<String?> {
+        return group.asObservable()
+            .map({
+                $0?.activityInfo?.numberOfLikes
+            })
+            .filterNil()
+            .map({
+                "\($0)"
+            })
+            .startWith("0")
+    }
+    
     var groupName: Observable<String?> {
         return group.asObservable().filterNil()
             .map({
@@ -119,6 +131,10 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
             })
     }
     
+    var hasLikedGroupPlan: Observable<Bool> {
+        return self.groupAPI.checkGroupStatusEndpoint(userID: self.authAPI.SignedInUserID, groupID: self.groupID)
+    }
+    
     init(sceneCoordinator: SceneCoordinatorType, groupID: String) {
         self.sceneCoordinator = sceneCoordinator
         self.groupID = groupID
@@ -126,13 +142,11 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
         self.groupAPI.getGroup(groupID: groupID).bind(to: group).addDisposableTo(bag)
         Observable.combineLatest(group.asObservable(), reloadMembers)
             .flatMap({ [unowned self] group, _ -> Observable<[GroupMemberSnapshot]> in
-                //TODO: uncommit once gabo fixes endpoint
-//                if group?.activityInfo == nil {
-//                    return self.groupAPI.getGroupMembers(groupID: self.groupID)
-//                } else {
-//                    return self.groupAPI.getGroupMembersWithStatus(groupID: self.groupID)
-//                }
-                return self.groupAPI.getGroupMembers(groupID: self.groupID)
+                if group?.activityInfo == nil {
+                    return self.groupAPI.getGroupMembers(groupID: self.groupID)
+                } else {
+                    return self.groupAPI.getGroupMembersWithStatus(groupID: self.groupID)
+                }
             })
             .bind(to: members)
             .addDisposableTo(bag)
