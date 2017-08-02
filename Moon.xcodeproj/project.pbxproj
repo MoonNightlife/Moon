@@ -81,6 +81,10 @@
 		F019A5861F0318EF00FF7A27 /* BarProfileVCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F019A5851F0318EF00FF7A27 /* BarProfileVCExtensions.swift */; };
 		F01CE3E11EFEDE1000EE9535 /* SelectRegionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01CE3E01EFEDE1000EE9535 /* SelectRegionViewModel.swift */; };
 		F01CE3E31EFEDE9500EE9535 /* SelectRegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01CE3E21EFEDE9500EE9535 /* SelectRegionViewController.swift */; };
+		F02841821F311560000747D0 /* BasicImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F02841811F311560000747D0 /* BasicImageCell.xib */; };
+		F02841871F311784000747D0 /* BasicImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02841861F311784000747D0 /* BasicImageTableViewCell.swift */; };
+		F028418A1F311A7B000747D0 /* SnapshotBasicImageCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02841891F311A7B000747D0 /* SnapshotBasicImageCellViewModel.swift */; };
+		F028418C1F31E2DF000747D0 /* BasicImageCellViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028418B1F31E2DF000747D0 /* BasicImageCellViewModelType.swift */; };
 		F03322441F16565800FD72CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03322431F16565800FD72CD /* ViewController.swift */; };
 		F03322461F16A77900FD72CD /* EditProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03322451F16A77900FD72CD /* EditProfileInfo.swift */; };
 		F0335A761EF1F7DD005118B4 /* RxDataSourceSearchSnapshotModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0335A751EF1F7DD005118B4 /* RxDataSourceSearchSnapshotModel.swift */; };
@@ -367,6 +371,10 @@
 		F019A5851F0318EF00FF7A27 /* BarProfileVCExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarProfileVCExtensions.swift; sourceTree = "<group>"; };
 		F01CE3E01EFEDE1000EE9535 /* SelectRegionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectRegionViewModel.swift; sourceTree = "<group>"; };
 		F01CE3E21EFEDE9500EE9535 /* SelectRegionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectRegionViewController.swift; sourceTree = "<group>"; };
+		F02841811F311560000747D0 /* BasicImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicImageCell.xib; sourceTree = "<group>"; };
+		F02841861F311784000747D0 /* BasicImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicImageTableViewCell.swift; sourceTree = "<group>"; };
+		F02841891F311A7B000747D0 /* SnapshotBasicImageCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotBasicImageCellViewModel.swift; sourceTree = "<group>"; };
+		F028418B1F31E2DF000747D0 /* BasicImageCellViewModelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicImageCellViewModelType.swift; sourceTree = "<group>"; };
 		F03322431F16565800FD72CD /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F03322451F16A77900FD72CD /* EditProfileInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileInfo.swift; sourceTree = "<group>"; };
 		F0335A751EF1F7DD005118B4 /* RxDataSourceSearchSnapshotModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxDataSourceSearchSnapshotModel.swift; sourceTree = "<group>"; };
@@ -796,6 +804,25 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		F02841851F311749000747D0 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F02841881F31179E000747D0 /* BasicImage */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		F02841881F31179E000747D0 /* BasicImage */ = {
+			isa = PBXGroup;
+			children = (
+				F02841861F311784000747D0 /* BasicImageTableViewCell.swift */,
+				F02841891F311A7B000747D0 /* SnapshotBasicImageCellViewModel.swift */,
+				F028418B1F31E2DF000747D0 /* BasicImageCellViewModelType.swift */,
+				F02841811F311560000747D0 /* BasicImageCell.xib */,
+			);
+			name = BasicImage;
+			sourceTree = "<group>";
+		};
 		F034044B1F0D6C1800475FDF /* Service Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -1055,6 +1082,7 @@
 				F09DF08B1EEAF0610092BFA5 /* NotificationTableViewCell.swift */,
 				F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */,
 				F0942F0C1ECCEC550038E389 /* FeaturedEventView.swift */,
+				F02841851F311749000747D0 /* Cells */,
 				F0EF693B1EF0949C0028A32B /* UsersTableViewCell.swift */,
 				F04A6D591EEF2B8C000D898B /* LoadMoreTableViewCell.swift */,
 			);
@@ -1465,6 +1493,7 @@
 				F0A225351ECBAA3E00170927 /* miller.jpeg in Resources */,
 				C0FC62901ED260D40087FA3B /* p8.jpg in Resources */,
 				F06209731F1E933600AF529A /* GoogleService-Info.plist in Resources */,
+				F02841821F311560000747D0 /* BasicImageCell.xib in Resources */,
 				F001BABC1EC50D2600CDF9BC /* Moons_View_Background.png in Resources */,
 				C034E2D71ECCF38C008EA4BA /* p7.jpg in Resources */,
 				F0A2253C1ECBAB2400170927 /* sky.jpeg in Resources */,
@@ -1687,6 +1716,7 @@
 				F0A52CC41EEDE3D60067E8DD /* SearchResultsViewController.swift in Sources */,
 				F072766B1F2B6A2100FF2CFA /* RxDataSourceSnapshotModel.swift in Sources */,
 				F0E59F281EEF735A007A3323 /* BarInfoViewController.swift in Sources */,
+				F028418A1F311A7B000747D0 /* SnapshotBasicImageCellViewModel.swift in Sources */,
 				F0A52CC81EEDE7740067E8DD /* SearchViewController.swift in Sources */,
 				F03C78C91EE9EA5C002AEDAD /* DeleteAccountViewModel.swift in Sources */,
 				F03474391F28A36A00E6BA07 /* Group.swift in Sources */,
@@ -1796,6 +1826,7 @@
 				F03404531F0D6C6D00475FDF /* AuthAPIType.swift in Sources */,
 				F0CF7F251EF3850F005C068C /* CountryCode.swift in Sources */,
 				F0CA18931EE585D700428318 /* ProfileViewController.swift in Sources */,
+				F02841871F311784000747D0 /* BasicImageTableViewCell.swift in Sources */,
 				F09DF08C1EEAF0610092BFA5 /* NotificationTableViewCell.swift in Sources */,
 				F03474441F28B64C00E6BA07 /* UserSnapshot.swift in Sources */,
 				F03776A21EC3A44100B92E6B /* FakeSpecialData.swift in Sources */,
@@ -1815,6 +1846,7 @@
 				C08197281F1969F4008267A8 /* Images.swift in Sources */,
 				F0EF693E1EF09AD90028A32B /* BackType.swift in Sources */,
 				F0CA18B31EE5AE7500428318 /* Enums.swift in Sources */,
+				F028418C1F31E2DF000747D0 /* BasicImageCellViewModelType.swift in Sources */,
 				C0F45BA61EEB19D8008ED6A7 /* PeopleGoingCarouselView.swift in Sources */,
 				F049896E1EE068E000064F58 /* SceneCoordinator.swift in Sources */,
 				F0055D691EC5E64B005544B4 /* CityOverviewViewController.swift in Sources */,
