@@ -10,7 +10,7 @@ import Foundation
 import Action
 import RxSwift
 
-class ViewGroupsViewModel: NetworkingInjected, AuthNetworkingInjected {
+class ViewGroupsViewModel: NetworkingInjected, AuthNetworkingInjected, StorageNetworkingInjected, ImageNetworkingInjected {
     // MARK: - Global
     
     // MARK: - Dependencies
@@ -57,5 +57,9 @@ class ViewGroupsViewModel: NetworkingInjected, AuthNetworkingInjected {
             let vm = GroupActivityViewModel(sceneCoordinator: self.sceneCoordinator, groupID: "-KqCrziDBFbqWCkyM9eC")
             return self.sceneCoordinator.transition(to: Scene.Group.groupActivity(vm), type: .modal)
         }
+    }
+    
+    func viewModelForCell(snapshot: Snapshot) -> BasicImageCellViewModelType {
+        return SnapshotBasicImageCellViewModel(snapshot: snapshot)
     }
 }

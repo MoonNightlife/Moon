@@ -30,6 +30,25 @@ struct FirebaseStorageAPI: StorageAPIType {
         })
     }
     
+    func uploadGroupPictureFrom(data: Data, forGroup id: String) -> Observable<Void> {
+        return Observable.create({ (observer) -> Disposable in
+            let ref = Storage.storage().reference().child("group").child(id).child("pic1.jpg")
+            let task = ref.putData(data, metadata: nil, completion: { (_, error) in
+                if let e = error {
+                    observer.onError(e)
+                } else {
+                    observer.onNext()
+                    observer.onCompleted()
+                }
+            })
+            
+            return Disposables.create {
+                task.cancel()
+            }
+        })
+    }
+    
+    
     func getProfilePictureDownloadUrlForUser(id: String, picName: String) -> Observable<URL?> {
         return Observable.create({ (observer) -> Disposable in
             let ref = Storage.storage().reference().child("user").child(id).child("profilePictures").child(picName)
@@ -81,6 +100,22 @@ struct FirebaseStorageAPI: StorageAPIType {
     func getEventPictureDownloadUrlForEvent(id: String) -> Observable<URL?> {
         return Observable.create({ (observer) -> Disposable in
             let ref = Storage.storage().reference().child("event").child(id).child("pic1.jpg")
+            ref.downloadURL(completion: { (url, error) in
+                if let e = error {
+                    observer.onError(e)
+                }
+                observer.onNext(url)
+                observer.onCompleted()
+            })
+            
+            return Disposables.create()
+            
+        })
+    }
+    
+    func getGroupPictureDownloadURLForGroup(id: String) -> Observable<URL?> {
+        return Observable.create({ (observer) -> Disposable in
+            let ref = Storage.storage().reference().child("group").child(id).child("pic1.jpg")
             ref.downloadURL(completion: { (url, error) in
                 if let e = error {
                     observer.onError(e)
