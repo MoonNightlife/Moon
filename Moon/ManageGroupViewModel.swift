@@ -17,12 +17,13 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     private let bag = DisposeBag()
     private var dateFormatter: DateFormatter! {
         let df = DateFormatter()
-        df.timeStyle = .short
+        df.dateFormat = "h:mm"
         return df
     }
     private var members = Variable<[GroupMemberSnapshot]>([])
     private var selectedVenueSnapshot = Variable<Snapshot?>(nil)
     private var group = Variable<Group?>(nil)
+    private var hasLikedPlan = Variable<Bool>(false)
     
     // MARK: - Dependencies
     var sceneCoordinator: SceneCoordinatorType
@@ -43,16 +44,21 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     }(self)
     
     // MARK: - Inputs
-    var endTime = Variable<Date?>(nil)
+    var endTime = Variable<TimeInterval>(3600)
     var venueSearchText = PublishSubject<String>()
     var selectedVenue = PublishSubject<SearchSnapshotSectionModel.Item>()
     var reloadMembers = PublishSubject<Void>()
     
     // MARK: - Outputs
-    var endTimeString: Observable<String> {
-        return endTime.asObservable().filterNil()
-            .map({ [unowned self] date in
-                self.dateFormatter.string(from: date)
+    var limitedEndTime: Observable<TimeInterval> {
+        return endTime.asObservable()
+            .map(filterEndTime)
+    }
+    var endTimeString: Observable<String?> {
+        return endTime.asObservable()
+            .map(filterEndTime)
+            .map({ interval in
+                interval.format()
             })
     }
     
@@ -132,7 +138,19 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     }
     
     var hasLikedGroupPlan: Observable<Bool> {
-        return self.groupAPI.checkGroupStatusEndpoint(userID: self.authAPI.SignedInUserID, groupID: self.groupID)
+        return hasLikedPlan.asObservable()
+    }
+    
+    func filterEndTime(time: TimeInterval) -> TimeInterval {
+        if time < 3600.0 {
+            // If less than an hour return 1 hour
+            return 3600.0
+        } else if time > 43200.0 {
+            //If greter than 12 hours return 12 hours
+            return 43200.0
+        } else {
+            return time
+        }
     }
     
     init(sceneCoordinator: SceneCoordinatorType, groupID: String) {
@@ -140,6 +158,7 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
         self.groupID = groupID
         
         self.groupAPI.getGroup(groupID: groupID).bind(to: group).addDisposableTo(bag)
+        self.userAPI.hasLikedGroupActivity(userID: self.authAPI.SignedInUserID, groupID: self.groupID).bind(to: hasLikedPlan).addDisposableTo(bag)
         Observable.combineLatest(group.asObservable(), reloadMembers)
             .flatMap({ [unowned self] group, _ -> Observable<[GroupMemberSnapshot]> in
                 if group?.activityInfo == nil {
@@ -179,10 +198,7 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     
     func onStartPlan() -> CocoaAction {
         return CocoaAction { [unowned self] in
-            guard let endTime = self.endTime.value else {
-               return Observable.just()
-            }
-            return self.groupAPI.startPlan(groupID: self.groupID, endTime: endTime.timeIntervalSince1970)
+            return self.groupAPI.startPlan(groupID: self.groupID, endTime: self.filterEndTime(time: self.endTime.value))
         }
     }
     
@@ -209,6 +225,14 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     func onLikePlan() -> CocoaAction {
         return CocoaAction { [unowned self] in
             return self.userAPI.likeGroupActivity(userID: self.authAPI.SignedInUserID, groupID: self.groupID)
+                .do(onSubscribe: {
+                    guard let numLikes = self.group.value?.activityInfo?.numberOfLikes else {
+                        return
+                    }
+                    let newNum = self.hasLikedPlan.value ? numLikes - 1 : numLikes + 1
+                    self.group.value?.activityInfo?.numberOfLikes = newNum
+                    self.hasLikedPlan.value = !self.hasLikedPlan.value
+                })
         }
     }
     
@@ -224,9 +248,13 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     
     func onViewLikers() -> CocoaAction {
         return CocoaAction {
-            //TODO: view likers endpoint should be called here
-            Observable.just()
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .group(id: self.groupID))
+            return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
+    }
+    
+    func viewModelForCell(groupMemberSnapshot: GroupMemberSnapshot) -> BasicImageCellViewModelType {
+        return GroupMemberBasicImageCellViewModel(groupMemberSnapshot: groupMemberSnapshot)
     }
 
 }

@@ -13,28 +13,37 @@ struct SnapshotBasicImageCellViewModel: BasicImageCellViewModelType, StorageNetw
 
     // Globals
     private let snapshot: Observable<Snapshot>
+    private let imageSource: SnapshotImageSource
     
     // Inputs
     
     // Outputs
     var mainLabelText: Observable<String?> {
-        return snapshot.asObservable().map {$0.name}
+        return snapshot.map {$0.name}
     }
     
     var mainImage: Observable<UIImage> {
-        return snapshot.asObservable().map {$0.id}
+        return snapshot.map {$0.id}
             .errorOnNil()
-            .flatMap({
-                return self.storageAPI.getGroupPictureDownloadURLForGroup(id: $0)
-                    .errorOnNil()
-                    .flatMap({
-                        self.photoService.getImageFor(url: $0)
-                    })
+            .flatMap({ id -> Observable<UIImage> in
+                switch self.imageSource {
+                case .group:
+                    return self.storageAPI.getGroupPictureDownloadURLForGroup(id: id)
+                        .errorOnNil()
+                        .flatMap({
+                            self.photoService.getImageFor(url: $0)
+                        })
+                default:
+                    fatalError("Not Implemented")
+                    return Observable.just(#imageLiteral(resourceName: "DefaultProfilePic"))
+                }
+                
             })
             .catchErrorJustReturn(#imageLiteral(resourceName: "DefaultGroupPic"))
     }
     
-    init(snapshot: Snapshot) {
+    init(snapshot: Snapshot, imageSource: SnapshotImageSource) {
         self.snapshot = Observable.just(snapshot)
+        self.imageSource = imageSource
     }
 }

@@ -68,7 +68,7 @@ class CreateEditGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInje
                 $0.id
             })
             memberIDStrings.append(this.authAPI.SignedInUserID)
-            return this.groupAPI.createGroup(groupName: groupName, memebers: memberIDStrings)
+            return this.groupAPI.createGroup(groupName: groupName, members: memberIDStrings)
                 .flatMap({
                     return this.preformBackTransition()
                 })

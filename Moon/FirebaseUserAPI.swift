@@ -50,6 +50,7 @@ struct FirebaseUserAPI: UserAPIType {
         static let hasLikedSpecial = userBaseURL + "hasLikedSpecial"
         static let hasLikedEvent = userBaseURL + "hasLikedEvent"
         static let hasLikedActivity = userBaseURL + "hasLikedActivity"
+        static let hasLikedGroupActivity = userBaseURL + "hasLikedGroupActivity"
         
         static let pendingFriendRequest = userBaseURL + "pendingFriendRequest"
         static let areFriends = userBaseURL + "getFriendStatus"
@@ -625,6 +626,34 @@ extension FirebaseUserAPI {
                 "id": ActivityID
             ]
             let request = Alamofire.request(UserFunction.hasLikedActivity, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseJSON(completionHandler: { (response) in
+                    switch response.result {
+                    case .success(let value):
+                        if let hasLiked = value as? Bool {
+                            observer.onNext(hasLiked)
+                            observer.onCompleted()
+                            
+                        } else {
+                            observer.onError(APIError.jsonCastingFailure)
+                        }
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    func hasLikedGroupActivity(userID: String, groupID: String) -> Observable<Bool> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "userId": userID,
+                "id": groupID
+            ]
+            let request = Alamofire.request(UserFunction.hasLikedGroupActivity, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()
                 .responseJSON(completionHandler: { (response) in
                     switch response.result {

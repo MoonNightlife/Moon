@@ -70,8 +70,7 @@ struct GroupActivityViewModel: BackType, NetworkingInjected, StorageNetworkingIn
         self.groupID = groupID
         
         self.groupAPI.getGroup(groupID: groupID).bind(to: group).addDisposableTo(bag)
-        //TODO: use has liked endpoint to update heart when view is loaded
-        //self.groupAPI.checkGroupStatusEndpoint(userID: self.authAPI.SignedInUserID, groupID: self.groupID).bind(to: hasLikedPlan).addDisposableTo(bag)
+        self.userAPI.hasLikedGroupActivity(userID: self.authAPI.SignedInUserID, groupID: self.groupID).bind(to: hasLikedPlan).addDisposableTo(bag)
     }
     
     func onShowProfile(userID: String) -> CocoaAction {
