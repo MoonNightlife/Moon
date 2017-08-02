@@ -51,6 +51,7 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
         prepareScrollView()
         prepareSuggestedMemberView()
         configureDataSource()
+        self.automaticallyAdjustsScrollViewInsets = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,7 +79,7 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
         let keyboardShift = keyboardHeight - bioY
         let extraShift = CGFloat(10) + suggestedMembersView.frame.size.height
         
-        offSet = extraShift + keyboardShift
+        offSet = -(extraShift + keyboardShift)
     }
     
     func bindViewModel() {
@@ -256,7 +257,7 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
     func animateViewDown() {
         UIView.animate(withDuration: Double(0.3), animations: {
             self.suggestedMemberViewHeightConstraint.constant = 0
-            self.view.layoutIfNeeded()
+            //self.view.layoutIfNeeded()
         })
         
     }
@@ -264,7 +265,7 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
     func moveScrollViewUP() {
         UIView.animate(withDuration: Double(0.3), animations: {
             self.scrollView.contentOffset.y = self.offSet
-            self.view.layoutIfNeeded()
+            self.scrollView.layoutIfNeeded()
         })
     }
     
@@ -301,6 +302,7 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         addMemberTextField.resignFirstResponder()
         groupNameTextField.resignFirstResponder()
+        print("touching")
     }
     
     fileprivate func configureDataSource() {
