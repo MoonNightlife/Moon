@@ -115,6 +115,7 @@ enum UserTableSource {
     case special(id: String)
     case event(id: String)
     case activity(id: String)
+    case group(id: String)
 }
 
 enum ProfileActionButton {
@@ -138,4 +139,10 @@ enum UsersGoingType: Int {
 enum CreateEditGroupBottomButtonType {
     case leave
     case save
+}
+
+enum SnapshotImageSource {
+    case group
+    case bar
+    case user
 }

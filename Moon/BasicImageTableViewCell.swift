@@ -46,7 +46,7 @@ class BasicImageTableViewCell: UITableViewCell {
         viewModel.mainLabelText.bind(to: mainLabel.rx.text).addDisposableTo(bag)
         viewModel.mainImage.bind(to: mainImageView.rx.image).addDisposableTo(bag)
         viewModel.accessoryButtonEnabled.bind(to: accessoryButton.rx.isEnabled).addDisposableTo(bag)
-        //viewModel.accessoryButtonImage.bind(to: accessoryButton.rx.image().addDisposableTo(bag)
+        viewModel.accessoryButtonImage.bind(to: accessoryButton.rx.image()).addDisposableTo(bag)
     }
 
     override func prepareForReuse() {

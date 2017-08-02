@@ -26,19 +26,21 @@ struct FirebaseGroupAPI: GroupAPIType {
         static let getGroup = groupBaseURL + "getGroup"
         static let getGroupMembers = groupBaseURL + "getGroupMembers"
         static let getGroupMembersWithStatus = groupBaseURL + "getMembersWithStatus"
+        static let getMembersActivity = groupBaseURL + "getMembersActivity"
         static let startPlan = groupBaseURL + "startPlan"
         static let addVenueToPlan = groupBaseURL + "addVenueToPlan"
         //TODO: Check functions name once implemented
-        static let placeVote = groupBaseURL + "placeVote"
+        static let placeVote = groupBaseURL + "voteForVenue"
         static let checkGroupStatus = groupBaseURL + "getGroupStatus"
         static let getGroupsForUser = groupBaseURL + "getGroupsForUser"
+        static let getActivityGroupLikers = groupBaseURL + "getActivityGroupLikers"
     }
     
-    func createGroup(groupName: String, memebers: [String]) -> Observable<Void> {
+    func createGroup(groupName: String, members: [String]) -> Observable<Void> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
                 "groupName": groupName,
-                "members": memebers
+                "members": members
             ]
             let request = Alamofire.request(GroupFunction.createGroup, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()
@@ -199,6 +201,30 @@ struct FirebaseGroupAPI: GroupAPIType {
 
     }
     
+    func getMembersActivity(groupID: String) -> Observable<[Activity]> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": groupID
+            ]
+            let request = Alamofire.request(GroupFunction.getMembersActivity, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseArray(completionHandler: { (response: DataResponse<[Activity]>) in
+                    switch response.result {
+                    case .success(let groupSnapshot):
+                        observer.onNext(groupSnapshot)
+                        observer.onCompleted()
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+
+    }
+    
     func startPlan(groupID: String, endTime: Double) -> Observable<Void> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
@@ -319,5 +345,29 @@ struct FirebaseGroupAPI: GroupAPIType {
                 request.cancel()
             }
         })
+    }
+    
+    func getActivityGroupLikers(groupID: String) -> Observable<[UserSnapshot]> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": groupID
+            ]
+            let request = Alamofire.request(GroupFunction.getActivityGroupLikers, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseArray(completionHandler: { (response: DataResponse<[UserSnapshot]>) in
+                    switch response.result {
+                    case .success(let snapshots):
+                        observer.onNext(snapshots)
+                        observer.onCompleted()
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+
     }
 }

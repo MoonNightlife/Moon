@@ -217,6 +217,8 @@
 		F0A8E2EA1EC3C858001D9993 /* pic6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2E11EC3C858001D9993 /* pic6.jpg */; };
 		F0A8E2EB1EC3C858001D9993 /* Pic7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A8E2E21EC3C858001D9993 /* Pic7.jpg */; };
 		F0A8FE181F01857F003044B1 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A8FE171F01857F003044B1 /* Array.swift */; };
+		F0B1BD181F31FA0F00A8623E /* GroupMemberBasicImageCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1BD171F31FA0F00A8623E /* GroupMemberBasicImageCellViewModel.swift */; };
+		F0B1BD1A1F320DC200A8623E /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1BD191F320DC200A8623E /* TimeInterval.swift */; };
 		F0B5F93F1EEF790A0095F12E /* BarInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B5F93E1EEF790A0095F12E /* BarInfo.swift */; };
 		F0C66BDF1EF41C9400B22811 /* SinchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C66BDE1EF41C9400B22811 /* SinchService.swift */; };
 		F0C72F441EF81D7700B25C52 /* KingFisherPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C72F431EF81D7700B25C52 /* KingFisherPhotoService.swift */; };
@@ -512,6 +514,8 @@
 		F0A8E2E11EC3C858001D9993 /* pic6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic6.jpg; sourceTree = "<group>"; };
 		F0A8E2E21EC3C858001D9993 /* Pic7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Pic7.jpg; sourceTree = "<group>"; };
 		F0A8FE171F01857F003044B1 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		F0B1BD171F31FA0F00A8623E /* GroupMemberBasicImageCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMemberBasicImageCellViewModel.swift; sourceTree = "<group>"; };
+		F0B1BD191F320DC200A8623E /* TimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		F0B5F93E1EEF790A0095F12E /* BarInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarInfo.swift; sourceTree = "<group>"; };
 		F0C66BDE1EF41C9400B22811 /* SinchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinchService.swift; sourceTree = "<group>"; };
 		F0C72F431EF81D7700B25C52 /* KingFisherPhotoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KingFisherPhotoService.swift; sourceTree = "<group>"; };
@@ -817,6 +821,7 @@
 			children = (
 				F02841861F311784000747D0 /* BasicImageTableViewCell.swift */,
 				F02841891F311A7B000747D0 /* SnapshotBasicImageCellViewModel.swift */,
+				F0B1BD171F31FA0F00A8623E /* GroupMemberBasicImageCellViewModel.swift */,
 				F028418B1F31E2DF000747D0 /* BasicImageCellViewModelType.swift */,
 				F02841811F311560000747D0 /* BasicImageCell.xib */,
 			);
@@ -1328,6 +1333,7 @@
 				C08197271F1969F4008267A8 /* Images.swift */,
 				F04D670C1F236F600031CAA4 /* UIView.swift */,
 				F04D670E1F236F860031CAA4 /* UIWindow.swift */,
+				F0B1BD191F320DC200A8623E /* TimeInterval.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1730,6 +1736,7 @@
 				F07757B01F13FD9800B659D9 /* BarSnapshot.swift in Sources */,
 				F03765C91F25111600BE173D /* ViewGroupsViewModel.swift in Sources */,
 				F0CF7F1D1EF37D80005C068C /* CountryCodeViewModel.swift in Sources */,
+				F0B1BD181F31FA0F00A8623E /* GroupMemberBasicImageCellViewModel.swift in Sources */,
 				F0FEAFEB1F1E2FC500E1C1A6 /* TutorialViewController.swift in Sources */,
 				F0A52CCA1EEDE7A80067E8DD /* SearchViewModel.swift in Sources */,
 				F0CA18971EE58BBD00428318 /* MainViewModel.swift in Sources */,
@@ -1769,6 +1776,7 @@
 				F0A52CC61EEDE3EB0067E8DD /* SearchResultsViewModel.swift in Sources */,
 				F0388CF91EE9D35C00E8ED48 /* BarProfileViewModel.swift in Sources */,
 				F0C72F441EF81D7700B25C52 /* KingFisherPhotoService.swift in Sources */,
+				F0B1BD1A1F320DC200A8623E /* TimeInterval.swift in Sources */,
 				F09DF0921EEAFB670092BFA5 /* WebViewViewModel.swift in Sources */,
 				F0E6ED121ECB3C54009508FC /* SearchBar.swift in Sources */,
 				F0E1F5261F151E5900BC0785 /* FacebookUserInfo.swift in Sources */,

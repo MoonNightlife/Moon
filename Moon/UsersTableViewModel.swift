@@ -42,6 +42,8 @@ class UsersTableViewModel: BackType, ImageNetworkingInjected, NetworkingInjected
             userSource = this.getEventLikers(eventID: id)
         case let .special(id):
             userSource = this.getSpecialLikers(specialID: id)
+        case let .group(id):
+            userSource = this.getGroupLikers(groupID: id)
         }
         
         return this.reload.flatMap({_ in
@@ -107,6 +109,15 @@ class UsersTableViewModel: BackType, ImageNetworkingInjected, NetworkingInjected
                 return $0.map(UserSectionItem.friend)
             }).map({
                 return UserSectionModel.friendsSection(title: "Event Likes", items: $0)
+            }).toArray()
+    }
+    
+    func getGroupLikers(groupID: String) -> Observable<[UserSectionModel]> {
+        return groupAPI.getActivityGroupLikers(groupID: groupID)
+            .map({
+                return $0.map(UserSectionItem.friend)
+            }).map({
+                return UserSectionModel.friendsSection(title: "Group Likes", items: $0)
             }).toArray()
     }
     

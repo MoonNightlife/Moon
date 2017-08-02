@@ -14,12 +14,16 @@ protocol BasicImageCellViewModelType {
     // Outputs
     var mainLabelText: Observable<String?> { get }
     var mainImage: Observable<UIImage> { get }
-    var accessoryButtonImage: Observable<UIImage> { get }
+    var accessoryButtonImage: Observable<UIImage?> { get }
     var accessoryButtonEnabled: Observable<Bool> { get }
 }
 
 extension BasicImageCellViewModelType {
     var accessoryButtonEnabled: Observable<Bool> {
         return Observable.just(false)
+    }
+    
+    var accessoryButtonImage: Observable<UIImage?> {
+        return Observable.just(nil)
     }
 }

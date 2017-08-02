@@ -59,6 +59,8 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         prepareDatePickerView()
         prepareGroupNameLabel()
         configureDataSource()
+        
+        resgisterCells()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,23 +92,36 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
             .addDisposableTo(bag)
         viewModel.hasLikedGroupPlan
             .subscribe(onNext: { [weak self] hasLiked in
-                self?.likeButton.imageView?.tintColor = hasLiked ? .red : .lightGray
+                self?.likeButton.tintColor = hasLiked ? .red : .lightGray
             })
             .addDisposableTo(bag)
         viewModel.displayMembers.bind(to: membersTableView.rx.items(dataSource: membersDataSource)).addDisposableTo(bag)
         viewModel.displayOptions.bind(to: venuesTableView.rx.items(dataSource: venuesDataSource)).addDisposableTo(bag)
         viewModel.venueSearchResults.bind(to: suggestedVenuesTableView.rx.items(dataSource: suggestedVenuesDataSource)).addDisposableTo(bag)
         
-        datePickerView.rx.date.bind(to: viewModel.endTime).addDisposableTo(bag)
+        datePickerView.rx.countDownDuration.bind(to: viewModel.endTime).addDisposableTo(bag)
+        viewModel.limitedEndTime.skip(1).bind(to: datePickerView.rx.countDownDuration).addDisposableTo(bag)
+        
         suggestedVenuesTableView.rx.modelSelected(SearchSnapshotSectionModel.Item.self).bind(to: viewModel.selectedVenue).addDisposableTo(bag)
         addVenueTextField.rx.textInput.text.orEmpty.bind(to: viewModel.venueSearchText).addDisposableTo(bag)
         membersTableView.rx.modelSelected(GroupMemberSectionModel.Item.self).map({$0.id}).filterNil().bind(to: viewModel.onViewProfile.inputs).addDisposableTo(bag)
         venuesTableView.rx.modelSelected(PlanOptionSectionModel.Item.self).map({$0.barID}).filterNil().bind(to: viewModel.onViewVenue.inputs).addDisposableTo(bag)
     }
     
+    private func resgisterCells() {
+        let nib = UINib(nibName: "BasicImageCell", bundle: nil)
+        membersTableView.register(nib, forCellReuseIdentifier: "BasicImageCell")
+    }
+    
     fileprivate func prepareDatePickerView() {
         datePickerView = UIDatePicker()
-        datePickerView.datePickerMode = .time
+        datePickerView.datePickerMode = .countDownTimer
+        
+        var dateComp = DateComponents()
+        dateComp.hour = 1
+        dateComp.minute = 1
+        let date = Calendar.current.date(from: dateComp)
+        datePickerView.setDate(date!, animated: false)
         
         planEndTime.rx.controlEvent(.editingDidBegin)
             .subscribe(onNext: {
@@ -116,18 +131,19 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     }
     
     func configureDataSource() {
-        membersDataSource.configureCell = { [weak self] dataSource, collectionView, indexPath, item in
-            let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "memberCell")
+        membersDataSource.configureCell = { [weak self] dataSource, tableView, indexPath, item in
+            guard let strongSelf = self else {
+                return UITableViewCell()
+            }
             
-            cell.textLabel?.text = item.name
-            
-            let goignStatusIcon = item.isGoing ?? false ? Icon.cm.check?.tint(with: .moonGreen) : Icon.cm.close?.tint(with: .moonRed)
-            cell.accessoryView = UIImageView(image: goignStatusIcon)
+            //swiftlint:disable:next force_cast
+            let cell = tableView.dequeueReusableCell(withIdentifier: "BasicImageCell", for: indexPath) as! BasicImageTableViewCell
+            cell.viewModel = strongSelf.viewModel.viewModelForCell(groupMemberSnapshot: item)
             
             return cell
         }
         
-        venuesDataSource.configureCell = { [weak self] dataSource, collectionView, indexPath, item in
+        venuesDataSource.configureCell = { [weak self] dataSource, tableView, indexPath, item in
             let cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "venueCell")
             
             if let barID = item.barID, let strongSelf = self {
@@ -143,7 +159,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
             return cell
         }
         
-        suggestedVenuesDataSource.configureCell = { [weak self] dataSource, collectionView, indexPath, item in
+        suggestedVenuesDataSource.configureCell = { [weak self] dataSource, tableView, indexPath, item in
             let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "venueResultCell")
             
             switch item {
@@ -221,7 +237,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     
     func prepareEndTimeTextField() {
         planEndTime.placeholder = "Set Voting End Time"
-        planEndTime.isClearIconButtonEnabled = true
+        planEndTime.isClearIconButtonEnabled = false
         planEndTime.placeholderActiveColor = .moonBlue
         planEndTime.dividerActiveColor = .moonBlue
         planEndTime.dividerNormalColor = .moonBlue
@@ -289,6 +305,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     }
     
     @IBAction func startPlabButtonPressed(_ sender: Any) {
+        planEndTime.resignFirstResponder()
         showPlan()
     }
     

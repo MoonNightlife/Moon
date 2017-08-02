@@ -60,6 +60,6 @@ class ViewGroupsViewModel: NetworkingInjected, AuthNetworkingInjected, StorageNe
     }
     
     func viewModelForCell(snapshot: Snapshot) -> BasicImageCellViewModelType {
-        return SnapshotBasicImageCellViewModel(snapshot: snapshot)
+        return SnapshotBasicImageCellViewModel(snapshot: snapshot, imageSource: .group)
     }
 }
