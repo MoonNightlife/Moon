@@ -252,7 +252,7 @@ PODS:
   - RxAlamofire/Core (3.0.3):
     - Alamofire (~> 4.0)
     - RxSwift (~> 3.0)
-  - RxCocoa (3.4.0):
+  - RxCocoa (3.5.0):
     - RxSwift (~> 3.4)
   - RxDataSources (1.0.3):
     - RxCocoa (~> 3.0)
@@ -344,7 +344,7 @@ SPEC CHECKSUMS:
   Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
   RAReorderableLayout: 5b6b87dd4022ee1747fd475623b14f5df940f754
   RxAlamofire: 5eb39188c4917ad98127c0ecb4878a61b7517003
-  RxCocoa: d14ef6b6029e1ddc6e966508c09289090de68ff9
+  RxCocoa: a0a09f45d0e5b48ecb6a4a7b4b4c89c88d3f633f
   RxDataSources: a021a0e944ba5f7991259829d973afdbfa719c0b
   RxOptional: b97b59183af80d1e729ac9e51d09a10be668d6a8
   RxSwift: 3789a1af753002a14edecdb698a2424624296a9c
