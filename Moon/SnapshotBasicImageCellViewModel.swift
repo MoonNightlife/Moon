@@ -35,7 +35,6 @@ struct SnapshotBasicImageCellViewModel: BasicImageCellViewModelType, StorageNetw
                         })
                 default:
                     fatalError("Not Implemented")
-                    return Observable.just(#imageLiteral(resourceName: "DefaultProfilePic"))
                 }
                 
             })

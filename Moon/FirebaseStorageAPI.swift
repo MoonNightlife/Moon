@@ -48,7 +48,6 @@ struct FirebaseStorageAPI: StorageAPIType {
         })
     }
     
-    
     func getProfilePictureDownloadUrlForUser(id: String, picName: String) -> Observable<URL?> {
         return Observable.create({ (observer) -> Disposable in
             let ref = Storage.storage().reference().child("user").child(id).child("profilePictures").child(picName)

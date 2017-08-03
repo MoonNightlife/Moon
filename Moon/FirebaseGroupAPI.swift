@@ -29,7 +29,6 @@ struct FirebaseGroupAPI: GroupAPIType {
         static let getMembersActivity = groupBaseURL + "getMembersActivity"
         static let startPlan = groupBaseURL + "startPlan"
         static let addVenueToPlan = groupBaseURL + "addVenueToPlan"
-        //TODO: Check functions name once implemented
         static let placeVote = groupBaseURL + "voteForVenue"
         static let checkGroupStatus = groupBaseURL + "getGroupStatus"
         static let getGroupsForUser = groupBaseURL + "getGroupsForUser"

@@ -19,7 +19,7 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
 
     private let bag = DisposeBag()
     var viewModel: SearchResultsViewModel!
-    var indicator = UIActivityIndicatorView()
+    var indicator: UIActivityIndicatorView!
 
     @IBOutlet weak var searchResultsTableView: UITableView!
     

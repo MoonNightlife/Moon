@@ -50,6 +50,9 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     var reloadMembers = PublishSubject<Void>()
     
     // MARK: - Outputs
+    var showBlockingLoadingIndicator = Variable<Bool>(false)
+    var showSearchLoadingIndicator = Variable<Bool>(false)
+    
     var limitedEndTime: Observable<TimeInterval> {
         return endTime.asObservable()
             .map(filterEndTime)
@@ -98,11 +101,19 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     
     var venueSearchResults: Observable<[SearchSnapshotSectionModel]> {
         return venueSearchText
-            .filter { $0.isNotEmpty }
             .throttle(0.5, scheduler: MainScheduler.instance)
             .distinctUntilChanged()
-            .flatMapLatest({
-                self.barAPI.searchForBar(searchText: $0)
+            .flatMapLatest({ [unowned self] searchText -> Observable<[BarSnapshot]> in
+                if searchText.isEmpty {
+                    return Observable.just([])
+                } else {
+                    return self.barAPI.searchForBar(searchText: searchText)
+                        .do(onSubscribed: {
+                            self.showSearchLoadingIndicator.value = true
+                        }, onDispose: {
+                            self.showSearchLoadingIndicator.value = false
+                        })
+                }
             })
             .map({
                 return [SearchSnapshotSectionModel.snapshotsToSnapshotSectionModel(withTitle: "Venues", snapshots: $0), SearchSnapshotSectionModel.loadingSectionModel()]
@@ -165,10 +176,23 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
         self.sceneCoordinator = sceneCoordinator
         self.groupID = groupID
         
-        self.groupAPI.getGroup(groupID: groupID).bind(to: group).addDisposableTo(bag)
+        self.groupAPI.getGroup(groupID: groupID)
+            .do(onSubscribe: { [unowned self] in
+                self.showBlockingLoadingIndicator.value = true
+            }, onDispose: {
+                self.showBlockingLoadingIndicator.value = false
+            })
+            .bind(to: group).addDisposableTo(bag)
+        
         self.userAPI.hasLikedGroupActivity(userID: self.authAPI.SignedInUserID, groupID: self.groupID).bind(to: hasLikedPlan).addDisposableTo(bag)
+        
         Observable.combineLatest(group.asObservable(), reloadMembers)
             .flatMap({ [unowned self] group, _ -> Observable<[GroupMemberSnapshot]> in
+                
+                guard group == nil else {
+                    return Observable.empty()
+                }
+                
                 if group?.activityInfo == nil {
                     return self.groupAPI.getGroupMembers(groupID: self.groupID)
                 } else {
@@ -217,7 +241,9 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
             }
             
             return self.groupAPI.addVenueToPlan(groupID: self.groupID, barID: selectedBarID)
-                .do(onNext: {
+                .do(onNext: { [unowned self] in
+                    self.venueSearchText.onNext("")
+                    self.selectedVenueSnapshot.value = nil
                     let newOption = PlanOption(snapshot: snapshot)
                     self.group.value?.plan?.options?.append(newOption)
                 })
@@ -227,6 +253,19 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     func onVote(barID: String) -> CocoaAction {
         return CocoaAction { [unowned self] in
             return self.groupAPI.placeVote(userID: self.authAPI.SignedInUserID, groupID: self.groupID, barID: barID)
+                .do(onNext: { [unowned self] in
+                    let updatedOptions = self.group.value?.plan?.options?
+                        .map { option -> (PlanOption) in
+                            if option.barID == barID {
+                                var temp = option
+                                temp.voteCount = (option.voteCount ?? 0) + 1
+                                return temp
+                            } else {
+                                return option
+                            }
+                        }
+                    self.group.value?.plan?.options = updatedOptions
+                })
         }
     }
     

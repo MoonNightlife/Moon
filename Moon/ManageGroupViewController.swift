@@ -12,6 +12,7 @@ import Action
 import RxSwift
 import RxCocoa
 import RxDataSources
+import SwiftOverlays
 
 class ManageGroupViewController: UIViewController, BindableType, UITextFieldDelegate {
 
@@ -21,6 +22,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     var backButton: UIBarButtonItem!
     var editButton: UIBarButtonItem!
     var datePickerView: UIDatePicker!
+    var indicator: UIActivityIndicatorView!
     
     let membersDataSource = RxTableViewSectionedReloadDataSource<GroupMemberSectionModel>()
     let suggestedVenuesDataSource = RxTableViewSectionedAnimatedDataSource<SearchSnapshotSectionModel>()
@@ -56,9 +58,11 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         prepareAddVenueTextField()
         prepareStartPlanButton()
         prepareEndTimeTextField()
-        prepareDatePickerView()
         prepareGroupNameLabel()
         configureDataSource()
+        setupActivityIndicator()
+        
+        prepareDatePickerView()
         
         resgisterCells()
     }
@@ -66,6 +70,17 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.reloadMembers.onNext()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Make sure overlay is removed
+        SwiftOverlays.removeAllBlockingOverlays()
     }
 
     func bindViewModel() {
@@ -77,6 +92,23 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         addVenueButton.rx.action = viewModel.onAddVenue()
         groupPlan.rx.action = viewModel.onViewPlanBar()
         
+        viewModel.showSearchLoadingIndicator.asObservable().subscribe(onNext: { [weak self] in
+            if $0 {
+                self?.indicator.startAnimating()
+            } else {
+                self?.indicator.stopAnimating()
+            }
+        }).addDisposableTo(bag)
+        
+        viewModel.showBlockingLoadingIndicator.asObservable()
+            .subscribe(onNext: {
+                if $0 {
+                    SwiftOverlays.showBlockingWaitOverlay()
+                } else {
+                    SwiftOverlays.removeAllBlockingOverlays()
+                }
+            })
+            .addDisposableTo(bag)
         viewModel.groupImage.bind(to: groupPicture.rx.image).addDisposableTo(bag)
         viewModel.groupName.bind(to: groupNameLabel.rx.text).addDisposableTo(bag)
         viewModel.endTimeString.bind(to: planEndTime.rx.text).addDisposableTo(bag)
@@ -90,18 +122,22 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
                 }
             })
             .addDisposableTo(bag)
+        
         viewModel.hasLikedGroupPlan
             .subscribe(onNext: { [weak self] hasLiked in
                 self?.likeButton.tintColor = hasLiked ? .red : .lightGray
             })
             .addDisposableTo(bag)
         
-        viewModel.displayMembers.bind(to: membersTableView.rx.items(dataSource: membersDataSource)).addDisposableTo(bag)
+        viewModel.displayMembers
+            .bind(to: membersTableView.rx.items(dataSource: membersDataSource))
+            .addDisposableTo(bag)
+        
         viewModel.displayOptions.bind(to: venuesTableView.rx.items(dataSource: venuesDataSource)).addDisposableTo(bag)
         viewModel.venueSearchResults.bind(to: suggestedVenuesTableView.rx.items(dataSource: suggestedVenuesDataSource)).addDisposableTo(bag)
     
-        datePickerView.rx.countDownDuration.bind(to: viewModel.endTime).addDisposableTo(bag)
-        viewModel.limitedEndTime.skip(1).bind(to: datePickerView.rx.countDownDuration).addDisposableTo(bag)
+        datePickerView.rx.countDownDuration.debug().bind(to: viewModel.endTime).addDisposableTo(bag)
+        viewModel.limitedEndTime.debug().bind(to: datePickerView.rx.countDownDuration).addDisposableTo(bag)
         
         suggestedVenuesTableView.rx.modelSelected(SearchSnapshotSectionModel.Item.self)
             .do(onNext: { [weak self] _ in
@@ -120,6 +156,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
                     return
                 }
                 self?.membersTableView.deselectRow(at: selectedIndexPath, animated: true)
+                self?.planEndTime.resignFirstResponder()
             })
             .filterNil()
             .bind(to: viewModel.onViewProfile.inputs)
@@ -146,13 +183,17 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         datePickerView = UIDatePicker()
         datePickerView.datePickerMode = .countDownTimer
         
-        var dateComp = DateComponents()
-        dateComp.hour = 1
-        dateComp.minute = 1
-        let date = Calendar.current.date(from: dateComp)
-        datePickerView.setDate(date!, animated: false)
-        
         planEndTime.rx.controlEvent(.editingDidBegin)
+            .do(onNext: {
+                // This hack fixes the iOS bug with the date picker
+                // https://stackoverflow.com/questions/19251803/objective-c-uidatepicker-uicontroleventvaluechanged-only-fired-on-second-select
+                DispatchQueue.main.async {
+                    var dateComp = DateComponents()
+                    dateComp.second = Int(self.datePickerView.countDownDuration)
+                    let date = Calendar.current.date(from: dateComp)
+                    self.datePickerView.setDate(date!, animated: false)
+                }
+            })
             .subscribe(onNext: {
                 self.planEndTime.inputView = self.datePickerView
             })
@@ -176,12 +217,13 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
             let cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "venueCell")
             
             if let barID = item.barID, let strongSelf = self {
-                var voteButton = IconButton(image: Icon.cm.star, tintColor: .red)
+                var voteButton = IconButton(image: Icon.cm.star, tintColor: .lightGray)
                 voteButton.rx.action = strongSelf.viewModel.onVote(barID: barID)
                 cell.accessoryView = voteButton
                 voteButton.sizeToFit()
             }
             
+            cell.textLabel?.textColor = .lightGray
             cell.textLabel?.text = item.barName
             cell.detailTextLabel?.text = "\(item.voteCount ?? 0)"
             
@@ -193,7 +235,15 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
             
             switch item {
             case let .searchResult(snapshot):
+                cell.textLabel?.textColor = .lightGray
                 cell.textLabel?.text = snapshot.name
+                return cell
+                
+            case .loading:
+                self?.indicator.center = cell.contentView.center
+                if let strongSelf = self {
+                    cell.contentView.addSubview(strongSelf.indicator)
+                }
                 return cell
             default:
                 return cell
@@ -283,6 +333,13 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         startPlanButton.backgroundColor = .moonGreen
         startPlanButton.cornerRadius = 5
         startPlanButton.tintColor = .white
+    }
+    
+    func setupActivityIndicator() {
+        indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        indicator.center = self.view.center
+        indicator.hidesWhenStopped = true
     }
     
     func animateVenuesViewDown() {
