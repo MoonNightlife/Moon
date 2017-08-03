@@ -95,17 +95,46 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
                 self?.likeButton.tintColor = hasLiked ? .red : .lightGray
             })
             .addDisposableTo(bag)
+        
         viewModel.displayMembers.bind(to: membersTableView.rx.items(dataSource: membersDataSource)).addDisposableTo(bag)
         viewModel.displayOptions.bind(to: venuesTableView.rx.items(dataSource: venuesDataSource)).addDisposableTo(bag)
         viewModel.venueSearchResults.bind(to: suggestedVenuesTableView.rx.items(dataSource: suggestedVenuesDataSource)).addDisposableTo(bag)
-        
+    
         datePickerView.rx.countDownDuration.bind(to: viewModel.endTime).addDisposableTo(bag)
         viewModel.limitedEndTime.skip(1).bind(to: datePickerView.rx.countDownDuration).addDisposableTo(bag)
         
-        suggestedVenuesTableView.rx.modelSelected(SearchSnapshotSectionModel.Item.self).bind(to: viewModel.selectedVenue).addDisposableTo(bag)
+        suggestedVenuesTableView.rx.modelSelected(SearchSnapshotSectionModel.Item.self)
+            .do(onNext: { [weak self] _ in
+                guard let selectedIndexPath = self?.suggestedVenuesTableView.indexPathForSelectedRow else {
+                    return
+                }
+                self?.suggestedVenuesTableView.deselectRow(at: selectedIndexPath, animated: true)
+            })
+            .bind(to: viewModel.selectedVenue)
+            .addDisposableTo(bag)
+        
         addVenueTextField.rx.textInput.text.orEmpty.bind(to: viewModel.venueSearchText).addDisposableTo(bag)
-        membersTableView.rx.modelSelected(GroupMemberSectionModel.Item.self).map({$0.id}).filterNil().bind(to: viewModel.onViewProfile.inputs).addDisposableTo(bag)
-        venuesTableView.rx.modelSelected(PlanOptionSectionModel.Item.self).map({$0.barID}).filterNil().bind(to: viewModel.onViewVenue.inputs).addDisposableTo(bag)
+        membersTableView.rx.modelSelected(GroupMemberSectionModel.Item.self).map({$0.id})
+            .do(onNext: { [weak self] _ in
+                guard let selectedIndexPath = self?.membersTableView.indexPathForSelectedRow else {
+                    return
+                }
+                self?.membersTableView.deselectRow(at: selectedIndexPath, animated: true)
+            })
+            .filterNil()
+            .bind(to: viewModel.onViewProfile.inputs)
+            .addDisposableTo(bag)
+        
+        venuesTableView.rx.modelSelected(PlanOptionSectionModel.Item.self).map({$0.barID})
+            .filterNil()
+            .do(onNext: { [weak self] _ in
+                guard let selectedIndexPath = self?.venuesTableView.indexPathForSelectedRow else {
+                    return
+                }
+                self?.venuesTableView.deselectRow(at: selectedIndexPath, animated: true)
+            })
+            .bind(to: viewModel.onViewVenue.inputs)
+            .addDisposableTo(bag)
     }
     
     private func resgisterCells() {
@@ -210,6 +239,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         groupPicture.layer.cornerRadius = groupPicture.frame.size.height  / 2
         groupPicture.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         groupPicture.contentMode = UIViewContentMode.scaleAspectFill
+        groupPicture.backgroundColor = .moonGrey
         groupPicture.clipsToBounds = true
     }
     

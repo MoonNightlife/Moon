@@ -11,7 +11,7 @@ import Action
 import RxCocoa
 import RxSwift
 
-class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected {
+class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected, StorageNetworkingInjected, ImageNetworkingInjected {
     // MARK: - Global
     private let groupID: String
     private let bag = DisposeBag()
@@ -63,7 +63,12 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     }
     
     var groupImage: Observable<UIImage> {
-        return Observable.just(#imageLiteral(resourceName: "DefaultGroupPic"))
+        return self.storageAPI.getGroupPictureDownloadURLForGroup(id: self.groupID)
+            .errorOnNil()
+            .flatMap({
+                self.photoService.getImageFor(url: $0)
+            })
+            .catchErrorJustReturn(#imageLiteral(resourceName: "DefaultGroupPic"))
     }
     
     var planInProcess: Observable<Bool> {
@@ -104,11 +109,14 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
             })
     }
     
-    var currentPlanBarName: Observable<String?> {
+    var currentPlanBarName: Observable<String> {
         return group.asObservable().filterNil()
             .map({
                 $0.activityInfo?.barName
             })
+            .startWith("")
+            .errorOnNil()
+            .catchErrorJustReturn("No Plan")
     }
     
     var currentPlanNumberOfLikes: Observable<String?> {
