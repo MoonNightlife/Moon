@@ -218,7 +218,9 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
             let cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "venueCell")
             
             if let barID = item.barID, let strongSelf = self {
-                var voteButton = IconButton(image: Icon.cm.star, tintColor: .lightGray)
+                var voteButton = IconButton()
+                let image = (item.userVoted ?? false) ? Icon.cm.star?.tint(with: .red) : Icon.cm.star?.tint(with: .lightGray)
+                voteButton.image = image
                 voteButton.rx.action = strongSelf.viewModel.onVote(barID: barID)
                 cell.accessoryView = voteButton
                 voteButton.sizeToFit()

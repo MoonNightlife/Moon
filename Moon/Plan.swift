@@ -27,6 +27,7 @@ struct PlanOption: Mappable {
     var barID: String?
     var barName: String?
     var voteCount: Int?
+    var userVoted: Bool?
     
     init(snapshot: Snapshot) {
         self.barID = snapshot.id

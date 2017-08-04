@@ -30,6 +30,7 @@ struct FirebaseGroupAPI: GroupAPIType {
         static let startPlan = groupBaseURL + "startPlan"
         static let addVenueToPlan = groupBaseURL + "addVenueToPlan"
         static let placeVote = groupBaseURL + "voteForVenue"
+        static let hasVoted = groupBaseURL + "hasVoted"
         static let checkGroupStatus = groupBaseURL + "getGroupStatus"
         static let getGroupsForUser = groupBaseURL + "getGroupsForUser"
         static let getActivityGroupLikers = groupBaseURL + "getActivityGroupLikers"
@@ -292,6 +293,35 @@ struct FirebaseGroupAPI: GroupAPIType {
                     } else {
                         observer.onNext()
                         observer.onCompleted()
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    
+    func getOptionVotedFor(groupID: String, userID: String) -> Observable<String?> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": groupID,
+                "userId": userID
+            ]
+            let request = Alamofire.request(GroupFunction.hasVoted, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseJSON(completionHandler: { (response) in
+                    switch response.result {
+                    case .success(let value):
+                        print(value)
+                        if let dic = value as? [String: String], let barID = dic["barId"] {
+                            observer.onNext(barID)
+                        } else {
+                            observer.onNext(nil)
+                        }
+                        observer.onCompleted()
+                    case .failure(let error):
+                        observer.onError(error)
                     }
                 })
             

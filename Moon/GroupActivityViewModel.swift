@@ -49,20 +49,21 @@ struct GroupActivityViewModel: BackType, NetworkingInjected, StorageNetworkingIn
         return self.hasLikedPlan.asObservable()
     }
     
-    var displayUsers: Observable<[SnapshotSectionModel]> {
-        return self.groupAPI.getGroupMembersWithStatus(groupID: groupID)
+    var displayUsers: Observable<[ActivitySection]> {
+        return self.groupAPI.getMembersActivity(groupID: groupID)
             .map({
-                $0.filter({
-                  $0.isGoing == true
-                })
-            })
-            .map({
-                return [SnapshotSectionModel(header: "Users", items: $0)]
+                return [ActivitySection(model: "Activities", items: $0)]
             })
     }
     
     var groupPicture: Observable<UIImage> {
-        return Observable.just(#imageLiteral(resourceName: "DefaultGroupPic"))
+        return self.storageAPI.getGroupPictureDownloadURLForGroup(id: self.groupID)
+            .errorOnNil()
+            .flatMap({
+                self.photoService.getImageFor(url: $0)
+            })
+            .catchErrorJustReturn(#imageLiteral(resourceName: "DefaultGroupPic"))
+
     }
     
     init(sceneCoordinator: SceneCoordinatorType, groupID: String) {
@@ -94,8 +95,8 @@ struct GroupActivityViewModel: BackType, NetworkingInjected, StorageNetworkingIn
     
     func onViewUserActivityLikes(userID: String) -> CocoaAction {
         return CocoaAction {
-            //TODO: view likers
-            return Observable.just()
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .activity(id: userID))
+            return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
     }
     
@@ -115,8 +116,8 @@ struct GroupActivityViewModel: BackType, NetworkingInjected, StorageNetworkingIn
     
     func onViewGroupLikers() -> CocoaAction {
         return CocoaAction {
-            //TODO: Implement functionality
-            return Observable.just()
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .group(id: self.groupID))
+            return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
         }
     }
     

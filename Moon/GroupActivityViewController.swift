@@ -19,7 +19,7 @@ class GroupActivityViewController: UIViewController, BindableType, UICollectionV
     var viewModel: GroupActivityViewModel!
     var bag = DisposeBag()
     var backButton: UIBarButtonItem!
-    var groupMembersDataSource = RxCollectionViewSectionedReloadDataSource<SnapshotSectionModel>()
+    var groupMembersDataSource = RxCollectionViewSectionedReloadDataSource<ActivitySection>()
     private let membersCollectionCellResuseIdenifier = "MemberSnapshotCell"
     
     @IBOutlet weak var groupPic: UIImageView!
@@ -127,8 +127,7 @@ class GroupActivityViewController: UIViewController, BindableType, UICollectionV
             
             if let strongSelf = self {
                 view.initializeView()
-                //TODO: populate view wuth activity when api endpoint is created
-                //strongSelf.populate(userCollectionView: view, snapshot: item)
+                strongSelf.populateGoing(peopleGoingView: view, activity: item)
             }
             
             // Remove the last view from the cell if there is one

@@ -24,6 +24,7 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     private var selectedVenueSnapshot = Variable<Snapshot?>(nil)
     private var group = Variable<Group?>(nil)
     private var hasLikedPlan = Variable<Bool>(false)
+    private var optionVotedFor = Variable<String?>(nil)
     
     // MARK: - Dependencies
     var sceneCoordinator: SceneCoordinatorType
@@ -92,9 +93,18 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     }
     
     var displayOptions: Observable<[PlanOptionSectionModel]> {
-        return group.asObservable()
+        return Observable.combineLatest(group.asObservable(), optionVotedFor.asObservable())
             .map({
-                $0?.plan?.options
+                $0.0?.plan?.options?.map({
+                    var temp = $0
+
+                    if $0.barID == self.optionVotedFor.value {
+                        temp.userVoted = true
+                    } else {
+                        temp.userVoted = false
+                    }
+                    return temp
+                })
             })
             .filterNil()
             .map({
@@ -220,6 +230,7 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
             .bind(to: selectedVenueSnapshot)
             .addDisposableTo(bag)
         
+        self.groupAPI.getOptionVotedFor(groupID: self.groupID, userID: self.authAPI.SignedInUserID).bind(to: optionVotedFor).addDisposableTo(bag)
     }
     
     func onEdit() -> CocoaAction {
@@ -263,7 +274,14 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
                 .do(onNext: { [unowned self] in
                     let updatedOptions = self.group.value?.plan?.options?
                         .map { option -> (PlanOption) in
-                            if option.barID == barID {
+                            
+                            if option.barID == self.optionVotedFor.value {
+                                // decrement the old voted for count
+                                var temp = option
+                                temp.voteCount = (option.voteCount!) - 1
+                                return temp
+                            } else if option.barID == barID {
+                                // increment the new voted for count, but only if not just unvoting
                                 var temp = option
                                 temp.voteCount = (option.voteCount ?? 0) + 1
                                 return temp
@@ -271,6 +289,15 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
                                 return option
                             }
                         }
+                    
+                    // Updated icon for newly voted for option
+                    // if not just unvoting
+                    if barID == self.optionVotedFor.value {
+                        self.optionVotedFor.value = nil
+                    } else {
+                        self.optionVotedFor.value = barID
+                    }
+                    
                     self.group.value?.plan?.options = updatedOptions
                 })
         }
