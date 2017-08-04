@@ -13,6 +13,7 @@ import Fusuma
 import RxDataSources
 import RxSwift
 import RxCocoa
+import SwiftOverlays
 
 class CreateEditGroupViewController: UIViewController, BindableType, FusumaDelegate, UITextFieldDelegate, UIScrollViewDelegate {
     
@@ -31,7 +32,7 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
 
     @IBOutlet weak var suggestedMembersView: UIView!
     @IBOutlet weak var groupPicture: UIImageView!
-    @IBOutlet weak var groupNameTextField: TextField!
+    @IBOutlet weak var groupNameTextField: ErrorTextField!
     @IBOutlet weak var addMemberTextField: TextField!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
@@ -98,7 +99,18 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
         
         userSearchResultsTableView.rx.modelSelected(SearchSnapshotSectionModel.Item.self).bind(to: viewModel.selectedFriend).addDisposableTo(bag)
         
+        // Save button turns to leave button when editing a group
         saveButton.rx.action = viewModel.getActionForBottomButton()
+        viewModel.onSave.executing
+            .subscribe(onNext: { [weak self] executing in
+                if executing {
+                    self?.showWaitOverlayWithText("Creating Group")
+                } else {
+                    self?.removeAllOverlays()
+                }
+            })
+            .addDisposableTo(bag)
+        
         viewModel.onSave.errors
             .subscribe(onNext: {
                 if case let .underlyingError(error) = $0 {
@@ -110,14 +122,50 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
         addButton.rx.action = viewModel.onAddUser
         backButton.rx.action = viewModel.onBack()
         
+        groupNameTextField.rx.controlEvent(UIControlEvents.editingDidEnd)
+            .map({ [weak self] _ in
+                return self?.groupNameTextField.text
+            })
+            .filterNil()
+            .map {$0.trimmed}
+            .bind(to: viewModel.updateName.inputs)
+            .addDisposableTo(bag)
+        
+        viewModel.showNameErrorMessage.bind(to: groupNameTextField.rx.isErrorRevealed).addDisposableTo(bag)
+        
+        viewModel.updateName.executionObservables
+            .flatMap({ [weak self] in
+                return $0.do(onNext: { [weak self] _ in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    
+                    let view = UIView(frame: CGRect(x: 0, y: strongSelf.navigationController!.navigationBar.frame.height, width: strongSelf.view.frame.width, height: 30))
+                    view.backgroundColor = .moonGrey
+                    
+                    let textField = UITextField(frame: view.bounds)
+                    textField.textAlignment = .center
+                    textField.text = "Group name updated"
+                    textField.textColor = .lightGray
+                    textField.font = UIFont.moonFont(size: 16)
+                    
+                    view.addSubview(textField)
+                    
+                    SwiftOverlays.showAnnoyingNotificationOnTopOfStatusBar(view, duration: 3.0)
+                })
+            })
+            .subscribe()
+            .addDisposableTo(bag)
+        
         backButton.image = viewModel.showBackArrow ? Icon.cm.arrowBack : Icon.cm.arrowDownward
         changeBottonButton(type: viewModel.bottomButtonStyle)
         
         viewModel.selectedFriendText.bind(to: addMemberTextField.rx.text).addDisposableTo(bag)
         viewModel.groupNameText.bind(to: groupNameTextField.rx.text).addDisposableTo(bag)
         addMemberTextField.rx.textInput.text.bind(to: viewModel.friendSearchText).addDisposableTo(bag)
-        groupNameTextField.rx.textInput.text.bind(to: viewModel.groupName).addDisposableTo(bag)
+        groupNameTextField.rx.textInput.text.map {$0?.trimmed}.bind(to: viewModel.groupName).addDisposableTo(bag)
         
+        viewModel.groupImage.bind(to: groupPicture.rx.image).addDisposableTo(bag)
     }
     
     private func changeBottonButton(type: CreateEditGroupBottomButtonType) {
@@ -151,10 +199,13 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
     
     func prepareGroupNameTextField() {
         groupNameTextField.placeholder = "Group Name"
+        groupNameTextField.detail = "Invalid Name"
         groupNameTextField.isClearIconButtonEnabled = true
         groupNameTextField.placeholderActiveColor = .moonBlue
         groupNameTextField.dividerActiveColor = .moonBlue
         groupNameTextField.dividerNormalColor = .moonBlue
+        
+        groupNameTextField.returnKeyType = .done
             
         let leftView = UIImageView()
         leftView.image = Icon.cm.pen
@@ -209,6 +260,7 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
     }
     
     func prepareGroupPicture() {
+        groupPicture.backgroundColor = .moonGrey
         groupPicture.isUserInteractionEnabled = true
         tap.addTarget(self, action: #selector(imageTouched))
         groupPicture.addGestureRecognizer(tap)
@@ -221,8 +273,8 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
     // MARK: FUSUMA DELEGATES for image cropping
     // Return the image which is selected from camera roll or is taken via the camera.
     func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
-        //let i  = image.crop(toWidth: 200, toHeight: 200) // circle image
         groupPicture.image = image
+        viewModel.newGroupImage.value = image
     }
     
     func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {
@@ -302,7 +354,6 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         addMemberTextField.resignFirstResponder()
         groupNameTextField.resignFirstResponder()
-        print("touching")
     }
     
     fileprivate func configureDataSource() {
@@ -316,6 +367,7 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
             let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "memberCell")
             
             cell.textLabel?.text = item.name
+            cell.textLabel?.textColor = .lightGray
             
             return cell
         }
@@ -332,6 +384,7 @@ class CreateEditGroupViewController: UIViewController, BindableType, FusumaDeleg
             switch item {
             case let .searchResult(snapshot):
                 cell.textLabel?.text = snapshot.name
+                cell.textLabel?.textColor = .lightGray
                 return cell
             default:
                 return cell

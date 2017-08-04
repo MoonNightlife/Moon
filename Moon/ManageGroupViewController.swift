@@ -69,6 +69,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel.reloadGroup.onNext()
         viewModel.reloadMembers.onNext()
     }
     

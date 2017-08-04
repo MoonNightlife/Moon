@@ -20,9 +20,14 @@ protocol ValidationUtilityType {
 struct ValidationConstants {
     static let maxNameCount = 18
     static let minNameCount = 1
+    
     static let maxUsernameCount = 12
     static let minUsernameCount = 5
+    
     static let minPasswordCount = 6
+    
+    static let maxGroupNameCount = 24
+    static let minGroupNameCount = 1
 }
 
 class ValidationUtility: ValidationUtilityType {
@@ -86,7 +91,7 @@ class ValidationUtility: ValidationUtilityType {
             return false
         }
         
-        let validLength = name.characters.count < ValidationConstants.maxNameCount && name.characters.count > ValidationConstants.minNameCount
+        let validLength = name.characters.count <= ValidationConstants.maxGroupNameCount && name.characters.count > ValidationConstants.minGroupNameCount
         let hasNonWhiteChars = stringHasNonWhiteChars(string: name)
         let hasSpecialCharsAndNums = specialCharactersAndNumbersIn(string: name)
         

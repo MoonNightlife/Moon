@@ -10,8 +10,8 @@ import Foundation
 import RxSwift
 
 protocol GroupAPIType {
-    func createGroup(groupName: String, members: [String]) -> Observable<Void>
-    func updateGroupName(groupName: String) -> Observable<Void>
+    func createGroup(groupName: String, members: [String]) -> Observable<String>
+    func updateGroupName(groupID: String, groupName: String) -> Observable<Void>
     func removeUserFromGroup(groupID: String, userID: String) -> Observable<Void>
     func addUserToGroup(groupID: String, userID: String) -> Observable<Void>
     func getGroup(groupID: String) -> Observable<Group>

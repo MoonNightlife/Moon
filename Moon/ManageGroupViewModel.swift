@@ -48,6 +48,7 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     var venueSearchText = PublishSubject<String>()
     var selectedVenue = PublishSubject<SearchSnapshotSectionModel.Item>()
     var reloadMembers = PublishSubject<Void>()
+    var reloadGroup = BehaviorSubject<Void>(value: ())
     
     // MARK: - Outputs
     var showBlockingLoadingIndicator = Variable<Bool>(false)
@@ -66,12 +67,14 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     }
     
     var groupImage: Observable<UIImage> {
-        return self.storageAPI.getGroupPictureDownloadURLForGroup(id: self.groupID)
-            .errorOnNil()
-            .flatMap({
-                self.photoService.getImageFor(url: $0)
-            })
-            .catchErrorJustReturn(#imageLiteral(resourceName: "DefaultGroupPic"))
+        return reloadGroup.flatMap({
+            return self.storageAPI.getGroupPictureDownloadURLForGroup(id: self.groupID)
+                .errorOnNil()
+                .flatMap({
+                    self.photoService.getImageFor(url: $0)
+                })
+                .catchErrorJustReturn(#imageLiteral(resourceName: "DefaultGroupPic"))
+        })
     }
     
     var planInProcess: Observable<Bool> {
@@ -176,11 +179,15 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
         self.sceneCoordinator = sceneCoordinator
         self.groupID = groupID
         
-        self.groupAPI.getGroup(groupID: groupID)
-            .do(onSubscribe: { [unowned self] in
-                self.showBlockingLoadingIndicator.value = true
-            }, onDispose: {
-                self.showBlockingLoadingIndicator.value = false
+        reloadGroup
+            .flatMap({
+                return self.groupAPI.getGroup(groupID: groupID)
+                    .do(onSubscribe: { [unowned self] in
+                        self.showBlockingLoadingIndicator.value = true
+                    }, onDispose: {
+                        self.showBlockingLoadingIndicator.value = false
+                    })
+
             })
             .bind(to: group).addDisposableTo(bag)
         

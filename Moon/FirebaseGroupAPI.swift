@@ -35,7 +35,7 @@ struct FirebaseGroupAPI: GroupAPIType {
         static let getActivityGroupLikers = groupBaseURL + "getActivityGroupLikers"
     }
     
-    func createGroup(groupName: String, members: [String]) -> Observable<Void> {
+    func createGroup(groupName: String, members: [String]) -> Observable<String> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
                 "groupName": groupName,
@@ -43,12 +43,18 @@ struct FirebaseGroupAPI: GroupAPIType {
             ]
             let request = Alamofire.request(GroupFunction.createGroup, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()
-                .response(completionHandler: {
-                    if let e = $0.error {
-                        observer.onError(e)
-                    } else {
-                        observer.onNext()
-                        observer.onCompleted()
+                .responseJSON(completionHandler: { (response) in
+                    switch response.result {
+                    case .success(let value):
+                        if let groupID = value as? String {
+                            observer.onNext(groupID)
+                            observer.onCompleted()
+                            
+                        } else {
+                            observer.onError(APIError.jsonCastingFailure)
+                        }
+                    case .failure(let error):
+                        observer.onError(error)
                     }
                 })
             
@@ -59,9 +65,10 @@ struct FirebaseGroupAPI: GroupAPIType {
 
     }
     
-    func updateGroupName(groupName: String) -> Observable<Void> {
+    func updateGroupName(groupID: String, groupName: String) -> Observable<Void> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
+                "id": groupID,
                 "groupName": groupName
             ]
             let request = Alamofire.request(GroupFunction.updateGroupName, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)

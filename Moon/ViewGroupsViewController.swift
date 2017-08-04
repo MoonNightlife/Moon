@@ -20,6 +20,7 @@ class ViewGroupsViewController: UIViewController, BindableType {
     var viewModel: ViewGroupsViewModel!
     var bag = DisposeBag()
     var groupsDataSource = RxTableViewSectionedReloadDataSource<SnapshotSectionModel>()
+    var refreshControl: UIRefreshControl = UIRefreshControl()
 
     @IBOutlet weak var viewActivity: UIButton!
     @IBOutlet weak var create: MDCFloatingButton!
@@ -34,6 +35,14 @@ class ViewGroupsViewController: UIViewController, BindableType {
         // Do any additional setup after loading the view.
         prepareCreateButton()
         configureDataSource()
+        
+        groupsTableView.refreshControl = refreshControl
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.getGroups.execute()
     }
 
     func bindViewModel() {
@@ -51,8 +60,16 @@ class ViewGroupsViewController: UIViewController, BindableType {
             .filterNil()
             .bind(to: viewModel.onManageGroup.inputs).addDisposableTo(bag)
         
-        viewModel.groupsToDisplay.bind(to: groupsTableView.rx.items(dataSource: groupsDataSource)).addDisposableTo(bag)
+        viewModel.groupsToDisplay
+            .do(onNext: { [weak self] _ in
+                self?.refreshControl.endRefreshing()
+            })
+            .bind(to: groupsTableView.rx.items(dataSource: groupsDataSource))
+            .addDisposableTo(bag)
+        
         viewModel.getGroups.execute()
+        
+        refreshControl.rx.controlEvent(.valueChanged).bind(to: viewModel.getGroups.inputs).addDisposableTo(bag)
     }
     
     func prepareCreateButton() {

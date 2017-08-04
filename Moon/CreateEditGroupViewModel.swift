@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import Action
 
-class CreateEditGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected {
+class CreateEditGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected, StorageNetworkingInjected, ImageNetworkingInjected {
     // MARK: - Global
     private var groupID: String?
     private let group = Variable<Group?>(nil)
@@ -43,37 +43,65 @@ class CreateEditGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInje
                 return Observable.just()
             }
             
+            guard !this.members.value.contains(groupMember) else {
+                return Observable.just()
+                    .do(onNext: {
+                        this.friendSearchText.onNext("")
+                        this.selectedGroupMemberSnapshot.value = nil
+                    })
+            }
+
             this.members.value += [groupMember]
             
             if let groupID = this.groupID, let userID = groupMember.id {
                 return this.groupAPI.addUserToGroup(groupID: groupID, userID: userID)
                     .do(onNext: {
+                        this.friendSearchText.onNext("")
                         this.selectedGroupMemberSnapshot.value = nil
                     })
             } else {
                 return Observable.just()
                     .do(onNext: {
+                        this.friendSearchText.onNext("")
                         this.selectedGroupMemberSnapshot.value = nil
                     })
             }
         }
     }(self)
     
-    lazy var onSave: CocoaAction = { this in
-        return Action(enabledIf: this.validGroupName) {_ in
-            guard let groupName = this.groupName.value else {
+    lazy var updateName: Action<String, Void> = {
+        return Action { name in
+            if let groupID = self.groupID {
+                return self.groupAPI.updateGroupName(groupID: groupID, groupName: name)
+            } else {
+                return Observable.empty()
+            }
+        }
+    }()
+    
+    lazy var onSave: CocoaAction = {
+        return Action(enabledIf: self.validGroupName) {_ in
+            guard let groupName = self.groupName.value else {
                 return Observable.error(GroupError.noGroupName)
             }
-            var memberIDStrings = this.members.value.flatMap({
+            var memberIDStrings = self.members.value.flatMap({
                 $0.id
             })
-            memberIDStrings.append(this.authAPI.SignedInUserID)
-            return this.groupAPI.createGroup(groupName: groupName, members: memberIDStrings)
-                .flatMap({
-                    return this.preformBackTransition()
+            memberIDStrings.append(self.authAPI.SignedInUserID)
+            return self.groupAPI.createGroup(groupName: groupName, members: memberIDStrings)
+                .flatMap({ groupID -> Observable<Void> in
+                    guard let image = self.newGroupImage.value,
+                        let imageData = UIImageJPEGRepresentation(image, 0.25) else {
+                        return Observable.just()
+                    }
+                    
+                    return self.storageAPI.uploadGroupPictureFrom(data: imageData, forGroup: groupID)
+                })
+                .flatMap({_ -> Observable<Void> in
+                    return self.preformBackTransition()
                 })
         }
-    }(self)
+    }()
     
     lazy var onRemoveUser: Action<String, Void> = { this in
         return Action { userID in
@@ -89,17 +117,19 @@ class CreateEditGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInje
     }(self)
     
     lazy var onLeaveGroup: CocoaAction = {
-        return CocoaAction {
-            print("Leaving Group")
-            return Observable.just()
+        return CocoaAction {_ in 
+            return self.groupAPI.removeUserFromGroup(groupID: self.groupID!, userID: self.authAPI.SignedInUserID)
+                .flatMap({
+                    return self.sceneCoordinator.pop()
+                })
         }
     }()
     
     // MARK: - Inputs
-    var groupImage = PublishSubject<UIImage>()
     var groupName = Variable<String?>(nil)
     var friendSearchText = PublishSubject<String?>()
     var selectedFriend = PublishSubject<SearchSnapshotSectionModel.Item>()
+    var newGroupImage = Variable<UIImage?>(nil)
     
     // MARK: - Outputs
     var showBackArrow: Bool {
@@ -107,6 +137,11 @@ class CreateEditGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInje
         // and we have presented the controller modally, so the arrow
         // should be down instead of back
         return groupID != nil
+        
+    }
+    
+    var showNameErrorMessage: Observable<Bool> {
+        return groupName.asObservable().filterNil().skip(1).map(ValidationUtility.validGroupName).map(!)
     }
     
     var bottomButtonStyle: CreateEditGroupBottomButtonType {
@@ -119,7 +154,12 @@ class CreateEditGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInje
     
     var displayUsers: Observable<[GroupMemberSectionModel]> {
         return members.asObservable().map({
-            return [GroupMemberSectionModel(header: "Members", items: $0)]
+            let filteredSnapshots = $0.filter({
+                // Remove the id of the signed in user. 
+                // If the signed in user wants to leave the group, he hits the leave button
+                $0.id != self.authAPI.SignedInUserID
+            })
+            return [GroupMemberSectionModel(header: "Members", items: filteredSnapshots)]
         })
     }
     
@@ -148,6 +188,19 @@ class CreateEditGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInje
                 $0.name
             })
     }
+    
+    var groupImage: Observable<UIImage> {
+        if let groupID = self.groupID {
+            return self.storageAPI.getGroupPictureDownloadURLForGroup(id: groupID)
+                .errorOnNil()
+                .flatMap({
+                    self.photoService.getImageFor(url: $0)
+                })
+                .catchErrorJustReturn(#imageLiteral(resourceName: "DefaultGroupPic"))
+        } else {
+            return Observable.just(#imageLiteral(resourceName: "DefaultGroupPic"))
+        }
+    }
 
     init(sceneCoordinator: SceneCoordinatorType, groupID: String?) {
         self.sceneCoordinator = sceneCoordinator
@@ -171,13 +224,27 @@ class CreateEditGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInje
             .addDisposableTo(bag)
         
         self.userAPI.getFriends(userID: self.authAPI.SignedInUserID).bind(to: friends).addDisposableTo(bag)
+        
+        self.newGroupImage
+            .asObservable()
+            .filterNil()
+            .map({
+                UIImageJPEGRepresentation($0, 0.25)
+            })
+            .filterNil()
+            .flatMap({ imageData -> Observable<Void> in
+                guard let groupID = self.groupID else {
+                    return Observable.empty()
+                }
+                return self.storageAPI.uploadGroupPictureFrom(data: imageData, forGroup: groupID)
+            })
+            .subscribe()
+            .addDisposableTo(bag)
     }
     
     func getActionForBottomButton() -> CocoaAction {
-        if let groupID = groupID {
-            return CocoaAction {
-                return self.groupAPI.removeUserFromGroup(groupID: groupID, userID: self.authAPI.SignedInUserID)
-            }
+        if groupID != nil {
+            return self.onLeaveGroup
         } else {
             return self.onSave
         }
