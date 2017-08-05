@@ -22,6 +22,7 @@ class GroupActivityViewController: UIViewController, BindableType, UICollectionV
     var groupMembersDataSource = RxCollectionViewSectionedReloadDataSource<ActivitySection>()
     private let membersCollectionCellResuseIdenifier = "MemberSnapshotCell"
     
+    @IBOutlet weak var goButton: UIButton!
     @IBOutlet weak var groupPic: UIImageView!
     @IBOutlet weak var groupNameLabel: UILabel!
     @IBOutlet weak var planButton: UIButton!
@@ -109,6 +110,13 @@ class GroupActivityViewController: UIViewController, BindableType, UICollectionV
         return flowLayout!
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var cellSize = CGFloat(0.0)
+        cellSize = collectionView.frame.size.height * 0.95
+
+        return CGSize(width: 200, height: 300)
+    }
+    
     func configureDataSource() {
         groupMembersDataSource.configureCell = {
             [weak self] dataSource, collectionView, indexPath, item in
@@ -117,12 +125,12 @@ class GroupActivityViewController: UIViewController, BindableType, UICollectionV
             
             collectionView.collectionViewLayout = (self?.cellsPerRowVertical(cells: 2, collectionView: collectionView))!
             
-            let width = cell.frame.width - 5
-            let height = cell.frame.size.height - 20
+            let width = cell.frame.width
+            let height = cell.frame.size.height
             
             let view = PeopleGoingCarouselView()
             
-            view.frame = CGRect(x: 0, y: 0, width: width, height: height)
+            view.frame = CGRect(x: (cell.frame.size.width / 2) - (width / 2), y: (cell.frame.size.width / 2) - (height / 2), width: width, height: height)
             view.backgroundColor = .clear
             
             if let strongSelf = self {
@@ -138,7 +146,6 @@ class GroupActivityViewController: UIViewController, BindableType, UICollectionV
             }
             
             cell.addSubview(view)
-            cell.layoutIfNeeded()
             return cell
         }
     }

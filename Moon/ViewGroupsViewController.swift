@@ -89,6 +89,7 @@ class ViewGroupsViewController: UIViewController, BindableType {
             
             //swiftlint:disable:next force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: "BasicImageCell", for: indexPath) as! BasicImageTableViewCell
+            
             cell.viewModel = strongSelf.viewModel.viewModelForCell(snapshot: item)
         
             return cell

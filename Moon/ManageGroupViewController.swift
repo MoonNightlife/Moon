@@ -14,7 +14,7 @@ import RxCocoa
 import RxDataSources
 import SwiftOverlays
 
-class ManageGroupViewController: UIViewController, BindableType, UITextFieldDelegate {
+class ManageGroupViewController: UIViewController, BindableType, UITextFieldDelegate, UIScrollViewDelegate {
 
     // MARK: - Global
     var viewModel: ManageGroupViewModel!
@@ -23,14 +23,19 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     var editButton: UIBarButtonItem!
     var datePickerView: UIDatePicker!
     var indicator: UIActivityIndicatorView!
+    var offSet: CGFloat!
+    var keyboardHeight: CGFloat!
+    var addVenueTextFieldIsActive = false
     
     let membersDataSource = RxTableViewSectionedReloadDataSource<GroupMemberSectionModel>()
     let suggestedVenuesDataSource = RxTableViewSectionedAnimatedDataSource<SearchSnapshotSectionModel>()
     let venuesDataSource = RxTableViewSectionedReloadDataSource<PlanOptionSectionModel>()
     
+    @IBOutlet weak var goButton: UIButton!
     @IBOutlet weak var groupPicture: UIImageView!
     @IBOutlet weak var groupNameLabel: UILabel!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var groupPlan: UIButton!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var likersButton: UIButton!
@@ -38,6 +43,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     @IBOutlet weak var startPlanButton: UIButton!
     @IBOutlet weak var addVenueTextField: TextField!
     @IBOutlet weak var addVenueButton: UIButton!
+    @IBOutlet weak var timeLabel: UILabel!
     
     @IBOutlet weak var membersTableView: UITableView!
     @IBOutlet weak var suggestedVenuesTableView: UITableView!
@@ -61,9 +67,9 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         prepareGroupNameLabel()
         configureDataSource()
         setupActivityIndicator()
-        
+        prepareScrollView()
         prepareDatePickerView()
-        
+        prepareSuggestedTableView()
         resgisterCells()
     }
     
@@ -75,6 +81,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -82,6 +89,26 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         
         // Make sure overlay is removed
         SwiftOverlays.removeAllBlockingOverlays()
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if addVenueTextFieldIsActive {
+            let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+            let keyboardFrame: NSValue = (userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as? NSValue)!
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRectangle.height
+            calculateOffset()
+            moveScrollViewUP()
+        }
+    }
+    
+    func calculateOffset() {
+        let screenHeight = self.view.frame.size.height
+        let bioY = screenHeight - suggestedVenuesTableView.y
+        let keyboardShift = keyboardHeight - bioY
+        let extraShift = suggestedVenuesTableView.frame.size.height - CGFloat(100)
+        
+        offSet = -(extraShift + keyboardShift)
     }
 
     func bindViewModel() {
@@ -319,7 +346,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     }
     
     func prepareEndTimeTextField() {
-        planEndTime.placeholder = "Set Voting End Time"
+        planEndTime.placeholder = "Set Timer"
         planEndTime.isClearIconButtonEnabled = false
         planEndTime.placeholderActiveColor = .moonBlue
         planEndTime.dividerActiveColor = .moonBlue
@@ -345,6 +372,21 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         indicator.hidesWhenStopped = true
     }
     
+    func prepareScrollView() {
+        scrollView.delegate = self
+        scrollView.isUserInteractionEnabled = true
+        scrollView.isScrollEnabled = false
+        scrollView.bounces = false
+        scrollView.keyboardDismissMode = .interactive
+        scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: 700)
+    }
+    
+    func prepareSuggestedTableView() {
+        suggestedVenuesTableView.layer.cornerRadius = 5
+        suggestedVenuesTableView.layer.borderWidth = 1
+        suggestedVenuesTableView.layer.borderColor = UIColor.lightGray.cgColor
+    }
+    
     func animateVenuesViewDown() {
         UIView.animate(withDuration: Double(0.3), animations: {
             self.suggestedVenuesHeightConstraint.constant = 100
@@ -364,18 +406,20 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == addVenueTextField {
             animateVenuesViewDown()
+            addVenueTextFieldIsActive = true
         }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         if textField == addVenueTextField {
             animateVenuesViewUp()
+            addVenueTextFieldIsActive = false
         }
     }
-    
+
     func animatePlanViewUp() {
         UIView.animate(withDuration: Double(0.3), animations: {
-            self.planViewHeightConstraint.constant = 0
+            self.planViewHeightConstraint.constant = 50
             self.view.layoutIfNeeded()
         })
         
@@ -387,6 +431,20 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
             self.view.layoutIfNeeded()
         })
         
+    }
+    
+    func moveScrollViewUP() {
+        UIView.animate(withDuration: Double(0.3), animations: {
+            self.scrollView.contentOffset.y = 30 //self.offSet
+            self.scrollView.layoutIfNeeded()
+        })
+    }
+    
+    func moveScrollViewDown() {
+        UIView.animate(withDuration: Double(0.3), animations: {
+            self.scrollView.contentOffset.y = 0 //self.scrollView.y
+            self.scrollView.layoutIfNeeded()
+        })
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -405,6 +463,13 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         addVenueButton.isHidden = false
         addVenueTextField.isHidden = false
         animatePlanViewDown()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        addVenueTextField.resignFirstResponder()
+        self.moveScrollViewDown()
+
+        return true
     }
 }
 
