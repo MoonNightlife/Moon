@@ -164,8 +164,8 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         viewModel.displayOptions.bind(to: venuesTableView.rx.items(dataSource: venuesDataSource)).addDisposableTo(bag)
         viewModel.venueSearchResults.bind(to: suggestedVenuesTableView.rx.items(dataSource: suggestedVenuesDataSource)).addDisposableTo(bag)
     
-        datePickerView.rx.countDownDuration.debug().bind(to: viewModel.endTime).addDisposableTo(bag)
-        viewModel.limitedEndTime.debug().bind(to: datePickerView.rx.countDownDuration).addDisposableTo(bag)
+        datePickerView.rx.countDownDuration.bind(to: viewModel.endTime).addDisposableTo(bag)
+        viewModel.limitedEndTime.bind(to: datePickerView.rx.countDownDuration).addDisposableTo(bag)
         
         suggestedVenuesTableView.rx.modelSelected(SearchSnapshotSectionModel.Item.self)
             .do(onNext: { [weak self] _ in
@@ -200,11 +200,46 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
             })
             .bind(to: viewModel.onViewVenue.inputs)
             .addDisposableTo(bag)
+        
+        let attendAction = viewModel.onChangeAttendance()
+        goButton.rx.action = attendAction
+        
+        attendAction.executionObservables.flatMap({
+            return $0
+                .do(onError: { [weak self] _ in
+                    self?.toggleGoButton()
+                    }, onSubscribe: { [weak self] _ in
+                        self?.toggleGoButton()
+                }).catchErrorJustReturn()
+            })
+            .subscribe()
+            .addDisposableTo(bag)
+        
+        attendAction.elements
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.reloadMembers.onNext()
+            }).addDisposableTo(bag)
+        
+        viewModel.isAttending.subscribe(onNext: { [weak self] isAttending in
+            if isAttending {
+                self?.goButton.setImage(#imageLiteral(resourceName: "thereIcon"), for: .normal)
+            } else {
+                self?.goButton.setImage(#imageLiteral(resourceName: "goButton"), for: .normal)
+            }
+        }).addDisposableTo(bag)
     }
     
     private func resgisterCells() {
         let nib = UINib(nibName: "BasicImageCell", bundle: nil)
         membersTableView.register(nib, forCellReuseIdentifier: "BasicImageCell")
+    }
+    
+    private func toggleGoButton() {
+        if goButton.imageView?.image == #imageLiteral(resourceName: "goButton") {
+            goButton.setImage(#imageLiteral(resourceName: "thereIcon"), for: .normal)
+        } else if goButton.imageView?.image == #imageLiteral(resourceName: "thereIcon") {
+            goButton.setImage(#imageLiteral(resourceName: "goButton"), for: .normal)
+        }
     }
     
     fileprivate func prepareDatePickerView() {

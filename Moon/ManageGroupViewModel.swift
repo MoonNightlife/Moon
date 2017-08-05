@@ -55,6 +55,10 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     var showBlockingLoadingIndicator = Variable<Bool>(false)
     var showSearchLoadingIndicator = Variable<Bool>(false)
     
+    var isAttending: Observable<Bool> {
+        return self.groupAPI.checkGroupStatusEndpoint(userID: self.authAPI.SignedInUserID, groupID: self.groupID)
+    }
+    
     var limitedEndTime: Observable<TimeInterval> {
         return endTime.asObservable()
             .map(filterEndTime)

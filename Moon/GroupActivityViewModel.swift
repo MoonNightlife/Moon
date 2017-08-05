@@ -23,8 +23,13 @@ struct GroupActivityViewModel: BackType, NetworkingInjected, StorageNetworkingIn
     // MARK: - Actions
     
     // MARK: - Inputs
+    var reloadUsers = BehaviorSubject<Void>(value: ())
     
     // MARK: - Outputs
+    var isAttending: Observable<Bool> {
+        return self.groupAPI.checkGroupStatusEndpoint(userID: self.authAPI.SignedInUserID, groupID: self.groupID)
+    }
+    
     var groupName: Observable<String?> {
         return group.asObservable().filterNil().map { $0.name }
     }
@@ -50,10 +55,12 @@ struct GroupActivityViewModel: BackType, NetworkingInjected, StorageNetworkingIn
     }
     
     var displayUsers: Observable<[ActivitySection]> {
-        return self.groupAPI.getMembersActivity(groupID: groupID)
-            .map({
-                return [ActivitySection(model: "Activities", items: $0)]
-            })
+        return reloadUsers.flatMap({
+            self.groupAPI.getMembersActivity(groupID: self.groupID)
+                .map({
+                    return [ActivitySection(model: "Activities", items: $0)]
+                })
+        })
     }
     
     var groupPicture: Observable<UIImage> {
@@ -140,5 +147,11 @@ struct GroupActivityViewModel: BackType, NetworkingInjected, StorageNetworkingIn
                 })
                 .catchErrorJustReturn(#imageLiteral(resourceName: "DefaultProfilePic"))
         })
+    }
+    
+    func onChangeAttendance() -> CocoaAction {
+        return CocoaAction {
+            return self.userAPI.goWithGroup(userID: self.authAPI.SignedInUserID, groupID: self.groupID, timeStamp: Date().timeIntervalSince1970)
+        }
     }
 }

@@ -65,6 +65,41 @@ class GroupActivityViewController: UIViewController, BindableType, UICollectionV
         likersButton.rx.action = viewModel.onViewGroupLikers()
         planButton.rx.action = viewModel.onViewBar()
         
+        let attendAction = viewModel.onChangeAttendance()
+        goButton.rx.action = attendAction
+        
+        attendAction.executionObservables.flatMap({
+            return $0
+                .do(onError: { [weak self] _ in
+                    self?.toggleGoButton()
+                    }, onSubscribe: { [weak self] _ in
+                        self?.toggleGoButton()
+                }).catchErrorJustReturn()
+        })
+            .subscribe()
+            .addDisposableTo(bag)
+        
+        attendAction.elements
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.reloadUsers.onNext()
+            }).addDisposableTo(bag)
+        
+        viewModel.isAttending.subscribe(onNext: { [weak self] isAttending in
+            if isAttending {
+                self?.goButton.setImage(#imageLiteral(resourceName: "thereIcon"), for: .normal)
+            } else {
+                self?.goButton.setImage(#imageLiteral(resourceName: "goButton"), for: .normal)
+            }
+        }).addDisposableTo(bag)
+        
+    }
+    
+    private func toggleGoButton() {
+        if goButton.imageView?.image == #imageLiteral(resourceName: "goButton") {
+            goButton.setImage(#imageLiteral(resourceName: "thereIcon"), for: .normal)
+        } else if goButton.imageView?.image == #imageLiteral(resourceName: "thereIcon") {
+            goButton.setImage(#imageLiteral(resourceName: "goButton"), for: .normal)
+        }
     }
     
     func prepareNavigationBackButton() {
