@@ -22,7 +22,6 @@ class ViewGroupsViewController: UIViewController, BindableType {
     var groupsDataSource = RxTableViewSectionedReloadDataSource<SnapshotSectionModel>()
     var refreshControl: UIRefreshControl = UIRefreshControl()
 
-    @IBOutlet weak var viewActivity: UIButton!
     @IBOutlet weak var create: UIButton!
     @IBOutlet weak var groupsTableView: UITableView!
     
@@ -47,7 +46,6 @@ class ViewGroupsViewController: UIViewController, BindableType {
 
     func bindViewModel() {
         create.rx.action = viewModel.onCreate()
-        viewActivity.rx.action = viewModel.onViewActivity()
         
         groupsTableView.rx.modelSelected(SnapshotSectionModel.Item.self)
             .do(onNext: { [weak self] _ in

@@ -16,6 +16,7 @@ class Activity: Mappable {
     var userID: String?
     var firstName: String?
     var lastName: String?
+    var groupName: String?
     var timestamp: Double?
     var numLikes: Int?
     var pic: String?
@@ -35,6 +36,7 @@ class Activity: Mappable {
         barName <- map["activityInfo/barName"]
         firstName <- map["firstName"]
         lastName <- map["lastName"]
+        groupName <- map["groupName"]
         timestamp <- map["activityInfo/timeStamp"]
         numLikes <- map["activityInfo/numberOfLikes"]
     }

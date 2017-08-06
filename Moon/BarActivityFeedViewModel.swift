@@ -27,7 +27,6 @@ struct BarActivityFeedViewModel: ImageNetworkingInjected, NetworkingInjected, Au
     lazy var refreshAction: Action<Void, [ActivitySection]> = { this in
        return  Action { _ in
             return this.userAPI.getActivityFeed(userID: this.authAPI.SignedInUserID)
-                
                 .map({
                     [ActivitySection.init(model: "Activities", items: $0)]
                 })
@@ -87,5 +86,23 @@ struct BarActivityFeedViewModel: ImageNetworkingInjected, NetworkingInjected, Au
                     self.photoService.getImageFor(url: $0)
                 })
         })
+    }
+    
+    func getGroupImage(id: String) -> Action<Void, UIImage> {
+        return Action {
+            return self.storageAPI.getGroupPictureDownloadURLForGroup(id: id)
+                .errorOnNil()
+                .flatMap({
+                    self.photoService.getImageFor(url: $0)
+                })
+                .catchErrorJustReturn(#imageLiteral(resourceName: "DefaultGroupPic"))
+        }
+    }
+    
+    func onViewActivity(groupID: String) -> CocoaAction {
+        return CocoaAction {
+            let vm = GroupActivityViewModel(sceneCoordinator: self.sceneCoordinator, groupID: groupID)
+            return self.sceneCoordinator.transition(to: Scene.Group.groupActivity(vm), type: .modal)
+        }
     }
 }

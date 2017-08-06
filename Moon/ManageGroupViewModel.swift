@@ -63,7 +63,7 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     var showGoButton: Observable<Bool> {
         return group.asObservable()
             .map({
-                return $0?.plan?.closingTime == nil ? false : true
+                return $0?.activityInfo == nil ? false : true
             })
     }
     

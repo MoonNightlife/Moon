@@ -100,18 +100,33 @@ class BarActivityFeedViewController: UIViewController, BindableType, DisplayErro
             }).subscribe().addDisposableTo(view.bag)
             hasLiked.execute()
             
-            view.user.rx.action = viewModel.onView(userID: userID)
+            // Check to see if user or group activity
+            if activity.firstName != nil {
+                view.user.setTitle(activity.userName, for: .normal)
+                view.user.rx.action = viewModel.onView(userID: userID)
+                
+                let downloader = viewModel.getProfileImage(id: userID)
+                downloader.elements.bind(to: view.profilePicture.rx.image).addDisposableTo(view.bag)
+                downloader.execute()
+            } else {
+                view.user.setTitle(activity.groupName, for: .normal)
+                //TODO: rename id for activity so it makes more sense. It can be a userID or groupID
+                view.user.rx.action = viewModel.onViewActivity(groupID: userID)
+                
+                let downloader = viewModel.getGroupImage(id: userID)
+                downloader.elements.bind(to: view.profilePicture.rx.image).addDisposableTo(view.bag)
+                downloader.execute()
+            }
+            
+            
             view.bar.rx.action = viewModel.onView(barID: barID)
             view.numLikeButton.rx.action = viewModel.onViewLikers(userID: userID)
             
-            let downloader = viewModel.getProfileImage(id: userID)
-            downloader.elements.bind(to: view.profilePicture.rx.image).addDisposableTo(view.bag)
-            downloader.execute()
+ 
             
         }
         
         // Bind labels
-        view.user.setTitle(activity.userName, for: .normal)
         view.bar.setTitle(activity.barName, for: .normal)
         view.numLikeButton.setTitle("\(activity.numLikes ?? 0)", for: .normal)
         

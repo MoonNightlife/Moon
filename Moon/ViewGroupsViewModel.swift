@@ -51,14 +51,6 @@ class ViewGroupsViewModel: NetworkingInjected, AuthNetworkingInjected, StorageNe
         }
     }
     
-    func onViewActivity() -> CocoaAction {
-        return CocoaAction { [unowned self] in
-            //TODO: remove hardcoded group number
-            let vm = GroupActivityViewModel(sceneCoordinator: self.sceneCoordinator, groupID: "-KqCrziDBFbqWCkyM9eC")
-            return self.sceneCoordinator.transition(to: Scene.Group.groupActivity(vm), type: .modal)
-        }
-    }
-    
     func viewModelForCell(snapshot: Snapshot) -> BasicImageCellViewModelType {
         return SnapshotBasicImageCellViewModel(snapshot: snapshot, imageSource: .group)
     }
