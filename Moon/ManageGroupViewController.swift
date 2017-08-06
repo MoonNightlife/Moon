@@ -222,9 +222,9 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         
         viewModel.isAttending.subscribe(onNext: { [weak self] isAttending in
             if isAttending {
-                self?.goButton.setImage(#imageLiteral(resourceName: "thereIcon"), for: .normal)
+                self?.goButton.setImage(#imageLiteral(resourceName: "thereIconGray"), for: .normal)
             } else {
-                self?.goButton.setImage(#imageLiteral(resourceName: "goButton"), for: .normal)
+                self?.goButton.setImage(#imageLiteral(resourceName: "goButtonGray"), for: .normal)
             }
         }).addDisposableTo(bag)
     }
@@ -235,10 +235,10 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     }
     
     private func toggleGoButton() {
-        if goButton.imageView?.image == #imageLiteral(resourceName: "goButton") {
-            goButton.setImage(#imageLiteral(resourceName: "thereIcon"), for: .normal)
-        } else if goButton.imageView?.image == #imageLiteral(resourceName: "thereIcon") {
-            goButton.setImage(#imageLiteral(resourceName: "goButton"), for: .normal)
+        if goButton.imageView?.image == #imageLiteral(resourceName: "goButtonGray") {
+            goButton.setImage(#imageLiteral(resourceName: "thereIconGray"), for: .normal)
+        } else if goButton.imageView?.image == #imageLiteral(resourceName: "thereIconGray") {
+            goButton.setImage(#imageLiteral(resourceName: "goButtonGray"), for: .normal)
         }
     }
     
@@ -462,7 +462,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     
     func animatePlanViewDown() {
         UIView.animate(withDuration: Double(0.3), animations: {
-            self.planViewHeightConstraint.constant = 220
+            self.planViewHeightConstraint.constant = 180
             self.view.layoutIfNeeded()
         })
         
@@ -470,7 +470,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     
     func moveScrollViewUP() {
         UIView.animate(withDuration: Double(0.3), animations: {
-            self.scrollView.contentOffset.y = 30 //self.offSet
+            self.scrollView.contentOffset.y = 50 //self.offSet
             self.scrollView.layoutIfNeeded()
         })
     }

@@ -39,6 +39,8 @@ class GroupActivityViewController: UIViewController, BindableType, UICollectionV
         preparePlanButton()
         prepareGroupNameLabel()
         configureDataSource()
+        
+        groupMembersCollectionView.delegate = self
     }
     
     func prepareGroupNameLabel() {
@@ -86,19 +88,19 @@ class GroupActivityViewController: UIViewController, BindableType, UICollectionV
         
         viewModel.isAttending.subscribe(onNext: { [weak self] isAttending in
             if isAttending {
-                self?.goButton.setImage(#imageLiteral(resourceName: "thereIcon"), for: .normal)
+                self?.goButton.setImage(#imageLiteral(resourceName: "thereIconGray"), for: .normal)
             } else {
-                self?.goButton.setImage(#imageLiteral(resourceName: "goButton"), for: .normal)
+                self?.goButton.setImage(#imageLiteral(resourceName: "goButtonGray"), for: .normal)
             }
         }).addDisposableTo(bag)
         
     }
     
     private func toggleGoButton() {
-        if goButton.imageView?.image == #imageLiteral(resourceName: "goButton") {
-            goButton.setImage(#imageLiteral(resourceName: "thereIcon"), for: .normal)
-        } else if goButton.imageView?.image == #imageLiteral(resourceName: "thereIcon") {
-            goButton.setImage(#imageLiteral(resourceName: "goButton"), for: .normal)
+        if goButton.imageView?.image == #imageLiteral(resourceName: "goButtonGray") {
+            goButton.setImage(#imageLiteral(resourceName: "thereIconGray"), for: .normal)
+        } else if goButton.imageView?.image == #imageLiteral(resourceName: "thereIconGray") {
+            goButton.setImage(#imageLiteral(resourceName: "goButtonGray"), for: .normal)
         }
     }
     
@@ -149,7 +151,7 @@ class GroupActivityViewController: UIViewController, BindableType, UICollectionV
         var cellSize = CGFloat(0.0)
         cellSize = collectionView.frame.size.height * 0.95
 
-        return CGSize(width: 200, height: 300)
+        return CGSize(width: 160, height: 170)
     }
     
     func configureDataSource() {
@@ -160,8 +162,8 @@ class GroupActivityViewController: UIViewController, BindableType, UICollectionV
             
             collectionView.collectionViewLayout = (self?.cellsPerRowVertical(cells: 2, collectionView: collectionView))!
             
-            let width = cell.frame.width
-            let height = cell.frame.size.height
+            let width = cell.frame.width - 10
+            let height = cell.frame.size.height - 20
             
             let view = PeopleGoingCarouselView()
             
@@ -179,6 +181,7 @@ class GroupActivityViewController: UIViewController, BindableType, UICollectionV
                     subview.removeFromSuperview()
                 }
             }
+            cell.layoutIfNeeded()
             
             cell.addSubview(view)
             return cell
