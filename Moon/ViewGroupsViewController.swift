@@ -23,7 +23,7 @@ class ViewGroupsViewController: UIViewController, BindableType {
     var refreshControl: UIRefreshControl = UIRefreshControl()
 
     @IBOutlet weak var viewActivity: UIButton!
-    @IBOutlet weak var create: MDCFloatingButton!
+    @IBOutlet weak var create: UIButton!
     @IBOutlet weak var groupsTableView: UITableView!
     
     override func viewDidLoad() {
@@ -73,10 +73,9 @@ class ViewGroupsViewController: UIViewController, BindableType {
     }
     
     func prepareCreateButton() {
-        create.backgroundColor = .moonGrey
-        create.setBackgroundColor(.moonGrey, for: .normal)
-        create.setImage(Icon.add, for: .normal)
-        create.tintColor = .moonGreen
+        create.backgroundColor = .moonGreen
+        create.tintColor = .white
+        create.layer.cornerRadius = 5
         
     }
     
