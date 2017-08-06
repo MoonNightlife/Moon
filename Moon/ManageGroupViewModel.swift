@@ -8,6 +8,7 @@
 
 import Foundation
 import Action
+import RxOptional
 import RxCocoa
 import RxSwift
 
@@ -57,6 +58,13 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     
     var isAttending: Observable<Bool> {
         return self.groupAPI.checkGroupStatusEndpoint(userID: self.authAPI.SignedInUserID, groupID: self.groupID)
+    }
+    
+    var showGoButton: Observable<Bool> {
+        return group.asObservable()
+            .map({
+                return $0?.plan?.closingTime == nil ? false : true
+            })
     }
     
     var limitedEndTime: Observable<TimeInterval> {
