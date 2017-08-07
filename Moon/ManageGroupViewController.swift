@@ -31,7 +31,6 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     let suggestedVenuesDataSource = RxTableViewSectionedAnimatedDataSource<SearchSnapshotSectionModel>()
     let venuesDataSource = RxTableViewSectionedReloadDataSource<PlanOptionSectionModel>()
     
-    @IBOutlet weak var goButton: UIButton!
     @IBOutlet weak var groupPicture: UIImageView!
     @IBOutlet weak var groupNameLabel: UILabel!
     
@@ -137,11 +136,12 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
                 }
             })
             .addDisposableTo(bag)
+        viewModel.showActivityHeartAndNumber.map(!).bind(to: likeButton.rx.isHidden).addDisposableTo(bag)
+        viewModel.showActivityHeartAndNumber.map(!).bind(to: likersButton.rx.isHidden).addDisposableTo(bag)
         viewModel.groupImage.bind(to: groupPicture.rx.image).addDisposableTo(bag)
         viewModel.groupName.bind(to: groupNameLabel.rx.text).addDisposableTo(bag)
         viewModel.endTimeString.bind(to: planEndTime.rx.text).addDisposableTo(bag)
         viewModel.currentPlanBarName.bind(to: groupPlan.rx.title()).addDisposableTo(bag)
-        viewModel.showGoButton.map(!).bind(to: goButton.rx.isHidden).addDisposableTo(bag)
         viewModel.currentPlanNumberOfLikes.bind(to: likersButton.rx.title()).addDisposableTo(bag)
         viewModel.selectedVenueText.bind(to: addVenueTextField.rx.text).addDisposableTo(bag)
         viewModel.planInProcess
@@ -201,46 +201,11 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
             })
             .bind(to: viewModel.onViewVenue.inputs)
             .addDisposableTo(bag)
-        
-        let attendAction = viewModel.onChangeAttendance()
-        goButton.rx.action = attendAction
-        
-        attendAction.executionObservables.flatMap({
-            return $0
-                .do(onError: { [weak self] _ in
-                    self?.toggleGoButton()
-                    }, onSubscribe: { [weak self] _ in
-                        self?.toggleGoButton()
-                }).catchErrorJustReturn()
-            })
-            .subscribe()
-            .addDisposableTo(bag)
-        
-        attendAction.elements
-            .subscribe(onNext: { [weak self] _ in
-                self?.viewModel.reloadMembers.onNext()
-            }).addDisposableTo(bag)
-        
-        viewModel.isAttending.subscribe(onNext: { [weak self] isAttending in
-            if isAttending {
-                self?.goButton.setImage(#imageLiteral(resourceName: "thereIconGray"), for: .normal)
-            } else {
-                self?.goButton.setImage(#imageLiteral(resourceName: "goButtonGray"), for: .normal)
-            }
-        }).addDisposableTo(bag)
     }
     
     private func resgisterCells() {
         let nib = UINib(nibName: "BasicImageCell", bundle: nil)
         membersTableView.register(nib, forCellReuseIdentifier: "BasicImageCell")
-    }
-    
-    private func toggleGoButton() {
-        if goButton.imageView?.image == #imageLiteral(resourceName: "goButtonGray") {
-            goButton.setImage(#imageLiteral(resourceName: "thereIconGray"), for: .normal)
-        } else if goButton.imageView?.image == #imageLiteral(resourceName: "thereIconGray") {
-            goButton.setImage(#imageLiteral(resourceName: "goButtonGray"), for: .normal)
-        }
     }
     
     fileprivate func prepareDatePickerView() {

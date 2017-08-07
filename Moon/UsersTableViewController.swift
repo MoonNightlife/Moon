@@ -50,7 +50,15 @@ class UsersTableViewController: UIViewController, BindableType {
             self?.refreshControl.endRefreshing()
         }).bind(to: userTableView.rx.items(dataSource: dataSource)).addDisposableTo(bag)
         
-        userTableView.rx.modelSelected(UserSectionModel.Item.self).bind(to: viewModel.onShowUser.inputs).addDisposableTo(bag)
+        userTableView.rx.modelSelected(UserSectionModel.Item.self)
+            .do(onNext: { [weak self] _ in
+                guard let selectedIndexPath = self?.userTableView.indexPathForSelectedRow else {
+                    return
+                }
+                self?.userTableView.deselectRow(at: selectedIndexPath, animated: true)
+            })
+            .bind(to: viewModel.onShowUser.inputs)
+            .addDisposableTo(bag)
         
         backButton.rx.action = viewModel.onBack()
         

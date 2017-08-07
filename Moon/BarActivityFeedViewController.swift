@@ -24,7 +24,7 @@ class BarActivityFeedViewController: UIViewController, BindableType, DisplayErro
     
     var viewModel: BarActivityFeedViewModel!
     let barActivityCellIdenifier = "barActivityCell"
-    let dataSource = RxTableViewSectionedAnimatedDataSource<ActivitySection>()
+    let dataSource = RxTableViewSectionedReloadDataSource<ActivitySection>()
     private let disposeBag = DisposeBag()
     var refreshControl: UIRefreshControl = UIRefreshControl()
     
@@ -85,30 +85,35 @@ class BarActivityFeedViewController: UIViewController, BindableType, DisplayErro
         // Bind actions
         if let userID = activity.userID, let barID = activity.barID {
             
-            let likeAction = viewModel.onLike(userID: userID)
-            view.likeButton.rx.action = likeAction
-            likeAction.elements.do(onNext: {
-                view.toggleColorAndNumber()
-            }).subscribe().addDisposableTo(view.bag)
-            
-            let hasLiked = viewModel.hasLikedActivity(activityID: userID)
-            hasLiked.elements.do(onNext: { hasLiked in
-                if hasLiked {
-                    view.likeButton.tintColor = .red
-                    view.heartColor = .red
-                }
-            }).subscribe().addDisposableTo(view.bag)
-            hasLiked.execute()
-            
             // Check to see if user or group activity
             if activity.firstName != nil {
+                view.hideGroupText()
                 view.user.setTitle(activity.userName, for: .normal)
                 view.user.rx.action = viewModel.onView(userID: userID)
                 
                 let downloader = viewModel.getProfileImage(id: userID)
                 downloader.elements.bind(to: view.profilePicture.rx.image).addDisposableTo(view.bag)
                 downloader.execute()
+                
+                let likeAction = viewModel.onLike(userID: userID)
+                view.likeButton.rx.action = likeAction
+                likeAction.elements.do(onNext: {
+                    view.toggleColorAndNumber()
+                }).subscribe().addDisposableTo(view.bag)
+                
+                let hasLiked = viewModel.hasLikedActivity(activityID: userID)
+                hasLiked.elements.do(onNext: { hasLiked in
+                    if hasLiked {
+                        view.likeButton.setImage(Icon.favorite?.tint(with: .red), for: .normal)
+                        view.heartColor = .red
+                    }
+                }).subscribe().addDisposableTo(view.bag)
+                hasLiked.execute()
+                
+                view.numLikeButton.rx.action = viewModel.onViewLikers(userID: userID)
+                
             } else {
+                view.showGroupText()
                 view.user.setTitle(activity.groupName, for: .normal)
                 //TODO: rename id for activity so it makes more sense. It can be a userID or groupID
                 view.user.rx.action = viewModel.onViewActivity(groupID: userID)
@@ -116,14 +121,26 @@ class BarActivityFeedViewController: UIViewController, BindableType, DisplayErro
                 let downloader = viewModel.getGroupImage(id: userID)
                 downloader.elements.bind(to: view.profilePicture.rx.image).addDisposableTo(view.bag)
                 downloader.execute()
+                
+                let likeAction = viewModel.onLikeGroupActivity(groupID: userID)
+                view.likeButton.rx.action = likeAction
+                likeAction.elements.do(onNext: {
+                    view.toggleColorAndNumber()
+                }).subscribe().addDisposableTo(view.bag)
+                
+                let hasLiked = viewModel.hasLikedGroupActivity(groupID: userID)
+                hasLiked.elements.do(onNext: { hasLiked in
+                    if hasLiked {
+                        view.likeButton.setImage(Icon.favorite?.tint(with: .red), for: .normal)
+                        view.heartColor = .red
+                    }
+                }).subscribe().addDisposableTo(view.bag)
+                hasLiked.execute()
+                
+                view.numLikeButton.rx.action = viewModel.onViewGroupLikers(groupID: userID)
             }
-            
-            
+        
             view.bar.rx.action = viewModel.onView(barID: barID)
-            view.numLikeButton.rx.action = viewModel.onViewLikers(userID: userID)
-            
- 
-            
         }
         
         // Bind labels

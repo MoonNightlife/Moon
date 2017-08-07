@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="25" id="LrV-iP-Szc">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LrV-iP-Szc" id="1rD-iJ-dzn">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search-by-algolia.png" translatesAutoresizingMaskIntoConstraints="NO" id="KWY-E4-6kd">
+                        <rect key="frame" x="122.5" y="12.5" width="130" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="130" id="NWO-WS-h0t"/>
+                            <constraint firstAttribute="height" constant="18" id="x1q-IC-jyh"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="KWY-E4-6kd" firstAttribute="centerX" secondItem="1rD-iJ-dzn" secondAttribute="centerX" id="BUu-F0-phY"/>
+                    <constraint firstItem="KWY-E4-6kd" firstAttribute="centerY" secondItem="1rD-iJ-dzn" secondAttribute="centerY" id="spM-Rr-WSc"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="60" y="39"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="search-by-algolia.png" width="260" height="36"/>
+    </resources>
+</document>

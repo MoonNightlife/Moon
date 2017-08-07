@@ -257,6 +257,8 @@
 		F0D497551F2CA9850020BD9F /* RxDataSourcePlanOptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D497541F2CA9850020BD9F /* RxDataSourcePlanOptionModel.swift */; };
 		F0D797B71ECF837A007BDB9C /* Dallas.gpx in Resources */ = {isa = PBXBuildFile; fileRef = F0D797B61ECF837A007BDB9C /* Dallas.gpx */; };
 		F0DAA0BE1F193D360039DA07 /* PopoverPresenterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DAA0BD1F193D360039DA07 /* PopoverPresenterType.swift */; };
+		F0DC7AB81F39194A00FE9895 /* AlgoliaLogoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0DC7AB71F39194A00FE9895 /* AlgoliaLogoCell.xib */; };
+		F0DC7ABA1F39199C00FE9895 /* search-by-algolia.png in Resources */ = {isa = PBXBuildFile; fileRef = F0DC7AB91F39199C00FE9895 /* search-by-algolia.png */; };
 		F0DCCAE91EF18E7900C9F5A9 /* RxReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DCCAE81EF18E7900C9F5A9 /* RxReachability.swift */; };
 		F0E1F5261F151E5900BC0785 /* FacebookUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E1F5251F151E5900BC0785 /* FacebookUserInfo.swift */; };
 		F0E1F5281F152C2800BC0785 /* FacebookLoginProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E1F5271F152C2800BC0785 /* FacebookLoginProviderType.swift */; };
@@ -554,6 +556,8 @@
 		F0D497541F2CA9850020BD9F /* RxDataSourcePlanOptionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxDataSourcePlanOptionModel.swift; sourceTree = "<group>"; };
 		F0D797B61ECF837A007BDB9C /* Dallas.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Dallas.gpx; sourceTree = "<group>"; };
 		F0DAA0BD1F193D360039DA07 /* PopoverPresenterType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverPresenterType.swift; sourceTree = "<group>"; };
+		F0DC7AB71F39194A00FE9895 /* AlgoliaLogoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlgoliaLogoCell.xib; sourceTree = "<group>"; };
+		F0DC7AB91F39199C00FE9895 /* search-by-algolia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search-by-algolia.png"; sourceTree = "<group>"; };
 		F0DCCAE81EF18E7900C9F5A9 /* RxReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxReachability.swift; sourceTree = "<group>"; };
 		F0DE764B1EFB295E0099989C /* Moon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Moon.entitlements; sourceTree = "<group>"; };
 		F0E1F5251F151E5900BC0785 /* FacebookUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookUserInfo.swift; sourceTree = "<group>"; };
@@ -811,6 +815,7 @@
 		F02841851F311749000747D0 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				F0DC7AB71F39194A00FE9895 /* AlgoliaLogoCell.xib */,
 				F02841881F31179E000747D0 /* BasicImage */,
 			);
 			name = Cells;
@@ -1063,6 +1068,7 @@
 		F09B9D041EC3555300B2385A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F0DC7AB91F39199C00FE9895 /* search-by-algolia.png */,
 				F0D797B61ECF837A007BDB9C /* Dallas.gpx */,
 				C034E2C81ECCF0B3008EA4BA /* FakeData */,
 				F04283AB1EC49D4E00CCB5F3 /* Bridging-Header.h */,
@@ -1494,6 +1500,7 @@
 				C034E2CD1ECCF2FB008EA4BA /* p1.jpg in Resources */,
 				F0A2252D1ECBAA3E00170927 /* absolute.jpeg in Resources */,
 				C0296B0B1EDF16A60074F0FA /* Web_Background.png in Resources */,
+				F0DC7AB81F39194A00FE9895 /* AlgoliaLogoCell.xib in Resources */,
 				F04283B51EC4A9F600CCB5F3 /* MoonsView.storyboard in Resources */,
 				F04283B31EC4A9E100CCB5F3 /* Featured.storyboard in Resources */,
 				F0A225351ECBAA3E00170927 /* miller.jpeg in Resources */,
@@ -1542,6 +1549,7 @@
 				C0465DB41EDF20DC0065FD7C /* Moon_Title.png in Resources */,
 				C0FC627A1ECF50C30087FA3B /* s4.jpg in Resources */,
 				C034E2D51ECCF37C008EA4BA /* p6.jpg in Resources */,
+				F0DC7ABA1F39199C00FE9895 /* search-by-algolia.png in Resources */,
 				C0DAD3101EE5EDD5008BAF05 /* pp1.jpg in Resources */,
 				C0DAD32C1EEA04D2008BAF05 /* b5.jpg in Resources */,
 				C0FC62771ECF50C30087FA3B /* s14.jpg in Resources */,

@@ -33,6 +33,9 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
         setupActivityIndicator()
         
         searchResultsTableView.rx.setDelegate(self).disposed(by: bag)
+        
+        let nib = UINib(nibName: "AlgoliaLogoCell", bundle: nil)
+        searchResultsTableView.register(nib, forCellReuseIdentifier: "AlgoliaLogoCell")
     }
 
     func bindViewModel() {
@@ -130,8 +133,9 @@ class SearchResultsViewController: UIViewController, BindableType, UITableViewDe
                 return cell
             case .contact(name: _, phoneNumber: _):
                 return UITableViewCell()
+            case .algoliaLogo:
+                return tableView.dequeueReusableCell(withIdentifier: "AlgoliaLogoCell", for: indexPath)
             }
-            
         }
     }
     

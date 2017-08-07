@@ -29,9 +29,11 @@ enum SearchSnapshotSectionItem: IdentifiableType, Equatable {
         case .loadMore:
             return "0"
         case .loading:
-            return "0"
+            return "1"
         case let .contact(name, phoneNumber):
             return name + phoneNumber
+        case .algoliaLogo:
+            return "2"
         }
     }
     
@@ -39,6 +41,7 @@ enum SearchSnapshotSectionItem: IdentifiableType, Equatable {
     case contact(name: String, phoneNumber: String)
     case loadMore(loadAction: CocoaAction)
     case loading
+    case algoliaLogo
 }
 
 extension SearchSnapshotSectionModel: AnimatableSectionModelType {
@@ -102,6 +105,10 @@ extension SearchSnapshotSectionModel: AnimatableSectionModelType {
     
     static func loadingSectionModel() -> SearchSnapshotSectionModel {
         return SearchSnapshotSectionModel.loading(title: "Loading", items: [.loading])
+    }
+    
+    static func algoliaSectionModel() -> SearchSnapshotSectionModel {
+        return SearchSnapshotSectionModel.searchResults(title: "", items: [.algoliaLogo])
     }
     
     static func snapshotsToSnapshotSectionModel(withTitle: String, snapshots: [Snapshot]) -> SearchSnapshotSectionModel {

@@ -38,6 +38,12 @@ struct GroupActivityViewModel: BackType, NetworkingInjected, StorageNetworkingIn
         return group.asObservable().filterNil().map { $0.activityInfo?.barName }
     }
     
+    var showGoButton: Observable<Bool> {
+        return self.groupAPI.isMemberOfGroup(userID: self.authAPI.SignedInUserID, groupID: self.groupID)
+            .catchErrorJustReturn(false)
+            .startWith(false)
+    }
+    
     var numberOfLikes: Observable<String> {
         return group.asObservable()
             .map({

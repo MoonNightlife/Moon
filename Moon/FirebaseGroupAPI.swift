@@ -26,6 +26,7 @@ struct FirebaseGroupAPI: GroupAPIType {
         static let getGroup = groupBaseURL + "getGroup"
         static let getGroupMembers = groupBaseURL + "getGroupMembers"
         static let getGroupMembersWithStatus = groupBaseURL + "getMembersWithStatus"
+        static let isMemberOfGroup = groupBaseURL + "isMemberOfGroup"
         static let getMembersActivity = groupBaseURL + "getMembersActivity"
         static let startPlan = groupBaseURL + "startPlan"
         static let addVenueToPlan = groupBaseURL + "addVenueToPlan"
@@ -206,6 +207,35 @@ struct FirebaseGroupAPI: GroupAPIType {
             }
         })
 
+    }
+    
+    func isMemberOfGroup(userID: String, groupID: String) -> Observable<Bool> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": userID,
+                "groupId": groupID
+            ]
+            let request = Alamofire.request(GroupFunction.isMemberOfGroup, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseJSON(completionHandler: { (response) in
+                    switch response.result {
+                    case .success(let value):
+                        if let isAttending = value as? Bool {
+                            observer.onNext(isAttending)
+                            observer.onCompleted()
+                            
+                        } else {
+                            observer.onError(APIError.jsonCastingFailure)
+                        }
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
     }
     
     func getMembersActivity(groupID: String) -> Observable<[Activity]> {

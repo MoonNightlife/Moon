@@ -11,7 +11,7 @@ import RxSwift
 import RxDataSources
 import Action
 
-typealias ActivitySection = AnimatableSectionModel<String, Activity>
+typealias ActivitySection = SectionModel<String, Activity>
 
 struct BarActivityFeedViewModel: ImageNetworkingInjected, NetworkingInjected, AuthNetworkingInjected, StorageNetworkingInjected {
     
@@ -35,19 +35,17 @@ struct BarActivityFeedViewModel: ImageNetworkingInjected, NetworkingInjected, Au
     
     init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator
-
-//        let numOfBlanks = (0..<7)
-//        let blankActivities = numOfBlanks.map { index -> Activity in
-//            let activity = Activity()
-//            activity.id = "\(index)"
-//            return activity
-//        }
-        
     }
     
     func onLike(userID: String) -> CocoaAction {
         return CocoaAction {_ in 
             return self.userAPI.likeActivity(userID: self.authAPI.SignedInUserID, activityUserID: userID)
+        }
+    }
+    
+    func onLikeGroupActivity(groupID: String) -> CocoaAction {
+        return CocoaAction {
+            return self.userAPI.likeGroupActivity(userID: self.authAPI.SignedInUserID, groupID: groupID)
         }
     }
     
@@ -75,6 +73,19 @@ struct BarActivityFeedViewModel: ImageNetworkingInjected, NetworkingInjected, Au
         return CocoaAction {
             let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .activity(id: userID))
             return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
+        }
+    }
+    
+    func onViewGroupLikers(groupID: String) -> CocoaAction {
+        return CocoaAction {
+            let vm = UsersTableViewModel(coordinator: self.sceneCoordinator, sourceID: .group(id: groupID))
+            return self.sceneCoordinator.transition(to: Scene.User.usersTable(vm), type: .modal)
+        }
+    }
+    
+    func hasLikedGroupActivity(groupID: String) -> Action<Void, Bool> {
+        return Action<Void, Bool> { _ in
+            return self.userAPI.hasLikedGroupActivity(userID: self.authAPI.SignedInUserID, groupID: groupID)
         }
     }
     

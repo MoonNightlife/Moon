@@ -51,6 +51,7 @@ class GroupActivityViewController: UIViewController, BindableType, UICollectionV
     func bindViewModel() {
         backButton.rx.action = viewModel.onBack()
         
+        viewModel.showGoButton.map(!).bind(to: goButton.rx.isHidden).addDisposableTo(bag)
         viewModel.groupName.bind(to: groupNameLabel.rx.text).addDisposableTo(bag)
         viewModel.barName.bind(to: planButton.rx.title()).addDisposableTo(bag)
         viewModel.numberOfLikes.bind(to: likersButton.rx.title()).addDisposableTo(bag)

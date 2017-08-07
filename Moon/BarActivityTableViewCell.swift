@@ -22,6 +22,7 @@ class BarActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var numLikeButton: UIButton!
     @IBOutlet weak var timeImageView: UIImageView!
+    @IBOutlet weak var groupPrefixText: UILabel!
     
     var bag = DisposeBag()
     var heartColor: HeartColor = .gray
@@ -40,6 +41,7 @@ class BarActivityTableViewCell: UITableViewCell {
         setupLocationImage()
         setupIsGoingToLabel()
         setupTimeImageView()
+        setupGroupPrefixText()
     }
     
     func toggleColorAndNumber() {
@@ -60,6 +62,14 @@ class BarActivityTableViewCell: UITableViewCell {
         user.rx.action = nil
         bar.rx.action = nil
         numLikeButton.rx.action = nil
+    }
+    
+    func showGroupText() {
+        groupPrefixText.text = "The group "
+    }
+    
+    func hideGroupText() {
+        groupPrefixText.text = ""
     }
 }
 
@@ -110,6 +120,11 @@ extension BarActivityTableViewCell {
         isGoingToLabel.font = UIFont.moonFont(size: 16)
         isGoingToLabel.text = "is going to"
         isGoingToLabel.textColor = .lightGray
+    }
+    
+    fileprivate func setupGroupPrefixText() {
+        groupPrefixText.font = UIFont.moonFont(size: 16)
+        groupPrefixText.textColor = .lightGray
     }
     
     fileprivate func setupTimeImageView() {

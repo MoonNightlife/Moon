@@ -68,8 +68,6 @@ class ContactsViewController: UIViewController, BindableType, MFMessageComposeVi
             [weak self] dataSource, tableView, indexPath, item in
             //swiftlint:disable force_cast
             switch item {
-            case .loadMore(_):
-                return UITableViewCell()
             case let .searchResult(snapshot):
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactTableViewCell
                 cell.name.text = snapshot.name
@@ -81,8 +79,6 @@ class ContactsViewController: UIViewController, BindableType, MFMessageComposeVi
                     downloader?.execute()
                 }
                 return cell
-            case .loading:
-                return UITableViewCell()
             case let .contact(name, phoneNumber):
                 let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "InviteContactCell")
                 
@@ -102,6 +98,8 @@ class ContactsViewController: UIViewController, BindableType, MFMessageComposeVi
                 inviteButton.rx.action = self?.onSendInviteMessage(phoneNumber: phoneNumber)
                 
                 return cell
+            default:
+                return UITableViewCell()
             }
 
         }

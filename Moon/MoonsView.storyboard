@@ -99,7 +99,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="is going to" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4w3-oI-4UM">
-                                                    <rect key="frame" x="120" y="13" width="79.5" height="21"/>
+                                                    <rect key="frame" x="207" y="13" width="79.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -112,7 +112,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSm-rD-Yoo">
-                                                    <rect key="frame" x="66" y="8" width="46" height="30"/>
+                                                    <rect key="frame" x="153" y="8" width="46" height="30"/>
                                                     <state key="normal" title="Button"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4E-6C-Uc2">
@@ -142,6 +142,12 @@
                                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The group" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rgj-QO-RMK">
+                                                    <rect key="frame" x="66" y="13" width="79" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="YOu-Sq-Oca" firstAttribute="centerY" secondItem="Vfp-2k-JUk" secondAttribute="centerY" id="0D7-AT-YFD"/>
@@ -151,15 +157,17 @@
                                                 <constraint firstItem="yxX-Gr-7RY" firstAttribute="centerY" secondItem="J4E-6C-Uc2" secondAttribute="centerY" id="DDJ-gW-ZJ4"/>
                                                 <constraint firstItem="rWW-0D-fp0" firstAttribute="centerY" secondItem="yxX-Gr-7RY" secondAttribute="centerY" id="Hqw-gM-F1F"/>
                                                 <constraint firstItem="4w3-oI-4UM" firstAttribute="leading" secondItem="XSm-rD-Yoo" secondAttribute="trailing" constant="8" id="Kud-vZ-pfH"/>
-                                                <constraint firstItem="XSm-rD-Yoo" firstAttribute="leading" secondItem="LgK-2g-9Qc" secondAttribute="trailing" constant="8" id="QxU-QD-SqM"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Vfp-2k-JUk" secondAttribute="trailing" id="SRH-9b-dhN"/>
                                                 <constraint firstItem="4w3-oI-4UM" firstAttribute="centerY" secondItem="XSm-rD-Yoo" secondAttribute="centerY" id="TFE-4w-02d"/>
                                                 <constraint firstItem="J4E-6C-Uc2" firstAttribute="leading" secondItem="R1G-Hi-E9a" secondAttribute="trailing" constant="8" id="V0p-1z-bAG"/>
                                                 <constraint firstItem="rWW-0D-fp0" firstAttribute="leading" secondItem="yxX-Gr-7RY" secondAttribute="trailing" constant="8" symbolic="YES" id="XeU-xW-tOX"/>
                                                 <constraint firstItem="J4E-6C-Uc2" firstAttribute="centerY" secondItem="R1G-Hi-E9a" secondAttribute="centerY" id="Zgs-IO-OuL"/>
                                                 <constraint firstAttribute="topMargin" secondItem="LgK-2g-9Qc" secondAttribute="top" id="akr-Fj-mK1"/>
+                                                <constraint firstItem="XSm-rD-Yoo" firstAttribute="leading" secondItem="rgj-QO-RMK" secondAttribute="trailing" constant="8" symbolic="YES" id="e2v-Sk-XiI"/>
                                                 <constraint firstAttribute="leadingMargin" secondItem="LgK-2g-9Qc" secondAttribute="leading" id="fqC-BX-hQX"/>
                                                 <constraint firstItem="R1G-Hi-E9a" firstAttribute="leading" secondItem="LgK-2g-9Qc" secondAttribute="trailing" constant="8" id="gX6-fJ-N8b"/>
+                                                <constraint firstItem="rgj-QO-RMK" firstAttribute="centerY" secondItem="XSm-rD-Yoo" secondAttribute="centerY" id="gqA-uz-ilQ"/>
+                                                <constraint firstItem="rgj-QO-RMK" firstAttribute="leading" secondItem="LgK-2g-9Qc" secondAttribute="trailing" constant="8" id="kPh-pF-ubz"/>
                                                 <constraint firstItem="R1G-Hi-E9a" firstAttribute="top" secondItem="XSm-rD-Yoo" secondAttribute="bottom" constant="4" id="mlA-yE-SNc"/>
                                                 <constraint firstItem="YOu-Sq-Oca" firstAttribute="centerY" secondItem="4w3-oI-4UM" secondAttribute="centerY" id="pKp-7O-wXR"/>
                                                 <constraint firstItem="YOu-Sq-Oca" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4w3-oI-4UM" secondAttribute="trailing" constant="8" id="umi-gT-3Gw"/>
@@ -168,6 +176,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="bar" destination="J4E-6C-Uc2" id="FXj-yb-QIz"/>
+                                            <outlet property="groupPrefixText" destination="rgj-QO-RMK" id="R1u-dr-jQ9"/>
                                             <outlet property="isGoingToLabel" destination="4w3-oI-4UM" id="T2z-g8-BPs"/>
                                             <outlet property="likeButton" destination="yxX-Gr-7RY" id="ffN-Oy-oNE"/>
                                             <outlet property="locationIcon" destination="R1G-Hi-E9a" id="X3U-6v-M96"/>
