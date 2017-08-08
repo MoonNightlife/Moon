@@ -42,7 +42,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     @IBOutlet weak var startPlanButton: UIButton!
     @IBOutlet weak var addVenueTextField: TextField!
     @IBOutlet weak var addVenueButton: UIButton!
-    @IBOutlet weak var timeLabel: UILabel!
+
     
     @IBOutlet weak var membersTableView: UITableView!
     @IBOutlet weak var suggestedVenuesTableView: UITableView!

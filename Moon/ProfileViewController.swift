@@ -213,7 +213,7 @@ class ProfileViewController: UIViewController, BindableType {
     private func setUpLikeButtons() {
         likesButton.titleLabel?.font = UIFont(name: "Roboto", size: 14)
         likesButton.tintColor = .lightGray
-        likesButton.setTitle("100", for: .normal)
+        likesButton.setTitle("0", for: .normal)
         
         let image =  Icon.favorite
         likeButton.setBackgroundImage(image, for: .normal)
