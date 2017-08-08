@@ -82,6 +82,11 @@ class UsersTableViewController: UIViewController, BindableType {
                     //swiftlint:disable force_cast
                     let cell = tableView.dequeueReusableCell(withIdentifier: "UsersTableCell", for: indexPath) as! UsersTableViewCell
                     
+                    cell.profilePicture.image = nil
+                    cell.profilePicture.backgroundColor = .moonGrey
+                    cell.profilePicture.cornerRadius = cell.profilePicture.frame.size.width / 2
+                    cell.profilePicture.clipsToBounds = true
+                    
                     if let id = snap.id {
                         let downloadAction = strongSelf.viewModel.getProfileImage(id: id)
                         downloadAction
@@ -90,9 +95,6 @@ class UsersTableViewController: UIViewController, BindableType {
                             .addDisposableTo(cell.bag)
                         downloadAction.execute()
                     }
-                    
-                    cell.profilePicture.cornerRadius = cell.profilePicture.frame.size.width / 2
-                    cell.profilePicture.clipsToBounds = true
                     
                     cell.name.text = snap.name
                     cell.name.textColor = .lightGray
@@ -103,6 +105,11 @@ class UsersTableViewController: UIViewController, BindableType {
                     //swiftlint:disable force_cast
                     let cell = tableView.dequeueReusableCell(withIdentifier: "FriendRequest", for: indexPath) as! FriendRequestTableViewCell
                     
+                    cell.profilePicture.image = nil
+                    cell.profilePicture.backgroundColor = .moonGrey
+                    cell.profilePicture.cornerRadius = cell.profilePicture.frame.size.width / 2
+                    cell.profilePicture.clipsToBounds = true
+                    
                     if let id = snap.id {
                         let downloadAction = strongSelf.viewModel.getProfileImage(id: id)
                         downloadAction
@@ -111,9 +118,6 @@ class UsersTableViewController: UIViewController, BindableType {
                             .addDisposableTo(cell.bag)
                         downloadAction.execute()
                     }
-                    
-                    cell.profilePicture.cornerRadius = cell.profilePicture.frame.size.width / 2
-                    cell.profilePicture.clipsToBounds = true
                     
                     cell.name.text = snap.name
                     cell.name.textColor = .lightGray

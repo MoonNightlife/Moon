@@ -163,10 +163,11 @@ class UsersTableViewModel: BackType, ImageNetworkingInjected, NetworkingInjected
     func getProfileImage(id: String) -> Action<Void, UIImage> {
         return Action(workFactory: {_ in
             return self.storageAPI.getProfilePictureDownloadUrlForUser(id: id, picName: "pic1.jpg")
-                .filterNil()
+                .errorOnNil()
                 .flatMap({
                     self.photoService.getImageFor(url: $0)
                 })
+                .catchErrorJustReturn(#imageLiteral(resourceName: "DefaultProfilePic"))
         })
     }
 }

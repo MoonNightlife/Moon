@@ -25,5 +25,7 @@ class FriendRequestTableViewCell: UITableViewCell {
 
     override func prepareForReuse() {
         bag = DisposeBag()
+        acceptButton.rx.action = nil
+        declineButton.rx.action = nil
     }
 }

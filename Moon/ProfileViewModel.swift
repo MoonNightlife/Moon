@@ -112,7 +112,7 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
             return firstName + " " + lastName
         })
     
-        bio = user.map({ $0.bio }).replaceNilWith("No Bio")
+        bio = user.map({ $0.bio }).replaceNilWith("")
         activityBarName = user.map({ $0.barName }).replaceNilWith("No Plans")
 
         let newPhotos = reloadPhotos.flatMap({ () -> Observable<[UIImage]> in
