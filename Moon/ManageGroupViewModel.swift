@@ -90,7 +90,7 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     var planInProcess: Observable<Bool> {
         return group.asObservable()
             .map({
-                return $0?.plan?.closingTime == nil ? false : true
+                return $0?.plan?.startTime == nil ? false : true
             })
     }
     
@@ -257,7 +257,7 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     
     func onStartPlan() -> CocoaAction {
         return CocoaAction { [unowned self] in
-            return self.groupAPI.startPlan(groupID: self.groupID, endTime: self.filterEndTime(time: self.endTime.value))
+            return self.groupAPI.startPlan(groupID: self.groupID, endTime: Date().timeIntervalSince1970)
         }
     }
     
