@@ -58,6 +58,10 @@ struct FirebaseUserAPI: UserAPIType {
         
         static let getNoticationSettings = userBaseURL + "getNotificationSettings"
         static let updateNotifcationSettings = userBaseURL + "updateNotificationSettings"
+        
+        static let getPrivacySetting = userBaseURL + "getPrivacySetting"
+        static let updatePrivacySetting = userBaseURL + "updatePrivacySetting"
+        static let canViewFullProfile = userBaseURL + "canViewFullProfile"
     }
     
 }
@@ -239,6 +243,35 @@ extension FirebaseUserAPI {
             }
         })
         
+    }
+    
+    func canViewFullProfile(userID: String, viewerID: String) -> Observable<Bool> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "userId": viewerID,
+                "id": userID
+            ]
+            let request = Alamofire.request(UserFunction.canViewFullProfile, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseJSON(completionHandler: { (response) in
+                    switch response.result {
+                    case .success(let value):
+                        if let canView = value as? Bool {
+                            observer.onNext(canView)
+                            observer.onCompleted()
+                            
+                        } else {
+                            observer.onError(APIError.jsonCastingFailure)
+                        }
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
     }
     
     func update(profile: UserProfile) -> Observable<Void> {
@@ -818,6 +851,58 @@ extension FirebaseUserAPI {
                 "settings": settings.toJSON()
             ]
             let request = Alamofire.request(UserFunction.updateNotifcationSettings, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .response(completionHandler: {
+                    if let e = $0.error {
+                        observer.onError(e)
+                    } else {
+                        observer.onNext()
+                        observer.onCompleted()
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+    }
+    
+    func getPrivacySetting(userID: String) -> Observable<Bool> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": userID,
+            ]
+            let request = Alamofire.request(UserFunction.getPrivacySetting, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseJSON(completionHandler: { (response) in
+                    switch response.result {
+                    case .success(let value):
+                        if let isOn = value as? Bool {
+                            observer.onNext(isOn)
+                            observer.onCompleted()
+                            
+                        } else {
+                            observer.onError(APIError.jsonCastingFailure)
+                        }
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
+
+    }
+    
+    func updatePrivacySetting(userID: String, privacy: Bool) -> Observable<Void> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": userID,
+                "privacy": privacy
+            ]
+            let request = Alamofire.request(UserFunction.updatePrivacySetting, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()
                 .response(completionHandler: {
                     if let e = $0.error {

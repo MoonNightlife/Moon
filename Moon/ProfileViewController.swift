@@ -30,6 +30,7 @@ class ProfileViewController: UIViewController, BindableType {
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var likesButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var planImageView: UIImageView!
 
     var friendsButton: MIBadgeButton!
     
@@ -152,6 +153,39 @@ class ProfileViewController: UIViewController, BindableType {
         viewModel.numberOfFriendRequest.elements.subscribe(onNext: { [weak self] num in
             self?.friendsButton.badgeString = num
         }).addDisposableTo(bag)
+        
+        viewModel.showPlan
+            .subscribe(onNext: { [weak self] in
+                $0 ? self?.showPlan() : self?.hidePlan()
+            })
+            .addDisposableTo(bag)
+        
+        viewModel.showLikeButton
+            .subscribe(onNext: { [weak self] in
+                if $0 {
+                    self?.likeButton.isHidden = false
+                    self?.likesButton.isHidden = false
+                } else {
+                    self?.likeButton.isHidden = true
+                    self?.likesButton.isHidden = true
+                }
+            })
+            .addDisposableTo(bag)
+    }
+    
+    private func showPlan() {
+        likeButton.isHidden = false
+        likesButton.isHidden = false
+        planButton.isHidden = false
+        planImageView.image = #imageLiteral(resourceName: "LocationIcon")
+    }
+    
+    private func hidePlan() {
+        likeButton.isHidden = true
+        likesButton.isHidden = true
+        planButton.isHidden = true
+        //TODO: add lock icon
+        planImageView.image = Icon.cm.close
     }
     
     private func setUpPageController() {

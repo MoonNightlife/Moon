@@ -11,7 +11,7 @@ import RxSwift
 
 protocol BarAPIType {
     func getBarFriends(barID: String, userID: String) -> Observable<[Activity]>
-    func getBarPeople(barID: String) -> Observable<[Activity]>
+    func getBarPeople(barID: String, userID: String) -> Observable<[Activity]>
     
     func getBarInfo(barID: String) -> Observable<BarProfile>
     func getBarEvents(barID: String) -> Observable<[BarEvent]>

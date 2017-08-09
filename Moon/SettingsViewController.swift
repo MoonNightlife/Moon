@@ -21,6 +21,7 @@ class SettingsViewController: UITableViewController, BindableType {
     @IBOutlet weak var usernameCell: UITableViewCell!
     @IBOutlet weak var phoneNumberCell: UITableViewCell!
     @IBOutlet weak var emailCell: UITableViewCell!
+    @IBOutlet weak var privacySwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +46,28 @@ class SettingsViewController: UITableViewController, BindableType {
             viewModel.email.bind(to: emailLabel.rx.text).addDisposableTo(disposeBag)
             viewModel.phoneNumber.bind(to: phoneNumberLabel.rx.text).addDisposableTo(disposeBag)
         }
+        
+        // Bind the initial state to the privacy switch
+        viewModel.privacy.drive(privacySwitch.rx.isOn).addDisposableTo(disposeBag)
+        // Call action on update privacy when switch changes
+        privacySwitch.rx.bind(to: viewModel.updatePrivacy, controlEvent: privacySwitch.rx.controlEvent(.valueChanged)) {
+            return $0.isOn
+        }
+        viewModel.updatePrivacy.executing.map(!).bind(to: privacySwitch.rx.isEnabled).addDisposableTo(disposeBag)
+        viewModel.updatePrivacy.executionObservables
+            .flatMap({
+                // Must catch error or else the subscription will die
+                return $0.do(onError: { [unowned self] _ in
+                    self.privacySwitch.isOn = !self.privacySwitch.isOn
+                    
+                    let errorView = TopErrorMessage.instanceFromNib()
+                    errorView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 25)
+                    errorView.displayMessage = "Could not update privacy setting"
+                    SwiftOverlays.showAnnoyingNotificationOnTopOfStatusBar(errorView, duration: 3.0)
+                }).catchErrorJustReturn(())
+            })
+            .subscribe()
+            .addDisposableTo(disposeBag)
         
         viewModel.loadingIndicator.asObservable()
             .subscribe(onNext: { [weak self] show in

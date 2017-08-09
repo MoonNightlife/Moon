@@ -90,7 +90,7 @@ enum SettingSections {
         case username = 0
         case changePhoneNumber = 1
         case changeEmail = 2
-        case notifications = 3
+        case notifications = 4
     }
     
     enum AccountActions: Int {

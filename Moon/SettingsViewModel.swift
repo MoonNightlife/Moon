@@ -9,6 +9,7 @@
 import Foundation
 import Action
 import RxSwift
+import RxCocoa
 import RxDataSources
 import FirebaseAuth
 import FirebaseMessaging
@@ -50,11 +51,20 @@ struct SettingsViewModel: AuthNetworkingInjected, NetworkingInjected {
         }
     }(self)
     
+    lazy var updatePrivacy: Action<Bool, Void> = { this in
+        return Action {
+            return this.userAPI.updatePrivacySetting(userID: this.authAPI.SignedInUserID, privacy: $0)
+        }
+    }(self)
+    
     // Output
     var email: Observable<String>!
     var phoneNumber: Observable<String>!
     var username: Observable<String>!
     var loadingIndicator = Variable<Bool>(false)
+    var privacy: Driver<Bool> {
+        return self.userAPI.getPrivacySetting(userID: self.authAPI.SignedInUserID).startWith(false).asDriver(onErrorJustReturn: false)
+    }
     
     // Dependencies
     private let sceneCoordinator: SceneCoordinatorType
