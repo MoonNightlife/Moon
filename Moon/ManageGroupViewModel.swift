@@ -46,7 +46,6 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     }(self)
     
     // MARK: - Inputs
-    var endTime = Variable<TimeInterval>(3600)
     var venueSearchText = PublishSubject<String>()
     var selectedVenue = PublishSubject<SearchSnapshotSectionModel.Item>()
     var reloadMembers = PublishSubject<Void>()
@@ -62,18 +61,6 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
                 return $0.activityInfo == nil ? false : true
             })
             .startWith(false)
-    }
-    
-    var limitedEndTime: Observable<TimeInterval> {
-        return endTime.asObservable()
-            .map(filterEndTime)
-    }
-    var endTimeString: Observable<String?> {
-        return endTime.asObservable()
-            .map(filterEndTime)
-            .map({ interval in
-                interval.format()
-            })
     }
     
     var groupImage: Observable<UIImage> {
@@ -182,18 +169,6 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
         return hasLikedPlan.asObservable()
     }
     
-    func filterEndTime(time: TimeInterval) -> TimeInterval {
-        if time < 3600.0 {
-            // If less than an hour return 1 hour
-            return 3600.0
-        } else if time > 43200.0 {
-            //If greter than 12 hours return 12 hours
-            return 43200.0
-        } else {
-            return time
-        }
-    }
-    
     init(sceneCoordinator: SceneCoordinatorType, groupID: String) {
         self.sceneCoordinator = sceneCoordinator
         self.groupID = groupID
@@ -215,7 +190,7 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
         Observable.combineLatest(group.asObservable(), reloadMembers)
             .flatMap({ [unowned self] group, _ -> Observable<[GroupMemberSnapshot]> in
                 
-                guard group == nil else {
+                guard group != nil else {
                     return Observable.empty()
                 }
                 
@@ -257,7 +232,7 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     
     func onStartPlan() -> CocoaAction {
         return CocoaAction { [unowned self] in
-            return self.groupAPI.startPlan(groupID: self.groupID, endTime: Date().timeIntervalSince1970)
+            return self.groupAPI.startPlan(groupID: self.groupID, startTime: Date().timeIntervalSince1970)
         }
     }
     

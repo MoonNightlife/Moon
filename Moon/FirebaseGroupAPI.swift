@@ -262,11 +262,11 @@ struct FirebaseGroupAPI: GroupAPIType {
 
     }
     
-    func startPlan(groupID: String, endTime: Double) -> Observable<Void> {
+    func startPlan(groupID: String, startTime: Double) -> Observable<Void> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
                 "id": groupID,
-                "endTime": endTime
+                "startTime": startTime
             ]
             let request = Alamofire.request(GroupFunction.startPlan, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()

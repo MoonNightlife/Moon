@@ -64,7 +64,6 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         configureDataSource()
         setupActivityIndicator()
         prepareScrollView()
-        prepareDatePickerView()
         prepareSuggestedTableView()
         resgisterCells()
     }
@@ -161,9 +160,6 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         
         viewModel.displayOptions.bind(to: venuesTableView.rx.items(dataSource: venuesDataSource)).addDisposableTo(bag)
         viewModel.venueSearchResults.bind(to: suggestedVenuesTableView.rx.items(dataSource: suggestedVenuesDataSource)).addDisposableTo(bag)
-    
-        datePickerView.rx.countDownDuration.bind(to: viewModel.endTime).addDisposableTo(bag)
-        viewModel.limitedEndTime.bind(to: datePickerView.rx.countDownDuration).addDisposableTo(bag)
         
         suggestedVenuesTableView.rx.modelSelected(SearchSnapshotSectionModel.Item.self)
             .do(onNext: { [weak self] _ in
@@ -203,27 +199,6 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     private func resgisterCells() {
         let nib = UINib(nibName: "BasicImageCell", bundle: nil)
         membersTableView.register(nib, forCellReuseIdentifier: "BasicImageCell")
-    }
-    
-    fileprivate func prepareDatePickerView() {
-        datePickerView = UIDatePicker()
-        datePickerView.datePickerMode = .countDownTimer
-        
-//        planEndTime.rx.controlEvent(.editingDidBegin)
-//            .do(onNext: {
-//                // This hack fixes the iOS bug with the date picker
-//                // https://stackoverflow.com/questions/19251803/objective-c-uidatepicker-uicontroleventvaluechanged-only-fired-on-second-select
-//                DispatchQueue.main.async {
-//                    var dateComp = DateComponents()
-//                    dateComp.second = Int(self.datePickerView.countDownDuration)
-//                    let date = Calendar.current.date(from: dateComp)
-//                    self.datePickerView.setDate(date!, animated: false)
-//                }
-//            })
-//            .subscribe(onNext: {
-//                self.planEndTime.inputView = self.datePickerView
-//            })
-//            .addDisposableTo(bag)
     }
     
     func configureDataSource() {
