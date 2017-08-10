@@ -38,7 +38,6 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     @IBOutlet weak var groupPlan: UIButton!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var likersButton: UIButton!
-    @IBOutlet weak var planEndTime: TextField!
     @IBOutlet weak var startPlanButton: UIButton!
     @IBOutlet weak var addVenueTextField: TextField!
     @IBOutlet weak var addVenueButton: UIButton!
@@ -61,7 +60,6 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         prepareAddVenueButton()
         prepareAddVenueTextField()
         prepareStartPlanButton()
-        prepareEndTimeTextField()
         prepareGroupNameLabel()
         configureDataSource()
         setupActivityIndicator()
@@ -139,7 +137,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         viewModel.showActivityHeartAndNumber.map(!).bind(to: likersButton.rx.isHidden).addDisposableTo(bag)
         viewModel.groupImage.bind(to: groupPicture.rx.image).addDisposableTo(bag)
         viewModel.groupName.bind(to: groupNameLabel.rx.text).addDisposableTo(bag)
-        viewModel.endTimeString.bind(to: planEndTime.rx.text).addDisposableTo(bag)
+       // viewModel.endTimeString.bind(to: planEndTime.rx.text).addDisposableTo(bag)
         viewModel.currentPlanBarName.bind(to: groupPlan.rx.title()).addDisposableTo(bag)
         viewModel.currentPlanNumberOfLikes.bind(to: likersButton.rx.title()).addDisposableTo(bag)
         viewModel.selectedVenueText.bind(to: addVenueTextField.rx.text).addDisposableTo(bag)
@@ -184,7 +182,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
                     return
                 }
                 self?.membersTableView.deselectRow(at: selectedIndexPath, animated: true)
-                self?.planEndTime.resignFirstResponder()
+                //self?.planEndTime.resignFirstResponder()
             })
             .filterNil()
             .bind(to: viewModel.onViewProfile.inputs)
@@ -211,21 +209,21 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         datePickerView = UIDatePicker()
         datePickerView.datePickerMode = .countDownTimer
         
-        planEndTime.rx.controlEvent(.editingDidBegin)
-            .do(onNext: {
-                // This hack fixes the iOS bug with the date picker
-                // https://stackoverflow.com/questions/19251803/objective-c-uidatepicker-uicontroleventvaluechanged-only-fired-on-second-select
-                DispatchQueue.main.async {
-                    var dateComp = DateComponents()
-                    dateComp.second = Int(self.datePickerView.countDownDuration)
-                    let date = Calendar.current.date(from: dateComp)
-                    self.datePickerView.setDate(date!, animated: false)
-                }
-            })
-            .subscribe(onNext: {
-                self.planEndTime.inputView = self.datePickerView
-            })
-            .addDisposableTo(bag)
+//        planEndTime.rx.controlEvent(.editingDidBegin)
+//            .do(onNext: {
+//                // This hack fixes the iOS bug with the date picker
+//                // https://stackoverflow.com/questions/19251803/objective-c-uidatepicker-uicontroleventvaluechanged-only-fired-on-second-select
+//                DispatchQueue.main.async {
+//                    var dateComp = DateComponents()
+//                    dateComp.second = Int(self.datePickerView.countDownDuration)
+//                    let date = Calendar.current.date(from: dateComp)
+//                    self.datePickerView.setDate(date!, animated: false)
+//                }
+//            })
+//            .subscribe(onNext: {
+//                self.planEndTime.inputView = self.datePickerView
+//            })
+//            .addDisposableTo(bag)
     }
     
     func configureDataSource() {
@@ -345,19 +343,6 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         addVenueButton.isHidden = true
     }
     
-    func prepareEndTimeTextField() {
-        planEndTime.placeholder = "Set Timer"
-        planEndTime.isClearIconButtonEnabled = false
-        planEndTime.placeholderActiveColor = .moonBlue
-        planEndTime.dividerActiveColor = .moonBlue
-        planEndTime.dividerNormalColor = .moonBlue
-        
-        let leftView = UIImageView()
-        leftView.image = Icon.cm.pen
-        planEndTime.leftView = leftView
-        planEndTime.leftViewActiveColor = .moonBlue
-        planEndTime.delegate = self
-    }
     
     func prepareStartPlanButton() {
         startPlanButton.backgroundColor = .moonGreen
@@ -449,17 +434,14 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         addVenueTextField.resignFirstResponder()
-        planEndTime.resignFirstResponder()
     }
     
     @IBAction func startPlabButtonPressed(_ sender: Any) {
-        planEndTime.resignFirstResponder()
         showPlan()
     }
     
     private func showPlan() {
         startPlanButton.isHidden = true
-        planEndTime.isHidden = true
         addVenueButton.isHidden = false
         addVenueTextField.isHidden = false
         animatePlanViewDown()
