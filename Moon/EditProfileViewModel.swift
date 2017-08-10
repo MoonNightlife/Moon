@@ -15,9 +15,9 @@ class EditProfileViewModel: BackType, StorageNetworkingInjected, ImageNetworking
     // Local
     private let bag = DisposeBag()
     var validInputs: Observable<Bool> {
-        return Observable.combineLatest(firstName.asObservable(), lastName.asObservable())
-            .map { first, last -> Bool in
-                return ValidationUtility.validName(firstName: first, lastName: last)
+        return Observable.combineLatest(firstName.asObservable(), lastName.asObservable(), bio.asObservable())
+            .map { first, last, bio -> Bool in
+                return ValidationUtility.validName(firstName: first, lastName: last) && ValidationUtility.validBio(bio: bio)
         }
 
     }
@@ -75,7 +75,7 @@ class EditProfileViewModel: BackType, StorageNetworkingInjected, ImageNetworking
         var uploadDic = [String: Data]()
         
         let uploadImages = photoArray.filter({
-            $0 != #imageLiteral(resourceName: "AddMorePicsIcon")
+            !$0.isEqualToImage(image: #imageLiteral(resourceName: "AddMorePicsIcon"))
         })
         
         let uploadData = uploadImages.map({
@@ -90,11 +90,17 @@ class EditProfileViewModel: BackType, StorageNetworkingInjected, ImageNetworking
     }
     
     private func uploadImages() -> Observable<[Void]> {
-        let uploads = prepareArrayForUpload(photoArray: self.profilePictures.value).map({
-            return self.storageAPI.uploadProfilePictureFrom(data: $1, forUser: self.authAPI.SignedInUserID, imageName: $0)
-        })
-        
-        return Observable.zip(uploads)
+        let uploads = prepareArrayForUpload(photoArray: self.profilePictures.value)
+        if uploads.isNotEmpty {
+            let uploadObservables = uploads
+                .map({
+                    return self.storageAPI.uploadProfilePictureFrom(data: $1, forUser: self.authAPI.SignedInUserID, imageName: $0)
+                })
+            
+            return Observable.zip(uploadObservables)
+        } else {
+            return Observable.just([])
+        }
     }
 
     func onSave() -> CocoaAction {

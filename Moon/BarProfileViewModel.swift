@@ -70,7 +70,7 @@ class BarProfileViewModel: ImageNetworkingInjected, NetworkingInjected, BackType
         }).catchErrorJustReturn([]).bind(to: barPics).addDisposableTo(bag)
 
         let peopleGoing = reloadDisplayUsers.flatMap({ [unowned self] _ in
-           return self.barAPI.getBarPeople(barID: barID).catchErrorJustReturn([])
+           return self.barAPI.getBarPeople(barID: barID, userID: self.authAPI.SignedInUserID).catchErrorJustReturn([])
         })
         let friendsGoing = reloadDisplayUsers.flatMap({ [unowned self] _ in
            return self.barAPI.getBarFriends(barID: self.barID, userID: self.authAPI.SignedInUserID).catchErrorJustReturn([])

@@ -24,7 +24,7 @@ class EditProfileViewController: UIViewController, BindableType, RAReorderableLa
     var keyboardHeight: CGFloat!
     let fusuma = FusumaViewController()
     fileprivate var index: NSIndexPath!
-    
+
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var bioTextField: TextField!
     @IBOutlet weak var firstNameTextField: TextField!
@@ -317,7 +317,7 @@ extension EditProfileViewController {
     
     func collectionView(_ collectionView: UICollectionView, at: IndexPath, canMoveTo: IndexPath) -> Bool {
         let cell = collectionView.cellForItem(at: canMoveTo) as? RACollectionViewCell
-        if cell?.imageView.image == #imageLiteral(resourceName: "AddMorePicsIcon") {
+        if cell!.imageView.image!.isEqualToImage(image: #imageLiteral(resourceName: "AddMorePicsIcon")) {
             return false
         }
         

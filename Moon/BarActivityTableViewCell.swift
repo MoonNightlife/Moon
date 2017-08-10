@@ -13,6 +13,7 @@ import Material
 
 class BarActivityTableViewCell: UITableViewCell {
     
+    
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var user: UIButton!
     @IBOutlet weak var isGoingToLabel: UILabel!
@@ -26,6 +27,8 @@ class BarActivityTableViewCell: UITableViewCell {
     
     var bag = DisposeBag()
     var heartColor: HeartColor = .gray
+    // This formula will give you a font size of 16 on iphone 7
+    let scaledFontSize = UIScreen.main.bounds.height * 0.024
     
     func initializeCell() {
     
@@ -88,7 +91,7 @@ extension BarActivityTableViewCell {
     
     fileprivate func setupUsername() {
         self.user.setTitleColor(.darkGray, for: .normal)
-        self.user.titleLabel?.font = UIFont.moonFont(size: 16)
+        self.user.titleLabel?.font = UIFont.moonFont(size: scaledFontSize)
         self.user.titleLabel?.lineBreakMode = .byTruncatingTail
     }
     
@@ -117,13 +120,13 @@ extension BarActivityTableViewCell {
     }
     
     fileprivate func setupIsGoingToLabel() {
-        isGoingToLabel.font = UIFont.moonFont(size: 16)
+        isGoingToLabel.font = UIFont.moonFont(size: scaledFontSize)
         isGoingToLabel.text = "is going to"
         isGoingToLabel.textColor = .lightGray
     }
     
     fileprivate func setupGroupPrefixText() {
-        groupPrefixText.font = UIFont.moonFont(size: 16)
+        groupPrefixText.font = UIFont.moonFont(size: scaledFontSize)
         groupPrefixText.textColor = .lightGray
     }
     

@@ -62,10 +62,12 @@ struct FirebaseBarAPI: BarAPIType {
         })
 
     }
-    func getBarPeople(barID: String) -> Observable<[Activity]> {
+    func getBarPeople(barID: String, userID: String) -> Observable<[Activity]> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
-                "id": "\(barID)"
+                "id": barID,
+                "userId": userID
+                
             ]
             let request = Alamofire.request(BarFunction.getBarPeople, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()

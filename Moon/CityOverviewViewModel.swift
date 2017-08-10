@@ -40,7 +40,7 @@ struct CityOverviewViewModel: NetworkingInjected, AuthNetworkingInjected, Storag
     
     lazy var getPeopleForBar: Action<String, [Activity]> = { this in
         return Action(workFactory: {
-            return this.barAPI.getBarPeople(barID: $0).startWith([])
+            this.barAPI.getBarPeople(barID: $0, userID: this.authAPI.SignedInUserID).startWith([])
         })
     }(self)
     

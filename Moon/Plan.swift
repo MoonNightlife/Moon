@@ -10,7 +10,7 @@ import Foundation
 import ObjectMapper
 
 struct Plan: Mappable {
-    var closingTime: Date?
+    var startTime: Date?
     var options: [PlanOption]?
     
     init?(map: Map) {
@@ -18,7 +18,7 @@ struct Plan: Mappable {
     }
     
     mutating func mapping(map: Map) {
-        closingTime <- (map["endTime"], DateTransfromDouble)
+        startTime <- (map["startTime"], DateTransfromDouble)
         options <- map["options"]
     }
 }

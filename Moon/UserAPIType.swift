@@ -31,6 +31,7 @@ protocol UserAPIType {
     // User Info
     func getFriends(userID: String) -> Observable<[UserSnapshot]>
     func getUserProfile(userID: String) -> Observable<UserProfile>
+    func canViewFullProfile(userID: String, viewerID: String) -> Observable<Bool>
     func update(profile: UserProfile) -> Observable<Void>
     func getActivityLikers(activityID: String) -> Observable<[UserSnapshot]>
     func getActivityFeed(userID: String) -> Observable<[Activity]>
@@ -63,4 +64,6 @@ protocol UserAPIType {
     // Settings
     func getNotificationSettings(userID: String) -> Observable<[NotificationSetting]>
     func updateNotificationSettings(userID: String, settings: [NotificationSetting]) -> Observable<Void>
+    func getPrivacySetting(userID: String) -> Observable<Bool>
+    func updatePrivacySetting(userID: String, privacy: Bool) -> Observable<Void>
 }

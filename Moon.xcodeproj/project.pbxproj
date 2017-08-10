@@ -166,6 +166,8 @@
 		F04D670F1F236F860031CAA4 /* UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04D670E1F236F860031CAA4 /* UIWindow.swift */; };
 		F04F445C1ECF840700D5FC62 /* BarAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */; };
 		F05491241F1FBB63008568E5 /* NotificationSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05491231F1FBB63008568E5 /* NotificationSetting.swift */; };
+		F05DF7561F3B28590011CDF9 /* TopErrorMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F05DF7551F3B28590011CDF9 /* TopErrorMessageView.xib */; };
+		F05DF7591F3B28F40011CDF9 /* TopErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05DF7581F3B28F40011CDF9 /* TopErrorMessage.swift */; };
 		F06209731F1E933600AF529A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F06209721F1E933600AF529A /* GoogleService-Info.plist */; };
 		F06B42321EFDAE9900BE7626 /* DynamicLinkingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B42311EFDAE9900BE7626 /* DynamicLinkingAPI.swift */; };
 		F06B56FD1EFAA8750028552A /* RxDataSourceUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B56FC1EFAA8750028552A /* RxDataSourceUserModel.swift */; };
@@ -276,6 +278,7 @@
 		F0EF693C1EF0949C0028A32B /* UsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EF693B1EF0949C0028A32B /* UsersTableViewCell.swift */; };
 		F0EF693E1EF09AD90028A32B /* BackType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EF693D1EF09AD90028A32B /* BackType.swift */; };
 		F0F210591ECA1C160027B50B /* SearchBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F210581ECA1C160027B50B /* SearchBarViewController.swift */; };
+		F0F496471F39F94D00B3405A /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F496461F39F94D00B3405A /* UIImage.swift */; };
 		F0F4CDFB1F0DA04C00AE69C1 /* Transforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F4CDFA1F0DA04C00AE69C1 /* Transforms.swift */; };
 		F0F6B5121F019FF1000C4489 /* DisplayErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B5111F019FF1000C4489 /* DisplayErrorType.swift */; };
 		F0FD8F301EE178650020D131 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */; };
@@ -465,6 +468,8 @@
 		F04D670E1F236F860031CAA4 /* UIWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWindow.swift; sourceTree = "<group>"; };
 		F04F445B1ECF840700D5FC62 /* BarAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAnnotation.swift; sourceTree = "<group>"; };
 		F05491231F1FBB63008568E5 /* NotificationSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSetting.swift; sourceTree = "<group>"; };
+		F05DF7551F3B28590011CDF9 /* TopErrorMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopErrorMessageView.xib; sourceTree = "<group>"; };
+		F05DF7581F3B28F40011CDF9 /* TopErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopErrorMessage.swift; sourceTree = "<group>"; };
 		F06209721F1E933600AF529A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F06B42311EFDAE9900BE7626 /* DynamicLinkingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicLinkingAPI.swift; sourceTree = "<group>"; };
 		F06B56FC1EFAA8750028552A /* RxDataSourceUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxDataSourceUserModel.swift; sourceTree = "<group>"; };
@@ -576,6 +581,7 @@
 		F0EF693B1EF0949C0028A32B /* UsersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewCell.swift; sourceTree = "<group>"; };
 		F0EF693D1EF09AD90028A32B /* BackType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackType.swift; sourceTree = "<group>"; };
 		F0F210581ECA1C160027B50B /* SearchBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarViewController.swift; sourceTree = "<group>"; };
+		F0F496461F39F94D00B3405A /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		F0F4CDFA1F0DA04C00AE69C1 /* Transforms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transforms.swift; sourceTree = "<group>"; };
 		F0F6B5111F019FF1000C4489 /* DisplayErrorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayErrorType.swift; sourceTree = "<group>"; };
 		F0FD8F2F1EE178650020D131 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -993,6 +999,15 @@
 			name = Scenes;
 			sourceTree = "<group>";
 		};
+		F05DF7571F3B28D10011CDF9 /* TopErrorMessage */ = {
+			isa = PBXGroup;
+			children = (
+				F05DF7551F3B28590011CDF9 /* TopErrorMessageView.xib */,
+				F05DF7581F3B28F40011CDF9 /* TopErrorMessage.swift */,
+			);
+			name = TopErrorMessage;
+			sourceTree = "<group>";
+		};
 		F06B42331EFDC4D800BE7626 /* DynamicLinking */ = {
 			isa = PBXGroup;
 			children = (
@@ -1096,6 +1111,7 @@
 				F02841851F311749000747D0 /* Cells */,
 				F0EF693B1EF0949C0028A32B /* UsersTableViewCell.swift */,
 				F04A6D591EEF2B8C000D898B /* LoadMoreTableViewCell.swift */,
+				F05DF7571F3B28D10011CDF9 /* TopErrorMessage */,
 			);
 			name = Subclasses;
 			sourceTree = "<group>";
@@ -1340,6 +1356,7 @@
 				F04D670C1F236F600031CAA4 /* UIView.swift */,
 				F04D670E1F236F860031CAA4 /* UIWindow.swift */,
 				F0B1BD191F320DC200A8623E /* TimeInterval.swift */,
+				F0F496461F39F94D00B3405A /* UIImage.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1559,6 +1576,7 @@
 				F0A8E2EA1EC3C858001D9993 /* pic6.jpg in Resources */,
 				C0FC62781ECF50C30087FA3B /* s2.jpg in Resources */,
 				C0552C661EE0A1FB007B84F6 /* facebookButton.png in Resources */,
+				F05DF7561F3B28590011CDF9 /* TopErrorMessageView.xib in Resources */,
 				C0FC627D1ECF53520087FA3B /* s7.jpg in Resources */,
 				C0DAD3241EEA04B2008BAF05 /* b1.jpg in Resources */,
 				C0552C681EE0A200007B84F6 /* googleButton.png in Resources */,
@@ -1735,6 +1753,7 @@
 				F03C78C91EE9EA5C002AEDAD /* DeleteAccountViewModel.swift in Sources */,
 				F03474391F28A36A00E6BA07 /* Group.swift in Sources */,
 				F0E59F2A1EEF73B4007A3323 /* BarInfoViewModel.swift in Sources */,
+				F05DF7591F3B28F40011CDF9 /* TopErrorMessage.swift in Sources */,
 				F0CF7F1B1EF37D5E005C068C /* EnterCodeViewModel.swift in Sources */,
 				F0ED6B3D1F057909005D04D6 /* FirebaseUserAPI.swift in Sources */,
 				F0CF7F191EF37D54005C068C /* EnterPhoneNumberViewModel.swift in Sources */,
@@ -1742,6 +1761,7 @@
 				F0CA18AB1EE5AA4C00428318 /* FeaturedViewModel.swift in Sources */,
 				F04283AD1EC49DB600CCB5F3 /* MainViewController.swift in Sources */,
 				F07757B01F13FD9800B659D9 /* BarSnapshot.swift in Sources */,
+				F0F496471F39F94D00B3405A /* UIImage.swift in Sources */,
 				F03765C91F25111600BE173D /* ViewGroupsViewModel.swift in Sources */,
 				F0CF7F1D1EF37D80005C068C /* CountryCodeViewModel.swift in Sources */,
 				F0B1BD181F31FA0F00A8623E /* GroupMemberBasicImageCellViewModel.swift in Sources */,

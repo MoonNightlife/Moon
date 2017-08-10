@@ -19,6 +19,8 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
     private let barID = Variable<String?>(nil)
     private let userID: String
     private let editProfileInfo = Variable<EditProfileInfo>(EditProfileInfo())
+    private let user: Observable<UserProfile>
+    private let acceptedFriendRequest = PublishSubject<Void>()
     
     // Dependecies
     private let sceneCoordinator: SceneCoordinatorType
@@ -50,6 +52,24 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
     var numberOfLikes: Observable<String>
     var hasLiked: Observable<Bool> {
         return self.userAPI.hasLikedActivity(userID: self.authAPI.SignedInUserID, ActivityID: self.userID)
+    }
+    var showPlan: Observable<Bool> {
+        let backendResult = self.userAPI.canViewFullProfile(userID: self.userID, viewerID: self.authAPI.SignedInUserID)
+        return Observable.merge(backendResult, acceptedFriendRequest.asObservable().map({true}))
+    }
+    var showLikeButton: Observable<Bool> {
+        return user
+            .map({
+                $0.barId
+            })
+            .map({
+                if $0 == nil {
+                    return false
+                } else {
+                    return true
+                }
+            })
+            .startWith(false)
     }
     
     init(coordinator: SceneCoordinatorType, userID: String, userAPI: UserAPIType = FirebaseUserAPI(), photoService: PhotoService = KingFisherPhotoService(), authAPI: AuthAPIType = FirebaseAuthAPI(), storageAPI: StorageAPIType = FirebaseStorageAPI()) {
@@ -91,7 +111,7 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
             return userAPI.getUserProfile(userID: userID).catchErrorJustReturn(UserProfile()).shareReplay(1)
         })
         
-        let user = reload.elements
+        user = reload.elements
         
         numberOfLikes = user.map { $0.numberOfLikes }.filterNil().map { "\($0)" }
         
@@ -112,7 +132,7 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
             return firstName + " " + lastName
         })
     
-        bio = user.map({ $0.bio }).replaceNilWith("No Bio")
+        bio = user.map({ $0.bio }).replaceNilWith("")
         activityBarName = user.map({ $0.barName }).replaceNilWith("No Plans")
 
         let newPhotos = reloadPhotos.flatMap({ () -> Observable<[UIImage]> in
@@ -200,6 +220,7 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
         return CocoaAction { _ in
             return self.userAPI.acceptFriend(userID: self.authAPI.SignedInUserID, friendID: self.userID).do(onNext: {
                 self.reloadActionButton.onNext()
+                self.acceptedFriendRequest.onNext()
             })
 
         }

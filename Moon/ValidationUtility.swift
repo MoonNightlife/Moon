@@ -15,6 +15,7 @@ protocol ValidationUtilityType {
     static func validEmail(email: String?) -> Bool
     static func validBirthday(birthday: Date?) -> Bool
     static func validPassword(password: String?) -> Bool
+    static func validBio(bio: String?) -> Bool
 }
 
 struct ValidationConstants {
@@ -28,6 +29,8 @@ struct ValidationConstants {
     
     static let maxGroupNameCount = 24
     static let minGroupNameCount = 1
+    
+    static let maxBioCount = 30
 }
 
 class ValidationUtility: ValidationUtilityType {
@@ -96,6 +99,15 @@ class ValidationUtility: ValidationUtilityType {
         let hasSpecialCharsAndNums = specialCharactersAndNumbersIn(string: name)
         
         return validLength && !hasSpecialCharsAndNums && hasNonWhiteChars
+    }
+    static func validBio(bio: String?) -> Bool {
+        guard let bio = bio else {
+            return false
+        }
+        
+        let validLength = bio.characters.count <= ValidationConstants.maxBioCount
+        
+        return validLength
     }
 }
 
