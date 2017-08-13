@@ -31,6 +31,7 @@ class ProfileViewController: UIViewController, BindableType {
     @IBOutlet weak var likesButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var planImageView: UIImageView!
+    @IBOutlet weak var reportButton: UIButton!
 
     var friendsButton: MIBadgeButton!
     
@@ -48,6 +49,7 @@ class ProfileViewController: UIViewController, BindableType {
         setUpUsernameLabel()
         setupAcceptButton()
         setUpLikeButtons()
+        prepareReportButton()
         
     }
     
@@ -253,6 +255,14 @@ class ProfileViewController: UIViewController, BindableType {
         likeButton.setBackgroundImage(image, for: .normal)
         likeButton.tintColor = .lightGray
         
+    }
+    
+    private func prepareReportButton() {
+        reportButton.tintColor = .moonRed
+        reportButton.titleLabel?.font = UIFont(name: "Roboto", size: 17)
+        reportButton.layer.cornerRadius = reportButton.frame.size.height / 2
+        reportButton.layer.borderWidth = 2.5
+        reportButton.layer.borderColor = UIColor.moonRed.cgColor
     }
 
 }
