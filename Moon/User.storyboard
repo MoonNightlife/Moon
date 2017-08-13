@@ -168,6 +168,7 @@
                                     <constraint firstAttribute="width" constant="30" id="GoT-Ba-yhO"/>
                                     <constraint firstAttribute="height" constant="30" id="ZHh-Jd-gfr"/>
                                 </constraints>
+                                <state key="normal" title="!"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -208,6 +209,7 @@
                         <outlet property="pageController" destination="GXf-Ku-Z6f" id="SKa-WF-3ya"/>
                         <outlet property="planButton" destination="KYC-Sf-EDE" id="UCY-21-shU"/>
                         <outlet property="planImageView" destination="taY-YI-bsl" id="46z-Me-R6F"/>
+                        <outlet property="reportButton" destination="vL4-zf-D7s" id="AuJ-8h-uRr"/>
                         <outlet property="toolBar" destination="UUB-4w-a4j" id="aby-wb-BEi"/>
                         <outlet property="usernameLabel" destination="Yob-e9-dvl" id="4a1-x7-QSt"/>
                     </connections>
@@ -430,7 +432,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="74K-Be-0h3">
-                                                    <rect key="frame" x="16" y="11" width="52" height="21"/>
+                                                    <rect key="frame" x="16" y="11" width="52" height="21.5"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
