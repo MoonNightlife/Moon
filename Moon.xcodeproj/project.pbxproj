@@ -191,6 +191,7 @@
 		F09DF0961EEB85140092BFA5 /* ContentSuggestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF0951EEB85140092BFA5 /* ContentSuggestionsViewController.swift */; };
 		F09DF0981EEB854D0092BFA5 /* ContentSuggestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09DF0971EEB854D0092BFA5 /* ContentSuggestionViewModel.swift */; };
 		F0A0F4A51F14FE4B0034EC64 /* FacebookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A0F4A41F14FE4B0034EC64 /* FacebookService.swift */; };
+		F0A100161F3CA04900463071 /* TutorialType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A100151F3CA04900463071 /* TutorialType.swift */; };
 		F0A2251F1ECB9F2600170927 /* MoonFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A2251E1ECB9F2600170927 /* MoonFont.swift */; };
 		F0A2252D1ECBAA3E00170927 /* absolute.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F0A225211ECBAA3E00170927 /* absolute.jpeg */; };
 		F0A2252E1ECBAA3E00170927 /* bacardi.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F0A225221ECBAA3E00170927 /* bacardi.jpeg */; };
@@ -493,6 +494,7 @@
 		F09DF0951EEB85140092BFA5 /* ContentSuggestionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentSuggestionsViewController.swift; sourceTree = "<group>"; };
 		F09DF0971EEB854D0092BFA5 /* ContentSuggestionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentSuggestionViewModel.swift; sourceTree = "<group>"; };
 		F0A0F4A41F14FE4B0034EC64 /* FacebookService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookService.swift; sourceTree = "<group>"; };
+		F0A100151F3CA04900463071 /* TutorialType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialType.swift; sourceTree = "<group>"; };
 		F0A2251E1ECB9F2600170927 /* MoonFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonFont.swift; sourceTree = "<group>"; };
 		F0A225211ECBAA3E00170927 /* absolute.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = absolute.jpeg; sourceTree = "<group>"; };
 		F0A225221ECBAA3E00170927 /* bacardi.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bacardi.jpeg; sourceTree = "<group>"; };
@@ -1386,6 +1388,7 @@
 				F03474381F28A36A00E6BA07 /* Group.swift */,
 				F034743A1F28A37300E6BA07 /* Plan.swift */,
 				F034743C1F28A38500E6BA07 /* ActivityInfo.swift */,
+				F0A100151F3CA04900463071 /* TutorialType.swift */,
 			);
 			name = "Models ";
 			sourceTree = "<group>";
@@ -1876,6 +1879,7 @@
 				F0FD8F371EE1DC950020D131 /* ErrorTextField+Rx.swift in Sources */,
 				F0335A761EF1F7DD005118B4 /* RxDataSourceSearchSnapshotModel.swift in Sources */,
 				F0DCCAE91EF18E7900C9F5A9 /* RxReachability.swift in Sources */,
+				F0A100161F3CA04900463071 /* TutorialType.swift in Sources */,
 				F04A6D561EEEF931000D898B /* SearchTableViewCell.swift in Sources */,
 				F0CA18AF1EE5AA6C00428318 /* BarActivityFeedViewModel.swift in Sources */,
 				F0CF158E1EDEED8600531DCF /* NameViewModel.swift in Sources */,

@@ -17,20 +17,6 @@ class TutorialViewController: UIViewController, BindableType {
     @IBOutlet weak var pageController: UIPageControl!
     
     var viewModel: TutorialViewModel!
-    enum TutorialViews: Int {
-        case search, feature, moon, explore
-        
-        static let count = 4
-        
-        func image() -> UIImage {
-            switch self {
-            case .search: return #imageLiteral(resourceName: "SearchTutorial")
-            case .feature: return #imageLiteral(resourceName: "FeaturedEventsTutorial")
-            case .moon: return #imageLiteral(resourceName: "MoonsViewTutorial")
-            case .explore: return #imageLiteral(resourceName: "ExploreTutorial")
-            }
-        }
-    }
     
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
@@ -60,7 +46,7 @@ class TutorialViewController: UIViewController, BindableType {
     }
     
     private func setupPageController() {
-        pageController.numberOfPages = TutorialViews.count
+        pageController.numberOfPages = viewModel.tutorialViews.count
         pageController.pageIndicatorTintColor = .lightGray
         pageController.currentPageIndicatorTintColor = .darkGray
     }
@@ -79,12 +65,12 @@ extension TutorialViewController: iCarouselDelegate, iCarouselDataSource {
     }
     
     func numberOfItems(in carousel: iCarousel) -> Int {
-        return TutorialViews.count
+        return viewModel.tutorialViews.count
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         
-        let imageForIndex = TutorialViews.init(rawValue: index)?.image()
+        let imageForIndex = viewModel.tutorialViews.images[index]
         
         if let view = view as? UIImageView {
             view.image = imageForIndex

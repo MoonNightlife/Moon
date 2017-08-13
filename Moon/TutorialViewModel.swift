@@ -13,8 +13,12 @@ struct TutorialViewModel: BackType {
     // Dependencies
     var sceneCoordinator: SceneCoordinatorType
     
-    init(sceneCoordinator: SceneCoordinatorType) {
+    // Outputs
+    var tutorialViews: TutorialViewsType
+    
+    init(sceneCoordinator: SceneCoordinatorType, type: TutorialType) {
         self.sceneCoordinator = sceneCoordinator
+        tutorialViews = type.views()
     }
 
 }

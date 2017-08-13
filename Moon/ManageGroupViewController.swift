@@ -77,6 +77,10 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        if firstTimeViewingManageGroup() {
+            viewModel.onShowTutorial().execute()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -254,6 +258,18 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         }
     }
     
+    fileprivate func firstTimeViewingManageGroup() -> Bool {
+        if UserDefaults.standard.bool(forKey: "FirstTimeViewingManageGroup") {
+            // App already launched
+            return true
+        } else {
+            // This is the first launch ever
+            UserDefaults.standard.set(true, forKey: "FirstTimeViewingManageGroup")
+            UserDefaults.standard.synchronize()
+            return true
+        }
+    }
+    
     func prepareNavigationBackButton() {
         backButton = UIBarButtonItem()
         backButton.image = Icon.cm.arrowDownward
@@ -317,7 +333,6 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         addVenueButton.tintColor = .white
         addVenueButton.isHidden = true
     }
-    
     
     func prepareStartPlanButton() {
         startPlanButton.backgroundColor = .moonGreen

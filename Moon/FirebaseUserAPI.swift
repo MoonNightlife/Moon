@@ -870,7 +870,7 @@ extension FirebaseUserAPI {
     func getPrivacySetting(userID: String) -> Observable<Bool> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
-                "id": userID,
+                "id": userID
             ]
             let request = Alamofire.request(UserFunction.getPrivacySetting, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()

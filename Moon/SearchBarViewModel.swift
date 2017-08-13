@@ -80,7 +80,7 @@ struct SearchBarViewModel: NetworkingInjected, AuthNetworkingInjected {
     
     func onShowTutorial() -> CocoaAction {
         return CocoaAction { _ in
-            let vm = TutorialViewModel(sceneCoordinator: self.sceneCoordinator)
+            let vm = TutorialViewModel(sceneCoordinator: self.sceneCoordinator, type: .intro)
             return self.sceneCoordinator.transition(to: Scene.Master.tutorial(vm), type: .popover)
         }
     }

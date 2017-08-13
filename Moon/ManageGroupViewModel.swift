@@ -321,5 +321,12 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     func viewModelForCell(groupMemberSnapshot: GroupMemberSnapshot) -> BasicImageCellViewModelType {
         return GroupMemberBasicImageCellViewModel(groupMemberSnapshot: groupMemberSnapshot)
     }
+    
+    func onShowTutorial() -> CocoaAction {
+        return CocoaAction { _ in
+            let vm = TutorialViewModel(sceneCoordinator: self.sceneCoordinator, type: .group)
+            return self.sceneCoordinator.transition(to: Scene.Master.tutorial(vm), type: .popover)
+        }
+    }
 
 }

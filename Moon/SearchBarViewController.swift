@@ -121,7 +121,7 @@ class SearchBarViewController: SearchBarController, BindableType, UIPopoverPrese
     fileprivate func firstLaunch() -> Bool {
         if UserDefaults.standard.bool(forKey: "HasLaunchedOnce") {
             // App already launched
-            return false
+            return true
         } else {
             // This is the first launch ever
             UserDefaults.standard.set(true, forKey: "HasLaunchedOnce")
