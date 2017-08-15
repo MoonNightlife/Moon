@@ -130,7 +130,7 @@ struct SettingsViewModel: AuthNetworkingInjected, NetworkingInjected {
             let vm = WebViewViewModel(coordinator: self.sceneCoordinator, url: URL(string: "https://www.iubenda.com/privacy-policy/7891983")!)
             return Scene.User.webView(vm)
         case .support:
-            let vm = WebViewViewModel(coordinator: self.sceneCoordinator, url: URL(string: "http://www.moonnightlifeapp.com/home")!)
+            let vm = WebViewViewModel(coordinator: self.sceneCoordinator, url: URL(string: "http://www.moonnightlife.com/home")!)
             return Scene.User.webView(vm)
         case .termsAndConditions:
             let vm = WebViewViewModel(coordinator: self.sceneCoordinator, url: URL(string: "https://www.iubenda.com/privacy-policy/7891983")!)

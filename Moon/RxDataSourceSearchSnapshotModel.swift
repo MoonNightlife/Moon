@@ -31,7 +31,7 @@ enum SearchSnapshotSectionItem: IdentifiableType, Equatable {
         case .loading:
             return "1"
         case let .contact(name, phoneNumber):
-            return name + phoneNumber
+            return name + phoneNumber + "\(arc4random())"
         case .algoliaLogo:
             return "2"
         }

@@ -261,7 +261,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     fileprivate func firstTimeViewingManageGroup() -> Bool {
         if UserDefaults.standard.bool(forKey: "FirstTimeViewingManageGroup") {
             // App already launched
-            return true
+            return false
         } else {
             // This is the first launch ever
             UserDefaults.standard.set(true, forKey: "FirstTimeViewingManageGroup")
