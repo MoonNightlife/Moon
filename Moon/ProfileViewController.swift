@@ -185,7 +185,7 @@ class ProfileViewController: UIViewController, BindableType {
         likeButton.isHidden = true
         likesButton.isHidden = true
         planButton.isHidden = true
-        planImageView.image = 
+        planImageView.image = #imageLiteral(resourceName: "lock")
     }
     
     private func setUpPageController() {
