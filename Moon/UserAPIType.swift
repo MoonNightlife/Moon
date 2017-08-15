@@ -27,6 +27,7 @@ protocol UserAPIType {
     func blockUser(userID: String, blockID: String) -> Observable<Void>
     func unblockUser(userID: String, blockID: String) -> Observable<Void>
     func getBlockedUserList(userID: String) -> Observable<[UserSnapshot]>
+    func reportUser(userId: String) -> Observable<Void>
     
     // User Info
     func getFriends(userID: String) -> Observable<[UserSnapshot]>

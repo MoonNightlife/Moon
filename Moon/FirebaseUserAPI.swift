@@ -62,6 +62,8 @@ struct FirebaseUserAPI: UserAPIType {
         static let getPrivacySetting = userBaseURL + "getPrivacySetting"
         static let updatePrivacySetting = userBaseURL + "updatePrivacySetting"
         static let canViewFullProfile = userBaseURL + "canViewFullProfile"
+        
+        static let reportUser = userBaseURL + "reportUser"
     }
     
 }
@@ -194,6 +196,27 @@ extension FirebaseUserAPI {
     }
     func getBlockedUserList(userID: String) -> Observable<[UserSnapshot]> {
         return Observable.empty()
+    }
+    func reportUser(userId: String) -> Observable<Void> {
+        return Observable.create({ (observer) -> Disposable in
+            let body: Parameters = [
+                "id": userId
+            ]
+            let request = Alamofire.request(UserFunction.reportUser, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .response(completionHandler: {
+                    if let e = $0.error {
+                        observer.onError(e)
+                    } else {
+                        observer.onNext()
+                        observer.onCompleted()
+                    }
+                })
+            
+            return Disposables.create {
+                request.cancel()
+            }
+        })
     }
 }
 // MARK: - User Info
