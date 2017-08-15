@@ -31,9 +31,9 @@ class ProfileViewController: UIViewController, BindableType {
     @IBOutlet weak var likesButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var planImageView: UIImageView!
-    @IBOutlet weak var reportButton: UIButton!
 
     var friendsButton: MIBadgeButton!
+    var moreButton: IconButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,13 +44,12 @@ class ProfileViewController: UIViewController, BindableType {
         setUpExitButton()
         setUpFriendsButton()
         setUpBioLabel()
+        setupMoreButton()
         setUpPlanButton()
         setUpToolBar()
         setUpUsernameLabel()
         setupAcceptButton()
         setUpLikeButtons()
-        prepareReportButton()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -186,8 +185,7 @@ class ProfileViewController: UIViewController, BindableType {
         likeButton.isHidden = true
         likesButton.isHidden = true
         planButton.isHidden = true
-        //TODO: add lock icon
-        planImageView.image = Icon.cm.close
+        planImageView.image = #imageLiteral(resourceName: "lock")
     }
     
     private func setUpPageController() {
@@ -244,6 +242,7 @@ class ProfileViewController: UIViewController, BindableType {
         toolBar.titleLabel.textColor = .white
         toolBar.detailLabel.textColor = .moonGrey
         toolBar.rightViews = [friendsButton]
+        toolBar.leftViews = [moreButton]
     }
     
     private func setUpLikeButtons() {
@@ -256,15 +255,26 @@ class ProfileViewController: UIViewController, BindableType {
         likeButton.tintColor = .lightGray
         
     }
-    
-    private func prepareReportButton() {
-        reportButton.tintColor = .moonRed
-        reportButton.titleLabel?.font = UIFont(name: "Roboto", size: 17)
-        reportButton.layer.cornerRadius = reportButton.frame.size.height / 2
-        reportButton.layer.borderWidth = 2.5
-        reportButton.layer.borderColor = UIColor.moonRed.cgColor
-    }
 
+    private func setupMoreButton() {
+        moreButton = IconButton(image: Icon.cm.moreHorizontal, tintColor: .white)
+        
+        let userMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let reportUserAction = UIAlertAction(title: "Report User", style: .default, handler: { _ -> Void in
+            self.viewModel.reportUser.onNext()
+        })
+    
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        userMenu.addAction(reportUserAction)
+        userMenu.addAction(cancelAction)
+    
+        moreButton.rx.action = CocoaAction {
+            self.present(userMenu, animated: true, completion: nil)
+            return Observable.empty()
+        }
+    }
 }
 
 extension ProfileViewController: iCarouselDataSource, iCarouselDelegate {

@@ -40,6 +40,7 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
     var reload: Action<Void, UserProfile>
     var reloadActionButton = PublishSubject<Void>()
     var reloadPhotos = PublishSubject<Void>()
+    var reportUser = PublishSubject<Void>()
     
     // Outputs
     var username: Observable<String>
@@ -77,6 +78,13 @@ struct ProfileViewModel: ImageNetworkingInjected, StorageNetworkingInjected, Aut
         
         self.userID = userID
         self.userAPI = userAPI
+        
+        reportUser
+            .flatMap({
+                return userAPI.reportUser(userId: userID)
+            })
+            .subscribe()
+            .addDisposableTo(bag)
         
         if authAPI.SignedInUserID == userID {
             isSignedInUserProfile.value = true

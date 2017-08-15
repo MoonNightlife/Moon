@@ -40,7 +40,7 @@ struct IntroViews: TutorialViewsType {
     var count: Int
     
     init() {
-        images = [#imageLiteral(resourceName: "SearchTutorial"), #imageLiteral(resourceName: "FeaturedEventsTutorial"), #imageLiteral(resourceName: "MoonsViewTutorial"), #imageLiteral(resourceName: "ExploreTutorial"), #imageLiteral(resourceName: "GroupsTutorial1")]
+        images = [#imageLiteral(resourceName: "SearchTutorial"), #imageLiteral(resourceName: "FeaturedEventsTutorial"), #imageLiteral(resourceName: "MoonsViewTutorial"), #imageLiteral(resourceName: "ExploreTutorial")]
         count = images.count
     }
 }
