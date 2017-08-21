@@ -48,4 +48,4 @@ struct KingFisherPhotoService: PhotoService {
             .retryWhen(RxErrorHandlers.imageRetryHandler)
     }
     
-    }
+}
