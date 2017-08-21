@@ -17,7 +17,7 @@ import AlamofireObjectMapper
 struct FirebaseUserAPI: UserAPIType {
     
     struct UserFunction {
-        private static let userBaseURL = "https://us-central1-moon-4409e.cloudfunctions.net/"
+        private static let userBaseURL = "https://us-central1-moondev-ac048.cloudfunctions.net/"
         
         static let updateProfile = userBaseURL + "updateProfile"
         static let getUserProfile = userBaseURL + "getUserProfile"
