@@ -1,16 +1,358 @@
 PODS:
-  - RxCocoa (3.4.0):
+  - Action (3.1.1):
+    - RxCocoa (~> 3.4)
     - RxSwift (~> 3.4)
+  - ActionButton (0.1.5)
+  - Alamofire (4.4.0)
+  - AlamofireObjectMapper (4.1.0):
+    - Alamofire (~> 4.1)
+    - ObjectMapper (~> 2.0)
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.8.4)
+  - EZSwipeController (0.6.1)
+  - FBSDKCoreKit (4.23.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.23.0):
+    - FBSDKCoreKit
+  - Firebase/Auth (4.0.0):
+    - Firebase/Core
+    - FirebaseAuth (= 4.0.0)
+  - Firebase/Core (4.0.0):
+    - FirebaseAnalytics (= 4.0.0)
+    - FirebaseCore (= 4.0.0)
+  - Firebase/Database (4.0.0):
+    - Firebase/Core
+    - FirebaseDatabase (= 4.0.0)
+  - Firebase/DynamicLinks (4.0.0):
+    - Firebase/Core
+    - FirebaseDynamicLinks (= 2.0.0)
+  - Firebase/Messaging (4.0.0):
+    - Firebase/Core
+    - FirebaseMessaging (= 2.0.0)
+  - Firebase/Storage (4.0.0):
+    - Firebase/Core
+    - FirebaseStorage (= 2.0.0)
+  - FirebaseAnalytics (4.0.0):
+    - FirebaseCore (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseAuth (4.0.0):
+    - FirebaseAnalytics (~> 4.0)
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - FirebaseCore (4.0.0):
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseDatabase (4.0.0):
+    - FirebaseAnalytics (~> 4.0)
+  - FirebaseDynamicLinks (2.0.0):
+    - FirebaseAnalytics (~> 4.0)
+  - FirebaseInstanceID (2.0.0):
+    - FirebaseCore (~> 4.0)
+  - FirebaseMessaging (2.0.0):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseCore (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - Protobuf (~> 3.1)
+  - FirebaseStorage (2.0.0):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseCore (~> 4.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - Fusuma (1.1.0)
+  - GoogleToolboxForMac/DebugUtils (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/Logger (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1):
+    - GoogleToolboxForMac/DebugUtils (= 2.1.1)
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
+  - GTMSessionFetcher/Core (1.1.10)
+  - iCarousel (1.8.3)
+  - Kingfisher (3.9.1)
+  - Material (2.6.3):
+    - Material/Core (= 2.6.3)
+  - Material/Core (2.6.3)
+  - MaterialComponents (23.0.2):
+    - MaterialComponents/ActivityIndicator (= 23.0.2)
+    - MaterialComponents/AnimationTiming (= 23.0.2)
+    - MaterialComponents/AppBar (= 23.0.2)
+    - MaterialComponents/ButtonBar (= 23.0.2)
+    - MaterialComponents/Buttons (= 23.0.2)
+    - MaterialComponents/CollectionCells (= 23.0.2)
+    - MaterialComponents/CollectionLayoutAttributes (= 23.0.2)
+    - MaterialComponents/Collections (= 23.0.2)
+    - MaterialComponents/Dialogs (= 23.0.2)
+    - MaterialComponents/FeatureHighlight (= 23.0.2)
+    - MaterialComponents/FlexibleHeader (= 23.0.2)
+    - MaterialComponents/HeaderStackView (= 23.0.2)
+    - MaterialComponents/Ink (= 23.0.2)
+    - MaterialComponents/NavigationBar (= 23.0.2)
+    - MaterialComponents/OverlayWindow (= 23.0.2)
+    - MaterialComponents/PageControl (= 23.0.2)
+    - MaterialComponents/Palettes (= 23.0.2)
+    - MaterialComponents/private (= 23.0.2)
+    - MaterialComponents/ProgressView (= 23.0.2)
+    - MaterialComponents/ShadowElevations (= 23.0.2)
+    - MaterialComponents/ShadowLayer (= 23.0.2)
+    - MaterialComponents/Slider (= 23.0.2)
+    - MaterialComponents/Snackbar (= 23.0.2)
+    - MaterialComponents/Tabs (= 23.0.2)
+    - MaterialComponents/Typography (= 23.0.2)
+  - MaterialComponents/ActivityIndicator (23.0.2):
+    - MaterialComponents/private/Application
+    - MaterialComponents/private/RTL
+  - MaterialComponents/AnimationTiming (23.0.2)
+  - MaterialComponents/AppBar (23.0.2):
+    - MaterialComponents/FlexibleHeader
+    - MaterialComponents/HeaderStackView
+    - MaterialComponents/NavigationBar
+    - MaterialComponents/private/Icons/ic_arrow_back
+    - MaterialComponents/private/RTL
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Typography
+  - MaterialComponents/ButtonBar (23.0.2):
+    - MaterialComponents/Buttons
+    - MaterialComponents/private/RTL
+  - MaterialComponents/Buttons (23.0.2):
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Typography
+    - MDFTextAccessibility
+  - MaterialComponents/CollectionCells (23.0.2):
+    - MaterialComponents/CollectionLayoutAttributes
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Icons/ic_check
+    - MaterialComponents/private/Icons/ic_check_circle
+    - MaterialComponents/private/Icons/ic_chevron_right
+    - MaterialComponents/private/Icons/ic_info
+    - MaterialComponents/private/Icons/ic_radio_button_unchecked
+    - MaterialComponents/private/Icons/ic_reorder
+    - MaterialComponents/private/Math
+    - MaterialComponents/private/RTL
+    - MaterialComponents/Typography
+  - MaterialComponents/CollectionLayoutAttributes (23.0.2)
+  - MaterialComponents/Collections (23.0.2):
+    - MaterialComponents/CollectionCells
+    - MaterialComponents/CollectionLayoutAttributes
+    - MaterialComponents/Ink
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Typography
+  - MaterialComponents/Dialogs (23.0.2):
+    - MaterialComponents/Buttons
+    - MaterialComponents/private/KeyboardWatcher
+    - MaterialComponents/private/RTL
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+  - MaterialComponents/FeatureHighlight (23.0.2):
+    - MaterialComponents/Typography
+    - MDFTextAccessibility
+  - MaterialComponents/FlexibleHeader (23.0.2):
+    - MaterialComponents/private/Application
+    - MDFTextAccessibility
+  - MaterialComponents/HeaderStackView (23.0.2)
+  - MaterialComponents/Ink (23.0.2)
+  - MaterialComponents/NavigationBar (23.0.2):
+    - MaterialComponents/ButtonBar
+    - MaterialComponents/private/Math
+    - MaterialComponents/private/RTL
+    - MaterialComponents/Typography
+    - MDFTextAccessibility
+  - MaterialComponents/OverlayWindow (23.0.2):
+    - MaterialComponents/private/Application
+  - MaterialComponents/PageControl (23.0.2)
+  - MaterialComponents/Palettes (23.0.2)
+  - MaterialComponents/private (23.0.2):
+    - MaterialComponents/private/Application (= 23.0.2)
+    - MaterialComponents/private/Icons (= 23.0.2)
+    - MaterialComponents/private/KeyboardWatcher (= 23.0.2)
+    - MaterialComponents/private/Math (= 23.0.2)
+    - MaterialComponents/private/Overlay (= 23.0.2)
+    - MaterialComponents/private/RTL (= 23.0.2)
+    - MaterialComponents/private/ThumbTrack (= 23.0.2)
+  - MaterialComponents/private/Application (23.0.2)
+  - MaterialComponents/private/Icons (23.0.2):
+    - MaterialComponents/private/Icons/Base (= 23.0.2)
+    - MaterialComponents/private/Icons/ic_arrow_back (= 23.0.2)
+    - MaterialComponents/private/Icons/ic_check (= 23.0.2)
+    - MaterialComponents/private/Icons/ic_check_circle (= 23.0.2)
+    - MaterialComponents/private/Icons/ic_chevron_right (= 23.0.2)
+    - MaterialComponents/private/Icons/ic_info (= 23.0.2)
+    - MaterialComponents/private/Icons/ic_radio_button_unchecked (= 23.0.2)
+    - MaterialComponents/private/Icons/ic_reorder (= 23.0.2)
+  - MaterialComponents/private/Icons/Base (23.0.2)
+  - MaterialComponents/private/Icons/ic_arrow_back (23.0.2):
+    - MaterialComponents/private/Icons/Base
+  - MaterialComponents/private/Icons/ic_check (23.0.2):
+    - MaterialComponents/private/Icons/Base
+  - MaterialComponents/private/Icons/ic_check_circle (23.0.2):
+    - MaterialComponents/private/Icons/Base
+  - MaterialComponents/private/Icons/ic_chevron_right (23.0.2):
+    - MaterialComponents/private/Icons/Base
+  - MaterialComponents/private/Icons/ic_info (23.0.2):
+    - MaterialComponents/private/Icons/Base
+  - MaterialComponents/private/Icons/ic_radio_button_unchecked (23.0.2):
+    - MaterialComponents/private/Icons/Base
+  - MaterialComponents/private/Icons/ic_reorder (23.0.2):
+    - MaterialComponents/private/Icons/Base
+  - MaterialComponents/private/KeyboardWatcher (23.0.2):
+    - MaterialComponents/private/Application
+  - MaterialComponents/private/Math (23.0.2)
+  - MaterialComponents/private/Overlay (23.0.2)
+  - MaterialComponents/private/RTL (23.0.2)
+  - MaterialComponents/private/ThumbTrack (23.0.2):
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Math
+    - MaterialComponents/private/RTL
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Typography
+  - MaterialComponents/ProgressView (23.0.2):
+    - MaterialComponents/private/Math
+    - MaterialComponents/private/RTL
+  - MaterialComponents/ShadowElevations (23.0.2)
+  - MaterialComponents/ShadowLayer (23.0.2)
+  - MaterialComponents/Slider (23.0.2):
+    - MaterialComponents/private/ThumbTrack
+  - MaterialComponents/Snackbar (23.0.2):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Buttons
+    - MaterialComponents/OverlayWindow
+    - MaterialComponents/private/Application
+    - MaterialComponents/private/KeyboardWatcher
+    - MaterialComponents/private/Overlay
+    - MaterialComponents/Typography
+  - MaterialComponents/Tabs (23.0.2):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Ink
+    - MaterialComponents/private/RTL
+    - MaterialComponents/Typography
+  - MaterialComponents/Typography (23.0.2):
+    - MaterialComponents/private/Application
+  - MDFTextAccessibility (1.2.0)
+  - MIBadgeButton-Swift (0.5)
+  - NVActivityIndicatorView (3.6.1)
+  - ObjectMapper (2.2.7)
+  - Protobuf (3.3.0)
+  - RAReorderableLayout (0.6.1)
+  - RxAlamofire (3.0.3):
+    - RxAlamofire/Core (= 3.0.3)
+  - RxAlamofire/Core (3.0.3):
+    - Alamofire (~> 4.0)
+    - RxSwift (~> 3.0)
+  - RxCocoa (3.5.0):
+    - RxSwift (~> 3.4)
+  - RxDataSources (1.0.3):
+    - RxCocoa (~> 3.0)
+    - RxSwift (~> 3.0)
+  - RxOptional (3.1.3):
+    - RxCocoa
+    - RxSwift
   - RxSwift (3.4.0)
+  - SinchVerification (2.0.4)
+  - SwiftLint (0.18.1)
+  - SwiftOverlays (3.0.0)
+  - Whisper (5.0.0)
 
 DEPENDENCIES:
+  - Action (~> 3.0)
+  - ActionButton
+  - AlamofireObjectMapper (~> 4.0)
+  - EZSwipeController
+  - FBSDKLoginKit
+  - Firebase/Auth
+  - Firebase/Core
+  - Firebase/Database
+  - Firebase/DynamicLinks
+  - Firebase/Messaging
+  - Firebase/Storage
+  - Fusuma
+  - iCarousel
+  - Kingfisher (~> 3.0)
+  - Material (from `https://github.com/CosmicMind/Material`)
+  - MaterialComponents
+  - MIBadgeButton-Swift (from `https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git`, branch `master`)
+  - NVActivityIndicatorView
+  - ObjectMapper
+  - RAReorderableLayout
+  - RxAlamofire
   - RxCocoa
+  - RxDataSources (~> 1.0)
+  - RxOptional
   - RxSwift
+  - SinchVerification
+  - SwiftLint
+  - SwiftOverlays (~> 3.0.0)
+  - Whisper
+
+EXTERNAL SOURCES:
+  Material:
+    :git: https://github.com/CosmicMind/Material
+  MIBadgeButton-Swift:
+    :branch: master
+    :git: https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git
+
+CHECKOUT OPTIONS:
+  Material:
+    :commit: 6bfd58cfc65a930a0bde660a588f2e75c2a533e8
+    :git: https://github.com/CosmicMind/Material
+  MIBadgeButton-Swift:
+    :commit: 3c2638d2e6e46ec2e6dd978d8ada8863df3df5e6
+    :git: https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git
 
 SPEC CHECKSUMS:
-  RxCocoa: d14ef6b6029e1ddc6e966508c09289090de68ff9
+  Action: e224bd151fe2e057f4189b4a9df0dc5d21264a9e
+  ActionButton: a71147de5a83b6d8d8e18464b216904ba7821677
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  AlamofireObjectMapper: 435adc82f5b367679bd9e71c4974a54efd0b2521
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  EZSwipeController: 255b0f8aed31963b0236802c926e27dd006a2532
+  FBSDKCoreKit: d7829f5a69901cd7296105328e4c3c3fc7da6518
+  FBSDKLoginKit: 6b92bd65f319d669d2b0730e49db495ef1660566
+  Firebase: 284eea779b73fdff309791817da7c68bff8dd572
+  FirebaseAnalytics: 6f08e746f7d66f5452931bc2e822b5df9c66b64a
+  FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
+  FirebaseCore: 85ad466044c2f013cdb167f85d426d15b128114a
+  FirebaseDatabase: d829b3a8c3e2ac7a16773c5df226966b0805dfc2
+  FirebaseDynamicLinks: ad3bef2e8addfa1490af9db02201429c5c9447dd
+  FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
+  FirebaseMessaging: 227406c05b0dc9290702d2e9f18ab5528f0c2cf2
+  FirebaseStorage: 8110a1ed2034c8fbfd83890d2acc9cdbbd99afec
+  Fusuma: 087dcf57cd0e8712d357dcf14559927da369642c
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
+  iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
+  Kingfisher: 6729a0baaa458245bfb8cd5a1296c71c10d6eb6c
+  Material: 68440da8f2564c19344d5da2ee5dde5618be5f95
+  MaterialComponents: fc0b6f9725db1f434aa3f8d7feb7832ac99a3692
+  MDFTextAccessibility: 94098925e0853551c5a311ce7c1ecefbe297cdb6
+  MIBadgeButton-Swift: 9e57309b00b168d75ca8fecb45bc75124a8ffddf
+  NVActivityIndicatorView: 9f52a7f84bf5c6a798722c450fe3c198e01c56ed
+  ObjectMapper: 65abcfd9a61cf7396cbd14a4fb22fddfcc46577e
+  Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
+  RAReorderableLayout: 5b6b87dd4022ee1747fd475623b14f5df940f754
+  RxAlamofire: 5eb39188c4917ad98127c0ecb4878a61b7517003
+  RxCocoa: a0a09f45d0e5b48ecb6a4a7b4b4c89c88d3f633f
+  RxDataSources: a021a0e944ba5f7991259829d973afdbfa719c0b
+  RxOptional: b97b59183af80d1e729ac9e51d09a10be668d6a8
   RxSwift: 3789a1af753002a14edecdb698a2424624296a9c
+  SinchVerification: 71af34426dfa35a86cfa9fa157ca5c3e170ec829
+  SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
+  SwiftOverlays: 4cdd9e4f5c7817fb6348882059eb697e11685fad
+  Whisper: 051f25e704bf8992641ffd28b20d5682ddc5f5d3
 
-PODFILE CHECKSUM: b316de0ffa25ae2e91cd7d1419075b76282e20cd
+PODFILE CHECKSUM: 619bddc84101c13ecc4be2182ba2432e459493d0
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.1

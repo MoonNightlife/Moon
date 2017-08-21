@@ -1,0 +1,22 @@
+{
+  "name": "SwaggerClient",
+  "platforms": {
+    "ios": "9.0",
+    "osx": "10.11"
+  },
+  "version": "0.0.1",
+  "source": {
+    "git": "git@github.com:swagger-api/swagger-mustache.git",
+    "tag": "v1.0.0"
+  },
+  "authors": "Swagger Codegen",
+  "license": "Proprietary",
+  "source_files": "SwaggerClient/Classes/Swaggers/**/*.swift",
+  "dependencies": {
+    "Alamofire": [
+      "~> 4.0"
+    ]
+  },
+  "homepage": "www.moonnightllifeapp.com",
+  "summary": "backend API"
+}

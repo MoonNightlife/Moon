@@ -7,40 +7,235 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+import FBSDKLoginKit
+import RxSwift
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, AuthNetworkingInjected {
+    
+    enum LaunchScreen {
+        case login
+        case barProfile(id: String)
+        case main
+    }
 
     var window: UIWindow?
-
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    var sceneCoordinator: SceneCoordinatorType!
+    var bag = DisposeBag()
+    let gcmMessageIDKey = "gcm.message_id"
+    
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        UIApplication.shared.statusBarStyle = .lightContent
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        sceneCoordinator = SceneCoordinator(window: window!)
+        
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        setupPushNotifications(application: application)
+        
+        FirebaseApp.configure()
+        
+        if RxReachability.shared.startMonitor("apple.com") == false {
+            print("Reachability failed!")
+        }
+        
+        Auth.auth().addStateDidChangeListener { _, user in
+            if user == nil {
+                self.prepareEntryViewController(vc: .login, sceneCoordinator: self.sceneCoordinator)
+            }
+        }
+    
+        if let url = launchOptions?[.url] as? URL {
+            return executeDeepLink(with: url)
+        } else {
+            if Auth.auth().currentUser != nil {
+                prepareEntryViewController(vc: .main, sceneCoordinator: sceneCoordinator)
+            } else {
+                prepareEntryViewController(vc: .login, sceneCoordinator: sceneCoordinator)
+            }
+        }
+        
         return true
     }
 
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+        let dynamicLink = DynamicLinks.dynamicLinks()?.dynamicLink(fromCustomSchemeURL: url)
+        if let dynamicLink = dynamicLink, let url = dynamicLink.url {
+            return executeDeepLink(with: url)
+        }
+        
+        FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
+        
+        return false
     }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    @available(iOS 8.0, *)
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        guard let dynamicLinks = DynamicLinks.dynamicLinks() else {
+            return false
+        }
+        let handled = dynamicLinks.handleUniversalLink(userActivity.webpageURL!) { [weak self] (dynamiclink, error) in
+            if let url = dynamiclink?.url {
+                _ = self?.executeDeepLink(with: url)
+            } else if let e = error {
+                print(e)
+            }
+        }
+        
+        return handled
     }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    }
-
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        if let userID = Auth.auth().currentUser?.uid {
+            
+            authAPI.checkForFirstTimeLogin(userId: userID).subscribe(onNext: { [unowned self] firstTime in
+                if firstTime {
+                    self.prepareEntryViewController(vc: .login, sceneCoordinator: self.sceneCoordinator)
+                }
+            }).addDisposableTo(bag)
+            
+        } else {
+            prepareEntryViewController(vc: .login, sceneCoordinator: self.sceneCoordinator)
+        }
     }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
 
 }
 
+// MARK: - Helper Fuctions
+extension AppDelegate {
+    fileprivate func prepareEntryViewController(vc: LaunchScreen, sceneCoordinator: SceneCoordinatorType) {
+        
+        switch vc {
+        case .login:
+            let viewModel = LoginViewModel(coordinator: sceneCoordinator)
+            let firstScene = Scene.Login.login(viewModel)
+            sceneCoordinator.transition(to: firstScene, type: .root)
+        case .main:
+            let mainVM = MainViewModel(coordinator: sceneCoordinator)
+            let searchVM = SearchBarViewModel(coordinator: sceneCoordinator)
+            sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
+        case .barProfile(let id):
+            let mainVM = MainViewModel(coordinator: sceneCoordinator)
+            let searchVM = SearchBarViewModel(coordinator: sceneCoordinator)
+            sceneCoordinator.transition(to: Scene.Master.searchBarWithMain(searchBar: searchVM, mainView: mainVM), type: .root)
+            let barVM = BarProfileViewModel(coordinator: sceneCoordinator, barID: id)
+            sceneCoordinator.transition(to: Scene.Bar.profile(barVM), type: .modal)
+        }
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    fileprivate func setupPushNotifications(application: UIApplication) {
+        
+        Messaging.messaging().delegate = self
+        //Messaging.messaging().shouldEstablishDirectChannel = true
+        
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
+    }
+    
+    // This is called when the application receievs a notification in the foregruond
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        // Print message ID.
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        // Print full message.
+        print(userInfo)
+        
+        // Change this to your preferred presentation option
+        completionHandler([])
+    }
+    
+    // This is called when the application receives a notification in the background and the user
+    // opens the app
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        // Print message ID.
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        // Print full message.
+        print(userInfo)
+        
+        // Reset the badge icon when the user views the notifcations from the background
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        
+        completionHandler()
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Unable to register for remote notifications: \(error.localizedDescription)")
+    }
+}
+
+extension AppDelegate : MessagingDelegate {
+    // [START refresh_token]
+    func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+        print("Firebase registration token: \(fcmToken)")
+    }
+    // [END refresh_token]
+    // [START ios_10_data_message]
+    // Receive data messages on iOS 10+ directly from FCM (bypassing APNs) when the app is in the foreground.
+    // To enable direct data messages, you can set Messaging.messaging().shouldEstablishDirectChannel to true.
+    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+        print("Received data message: \(remoteMessage.appData)")
+    }
+    // [END ios_10_data_message]
+}
+
+// MARK: - Deep Link
+extension AppDelegate {
+    fileprivate func executeDeepLink(with url: URL) -> Bool {
+        // Create a recognizer with this app's custom deep link types.
+        let recognizer = DeepLinkRecognizer(deepLinkTypes: [ShowEventDeepLink.self])
+        
+        // Try to create a deep link object based on the URL.
+        guard let deepLink = recognizer.deepLink(matching: url) else {
+            print("Unable to match URL: \(url.absoluteString)")
+            return false
+        }
+        
+        // Navigate to the view or content specified by the deep link.
+        switch deepLink {
+        case let link as ShowEventDeepLink: return showEvent(with: link)
+        default: fatalError("Unsupported DeepLink: \(type(of: deepLink))")
+        }
+    }
+    
+    fileprivate func showEvent(with deepLink: ShowEventDeepLink) -> Bool {
+        //prepareEntryViewController(vc: .barProfile(id: deepLink.barID), sceneCoordinator: <#SceneCoordinatorType#>)
+        print("Show Event")
+        return true
+    }
+}
