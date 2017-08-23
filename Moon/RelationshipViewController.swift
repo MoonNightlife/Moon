@@ -64,7 +64,7 @@ class RelationshipViewController: UIViewController, BindableType, ParentType {
     
     func prepareSegmentControl() {
         //segment set up
-        relationSegmentControl.items = ["Friends"]
+        relationSegmentControl.items = ["Friends", "Groups"]
         relationSegmentControl.selectedLabelColor = .moonPurple
         relationSegmentControl.borderColor = .clear
         relationSegmentControl.backgroundColor = .clear
