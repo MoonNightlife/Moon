@@ -285,11 +285,12 @@ struct FirebaseGroupAPI: GroupAPIType {
         })
     }
     
-    func addVenueToPlan(groupID: String, barID: String) -> Observable<Void> {
+    func addVenueToPlan(groupID: String, barID: String, userID: String) -> Observable<Void> {
         return Observable.create({ (observer) -> Disposable in
             let body: Parameters = [
                 "id": groupID,
-                "barId": barID
+                "barId": barID,
+                "userId": userID
             ]
             let request = Alamofire.request(GroupFunction.addVenueToPlan, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil)
                 .validate()

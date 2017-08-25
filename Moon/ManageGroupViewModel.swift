@@ -242,7 +242,7 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
                 return Observable.just()
             }
             
-            return self.groupAPI.addVenueToPlan(groupID: self.groupID, barID: selectedBarID)
+            return self.groupAPI.addVenueToPlan(groupID: self.groupID, barID: selectedBarID, userID: self.authAPI.SignedInUserID)
                 .do(onNext: { [unowned self] in
                     self.venueSearchText.onNext("")
                     self.selectedVenueSnapshot.value = nil
