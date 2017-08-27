@@ -34,6 +34,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     @IBOutlet weak var groupPicture: UIImageView!
     @IBOutlet weak var groupNameLabel: UILabel!
     
+    @IBOutlet weak var venueView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var groupPlan: UIButton!
     @IBOutlet weak var likeButton: UIButton!
@@ -100,14 +101,18 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
             moveScrollViewUP()
         }
     }
-    
+
     func calculateOffset() {
         let screenHeight = self.view.frame.size.height
-        let bioY = screenHeight - suggestedVenuesTableView.y
-        let keyboardShift = keyboardHeight - bioY
-        let extraShift = suggestedVenuesTableView.frame.size.height - CGFloat(100)
+        let y = screenHeight - venueView.y
+        let keyboardShift = y - keyboardHeight
         
-        offSet = -(extraShift + keyboardShift)
+        if y == 315 {
+            offSet = keyboardShift + 120
+        } else {
+            offSet = keyboardShift
+        }
+
     }
 
     func bindViewModel() {
@@ -362,7 +367,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     
     func animateVenuesViewDown() {
         UIView.animate(withDuration: Double(0.3), animations: {
-            self.suggestedVenuesHeightConstraint.constant = 100
+            self.suggestedVenuesHeightConstraint.constant = 120
             self.view.layoutIfNeeded()
         })
         
@@ -408,7 +413,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     
     func moveScrollViewUP() {
         UIView.animate(withDuration: Double(0.3), animations: {
-            self.scrollView.contentOffset.y = 50 //self.offSet
+            self.scrollView.contentOffset.y = self.offSet
             self.scrollView.layoutIfNeeded()
         })
     }
