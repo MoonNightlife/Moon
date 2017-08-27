@@ -140,7 +140,6 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         viewModel.showActivityHeartAndNumber.map(!).bind(to: likersButton.rx.isHidden).addDisposableTo(bag)
         viewModel.groupImage.bind(to: groupPicture.rx.image).addDisposableTo(bag)
         viewModel.groupName.bind(to: groupNameLabel.rx.text).addDisposableTo(bag)
-       // viewModel.endTimeString.bind(to: planEndTime.rx.text).addDisposableTo(bag)
         viewModel.currentPlanBarName.bind(to: groupPlan.rx.title()).addDisposableTo(bag)
         viewModel.currentPlanNumberOfLikes.bind(to: likersButton.rx.title()).addDisposableTo(bag)
         viewModel.selectedVenueText.bind(to: addVenueTextField.rx.text).addDisposableTo(bag)
@@ -182,7 +181,6 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
                     return
                 }
                 self?.membersTableView.deselectRow(at: selectedIndexPath, animated: true)
-                //self?.planEndTime.resignFirstResponder()
             })
             .filterNil()
             .bind(to: viewModel.onViewProfile.inputs)
