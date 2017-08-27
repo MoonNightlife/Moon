@@ -89,7 +89,7 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
     }
     
     var displayOptions: Observable<[PlanOptionSectionModel]> {
-        return Observable.combineLatest(group.asObservable(), optionVotedFor.asObservable())
+        return Observable.zip(group.asObservable(), optionVotedFor.asObservable())
             .map({
                 $0.0?.plan?.options?.map({
                     var temp = $0
@@ -129,14 +129,12 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
             })
     }
     
-    var currentPlanBarName: Observable<String> {
+    var currentPlanBarName: Observable<String?> {
         return group.asObservable().filterNil()
             .map({
                 $0.activityInfo?.barName
             })
-            .startWith("")
-            .errorOnNil()
-            .catchErrorJustReturn("No Plan")
+            .startWith("No Plan")
     }
     
     var currentPlanNumberOfLikes: Observable<String?> {
@@ -181,7 +179,6 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
                     }, onDispose: {
                         self.showBlockingLoadingIndicator.value = false
                     })
-
             })
             .bind(to: group).addDisposableTo(bag)
         
@@ -214,7 +211,12 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
             .bind(to: selectedVenueSnapshot)
             .addDisposableTo(bag)
         
-        self.groupAPI.getOptionVotedFor(groupID: self.groupID, userID: self.authAPI.SignedInUserID).bind(to: optionVotedFor).addDisposableTo(bag)
+        reloadGroup
+            .flatMap({
+                return self.groupAPI.getOptionVotedFor(groupID: self.groupID, userID: self.authAPI.SignedInUserID)
+            })
+            .bind(to: optionVotedFor)
+            .addDisposableTo(bag)
     }
     
     func onEdit() -> CocoaAction {
@@ -246,8 +248,7 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
                 .do(onNext: { [unowned self] in
                     self.venueSearchText.onNext("")
                     self.selectedVenueSnapshot.value = nil
-                    let newOption = PlanOption(snapshot: snapshot)
-                    self.group.value?.plan?.options?.append(newOption)
+                    self.reloadGroup.onNext()
                 })
         }
     }
@@ -256,33 +257,7 @@ class ManageGroupViewModel: BackType, NetworkingInjected, AuthNetworkingInjected
         return CocoaAction { [unowned self] in
             return self.groupAPI.placeVote(userID: self.authAPI.SignedInUserID, groupID: self.groupID, barID: barID)
                 .do(onNext: { [unowned self] in
-                    let updatedOptions = self.group.value?.plan?.options?
-                        .map { option -> (PlanOption) in
-                            
-                            if option.barID == self.optionVotedFor.value {
-                                // decrement the old voted for count
-                                var temp = option
-                                temp.voteCount = (option.voteCount!) - 1
-                                return temp
-                            } else if option.barID == barID {
-                                // increment the new voted for count, but only if not just unvoting
-                                var temp = option
-                                temp.voteCount = (option.voteCount ?? 0) + 1
-                                return temp
-                            } else {
-                                return option
-                            }
-                        }
-                    
-                    // Updated icon for newly voted for option
-                    // if not just unvoting
-                    if barID == self.optionVotedFor.value {
-                        self.optionVotedFor.value = nil
-                    } else {
-                        self.optionVotedFor.value = barID
-                    }
-                    
-                    self.group.value?.plan?.options = updatedOptions
+                    self.reloadGroup.onNext()
                 })
         }
     }
