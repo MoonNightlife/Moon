@@ -131,6 +131,7 @@
 		F03C78C91EE9EA5C002AEDAD /* DeleteAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03C78C81EE9EA5C002AEDAD /* DeleteAccountViewModel.swift */; };
 		F03CEF6D1F05962E00FCC4F3 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03CEF6C1F05962E00FCC4F3 /* Snapshot.swift */; };
 		F03CEF6F1F059BAC00FCC4F3 /* DependecyInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03CEF6E1F059BAC00FCC4F3 /* DependecyInjection.swift */; };
+		F04000601F5432C60005E2AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F040005F1F5432C60005E2AA /* GoogleService-Info.plist */; };
 		F04283AD1EC49DB600CCB5F3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04283AC1EC49DB600CCB5F3 /* MainViewController.swift */; };
 		F04283AF1EC4A92700CCB5F3 /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04283AE1EC4A92700CCB5F3 /* FeaturedViewController.swift */; };
 		F04283B11EC4A96200CCB5F3 /* MoonsViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04283B01EC4A96200CCB5F3 /* MoonsViewViewController.swift */; };
@@ -222,7 +223,6 @@
 		F0B1BD181F31FA0F00A8623E /* GroupMemberBasicImageCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1BD171F31FA0F00A8623E /* GroupMemberBasicImageCellViewModel.swift */; };
 		F0B1BD1A1F320DC200A8623E /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1BD191F320DC200A8623E /* TimeInterval.swift */; };
 		F0B5F93F1EEF790A0095F12E /* BarInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B5F93E1EEF790A0095F12E /* BarInfo.swift */; };
-		F0BE99E91F4B752B002D612D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F0BE99E81F4B752B002D612D /* GoogleService-Info.plist */; };
 		F0C66BDF1EF41C9400B22811 /* SinchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C66BDE1EF41C9400B22811 /* SinchService.swift */; };
 		F0C72F441EF81D7700B25C52 /* KingFisherPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C72F431EF81D7700B25C52 /* KingFisherPhotoService.swift */; };
 		F0CA18911EE584AF00428318 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA18901EE584AF00428318 /* ProfileViewModel.swift */; };
@@ -429,6 +429,7 @@
 		F03C78C81EE9EA5C002AEDAD /* DeleteAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteAccountViewModel.swift; sourceTree = "<group>"; };
 		F03CEF6C1F05962E00FCC4F3 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		F03CEF6E1F059BAC00FCC4F3 /* DependecyInjection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependecyInjection.swift; sourceTree = "<group>"; };
+		F040005F1F5432C60005E2AA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F04283AB1EC49D4E00CCB5F3 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		F04283AC1EC49DB600CCB5F3 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F04283AE1EC4A92700CCB5F3 /* FeaturedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedViewController.swift; sourceTree = "<group>"; };
@@ -525,7 +526,6 @@
 		F0B1BD171F31FA0F00A8623E /* GroupMemberBasicImageCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMemberBasicImageCellViewModel.swift; sourceTree = "<group>"; };
 		F0B1BD191F320DC200A8623E /* TimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		F0B5F93E1EEF790A0095F12E /* BarInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarInfo.swift; sourceTree = "<group>"; };
-		F0BE99E81F4B752B002D612D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F0C66BDE1EF41C9400B22811 /* SinchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinchService.swift; sourceTree = "<group>"; };
 		F0C72F431EF81D7700B25C52 /* KingFisherPhotoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KingFisherPhotoService.swift; sourceTree = "<group>"; };
 		F0CA18901EE584AF00428318 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -1093,7 +1093,7 @@
 				F001BAB21EC50CDB00CDF9BC /* Designs */,
 				F048F1211EA3B7A5000F0161 /* Assets.xcassets */,
 				F048F1261EA3B7A5000F0161 /* Info.plist */,
-				F0BE99E81F4B752B002D612D /* GoogleService-Info.plist */,
+				F040005F1F5432C60005E2AA /* GoogleService-Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1573,7 +1573,6 @@
 				C0DAD32C1EEA04D2008BAF05 /* b5.jpg in Resources */,
 				C0FC62771ECF50C30087FA3B /* s14.jpg in Resources */,
 				C0FC628E1ECF69730087FA3B /* e6.jpg in Resources */,
-				F0BE99E91F4B752B002D612D /* GoogleService-Info.plist in Resources */,
 				F001BABA1EC50D2600CDF9BC /* feed_base.png in Resources */,
 				F0A8E2E51EC3C858001D9993 /* pic1.jpg in Resources */,
 				F0A8E2EA1EC3C858001D9993 /* pic6.jpg in Resources */,
@@ -1607,6 +1606,7 @@
 				C0FC628B1ECF69730087FA3B /* e3.jpg in Resources */,
 				F048F1201EA3B7A5000F0161 /* Login.storyboard in Resources */,
 				C0FC628C1ECF69730087FA3B /* e4.jpg in Resources */,
+				F04000601F5432C60005E2AA /* GoogleService-Info.plist in Resources */,
 				C034E2D31ECCF365008EA4BA /* p5.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

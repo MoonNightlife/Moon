@@ -18,7 +18,7 @@ struct FirebaseAuthAPI: AuthAPIType {
     }
 
     struct AuthFunction {
-        private static let authBaseURL = "https://us-central1-moondev-ac048.cloudfunctions.net/"
+        private static let authBaseURL = "https://us-central1-moon-4409e.cloudfunctions.net/"
         
         // Create account will create the firebase user and upload the profile information
         static let createAccount = authBaseURL + "createNewUser"
