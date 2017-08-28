@@ -17,7 +17,7 @@ import AlamofireObjectMapper
 struct FirebaseGroupAPI: GroupAPIType {
 
     struct GroupFunction {
-        private static let groupBaseURL = "https://us-central1-moondev-ac048.cloudfunctions.net/"
+        private static let groupBaseURL = "https://us-central1-moon-4409e.cloudfunctions.net/"
         
         static let createGroup = groupBaseURL + "createGroup"
         static let updateGroupName = groupBaseURL + "updateGroupName"
