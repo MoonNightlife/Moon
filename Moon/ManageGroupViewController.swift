@@ -287,7 +287,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     func prepareEditButton() {
         editButton = UIBarButtonItem()
         editButton.image = Icon.cm.edit
-        editButton.tintColor = .lightGray
+        editButton.tintColor = .moonGreen
         navigationItem.rightBarButtonItem = editButton
     }
     
