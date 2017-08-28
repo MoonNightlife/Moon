@@ -34,6 +34,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     @IBOutlet weak var groupPicture: UIImageView!
     @IBOutlet weak var groupNameLabel: UILabel!
     
+    @IBOutlet weak var venueView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var groupPlan: UIButton!
     @IBOutlet weak var likeButton: UIButton!
@@ -100,14 +101,18 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
             moveScrollViewUP()
         }
     }
-    
+
     func calculateOffset() {
         let screenHeight = self.view.frame.size.height
-        let bioY = screenHeight - suggestedVenuesTableView.y
-        let keyboardShift = keyboardHeight - bioY
-        let extraShift = suggestedVenuesTableView.frame.size.height - CGFloat(100)
+        let y = screenHeight - venueView.y
+        let keyboardShift = y - keyboardHeight
         
-        offSet = -(extraShift + keyboardShift)
+        if y == 315 {
+            offSet = keyboardShift + 120
+        } else {
+            offSet = keyboardShift
+        }
+
     }
 
     func bindViewModel() {
@@ -140,7 +145,6 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
         viewModel.showActivityHeartAndNumber.map(!).bind(to: likersButton.rx.isHidden).addDisposableTo(bag)
         viewModel.groupImage.bind(to: groupPicture.rx.image).addDisposableTo(bag)
         viewModel.groupName.bind(to: groupNameLabel.rx.text).addDisposableTo(bag)
-       // viewModel.endTimeString.bind(to: planEndTime.rx.text).addDisposableTo(bag)
         viewModel.currentPlanBarName.bind(to: groupPlan.rx.title()).addDisposableTo(bag)
         viewModel.currentPlanNumberOfLikes.bind(to: likersButton.rx.title()).addDisposableTo(bag)
         viewModel.selectedVenueText.bind(to: addVenueTextField.rx.text).addDisposableTo(bag)
@@ -182,7 +186,6 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
                     return
                 }
                 self?.membersTableView.deselectRow(at: selectedIndexPath, animated: true)
-                //self?.planEndTime.resignFirstResponder()
             })
             .filterNil()
             .bind(to: viewModel.onViewProfile.inputs)
@@ -284,7 +287,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     func prepareEditButton() {
         editButton = UIBarButtonItem()
         editButton.image = Icon.cm.edit
-        editButton.tintColor = .lightGray
+        editButton.tintColor = .moonGreen
         navigationItem.rightBarButtonItem = editButton
     }
     
@@ -364,7 +367,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     
     func animateVenuesViewDown() {
         UIView.animate(withDuration: Double(0.3), animations: {
-            self.suggestedVenuesHeightConstraint.constant = 100
+            self.suggestedVenuesHeightConstraint.constant = 120
             self.view.layoutIfNeeded()
         })
         
@@ -410,7 +413,7 @@ class ManageGroupViewController: UIViewController, BindableType, UITextFieldDele
     
     func moveScrollViewUP() {
         UIView.animate(withDuration: Double(0.3), animations: {
-            self.scrollView.contentOffset.y = 50 //self.offSet
+            self.scrollView.contentOffset.y = self.offSet
             self.scrollView.layoutIfNeeded()
         })
     }

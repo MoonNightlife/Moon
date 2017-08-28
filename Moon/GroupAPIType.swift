@@ -20,7 +20,7 @@ protocol GroupAPIType {
     func isMemberOfGroup(userID: String, groupID: String) -> Observable<Bool>
     func getMembersActivity(groupID: String) -> Observable<[Activity]>
     func startPlan(groupID: String, startTime: Double) -> Observable<Void>
-    func addVenueToPlan(groupID: String, barID: String) -> Observable<Void>
+    func addVenueToPlan(groupID: String, barID: String, userID: String) -> Observable<Void>
     func placeVote(userID: String, groupID: String, barID: String) -> Observable<Void>
     func getOptionVotedFor(groupID: String, userID: String) -> Observable<String?>
     func checkGroupStatusEndpoint(userID: String, groupID: String) -> Observable<Bool>

@@ -131,6 +131,7 @@
 		F03C78C91EE9EA5C002AEDAD /* DeleteAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03C78C81EE9EA5C002AEDAD /* DeleteAccountViewModel.swift */; };
 		F03CEF6D1F05962E00FCC4F3 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03CEF6C1F05962E00FCC4F3 /* Snapshot.swift */; };
 		F03CEF6F1F059BAC00FCC4F3 /* DependecyInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03CEF6E1F059BAC00FCC4F3 /* DependecyInjection.swift */; };
+		F04000601F5432C60005E2AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F040005F1F5432C60005E2AA /* GoogleService-Info.plist */; };
 		F04283AD1EC49DB600CCB5F3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04283AC1EC49DB600CCB5F3 /* MainViewController.swift */; };
 		F04283AF1EC4A92700CCB5F3 /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04283AE1EC4A92700CCB5F3 /* FeaturedViewController.swift */; };
 		F04283B11EC4A96200CCB5F3 /* MoonsViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04283B01EC4A96200CCB5F3 /* MoonsViewViewController.swift */; };
@@ -168,7 +169,6 @@
 		F05491241F1FBB63008568E5 /* NotificationSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05491231F1FBB63008568E5 /* NotificationSetting.swift */; };
 		F05DF7561F3B28590011CDF9 /* TopErrorMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F05DF7551F3B28590011CDF9 /* TopErrorMessageView.xib */; };
 		F05DF7591F3B28F40011CDF9 /* TopErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05DF7581F3B28F40011CDF9 /* TopErrorMessage.swift */; };
-		F06209731F1E933600AF529A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F06209721F1E933600AF529A /* GoogleService-Info.plist */; };
 		F06B42321EFDAE9900BE7626 /* DynamicLinkingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B42311EFDAE9900BE7626 /* DynamicLinkingAPI.swift */; };
 		F06B56FD1EFAA8750028552A /* RxDataSourceUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B56FC1EFAA8750028552A /* RxDataSourceUserModel.swift */; };
 		F06B56FF1EFAAFD50028552A /* FriendRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06B56FE1EFAAFD50028552A /* FriendRequestTableViewCell.swift */; };
@@ -429,6 +429,7 @@
 		F03C78C81EE9EA5C002AEDAD /* DeleteAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteAccountViewModel.swift; sourceTree = "<group>"; };
 		F03CEF6C1F05962E00FCC4F3 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		F03CEF6E1F059BAC00FCC4F3 /* DependecyInjection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependecyInjection.swift; sourceTree = "<group>"; };
+		F040005F1F5432C60005E2AA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F04283AB1EC49D4E00CCB5F3 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		F04283AC1EC49DB600CCB5F3 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F04283AE1EC4A92700CCB5F3 /* FeaturedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedViewController.swift; sourceTree = "<group>"; };
@@ -471,7 +472,6 @@
 		F05491231F1FBB63008568E5 /* NotificationSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSetting.swift; sourceTree = "<group>"; };
 		F05DF7551F3B28590011CDF9 /* TopErrorMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopErrorMessageView.xib; sourceTree = "<group>"; };
 		F05DF7581F3B28F40011CDF9 /* TopErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopErrorMessage.swift; sourceTree = "<group>"; };
-		F06209721F1E933600AF529A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F06B42311EFDAE9900BE7626 /* DynamicLinkingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicLinkingAPI.swift; sourceTree = "<group>"; };
 		F06B56FC1EFAA8750028552A /* RxDataSourceUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxDataSourceUserModel.swift; sourceTree = "<group>"; };
 		F06B56FE1EFAAFD50028552A /* FriendRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestTableViewCell.swift; sourceTree = "<group>"; };
@@ -1093,7 +1093,7 @@
 				F001BAB21EC50CDB00CDF9BC /* Designs */,
 				F048F1211EA3B7A5000F0161 /* Assets.xcassets */,
 				F048F1261EA3B7A5000F0161 /* Info.plist */,
-				F06209721F1E933600AF529A /* GoogleService-Info.plist */,
+				F040005F1F5432C60005E2AA /* GoogleService-Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1525,7 +1525,6 @@
 				F04283B31EC4A9E100CCB5F3 /* Featured.storyboard in Resources */,
 				F0A225351ECBAA3E00170927 /* miller.jpeg in Resources */,
 				C0FC62901ED260D40087FA3B /* p8.jpg in Resources */,
-				F06209731F1E933600AF529A /* GoogleService-Info.plist in Resources */,
 				F02841821F311560000747D0 /* BasicImageCell.xib in Resources */,
 				F001BABC1EC50D2600CDF9BC /* Moons_View_Background.png in Resources */,
 				C034E2D71ECCF38C008EA4BA /* p7.jpg in Resources */,
@@ -1607,6 +1606,7 @@
 				C0FC628B1ECF69730087FA3B /* e3.jpg in Resources */,
 				F048F1201EA3B7A5000F0161 /* Login.storyboard in Resources */,
 				C0FC628C1ECF69730087FA3B /* e4.jpg in Resources */,
+				F04000601F5432C60005E2AA /* GoogleService-Info.plist in Resources */,
 				C034E2D31ECCF365008EA4BA /* p5.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
